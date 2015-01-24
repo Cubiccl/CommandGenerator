@@ -181,18 +181,19 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin
 
 	public void setupFrom(Map<String, Object> data)
 	{
-		super.setupFrom(data);
-		Object[] item = (Object[]) data.get(getPanelId());
+		ItemStack item = (ItemStack) data.get(getPanelId());
 		if (item == null)
 		{
 			reset();
 			return;
 		}
 
-		comboboxId.setSelected((String) item[0]);
-		spinnerDamage.setSelected((int) item[1]);
-		spinnerCount.setSelected((int) item[2]);
-		if (slot) spinnerSlot.setSelected((int) item[3]);
+		comboboxId.setSelected(item.getItem().getId());
+		spinnerDamage.setSelected(item.getDamage());
+		spinnerCount.setSelected(item.getCount());
+		if (slot) spinnerSlot.setSelected(item.getSlot());
+		if (item.getTag() != null) data.put(CGConstants.PANELID_NBT, item.getTag().getValue());
+		super.setupFrom(data);
 	}
 
 	public ItemStack getItemStack()

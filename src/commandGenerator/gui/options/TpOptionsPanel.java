@@ -1,12 +1,10 @@
 package commandGenerator.gui.options;
 
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 
@@ -35,8 +33,6 @@ public class TpOptionsPanel extends OptionsPanel
 		panelDestinationEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET2, "GUI:tp.destination.entity", CGConstants.ENTITIES_ALL);
 		panelDestinationEntity.setEnabled(false);
 		panelDestinationEntity.setEnabledContent(false);
-		panelDestinationEntity.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY),
-				Lang.get("GUI:tp.destination.entity")));
 		panelDestinationCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:tp.destination.coords", true, true);
 
 		radiobuttonCoords = new JRadioButton(Lang.get("GUI:tp.coords"));
@@ -47,11 +43,8 @@ public class TpOptionsPanel extends OptionsPanel
 			{
 				panelDestinationCoords.setEnabled(true);
 				panelDestinationCoords.setEnabledContent(true);
-				panelDestinationCoords.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.RED), Lang.get("GUI:tp.coords")));
 				panelDestinationEntity.setEnabled(false);
 				panelDestinationEntity.setEnabledContent(false);
-				panelDestinationEntity.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY),
-						Lang.get("GUI:tp.destination.entity")));
 			}
 		});
 		radiobuttonEntity = new JRadioButton(Lang.get("GUI:tp.entity"));
@@ -61,12 +54,8 @@ public class TpOptionsPanel extends OptionsPanel
 			{
 				panelDestinationCoords.setEnabled(false);
 				panelDestinationCoords.setEnabledContent(false);
-				panelDestinationCoords.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.DARK_GRAY),
-						Lang.get("GUI:tp.destination.coords")));
 				panelDestinationEntity.setEnabled(true);
 				panelDestinationEntity.setEnabledContent(true);
-				panelDestinationEntity.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.RED),
-						Lang.get("GUI:tp.destination.entity")));
 			}
 		});
 		radiobuttonGroup = new ButtonGroup();

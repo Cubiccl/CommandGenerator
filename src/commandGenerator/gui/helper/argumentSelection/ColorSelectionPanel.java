@@ -104,7 +104,6 @@ public class ColorSelectionPanel extends HelperPanel
 		sliderRed.setEnabled(enable);
 		sliderGreen.setEnabled(enable);
 		sliderBlue.setEnabled(enable);
-		setGrayBorder(!enable);
 	}
 
 	public void setLabelColor()

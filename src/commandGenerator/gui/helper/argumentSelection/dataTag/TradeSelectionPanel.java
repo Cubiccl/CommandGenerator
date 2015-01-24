@@ -2,17 +2,20 @@ package commandGenerator.gui.helper.argumentSelection.dataTag;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 
-import javax.swing.JTextField;
-
+import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
+import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.ObjectLists;
+import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagBoolean;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagInt;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
-import commandGenerator.gui.helper.components.CLabel;
+import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
@@ -21,25 +24,22 @@ import commandGenerator.main.DisplayHelper;
 public class TradeSelectionPanel extends HelperPanel
 {
 
-	private CLabel labelMaxUses, labelUses;
-	private JTextField textfieldMaxUses, textfieldUses;
+	private CEntry entryMaxUses, entryUses;
 	private CCheckBox checkboxRewardExp, checkboxBuyB;
 	private ItemSelectionPanel panelBuy, panelBuyB, panelSell;
 
 	public TradeSelectionPanel(String title)
 	{
-		super(CGConstants.DATAID_NONE, title, 1650, 800);
+		super(CGConstants.PANELID_OPTIONS, title, 810, 1100);
 
-		labelMaxUses = new CLabel("GUI:trade.use_max");
-		labelUses = new CLabel("GUI:trade.use");
+		entryUses = new CEntry(CGConstants.DATAID_NAME, "GUI:trade.use");
+		entryMaxUses = new CEntry(CGConstants.DATAID_NAME2, "GUI:trade.use_max");
 
-		textfieldMaxUses = new JTextField(10);
-		textfieldUses = new JTextField(10);
-		textfieldMaxUses.setText("10");
-		textfieldUses.setText("0");
+		entryUses.setTextField("0");
+		entryMaxUses.setTextField("10");
 
-		checkboxRewardExp = new CCheckBox(CGConstants.DATAID_NONE, "GUI:trade.xp");
-		checkboxBuyB = new CCheckBox(CGConstants.DATAID_NONE, "GUI:trade.buyb.use");
+		checkboxRewardExp = new CCheckBox(CGConstants.DATAID_MODE, "GUI:trade.xp");
+		checkboxBuyB = new CCheckBox(CGConstants.DATAID_MODE2, "GUI:trade.buyb.use");
 		checkboxBuyB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -48,44 +48,35 @@ public class TradeSelectionPanel extends HelperPanel
 			}
 		});
 
-		panelBuy = new ItemSelectionPanel(CGConstants.DATAID_NONE, "GUI:trade.buy", ObjectLists.get(CGConstants.LIST_ITEMS), true, false);
-		panelBuyB = new ItemSelectionPanel(CGConstants.DATAID_NONE, "GUI:trade.buyb", ObjectLists.get(CGConstants.LIST_ITEMS), true, false);
+		panelBuy = new ItemSelectionPanel(CGConstants.PANELID_TARGET, "GUI:trade.buy", ObjectLists.get(CGConstants.LIST_ITEMS), true, false);
+		panelBuyB = new ItemSelectionPanel(CGConstants.PANELID_TARGET2, "GUI:trade.buyb", ObjectLists.get(CGConstants.LIST_ITEMS), true, false);
 		panelBuyB.setEnabledContent(false);
-		panelSell = new ItemSelectionPanel(CGConstants.DATAID_NONE, "GUI:trade.sell", ObjectLists.get(CGConstants.LIST_ITEMS), true, false);
+		panelSell = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:trade.sell", ObjectLists.get(CGConstants.LIST_ITEMS), true, false);
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(labelMaxUses, gbc);
-		gbc.gridy++;
-		add(labelUses, gbc);
-		gbc.gridy++;
-		add(checkboxRewardExp, gbc);
-
+		add(entryUses, gbc);
 		gbc.gridx++;
-		gbc.gridy = 0;
-		add(textfieldMaxUses, gbc);
-		gbc.gridy++;
-		add(textfieldUses, gbc);
-		gbc.gridy++;
+		add(entryMaxUses, gbc);
+		gbc.gridx++;
+		add(checkboxRewardExp, gbc);
+		gbc.gridx++;
 		add(checkboxBuyB, gbc);
 
-		gbc.gridx++;
-		gbc.gridy = 0;
-		gbc.gridheight = 3;
-		add(panelBuy, gbc);
-		gbc.gridheight = 1;
-		gbc.gridy = 3;
-		add(panelBuyB, gbc);
 		gbc.gridx = 0;
-		gbc.gridwidth = 2;
+		gbc.gridwidth = 4;
+		gbc.gridy++;
+		add(panelBuy, gbc);
+		gbc.gridy++;
 		add(panelSell, gbc);
-		gbc.gridwidth = 1;
+		gbc.gridy++;
+		add(panelBuyB, gbc);
 	}
 
 	public TagCompound generateTrade()
 	{
 
-		String maxUses = textfieldMaxUses.getText(), uses = textfieldUses.getText();
+		String maxUses = entryMaxUses.getText(), uses = entryMaxUses.getText();
 		ItemStack buy, buyB, sell;
 
 		try
@@ -127,5 +118,42 @@ public class TradeSelectionPanel extends HelperPanel
 	@Override
 	public void updateLang()
 	{}
+
+	@Override
+	public void setupFrom(Map<String, Object> data)
+	{
+		TagCompound trade = (TagCompound) data.get(getPanelId());
+		int maxUses = 10, uses = 0;
+		boolean reward = false, buyb = false;
+		ItemStack buy = new ItemStack((Item) ObjectBase.getObjectFromId("stone"), 0), buyB = new ItemStack((Item) ObjectBase.getObjectFromId("stone"), 0), sell = new ItemStack(
+				(Item) ObjectBase.getObjectFromId("stone"), 0);
+
+		for (int i = 0; i < trade.size(); i++)
+		{
+			Tag tag = trade.get(i);
+			if (tag.getId().equals("maxUses")) maxUses = ((TagInt) tag).getValue();
+			if (tag.getId().equals("uses")) uses = ((TagInt) tag).getValue();
+			if (tag.getId().equals("rewardExp")) reward = ((TagBoolean) tag).getValue();
+			if (tag.getId().equals("buy")) buy = ItemStack.generateFrom((TagCompound) tag);
+			if (tag.getId().equals("sell")) sell = ItemStack.generateFrom((TagCompound) tag);
+			if (tag.getId().equals("buyB"))
+			{
+				buyB = ItemStack.generateFrom((TagCompound) tag);
+				buyb = true;
+			}
+		}
+
+		Map<String, Object> clean = new HashMap<String, Object>();
+		clean.put(CGConstants.DATAID_NAME, Integer.toString(uses));
+		clean.put(CGConstants.DATAID_NAME2, Integer.toString(maxUses));
+		clean.put(CGConstants.DATAID_MODE, reward);
+		clean.put(CGConstants.DATAID_MODE2, buyb);
+		
+		clean.put(CGConstants.PANELID_TARGET, buy);
+		clean.put(CGConstants.PANELID_TARGET2, buyB);
+		clean.put(CGConstants.PANELID_ITEM, sell);
+
+		super.setupFrom(clean);
+	}
 
 }

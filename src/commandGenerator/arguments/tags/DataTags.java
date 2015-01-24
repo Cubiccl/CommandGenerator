@@ -177,7 +177,6 @@ public class DataTags
 
 	public static List<Tag> generateListFrom(String nbt)
 	{
-		DisplayHelper.log("Creating NBT tags from : " + nbt);
 		List<Tag> list = new ArrayList<Tag>();
 		if (nbt.length() == 2) return list;
 		boolean inList = nbt.startsWith("[");
@@ -197,6 +196,20 @@ public class DataTags
 	private static Tag genTagFromString(String nbt, boolean list)
 	{
 		DisplayHelper.log("Creating NBT tag : " + nbt);
+
+		if (nbt.startsWith("id:"))
+		{
+			int sep = nbt.indexOf(':');
+			String value = nbt.substring(sep + 1);
+			try
+			{
+				return new TagInt("id").setValue(Integer.parseInt(value));
+			} catch (Exception e)
+			{
+				return new TagString("id").setValue(value.substring(1, value.length() - 1));
+			}
+		}
+
 		String[] corresponding = { "", "" };
 		String value = nbt;
 		if (!list)

@@ -12,7 +12,7 @@ import commandGenerator.arguments.objects.EffectType;
 import commandGenerator.arguments.objects.EnchantType;
 import commandGenerator.arguments.objects.Enchantment;
 import commandGenerator.arguments.objects.EntitySelector;
-import commandGenerator.arguments.objects.Item;
+import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
@@ -45,19 +45,17 @@ public class Generator
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public static Map<String, Object> genBlockData(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
 		String[] elements = genElements(command);
-
 		try
 		{
 			data.put(CGConstants.PANELID_COORDS, Coordinates.generateFrom(elements[1], elements[2], elements[3]));
-			data.put(CGConstants.PANELID_NBT, DataTags.generateListFrom(elements[4]));
-			data.put(CGConstants.PANELID_BLOCK, Item.generateBlockFrom(DataTags.getObjectFromTags((List<Tag>) data.get(CGConstants.PANELID_NBT)).getId(), 0));
+			List<Tag> nbt = DataTags.generateListFrom(elements[4]);
+			data.put(CGConstants.PANELID_BLOCK, ItemStack.generateBlockFrom(DataTags.getObjectFromTags(nbt).getId(), 0, nbt));
 
-			if (data.get(CGConstants.PANELID_COORDS) == null || data.get(CGConstants.PANELID_NBT) == null || data.get(CGConstants.PANELID_BLOCK) == null) return wrong();
+			if (data.get(CGConstants.PANELID_COORDS) == null || data.get(CGConstants.PANELID_BLOCK) == null) return wrong();
 
 			return data;
 		} catch (Exception e)
@@ -85,9 +83,9 @@ public class Generator
 				damage = Integer.parseInt(elements[3]);
 			}
 			if (elements.length > 4) count = Integer.parseInt(elements[4]);
-			data.put(CGConstants.PANELID_ITEM, Item.generateFrom(id, damage, count, 0));
+			data.put(CGConstants.PANELID_ITEM, ItemStack.generateFrom(id, damage, count, new ArrayList<Tag>(), 0));
 
-			if (elements.length > 5) data.put(CGConstants.PANELID_NBT, DataTags.generateListFrom(elements[5]));
+			if (elements.length > 5) data.put(CGConstants.PANELID_ITEM, ItemStack.generateFrom(id, damage, count,DataTags.generateListFrom(elements[5]), 0));
 
 			return data;
 		} catch (Exception e)
@@ -216,7 +214,7 @@ public class Generator
 			{
 				startIndex = 11;
 				data.put(CGConstants.PANELID_COORDS_START, Coordinates.generateFrom(elements[6], elements[7], elements[8]));
-				data.put(CGConstants.PANELID_BLOCK, Item.generateBlockFrom(elements[9], Integer.parseInt(elements[10])));
+				data.put(CGConstants.PANELID_BLOCK, ItemStack.generateBlockFrom(elements[9], Integer.parseInt(elements[10]), new ArrayList<Tag>()));
 			}
 
 			String exe = "";
@@ -241,7 +239,7 @@ public class Generator
 		{
 			data.put(CGConstants.PANELID_COORDS_START, Coordinates.generateFrom(elements[1], elements[2], elements[3]));
 			data.put(CGConstants.PANELID_COORDS_END, Coordinates.generateFrom(elements[4], elements[5], elements[6]));
-			data.put(CGConstants.PANELID_BLOCK, Item.generateBlockFrom(elements[7], Integer.parseInt(elements[8])));
+			data.put(CGConstants.PANELID_BLOCK, ItemStack.generateBlockFrom(elements[7], Integer.parseInt(elements[8]), new ArrayList<Tag>()));
 			data.put(CGConstants.DATAID_MODE2, 0);
 			data.put(CGConstants.DATAID_MODE, 0);
 
@@ -254,10 +252,11 @@ public class Generator
 			} else if (elements.length > 10 && !elements[10].contains("{"))
 			{
 				data.put(CGConstants.DATAID_MODE2, 1);
-				data.put(CGConstants.PANELID_ITEM, Item.generateBlockFrom(elements[10], Integer.parseInt(elements[11])));
+				data.put(CGConstants.PANELID_ITEM, ItemStack.generateBlockFrom(elements[10], Integer.parseInt(elements[11]), new ArrayList<Tag>()));
 			} else if (elements.length > 10)
 			{
-				data.put(CGConstants.PANELID_NBT, DataTags.generateListFrom(elements[10]));
+				data.put(CGConstants.PANELID_BLOCK,
+						ItemStack.generateBlockFrom(elements[7], Integer.parseInt(elements[8]), DataTags.generateListFrom(elements[10])));
 			}
 
 			return data;
@@ -295,9 +294,9 @@ public class Generator
 			int count = 0, damage = 0;
 			if (elements.length > 3) count = Integer.parseInt(elements[3]);
 			if (elements.length > 4) damage = Integer.parseInt(elements[4]);
-			if (elements.length > 5) data.put(CGConstants.PANELID_NBT, DataTags.generateListFrom(elements[5]));
 
-			data.put(CGConstants.PANELID_ITEM, Item.generateFrom(id, damage, count, 0));
+			data.put(CGConstants.PANELID_ITEM, ItemStack.generateFrom(id, damage, count, new ArrayList<Tag>(), 0));
+			if (elements.length > 5) data.put(CGConstants.PANELID_ITEM, ItemStack.generateFrom(id, damage, count, DataTags.generateListFrom(elements[5]), 0));
 
 			return data;
 		} catch (Exception e)
@@ -404,7 +403,7 @@ public class Generator
 				damage = Integer.parseInt(elements[6]);
 			} else return wrong();
 
-			data.put(CGConstants.PANELID_ITEM, Item.generateFrom(id, damage, count, slot));
+			data.put(CGConstants.PANELID_ITEM, ItemStack.generateFrom(id, damage, count, new ArrayList<Tag>(), slot));
 
 			return data;
 		} catch (Exception e)
@@ -485,14 +484,16 @@ public class Generator
 			data.put(CGConstants.PANELID_COORDS, Coordinates.generateFrom(elements[1], elements[2], elements[3]));
 			data.put(CGConstants.DATAID_MODE, 0);
 
-			if (elements.length > 5) data.put(CGConstants.PANELID_BLOCK, Item.generateBlockFrom(elements[4], Integer.parseInt(elements[5])));
-			else data.put(CGConstants.PANELID_BLOCK, Item.generateBlockFrom(elements[4], 0));
+			List<Tag> tags = new ArrayList<Tag>();
+			if (elements.length > 7) tags = DataTags.generateListFrom(elements[7]);
+
+			if (elements.length > 5) data.put(CGConstants.PANELID_BLOCK, ItemStack.generateBlockFrom(elements[4], Integer.parseInt(elements[5]), tags));
+			else data.put(CGConstants.PANELID_BLOCK, ItemStack.generateBlockFrom(elements[4], 0, tags));
 			if (elements.length > 6)
 			{
 				if (elements[6].equals("destroy")) data.put(CGConstants.DATAID_MODE, 1);
 				if (elements[6].equals("replace")) data.put(CGConstants.DATAID_MODE, 2);
 			}
-			if (elements.length > 7) data.put(CGConstants.PANELID_NBT, DataTags.generateListFrom(elements[7]));
 
 			return data;
 		} catch (Exception e)
@@ -607,9 +608,11 @@ public class Generator
 		{
 			data.put(CGConstants.PANELID_COORDS, Coordinates.generateFrom(elements[1], elements[2], elements[3]));
 
-			if (elements.length > 5) data.put(CGConstants.PANELID_BLOCK, Item.generateBlockFrom(elements[4], Integer.parseInt(elements[5])));
-			else data.put(CGConstants.PANELID_BLOCK, Item.generateBlockFrom(elements[4], 0));
-			if (elements.length > 6) data.put(CGConstants.PANELID_NBT, DataTags.generateListFrom(elements[6]));
+			List<Tag> tags = new ArrayList<Tag>();
+			if (elements.length > 6) tags = DataTags.generateListFrom(elements[6]);
+
+			if (elements.length > 5) data.put(CGConstants.PANELID_BLOCK, ItemStack.generateBlockFrom(elements[4], Integer.parseInt(elements[5]), tags));
+			else data.put(CGConstants.PANELID_BLOCK, ItemStack.generateBlockFrom(elements[4], 0, tags));
 
 			return data;
 		} catch (Exception e)

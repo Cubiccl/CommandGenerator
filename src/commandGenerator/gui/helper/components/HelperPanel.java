@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.components;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -11,6 +10,7 @@ import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.border.EtchedBorder;
 
 import commandGenerator.main.Lang;
 
@@ -40,22 +40,15 @@ public abstract class HelperPanel extends JPanel implements CComponent
 		this.id = id;
 		this.title = title;
 		this.gray = false;
-		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.RED), Lang.get(title)));
+		setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Lang.get(title)));
 		setPreferredSize(new Dimension(width, height));
 		components = new ArrayList<CComponent>();
 
 	}
 
-	public void setGrayBorder(boolean gray)
-	{
-		if (gray) setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY), Lang.get(title)));
-		else setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.RED), Lang.get(title)));
-		this.gray = gray;
-	}
-
 	protected void updateTitle()
 	{
-		setGrayBorder(gray);
+		setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Lang.get(title)));
 	}
 
 	public void setTitle(String title)
@@ -109,7 +102,6 @@ public abstract class HelperPanel extends JPanel implements CComponent
 		{
 			components.get(i).setEnabledContent(enable);
 		}
-		setGrayBorder(!enable);
 	}
 
 }

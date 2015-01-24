@@ -109,7 +109,6 @@ public class CoordSelectionPanel extends HelperPanel
 	public void setEnabledContent(boolean enable)
 	{
 
-		setGrayBorder(!enable);
 		setEnabled(enable);
 		entryX.setEnabledContent(enable);
 		entryY.setEnabledContent(enable);

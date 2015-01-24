@@ -81,6 +81,7 @@ public class TagDisplayer extends JPanel implements CComponent
 			if (values.get(i).getId().equals(getSelected().getId()))
 			{
 				values.get(i).askValue();
+				display();
 				return;
 			}
 		}
@@ -138,8 +139,8 @@ public class TagDisplayer extends JPanel implements CComponent
 	@Override
 	public void setEnabledContent(boolean enable)
 	{
-		list.setEnabled(false);
-		editorPane.setEnabled(false);
+		list.setEnabled(enable);
+		editorPane.setEnabled(enable);
 	}
 
 	@Override

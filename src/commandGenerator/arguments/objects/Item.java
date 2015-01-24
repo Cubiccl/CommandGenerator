@@ -141,16 +141,4 @@ public class Item extends ObjectBase
 	{
 		return getTexture(0);
 	}
-
-	public static Object[] generateFrom(String id, int damage, int count, int slot)
-	{
-		DisplayHelper.log("Created Item : " + count + " " + ((Item) ObjectBase.getObjectFromId(id)).getName(damage) + " in slot " + slot);
-		return new Object[] { id, damage, count, slot };
-	}
-
-	public static Object[] generateBlockFrom(String id, int damage)
-	{
-		DisplayHelper.log("Created block : " + ((Item) ObjectBase.getObjectFromId(id)).getName(damage));
-		return new Object[] { id, damage };
-	}
 }

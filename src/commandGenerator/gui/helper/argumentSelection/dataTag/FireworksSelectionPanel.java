@@ -7,7 +7,6 @@ import commandGenerator.arguments.tags.TagList;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.NumberSpinner;
 import commandGenerator.main.CGConstants;
-import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
 public class FireworksSelectionPanel extends HelperPanel
@@ -23,7 +22,7 @@ public class FireworksSelectionPanel extends HelperPanel
 		spinnerFlight = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:fireworks.flight", -128, 127, null);
 		spinnerFlight.setSelected(0);
 
-		explosionsPanel = new ListSelectionPanel(Lang.get("TAGS:Explosions"), CGConstants.OBJECT_TAG_EXPLOSION);
+		explosionsPanel = new ListSelectionPanel("TAGS:Explosions", CGConstants.OBJECT_TAG_EXPLOSION);
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;

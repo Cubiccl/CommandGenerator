@@ -403,22 +403,6 @@ public class EntitySelectionPanel extends HelperPanel
 		return sel;
 	}
 
-	public void setEnabledContent(boolean enabled)
-	{
-		setGrayBorder(!enabled);
-		labelEntity.setEnabled(enabled);
-		labelSelector.setEnabled(enabled);
-		labelSelectors.setEnabled(enabled);
-		entryPlayer.setEnabledContent(enabled);
-		buttonAdd.setEnabled(enabled);
-		buttonHelpEntity.setEnabled(enabled);
-		buttonHelpSelector.setEnabled(enabled);
-		buttonRemove.setEnabled(enabled);
-		boxEntities.setEnabled(enabled);
-		boxSelectors.setEnabled(enabled);
-		scrollpane.setEnabled(enabled);
-	}
-
 	public Entity getEntity()
 	{
 		Entity entity = Entity.player;

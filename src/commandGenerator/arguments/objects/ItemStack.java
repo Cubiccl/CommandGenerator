@@ -1,9 +1,12 @@
 package commandGenerator.arguments.objects;
 
+import java.util.List;
+
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagInt;
 import commandGenerator.arguments.tags.TagString;
+import commandGenerator.main.DisplayHelper;
 
 public class ItemStack
 {
@@ -117,6 +120,25 @@ public class ItemStack
 		}
 
 		return new ItemStack(item, damage, count, nbt, slot);
+	}
+
+	public static ItemStack generateFrom(String id, int damage, int count, List<Tag> nbt, int slot)
+	{
+		Item item = (Item) ObjectBase.getObjectFromId(id);
+		if (!(item instanceof Item)) return null;
+		TagCompound tag = new TagCompound("tag") {
+			public void askValue()
+			{}
+		};
+		tag.setValue(nbt);
+		
+		DisplayHelper.log("Created Item : " + count + " " + ((Item) ObjectBase.getObjectFromId(id)).getName(damage) + " in slot " + slot);
+		return new ItemStack(item, damage, count, tag, slot);
+	}
+
+	public static ItemStack generateBlockFrom(String id, int damage, List<Tag> nbt)
+	{
+		return generateFrom(id, damage, -1, nbt, -1);
 	}
 
 }

@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import commandGenerator.arguments.objects.Item;
+import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
@@ -126,16 +127,20 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 	@Override
 	public void setupFrom(Map<String, Object> data)
 	{
-		Object[] options = (Object[]) data.get(getPanelId());
-		if (options == null)
+		ItemStack block = (ItemStack) data.get(getPanelId());
+		if (block == null)
 		{
 			reset();
 			return;
 		}
 
-		comboboxId.setSelected((String) options[0]);
-		spinnerDamage.setSelected((int) options[1]);
-		if (this.data) panelData.setupFrom(data);
+		comboboxId.setSelected(block.getItem().getId());
+		spinnerDamage.setSelected(block.getDamage());
+		if (this.data)
+		{
+			if (block.getTag() != null) data.put(CGConstants.PANELID_NBT, block.getTag().getValue());
+			panelData.setupFrom(data);
+		}
 	}
 
 }
