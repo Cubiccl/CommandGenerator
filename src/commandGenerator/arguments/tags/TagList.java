@@ -59,7 +59,7 @@ public abstract class TagList extends Tag
 		for (int i = 0; i < value.size(); i++)
 		{
 			if (i != 0) nbt += ",";
-			nbt += value.get(i).commandStructure();// TODO keep this? .substring(value.get(i).getId().length() + 1)
+			nbt += value.get(i).commandStructure().substring(value.get(i).getId().length() + 1);
 		}
 		return nbt + "]";
 	}

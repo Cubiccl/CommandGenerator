@@ -131,10 +131,10 @@ public class ExplosionSelectionPanel extends HelperPanel
 		if (index < colors.size()) colors.remove(index);
 		else colorsFade.remove(index - colors.size());
 		displayColors();
-		
+
 	}
 
-	public void displayColors()
+	private void displayColors()
 	{
 		String text = "";
 		if (colors.size() > 0) text += "Colors<br />";
@@ -207,6 +207,26 @@ public class ExplosionSelectionPanel extends HelperPanel
 		checkboxFlicker.updateLang();
 		checkboxTrail.updateLang();
 		comboboxType.updateLang();
+	}
+
+	public void setup(boolean flicker, boolean trail, int type, TagList color, TagList fade)
+	{
+		checkboxFlicker.setSelected(flicker);
+		checkboxTrail.setSelected(trail);
+		comboboxType.setSelectedIndex(type);
+		colors.clear();
+		colorsFade.clear();
+		if (color != null)
+		{
+			for (int i = 0; i < color.getValue().size(); i++)
+				colors.add(((TagInt) color.getValue().get(i)).getValue());
+		}
+		if (color != null)
+		{
+			for (int i = 0; i < fade.getValue().size(); i++)
+				colorsFade.add(((TagInt) fade.getValue().get(i)).getValue());
+		}
+		displayColors();
 	}
 
 }

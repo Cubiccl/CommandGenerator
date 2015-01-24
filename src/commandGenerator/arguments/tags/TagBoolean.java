@@ -59,4 +59,9 @@ public class TagBoolean extends Tag
 		else return getId() + ":0b";
 	}
 
+	public boolean getValue()
+	{
+		return value;
+	}
+
 }
