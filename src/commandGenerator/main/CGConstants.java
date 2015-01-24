@@ -9,7 +9,7 @@ public class CGConstants
 			LIST_MINE = "mine", LIST_USE = "use", LIST_MOBS = "mob";
 
 	public static final byte OBJECT_ITEM = 0, OBJECT_ENTITY = 1, OBJECT_EFFECT = 2, OBJECT_ENCHANT = 3, OBJECT_ACHIEVEMENT = 4, OBJECT_ATTRIBUTE = 5,
-			OBJECT_PARTICLE = 6, OBJECT_TAG = 7, OBJECT_SOUND = 8, OBJECT_STRING = 9;
+			OBJECT_PARTICLE = 6, OBJECT_TAG = 7, OBJECT_SOUND = 8, OBJECT_STRING = 9, OBJECT_TAG_EXPLOSION = 10;
 
 	public static final String PANELID_TARGET = "Ptarget", PANELID_TARGET2 = "Ptarget2", PANELID_ACHIEVEMENT = "Pach", PANELID_XP = "Pxp",
 			PANELID_EFFECT = "Peff", PANELID_ENCHANT = "Pench", PANELID_COORDS = "Pcoo", PANELID_COORDS_START = "PcooS", PANELID_COORDS_END = "PcooE",
@@ -25,7 +25,7 @@ public class CGConstants
 			DATAID_SPREAD_DISTMAX = "spread_disMax";
 
 	public static final String NBTID_COLOR = "nbt_color";
-	
+
 	public static final int DETAILS_ALL = 2, DETAILS_ONE = 1, DETAILS_NONE = 0;
 
 }

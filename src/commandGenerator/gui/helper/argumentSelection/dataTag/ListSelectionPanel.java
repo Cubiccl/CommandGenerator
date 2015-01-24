@@ -24,6 +24,7 @@ import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagString;
+import commandGenerator.arguments.tags.specific.TagExplosion;
 import commandGenerator.gui.helper.argumentSelection.EffectSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.EnchantSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
@@ -161,6 +162,10 @@ public class ListSelectionPanel extends HelperPanel
 				objects.set(nbr, panelI.getItemStack());
 				break;
 
+			case CGConstants.OBJECT_TAG_EXPLOSION:
+				((TagExplosion) objects.get(nbr)).askValue();
+				break;
+
 			case CGConstants.OBJECT_STRING:
 				String[] strings = new String[list.length];
 				for (int i = 0; i < strings.length; i++)
@@ -220,6 +225,12 @@ public class ListSelectionPanel extends HelperPanel
 				objects.add(panelI.getItemStack());
 				break;
 
+			case CGConstants.OBJECT_TAG_EXPLOSION:
+				TagExplosion explosion = new TagExplosion();
+				explosion.askValue();
+				objects.add(explosion);
+				break;
+
 			case CGConstants.OBJECT_STRING:
 				String[] strings = new String[list.length];
 				for (int i = 0; i < strings.length; i++)
@@ -273,6 +284,9 @@ public class ListSelectionPanel extends HelperPanel
 				break;
 			case CGConstants.OBJECT_ITEM:
 				name = Lang.get("GENERAL:item");
+				break;
+			case CGConstants.OBJECT_TAG_EXPLOSION:
+				name = Lang.get("TAGS:Explosion");
 				break;
 
 			default:

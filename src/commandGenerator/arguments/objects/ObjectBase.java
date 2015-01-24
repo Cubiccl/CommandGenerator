@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagString;
+import commandGenerator.arguments.tags.specific.TagExplosion;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
@@ -81,6 +82,7 @@ public abstract class ObjectBase
 		if (object instanceof Effect) return ((Effect) object).display();
 		if (object instanceof Enchantment) return ((Enchantment) object).display();
 		if (object instanceof Attribute) return ((Attribute) object).display();
+		if (object instanceof TagExplosion) return ((TagExplosion) object).display(CGConstants.DETAILS_ALL, 0);
 		if (object instanceof TagString) return ((TagString) object).display(CGConstants.DETAILS_ALL, 0);
 
 		return object.toString();
@@ -92,7 +94,9 @@ public abstract class ObjectBase
 		if (object instanceof Effect) return ((Effect) object).toNBT();
 		if (object instanceof Enchantment) return ((Enchantment) object).toNBT();
 		if (object instanceof Attribute) return ((Attribute) object).toNBT();
+		if (object instanceof TagExplosion) return ((TagExplosion) object);
+		if (object instanceof TagString) return ((TagString) object);
 
-		return (TagString) object;
+		return (Tag) object;
 	}
 }
