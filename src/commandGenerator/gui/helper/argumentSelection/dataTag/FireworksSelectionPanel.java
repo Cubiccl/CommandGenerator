@@ -122,4 +122,10 @@ public class FireworksSelectionPanel extends HelperPanel
 		buttonRemove.updateLang();
 	}
 
+	public void setup(int flight, List<Tag> list)
+	{
+		spinnerFlight.setSelected(flight);
+		if (list != null) explosions = list;
+	}
+
 }

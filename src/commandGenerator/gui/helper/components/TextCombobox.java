@@ -50,7 +50,7 @@ public class TextCombobox extends JPanel implements CComponent
 		box.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
 			{
-				if (parent != null) parent.updateCombobox();
+				boxSelect();
 			}
 		});
 		box.setPreferredSize(new Dimension(200, 20));
@@ -72,7 +72,17 @@ public class TextCombobox extends JPanel implements CComponent
 		add(box, gbc);
 	}
 
-	protected void search(KeyEvent key)
+	private void boxSelect()
+	{
+		String selected = (String) box.getSelectedItem();
+
+		text.setText("");
+		box.setModel(new JComboBox<String>(names).getModel());
+		box.setSelectedItem(selected);
+		if (parent != null) parent.updateCombobox();
+	}
+
+	private void search(KeyEvent key)
 	{
 
 		if (text.getText() == null || text.getText() == "") return;
@@ -80,13 +90,12 @@ public class TextCombobox extends JPanel implements CComponent
 		if (key != null && key.getKeyCode() == 10 && box.getSelectedItem() != null)
 		{
 			String selected = (String) box.getSelectedItem();
-			if (parent != null)
-			{
-				text.setText("");
-				parent.updateCombobox();
-				box.setModel(new JComboBox<String>(names).getModel());
-				box.setSelectedItem(selected);
-			}
+
+			text.setText("");
+			box.setModel(new JComboBox<String>(names).getModel());
+			box.setSelectedItem(selected);
+			if (parent != null) parent.updateCombobox();
+
 			return;
 		}
 
