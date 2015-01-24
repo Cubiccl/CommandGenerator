@@ -55,8 +55,10 @@ public class TagBoolean extends Tag
 	@Override
 	public String commandStructure()
 	{
-		if (value) return getId() + ":1b";
-		else return getId() + ":0b";
+		String text = getId();
+		if (!text.equals("")) text += ":";
+		if (value) return text + "1b";
+		else return text + "0b";
 	}
 
 	public boolean getValue()

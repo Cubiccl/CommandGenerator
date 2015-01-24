@@ -124,7 +124,7 @@ public class ListSelectionPanel extends HelperPanel
 				map.put(CGConstants.PANELID_OPTIONS, objects.get(nbr));
 				panelA.setupFrom(map);
 
-				if (DisplayHelper.showQuestion(panelA, Lang.get("GENERAL:add").replaceAll("<item>", Lang.get("GENERAL:attribute")))) return;
+				if (DisplayHelper.showQuestion(panelA, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:attribute")))) return;
 				if (panelA.getAttribute() == null) return;
 				objects.set(nbr, panelA.getAttribute());
 				break;
@@ -134,7 +134,7 @@ public class ListSelectionPanel extends HelperPanel
 				map.put(CGConstants.PANELID_EFFECT, objects.get(nbr));
 				panelEf.setupFrom(map);
 
-				if (DisplayHelper.showQuestion(panelEf, Lang.get("GENERAL:add").replaceAll("<item>", Lang.get("GENERAL:effect")))) return;
+				if (DisplayHelper.showQuestion(panelEf, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:effect")))) return;
 				objects.set(nbr, panelEf.generateEffect());
 				break;
 
@@ -143,7 +143,7 @@ public class ListSelectionPanel extends HelperPanel
 				map.put(CGConstants.PANELID_ENCHANT, objects.get(nbr));
 				panelEn.setupFrom(map);
 
-				if (DisplayHelper.showQuestion(panelEn, Lang.get("GENERAL:add").replaceAll("<item>", Lang.get("GENERAL:enchant")))) return;
+				if (DisplayHelper.showQuestion(panelEn, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:enchant")))) return;
 				if (panelEn.generateEnchantment() == null) return;
 				objects.set(nbr, panelEn.generateEnchantment());
 				break;
@@ -158,7 +158,7 @@ public class ListSelectionPanel extends HelperPanel
 				map.put(CGConstants.PANELID_NBT, stack.getTag().getValue());
 				panelI.setupFrom(map);
 
-				if (DisplayHelper.showQuestion(panelI, Lang.get("GENERAL:add").replaceAll("<item>", Lang.get("GENERAL:item")))) return;
+				if (DisplayHelper.showQuestion(panelI, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:item")))) return;
 				objects.set(nbr, panelI.getItemStack());
 				break;
 
@@ -175,7 +175,7 @@ public class ListSelectionPanel extends HelperPanel
 				scrollpane.getVerticalScrollBar().setUnitIncrement(20);
 				scrollpane.getHorizontalScrollBar().setUnitIncrement(20);
 				scrollpane.setPreferredSize(new Dimension(840, 600));
-				if (DisplayHelper.showQuestion(scrollpane, Lang.get("GENERAL:add").replaceAll("<item>", Lang.get("GENERAL:trade")))) return;
+				if (DisplayHelper.showQuestion(scrollpane, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:trade")))) return;
 				if (panelT.generateTrade() == null) return;
 				objects.set(nbr, panelT.generateTrade());
 				break;
@@ -212,20 +212,20 @@ public class ListSelectionPanel extends HelperPanel
 		{
 			case CGConstants.OBJECT_ATTRIBUTE:
 				AttributeSelectionPanel panelA = new AttributeSelectionPanel();
-				if (DisplayHelper.showQuestion(panelA, Lang.get("GENERAL:add").replaceAll("<item>", Lang.get("GENERAL:attribute")))) return;
+				if (DisplayHelper.showQuestion(panelA, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:attribute")))) return;
 				if (panelA.getAttribute() == null) return;
 				objects.add(panelA.getAttribute());
 				break;
 
 			case CGConstants.OBJECT_EFFECT:
 				EffectSelectionPanel panelEf = new EffectSelectionPanel(CGConstants.DATAID_NONE, "GUI:add.effect");
-				if (DisplayHelper.showQuestion(panelEf, Lang.get("GENERAL:add").replaceAll("<item>", Lang.get("GENERAL:effect")))) return;
+				if (DisplayHelper.showQuestion(panelEf, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:effect")))) return;
 				objects.add(panelEf.generateEffect());
 				break;
 
 			case CGConstants.OBJECT_ENCHANT:
 				EnchantSelectionPanel panelEn = new EnchantSelectionPanel(CGConstants.DATAID_NONE, "GUI:add.enchant", false);
-				if (DisplayHelper.showQuestion(panelEn, Lang.get("GENERAL:add").replaceAll("<item>", Lang.get("GENERAL:enchant")))) return;
+				if (DisplayHelper.showQuestion(panelEn, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:enchant")))) return;
 				if (panelEn.generateEnchantment() == null) return;
 				objects.add(panelEn.generateEnchantment());
 				break;
@@ -235,7 +235,7 @@ public class ListSelectionPanel extends HelperPanel
 				for (int i = 0; i < items.length; i++)
 					items[i] = (Item) list[i];
 				ItemSelectionPanel panelI = new ItemSelectionPanel(CGConstants.DATAID_NONE, "GUI:add.item", items, true, true);
-				if (DisplayHelper.showQuestion(panelI, Lang.get("GENERAL:add").replaceAll("<item>", Lang.get("GENERAL:item")))) return;
+				if (DisplayHelper.showQuestion(panelI, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:item")))) return;
 				objects.add(panelI.getItemStack());
 				break;
 
@@ -251,7 +251,7 @@ public class ListSelectionPanel extends HelperPanel
 				scrollpane.getVerticalScrollBar().setUnitIncrement(20);
 				scrollpane.getHorizontalScrollBar().setUnitIncrement(20);
 				scrollpane.setPreferredSize(new Dimension(840, 600));
-				if (DisplayHelper.showQuestion(scrollpane, Lang.get("GENERAL:add").replaceAll("<item>", Lang.get("GENERAL:trade")))) return;
+				if (DisplayHelper.showQuestion(scrollpane, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:trade")))) return;
 				if (panelT.generateTrade() == null) return;
 				objects.add(panelT.generateTrade());
 				break;

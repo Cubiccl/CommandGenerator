@@ -117,7 +117,8 @@ public class TagInt extends Tag
 	@Override
 	public String commandStructure()
 	{
-		return getId() + ":" + Integer.toString(value);
+		if (getId().equals("")) return Integer.toString(value);
+		return getId() + ":" + value;
 	}
 
 	public int getValue()

@@ -56,10 +56,11 @@ public abstract class TagList extends Tag
 	public String commandStructure()
 	{
 		String nbt = getId() + ":[";
+		if (nbt.equals(":[")) nbt = "[";
 		for (int i = 0; i < value.size(); i++)
 		{
 			if (i != 0) nbt += ",";
-			nbt += value.get(i).commandStructure().substring(value.get(i).getId().length() + 1);
+			nbt += value.get(i).commandStructure();
 		}
 		return nbt + "]";
 	}

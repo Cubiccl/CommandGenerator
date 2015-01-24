@@ -36,7 +36,7 @@ public class TellrawOptionsPanel extends OptionsPanel
 		if (player == null) return null;
 		if (panelJson.generateMessage() == null) return null;
 
-		return "tellraw " + player.commandStructure() + " " + panelJson.generateMessage().commandStructure().substring(1);
+		return "tellraw " + player.commandStructure() + " " + panelJson.generateMessage().commandStructure();
 	}
 
 }

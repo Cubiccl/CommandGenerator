@@ -93,7 +93,8 @@ public class TagDouble extends Tag
 	@Override
 	public String commandStructure()
 	{
-		return getId() + ":" + Double.toString(value) + "d";
+		if (getId().equals("")) return Double.toString(value);
+		return getId() + ":" + value;
 	}
 
 }

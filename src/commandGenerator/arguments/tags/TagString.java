@@ -80,7 +80,7 @@ public class TagString extends Tag
 	@Override
 	public String commandStructure()
 	{
+		if (getId().equals("")) return "\"" + value + "\"";
 		return getId() + ":\"" + value + "\"";
 	}
-
 }
