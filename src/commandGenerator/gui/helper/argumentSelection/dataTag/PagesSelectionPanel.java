@@ -21,8 +21,8 @@ import javax.swing.event.ListSelectionListener;
 
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
+import commandGenerator.arguments.tags.TagList;
 import commandGenerator.arguments.tags.TagString;
-import commandGenerator.gui.helper.argumentSelection.json.JsonMessageSelectionPanel;
 import commandGenerator.gui.helper.components.CButton;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
@@ -140,20 +140,30 @@ public class PagesSelectionPanel extends JPanel
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put(CGConstants.PANELID_JSON, DataTags.generateListFrom(text));
-		JsonMessageSelectionPanel panel = new JsonMessageSelectionPanel("GENERAL:text");
+		ListSelectionPanel panel = new ListSelectionPanel("GENERAL:text", CGConstants.OBJECT_JSON);
 		panel.setupFrom(data);
 		if (DisplayHelper.showQuestion(panel, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
 
-		pages.set(list.getSelectedIndex(), panel.generateMessage().commandStructure());
+		TagList tag = new TagList() {
+			public void askValue()
+			{}
+		};
+		tag.setValue(panel.getList());
+		pages.set(list.getSelectedIndex(), tag.commandStructure());
 		setupList();
 	}
 
 	private void addJson()
 	{
-		JsonMessageSelectionPanel panel = new JsonMessageSelectionPanel("GENERAL:add");
+		ListSelectionPanel panel = new ListSelectionPanel("GENERAL:text", CGConstants.OBJECT_JSON);
 		if (DisplayHelper.showQuestion(panel, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
 
-		pages.add(panel.generateMessage().commandStructure());
+		TagList tag = new TagList() {
+			public void askValue()
+			{}
+		};
+		tag.setValue(panel.getList());
+		pages.add(tag.commandStructure());
 		setupList();
 	}
 

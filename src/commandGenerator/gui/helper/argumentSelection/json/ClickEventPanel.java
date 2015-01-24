@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.components.CEntry;
@@ -75,6 +76,24 @@ public class ClickEventPanel extends HelperPanel
 		updateTitle();
 		entryText.updateLang();
 		comboboxAction.updateLang();
+	}
+
+	public void setup(TagCompound nbt)
+	{
+		String action = "open_url", value = "";
+
+		for (int i = 0; i < nbt.size(); i++)
+		{
+			Tag tag = nbt.get(i);
+			if (tag.getId().equals("action")) action = ((TagString) tag).getValue();
+			if (tag.getId().equals("value")) value = ((TagString) tag).getValue();
+		}
+
+		if (action.equals("open_url")) comboboxAction.setSelectedIndex(0);
+		if (action.equals("run_command")) comboboxAction.setSelectedIndex(1);
+		if (action.equals("suggest_command")) comboboxAction.setSelectedIndex(2);
+
+		entryText.setTextField(value);
 	}
 
 }

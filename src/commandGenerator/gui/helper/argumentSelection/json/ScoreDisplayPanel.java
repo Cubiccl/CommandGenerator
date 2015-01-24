@@ -1,6 +1,10 @@
 package commandGenerator.gui.helper.argumentSelection.json;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import commandGenerator.arguments.objects.EntitySelector;
+import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
@@ -22,7 +26,7 @@ public class ScoreDisplayPanel extends HelperPanel
 
 		entryObjective = new CEntry(CGConstants.DATAID_NONE, "GUI:scoreboard.objective");
 
-		panelEntity = new EntitySelectionPanel(CGConstants.DATAID_NONE, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -48,7 +52,7 @@ public class ScoreDisplayPanel extends HelperPanel
 			public void askValue()
 			{}
 		};
-		tag.addTag(new TagString("name").setValue(entity.display()));
+		tag.addTag(new TagString("name").setValue(entity.commandStructure()));
 		tag.addTag(new TagString("objective").setValue(objective));
 
 		return tag;
@@ -62,4 +66,18 @@ public class ScoreDisplayPanel extends HelperPanel
 		panelEntity.updateLang();
 	}
 
+	public void setup(TagCompound nbt)
+	{
+		for (int i = 0; i < nbt.size(); i++)
+		{
+			Tag tag = nbt.get(i);
+			if (tag.getId().equals("objective")) entryObjective.setTextField(((TagString) tag).getValue());
+			if (tag.getId().equals("name"))
+			{
+				Map<String, Object> data = new HashMap<String, Object>();
+				data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(((TagString) tag).getValue()));
+				panelEntity.setupFrom(data);
+			}
+		}
+	}
 }

@@ -23,11 +23,13 @@ import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.Tag;
+import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.arguments.tags.specific.TagExplosion;
 import commandGenerator.gui.helper.argumentSelection.EffectSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.EnchantSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.json.JsonSelectionPanel;
 import commandGenerator.gui.helper.components.CButton;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.main.CGConstants;
@@ -171,13 +173,26 @@ public class ListSelectionPanel extends HelperPanel
 				map.put(CGConstants.PANELID_OPTIONS, objects.get(nbr));
 				panelT.setupFrom(map);
 
-				JScrollPane scrollpane = new JScrollPane(panelT);
-				scrollpane.getVerticalScrollBar().setUnitIncrement(20);
-				scrollpane.getHorizontalScrollBar().setUnitIncrement(20);
-				scrollpane.setPreferredSize(new Dimension(840, 600));
-				if (DisplayHelper.showQuestion(scrollpane, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:trade")))) return;
+				JScrollPane scrollpaneT = new JScrollPane(panelT);
+				scrollpaneT.getVerticalScrollBar().setUnitIncrement(20);
+				scrollpaneT.getHorizontalScrollBar().setUnitIncrement(20);
+				scrollpaneT.setPreferredSize(new Dimension(840, 600));
+				if (DisplayHelper.showQuestion(scrollpaneT, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:trade")))) return;
 				if (panelT.generateTrade() == null) return;
 				objects.set(nbr, panelT.generateTrade());
+				break;
+
+			case CGConstants.OBJECT_JSON:
+				JsonSelectionPanel panelJ = new JsonSelectionPanel("GENERAL:text", true);
+				panelJ.setup((TagCompound) objects.get(nbr));
+				JScrollPane scrollpaneJ = new JScrollPane(panelJ);
+				scrollpaneJ.getVerticalScrollBar().setUnitIncrement(20);
+				scrollpaneJ.getHorizontalScrollBar().setUnitIncrement(20);
+				scrollpaneJ.setPreferredSize(new Dimension(840, 600));
+
+				if (DisplayHelper.showQuestion(scrollpaneJ, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
+				if (panelJ.getTag() == null) return;
+				objects.set(nbr, panelJ.getTag());
 				break;
 
 			case CGConstants.OBJECT_STRING:
@@ -247,13 +262,24 @@ public class ListSelectionPanel extends HelperPanel
 
 			case CGConstants.OBJECT_TAG_TRADE:
 				TradeSelectionPanel panelT = new TradeSelectionPanel("GENERAL:trade");
-				JScrollPane scrollpane = new JScrollPane(panelT);
-				scrollpane.getVerticalScrollBar().setUnitIncrement(20);
-				scrollpane.getHorizontalScrollBar().setUnitIncrement(20);
-				scrollpane.setPreferredSize(new Dimension(840, 600));
-				if (DisplayHelper.showQuestion(scrollpane, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:trade")))) return;
+				JScrollPane scrollpaneT = new JScrollPane(panelT);
+				scrollpaneT.getVerticalScrollBar().setUnitIncrement(20);
+				scrollpaneT.getHorizontalScrollBar().setUnitIncrement(20);
+				scrollpaneT.setPreferredSize(new Dimension(840, 600));
+				if (DisplayHelper.showQuestion(scrollpaneT, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:trade")))) return;
 				if (panelT.generateTrade() == null) return;
 				objects.add(panelT.generateTrade());
+				break;
+
+			case CGConstants.OBJECT_JSON:
+				JsonSelectionPanel panelJ = new JsonSelectionPanel("GENERAL:text", true);
+				JScrollPane scrollpaneJ = new JScrollPane(panelJ);
+				scrollpaneJ.getVerticalScrollBar().setUnitIncrement(20);
+				scrollpaneJ.getHorizontalScrollBar().setUnitIncrement(20);
+				scrollpaneJ.setPreferredSize(new Dimension(840, 600));
+				if (DisplayHelper.showQuestion(scrollpaneJ, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
+				if (panelJ.getTag() == null) return;
+				objects.add(panelJ.getTag());
 				break;
 
 			case CGConstants.OBJECT_STRING:

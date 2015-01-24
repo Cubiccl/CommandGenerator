@@ -3,7 +3,11 @@ package commandGenerator.gui.helper.argumentSelection.json;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 
+import commandGenerator.arguments.objects.EntitySelector;
+import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
@@ -15,7 +19,7 @@ import commandGenerator.main.CGConstants;
 import commandGenerator.main.Resources;
 
 @SuppressWarnings("serial")
-public class JsonTextSelectionPanel extends HelperPanel
+public class JsonSelectionPanel extends HelperPanel
 {
 
 	private CEntry entryText, entryInsertion;
@@ -27,9 +31,9 @@ public class JsonTextSelectionPanel extends HelperPanel
 	private ClickEventPanel panelClick;
 	private boolean events;
 
-	public JsonTextSelectionPanel(String title, boolean events)
+	public JsonSelectionPanel(String title, boolean events)
 	{
-		super(CGConstants.DATAID_NONE, title, 1200, 800);
+		super(CGConstants.DATAID_NONE, title, 630, 1200);
 		this.events = events;
 
 		entryText = new CEntry(CGConstants.DATAID_NONE, "GUI:json.text");
@@ -58,7 +62,7 @@ public class JsonTextSelectionPanel extends HelperPanel
 		comboboxColor.setPreferredSize(new Dimension(200, 20));
 		comboboxColor.setSelectedIndex(15);
 
-		panelEntity = new EntitySelectionPanel(CGConstants.DATAID_NONE, "GUI:json.display.entity", CGConstants.ENTITIES_PLAYERS);
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GUI:json.display.entity", CGConstants.ENTITIES_PLAYERS);
 		panelEntity.setVisible(false);
 		panelScore = new ScoreDisplayPanel("GUI:json.display.score");
 		panelScore.setVisible(false);
@@ -69,18 +73,10 @@ public class JsonTextSelectionPanel extends HelperPanel
 		gbc.gridy = 0;
 		add(comboboxMode, gbc);
 		gbc.gridy++;
-		gbc.gridheight = 5;
 		add(entryText, gbc);
 		add(panelEntity, gbc);
 		add(panelScore, gbc);
-		gbc.gridheight = 1;
-		gbc.gridy = 8;
-		if (events) add(checkboxHover, gbc);
 		gbc.gridy++;
-		if (events) add(panelHover, gbc);
-
-		gbc.gridx++;
-		gbc.gridy = 0;
 		add(comboboxColor, gbc);
 		gbc.gridy++;
 		add(checkboxBold, gbc);
@@ -96,6 +92,10 @@ public class JsonTextSelectionPanel extends HelperPanel
 		add(entryInsertion, gbc);
 		gbc.gridy++;
 		add(entryInsertion, gbc);
+		gbc.gridy++;
+		if (events) add(checkboxHover, gbc);
+		gbc.gridy++;
+		if (events) add(panelHover, gbc);
 		gbc.gridy++;
 		if (events) add(checkboxClick, gbc);
 		gbc.gridy++;
@@ -121,7 +121,7 @@ public class JsonTextSelectionPanel extends HelperPanel
 				tag.addTag(panelScore.generateScore());
 				break;
 			case 2:
-				tag.addTag(new TagString("selector").setValue(panelEntity.generateEntity().display()));
+				tag.addTag(new TagString("selector").setValue(panelEntity.generateEntity().commandStructure()));
 				break;
 			default:
 				break;
@@ -157,4 +157,44 @@ public class JsonTextSelectionPanel extends HelperPanel
 		comboboxMode.updateLang();
 	}
 
+	public void setup(TagCompound nbt)
+	{
+		for (int i = 0; i < nbt.size(); i++)
+		{
+			Tag tag = nbt.get(i);
+			if (tag.getId().equals("bold")) checkboxBold.setSelected(((TagString) tag).getValue() == "true");
+			if (tag.getId().equals("underlined")) checkboxUnderlined.setSelected(((TagString) tag).getValue() == "true");
+			if (tag.getId().equals("italic")) checkboxItalic.setSelected(((TagString) tag).getValue() == "true");
+			if (tag.getId().equals("strikethrough")) checkboxStrikethrough.setSelected(((TagString) tag).getValue() == "true");
+			if (tag.getId().equals("obfuscated")) checkboxObfuscated.setSelected(((TagString) tag).getValue() == "true");
+			if (tag.getId().equals("insertion")) entryInsertion.setTextField(((TagString) tag).getValue());
+			if (tag.getId().equals("clickEvent")) panelClick.setup((TagCompound) tag);
+			if (tag.getId().equals("hoverEvent")) panelHover.setup((TagCompound) tag);
+			if (tag.getId().equals("color"))
+			{
+				String color = ((TagString) tag).getValue();
+				for (int j = 0; j < Resources.colors.length; j++)
+					if (Resources.colors[j].equals(color)) comboboxColor.setSelectedIndex(j);
+
+			}
+
+			if (tag.getId().equals("text")) entryText.setTextField(((TagString) tag).getValue());
+			if (tag.getId().equals("score"))
+			{
+				comboboxMode.setSelectedIndex(1);
+				panelScore.setup((TagCompound) tag);
+			}
+			if (tag.getId().equals("selector"))
+			{
+				comboboxMode.setSelectedIndex(2);
+				Map<String, Object> data = new HashMap<String, Object>();
+				data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(((TagString) tag).getValue()));
+				panelEntity.setupFrom(data);
+			}
+		}
+
+		entryText.setVisible(comboboxMode.getSelectedIndex() == 0);
+		panelScore.setVisible(comboboxMode.getSelectedIndex() == 1);
+		panelEntity.setVisible(comboboxMode.getSelectedIndex() == 2);
+	}
 }

@@ -5,9 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import commandGenerator.arguments.objects.EntitySelector;
+import commandGenerator.arguments.tags.TagList;
 import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
-import commandGenerator.gui.helper.argumentSelection.json.JsonMessageSelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.dataTag.ListSelectionPanel;
 import commandGenerator.gui.helper.commandSpecific.TitleDetailsPanel;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.main.CGConstants;
@@ -19,7 +20,7 @@ public class TitleOptionsPanel extends OptionsPanel
 	private LangComboBox comboboxMode;
 	private EntitySelectionPanel panelPlayer;
 	private TitleDetailsPanel panelDetails;
-	private JsonMessageSelectionPanel panelJson;
+	private ListSelectionPanel panelJson;
 	private static final String[] modes = { "title", "subtitle", "times" };
 
 	public TitleOptionsPanel()
@@ -41,7 +42,7 @@ public class TitleOptionsPanel extends OptionsPanel
 		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
 		panelDetails = new TitleDetailsPanel("GENERAL:options");
 		panelDetails.setVisible(false);
-		panelJson = new JsonMessageSelectionPanel("GUI:title.json");
+		panelJson = new ListSelectionPanel("GUI:title.json", CGConstants.OBJECT_JSON);
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -67,8 +68,13 @@ public class TitleOptionsPanel extends OptionsPanel
 			return "title " + player.commandStructure() + " " + modes[comboboxMode.getSelectedIndex()] + " " + options[0] + " " + options[1] + " " + options[2];
 		} else
 		{
-			if (panelJson.generateMessage() == null) return null;
-			return "title " + player.commandStructure() + " " + modes[comboboxMode.getSelectedIndex()] + " " + panelJson.generateMessage().commandStructure().substring(1);
+
+			TagList list = new TagList() {
+				public void askValue()
+				{}
+			};
+			list.setValue(panelJson.getList());
+			return "title " + player.commandStructure() + " " + modes[comboboxMode.getSelectedIndex()] + " " + list.commandStructure();
 		}
 	}
 
