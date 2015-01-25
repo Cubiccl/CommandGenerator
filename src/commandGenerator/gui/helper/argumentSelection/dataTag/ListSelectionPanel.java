@@ -132,7 +132,7 @@ public class ListSelectionPanel extends HelperPanel
 				break;
 
 			case CGConstants.OBJECT_EFFECT:
-				EffectSelectionPanel panelEf = new EffectSelectionPanel(CGConstants.PANELID_EFFECT, "GUI:add.effect");
+				EffectSelectionPanel panelEf = new EffectSelectionPanel(CGConstants.PANELID_EFFECT, "GENERAL:effect");
 				map.put(CGConstants.PANELID_EFFECT, objects.get(nbr));
 				panelEf.setupFrom(map);
 
@@ -141,7 +141,7 @@ public class ListSelectionPanel extends HelperPanel
 				break;
 
 			case CGConstants.OBJECT_ENCHANT:
-				EnchantSelectionPanel panelEn = new EnchantSelectionPanel(CGConstants.PANELID_ENCHANT, "GUI:add.enchant", false);
+				EnchantSelectionPanel panelEn = new EnchantSelectionPanel(CGConstants.PANELID_ENCHANT, "GENERAL:enchant", false);
 				map.put(CGConstants.PANELID_ENCHANT, objects.get(nbr));
 				panelEn.setupFrom(map);
 
@@ -163,7 +163,7 @@ public class ListSelectionPanel extends HelperPanel
 				Item[] items = new Item[list.length];
 				for (int i = 0; i < items.length; i++)
 					items[i] = (Item) list[i];
-				ItemSelectionPanel panelI = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:add.item", items, true, true);
+				ItemSelectionPanel panelI = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GENERAL:item", items, true, true);
 				ItemStack stack = (ItemStack) objects.get(nbr);
 				map.put(CGConstants.PANELID_ITEM, new Object[] { stack.getItem().getId(), stack.getDamage(), stack.getCount(), stack.getSlot() });
 				map.put(CGConstants.PANELID_NBT, stack.getTag().getValue());
@@ -250,13 +250,13 @@ public class ListSelectionPanel extends HelperPanel
 				break;
 
 			case CGConstants.OBJECT_EFFECT:
-				EffectSelectionPanel panelEf = new EffectSelectionPanel(CGConstants.DATAID_NONE, "GUI:add.effect");
+				EffectSelectionPanel panelEf = new EffectSelectionPanel(CGConstants.DATAID_NONE, "GENERAL:effect");
 				if (DisplayHelper.showQuestion(panelEf, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:effect")))) return;
 				objects.add(panelEf.generateEffect());
 				break;
 
 			case CGConstants.OBJECT_ENCHANT:
-				EnchantSelectionPanel panelEn = new EnchantSelectionPanel(CGConstants.DATAID_NONE, "GUI:add.enchant", false);
+				EnchantSelectionPanel panelEn = new EnchantSelectionPanel(CGConstants.DATAID_NONE, "GENERAL:enchant", false);
 				if (DisplayHelper.showQuestion(panelEn, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:enchant")))) return;
 				if (panelEn.generateEnchantment() == null) return;
 				objects.add(panelEn.generateEnchantment());
@@ -273,7 +273,7 @@ public class ListSelectionPanel extends HelperPanel
 				Item[] items = new Item[list.length];
 				for (int i = 0; i < items.length; i++)
 					items[i] = (Item) list[i];
-				ItemSelectionPanel panelI = new ItemSelectionPanel(CGConstants.DATAID_NONE, "GUI:add.item", items, true, true);
+				ItemSelectionPanel panelI = new ItemSelectionPanel(CGConstants.DATAID_NONE, "GENERAL:item", items, true, true);
 				if (DisplayHelper.showQuestion(panelI, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:item")))) return;
 				objects.add(panelI.getItemStack());
 				break;
@@ -409,8 +409,13 @@ public class ListSelectionPanel extends HelperPanel
 
 	public void setList(List<Tag> list)
 	{
-		// TODO objects = list;
-		System.out.println("Setting list, //TODO");
+		if (list == null) return;
+		
+		objects.clear();
+		for (int i = 0; i < list.size(); i++)
+			objects.add(ObjectBase.toObject(list.get(i), type));
+		
+		setupList();
 	}
 
 }

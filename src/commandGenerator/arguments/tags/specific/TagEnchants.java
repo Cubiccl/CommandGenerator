@@ -17,7 +17,9 @@ public class TagEnchants extends TagList
 	{
 		panel = new ListSelectionPanel("TAGS:" + getId(), CGConstants.OBJECT_ENCHANT);
 		((ListSelectionPanel) panel).setList(getValue());
+		
 		if (showPanel()) return;
+		
 		setValue(((ListSelectionPanel) panel).getList());
 	}
 

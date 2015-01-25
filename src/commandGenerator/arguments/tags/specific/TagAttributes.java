@@ -93,9 +93,9 @@ public class TagAttributes extends TagList
 
 			for (int j = 0; j < attribute.size(); j++)
 			{
-				if (attribute.get(i).getId().equals("AttributeName")) id = ((TagString) attribute.get(i)).getValue();
-				if (attribute.get(i).getId().equals("Amount")) amount = ((TagDouble) attribute.get(i)).getValue();
-				if (attribute.get(i).getId().equals("Operation")) operation = ((TagInt) attribute.get(i)).getValue();
+				if (attribute.get(j).getId().equals("AttributeName")) id = ((TagString) attribute.get(j)).getValue();
+				if (attribute.get(j).getId().equals("Amount")) amount = ((TagDouble) attribute.get(j)).getValue();
+				if (attribute.get(j).getId().equals("Operation")) operation = ((TagInt) attribute.get(j)).getValue();
 			}
 			text += new Attribute((AttributeType) ObjectBase.getObjectFromId(id), amount, operation).display();
 		}
