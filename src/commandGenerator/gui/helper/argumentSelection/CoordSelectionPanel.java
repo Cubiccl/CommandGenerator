@@ -84,7 +84,7 @@ public class CoordSelectionPanel extends HelperPanel
 	public Coordinates generateCoord()
 	{
 		DisplayHelper.log("Generating coordinates");
-		int x, y, z;
+		double x, y, z;
 		boolean areRelative = false, isRotation = false;
 
 		if (relative) areRelative = checkboxRelative.isSelected();
@@ -92,9 +92,9 @@ public class CoordSelectionPanel extends HelperPanel
 
 		try
 		{
-			x = Integer.parseInt(entryX.getText());
-			y = Integer.parseInt(entryY.getText());
-			z = Integer.parseInt(entryZ.getText());
+			x = Double.parseDouble(entryX.getText());
+			y = Double.parseDouble(entryY.getText());
+			z = Double.parseDouble(entryZ.getText());
 		} catch (Exception ex)
 		{
 			DisplayHelper.warningInteger();
@@ -137,9 +137,9 @@ public class CoordSelectionPanel extends HelperPanel
 			return;
 		}
 
-		entryX.setTextField(Integer.toString(coords.getCoord(Coordinates.X)));
-		entryY.setTextField(Integer.toString(coords.getCoord(Coordinates.Y)));
-		entryZ.setTextField(Integer.toString(coords.getCoord(Coordinates.Z)));
+		entryX.setTextField(Double.toString(coords.getCoord(Coordinates.X)));
+		entryY.setTextField(Double.toString(coords.getCoord(Coordinates.Y)));
+		entryZ.setTextField(Double.toString(coords.getCoord(Coordinates.Z)));
 
 		if (relative) checkboxRelative.setSelected(coords.getRelative());
 		if (rotation)

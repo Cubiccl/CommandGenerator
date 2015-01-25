@@ -41,6 +41,7 @@ public class DataTags
 		if (tag[1].equals("string")) return initString(tag);
 		if (tag[1].equals("int")) return initInt(tag);
 		if (tag[1].equals("float")) return initFloat(tag);
+		if (tag[1].equals("double")) return initDouble(tag);
 		if (tag[1].equals("item")) return initItem(tag);
 		if (tag[1].equals("item_list")) return initItemList(tag);
 		if (tag[1].equals("custom")) return initCustom(tag);
@@ -175,6 +176,11 @@ public class DataTags
 		return tag;
 	}
 
+	private static Tag initDouble(String[] tagData)
+	{
+		return new TagDouble(tagData[0], tagData[2]);
+	}
+
 	public static List<Tag> generateListFrom(String nbt)
 	{
 		List<Tag> list = new ArrayList<Tag>();
@@ -231,6 +237,7 @@ public class DataTags
 			if (nbt.startsWith("\"") && nbt.endsWith("\"")) corresponding[1] = "string";
 			else if (nbt.startsWith("{") && nbt.endsWith("}")) corresponding[1] = "compound";
 			else if (nbt.endsWith("f") || nbt.endsWith("F")) corresponding[1] = "float";
+			else if (nbt.endsWith("d") || nbt.endsWith("D")) corresponding[1] = "double";
 			else corresponding[1] = "int";
 		}
 

@@ -12,13 +12,13 @@ public class Coordinates
 
 	public static final int X = 0, Y = 1, Z = 2;
 
-	private int x, y, z;
+	private double x, y, z;
 
 	float xRotation, yRotation;
 	private boolean areRelative, isRotation;
 
 	/** Creates new Coordinates. */
-	public Coordinates(int x, int y, int z)
+	public Coordinates(double x, double y, double z)
 	{
 
 		this.x = x;
@@ -31,7 +31,7 @@ public class Coordinates
 	}
 
 	/** Creates new Coordinates. */
-	public Coordinates(int x, int y, int z, boolean areRelative)
+	public Coordinates(double x, double y, double z, boolean areRelative)
 	{
 
 		this.x = x;
@@ -43,7 +43,7 @@ public class Coordinates
 	}
 
 	/** Creates new Coordinates. */
-	public Coordinates(int x, int y, int z, float xRotation, float yRotation, boolean areRelative)
+	public Coordinates(double x, double y, double z, float xRotation, float yRotation, boolean areRelative)
 	{
 
 		this.x = x;
@@ -83,11 +83,11 @@ public class Coordinates
 
 		String display = "";
 		if (this.areRelative) display += "~";
-		display += Integer.toString(x) + " ";
+		display += Double.toString(x) + " ";
 		if (this.areRelative) display += "~";
-		display += Integer.toString(y) + " ";
+		display += Double.toString(y) + " ";
 		if (this.areRelative) display += "~";
-		display += Integer.toString(z);
+		display += Double.toString(z);
 
 		if (this.isRotation) display += " " + Float.toString(xRotation) + " " + Float.toString(yRotation);
 
@@ -95,7 +95,7 @@ public class Coordinates
 	}
 
 	/** Returns the specified coordinate. */
-	public int getCoord(int coord)
+	public double getCoord(int coord)
 	{
 		switch (coord)
 		{

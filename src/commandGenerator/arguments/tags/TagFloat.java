@@ -89,8 +89,8 @@ public class TagFloat extends Tag
 	@Override
 	public String commandStructure()
 	{
-		if (getId().equals("")) return Float.toString(value);
-		return getId() + ":" + value;
+		if (getId().equals("")) return Float.toString(value) + "F";
+		return getId() + ":" + value + "F";
 	}
 
 	public void setMin(float min)
