@@ -114,7 +114,7 @@ public class NumberSpinner extends JPanel implements CComponent
 
 	public void setSelected(int value)
 	{
-		spinner.setValue(value);
+		if (value >= min && value <= max) spinner.setValue(value);
 	}
 
 	@Override

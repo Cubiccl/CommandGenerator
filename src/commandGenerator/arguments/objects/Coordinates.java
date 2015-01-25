@@ -145,7 +145,7 @@ public class Coordinates
 
 	public static Coordinates generateFrom(String x, String y, String z)
 	{
-		int cx, cy, cz;
+		double cx, cy, cz;
 		boolean relative = x.startsWith("~");
 
 		try
@@ -158,11 +158,11 @@ public class Coordinates
 				z = z.substring(1);
 			}
 
-			if (!x.equals("")) cx = Integer.parseInt(x);
+			if (!x.equals("")) cx = Double.parseDouble(x);
 			else cx = 0;
-			if (!y.equals("")) cy = Integer.parseInt(y);
+			if (!y.equals("")) cy = Double.parseDouble(y);
 			else cy = 0;
-			if (!z.equals("")) cz = Integer.parseInt(z);
+			if (!z.equals("")) cz = Double.parseDouble(z);
 			else cz = 0;
 
 			Coordinates coords = new Coordinates(cx, cy, cz, relative);
@@ -179,7 +179,7 @@ public class Coordinates
 
 	public static Coordinates generateFromWithRot(String x, String y, String z, float rotX, float rotY)
 	{
-		int cx, cy, cz;
+		double cx, cy, cz;
 		boolean relative = x.startsWith("~");
 
 		try
@@ -192,11 +192,11 @@ public class Coordinates
 				z = z.substring(1);
 			}
 
-			if (!x.equals("")) cx = Integer.parseInt(x);
+			if (!x.equals("")) cx = Double.parseDouble(x);
 			else cx = 0;
-			if (!y.equals("")) cy = Integer.parseInt(y);
+			if (!y.equals("")) cy = Double.parseDouble(y);
 			else cy = 0;
-			if (!z.equals("")) cz = Integer.parseInt(z);
+			if (!z.equals("")) cz = Double.parseDouble(z);
 			else cz = 0;
 
 			Coordinates coords = new Coordinates(cx, cy, cz, rotX, rotY, relative);

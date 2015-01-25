@@ -51,20 +51,31 @@ public class PoseSelectionPanel extends HelperPanel
 		TagList tLLeg = lLeg.getPose();
 		TagList tRLeg = rLeg.getPose();
 
-		if (tBody == null || tLArm == null || tRArm == null || tHead == null || tLLeg == null || tRLeg == null) return null;
-
 		List<Tag> list = new ArrayList<Tag>();
-		list.add(tBody);
-		list.add(tLArm);
-		list.add(tRArm);
-		list.add(tHead);
-		list.add(tLLeg);
-		list.add(tRLeg);
+		if (tBody != null) list.add(tBody);
+		if (tLArm != null) list.add(tLArm);
+		if (tRArm != null) list.add(tRArm);
+		if (tHead != null) list.add(tHead);
+		if (tLLeg != null) list.add(tLLeg);
+		if (tRLeg != null) list.add(tRLeg);
 		return list;
 	}
 
 	@Override
 	public void updateLang()
 	{}
+
+	public void setup(List<Tag> value)
+	{
+		for (int i = 0; i < value.size(); i++)
+		{
+			if (value.get(i).getId().equals("Body")) body.setup((TagList) value.get(i));
+			if (value.get(i).getId().equals("LeftArm")) lArm.setup((TagList) value.get(i));
+			if (value.get(i).getId().equals("RightArm")) rArm.setup((TagList) value.get(i));
+			if (value.get(i).getId().equals("Head")) head.setup((TagList) value.get(i));
+			if (value.get(i).getId().equals("LeftLeg")) lLeg.setup((TagList) value.get(i));
+			if (value.get(i).getId().equals("RightLeg")) rLeg.setup((TagList) value.get(i));
+		}
+	}
 
 }

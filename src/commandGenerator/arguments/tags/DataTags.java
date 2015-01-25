@@ -45,7 +45,11 @@ public class DataTags
 		if (tag[1].equals("item")) return initItem(tag);
 		if (tag[1].equals("item_list")) return initItemList(tag);
 		if (tag[1].equals("custom")) return initCustom(tag);
-		else return new TagCompound() {
+		if (tag[1].equals("list")) return new TagList(tag[0]) {
+			public void askValue()
+			{}
+		};
+		return new TagCompound() {
 			public void askValue()
 			{}
 		};
@@ -231,7 +235,9 @@ public class DataTags
 			for (String[] entity : entities)
 				if (entity[0].equals(id)) corresponding = entity;
 			for (String[] generate : generated)
+			{
 				if (generate[0].equals(id)) corresponding = generate;
+			}
 		} else
 		{
 			if (nbt.startsWith("\"") && nbt.endsWith("\"")) corresponding[1] = "string";

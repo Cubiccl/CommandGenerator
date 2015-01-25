@@ -3,16 +3,22 @@ package commandGenerator.arguments.tags.specific;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.dataTag.PoseSelectionPanel;
 
-public class TagPose extends TagCompound {
+public class TagPose extends TagCompound
+{
 
-	public TagPose() {
+	public TagPose()
+	{
 		super("entity.Pose", "ArmorStand");
 	}
 
 	@Override
-	public void askValue() {
+	public void askValue()
+	{
 		panel = new PoseSelectionPanel();
-		showPanel();
+		((PoseSelectionPanel) panel).setup(getValue());
+
+		if (showPanel()) return;
+
 		if (((PoseSelectionPanel) panel).getPose() != null) setValue(((PoseSelectionPanel) panel).getPose());
 	}
 
