@@ -195,6 +195,14 @@ public class ListSelectionPanel extends HelperPanel
 				objects.set(nbr, panelJ.getTag());
 				break;
 
+			case CGConstants.OBJECT_TAG_PATTERN:
+				PatternSelectionPanel panelP = new PatternSelectionPanel();
+				panelP.setup((TagCompound) objects.get(nbr));
+				if (DisplayHelper.showQuestion(panelP, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:pattern")))) return;
+				if (panelP.getPattern() == null) return;
+				objects.set(nbr, panelP.getPattern());
+				break;
+
 			case CGConstants.OBJECT_STRING:
 				String[] strings = new String[list.length];
 				for (int i = 0; i < strings.length; i++)
@@ -282,6 +290,13 @@ public class ListSelectionPanel extends HelperPanel
 				objects.add(panelJ.getTag());
 				break;
 
+			case CGConstants.OBJECT_TAG_PATTERN:
+				PatternSelectionPanel panelP = new PatternSelectionPanel();
+				if (DisplayHelper.showQuestion(panelP, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:pattern")))) return;
+				if (panelP.getPattern() == null) return;
+				objects.add(panelP.getPattern());
+				break;
+
 			case CGConstants.OBJECT_STRING:
 				String[] strings = new String[list.length];
 				for (int i = 0; i < strings.length; i++)
@@ -341,6 +356,9 @@ public class ListSelectionPanel extends HelperPanel
 				break;
 			case CGConstants.OBJECT_TAG_TRADE:
 				name = Lang.get("GENERAL:trade");
+				break;
+			case CGConstants.OBJECT_TAG_PATTERN:
+				name = Lang.get("GENERAL:pattern");
 				break;
 
 			default:

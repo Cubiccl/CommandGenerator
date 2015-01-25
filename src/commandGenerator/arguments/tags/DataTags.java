@@ -144,7 +144,7 @@ public class DataTags
 					data = data.substring("labeled=".length());
 					String[] options = data.split(":");
 					tag.setMin(Integer.parseInt(options[0]));
-					tag.setMin(Integer.parseInt(options[1]));
+					tag.setMax(Integer.parseInt(options[1]));
 					tag.setChoices(options[2]);
 				}
 			}

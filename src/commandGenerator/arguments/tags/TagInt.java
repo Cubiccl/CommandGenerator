@@ -48,7 +48,7 @@ public class TagInt extends Tag
 		{
 			textfield = new JTextField(15);
 			textfield.setText(Integer.toString(value));
-			gbc.gridy++;
+			gbc.gridx++;
 			panel.add(textfield, gbc);
 			if (showPanel()) return;
 			if (!isValueOk(textfield.getText())) return;
@@ -57,9 +57,10 @@ public class TagInt extends Tag
 		{
 			String[] names = new String[max - min];
 			for (int i = 0; i < names.length; i++)
-				names[i] = Lang.get("TAGS:" + choicesId + i);
+				names[i] = Lang.get("RESOURCES:" + choicesId + "_" + i);
 
 			JComboBox<String> combobox = new JComboBox<String>(names);
+			gbc.gridx++;
 			panel.add(combobox, gbc);
 
 			if (showPanel()) return;
