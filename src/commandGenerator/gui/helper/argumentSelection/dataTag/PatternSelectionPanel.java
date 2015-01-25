@@ -40,7 +40,7 @@ public class PatternSelectionPanel extends HelperPanel
 		labelImage = new JLabel();
 		try
 		{
-			labelImage.setIcon(new ImageIcon(Resources.folder + "/textures/banners/bs.png"));
+			labelImage.setIcon(new ImageIcon(Resources.folder + "textures/banners/bs.png"));
 		} catch (Exception e)
 		{
 			DisplayHelper.missingTexture("textures/banners/bs.png");
@@ -56,7 +56,7 @@ public class PatternSelectionPanel extends HelperPanel
 			{
 				try
 				{
-					labelImage.setIcon(new ImageIcon(Resources.folder + "/textures/banners/" + patternIds[comboboxPattern.getSelectedIndex()] + ".png"));
+					labelImage.setIcon(new ImageIcon(Resources.folder + "textures/banners/" + patternIds[comboboxPattern.getSelectedIndex()] + ".png"));
 				} catch (Exception e)
 				{
 					DisplayHelper.missingTexture("textures/banners/" + patternIds[comboboxPattern.getSelectedIndex()] + ".png");

@@ -245,6 +245,10 @@ public class FileHelper
 			try
 			{
 				Writer writer = new PrintWriter(folder + "customData.txt");
+				writer.write("/** BLOCKS **** ID,id **/\n\n/** ITEMS **** ID,id,maxDamage,gif **/\n\n/** ENTITIES **/\n\n/** EFFECTS **/\n\n"
+						+ "/** ENCHANTMENTS **** ID,id,max_level **/\n\n/** ACHIEVEMENTS **** id,item **/\n\n/** ATTRIBUTES **/\n\n/** PARTICLES **/\n\n/** SOUNDS **/\n\n"
+						+ "/** LISTS **** name:elements **/\n\n/** BLOCKTAGS **** name,type,applicable **/\n\n/** ITEMTAGS **** name,type,applicable **/\n\n"
+						+ "/** ENTITYTAGS **** name,type,applicable **/\n\n/** GENERATEDTAGS **** name,type **/\n\n/** END **/");
 				writer.close();
 			} catch (Exception e)
 			{}

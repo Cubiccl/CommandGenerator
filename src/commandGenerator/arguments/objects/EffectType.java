@@ -44,7 +44,7 @@ public class EffectType extends ObjectBase
 	@Override
 	public ImageIcon getTexture()
 	{
-		return new ImageIcon(Resources.folder + "/textures/effects/" + getId() + ".png");
+		return new ImageIcon(Resources.folder + "textures/effects/" + getId() + ".png");
 	}
 
 	public static EffectType[] getList()

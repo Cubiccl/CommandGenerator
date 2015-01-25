@@ -17,7 +17,7 @@ public class InitObjects
 	public static void init()
 	{
 		String[] data = FileHelper.readFileArray("data.txt").toArray(new String[0]);
-		String[] dataCustom = FileHelper.readFileArray("dataCustom.txt").toArray(new String[0]);
+		String[] dataCustom = FileHelper.readFileArray("customData.txt").toArray(new String[0]);
 		if (data.length == 0) return;
 		Map<String, String[]> convertedData = convert(data, dataCustom);
 
