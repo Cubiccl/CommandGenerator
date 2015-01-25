@@ -14,7 +14,7 @@ public class Coordinates
 
 	private double x, y, z;
 
-	float xRotation, yRotation;
+	private float xRotation, yRotation;
 	private boolean areRelative, isRotation;
 
 	/** Creates new Coordinates. */
@@ -57,7 +57,7 @@ public class Coordinates
 	}
 
 	/** Creates new Coordinates. */
-	public Coordinates(int x, int y, int z, int xRotation, int yRotation)
+	public Coordinates(double x, double y, double z, float xRotation, float yRotation)
 	{
 
 		this.x = x;

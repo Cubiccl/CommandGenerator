@@ -16,7 +16,7 @@ public class TagDropChances extends TagList
 	{
 		panel = new DropChancesSelectionPanel("TAGS:" + getId());
 		((DropChancesSelectionPanel) panel).setup(getValue());
-		showPanel();
+		if (showPanel()) return;
 		setValue(((DropChancesSelectionPanel) panel).getDropChances());
 	}
 

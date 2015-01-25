@@ -16,7 +16,7 @@ public class TagEquipment extends TagList
 	{
 		panel = new EquipmentSelectionPanel("TAGS:" + getId());
 		((EquipmentSelectionPanel) panel).setup(getValue());
-		showPanel();
+		if (showPanel()) return;
 		setValue(((EquipmentSelectionPanel) panel).getSelectedEquipment());
 	}
 

@@ -45,9 +45,9 @@ public class TagExplosion extends TagCompound
 
 		colors = ((ExplosionSelectionPanel) panel).getColors() != null;
 		fades = ((ExplosionSelectionPanel) panel).getFadeColors() != null;
-		
-		if (((ExplosionSelectionPanel) panel).getColors() != null) addTag(((ExplosionSelectionPanel) panel).getColors());
-		if (((ExplosionSelectionPanel) panel).getFadeColors() != null) addTag(((ExplosionSelectionPanel) panel).getFadeColors());
+
+		addTag(((ExplosionSelectionPanel) panel).getColors());
+		addTag(((ExplosionSelectionPanel) panel).getFadeColors());
 
 	}
 }

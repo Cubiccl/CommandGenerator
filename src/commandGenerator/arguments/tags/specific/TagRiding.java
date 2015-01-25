@@ -32,7 +32,7 @@ public class TagRiding extends TagCompound
 
 		if (showPanel()) return;
 
-		if (((NBTTagPanel) panel).getTagList() != null) setValue(((NBTTagPanel) panel).getTagList());
+		setValue(((NBTTagPanel) panel).getTagList());
 	}
 
 }

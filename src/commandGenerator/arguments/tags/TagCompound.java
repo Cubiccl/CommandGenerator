@@ -23,6 +23,7 @@ public abstract class TagCompound extends Tag
 
 	public void addTag(Tag tag)
 	{
+		if (tag == null) return;
 		value.add(tag);
 	}
 
@@ -55,7 +56,7 @@ public abstract class TagCompound extends Tag
 			text += "<br />";
 			for (int j = 0; j < lvls; j++)
 				text += "|";
-			text += "*" + value.get(i).display(details - 1, lvls + 1);
+			text += "* " + value.get(i).display(details - 1, lvls + 1);
 		}
 		return text;
 	}
@@ -77,6 +78,7 @@ public abstract class TagCompound extends Tag
 
 	public void setValue(List<Tag> value)
 	{
+		if (value == null) return;
 		this.value = value;
 	}
 

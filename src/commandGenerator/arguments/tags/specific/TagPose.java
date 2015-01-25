@@ -19,7 +19,7 @@ public class TagPose extends TagCompound
 
 		if (showPanel()) return;
 
-		if (((PoseSelectionPanel) panel).getPose() != null) setValue(((PoseSelectionPanel) panel).getPose());
+		setValue(((PoseSelectionPanel) panel).getPose());
 	}
 
 }

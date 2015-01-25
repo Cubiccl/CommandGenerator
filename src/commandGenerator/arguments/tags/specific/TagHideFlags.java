@@ -3,19 +3,22 @@ package commandGenerator.arguments.tags.specific;
 import commandGenerator.arguments.tags.TagInt;
 import commandGenerator.gui.helper.argumentSelection.dataTag.FlagSelectionPanel;
 
-public class TagHideFlags extends TagInt {
+public class TagHideFlags extends TagInt
+{
 
-	public TagHideFlags() {
+	public TagHideFlags()
+	{
 		super("item.HideFlags", "LIST=items");
 	}
-	
+
 	@Override
-	public void askValue() {
-		
+	public void askValue()
+	{
+
 		panel = new FlagSelectionPanel();
-		showPanel();
+		if (showPanel()) return;
 		value = ((FlagSelectionPanel) panel).getHideFlags();
-		
+
 	}
 
 }

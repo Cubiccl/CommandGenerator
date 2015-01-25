@@ -35,7 +35,7 @@ public abstract class TagList extends Tag
 			text += "<br />";
 			for (int j = 0; j < lvls; j++)
 				text += "|";
-			text += "-" + value.get(i).display(details, lvls + 1);
+			text += "- " + value.get(i).display(details, lvls + 1);
 		}
 
 		return text;
@@ -43,6 +43,7 @@ public abstract class TagList extends Tag
 
 	public TagList setValue(List<Tag> value)
 	{
+		if (value == null) return this;
 		this.value = value;
 		return this;
 	}

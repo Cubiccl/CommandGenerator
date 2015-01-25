@@ -18,7 +18,7 @@ public class TagDisabledSlots extends TagInt
 
 		panel = new DisabledSlotsPanel();
 		((DisabledSlotsPanel) panel).setupFrom(getValue());
-		showPanel();
+		if (showPanel()) return;
 		value = ((DisabledSlotsPanel) panel).getDisabledSlots();
 
 	}
