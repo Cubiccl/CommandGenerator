@@ -85,7 +85,7 @@ public class Generator
 			if (elements.length > 4) count = Integer.parseInt(elements[4]);
 			data.put(CGConstants.PANELID_ITEM, ItemStack.generateFrom(id, damage, count, new ArrayList<Tag>(), 0));
 
-			if (elements.length > 5) data.put(CGConstants.PANELID_ITEM, ItemStack.generateFrom(id, damage, count,DataTags.generateListFrom(elements[5]), 0));
+			if (elements.length > 5) data.put(CGConstants.PANELID_ITEM, ItemStack.generateFrom(id, damage, count, DataTags.generateListFrom(elements[5]), 0));
 
 			return data;
 		} catch (Exception e)
@@ -826,7 +826,12 @@ public class Generator
 		{
 			for (int j = 0; j < base[i].length(); j++)
 			{
-				if (base[i].charAt(j) == '"') inString = !inString;
+
+				if (base[i].charAt(j) == '"')
+				{
+					if (j == 0) inString = !inString;
+					else if (base[i].charAt(j - 1) != '\\') inString = !inString;
+				}
 			}
 			if (elements.size() <= realIndex) elements.add(base[i]);
 			else elements.set(realIndex, elements.get(realIndex) + " " + base[i]);

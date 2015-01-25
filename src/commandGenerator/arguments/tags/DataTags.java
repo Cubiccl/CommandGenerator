@@ -210,7 +210,7 @@ public class DataTags
 			}
 		}
 
-		String[] corresponding = { "", "" };
+		String[] corresponding = { "", "", "air" }; // Air doesn't affect anything. Just to prevent from crashing...
 		String value = nbt;
 		if (!list)
 		{
@@ -226,6 +226,12 @@ public class DataTags
 				if (entity[0].equals(id)) corresponding = entity;
 			for (String[] generate : generated)
 				if (generate[0].equals(id)) corresponding = generate;
+		} else
+		{
+			if (nbt.startsWith("\"") && nbt.endsWith("\"")) corresponding[1] = "string";
+			else if (nbt.startsWith("{") && nbt.endsWith("}")) corresponding[1] = "compound";
+			else if (nbt.endsWith("f") || nbt.endsWith("F")) corresponding[1] = "float";
+			else corresponding[1] = "int";
 		}
 
 		Tag tag = init(corresponding);
@@ -284,7 +290,11 @@ public class DataTags
 		{
 			for (int j = 0; j < base[i].length(); j++)
 			{
-				if (base[i].charAt(j) == '"') inString = !inString;
+				if (base[i].charAt(j) == '"')
+				{
+					if (j == 0) inString = !inString;
+					else if (base[i].charAt(j - 1) != '\\') inString = !inString;
+				}
 				if (base[i].charAt(j) == '[' && !inString) brackRect++;
 				if (base[i].charAt(j) == ']' && !inString) brackRect--;
 				if (base[i].charAt(j) == '{' && !inString) brackCurv++;
