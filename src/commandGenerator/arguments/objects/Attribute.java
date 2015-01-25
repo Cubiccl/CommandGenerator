@@ -69,7 +69,7 @@ public class Attribute
 			{}
 		};
 
-		tag.addTag(new TagString("AttributeName").setValue(getName()));
+		tag.addTag(new TagString("AttributeName").setValue(type.getId()));
 		tag.addTag(new TagDouble("Amount").setValue(amount));
 		tag.addTag(new TagInt("Operation").setValue(operation));
 		tag.addTag(new TagString("Name").setValue(getName()));
