@@ -64,7 +64,7 @@ public class Entity extends ObjectBase
 	{
 		List<Entity> entityList = new ArrayList<Entity>();
 		for (int i = 0; i < ids.size(); i++)
-			if (ids.get(i) != "Player") entityList.add(list.get(ids.get(i)));
+			if (!ids.get(i).equals("Player") && !ids.get(i).equals("")) entityList.add(list.get(ids.get(i)));
 		return entityList.toArray(new Entity[0]);
 	}
 

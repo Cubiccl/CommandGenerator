@@ -2,6 +2,8 @@ package commandGenerator.gui.helper.argumentSelection.dataTag;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -62,7 +64,7 @@ public class SpawnSelectionPanel extends JPanel implements IBox
 		add(textfieldWeight, gbc);
 	}
 
-	public Tag getTag()
+	public TagCompound getTag()
 	{
 
 		String weight = textfieldWeight.getText();
@@ -94,6 +96,22 @@ public class SpawnSelectionPanel extends JPanel implements IBox
 	public void updateCombobox()
 	{
 		panelTag.updateCombobox((Entity) combobox.getValue());
+	}
+
+	public void setup(TagCompound nbt)
+	{
+		for (int i = 0; i < nbt.size(); i++)
+		{
+			Tag tag = nbt.get(i);
+			if (tag.getId().equals("Type")) combobox.setSelected(ObjectBase.getObjectFromId(((TagString) tag).getValue()));
+			if (tag.getId().equals("Weight")) textfieldWeight.setText(Integer.toString(((TagInt) tag).getValue()));
+			if (tag.getId().equals("Properties"))
+			{
+				Map<String, Object> data = new HashMap<String, Object>();
+				data.put(CGConstants.PANELID_NBT, ((TagCompound) tag).getValue());
+				panelTag.setupFrom(data);
+			}
+		}
 	}
 
 }

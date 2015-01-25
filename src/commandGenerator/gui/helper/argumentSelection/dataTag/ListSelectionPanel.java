@@ -150,6 +150,15 @@ public class ListSelectionPanel extends HelperPanel
 				objects.set(nbr, panelEn.generateEnchantment());
 				break;
 
+			case CGConstants.OBJECT_ENTITY:
+				SpawnSelectionPanel panelSp = new SpawnSelectionPanel();
+				panelSp.setup((TagCompound) objects.get(nbr));
+
+				if (DisplayHelper.showQuestion(panelSp, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:entity")))) return;
+				if (panelSp.getTag() == null) return;
+				objects.set(nbr, panelSp.getTag());
+				break;
+
 			case CGConstants.OBJECT_ITEM:
 				Item[] items = new Item[list.length];
 				for (int i = 0; i < items.length; i++)
@@ -253,6 +262,13 @@ public class ListSelectionPanel extends HelperPanel
 				objects.add(panelEn.generateEnchantment());
 				break;
 
+			case CGConstants.OBJECT_ENTITY:
+				SpawnSelectionPanel panelSp = new SpawnSelectionPanel();
+				if (DisplayHelper.showQuestion(panelSp, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:entity")))) return;
+				if (panelSp.getTag() == null) return;
+				objects.add(panelSp.getTag());
+				break;
+
 			case CGConstants.OBJECT_ITEM:
 				Item[] items = new Item[list.length];
 				for (int i = 0; i < items.length; i++)
@@ -301,14 +317,14 @@ public class ListSelectionPanel extends HelperPanel
 				String[] strings = new String[list.length];
 				for (int i = 0; i < strings.length; i++)
 					strings[i] = (String) list[i];
-				JPanel panelS = new JPanel();
+				JPanel panelSt = new JPanel();
 				JLabel label = new JLabel(Lang.get("GENERAL:add_only"));
 				JComboBox<String> box = new JComboBox<String>(strings);
 
-				panelS.add(label);
-				panelS.add(box);
+				panelSt.add(label);
+				panelSt.add(box);
 
-				if (DisplayHelper.showQuestion(panelS, Lang.get("GENERAL:add_only"))) return;
+				if (DisplayHelper.showQuestion(panelSt, Lang.get("GENERAL:add_only"))) return;
 				objects.add(new TagString().setValue((String) box.getSelectedItem()));
 				break;
 
@@ -347,6 +363,9 @@ public class ListSelectionPanel extends HelperPanel
 				break;
 			case CGConstants.OBJECT_ENCHANT:
 				name = Lang.get("GENERAL:enchant");
+				break;
+			case CGConstants.OBJECT_ENTITY:
+				name = Lang.get("GENERAL:entity");
 				break;
 			case CGConstants.OBJECT_ITEM:
 				name = Lang.get("GENERAL:item");

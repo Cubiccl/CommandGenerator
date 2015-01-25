@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import commandGenerator.main.CGConstants;
+import commandGenerator.main.Lang;
 
 public abstract class TagCompound extends Tag
 {
@@ -58,6 +59,8 @@ public abstract class TagCompound extends Tag
 				text += "|";
 			text += "* " + value.get(i).display(details - 1, lvls + 1);
 		}
+		
+		if (size() == 0) return text + Lang.get("GENERAL:empty");
 		return text;
 	}
 

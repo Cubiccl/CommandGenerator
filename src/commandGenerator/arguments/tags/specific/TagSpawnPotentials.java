@@ -1,7 +1,8 @@
 package commandGenerator.arguments.tags.specific;
 
 import commandGenerator.arguments.tags.TagList;
-import commandGenerator.gui.helper.argumentSelection.dataTag.SpawnPotentialsSelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.dataTag.ListSelectionPanel;
+import commandGenerator.main.CGConstants;
 
 public class TagSpawnPotentials extends TagList
 {
@@ -14,10 +15,11 @@ public class TagSpawnPotentials extends TagList
 	@Override
 	public void askValue()
 	{
-		panel = new SpawnPotentialsSelectionPanel();
+		panel = new ListSelectionPanel("GENERAL:entity", CGConstants.OBJECT_ENTITY);
+		((ListSelectionPanel) panel).setList(getValue());
 
 		if (showPanel()) return;
 
-		setValue(((SpawnPotentialsSelectionPanel) panel).getSpawnPotentials());
+		setValue(((ListSelectionPanel) panel).getList());
 	}
 }
