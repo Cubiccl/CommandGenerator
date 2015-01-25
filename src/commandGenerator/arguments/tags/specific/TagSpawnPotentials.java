@@ -3,17 +3,21 @@ package commandGenerator.arguments.tags.specific;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.gui.helper.argumentSelection.dataTag.SpawnPotentialsSelectionPanel;
 
-public class TagSpawnPotentials extends TagList {
+public class TagSpawnPotentials extends TagList
+{
 
-	public TagSpawnPotentials() {
+	public TagSpawnPotentials()
+	{
 		super("block.SpawnPotentials", "mob_spawner");
 	}
 
 	@Override
-	public void askValue() {
+	public void askValue()
+	{
 		panel = new SpawnPotentialsSelectionPanel();
-		showPanel();
+
+		if (showPanel()) return;
+
 		setValue(((SpawnPotentialsSelectionPanel) panel).getSpawnPotentials());
 	}
-
 }

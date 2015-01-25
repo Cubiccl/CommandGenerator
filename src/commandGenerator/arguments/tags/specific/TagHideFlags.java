@@ -9,14 +9,17 @@ public class TagHideFlags extends TagInt
 	public TagHideFlags()
 	{
 		super("item.HideFlags", "LIST=items");
+		setValue(0);
 	}
 
 	@Override
 	public void askValue()
 	{
-
 		panel = new FlagSelectionPanel();
+		((FlagSelectionPanel) panel).setup(getValue());
+
 		if (showPanel()) return;
+
 		value = ((FlagSelectionPanel) panel).getHideFlags();
 
 	}
