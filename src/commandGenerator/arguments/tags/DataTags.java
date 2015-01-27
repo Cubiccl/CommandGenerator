@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.ObjectLists;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.tags.specific.TagAttributes;
 import commandGenerator.arguments.tags.specific.TagBlockEntity;
 import commandGenerator.arguments.tags.specific.TagCanDestroy;
@@ -101,7 +101,7 @@ public class DataTags
 		else
 		{
 			List<String> objects = new ArrayList<String>();
-			for (ObjectBase object : ObjectLists.get(tagData[3].substring("LIST=".length())))
+			for (ObjectBase object : Registerer.getList(tagData[3].substring("LIST=".length())))
 				objects.add(object.getId());
 			tag = new TagItem(tagData[0], objects.toArray(new String[0]), false, tagData[2]);
 		}

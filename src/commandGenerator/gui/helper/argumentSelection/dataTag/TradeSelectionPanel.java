@@ -8,7 +8,7 @@ import java.util.Map;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.ObjectLists;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagBoolean;
 import commandGenerator.arguments.tags.TagCompound;
@@ -48,10 +48,10 @@ public class TradeSelectionPanel extends HelperPanel
 			}
 		});
 
-		panelBuy = new ItemSelectionPanel(CGConstants.PANELID_TARGET, "GUI:trade.buy", ObjectLists.get(CGConstants.LIST_ITEMS), true, false);
-		panelBuyB = new ItemSelectionPanel(CGConstants.PANELID_TARGET2, "GUI:trade.buyb", ObjectLists.get(CGConstants.LIST_ITEMS), true, false);
+		panelBuy = new ItemSelectionPanel(CGConstants.PANELID_TARGET, "GUI:trade.buy", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
+		panelBuyB = new ItemSelectionPanel(CGConstants.PANELID_TARGET2, "GUI:trade.buyb", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
 		panelBuyB.setEnabledContent(false);
-		panelSell = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:trade.sell", ObjectLists.get(CGConstants.LIST_ITEMS), true, false);
+		panelSell = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:trade.sell", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -148,7 +148,7 @@ public class TradeSelectionPanel extends HelperPanel
 		clean.put(CGConstants.DATAID_NAME2, Integer.toString(maxUses));
 		clean.put(CGConstants.DATAID_MODE, reward);
 		clean.put(CGConstants.DATAID_MODE2, buyb);
-		
+
 		clean.put(CGConstants.PANELID_TARGET, buy);
 		clean.put(CGConstants.PANELID_TARGET2, buyB);
 		clean.put(CGConstants.PANELID_ITEM, sell);

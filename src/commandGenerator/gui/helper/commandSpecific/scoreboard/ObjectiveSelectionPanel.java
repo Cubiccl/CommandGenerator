@@ -7,7 +7,7 @@ import java.util.Map;
 
 import commandGenerator.arguments.objects.Achievement;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.ObjectLists;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.LangComboBox;
@@ -63,7 +63,7 @@ public class ObjectiveSelectionPanel extends HelperPanel
 
 		else if (index == 13) comboboxPrecise2.setText("RESOURCES:stat", statList.length);
 
-		else if (index == 11 || index == 12) comboboxPrecise.setData(ObjectLists.get(CGConstants.LIST_MOBS));
+		else if (index == 11 || index == 12) comboboxPrecise.setData(Registerer.getList(CGConstants.LIST_MOBS));
 
 		else if (index >= 14) comboboxPrecise2.setText("RESOURCES:color", 16);
 
@@ -71,10 +71,10 @@ public class ObjectiveSelectionPanel extends HelperPanel
 		{
 			comboboxPrecise.setEnabled(true);
 			ObjectBase[] itemList = new ObjectBase[0];
-			if (index == 7) itemList = ObjectLists.get(CGConstants.LIST_CRAFT);
-			else if (index == 8) itemList = ObjectLists.get(CGConstants.LIST_USE);
-			else if (index == 9) itemList = ObjectLists.get(CGConstants.LIST_ITEMS);
-			else itemList = ObjectLists.get(CGConstants.LIST_MINE);
+			if (index == 7) itemList = Registerer.getList(CGConstants.LIST_CRAFT);
+			else if (index == 8) itemList = Registerer.getList(CGConstants.LIST_USE);
+			else if (index == 9) itemList = Registerer.getList(CGConstants.LIST_ITEMS);
+			else itemList = Registerer.getList(CGConstants.LIST_MINE);
 
 			comboboxPrecise.setData(itemList);
 		}

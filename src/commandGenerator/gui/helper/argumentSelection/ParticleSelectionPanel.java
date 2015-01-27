@@ -9,8 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 
 import commandGenerator.arguments.objects.Item;
-import commandGenerator.arguments.objects.ObjectLists;
 import commandGenerator.arguments.objects.Particle;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.CEntry;
@@ -60,10 +60,10 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 
 		comboboxParticle = new CComboBox(CGConstants.PANELID_PARTICLE, "GUI:particle", Particle.getList(), this);
 
-		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:particle.block", ObjectLists.get(CGConstants.LIST_BLOCKS), false);
+		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:particle.block", Registerer.getList(CGConstants.LIST_BLOCKS), false);
 		panelBlock.setVisible(false);
 		panelBlock.setPreferredSize(new Dimension(800, 150));
-		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:particle.item", ObjectLists.get(CGConstants.LIST_ICONS), false, false);
+		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:particle.item", Registerer.getList(CGConstants.LIST_ICONS), false, false);
 		panelItem.setVisible(false);
 		panelItem.setPreferredSize(new Dimension(800, 150));
 

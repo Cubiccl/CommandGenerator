@@ -73,6 +73,7 @@ public class SummonOptionsPanel extends OptionsPanel implements IBox
 	public void updateCombobox()
 	{
 		panelTag.updateCombobox((Entity) comboboxEntity.getValue());
+		label.setIcon(comboboxEntity.getValue().getTexture());
 	}
 
 }

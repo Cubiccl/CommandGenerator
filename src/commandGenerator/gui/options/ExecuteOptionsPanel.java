@@ -9,11 +9,10 @@ import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 
-import commandGenerator.arguments.objects.Commands;
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.EntitySelector;
 import commandGenerator.arguments.objects.Item;
-import commandGenerator.arguments.objects.ObjectLists;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.PanelCommandSelection;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
@@ -55,7 +54,7 @@ public class ExecuteOptionsPanel extends OptionsPanel
 
 		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 
-		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:execute.block", ObjectLists.get("blocks"), false);
+		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:execute.block", Registerer.getList(CGConstants.LIST_BLOCKS), false);
 		panelBlock.setEnabledContent(false);
 
 		gbc.gridx = 0;
@@ -99,8 +98,8 @@ public class ExecuteOptionsPanel extends OptionsPanel
 		panelCommand = new PanelCommandSelection(false);
 		panelCommand.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), Lang.get("GUI:execute.command")));
 		panelCommand.setPreferredSize(new Dimension(1100, 650));
-		panelCommand.setSelectedCommand(Commands.getCommandFromId(storedCommand.split(" ")[0]));
-		panelCommand.panelOptions.setupFrom(Commands.getCommandFromId(storedCommand.split(" ")[0]).generateSetup(storedCommand));
+		panelCommand.setSelectedCommand(Registerer.getCommandFromId(storedCommand.split(" ")[0]));
+		panelCommand.panelOptions.setupFrom(Registerer.getCommandFromId(storedCommand.split(" ")[0]).generateSetup(storedCommand));
 
 		JOptionPane.showMessageDialog(null, panelCommand, Lang.get("GUI:execute.select"), JOptionPane.QUESTION_MESSAGE);
 		if (panelCommand.generateCommand() == null) return null;

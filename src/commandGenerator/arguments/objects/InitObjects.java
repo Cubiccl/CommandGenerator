@@ -35,9 +35,7 @@ public class InitObjects
 		initTags(convertedData.get("ENTITYTAGS"), 2);
 		initTags(convertedData.get("GENERATEDTAGS"), 3);
 
-		ObjectLists.add("allEntities", Entity.ids.toArray(new String[0]));
-
-		Commands.initCommands();
+		Registerer.registerList("allEntities", Entity.ids.toArray(new String[0]));
 
 	}
 
@@ -170,9 +168,9 @@ public class InitObjects
 		for (String list : lists)
 		{
 			String[] listData = list.split(":");
-			ObjectLists.add(listData[0], listData[1].split(","));
+			Registerer.registerList(listData[0], listData[1].split(","));
 		}
-		ObjectLists.add("durability", Item.durabilityList.toArray(new String[0]));
+		Registerer.registerList("durability", Item.durabilityList.toArray(new String[0]));
 	}
 
 	private static Map<String, String[]> convert(String[] data, String[] dataCustom)

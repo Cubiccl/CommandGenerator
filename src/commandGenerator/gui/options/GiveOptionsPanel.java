@@ -2,7 +2,7 @@ package commandGenerator.gui.options;
 
 import commandGenerator.arguments.objects.EntitySelector;
 import commandGenerator.arguments.objects.Item;
-import commandGenerator.arguments.objects.ObjectLists;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
@@ -20,7 +20,7 @@ public class GiveOptionsPanel extends OptionsPanel
 		super();
 
 		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
-		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:give.item", ObjectLists.get(CGConstants.LIST_ITEMS), true, false);
+		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:give.item", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;

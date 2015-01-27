@@ -3,7 +3,6 @@ package commandGenerator.main;
 import java.util.List;
 
 import commandGenerator.arguments.objects.Command;
-import commandGenerator.arguments.objects.Commands;
 
 public class Settings
 {
@@ -38,7 +37,7 @@ public class Settings
 
 	public Settings()
 	{
-		selectedCommand = Commands.achievement;
+		selectedCommand = Command.achievement;
 		language = Integer.parseInt(FileHelper.getOption("lang"));
 		previousVersion = FileHelper.getOption("version");
 		firstLaunch = !previousVersion.equals(Resources.versions[Resources.versions.length - 1]);

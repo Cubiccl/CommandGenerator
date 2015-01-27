@@ -2,7 +2,7 @@ package commandGenerator.gui.options;
 
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Item;
-import commandGenerator.arguments.objects.ObjectLists;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
@@ -21,7 +21,7 @@ public class TestforblockOptionsPanel extends OptionsPanel
 		super();
 
 		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:block.coords", true, false);
-		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:testforblocks.block", ObjectLists.get(CGConstants.LIST_BLOCKS), true);
+		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:testforblocks.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -43,7 +43,8 @@ public class TestforblockOptionsPanel extends OptionsPanel
 
 		String command = "testforblock " + coords.commandStructure() + " " + block.getId() + " " + Integer.toString(damage);
 
-		if (!tag.commandStructure().substring(tag.getId().length() + 1).equals("{}")) command += " " + tag.commandStructure().substring(tag.getId().length() + 1);
+		if (!tag.commandStructure().substring(tag.getId().length() + 1).equals("{}")) command += " "
+				+ tag.commandStructure().substring(tag.getId().length() + 1);
 
 		return command;
 	}

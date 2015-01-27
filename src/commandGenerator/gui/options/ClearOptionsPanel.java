@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import commandGenerator.arguments.objects.EntitySelector;
 import commandGenerator.arguments.objects.Item;
-import commandGenerator.arguments.objects.ObjectLists;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
@@ -36,7 +36,7 @@ public class ClearOptionsPanel extends OptionsPanel
 		checkboxMaxCount = new CCheckBox(CGConstants.DATAID_CLEAR_ITEM, "GUI:clear.items");
 
 		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
-		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:clear.item", ObjectLists.get(CGConstants.LIST_ITEMS), true, false);
+		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:clear.item", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;

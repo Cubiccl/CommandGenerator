@@ -12,7 +12,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
 
 import commandGenerator.arguments.objects.ItemStack;
-import commandGenerator.arguments.objects.ObjectLists;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
@@ -171,7 +171,7 @@ public class EquipmentSelectionPanel extends HelperPanel
 
 	private void addItem(int slot)
 	{
-		ItemSelectionPanel panel = new ItemSelectionPanel(CGConstants.DATAID_NONE, "GUI:item", ObjectLists.get(CGConstants.LIST_ITEMS), true, false);
+		ItemSelectionPanel panel = new ItemSelectionPanel(CGConstants.DATAID_NONE, "GUI:item", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
 		if (DisplayHelper.showQuestion(panel, Lang.get("GUI:item.add"))) return;
 		equipment[slot] = new ItemStack(panel.generateItem(), panel.getDamage(), panel.getCount(), panel.getItemTag());
 		displayItems();

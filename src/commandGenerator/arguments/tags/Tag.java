@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.ObjectLists;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 
@@ -47,7 +47,7 @@ public abstract class Tag extends ObjectBase
 			} else
 			{
 				objectId = objectId.substring("LIST=".length());
-				for (ObjectBase object : ObjectLists.get(objectId))
+				for (ObjectBase object : Registerer.getList(objectId))
 					objects.add(object);
 
 			}

@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import commandGenerator.arguments.objects.ObjectLists;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
@@ -41,7 +41,7 @@ public class ReplaceitemOptionsPanel extends OptionsPanel
 		panelBlock = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:block.coords", true, false);
 		panelEntity = new ReplaceitemEntityPanel();
 		panelEntity.setVisible(false);
-		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:replaceitem.item", ObjectLists.get(CGConstants.LIST_ITEMS), true, true);
+		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:replaceitem.item", Registerer.getList(CGConstants.LIST_ITEMS), true, true);
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;

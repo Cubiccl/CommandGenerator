@@ -8,7 +8,7 @@ import javax.swing.JButton;
 
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Item;
-import commandGenerator.arguments.objects.ObjectLists;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
@@ -46,7 +46,7 @@ public class FillNormalPanel extends HelperPanel
 
 		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:fill.start", true, false);
 		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:fill.end", true, false);
-		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:fill.block", ObjectLists.get("blocks"), true);
+		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:fill.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;

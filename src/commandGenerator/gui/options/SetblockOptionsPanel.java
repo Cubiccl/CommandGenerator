@@ -8,7 +8,7 @@ import javax.swing.JButton;
 
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Item;
-import commandGenerator.arguments.objects.ObjectLists;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
@@ -46,7 +46,7 @@ public class SetblockOptionsPanel extends OptionsPanel
 		comboboxMode.setPreferredSize(new Dimension(200, 20));
 
 		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:setblock.coords", true, false);
-		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:setblock.block", ObjectLists.get(CGConstants.LIST_BLOCKS), true);
+		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:setblock.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -72,9 +72,11 @@ public class SetblockOptionsPanel extends OptionsPanel
 
 		if (coords == null || block == null) return null;
 
-		String command = "setblock " + coords.commandStructure() + " " + block.getId() + " " + Integer.toString(damage) + " " + modes[comboboxMode.getSelectedIndex()];
+		String command = "setblock " + coords.commandStructure() + " " + block.getId() + " " + Integer.toString(damage) + " "
+				+ modes[comboboxMode.getSelectedIndex()];
 
-		if (!tag.commandStructure().substring(tag.getId().length() + 1).equals("{}")) command += " " + tag.commandStructure().substring(tag.getId().length() + 1);
+		if (!tag.commandStructure().substring(tag.getId().length() + 1).equals("{}")) command += " "
+				+ tag.commandStructure().substring(tag.getId().length() + 1);
 
 		return command;
 	}
