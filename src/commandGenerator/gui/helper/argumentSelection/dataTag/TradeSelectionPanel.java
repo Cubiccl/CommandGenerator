@@ -7,7 +7,6 @@ import java.util.Map;
 
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
-import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagBoolean;
@@ -125,8 +124,8 @@ public class TradeSelectionPanel extends HelperPanel
 		TagCompound trade = (TagCompound) data.get(getPanelId());
 		int maxUses = 10, uses = 0;
 		boolean reward = false, buyb = false;
-		ItemStack buy = new ItemStack((Item) ObjectBase.getObjectFromId("stone"), 0), buyB = new ItemStack((Item) ObjectBase.getObjectFromId("stone"), 0), sell = new ItemStack(
-				(Item) ObjectBase.getObjectFromId("stone"), 0);
+		ItemStack buy = new ItemStack((Item) Registerer.getObjectFromId("stone"), 0), buyB = new ItemStack((Item) Registerer.getObjectFromId("stone"), 0), sell = new ItemStack(
+				(Item) Registerer.getObjectFromId("stone"), 0);
 
 		for (int i = 0; i < trade.size(); i++)
 		{

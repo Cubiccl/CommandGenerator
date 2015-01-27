@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Entity;
-import commandGenerator.arguments.objects.ObjectBase;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.OptionsPanel;
@@ -30,12 +30,12 @@ public class SummonOptionsPanel extends OptionsPanel implements IBox
 		super();
 		setPreferredSize(new Dimension(950, 600));
 
-		label = new JLabel(ObjectBase.getObjectFromId("Item").getTexture());
+		label = new JLabel(Registerer.getObjectFromId("Item").getTexture());
 
 		comboboxEntity = new CComboBox(CGConstants.DATAID_ENTITY, "GUI:entity.select", Entity.entities.toArray(new Entity[0]), this);
 
 		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:summon.coords", true, false);
-		panelTag = new NBTTagPanel("GUI:entity.tags", ObjectBase.getObjectFromId("Item"), DataTags.entities);
+		panelTag = new NBTTagPanel("GUI:entity.tags", Registerer.getObjectFromId("Item"), DataTags.entities);
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;

@@ -42,7 +42,7 @@ public abstract class Tag extends ObjectBase
 			{
 				String[] objectsIds = objectId.split(":");
 				for (String id1 : objectsIds)
-					objects.add(ObjectBase.getObjectFromId(id1));
+					objects.add(Registerer.getObjectFromId(id1));
 
 			} else
 			{

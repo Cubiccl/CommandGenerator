@@ -103,7 +103,7 @@ public class ItemStack
 
 	public static ItemStack generateFrom(TagCompound tag)
 	{
-		Item item = (Item) ObjectBase.getObjectFromId("stone");
+		Item item = (Item) Registerer.getObjectFromId("stone");
 		int damage = 0, count = 1, slot = -1;
 		TagCompound nbt = new TagCompound() {
 			public void askValue()
@@ -112,7 +112,7 @@ public class ItemStack
 		for (int i = 0; i < tag.size(); i++)
 		{
 			Tag part = tag.get(i);
-			if (part.getId().equals("id")) item = (Item) ObjectBase.getObjectFromId(((TagString) part).getValue());
+			if (part.getId().equals("id")) item = (Item) Registerer.getObjectFromId(((TagString) part).getValue());
 			if (part.getId().equals("Damage")) damage = ((TagInt) part).getValue();
 			if (part.getId().equals("Count")) count = ((TagInt) part).getValue();
 			if (part.getId().equals("Slot")) slot = ((TagInt) part).getValue();
@@ -124,15 +124,15 @@ public class ItemStack
 
 	public static ItemStack generateFrom(String id, int damage, int count, List<Tag> nbt, int slot)
 	{
-		Item item = (Item) ObjectBase.getObjectFromId(id);
+		Item item = (Item) Registerer.getObjectFromId(id);
 		if (!(item instanceof Item)) return null;
 		TagCompound tag = new TagCompound("tag") {
 			public void askValue()
 			{}
 		};
 		tag.setValue(nbt);
-		
-		DisplayHelper.log("Created Item : " + count + " " + ((Item) ObjectBase.getObjectFromId(id)).getName(damage) + " in slot " + slot);
+
+		DisplayHelper.log("Created Item : " + count + " " + ((Item) Registerer.getObjectFromId(id)).getName(damage) + " in slot " + slot);
 		return new ItemStack(item, damage, count, tag, slot);
 	}
 

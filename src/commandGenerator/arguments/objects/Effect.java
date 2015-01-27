@@ -8,8 +8,13 @@ import commandGenerator.main.Lang;
 public class Effect
 {
 
+	/** This Effect's type. */
 	private EffectType type;
-	private int amplifier, duration;
+	/** This Effect's level. */
+	private int amplifier;
+	/** This Effect's duration. */
+	private int duration;
+	/** True if this Effect's particles should be shown. */
 	private boolean showParticles;
 
 	/** Creates a new Effect
@@ -50,7 +55,7 @@ public class Effect
 		else return type.getId() + " " + Integer.toString(duration) + " " + Integer.toString(amplifier) + " true";
 	}
 
-	/** Displays the Effect for the user. */
+	/** Returns a String version of this Effect to be displayed to the user. */
 	public String display()
 	{
 		String display = Lang.get("GUI:effect.display");
@@ -62,21 +67,25 @@ public class Effect
 		return display;
 	}
 
+	/** Returns this Effect's amplifier. */
 	public int getAmplifier()
 	{
 		return amplifier;
 	}
 
+	/** Returns this Effect's duration. */
 	public int getDuration()
 	{
 		return duration;
 	}
 
-	public String getId()
+	/** Returns this Effect's type. */
+	public EffectType getType()
 	{
-		return type.getId();
+		return type;
 	}
 
+	/** Returns whether this Effect's particles should be shown. */
 	public boolean showParticles()
 	{
 		return showParticles;
@@ -97,11 +106,6 @@ public class Effect
 		tag.addTag(new TagBoolean("Ambient").setValue(false));
 		return tag;
 
-	}
-
-	public EffectType getEffectType()
-	{
-		return type;
 	}
 
 }

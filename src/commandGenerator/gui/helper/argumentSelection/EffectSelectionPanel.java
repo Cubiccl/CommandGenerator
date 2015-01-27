@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 
 import commandGenerator.arguments.objects.Effect;
 import commandGenerator.arguments.objects.EffectType;
-import commandGenerator.arguments.objects.ObjectBase;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.CEntry;
@@ -33,7 +33,7 @@ public class EffectSelectionPanel extends HelperPanel implements IBox
 		labelImage = new JLabel();
 		try
 		{
-			labelImage.setIcon(ObjectBase.getObjectFromId("speed").getTexture());
+			labelImage.setIcon(Registerer.getObjectFromId("speed").getTexture());
 		} catch (Exception e)
 		{
 			DisplayHelper.missingTexture("effects/speed.png");
@@ -113,7 +113,7 @@ public class EffectSelectionPanel extends HelperPanel implements IBox
 	public void setupFrom(Map<String, Object> data)
 	{
 		Effect effect = (Effect) data.get(getPanelId());
-		
+
 		entryDuration.setTextField(Integer.toString(effect.getDuration()));
 		spinnerAmplifier.setSelected(effect.getAmplifier());
 		comboboxEffect.setSelected(effect.getEffectType());

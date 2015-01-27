@@ -9,6 +9,7 @@ import javax.swing.SwingConstants;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
@@ -97,7 +98,7 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin
 
 	public Item generateItem()
 	{
-		return (Item) ObjectBase.getObjectFromId(comboboxId.getValue());
+		return (Item) Registerer.getObjectFromId(comboboxId.getValue());
 	}
 
 	public int getCount()

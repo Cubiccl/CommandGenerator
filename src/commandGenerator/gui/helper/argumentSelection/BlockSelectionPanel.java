@@ -10,6 +10,7 @@ import javax.swing.SwingConstants;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.dataTag.NBTTagPanel;
@@ -52,7 +53,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 			ids[i] = blockList[i].getId();
 		comboboxId = new TextCombobox(CGConstants.DATAID_NONE, "GUI:block.id", ids, this);
 
-		if (data) panelData = new NBTTagPanel("GUI:tag.block", ObjectBase.getObjectFromId("air"), DataTags.blocks);
+		if (data) panelData = new NBTTagPanel("GUI:tag.block", Registerer.getObjectFromId("air"), DataTags.blocks);
 
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 
@@ -76,7 +77,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 
 	public Item generateBlock()
 	{
-		return (Item) ObjectBase.getObjectFromId(comboboxId.getValue());
+		return (Item) Registerer.getObjectFromId(comboboxId.getValue());
 	}
 
 	public Item[] getBlockList()
@@ -112,7 +113,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 	public void updateCombobox()
 	{
 		spinnerDamage.setValues(0, generateBlock().getMaxDamage());
-		if (data) panelData.updateCombobox((Item) ObjectBase.getObjectFromId(comboboxId.getValue()));
+		if (data) panelData.updateCombobox((Item) Registerer.getObjectFromId(comboboxId.getValue()));
 		labelImage.setIcon(generateBlock().getTexture(getDamage()));
 		labelName.setText(generateBlock().getName(getDamage()));
 	}

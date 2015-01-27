@@ -6,29 +6,40 @@ import java.util.List;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Generator;
 
-public class EntitySelector
+public class Target
 {
-	public static final String[] selectorsTypes = { "@a", "@p", "@e", "@r" }, selectorNames = { "All players", "Closest player", "All entities",
-			"A random player" };
+	/** All selector types. */
+	public static final String[] selectorsTypes = { "@a", "@p", "@e", "@r" };
+	/** Names of the selectors. */
+	public static final String[] selectorNames = { "All players", "Closest player", "All entities", "A random player" };
+	/** The Target types */
 	public static final int ALL = 0, CLOSEST = 1, ENTITY = 2, RANDOM = 3, PLAYER = 4;
 
+	/** This Target's type. */
 	private int type;
+	/** This Target's name. */
 	private String name;
+	/** This Target's selectors. */
 	private List<String[]> selectors;
 
-	public EntitySelector(String name)
+	/** Creates a new Target
+	 * 
+	 * @param name
+	 *            - The Target's name. */
+	public Target(String name)
 	{
 		this.name = name;
 		this.type = PLAYER;
+		selectors = new ArrayList<String[]>();
 	}
 
-	/** Creates a new Entity Selector
+	/** Creates a new Target
 	 * 
 	 * @param type
-	 *            - The Selector type.
+	 *            - The Target type.
 	 * @param selectors
 	 *            - The selectors. */
-	public EntitySelector(int type, List<String[]> selectors)
+	public Target(int type, List<String[]> selectors)
 	{
 		this.type = type;
 		this.selectors = selectors;
@@ -57,22 +68,28 @@ public class EntitySelector
 		return display;
 	}
 
+	/** Returns this Target's selectors. */
 	public List<String[]> getSelectors()
 	{
 		return selectors;
 	}
 
+	/** Returns this Target's type. */
 	public int getType()
 	{
 		return type;
 	}
 
-	public static EntitySelector generateFrom(String text)
+	/** Generates a target from a generated command.
+	 * 
+	 * @param text
+	 *            - String - The generated command. */
+	public static Target generateFrom(String text)
 	{
 		if (!text.startsWith("@"))
 		{
 			DisplayHelper.log("Created entity : " + text);
-			return new EntitySelector(text);
+			return new Target(text);
 		}
 
 		try
@@ -86,7 +103,7 @@ public class EntitySelector
 					selectorList.add(new String[] { data.split("=")[0], data.split("=")[1] });
 			}
 
-			EntitySelector sel = new EntitySelector(type, selectorList);
+			Target sel = new Target(type, selectorList);
 			DisplayHelper.log("Created entity selector : " + sel.display());
 			return sel;
 		} catch (Exception e)
@@ -109,6 +126,10 @@ public class EntitySelector
 		return display;
 	}
 
+	/** Returns the type of the Target from the String input.
+	 * 
+	 * @param sel
+	 *            - String - The text. */
 	public static int getTypeFromString(String sel)
 	{
 		if (sel.equals("@a")) return ALL;

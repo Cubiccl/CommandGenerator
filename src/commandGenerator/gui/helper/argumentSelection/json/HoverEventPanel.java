@@ -10,7 +10,6 @@ import javax.swing.JTextField;
 
 import commandGenerator.arguments.objects.Achievement;
 import commandGenerator.arguments.objects.ItemStack;
-import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
@@ -157,7 +156,7 @@ public class HoverEventPanel extends HelperPanel
 		{
 			comboboxAction.setSelectedIndex(3);
 			Map<String, Object> data = new HashMap<String, Object>();
-			data.put(CGConstants.PANELID_ACHIEVEMENT, ((Achievement) ObjectBase.getObjectFromId(value)));
+			data.put(CGConstants.PANELID_ACHIEVEMENT, ((Achievement) Registerer.getObjectFromId(value)));
 			panelStat.setupFrom(data);
 		}
 

@@ -4,7 +4,7 @@ import javax.swing.JLabel;
 
 import commandGenerator.arguments.objects.Entity;
 import commandGenerator.arguments.objects.EntitySelector;
-import commandGenerator.arguments.objects.ObjectBase;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.OptionsPanel;
@@ -31,7 +31,7 @@ public class EntityDataOptionsPanel extends OptionsPanel implements IBox
 		super();
 		this.command = command;
 
-		label = new JLabel(((Entity) ObjectBase.getObjectFromId("Item")).getTexture());
+		label = new JLabel(((Entity) Registerer.getObjectFromId("Item")).getTexture());
 		labelExplain = new CLabel("GUI:entity.explain", true);
 
 		comboboxEntity = new CComboBox(CGConstants.DATAID_ENTITY, "GUI:entity.select", Entity.getList(), this);

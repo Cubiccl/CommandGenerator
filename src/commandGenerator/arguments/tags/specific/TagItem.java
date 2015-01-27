@@ -1,6 +1,7 @@
 package commandGenerator.arguments.tags.specific;
 
 import commandGenerator.arguments.objects.ObjectBase;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagInt;
@@ -28,7 +29,7 @@ public class TagItem extends TagCompound
 		clear();
 		ObjectBase[] items = new ObjectBase[ids.length];
 		for (int i = 0; i < ids.length; i++)
-			items[i] = ObjectBase.getObjectFromId(ids[i]);
+			items[i] = Registerer.getObjectFromId(ids[i]);
 		panel = new ItemSelectionPanel(CGConstants.DATAID_NONE, "GUI:item", items, true, slot);
 		showPanel();
 
@@ -42,8 +43,8 @@ public class TagItem extends TagCompound
 		addTag(new TagString("id").setValue(((ItemSelectionPanel) panel).generateItem().getId()));
 		addTag(new TagInt("Damage").setValue(((ItemSelectionPanel) panel).getDamage()));
 		addTag(new TagInt("Count").setValue(((ItemSelectionPanel) panel).getCount()));
-		if (!((ItemSelectionPanel) panel).getItemTag().commandStructure().substring(((ItemSelectionPanel) panel).getItemTag().getId().length() + 1).equals("{}")) addTag(((ItemSelectionPanel) panel)
-				.getItemTag());
+		if (!((ItemSelectionPanel) panel).getItemTag().commandStructure().substring(((ItemSelectionPanel) panel).getItemTag().getId().length() + 1)
+				.equals("{}")) addTag(((ItemSelectionPanel) panel).getItemTag());
 
 	}
 

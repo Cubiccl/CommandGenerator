@@ -35,8 +35,6 @@ public class InitObjects
 		initTags(convertedData.get("ENTITYTAGS"), 2);
 		initTags(convertedData.get("GENERATEDTAGS"), 3);
 
-		Registerer.registerList("allEntities", Entity.ids.toArray(new String[0]));
-
 	}
 
 	private static void initTags(String[] tags, int type)
@@ -105,9 +103,9 @@ public class InitObjects
 	{
 		entities = entities[0].split(",");
 		for (String id : entities)
-		{
 			new Entity(id);
-		}
+
+		Registerer.setupEntityList();
 	}
 
 	private static void initEffects(String[] effects)
@@ -130,7 +128,7 @@ public class InitObjects
 		for (String achievement : achs)
 		{
 			String[] achData = achievement.split(",");
-			new Achievement(achData[0], Item.getItemFromId(achData[1]));
+			new Achievement(achData[0], (Item) Registerer.getObjectFromId(achData[1]));
 		}
 	}
 

@@ -12,22 +12,18 @@ public class Coordinates
 
 	public static final int X = 0, Y = 1, Z = 2;
 
+	/** The Coordinates' positions. */
 	private double x, y, z;
 
+	/** The Coordinates rotations. */
 	private float xRotation, yRotation;
+	/** Details about this Coordinates. */
 	private boolean areRelative, isRotation;
 
 	/** Creates new Coordinates. */
 	public Coordinates(double x, double y, double z)
 	{
-
-		this.x = x;
-		this.y = y;
-		this.z = z;
-
-		this.areRelative = false;
-		this.isRotation = false;
-
+		this(x, y, z, false);
 	}
 
 	/** Creates new Coordinates. */
@@ -52,21 +48,6 @@ public class Coordinates
 		this.xRotation = xRotation;
 		this.yRotation = yRotation;
 		this.areRelative = areRelative;
-		this.isRotation = true;
-
-	}
-
-	/** Creates new Coordinates. */
-	public Coordinates(double x, double y, double z, float xRotation, float yRotation)
-	{
-
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		this.xRotation = xRotation;
-		this.yRotation = yRotation;
-
-		this.areRelative = false;
 		this.isRotation = true;
 
 	}
@@ -133,16 +114,19 @@ public class Coordinates
 		return tag;
 	}
 
+	/** Returns true if this Coordinates are relative. */
 	public boolean getRelative()
 	{
 		return areRelative;
 	}
 
+	/** Returns true if this Coordinates has rotations. */
 	public boolean getRotation()
 	{
 		return isRotation;
 	}
 
+	/** Generates Coordinates from command structure. */
 	public static Coordinates generateFrom(String x, String y, String z)
 	{
 		double cx, cy, cz;
@@ -177,6 +161,7 @@ public class Coordinates
 
 	}
 
+	/** Generates Coordinates from command structure. */
 	public static Coordinates generateFromWithRot(String x, String y, String z, float rotX, float rotY)
 	{
 		double cx, cy, cz;

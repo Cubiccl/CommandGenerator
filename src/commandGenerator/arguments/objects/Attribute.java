@@ -30,7 +30,7 @@ public class Attribute
 		this.operation = operation;
 	}
 
-	/** @return String - The displayed Attribute */
+	/** Returns a String version of this Attribute to be displayed to the user. */
 	public String display()
 	{
 		String display = "";
@@ -79,6 +79,7 @@ public class Attribute
 		return tag;
 	}
 
+	/** Returns this Attribute's type. */
 	public AttributeType getType()
 	{
 		return type;

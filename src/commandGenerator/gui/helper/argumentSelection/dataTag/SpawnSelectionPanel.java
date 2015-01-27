@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import commandGenerator.arguments.objects.Entity;
-import commandGenerator.arguments.objects.ObjectBase;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
@@ -44,7 +44,7 @@ public class SpawnSelectionPanel extends JPanel implements IBox
 
 		combobox = new CComboBox(CGConstants.DATAID_NONE, "GUI:entity.select", Entity.getListNoPlayer(), this);
 
-		panelTag = new NBTTagPanel("GUI:entity.tags", ObjectBase.getObjectFromId("Player"), DataTags.entities);
+		panelTag = new NBTTagPanel("GUI:entity.tags", Entity.player, DataTags.entities);
 
 		gbc = new GridBagConstraints();
 		gbc.gridx = 0;
@@ -103,7 +103,7 @@ public class SpawnSelectionPanel extends JPanel implements IBox
 		for (int i = 0; i < nbt.size(); i++)
 		{
 			Tag tag = nbt.get(i);
-			if (tag.getId().equals("Type")) combobox.setSelected(ObjectBase.getObjectFromId(((TagString) tag).getValue()));
+			if (tag.getId().equals("Type")) combobox.setSelected(Registerer.getObjectFromId(((TagString) tag).getValue()));
 			if (tag.getId().equals("Weight")) textfieldWeight.setText(Integer.toString(((TagInt) tag).getValue()));
 			if (tag.getId().equals("Properties"))
 			{

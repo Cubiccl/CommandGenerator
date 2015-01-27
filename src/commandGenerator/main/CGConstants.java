@@ -29,4 +29,6 @@ public class CGConstants
 
 	public static final int DETAILS_ALL = 2, DETAILS_ONE = 1, DETAILS_NONE = 0;
 
+	public static final String[] TYPES = { "Item", "Entity", "Effect", "Enchantment", "Achievement", "Attribute", "Particle", "NBT Tag", "Sound" };
+
 }

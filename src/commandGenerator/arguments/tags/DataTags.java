@@ -323,7 +323,7 @@ public class DataTags
 
 	public static ObjectBase getObjectFromTags(List<Tag> list)
 	{
-		if (list.size() == 0) return ObjectBase.getObjectFromId("air");
+		if (list.size() == 0) return Registerer.getObjectFromId("air");
 
 		List<ObjectBase> applicable = new ArrayList<ObjectBase>();
 		for (ObjectBase obj : list.get(0).getApplicable())

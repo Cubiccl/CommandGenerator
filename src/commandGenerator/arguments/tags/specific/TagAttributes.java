@@ -5,7 +5,7 @@ import java.util.List;
 
 import commandGenerator.arguments.objects.Attribute;
 import commandGenerator.arguments.objects.AttributeType;
-import commandGenerator.arguments.objects.ObjectBase;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagDouble;
@@ -97,7 +97,7 @@ public class TagAttributes extends TagList
 				if (attribute.get(j).getId().equals("Amount")) amount = ((TagDouble) attribute.get(j)).getValue();
 				if (attribute.get(j).getId().equals("Operation")) operation = ((TagInt) attribute.get(j)).getValue();
 			}
-			text += new Attribute((AttributeType) ObjectBase.getObjectFromId(id), amount, operation).display();
+			text += new Attribute((AttributeType) Registerer.getObjectFromId(id), amount, operation).display();
 		}
 
 		return text;

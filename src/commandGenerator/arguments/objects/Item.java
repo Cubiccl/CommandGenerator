@@ -1,9 +1,7 @@
 package commandGenerator.arguments.objects;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.ImageIcon;
 
@@ -15,10 +13,16 @@ import commandGenerator.main.Resources;
 public class Item extends ObjectBase
 {
 
-	private boolean hasGif, isBlock;
-	private int idNum, maxDamage, durability;
-	private static Map<String, Item> list = new HashMap<String, Item>();
-	private static List<String> ids = new ArrayList<String>();
+	/** True if this Item's texture is an animated Gif. */
+	private boolean hasGif;
+	/** True if this Item is a Block. */
+	private boolean isBlock;
+	/** This Item's numerical ID. */
+	private int idNum;
+	/** This Item's maximum damage. */
+	private int maxDamage;
+	/** This Item's durability. */
+	private int durability;
 	public static List<String> durabilityList = new ArrayList<String>();
 
 	/** Creates a new Item.
@@ -41,20 +45,21 @@ public class Item extends ObjectBase
 		this.maxDamage = 0;
 		this.durability = 0;
 		this.hasGif = false;
-		list.put(idString, this);
-		ids.add(idString);
 	}
 
+	/** Returns this Item's numerical ID. */
 	public int getIdNum()
 	{
 		return idNum;
 	}
 
+	/** Returns this Item's maximum damage. */
 	public int getMaxDamage()
 	{
 		return this.maxDamage;
 	}
 
+	/** Returns this Item's name. */
 	public String getName(int damage)
 	{
 		String category;
@@ -64,6 +69,10 @@ public class Item extends ObjectBase
 		return Lang.get(category + getId() + "_" + damage);
 	}
 
+	/** Returns this Item's texture according to the specified damage.
+	 * 
+	 * @param damage
+	 *            - Int - The damage. */
 	public ImageIcon getTexture(int damage)
 	{
 
@@ -94,48 +103,51 @@ public class Item extends ObjectBase
 		}
 	}
 
+	/** Returns true if this Items has an animated Gif as texture. */
 	public boolean hasGif()
 	{
 		return hasGif;
 	}
 
+	/** Sets this Item's Gif property */
 	public void setHasGif(String data)
 	{
 		this.hasGif = Boolean.parseBoolean(data);
 	}
 
+	/** Returns true if this Item is a Block. */
 	public boolean isBlock()
 	{
 		return isBlock;
 	}
 
-	public static Item getItemFromId(String id)
-	{
-		return list.get(id);
-	}
-
+	/** Returns this Item's name. */
 	@Override
 	public String getName()
 	{
 		return getName(0);
 	}
 
+	/** Sets this Item's maximum damage. */
 	public void setMaxDamage(String damage)
 	{
 		this.maxDamage = Integer.parseInt(damage);
 	}
 
+	/** Sets this Item's durability. */
 	public void setDurability(String durability)
 	{
 		this.durability = Integer.parseInt(durability);
 		durabilityList.add(this.getId());
 	}
 
+	/** Returns this Item's durability. */
 	public int getDurability()
 	{
 		return durability;
 	}
 
+	/** Returns this Item's texture. */
 	@Override
 	public ImageIcon getTexture()
 	{

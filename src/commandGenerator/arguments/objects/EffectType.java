@@ -1,8 +1,6 @@
 package commandGenerator.arguments.objects;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
@@ -13,55 +11,50 @@ import commandGenerator.main.Resources;
 
 public class EffectType extends ObjectBase
 {
+	private static Map<Integer, EffectType> effects = new HashMap<Integer, EffectType>();
 
+	/** This Effect's numerical ID. */
 	private int idNum;
-	private static Map<String, EffectType> list = new HashMap<String, EffectType>();
-	private static List<String> ids = new ArrayList<String>();
 
+	/** New Effect type.
+	 * 
+	 * @param idNum
+	 *            - Int - The Effect's numerical ID.
+	 * @param idString
+	 *            - String - The Effect's text ID. */
 	public EffectType(int idNum, String idString)
 	{
 		super(idString, CGConstants.OBJECT_EFFECT);
 		this.idNum = idNum;
-		list.put(idString, this);
-		ids.add(idString);
+		effects.put(idNum, this);
 	}
 
+	/** Returns this Effect's numerical ID. */
 	public int getIdNum()
 	{
 		return idNum;
 	}
 
+	/** Returns this Effect's name. */
 	public String getName()
 	{
 		return Lang.get("EFFECTS:" + getId());
 	}
 
-	public static EffectType getEffectFromId(String id)
-	{
-		return list.get(id);
-	}
-
+	/** Returns this Effect's texture. */
 	@Override
 	public ImageIcon getTexture()
 	{
 		return new ImageIcon(Resources.folder + "textures/effects/" + getId() + ".png");
 	}
 
-	public static EffectType[] getList()
+	/** Returns an Effect from its numerical ID.
+	 * 
+	 * @param id
+	 *            - Int - The Effect's ID. */
+	public static ObjectBase getEffectFromIdNum(int id)
 	{
-		EffectType[] types = new EffectType[list.size()];
-		for (int i = 0; i < ids.size(); i++)
-			types[i] = list.get(ids.get(i));
-		return types;
-	}
-
-	public static EffectType getEffectFromIdNum(int id)
-	{
-		for (int i = 0; i < ids.size(); i++)
-		{
-			if (list.get(ids.get(i)).getIdNum() == id) return getEffectFromId(ids.get(i));
-		}
-		return null;
+		return effects.get(id);
 	}
 
 }

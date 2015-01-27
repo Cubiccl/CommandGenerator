@@ -23,7 +23,7 @@ import javax.swing.SpinnerNumberModel;
 
 import commandGenerator.arguments.objects.Entity;
 import commandGenerator.arguments.objects.EntitySelector;
-import commandGenerator.arguments.objects.ObjectBase;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.gui.helper.components.CButton;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.CEntry;
@@ -408,7 +408,7 @@ public class EntitySelectionPanel extends HelperPanel
 		Entity entity = Entity.player;
 		for (int i = 0; i < addedSelectors.size(); i++)
 		{
-			if (addedSelectors.get(i)[0].equals("type")) entity = (Entity) ObjectBase.getObjectFromId(addedSelectors.get(i)[1]);
+			if (addedSelectors.get(i)[0].equals("type")) entity = (Entity) Registerer.getObjectFromId(addedSelectors.get(i)[1]);
 		}
 		return entity;
 	}

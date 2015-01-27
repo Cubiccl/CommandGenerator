@@ -1,9 +1,7 @@
 package commandGenerator.arguments.objects;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.ImageIcon;
 
@@ -15,24 +13,20 @@ import commandGenerator.main.Resources;
 public class Entity extends ObjectBase
 {
 
-	private static Map<String, Entity> list = new HashMap<String, Entity>();
-	public static List<String> ids = new ArrayList<String>();
-	public static List<Entity> entities = new ArrayList<Entity>();
 	public static Entity player = new Entity("Player"), entity = new Entity("");
 
 	public Entity(String id)
 	{
 		super(id, CGConstants.OBJECT_ENTITY);
-		list.put(id, this);
-		ids.add(id);
-		if (!id.equals("Player") && !id.equals("")) entities.add(this);
 	}
 
+	/** Returns this Entity's name. */
 	public String getName()
 	{
 		return Lang.get("ENTITIES:" + getId());
 	}
 
+	/** Returns this Entity's texture. */
 	public ImageIcon getTexture()
 	{
 
@@ -47,24 +41,14 @@ public class Entity extends ObjectBase
 		}
 	}
 
-	public static Entity getEntityFromId(String id)
-	{
-		return list.get(id);
-	}
-
-	public static Entity[] getList()
-	{
-		Entity[] entityList = new Entity[list.size()];
-		for (int i = 0; i < entityList.length; i++)
-			entityList[i] = list.get(ids.get(i));
-		return entityList;
-	}
-
+	/** Returns an array containing all registered Entities, except Player. */
 	public static Entity[] getListNoPlayer()
 	{
 		List<Entity> entityList = new ArrayList<Entity>();
-		for (int i = 0; i < ids.size(); i++)
-			if (!ids.get(i).equals("Player") && !ids.get(i).equals("")) entityList.add(list.get(ids.get(i)));
+		ObjectBase[] list = Registerer.getObjectList(CGConstants.OBJECT_ENTITY);
+		for (int i = 0; i < list.length; i++)
+			if (!list[i].getId().equals("Player")) entityList.add((Entity) list[i]);
+
 		return entityList.toArray(new Entity[0]);
 	}
 

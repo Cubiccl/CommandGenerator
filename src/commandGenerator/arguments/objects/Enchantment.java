@@ -10,8 +10,11 @@ import commandGenerator.main.Lang;
 public class Enchantment
 {
 
+	/** This Enchantment's type. */
 	private EnchantType type;
+	/** This Enchantment's level. */
 	private int level;
+	/** True if this Enchantment should respect Survival maximum levels. */
 	private boolean checkMax;
 
 	/** Creates a new Enchantment.
@@ -40,16 +43,19 @@ public class Enchantment
 		this.checkMax = checkMax;
 	}
 
-	public String getId()
+	/** Returns this Enchantment's type. */
+	public EnchantType getType()
 	{
-		return type.getId();
+		return type;
 	}
 
+	/** Returns this Enchantment's level. */
 	public int getLevel()
 	{
 		return level;
 	}
 
+	/** Returns this Enchantment's name. */
 	public String getName()
 	{
 
@@ -79,11 +85,7 @@ public class Enchantment
 		return tag;
 	}
 
-	public EnchantType getEnchantType()
-	{
-		return type;
-	}
-
+	/** Returns a String version of this Enchantment to be displayed to the user. */
 	public String display()
 	{
 		return Lang.get("GUI:enchant.display").replaceAll("<type>", Lang.get("ENCHANTS:" + type.getId())).replaceAll("<lvl>", Integer.toString(level + 1));

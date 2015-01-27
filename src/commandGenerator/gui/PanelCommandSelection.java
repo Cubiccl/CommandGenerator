@@ -28,7 +28,6 @@ import javax.swing.JTextField;
 import commandGenerator.CommandGenerator;
 import commandGenerator.arguments.objects.Command;
 import commandGenerator.arguments.objects.Item;
-import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.gui.helper.components.CButton;
 import commandGenerator.gui.helper.components.CCheckBox;
@@ -81,7 +80,7 @@ public class PanelCommandSelection extends JPanel
 		if (main)
 		{
 			buttonGenerate = new CButton("GUI:command.generate");
-			buttonGenerate.setIcon(((Item) ObjectBase.getObjectFromId("command_block")).getTexture(0));
+			buttonGenerate.setIcon(((Item) Registerer.getObjectFromId("command_block")).getTexture(0));
 			buttonGenerate.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e)
@@ -184,7 +183,7 @@ public class PanelCommandSelection extends JPanel
 
 		textareaStructure = new JTextArea(Resources.structureList[0]);
 		textareaStructure.setEditable(false);
-		
+
 		Command[] commands = Registerer.getCommandArray();
 		String[] names = new String[commands.length];
 		for (int j = 0; j < commands.length; j++)

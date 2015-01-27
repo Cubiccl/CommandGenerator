@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
-import commandGenerator.arguments.objects.Achievement;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.gui.helper.components.CComboBox;
@@ -59,7 +58,7 @@ public class ObjectiveSelectionPanel extends HelperPanel
 
 		if (index < 6) comboboxPrecise.setData(new ObjectBase[0]);
 
-		else if (index == 6) comboboxPrecise.setData(Achievement.getList());
+		else if (index == 6) comboboxPrecise.setData(Registerer.getObjectList(CGConstants.OBJECT_ACHIEVEMENT));
 
 		else if (index == 13) comboboxPrecise2.setText("RESOURCES:stat", statList.length);
 
@@ -106,7 +105,7 @@ public class ObjectiveSelectionPanel extends HelperPanel
 		setupChoices();
 		int index = comboboxMain.getSelectedIndex();
 
-		if (index >= 6 && index <= 12) comboboxPrecise.setSelected(ObjectBase.getObjectFromId(criteria.substring(1)));
+		if (index >= 6 && index <= 12) comboboxPrecise.setSelected(Registerer.getObjectFromId(criteria.substring(1)));
 		if (index == 13)
 		{
 			for (int i = 0; i < statList.length; i++)
