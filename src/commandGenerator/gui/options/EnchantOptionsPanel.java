@@ -1,7 +1,7 @@
 package commandGenerator.gui.options;
 
 import commandGenerator.arguments.objects.Enchantment;
-import commandGenerator.arguments.objects.EntitySelector;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.EnchantSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
@@ -31,12 +31,12 @@ public class EnchantOptionsPanel extends OptionsPanel
 	@Override
 	public String generateCommand()
 	{
-		EntitySelector player = panelPlayer.generateEntity();
+		Target player = panelPlayer.generateEntity();
 		Enchantment enchant = panelEnchant.generateEnchantment();
 
 		if (player == null || enchant == null) return null;
 
-		return "enchant " + player.commandStructure() + " " + enchant.getId() + " " + Integer.toString(enchant.getLevel());
+		return "enchant " + player.commandStructure() + " " + enchant.getType().getId() + " " + Integer.toString(enchant.getLevel());
 	}
 
 }

@@ -20,9 +20,9 @@ public class Enchantment
 	/** Creates a new Enchantment.
 	 * 
 	 * @param type
-	 *            - The Enchantment type.
+	 *            - <i>EnchantType</i> - The Enchantment type.
 	 * @param level
-	 *            - The Enchantment level. */
+	 *            - <i>int</i> - The Enchantment level. */
 	public Enchantment(EnchantType type, int level)
 	{
 		this(type, level, false);
@@ -31,11 +31,11 @@ public class Enchantment
 	/** Creates a new Enchantment.
 	 * 
 	 * @param type
-	 *            - The Enchantment type.
+	 *            - <i>EnchantType</i> - The Enchantment type.
 	 * @param level
-	 *            - The Enchantment level.
+	 *            - <i>int</i> - The Enchantment level.
 	 * @param checkMax
-	 *            - Should the Enchantment level be valid? */
+	 *            - <i>boolean</i> - Should the Enchantment level be valid? */
 	public Enchantment(EnchantType type, int level, boolean checkMax)
 	{
 		this.type = type;

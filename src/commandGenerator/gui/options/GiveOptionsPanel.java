@@ -1,8 +1,8 @@
 package commandGenerator.gui.options;
 
-import commandGenerator.arguments.objects.EntitySelector;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
@@ -32,7 +32,7 @@ public class GiveOptionsPanel extends OptionsPanel
 	@Override
 	public String generateCommand()
 	{
-		EntitySelector player = panelPlayer.generateEntity();
+		Target player = panelPlayer.generateEntity();
 		Item item = panelItem.generateItem();
 		int damage = panelItem.getDamage(), amount = panelItem.getCount();
 

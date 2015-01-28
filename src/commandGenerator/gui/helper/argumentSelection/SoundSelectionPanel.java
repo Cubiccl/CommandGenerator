@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.swing.JButton;
 
 import commandGenerator.arguments.objects.ObjectBase;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.objects.Sound;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CComboBox;
@@ -57,7 +58,7 @@ public class SoundSelectionPanel extends HelperPanel
 			}
 		});
 
-		comboboxSound = new CComboBox(CGConstants.DATAID_NONE, "GUI:playsound.choose", Sound.getList(), null);
+		comboboxSound = new CComboBox(CGConstants.DATAID_NONE, "GUI:playsound.choose", Registerer.getObjectList(CGConstants.OBJECT_SOUND), null);
 		comboboxSound.setPreferredSize(new Dimension(450, 100));
 
 		gbc.gridx = 0;

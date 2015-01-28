@@ -19,9 +19,9 @@ public class Registerer
 	/** Registers a list.
 	 * 
 	 * @param id
-	 *            - String - The list's ID.
+	 *            - <i>String</i> - The list's ID.
 	 * @param listNew
-	 *            - String[] - The list itself. */
+	 *            - <i>String[]</i> - The list itself. */
 	public static void registerList(String id, String[] listNew)
 	{
 		ObjectBase[] objects = new ObjectBase[listNew.length];
@@ -37,7 +37,7 @@ public class Registerer
 	/** Returns the Object list from its name.
 	 * 
 	 * @param listName
-	 *            - String - The List name. */
+	 *            - <i>String</i> - The List name. */
 	public static ObjectBase[] getList(String listName)
 	{
 		if (list.get(listName) == null)
@@ -51,7 +51,7 @@ public class Registerer
 	/** Returns a Command from its ID.
 	 * 
 	 * @param id
-	 *            - String - The Command's ID. */
+	 *            - <i>String</i> - The Command's ID. */
 	public static Command getCommandFromId(String id)
 	{
 		return commands.get(id);
@@ -60,7 +60,7 @@ public class Registerer
 	/** Registers a command
 	 * 
 	 * @param command
-	 *            - Command - The Command to register. */
+	 *            - <i>Command</i> - The Command to register. */
 
 	public static void registerCommand(Command command)
 	{
@@ -76,9 +76,9 @@ public class Registerer
 	/** Registers an Object
 	 * 
 	 * @param type
-	 *            - Byte - The Object type.
+	 *            - <i>byte</i> - The Object type.
 	 * @param object
-	 *            - ObjectBase - The Object to register. */
+	 *            - <i>ObjectBase</i> - The Object to register. */
 	public static void registerObject(byte type, ObjectBase object)
 	{
 		if (object.getId().equals("")) return;
@@ -91,7 +91,7 @@ public class Registerer
 	/** Returns the Object corresponding to this ID.
 	 * 
 	 * @param id
-	 *            - String - The Object's ID. */
+	 *            - <i>String</i> - The Object's ID. */
 	public static ObjectBase getObjectFromId(String id)
 	{
 		if (id.startsWith("minecraft:") || id.startsWith("minecraft.")) id = id.substring("minecraft:".length());
@@ -112,9 +112,9 @@ public class Registerer
 	/** Returns the Object corresponding to this ID.
 	 * 
 	 * @param type
-	 *            - Byte - The type of the Object
+	 *            - <i>byte</i> - The type of the Object
 	 * @param id
-	 *            - Int - The Object's ID. */
+	 *            - <i>int</i> - The Object's ID. */
 	public static ObjectBase getObjectFromIdNum(byte type, int id)
 	{
 		switch (type)
@@ -135,7 +135,7 @@ public class Registerer
 	/** Returns a list containing all registered Objects of the specified type.
 	 * 
 	 * @param type
-	 *            - Byte - The Objects' type. */
+	 *            - <i>byte</i> - The Objects' type. */
 	public static ObjectBase[] getObjectList(byte type)
 	{
 		return objects.get(type).values().toArray(new ObjectBase[0]);

@@ -10,7 +10,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerNumberModel;
 
-import commandGenerator.arguments.objects.EntitySelector;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.HelperPanel;
@@ -113,7 +113,7 @@ public class ReplaceitemEntityPanel extends HelperPanel
 	public String generateCommand()
 	{
 
-		EntitySelector entity = panelEntity.generateEntity();
+		Target entity = panelEntity.generateEntity();
 
 		if (entity == null) return null;
 

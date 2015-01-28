@@ -8,7 +8,7 @@ import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
-import commandGenerator.arguments.objects.EntitySelector;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
@@ -82,8 +82,8 @@ public class PlayersOperationPanel extends ScoreboardPanel
 	@Override
 	public String generateText()
 	{
-		EntitySelector entity1 = panelEntity1.generateEntity();
-		EntitySelector entity2 = panelEntity2.generateEntity();
+		Target entity1 = panelEntity1.generateEntity();
+		Target entity2 = panelEntity2.generateEntity();
 
 		if (entity1 == null || entity2 == null) return null;
 		if (entryObj1.getText().equals("") || entryObj1.getText().contains(" ") || entryObj2.getText().equals("") || entryObj2.getText().contains(" "))

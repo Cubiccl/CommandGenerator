@@ -11,10 +11,9 @@ import commandGenerator.arguments.objects.Effect;
 import commandGenerator.arguments.objects.EffectType;
 import commandGenerator.arguments.objects.EnchantType;
 import commandGenerator.arguments.objects.Enchantment;
-import commandGenerator.arguments.objects.EntitySelector;
 import commandGenerator.arguments.objects.ItemStack;
-import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.gui.helper.commandSpecific.scoreboard.PlayersOperationPanel;
@@ -35,7 +34,7 @@ public class Generator
 
 			data.put(CGConstants.DATAID_CHECK, elements[2].equals("*"));
 			if (!elements[2].equals("*")) data.put(CGConstants.PANELID_ACHIEVEMENT, Achievement.generateFrom(elements[2]));
-			data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[3]));
+			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[3]));
 
 			if ((!elements[2].equals("*") && (data.get(CGConstants.PANELID_ACHIEVEMENT) == null)) || data.get(CGConstants.PANELID_TARGET) == null) return wrong();
 
@@ -72,7 +71,7 @@ public class Generator
 
 		try
 		{
-			data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[1]));
+			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[1]));
 			data.put(CGConstants.DATAID_CLEAR_ITEM, elements.length < 2);
 			data.put(CGConstants.DATAID_CHECK, elements.length < 4);
 
@@ -136,10 +135,10 @@ public class Generator
 
 		try
 		{
-			data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[1]));
+			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[1]));
 
 			EffectType type = (EffectType) Registerer.getObjectFromId(elements[2]);
-			if (type == null) type = (EffectType) ObjectBase.getObjectFromIdNum(CGConstants.OBJECT_EFFECT, Integer.parseInt(elements[2]));
+			if (type == null) type = (EffectType) Registerer.getObjectFromIdNum(CGConstants.OBJECT_EFFECT, Integer.parseInt(elements[2]));
 			int duration = 30, level = 0;
 			boolean hide = false;
 			if (elements.length > 3) duration = Integer.parseInt(elements[3]);
@@ -164,9 +163,9 @@ public class Generator
 
 		try
 		{
-			data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[1]));
+			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[1]));
 			EnchantType type = (EnchantType) Registerer.getObjectFromId(elements[2]);
-			if (type == null) type = (EnchantType) ObjectBase.getObjectFromIdNum(CGConstants.OBJECT_ENCHANT, Integer.parseInt(elements[2]));
+			if (type == null) type = (EnchantType) Registerer.getObjectFromIdNum(CGConstants.OBJECT_ENCHANT, Integer.parseInt(elements[2]));
 			data.put(CGConstants.PANELID_ENCHANT, new Enchantment(type, Integer.parseInt(elements[3]), true));
 			DisplayHelper.log("Created enchantment : " + ((Enchantment) data.get(CGConstants.PANELID_ENCHANT)).display());
 
@@ -187,7 +186,7 @@ public class Generator
 
 		try
 		{
-			data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[1]));
+			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[1]));
 			data.put(CGConstants.PANELID_NBT, DataTags.generateListFrom(elements[2]));
 			data.put(CGConstants.DATAID_ENTITY, DataTags.getObjectFromTags((List<Tag>) data.get(CGConstants.PANELID_NBT)));
 
@@ -206,7 +205,7 @@ public class Generator
 
 		try
 		{
-			data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[1]));
+			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[1]));
 			data.put(CGConstants.PANELID_COORDS, Coordinates.generateFrom(elements[2], elements[3], elements[4]));
 			data.put(CGConstants.DATAID_CHECK, elements[5].equals("detect"));
 
@@ -290,7 +289,7 @@ public class Generator
 
 		try
 		{
-			data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[1]));
+			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[1]));
 			String id = elements[2];
 			int count = 0, damage = 0;
 			if (elements.length > 3) count = Integer.parseInt(elements[3]);
@@ -313,7 +312,7 @@ public class Generator
 
 		try
 		{
-			data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[1]));
+			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[1]));
 			if (data.get(CGConstants.PANELID_TARGET) == null) return wrong();
 			return data;
 		} catch (Exception e)
@@ -336,7 +335,7 @@ public class Generator
 			data.put(CGConstants.DATAID_CHECK, elements.length > 10);
 
 			if (elements.length > 9) data.put(CGConstants.DATAID_VALUE, new int[] { Integer.parseInt(elements[8]), Integer.parseInt(elements[9]) });
-			if (elements.length > 10) data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[10]));
+			if (elements.length > 10) data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[10]));
 
 			return data;
 		} catch (Exception e)
@@ -353,7 +352,7 @@ public class Generator
 		try
 		{
 			data.put(CGConstants.PANELID_SOUND, Registerer.getObjectFromId(elements[1]));
-			data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[2]));
+			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[2]));
 			if (elements.length > 5)
 			{
 				data.put(CGConstants.DATAID_SOUND_COORDS, true);
@@ -397,7 +396,7 @@ public class Generator
 			} else if (elements[1].equals("entity"))
 			{
 				data.put(CGConstants.DATAID_MODE, 1);
-				data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[2]));
+				data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[2]));
 				data.put(CGConstants.DATAID_VALUE, generateSlot(elements[3]));
 				id = elements[4];
 				count = Integer.parseInt(elements[5]);
@@ -528,7 +527,7 @@ public class Generator
 
 		try
 		{
-			data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[1]));
+			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[1]));
 			data.put(CGConstants.PANELID_COORDS, Coordinates.generateFrom(elements[2], elements[3], elements[4]));
 
 			if (data.get(CGConstants.PANELID_COORDS) == null || data.get(CGConstants.PANELID_TARGET) == null) return wrong();
@@ -547,7 +546,7 @@ public class Generator
 
 		try
 		{
-			data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[6]));
+			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[6]));
 			data.put(CGConstants.DATAID_SPREAD_X, elements[1]);
 			data.put(CGConstants.DATAID_SPREAD_Z, elements[2]);
 			data.put(CGConstants.DATAID_SPREAD_DIST, elements[3]);
@@ -589,7 +588,7 @@ public class Generator
 
 		try
 		{
-			data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[1]));
+			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[1]));
 			data.put(CGConstants.PANELID_JSON, DataTags.generateListFrom(elements[2]));
 
 			return data;
@@ -669,7 +668,7 @@ public class Generator
 
 		try
 		{
-			data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[1]));
+			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[1]));
 
 			if (elements[2].equals("times"))
 			{
@@ -696,10 +695,10 @@ public class Generator
 
 		try
 		{
-			data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[1]));
+			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[1]));
 			data.put(CGConstants.DATAID_ENTITY, true);
 
-			if (elements.length == 3) data.put(CGConstants.PANELID_TARGET2, EntitySelector.generateFrom(elements[2]));
+			if (elements.length == 3) data.put(CGConstants.PANELID_TARGET2, Target.generateFrom(elements[2]));
 			else
 			{
 				data.put(CGConstants.DATAID_ENTITY, false);
@@ -798,7 +797,7 @@ public class Generator
 			data.put(CGConstants.DATAID_CHECK, elements[1].contains("L"));
 			if (elements[1].contains("L")) elements[1] = elements[1].substring(0, elements[1].length() - 1);
 			data.put(CGConstants.DATAID_VALUE, elements[1]);
-			data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[2]));
+			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[2]));
 
 			if (data.get(CGConstants.PANELID_TARGET) == null) return wrong();
 			return data;
@@ -871,13 +870,13 @@ public class Generator
 
 		if (mode.equals("players"))
 		{
-			data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[3]));
+			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[3]));
 			if (!mode2.equals("reset") || elements.length > 4) data.put(CGConstants.DATAID_NAME, elements[4]);
 			if (mode2.equals("set") || mode2.equals("add") || mode2.equals("remove") || mode2.equals("test")) data.put(CGConstants.DATAID_VALUE, elements[5]);
 			if (mode2.equals("test") && elements.length > 6) data.put(CGConstants.DATAID_CHECK, elements[6]);
 			if (mode2.equals("operation"))
 			{
-				data.put(CGConstants.PANELID_TARGET2, EntitySelector.generateFrom(elements[6]));
+				data.put(CGConstants.PANELID_TARGET2, Target.generateFrom(elements[6]));
 				data.put(CGConstants.DATAID_NAME2, elements[7]);
 				data.put(CGConstants.DATAID_VALUE, 0);
 				for (int i = 0; i < PlayersOperationPanel.operationList.length; i++)
@@ -890,11 +889,11 @@ public class Generator
 		{
 			if (!mode2.equals("leave") || elements.length > 4) data.put(CGConstants.DATAID_NAME, elements[3]);
 			if (mode2.equals("add") && elements.length > 4) data.put(CGConstants.DATAID_NAME2, elements[4]);
-			if (mode2.equals("join")) data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[4]));
+			if (mode2.equals("join")) data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[4]));
 			if (mode2.equals("leave"))
 			{
-				if (elements.length > 4) data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[4]));
-				else data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(elements[3]));
+				if (elements.length > 4) data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[4]));
+				else data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[3]));
 			}
 			if (mode2.equals("option"))
 			{

@@ -1,6 +1,6 @@
 package commandGenerator.gui.options;
 
-import commandGenerator.arguments.objects.EntitySelector;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.commandSpecific.SpreadPanel;
@@ -30,7 +30,7 @@ public class SpreadOptionsPanel extends OptionsPanel
 	@Override
 	public String generateCommand()
 	{
-		EntitySelector player = panelPlayer.generateEntity();
+		Target player = panelPlayer.generateEntity();
 		String[] options = panelSpreadOptions.generateOptions();
 
 		if (player == null || options == null) return null;

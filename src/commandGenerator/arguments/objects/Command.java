@@ -79,7 +79,7 @@ public class Command
 	/** Creates a new Command
 	 * 
 	 * @param id
-	 *            - String - The Command's ID */
+	 *            - <i>String</i> - The Command's ID */
 	public Command(String id)
 	{
 		this.id = id;
@@ -139,7 +139,7 @@ public class Command
 	/** Generates the data used for the GUI from an already generated command
 	 * 
 	 * @param command
-	 *            - String - The command to use to generate all data */
+	 *            - <i>String</i> - The command to use to generate all data */
 	public Map<String, Object> generateSetup(String command)
 	{
 		if (id.equals("achievement")) return Generator.genAchievement(command);

@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 import java.util.Map;
 
 import commandGenerator.arguments.objects.Coordinates;
-import commandGenerator.arguments.objects.EntitySelector;
 import commandGenerator.arguments.objects.Particle;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
@@ -87,7 +87,7 @@ public class ParticleOptionsPanel extends OptionsPanel
 
 		if (checkBoxEntity.isSelected())
 		{
-			EntitySelector entity = panelEntity.generateEntity();
+			Target entity = panelEntity.generateEntity();
 			if (entity == null) return null;
 			command += " " + entity.commandStructure();
 		}

@@ -19,9 +19,9 @@ public class EffectType extends ObjectBase
 	/** New Effect type.
 	 * 
 	 * @param idNum
-	 *            - Int - The Effect's numerical ID.
+	 *            - <i>int</i> - The Effect's numerical ID.
 	 * @param idString
-	 *            - String - The Effect's text ID. */
+	 *            - <i>String</i> - The Effect's text ID. */
 	public EffectType(int idNum, String idString)
 	{
 		super(idString, CGConstants.OBJECT_EFFECT);
@@ -51,7 +51,7 @@ public class EffectType extends ObjectBase
 	/** Returns an Effect from its numerical ID.
 	 * 
 	 * @param id
-	 *            - Int - The Effect's ID. */
+	 *            - <i>int</i> - The Effect's ID. */
 	public static ObjectBase getEffectFromIdNum(int id)
 	{
 		return effects.get(id);

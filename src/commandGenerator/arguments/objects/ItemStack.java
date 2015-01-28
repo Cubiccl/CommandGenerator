@@ -11,20 +11,51 @@ import commandGenerator.main.DisplayHelper;
 public class ItemStack
 {
 
+	/** The Item this stack is composed of. */
 	private Item item;
-	private int damage, count, slot;
+	/** The Damage of the Item. */
+	private int damage;
+	/** The number of Items in this Stack. */
+	private int count;
+	/** The slot this stack's Items are in. */
+	private int slot;
+	/** The NBT Tags this stack's Items have. */
 	private TagCompound tag;
 
+	/** Creates a new ItemStack.
+	 * 
+	 * @param item
+	 *            - <i>Item</i> - The Item this stack is composed of.
+	 * @param damage
+	 *            - <i>int</i> - The Damage of the Item. */
 	public ItemStack(Item item, int damage)
 	{
 		this(item, damage, 1, null, -1);
 	}
 
+	/** Creates a new ItemStack.
+	 * 
+	 * @param item
+	 *            - <i>Item</i> - The Item this stack is composed of.
+	 * @param damage
+	 *            - <i>int</i> - The Damage of the Item.
+	 * @param count
+	 *            - <i>int</i> - The number of Items in this Stack. */
 	public ItemStack(Item item, int damage, int count)
 	{
 		this(item, damage, count, null, -1);
 	}
 
+	/** Creates a new ItemStack.
+	 * 
+	 * @param item
+	 *            - <i>Item</i> - The Item this stack is composed of.
+	 * @param damage
+	 *            - <i>int</i> - The Damage of the Item.
+	 * @param count
+	 *            - <i>int</i> - The number of Items in this Stack.
+	 * @param tag
+	 *            - <i>TagCompount</i> - The NBT Tags this stack's Items have. */
 	public ItemStack(Item item, int damage, int count, TagCompound tag)
 	{
 		this(item, damage, count, tag, -1);
@@ -33,15 +64,15 @@ public class ItemStack
 	/** Creates a new ItemStack.
 	 * 
 	 * @param item
-	 *            - The Item.
+	 *            - <i>Item</i> - The Item this stack is composed of.
 	 * @param damage
-	 *            - The Item damage.
+	 *            - <i>int</i> - The Damage of the Item.
 	 * @param count
-	 *            - The Item count.
+	 *            - <i>int</i> - The number of Items in this Stack.
 	 * @param tag
-	 *            - The NBT tags.
+	 *            - <i>TagCompound</i> - The NBT Tags this stack's Items have.
 	 * @param slot
-	 *            - The Item slot. */
+	 *            - <i>int</i> - The slot this stack's Item are in. */
 	public ItemStack(Item item, int damage, int count, TagCompound tag, int slot)
 	{
 		this.item = item;
@@ -51,6 +82,7 @@ public class ItemStack
 		this.slot = slot;
 	}
 
+	/** Returns a String version of this ItemStack to be displayed to the user. */
 	public String display(int details, int lvls)
 	{
 		String display = Integer.toString(count) + " " + item.getName(damage);
@@ -59,26 +91,31 @@ public class ItemStack
 		return display;
 	}
 
+	/** Returns the slot this Stack's Items are in. */
 	public int getSlot()
 	{
 		return slot;
 	}
 
+	/** Returns the number of Items in this Stack. */
 	public int getCount()
 	{
 		return count;
 	}
 
+	/** Returns the Damage of this Stack's Items. */
 	public int getDamage()
 	{
 		return damage;
 	}
 
+	/** Returns the Item type of this Stack. */
 	public Item getItem()
 	{
 		return item;
 	}
 
+	/** Returns the NBT Tags this Stack's Items have. */
 	public TagCompound getTag()
 	{
 		return tag;
@@ -101,6 +138,10 @@ public class ItemStack
 		return item;
 	}
 
+	/** Generates an ItemStack from a TagCompound.
+	 * 
+	 * @param tag
+	 *            - <i>TagCompount</i> - The tag used to generate. */
 	public static ItemStack generateFrom(TagCompound tag)
 	{
 		Item item = (Item) Registerer.getObjectFromId("stone");
@@ -122,6 +163,18 @@ public class ItemStack
 		return new ItemStack(item, damage, count, nbt, slot);
 	}
 
+	/** Generates a new ItemStack from the following data :
+	 * 
+	 * @param id
+	 *            - <i>String</i> - The Item ID.
+	 * @param damage
+	 *            - <i>int</i> - The Item damage.
+	 * @param count
+	 *            - <i>int</i> - The number of Items.
+	 * @param nbt
+	 *            - <i>ArrayList:Tag</i> - The NBT Tags as a list.
+	 * @param slot
+	 *            - <i>int</i> - The slot of this stack. */
 	public static ItemStack generateFrom(String id, int damage, int count, List<Tag> nbt, int slot)
 	{
 		Item item = (Item) Registerer.getObjectFromId(id);
@@ -136,6 +189,14 @@ public class ItemStack
 		return new ItemStack(item, damage, count, tag, slot);
 	}
 
+	/** Generates a new ItemStack from the following data :
+	 * 
+	 * @param id
+	 *            - <i>String</i> - The Item ID.
+	 * @param damage
+	 *            - <i>int</i> - The Item damage.
+	 * @param nbt
+	 *            - <i>ArrayList:Tag</i> - The NBT Tags as a list. */
 	public static ItemStack generateBlockFrom(String id, int damage, List<Tag> nbt)
 	{
 		return generateFrom(id, damage, -1, nbt, -1);

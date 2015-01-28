@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
-import commandGenerator.arguments.objects.EntitySelector;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagString;
@@ -188,7 +188,7 @@ public class JsonSelectionPanel extends HelperPanel
 			{
 				comboboxMode.setSelectedIndex(2);
 				Map<String, Object> data = new HashMap<String, Object>();
-				data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(((TagString) tag).getValue()));
+				data.put(CGConstants.PANELID_TARGET, Target.generateFrom(((TagString) tag).getValue()));
 				panelEntity.setupFrom(data);
 			}
 		}

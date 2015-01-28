@@ -9,7 +9,7 @@ import java.util.Map;
 import javax.swing.JComboBox;
 
 import commandGenerator.arguments.objects.Achievement;
-import commandGenerator.arguments.objects.EntitySelector;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.AchievementSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
@@ -63,7 +63,7 @@ public class AchievementOptionsPanel extends OptionsPanel
 	public String generateCommand()
 	{
 
-		EntitySelector player = panelTarget.generateEntity();
+		Target player = panelTarget.generateEntity();
 		Achievement achievement = panelAchievement.getSelectedAchievement();
 
 		if (player == null || achievement == null) return null;

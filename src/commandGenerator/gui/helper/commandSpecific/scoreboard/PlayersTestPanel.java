@@ -7,7 +7,7 @@ import java.util.Map;
 
 import javax.swing.JTextField;
 
-import commandGenerator.arguments.objects.EntitySelector;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
@@ -69,7 +69,7 @@ public class PlayersTestPanel extends ScoreboardPanel
 	public String generateText()
 	{
 
-		EntitySelector player = panelEntity.generateEntity();
+		Target player = panelEntity.generateEntity();
 		String objective = entryObjective.getText(), score = entryScore.getText(), max = textfieldMax.getText();
 
 		if (objective.equals("") || objective.contains(" "))

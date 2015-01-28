@@ -22,8 +22,8 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 import commandGenerator.arguments.objects.Entity;
-import commandGenerator.arguments.objects.EntitySelector;
 import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.components.CButton;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.CEntry;
@@ -282,7 +282,7 @@ public class EntitySelectionPanel extends HelperPanel
 		} else if (selector.equals("type"))
 		{
 
-			CComboBox box = new CComboBox("GUI:selector.type", CGConstants.DATAID_NONE, Entity.getList(), null);
+			CComboBox box = new CComboBox("GUI:selector.type", CGConstants.DATAID_NONE, Registerer.getObjectList(CGConstants.OBJECT_ENTITY), null);
 			boolean cancel = DisplayHelper.showQuestion(box, title);
 			if (cancel) return;
 			value = box.getValue().getId();
@@ -384,7 +384,7 @@ public class EntitySelectionPanel extends HelperPanel
 		textarea.setText(display);
 	}
 
-	public EntitySelector generateEntity()
+	public Target generateEntity()
 	{
 		if (boxEntities.getSelectedItem().equals(Lang.get("GUI:selector.player")))
 		{
@@ -395,10 +395,10 @@ public class EntitySelectionPanel extends HelperPanel
 			}
 
 			DisplayHelper.log("Generated entity selector : " + entryPlayer.getText());
-			return new EntitySelector(entryPlayer.getText());
+			return new Target(entryPlayer.getText());
 		}
 
-		EntitySelector sel = new EntitySelector(EntitySelector.getTypeFromString((String) boxEntities.getSelectedItem()), addedSelectors);
+		Target sel = new Target(Target.getTypeFromString((String) boxEntities.getSelectedItem()), addedSelectors);
 		DisplayHelper.log("Generated entity selector : " + sel.display());
 		return sel;
 	}
@@ -417,7 +417,7 @@ public class EntitySelectionPanel extends HelperPanel
 	public void setupFrom(Map<String, Object> data)
 	{
 		super.setupFrom(data);
-		EntitySelector entity = (EntitySelector) data.get(getPanelId());
+		Target entity = (Target) data.get(getPanelId());
 		if (entity == null)
 		{
 			reset();
@@ -428,12 +428,12 @@ public class EntitySelectionPanel extends HelperPanel
 		if (addedSelectors == null) addedSelectors = new ArrayList<String[]>();
 		displaySelectors();
 
-		if (entity.getType() == EntitySelector.PLAYER)
+		if (entity.getType() == Target.PLAYER)
 		{
 			boxEntities.setSelectedItem(Lang.get("GUI:selector.player"));
 			entryPlayer.setTextField(entity.display());
 		}
 
-		else boxEntities.setSelectedItem(EntitySelector.selectorsTypes[entity.getType()]);
+		else boxEntities.setSelectedItem(Target.selectorsTypes[entity.getType()]);
 	}
 }

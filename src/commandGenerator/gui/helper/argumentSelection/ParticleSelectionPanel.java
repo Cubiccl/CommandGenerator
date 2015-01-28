@@ -58,7 +58,7 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 			}
 		});
 
-		comboboxParticle = new CComboBox(CGConstants.PANELID_PARTICLE, "GUI:particle", Particle.getList(), this);
+		comboboxParticle = new CComboBox(CGConstants.PANELID_PARTICLE, "GUI:particle", Registerer.getObjectList(CGConstants.OBJECT_PARTICLE), this);
 
 		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:particle.block", Registerer.getList(CGConstants.LIST_BLOCKS), false);
 		panelBlock.setVisible(false);

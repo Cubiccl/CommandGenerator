@@ -6,48 +6,45 @@ import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
-public class ItemData extends Item {
+public class ItemData extends Item
+{//TODO re-do this
 
+	/** List of the damages this Item has. */
 	private int[] damageList;
 
 	/** Creates a new Item with specific damage.
 	 * 
 	 * @param isBlock
-	 *            - Is this Item a Block?
+	 *            - <i>boolean</i> - Is this Item a Block?
 	 * @param idNum
-	 *            - The Item's numerical ID.
+	 *            - <i>int</i> - The Item's numerical ID.
 	 * @param idString
-	 *            - The Item's text ID.
+	 *            - <i>String</i> - The Item's text ID.
 	 * @param damageList
-	 *            - The Item's damage list.
+	 *            - <i>int[]</i>- The Item's damage list.
 	 * @param hasGif
 	 *            - Does this Item have an animated image? */
-	public ItemData(boolean isBlock, int idNum, String idString, int[] damageList) {
+	public ItemData(boolean isBlock, int idNum, String idString, int[] damageList)
+	{
 		super(isBlock, idNum, idString);
 		this.damageList = damageList;
 	}
 
-	public int getDamage(int damage) {
-		return damageList[damage];
-	}
-
 	@Override
-	public String getName(int damage) {
-		
+	public String getName(int damage)
+	{
+
 		String category;
 		if (isBlock()) category = "BLOCKS:";
 		else category = "ITEMS:";
-		
+
 		if (damage >= damageList.length) return Lang.get(category + getId() + "_" + damageList[0]);
 		return Lang.get(category + getId() + "_" + damageList[damage]);
 	}
-	
-	public int getMaxDamage() {
-		return damageList.length - 1;
-	}
 
 	@Override
-	public ImageIcon getTexture(int damage) {
+	public ImageIcon getTexture(int damage)
+	{
 
 		String path = Resources.folder + "textures/";
 		int damageToUse = 0;
@@ -61,9 +58,11 @@ public class ItemData extends Item {
 
 		if (hasGif()) path += ".gif";
 		else path += ".png";
-		try {
+		try
+		{
 			return new ImageIcon(path);
-		} catch (Exception ex) {
+		} catch (Exception ex)
+		{
 			DisplayHelper.missingTexture(path);
 			return null;
 		}

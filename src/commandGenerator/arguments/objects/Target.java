@@ -25,7 +25,7 @@ public class Target
 	/** Creates a new Target
 	 * 
 	 * @param name
-	 *            - The Target's name. */
+	 *            - <i>String</i> - The Target's name. */
 	public Target(String name)
 	{
 		this.name = name;
@@ -36,9 +36,9 @@ public class Target
 	/** Creates a new Target
 	 * 
 	 * @param type
-	 *            - The Target type.
+	 *            - <i>int</i> - The Target type.
 	 * @param selectors
-	 *            - The selectors. */
+	 *            - <i>ArrayList:String[]</i> - The selectors. */
 	public Target(int type, List<String[]> selectors)
 	{
 		this.type = type;
@@ -83,7 +83,7 @@ public class Target
 	/** Generates a target from a generated command.
 	 * 
 	 * @param text
-	 *            - String - The generated command. */
+	 *            - <i>String</i> - The generated command. */
 	public static Target generateFrom(String text)
 	{
 		if (!text.startsWith("@"))
@@ -113,6 +113,7 @@ public class Target
 		}
 	}
 
+	/** Returns a String version of this Target to be displayed to the user. */
 	public String display()
 	{
 		if (type == PLAYER) return name;
@@ -129,7 +130,7 @@ public class Target
 	/** Returns the type of the Target from the String input.
 	 * 
 	 * @param sel
-	 *            - String - The text. */
+	 *            - <i>String</i> - The text. */
 	public static int getTypeFromString(String sel)
 	{
 		if (sel.equals("@a")) return ALL;

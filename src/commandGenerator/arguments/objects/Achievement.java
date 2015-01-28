@@ -14,9 +14,9 @@ public class Achievement extends ObjectBase
 	/** Creates a new Achievement
 	 * 
 	 * @param id
-	 *            - The achievement ID
+	 *            - <i>String</i> - The achievement ID
 	 * @param itemTexture
-	 *            - The item which will give its texture to the achievement */
+	 *            - <i>Item</i> - The item which will give its texture to the achievement */
 	public Achievement(String id, Item itemTexture)
 	{
 		super(id, CGConstants.OBJECT_ACHIEVEMENT);
@@ -44,7 +44,7 @@ public class Achievement extends ObjectBase
 	/** Generates an Achievement from its command structure.
 	 * 
 	 * @param data
-	 *            - String - The command structure. */
+	 *            - <i>String</i> - The command structure. */
 	public static Achievement generateFrom(String data)
 	{
 		if (data.contains("achievement.")) data = data.substring("achievement.".length());

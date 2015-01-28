@@ -14,9 +14,17 @@ import commandGenerator.main.CGConstants;
 public abstract class ObjectBase
 {
 
+	/** The Object's ID. */
 	private final String id;
+	/** The Object's type. */
 	private final byte type;
 
+	/** Creates a new ObjectBase.
+	 * 
+	 * @param id
+	 *            - <i>String</i> - This Object's ID.
+	 * @param type
+	 *            - <i>Byte</i> - This Object's type. */
 	public ObjectBase(String id, byte type)
 	{
 		this.id = id;
@@ -24,12 +32,13 @@ public abstract class ObjectBase
 		Registerer.registerObject(type, this);
 	}
 
-	/** Returns the object's String ID. */
+	/** Returns the Object's ID. */
 	public String getId()
 	{
 		return id;
 	}
 
+	/** Returns the Object's type. */
 	public byte getType()
 	{
 		return type;
@@ -46,6 +55,10 @@ public abstract class ObjectBase
 		return getName();
 	}
 
+	/** Returns a String version of the Object to be displayed to the user.
+	 * 
+	 * @param object
+	 *            - <i>Object</i> - The Object to display. */
 	public static String display(Object object)
 	{
 		if (object instanceof ItemStack) return ((ItemStack) object).display(CGConstants.DETAILS_ALL, 0);
@@ -58,6 +71,10 @@ public abstract class ObjectBase
 		return object.toString();
 	}
 
+	/** Returns a Tag version of the Object.
+	 * 
+	 * @param object
+	 *            - <i>Object</i> - The Object to turn into Tag. */
 	public static Tag toNBT(Object object)
 	{
 		if (object instanceof ItemStack) return ((ItemStack) object).toNBT("");
@@ -71,6 +88,12 @@ public abstract class ObjectBase
 		return (Tag) object;
 	}
 
+	/** Turns the NBT Tag into an Object according to the specified type of Object.
+	 * 
+	 * @param nbt
+	 *            - <i>Tag</i> - The NBT Tag.
+	 * @param type
+	 *            - <i>int</i> - The type of Object wanted. */
 	public static Object toObject(Tag nbt, int type)
 	{
 		switch (type)

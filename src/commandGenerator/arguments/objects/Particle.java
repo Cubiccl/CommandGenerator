@@ -1,10 +1,5 @@
 package commandGenerator.arguments.objects;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.swing.ImageIcon;
 
 import commandGenerator.main.CGConstants;
@@ -13,33 +8,39 @@ import commandGenerator.main.Lang;
 public class Particle extends ObjectBase
 {
 
+	/** Types of Particles :
+	 * <ul>
+	 * <li><strong>NORMAL</strong> : No specific behavior.</li>
+	 * <li><strong>BLOCK</strong> : Varies according to a Block's texture.</li>
+	 * <li><strong>ITEM</strong> : Varies according to an Item's texture.</li>
+	 * </ul> */
 	public static final int NORMAL = 0, BLOCK = 1, ITEM = 2;
-	private static Map<String, Particle> list = new HashMap<String, Particle>();
-	private static List<String> ids = new ArrayList<String>();
 
+	/** The type of the Particle. */
 	private int type;
 
+	/** Creates a new Particle.
+	 * 
+	 * @param id
+	 *            - <i>String</i> - The Particle's ID.
+	 * @param type
+	 *            - <i>int</i> - The Partcile's type. */
 	public Particle(String id, int type)
 	{
 		super(id, CGConstants.OBJECT_PARTICLE);
 		this.type = type;
-		list.put(id, this);
-		ids.add(id);
 	}
 
+	/** Returns a description of this Particle. */
 	public String getDescription()
 	{
 		return Lang.get("PARTICLES:" + getId());
 	}
 
+	/** Returns the type of this Particle. */
 	public int getParticleType()
 	{
 		return type;
-	}
-
-	public static Particle getParticleFromId(String id)
-	{
-		return list.get(id);
 	}
 
 	@Override
@@ -52,13 +53,5 @@ public class Particle extends ObjectBase
 	public ImageIcon getTexture()
 	{
 		return null;
-	}
-
-	public static Particle[] getList()
-	{
-		Particle[] particles = new Particle[list.size()];
-		for (int i = 0; i < particles.length; i++)
-			particles[i] = list.get(ids.get(i));
-		return particles;
 	}
 }

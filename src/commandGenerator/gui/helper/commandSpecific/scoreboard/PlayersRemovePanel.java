@@ -2,7 +2,7 @@ package commandGenerator.gui.helper.commandSpecific.scoreboard;
 
 import java.awt.Dimension;
 
-import commandGenerator.arguments.objects.EntitySelector;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.main.CGConstants;
@@ -38,7 +38,7 @@ public class PlayersRemovePanel extends ScoreboardPanel
 	public String generateText()
 	{
 
-		EntitySelector player = panelEntity.generateEntity();
+		Target player = panelEntity.generateEntity();
 		String objective = entryObjective.getText(), score = entryScore.getText();
 
 		if (objective.equals("") || objective.contains(" "))

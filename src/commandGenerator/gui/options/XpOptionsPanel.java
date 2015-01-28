@@ -1,6 +1,6 @@
 package commandGenerator.gui.options;
 
-import commandGenerator.arguments.objects.EntitySelector;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.XpSelectionPanel;
@@ -30,7 +30,7 @@ public class XpOptionsPanel extends OptionsPanel
 	@Override
 	public String generateCommand()
 	{
-		EntitySelector player = panelEntity.generateEntity();
+		Target player = panelEntity.generateEntity();
 		String xp = panelXp.generateXp();
 
 		if (player == null || xp == null) return null;

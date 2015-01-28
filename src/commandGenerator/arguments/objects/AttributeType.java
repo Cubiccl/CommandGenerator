@@ -11,7 +11,7 @@ public class AttributeType extends ObjectBase
 	/** New Attribute type
 	 * 
 	 * @param id
-	 *            - The Attribute type ID */
+	 *            - <i>String</i> - The Attribute type ID */
 	public AttributeType(String id)
 	{
 		super(id, CGConstants.OBJECT_ATTRIBUTE);

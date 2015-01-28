@@ -1,7 +1,7 @@
 package commandGenerator.gui.options;
 
 import commandGenerator.arguments.objects.Effect;
-import commandGenerator.arguments.objects.EntitySelector;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.EffectSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
@@ -31,12 +31,12 @@ public class EffectOptionsPanel extends OptionsPanel
 	@Override
 	public String generateCommand()
 	{
-		EntitySelector entity = panelEntity.generateEntity();
+		Target entity = panelEntity.generateEntity();
 		Effect effect = panelEffect.generateEffect();
 
 		if (entity == null || effect == null) return null;
 
-		return "effect " + entity.commandStructure() + " " + effect.display();
+		return "effect " + entity.commandStructure() + " " + effect.commandStructure();
 	}
 
 }

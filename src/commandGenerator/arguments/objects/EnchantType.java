@@ -18,6 +18,14 @@ public class EnchantType extends ObjectBase
 	/** This Enchantment's maximum level. */
 	private int max;
 
+	/** Creates a new Enchantment type.
+	 * 
+	 * @param idNum
+	 *            - <i>int</i> - The Enchantment's numerical ID.
+	 * @param idString
+	 *            - <i>String</i> - The Enchantment's ID.
+	 * @param max
+	 *            - <i>int</i> - The Enchantment's max level. */
 	public EnchantType(int idNum, String idString, int max)
 	{
 		super(idString, CGConstants.OBJECT_ENCHANT);
@@ -50,6 +58,10 @@ public class EnchantType extends ObjectBase
 		return null;
 	}
 
+	/** Returns the Enchantment type for the specified ID.
+	 * 
+	 * @param id
+	 *            - <i>int</i> - The Enchantment's ID. */
 	public static ObjectBase getEnchantFromIdNum(int id)
 	{
 		return enchants.get(id);

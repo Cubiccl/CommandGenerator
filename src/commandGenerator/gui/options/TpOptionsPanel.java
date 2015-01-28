@@ -9,7 +9,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 
 import commandGenerator.arguments.objects.Coordinates;
-import commandGenerator.arguments.objects.EntitySelector;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
@@ -84,7 +84,7 @@ public class TpOptionsPanel extends OptionsPanel
 	public String generateCommand()
 	{
 
-		EntitySelector target = panelTarget.generateEntity();
+		Target target = panelTarget.generateEntity();
 		if (target == null) return null;
 
 		if (radiobuttonCoords.isSelected())
@@ -102,7 +102,7 @@ public class TpOptionsPanel extends OptionsPanel
 		} else
 		{
 
-			EntitySelector entity = panelDestinationEntity.generateEntity();
+			Target entity = panelDestinationEntity.generateEntity();
 			if (entity == null) return null;
 
 			String command = "tp";

@@ -3,7 +3,7 @@ package commandGenerator.gui.helper.argumentSelection.json;
 import java.util.HashMap;
 import java.util.Map;
 
-import commandGenerator.arguments.objects.EntitySelector;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagString;
@@ -39,7 +39,7 @@ public class ScoreDisplayPanel extends HelperPanel
 	{
 
 		String objective = entryObjective.getText();
-		EntitySelector entity = panelEntity.generateEntity();
+		Target entity = panelEntity.generateEntity();
 
 		if (objective == null || objective.equals(""))
 		{
@@ -75,7 +75,7 @@ public class ScoreDisplayPanel extends HelperPanel
 			if (tag.getId().equals("name"))
 			{
 				Map<String, Object> data = new HashMap<String, Object>();
-				data.put(CGConstants.PANELID_TARGET, EntitySelector.generateFrom(((TagString) tag).getValue()));
+				data.put(CGConstants.PANELID_TARGET, Target.generateFrom(((TagString) tag).getValue()));
 				panelEntity.setupFrom(data);
 			}
 		}

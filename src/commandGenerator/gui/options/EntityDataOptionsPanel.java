@@ -3,8 +3,8 @@ package commandGenerator.gui.options;
 import javax.swing.JLabel;
 
 import commandGenerator.arguments.objects.Entity;
-import commandGenerator.arguments.objects.EntitySelector;
 import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.OptionsPanel;
@@ -34,7 +34,7 @@ public class EntityDataOptionsPanel extends OptionsPanel implements IBox
 		label = new JLabel(((Entity) Registerer.getObjectFromId("Item")).getTexture());
 		labelExplain = new CLabel("GUI:entity.explain", true);
 
-		comboboxEntity = new CComboBox(CGConstants.DATAID_ENTITY, "GUI:entity.select", Entity.getList(), this);
+		comboboxEntity = new CComboBox(CGConstants.DATAID_ENTITY, "GUI:entity.select", Registerer.getObjectList(CGConstants.OBJECT_ENTITY), this);
 
 		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 		panelEntitydata = new NBTTagPanel("GUI:entity.tags", Entity.player, DataTags.entities);
@@ -65,7 +65,7 @@ public class EntityDataOptionsPanel extends OptionsPanel implements IBox
 	@Override
 	public String generateCommand()
 	{
-		EntitySelector entity = panelEntity.generateEntity();
+		Target entity = panelEntity.generateEntity();
 		TagCompound tag = panelEntitydata.getNbtTags("tag");
 		String commandG = command + " ";
 

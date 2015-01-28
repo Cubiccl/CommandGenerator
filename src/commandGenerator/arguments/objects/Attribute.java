@@ -18,11 +18,11 @@ public class Attribute
 	/** New Attribute
 	 * 
 	 * @param type
-	 *            - The type of the Attribute
+	 *            - <i>AttributeType</i> - The type of the Attribute
 	 * @param amount
-	 *            - The amount given by the Attribute
+	 *            - <i>double</i> - The amount given by the Attribute
 	 * @param operation
-	 *            - The operation used by the Attribute */
+	 *            - <i>int</i> - The operation used by the Attribute */
 	public Attribute(AttributeType type, double amount, int operation)
 	{
 		this.type = type;

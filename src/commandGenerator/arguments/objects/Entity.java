@@ -15,6 +15,10 @@ public class Entity extends ObjectBase
 
 	public static Entity player = new Entity("Player"), entity = new Entity("");
 
+	/** Creates a new Entity.
+	 * 
+	 * @param id
+	 *            - <i>String</i> - The Entity's ID. */
 	public Entity(String id)
 	{
 		super(id, CGConstants.OBJECT_ENTITY);

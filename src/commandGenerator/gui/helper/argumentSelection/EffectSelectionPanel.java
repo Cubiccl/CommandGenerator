@@ -43,7 +43,7 @@ public class EffectSelectionPanel extends HelperPanel implements IBox
 
 		spinnerAmplifier = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:effect.amplifier", 1, 256, null);
 
-		comboboxEffect = new CComboBox(CGConstants.DATAID_NONE, "GUI:effect.choose", EffectType.getList(), this);
+		comboboxEffect = new CComboBox(CGConstants.DATAID_NONE, "GUI:effect.choose", Registerer.getObjectList(CGConstants.OBJECT_EFFECT), this);
 
 		checkboxHideParticles = new CCheckBox(CGConstants.DATAID_NONE, "GUI:effect.hide");
 
@@ -116,7 +116,7 @@ public class EffectSelectionPanel extends HelperPanel implements IBox
 
 		entryDuration.setTextField(Integer.toString(effect.getDuration()));
 		spinnerAmplifier.setSelected(effect.getAmplifier());
-		comboboxEffect.setSelected(effect.getEffectType());
+		comboboxEffect.setSelected(effect.getType());
 		checkboxHideParticles.setSelected(!effect.showParticles());
 	}
 

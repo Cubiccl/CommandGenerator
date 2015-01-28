@@ -13,30 +13,31 @@ import commandGenerator.main.Resources;
 public class Item extends ObjectBase
 {
 
-	/** True if this Item's texture is an animated Gif. */
-	private boolean hasGif;
-	/** True if this Item is a Block. */
-	private boolean isBlock;
-	/** This Item's numerical ID. */
-	private int idNum;
-	/** This Item's maximum damage. */
-	private int maxDamage;
+	/** List containing all items which have durability */
+	public static List<String> durabilityList = new ArrayList<String>();
 	/** This Item's durability. */
 	private int durability;
-	public static List<String> durabilityList = new ArrayList<String>();
+	/** True if this Item's texture is an animated Gif. */
+	private boolean hasGif;
+	/** This Item's numerical ID. */
+	private int idNum;
+	/** True if this Item is a Block. */
+	private boolean isBlock;
+	/** This Item's maximum damage. */
+	private int maxDamage;
 
 	/** Creates a new Item.
 	 * 
 	 * @param isBlock
-	 *            - Is this Item a Block?
+	 *            - <i>boolean</i> - Is this Item a Block?
 	 * @param idNum
-	 *            - The Item's numerical ID.
+	 *            - <i>int</i> - The Item's numerical ID.
 	 * @param idString
-	 *            - The Item's text ID.
+	 *            - <i>String</i> - The Item's text ID.
 	 * @param maxDamage
-	 *            - The Item's maximum damage.
+	 *            - <i>int</i> - The Item's maximum damage.
 	 * @param hasGif
-	 *            - Does this Item have an animated image? */
+	 *            - <i>boolean</i> - Does this Item have an animated image? */
 	public Item(boolean isBlock, int idNum, String idString)
 	{
 		super(idString, CGConstants.OBJECT_ITEM);
@@ -45,6 +46,12 @@ public class Item extends ObjectBase
 		this.maxDamage = 0;
 		this.durability = 0;
 		this.hasGif = false;
+	}
+
+	/** Returns this Item's durability. */
+	public int getDurability()
+	{
+		return durability;
 	}
 
 	/** Returns this Item's numerical ID. */
@@ -60,6 +67,13 @@ public class Item extends ObjectBase
 	}
 
 	/** Returns this Item's name. */
+	@Override
+	public String getName()
+	{
+		return getName(0);
+	}
+
+	/** Returns this Item's name. */
 	public String getName(int damage)
 	{
 		String category;
@@ -69,10 +83,17 @@ public class Item extends ObjectBase
 		return Lang.get(category + getId() + "_" + damage);
 	}
 
+	/** Returns this Item's texture. */
+	@Override
+	public ImageIcon getTexture()
+	{
+		return getTexture(0);
+	}
+
 	/** Returns this Item's texture according to the specified damage.
 	 * 
 	 * @param damage
-	 *            - Int - The damage. */
+	 *            - <i>int</i> - The damage. */
 	public ImageIcon getTexture(int damage)
 	{
 
@@ -109,29 +130,10 @@ public class Item extends ObjectBase
 		return hasGif;
 	}
 
-	/** Sets this Item's Gif property */
-	public void setHasGif(String data)
-	{
-		this.hasGif = Boolean.parseBoolean(data);
-	}
-
 	/** Returns true if this Item is a Block. */
 	public boolean isBlock()
 	{
 		return isBlock;
-	}
-
-	/** Returns this Item's name. */
-	@Override
-	public String getName()
-	{
-		return getName(0);
-	}
-
-	/** Sets this Item's maximum damage. */
-	public void setMaxDamage(String damage)
-	{
-		this.maxDamage = Integer.parseInt(damage);
 	}
 
 	/** Sets this Item's durability. */
@@ -141,16 +143,15 @@ public class Item extends ObjectBase
 		durabilityList.add(this.getId());
 	}
 
-	/** Returns this Item's durability. */
-	public int getDurability()
+	/** Sets this Item's Gif property */
+	public void setHasGif(String data)
 	{
-		return durability;
+		this.hasGif = Boolean.parseBoolean(data);
 	}
 
-	/** Returns this Item's texture. */
-	@Override
-	public ImageIcon getTexture()
+	/** Sets this Item's maximum damage. */
+	public void setMaxDamage(String damage)
 	{
-		return getTexture(0);
+		this.maxDamage = Integer.parseInt(damage);
 	}
 }

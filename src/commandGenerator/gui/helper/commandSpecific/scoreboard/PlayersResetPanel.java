@@ -7,7 +7,7 @@ import java.util.Map;
 
 import javax.swing.JTextField;
 
-import commandGenerator.arguments.objects.EntitySelector;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.main.CGConstants;
@@ -57,7 +57,7 @@ public class PlayersResetPanel extends ScoreboardPanel
 	public String generateText()
 	{
 
-		EntitySelector player = panelEntity.generateEntity();
+		Target player = panelEntity.generateEntity();
 		String objective = textfieldObjective.getText();
 
 		if ((objective.equals("") || objective.contains(" ")) && checkboxObjective.isSelected())

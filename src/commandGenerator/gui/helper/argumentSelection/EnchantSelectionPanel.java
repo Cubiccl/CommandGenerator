@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 import commandGenerator.arguments.objects.EnchantType;
 import commandGenerator.arguments.objects.Enchantment;
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.HelperPanel;
@@ -36,7 +37,7 @@ public class EnchantSelectionPanel extends HelperPanel implements IBox
 		spinnerLevel = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:enchant.level", 1, 5, null);
 		spinnerLevel.setVisible(limited);
 
-		comboboxEnchant = new CComboBox(CGConstants.DATAID_NONE, "GUI:enchant.choose", EnchantType.getList(), this);
+		comboboxEnchant = new CComboBox(CGConstants.DATAID_NONE, "GUI:enchant.choose", Registerer.getObjectList(CGConstants.OBJECT_ENCHANT), this);
 		comboboxEnchant.setPreferredSize(new Dimension(390, 50));
 
 		gbc.gridx = 0;
@@ -84,7 +85,7 @@ public class EnchantSelectionPanel extends HelperPanel implements IBox
 	public void setupFrom(Map<String, Object> data)
 	{
 		Enchantment enchant = (Enchantment) data.get(getPanelId());
-		comboboxEnchant.setSelected(enchant.getEnchantType());
+		comboboxEnchant.setSelected(enchant.getType());
 		spinnerLevel.setSelected(enchant.getLevel() + 1);
 		entryLevel.setTextField(Integer.toString(enchant.getLevel() + 1));
 	}

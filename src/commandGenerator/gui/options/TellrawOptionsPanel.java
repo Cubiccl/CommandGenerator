@@ -1,6 +1,6 @@
 package commandGenerator.gui.options;
 
-import commandGenerator.arguments.objects.EntitySelector;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
@@ -32,7 +32,7 @@ public class TellrawOptionsPanel extends OptionsPanel
 	public String generateCommand()
 	{
 
-		EntitySelector player = panelPlayer.generateEntity();
+		Target player = panelPlayer.generateEntity();
 
 		if (player == null) return null;
 

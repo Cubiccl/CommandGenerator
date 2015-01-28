@@ -32,7 +32,7 @@ public class SummonOptionsPanel extends OptionsPanel implements IBox
 
 		label = new JLabel(Registerer.getObjectFromId("Item").getTexture());
 
-		comboboxEntity = new CComboBox(CGConstants.DATAID_ENTITY, "GUI:entity.select", Entity.entities.toArray(new Entity[0]), this);
+		comboboxEntity = new CComboBox(CGConstants.DATAID_ENTITY, "GUI:entity.select", Entity.getListNoPlayer(), this);
 
 		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:summon.coords", true, false);
 		panelTag = new NBTTagPanel("GUI:entity.tags", Registerer.getObjectFromId("Item"), DataTags.entities);

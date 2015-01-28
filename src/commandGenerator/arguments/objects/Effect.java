@@ -20,11 +20,11 @@ public class Effect
 	/** Creates a new Effect
 	 * 
 	 * @param type
-	 *            - The Effect type
+	 *            - <i>EffectType</i> - The Effect type
 	 * @param amplifier
-	 *            - The Effect amplifier
+	 *            - <i>int</i> - The Effect amplifier
 	 * @param duration
-	 *            - The Effect duration */
+	 *            - <i>int</i> - The Effect duration */
 	public Effect(EffectType type, int amplifier, int duration)
 	{
 		this(type, amplifier, duration, true);
@@ -33,13 +33,13 @@ public class Effect
 	/** Creates a new Effect
 	 * 
 	 * @param type
-	 *            - The Effect type
+	 *            - <i>EffectType</i> - The Effect type
 	 * @param amplifier
-	 *            - The Effect amplifier
+	 *            - <i>int</i> - The Effect amplifier
 	 * @param duration
-	 *            - The Effect duration
+	 *            - <i>int</i> - The Effect duration
 	 * @param showParticles
-	 *            - Are this Effect's particles shown? */
+	 *            - <i>boolean</i> - Are this Effect's particles shown? */
 	public Effect(EffectType type, int amplifier, int duration, boolean showParticles)
 	{
 		this.type = type;

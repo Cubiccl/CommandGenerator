@@ -4,7 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.JTextField;
 
-import commandGenerator.arguments.objects.EntitySelector;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.main.CGConstants;
@@ -45,7 +45,7 @@ public class TeamsJoinPanel extends ScoreboardPanel
 	@Override
 	public String generateText()
 	{
-		EntitySelector player = panelPlayer.generateEntity();
+		Target player = panelPlayer.generateEntity();
 
 		if (textfieldTeam.getText().equals("") || textfieldTeam.getText().contains(" "))
 		{

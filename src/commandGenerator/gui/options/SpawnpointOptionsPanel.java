@@ -1,7 +1,7 @@
 package commandGenerator.gui.options;
 
 import commandGenerator.arguments.objects.Coordinates;
-import commandGenerator.arguments.objects.EntitySelector;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
@@ -32,7 +32,7 @@ public class SpawnpointOptionsPanel extends OptionsPanel
 	public String generateCommand()
 	{
 
-		EntitySelector player = panelEntity.generateEntity();
+		Target player = panelEntity.generateEntity();
 		Coordinates coords = panelCoords.generateCoord();
 
 		if (coords == null || player == null) return null;

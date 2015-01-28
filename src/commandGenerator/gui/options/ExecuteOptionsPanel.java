@@ -10,9 +10,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 
 import commandGenerator.arguments.objects.Coordinates;
-import commandGenerator.arguments.objects.EntitySelector;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.PanelCommandSelection;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
@@ -78,7 +78,7 @@ public class ExecuteOptionsPanel extends OptionsPanel
 	public String generateCommand()
 	{
 
-		EntitySelector entity = panelEntity.generateEntity();
+		Target entity = panelEntity.generateEntity();
 		Coordinates coord = panelCoord.generateCoord();
 
 		if (entity == null || coord == null) return null;
