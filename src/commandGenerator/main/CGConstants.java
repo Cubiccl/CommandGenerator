@@ -3,6 +3,12 @@ package commandGenerator.main;
 public class CGConstants
 {
 
+	/** The type of a Target Selection Panel.
+	 * <ul>
+	 * <li><strong>ENTITIES_PLAYERS</strong> : Can only target Players.</li>
+	 * <li><strong>ENTITIES_NPCS</strong> : Can only target Non-Player Characters.</li>
+	 * <li><strong>ENTITIES_ALL</strong> : Can target any Entity.</li>
+	 * </ul> */
 	public static final int ENTITIES_PLAYERS = 0, ENTITIES_NPCS = 1, ENTITIES_ALL = 2;
 
 	public static final String LIST_BLOCKS = "blocks", LIST_ITEMS = "items", LIST_ICONS = "icon", LIST_CRAFT = "craft", LIST_PLACE = "place",

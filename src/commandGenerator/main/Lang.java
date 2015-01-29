@@ -9,35 +9,40 @@ public class Lang
 
 	/** Contains all translations. */
 	private static Map<String, Map<String, String>> dictObjects, dictGui;
+	/** Language categories. */
 	private static final String[] objectCategories = { "BLOCKS", "ITEMS", "ENTITIES", "ACHIEVEMENTS", "ATTRIBUTES", "EFFECTS", "ENCHANTS", "PARTICLES",
 			"SOUNDS", "TAGS", "END" }, guiCategories = { "GUI", "GENERAL", "WARNING", "HELP", "RESOURCES", "END" };
 
-	/** Updates the language dictionary. */
+	/** Updates the language dictionaries. */
 	public static void updateLang()
 	{
-
 		dictGui = FileHelper.readLanguageFile(Settings.languages[CommandGenerator.opt.getLanguage()] + "_gui", guiCategories);
 		dictObjects = FileHelper.readLanguageFile(Settings.languages[CommandGenerator.opt.getLanguage()] + "_objects", objectCategories);
 		CommandGenerator.gui.updateLang();
-
 	}
 
 	/** Initializes the language dictionaries. */
 	public static void initLang()
 	{
-
 		dictGui = FileHelper.readLanguageFile(Settings.languages[CommandGenerator.opt.getLanguage()] + "_gui", guiCategories);
 		dictObjects = FileHelper.readLanguageFile(Settings.languages[CommandGenerator.opt.getLanguage()] + "_objects", objectCategories);
-
 	}
 
-	/** Returns true if the translation exists. */
+	/** Returns true if the translation exists.
+	 * 
+	 * @param dict
+	 *            - <i>Map:String->Map:String->String</i> - The dictionary to use.
+	 * @param id
+	 *            - <i>String</i> - The ID of the translation to look for. */
 	private static boolean exists(Map<String, Map<String, String>> dict, String id)
 	{
 		return dict.containsKey(id.split(":")[0]) && dict.get(id.split(":")[0]).containsKey(id.split(":")[1]);
 	}
 
-	/** Returns the translation of the String ID. */
+	/** Returns the translation of the String ID.
+	 * 
+	 * @param id
+	 *            - <i>String</i> - The ID of the translation to get. */
 	public static String get(String id)
 	{
 		if (id.equals("")) return id;
@@ -63,4 +68,5 @@ public class Lang
 		}
 		return dict.get(details[0]).get(details[1]).replaceAll("N/L", "\n");
 	}
+
 }

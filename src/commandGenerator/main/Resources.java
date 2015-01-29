@@ -8,6 +8,7 @@ public class Resources
 	/** The list of all versions this program has had. */
 	public static String[] versions, changelog;
 
+	/** The URL to the Command Generator resource folder. */
 	public static String folder;
 
 	/** The list of all structures for each command. */
@@ -43,7 +44,10 @@ public class Resources
 			"sidebar.team.blue", "sidebar.team.green", "sidebar.team.aqua", "sidebar.team.red", "sidebar.team.light_purple", "sidebar.team.yellow",
 			"sidebar.team.white" };
 
-	/** Returns the changelog for the specified version. */
+	/** Returns the changelog for the specified version.
+	 * 
+	 * @param version
+	 *            - <i>String</i> - The version to use. */
 	public static String changelog(String version)
 	{
 		for (int i = 0; i < versions.length; i++)
@@ -53,6 +57,7 @@ public class Resources
 		return changelog[changelog.length - 1];
 	}
 
+	/** Creates all versions. */
 	public static void setupVersions()
 	{
 		String[] data = FileHelper.readFileArray("version.txt").toArray(new String[0]);

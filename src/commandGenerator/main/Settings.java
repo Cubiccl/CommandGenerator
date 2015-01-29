@@ -27,7 +27,10 @@ public class Settings
 		return language;
 	}
 
-	/** Changes the selected languages. Updates the translations. */
+	/** Changes the selected languages. Updates the translations.
+	 * 
+	 * @param language
+	 *            - <i>int</i> - The language to use. */
 	public void setLanguage(int language)
 	{
 		this.language = language;
@@ -35,6 +38,7 @@ public class Settings
 		Lang.updateLang();
 	}
 
+	/** Creates new Settings. */
 	public Settings()
 	{
 		selectedCommand = Command.achievement;
@@ -44,6 +48,10 @@ public class Settings
 		savedObjects = FileHelper.readFileArray("savedObjects.txt");
 	}
 
+	/** Returns true if the version has already been updated.
+	 * 
+	 * @param version
+	 *            - <i>String</i> - The version to test for. */
 	public boolean alreadyUpdated(String version)
 	{
 		int indexPrev = 0, indexVersion = 0;

@@ -18,6 +18,7 @@ public class CommandGenerator
 	/** The user's settings */
 	public static Settings opt;
 
+	/** The main method. Called when the program launches. */
 	public static void main(String[] args)
 	{
 

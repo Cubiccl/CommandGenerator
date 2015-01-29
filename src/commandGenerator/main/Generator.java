@@ -22,6 +22,10 @@ import commandGenerator.gui.helper.commandSpecific.scoreboard.TeamsOptionPanel;
 public class Generator
 {
 
+	/** Generates the data for the /achievement command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genAchievement(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -45,6 +49,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /blockdata command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genBlockData(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -64,6 +72,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /clear command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genClear(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -94,6 +106,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /clone command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genClone(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -128,6 +144,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /effect command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genEffect(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -156,6 +176,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /enchant command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genEnchant(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -178,6 +202,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /entitydata command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	@SuppressWarnings("unchecked")
 	public static Map<String, Object> genEntityData(String command)
 	{
@@ -198,6 +226,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /execute command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genExecute(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -230,6 +262,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /fill command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genFill(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -266,6 +302,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /gamerule command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genGamerule(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -282,6 +322,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /give command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genGive(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -305,6 +349,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /kill command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genKill(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -321,6 +369,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /particle command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genParticle(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -344,6 +396,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /playsound command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genPlaysound(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -376,6 +432,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /replaceitem command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genReplaceitem(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -413,6 +473,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the slot caracteristics.
+	 * 
+	 * @param slot
+	 *            - <i>String</i> - The slot to generate from. */
 	private static Object[] generateSlot(String slot)
 	{
 
@@ -449,6 +513,10 @@ public class Generator
 		return new Object[] { index, spin, visible };
 	}
 
+	/** Generates the data for the /scoreboard command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genScoreboard(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -474,6 +542,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /setblock command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genSetblock(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -502,6 +574,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /setworldspawn command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genSetworldspawn(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -520,6 +596,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /spawnpoint command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genSpawnpoint(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -539,6 +619,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /spreadplayers command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genSpreadplayers(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -563,6 +647,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /summon command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genSummon(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -581,6 +669,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /tellraw command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genTellraw(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -599,6 +691,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /testforblock command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genTestforblock(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -621,6 +717,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /testforblocks command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genTestforblocks(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -641,6 +741,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /time command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genTime(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -661,6 +765,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /title command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genTitle(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -688,6 +796,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /tp command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genTp(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -714,6 +826,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /weather command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genWeather(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -735,6 +851,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /worldborder command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genWorldborder(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -786,6 +906,10 @@ public class Generator
 		}
 	}
 
+	/** Generates the data for the /xp command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to generate from. */
 	public static Map<String, Object> genXp(String command)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
@@ -814,7 +938,10 @@ public class Generator
 		return null;
 	}
 
-	/** Generates the different elements of the command */
+	/** Generates the different elements of the command
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command which elements should be identified. */
 	private static String[] genElements(String command)
 	{
 		List<String> elements = new ArrayList<String>();
@@ -841,6 +968,12 @@ public class Generator
 		return elements.toArray(new String[0]);
 	}
 
+	/** Generates the data details for /scoreboard.
+	 * 
+	 * @param data
+	 *            - <i>Map:String->Object</i> - The data storage.
+	 * @param elements
+	 *            - <i>String[]</i> -The elements of the command. */
 	private static void genScore(Map<String, Object> data, String[] elements)
 	{
 		String[][] scoreboardModes = { { "objectives", "add", "remove", "setdisplay" },

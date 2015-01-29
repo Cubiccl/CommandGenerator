@@ -19,62 +19,33 @@ public class FileHelper
 	/** Writer used to edit files. */
 	private static PrintWriter writer;
 
-	/** Reads a file's data accroding to an id. */
-	public static String read(String file, String id)
-	{
-
-		String name = id;
-
-		boolean flag = openFile(file);
-
-		if (flag) return name;
-
-		flag = true;
-
-		while (scanner.hasNextLine())
-		{
-			if (scanner.next().equals(id))
-			{
-				name = scanner.nextLine().substring(3);
-				flag = false;
-			} else scanner.nextLine();
-
-		}
-
-		if (flag) DisplayHelper.log("Missing translation : " + file + " / " + id);
-		scanner.close();
-		if (name.equals("null")) return "";
-		name = name.replaceAll("N/L", "\n");
-		return name;
-	}
-
-	/** Opens a file. Returns true if it couldn't. */
+	/** Opens a file. Returns true if it couldn't.
+	 * 
+	 * @param fileName
+	 *            - <i>String</i> - The URL of the file. Starts from the Command Generator resource folder. */
 	private static boolean openFile(String fileName)
 	{
 		try
 		{
-			scanner = new Scanner(new File(folder + "lang/" + fileName + ".txt"));
+			scanner = new Scanner(new File(folder + fileName));
 		} catch (Exception e)
 		{
-			DisplayHelper.log("Missing lang file : lang/" + fileName + ".txt");
+			DisplayHelper.log("Couldn't open file : " + fileName);
 			return true;
 		}
 		return false;
 	}
 
-	/** Returns the option in the settings file. */
+	/** Returns the option in the settings file.
+	 * 
+	 * @param id
+	 *            - <i>String</i> - The ID of the option to look for. */
 	public static String getOption(String id)
 	{
 
 		if (!new File(folder + "options.txt").exists()) createOptions();
 
-		try
-		{
-			scanner = new Scanner(new File(folder + "options.txt"));
-		} catch (Exception e)
-		{
-			DisplayHelper.log("Couldn't open the Options file.");
-		}
+		if (openFile("options.txt")) return null;
 
 		String option = id;
 
@@ -93,8 +64,6 @@ public class FileHelper
 	{
 		try
 		{
-			writer = new PrintWriter(folder + "savedObjects.txt", "UTF-8");
-			writer.close();
 			writer = new PrintWriter(folder + "options.txt", "UTF-8");
 			writer.println("lang = 0");
 			writer.println("version = 5.0");
@@ -106,7 +75,12 @@ public class FileHelper
 		}
 	}
 
-	/** Changes an option in the settings file. */
+	/** Changes an option in the settings file.
+	 * 
+	 * @param id
+	 *            - <i>String</i> - The ID of the option to change.
+	 * @param value
+	 *            - <i>String</i> - The new value of the option. */
 	public static void setOption(String id, String value)
 	{
 
@@ -148,6 +122,10 @@ public class FileHelper
 		}
 	}
 
+	/** Returns an ArrayList containing all lines of the specified file.
+	 * 
+	 * @param file
+	 *            - <i>String</i> - The URL of the file to read. */
 	public static List<String> readFileArray(String file)
 	{
 		boolean missing;
@@ -173,30 +151,19 @@ public class FileHelper
 		return text;
 	}
 
-	/** Reads an entire file. */
-	public static Map<String, String> readHoleFileIDs(String file)
-	{
-		Map<String, String> map = new HashMap<String, String>();
-
-		openFile(file);
-		while (scanner.hasNextLine())
-		{
-			String id = scanner.next();
-			String value = scanner.nextLine().substring(3);
-			map.put(id, value);
-		}
-
-		scanner.close();
-		return map;
-	}
-
-	public static Map<String, Map<String, String>> readLanguageFile(String id, String[] categories)
+	/** Reads a language file.
+	 * 
+	 * @param language
+	 *            - <i>String</i> - The name of the file
+	 * @param categories
+	 *            - <i>String[]</i> - The list of categories this file should contain. */
+	public static Map<String, Map<String, String>> readLanguageFile(String language, String[] categories)
 	{
 		Map<String, Map<String, String>> dict = new HashMap<String, Map<String, String>>();
 		Map<String, String> map = new HashMap<String, String>();
 		int index = 0;
 
-		boolean cancel = openFile(id);
+		boolean cancel = openFile("lang/" + language + ".txt");
 		if (cancel) return dict;
 		scanner.nextLine();
 		while (scanner.hasNextLine() && index < categories.length)
@@ -219,6 +186,7 @@ public class FileHelper
 		return dict;
 	}
 
+	/** Creates and sets up the Command Generator resource folder. */
 	public static void setupFolder()
 	{
 		String directory;
@@ -253,27 +221,6 @@ public class FileHelper
 			} catch (Exception e)
 			{}
 		}
-	}
-
-	public static void addObject(String txt)
-	{
-		try
-		{
-			List<String> prev = new ArrayList<String>();
-			Scanner scanner = new Scanner(new File(Resources.folder + "savedObjects.txt"));
-			while (scanner.hasNextLine())
-				prev.add(scanner.nextLine());
-			scanner.close();
-
-			Writer writer = new PrintWriter(Resources.folder + "savedObjects.txt");
-			for (int i = 0; i < prev.size(); i++)
-			{
-				writer.write(prev.get(i) + "\n");
-			}
-			writer.write(txt + "\n");
-			writer.close();
-		} catch (Exception e)
-		{}
 	}
 
 }
