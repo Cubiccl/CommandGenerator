@@ -1,6 +1,5 @@
 package commandGenerator.gui.options;
 
-import java.awt.Dimension;
 import java.util.Map;
 
 import commandGenerator.gui.helper.components.CEntry;
@@ -22,25 +21,6 @@ public class WeatherOptionsPanel extends OptionsPanel
 	public WeatherOptionsPanel()
 	{
 		super();
-
-		labelWeather = new CLabel("GUI:weather.select");
-
-		entryDuration = new CEntry(CGConstants.DATAID_NONE, "GUI:weather.duration");
-
-		comboboxWeather = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:weather.type", 3);
-		comboboxWeather.setPreferredSize(new Dimension(200, 20));
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(labelWeather);
-		gbc.gridx++;
-		add(comboboxWeather);
-
-		gbc.gridx = 0;
-		gbc.gridy++;
-		gbc.gridwidth = 2;
-		add(entryDuration);
-		gbc.gridwidth = 1;
 	}
 
 	@Override
@@ -72,5 +52,26 @@ public class WeatherOptionsPanel extends OptionsPanel
 		super.setupFrom(data);
 		if (data.get(CGConstants.DATAID_VALUE) != null) entryDuration.setTextField((String) data.get(CGConstants.DATAID_VALUE));
 	}
+
+	@Override
+	protected void createComponents()
+	{
+		labelWeather = new CLabel("GUI:weather.select");
+
+		entryDuration = new CEntry(CGConstants.DATAID_NONE, "GUI:weather.duration");
+
+		comboboxWeather = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:weather.type", 3);
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		addLine(labelWeather, comboboxWeather);
+		add(entryDuration);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 }

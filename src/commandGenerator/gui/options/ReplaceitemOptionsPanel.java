@@ -26,31 +26,6 @@ public class ReplaceitemOptionsPanel extends OptionsPanel
 	public ReplaceitemOptionsPanel()
 	{
 		super();
-
-		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:replaceitem.mode", 2);
-		comboboxMode.setPreferredSize(new Dimension(200, 20));
-		comboboxMode.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				panelBlock.setVisible(comboboxMode.getSelectedIndex() == 0);
-				panelEntity.setVisible(comboboxMode.getSelectedIndex() == 1);
-			}
-		});
-
-		panelBlock = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:block.coords", true, false);
-		panelEntity = new ReplaceitemEntityPanel();
-		panelEntity.setVisible(false);
-		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:replaceitem.item", Registerer.getList(CGConstants.LIST_ITEMS), true, true);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(comboboxMode);
-		gbc.gridy++;
-		add(panelBlock);
-		add(panelEntity);
-		gbc.gridy++;
-		add(panelItem);
 	}
 
 	@Override
@@ -71,6 +46,40 @@ public class ReplaceitemOptionsPanel extends OptionsPanel
 				+ panelItem.getItemTag().commandStructure().substring(panelItem.getItemTag().getId().length() + 1);
 
 		return command;
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:replaceitem.mode", 2);
+		comboboxMode.setPreferredSize(new Dimension(200, 20));
+
+		panelBlock = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:block.coords", true, false);
+		panelEntity = new ReplaceitemEntityPanel();
+		panelEntity.setVisible(false);
+		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:replaceitem.item", Registerer.getList(CGConstants.LIST_ITEMS), true, true);
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(comboboxMode);
+		add(panelBlock);
+		add(panelEntity);
+		add(panelItem);
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		comboboxMode.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				panelBlock.setVisible(comboboxMode.getSelectedIndex() == 0);
+				panelEntity.setVisible(comboboxMode.getSelectedIndex() == 1);
+			}
+		});
 	}
 
 }

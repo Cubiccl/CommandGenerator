@@ -43,56 +43,6 @@ public class ScoreboardOptionsPanel extends OptionsPanel
 	public ScoreboardOptionsPanel()
 	{
 		super();
-
-		buttonHelp = new JButton("?");
-		buttonHelp.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				DisplayHelper.showHelp(
-						Lang.get("HELP:scoreboard." + scoreboardModes[comboboxMode1.getSelectedIndex()][0] + "_" + comboboxMode2.getSelectedIndex()),
-						(String) comboboxMode1.getSelectedItem() + " " + (String) comboboxMode2.getSelectedItem());
-			}
-		});
-
-		comboboxMode1 = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:scoreboard.mode", 3);
-		comboboxMode1.setPreferredSize(new Dimension(200, 20));
-		comboboxMode1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				if (comboboxMode1.getSelectedIndex() == 0) comboboxMode2.setText("RESOURCES:scoreboard.mode.objectives", 3);
-				else if (comboboxMode1.getSelectedIndex() == 1) comboboxMode2.setText("RESOURCES:scoreboard.mode.players", 7);
-				else if (comboboxMode1.getSelectedIndex() == 2) comboboxMode2.setText("RESOURCES:scoreboard.mode.teams", 6);
-
-				setupPanel();
-			}
-		});
-		comboboxMode2 = new LangComboBox(CGConstants.DATAID_MODE2, "RESOURCES:scoreboard.mode.objectives", 3);
-		comboboxMode2.setPreferredSize(new Dimension(200, 20));
-		comboboxMode2.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				setupPanel();
-			}
-		});
-
-		panelScore = new ObjectivesAddPanel();
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(comboboxMode1);
-		gbc.gridx++;
-		add(comboboxMode2);
-		gbc.gridx++;
-		add(buttonHelp);
-
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		gbc.gridwidth = 3;
-		add(panelScore);
-		gbc.gridwidth = 1;
 	}
 
 	@Override
@@ -129,11 +79,63 @@ public class ScoreboardOptionsPanel extends OptionsPanel
 		else if (comboboxMode1.getSelectedIndex() == 2 && comboboxMode2.getSelectedIndex() == 5) panelScore = new TeamsOptionPanel();
 
 		panelScore.setVisible(true);
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		gbc.gridwidth = 3;
-		add(panelScore, gbc);
-		gbc.gridwidth = 1;
+		/* gbc.gridx = 0; gbc.gridy = 1; gbc.gridwidth = 3; add(panelScore, gbc); gbc.gridwidth = 1; */
+		System.out.println("Check this out for scoreboards.");
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		buttonHelp = new JButton("?");
+
+		comboboxMode1 = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:scoreboard.mode", 3);
+		comboboxMode1.setPreferredSize(new Dimension(200, 20));
+		comboboxMode2 = new LangComboBox(CGConstants.DATAID_MODE2, "RESOURCES:scoreboard.mode.objectives", 3);
+		comboboxMode2.setPreferredSize(new Dimension(200, 20));
+
+		panelScore = new ObjectivesAddPanel();
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(comboboxMode1);
+		add(comboboxMode2);
+		add(buttonHelp);
+		add(panelScore);
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		buttonHelp.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				DisplayHelper.showHelp(
+						Lang.get("HELP:scoreboard." + scoreboardModes[comboboxMode1.getSelectedIndex()][0] + "_" + comboboxMode2.getSelectedIndex()),
+						(String) comboboxMode1.getSelectedItem() + " " + (String) comboboxMode2.getSelectedItem());
+			}
+		});
+
+		comboboxMode1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				if (comboboxMode1.getSelectedIndex() == 0) comboboxMode2.setText("RESOURCES:scoreboard.mode.objectives", 3);
+				else if (comboboxMode1.getSelectedIndex() == 1) comboboxMode2.setText("RESOURCES:scoreboard.mode.players", 7);
+				else if (comboboxMode1.getSelectedIndex() == 2) comboboxMode2.setText("RESOURCES:scoreboard.mode.teams", 6);
+
+				setupPanel();
+			}
+		});
+		comboboxMode2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				setupPanel();
+			}
+		});
 	}
 
 }

@@ -16,15 +16,6 @@ public class SpreadOptionsPanel extends OptionsPanel
 	public SpreadOptionsPanel()
 	{
 		super();
-
-		panelSpreadOptions = new SpreadPanel("GENERAL:options");
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(panelSpreadOptions);
-		gbc.gridy++;
-		add(panelPlayer);
 	}
 
 	@Override
@@ -46,5 +37,23 @@ public class SpreadOptionsPanel extends OptionsPanel
 
 		return command;
 	}
+
+	@Override
+	protected void createComponents()
+	{
+		panelSpreadOptions = new SpreadPanel("GENERAL:options");
+		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelSpreadOptions);
+		add(panelPlayer);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 }

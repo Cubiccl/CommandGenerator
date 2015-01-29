@@ -13,9 +13,6 @@ public class KillOptionsPanel extends OptionsPanel
 	public KillOptionsPanel()
 	{
 		super();
-
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
-		add(panelEntity);
 	}
 
 	@Override
@@ -23,5 +20,21 @@ public class KillOptionsPanel extends OptionsPanel
 	{
 		return "kill " + panelEntity.generateEntity().commandStructure();
 	}
+
+	@Override
+	protected void createComponents()
+	{
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelEntity);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 }

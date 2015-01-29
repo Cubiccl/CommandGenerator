@@ -18,15 +18,6 @@ public class BlockdataOptionsPanel extends OptionsPanel
 	public BlockdataOptionsPanel()
 	{
 		super();
-
-		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:blockdata.coords", true, false);
-		panelBlockdata = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:blockdata.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(panelCoord);
-		gbc.gridy++;
-		add(panelBlockdata);
 	}
 
 	@Override
@@ -39,5 +30,23 @@ public class BlockdataOptionsPanel extends OptionsPanel
 
 		return "blockdata " + coord.commandStructure() + " " + tag.commandStructure().substring(tag.getId().length() + 1);
 	}
+
+	@Override
+	protected void createComponents()
+	{
+		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:blockdata.coords", true, false);
+		panelBlockdata = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:blockdata.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelCoord);
+		add(panelBlockdata);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 }

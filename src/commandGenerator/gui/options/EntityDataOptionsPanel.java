@@ -31,34 +31,6 @@ public class EntityDataOptionsPanel extends OptionsPanel implements IBox
 		super();
 		this.command = command;
 
-		label = new JLabel(((Entity) Registerer.getObjectFromId("Item")).getTexture());
-		labelExplain = new CLabel("GUI:entity.explain", true);
-
-		comboboxEntity = new CComboBox(CGConstants.DATAID_ENTITY, "GUI:entity.select", Registerer.getObjectList(CGConstants.OBJECT_ENTITY), this);
-
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
-		panelEntitydata = new NBTTagPanel("GUI:entity.tags", Entity.player, DataTags.entities);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(labelExplain);
-		gbc.gridy++;
-		add(comboboxEntity);
-		gbc.gridy++;
-		add(label);
-
-		gbc.gridx++;
-		gbc.gridy = 0;
-		gbc.gridheight = 3;
-		add(panelEntity);
-		gbc.gridheight = 1;
-
-		gbc.gridx--;
-		gbc.gridy = 3;
-		gbc.gridwidth = 2;
-		add(panelEntitydata);
-		gbc.gridwidth = 1;
-
 		updateCombobox();
 	}
 
@@ -79,5 +51,31 @@ public class EntityDataOptionsPanel extends OptionsPanel implements IBox
 	{
 		panelEntitydata.updateCombobox((Entity) comboboxEntity.getValue());
 	}
+
+	@Override
+	protected void createComponents()
+	{
+		label = new JLabel(((Entity) Registerer.getObjectFromId("Item")).getTexture());
+		labelExplain = new CLabel("GUI:entity.explain", true);
+
+		comboboxEntity = new CComboBox(CGConstants.DATAID_ENTITY, "GUI:entity.select", Registerer.getObjectList(CGConstants.OBJECT_ENTITY), this);
+
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntitydata = new NBTTagPanel("GUI:entity.tags", Entity.player, DataTags.entities);
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(labelExplain);
+		add(comboboxEntity);
+		add(label);
+		add(panelEntity);
+		add(panelEntitydata);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 }

@@ -17,15 +17,6 @@ public class EnchantOptionsPanel extends OptionsPanel
 	public EnchantOptionsPanel()
 	{
 		super();
-
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
-		panelEnchant = new EnchantSelectionPanel(CGConstants.PANELID_ENCHANT, "GENERAL:enchant", true);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(panelPlayer);
-		gbc.gridy++;
-		add(panelEnchant);
 	}
 
 	@Override
@@ -38,5 +29,23 @@ public class EnchantOptionsPanel extends OptionsPanel
 
 		return "enchant " + player.commandStructure() + " " + enchant.getType().getId() + " " + Integer.toString(enchant.getLevel());
 	}
+
+	@Override
+	protected void createComponents()
+	{
+		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelEnchant = new EnchantSelectionPanel(CGConstants.PANELID_ENCHANT, "GENERAL:enchant", true);
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelPlayer);
+		add(panelEnchant);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 }

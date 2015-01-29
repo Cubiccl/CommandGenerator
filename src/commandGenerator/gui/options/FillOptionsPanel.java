@@ -1,6 +1,5 @@
 package commandGenerator.gui.options;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -21,28 +20,6 @@ public class FillOptionsPanel extends OptionsPanel
 	public FillOptionsPanel()
 	{
 		super();
-
-		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE2, "RESOURCES:fill.mode2", 2);
-		comboboxMode.setPreferredSize(new Dimension(200, 20));
-		comboboxMode.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				panelNormal.setVisible(comboboxMode.getSelectedIndex() == 0);
-				panelReplace.setVisible(comboboxMode.getSelectedIndex() == 1);
-			}
-		});
-
-		panelNormal = new FillNormalPanel(600);
-		panelReplace = new FillReplacePanel();
-		panelReplace.setVisible(false);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(comboboxMode);
-		gbc.gridy++;
-		add(panelNormal);
-		add(panelReplace);
 	}
 
 	public void setupFrom(Map<String, Object> data)
@@ -64,6 +41,37 @@ public class FillOptionsPanel extends OptionsPanel
 	{
 		if (comboboxMode.getSelectedIndex() == 0) return panelNormal.generateCommand();
 		else return panelReplace.generateCommand();
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE2, "RESOURCES:fill.mode2", 2);
+
+		panelNormal = new FillNormalPanel(600);
+		panelReplace = new FillReplacePanel();
+		panelReplace.setVisible(false);
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(comboboxMode);
+		add(panelNormal);
+		add(panelReplace);
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		comboboxMode.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				panelNormal.setVisible(comboboxMode.getSelectedIndex() == 0);
+				panelReplace.setVisible(comboboxMode.getSelectedIndex() == 1);
+			}
+		});
 	}
 
 }

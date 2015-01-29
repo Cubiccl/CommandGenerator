@@ -1,7 +1,6 @@
 package commandGenerator.gui.options;
 
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -23,21 +22,27 @@ public class AchievementOptionsPanel extends OptionsPanel
 
 	private static CCheckBox checkbox;
 	private static JComboBox<String> comboboxMode;
-	private static EntitySelectionPanel panelTarget;
 	private static AchievementSelectionPanel panelAchievement;
+	private static EntitySelectionPanel panelTarget;
 
 	public AchievementOptionsPanel()
 	{
-
 		super();
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(comboboxMode);
+		add(checkbox);
+		add(panelTarget);
+		add(panelAchievement);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		checkbox = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:achievement.all");
-		checkbox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				panelAchievement.setEnabledContent(!checkbox.isSelected());
-			}
-		});
 
 		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "GUI:achievement.mode", 2);
 		comboboxMode.setPreferredSize(new Dimension(200, 20));
@@ -45,18 +50,17 @@ public class AchievementOptionsPanel extends OptionsPanel
 		panelTarget = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
 
 		panelAchievement = new AchievementSelectionPanel();
+	}
 
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(comboboxMode);
-		gbc.gridy++;
-		add(checkbox);
-		gbc.gridy++;
-		add(panelTarget);
-		gbc.gridy++;
-		add(panelAchievement);
-
+	@Override
+	protected void createListeners()
+	{
+		checkbox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				panelAchievement.setEnabledContent(!checkbox.isSelected());
+			}
+		});
 	}
 
 	@Override

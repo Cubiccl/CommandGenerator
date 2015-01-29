@@ -23,32 +23,6 @@ public class ClearOptionsPanel extends OptionsPanel
 	public ClearOptionsPanel()
 	{
 		super();
-
-		checkboxInventory = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:clear.inventory");
-		checkboxInventory.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				panelItem.setEnabled(!checkboxInventory.isSelected());
-				panelItem.setEnabledContent(!checkboxInventory.isSelected());
-			}
-		});
-		checkboxMaxCount = new CCheckBox(CGConstants.DATAID_CLEAR_ITEM, "GUI:clear.items");
-
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
-		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:clear.item", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridwidth = 2;
-		add(panelPlayer);
-		gbc.gridy++;
-		add(panelItem);
-		gbc.gridwidth = 1;
-		gbc.gridy++;
-		add(checkboxInventory);
-		gbc.gridx++;
-		add(checkboxMaxCount);
 	}
 
 	@Override
@@ -78,6 +52,38 @@ public class ClearOptionsPanel extends OptionsPanel
 		}
 
 		return command;
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		checkboxInventory = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:clear.inventory");
+
+		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:clear.item", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelPlayer);
+		add(panelItem);
+		add(checkboxInventory);
+		add(checkboxMaxCount);
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		checkboxInventory.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				panelItem.setEnabled(!checkboxInventory.isSelected());
+				panelItem.setEnabledContent(!checkboxInventory.isSelected());
+			}
+		});
+		checkboxMaxCount = new CCheckBox(CGConstants.DATAID_CLEAR_ITEM, "GUI:clear.items");
 	}
 
 }

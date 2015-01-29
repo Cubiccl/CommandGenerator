@@ -21,24 +21,6 @@ public class TimeOptionsPanel extends OptionsPanel
 	public TimeOptionsPanel()
 	{
 		super();
-
-		labelMode = new CLabel("GUI:time.mode");
-
-		entryTime = new CEntry(CGConstants.DATAID_VALUE, "GUI:time.time");
-
-		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:time.mode", 2);
-		comboboxMode.setPreferredSize(new Dimension(200, 20));
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(labelMode);
-		gbc.gridx++;
-		add(comboboxMode);
-		gbc.gridx--;
-		gbc.gridy++;
-		gbc.gridwidth = 2;
-		add(entryTime);
-		gbc.gridwidth = 1;
 	}
 
 	@Override
@@ -62,5 +44,27 @@ public class TimeOptionsPanel extends OptionsPanel
 
 		return "time " + modes[comboboxMode.getSelectedIndex()] + " " + time;
 	}
+
+	@Override
+	protected void createComponents()
+	{
+		labelMode = new CLabel("GUI:time.mode");
+
+		entryTime = new CEntry(CGConstants.DATAID_VALUE, "GUI:time.time");
+
+		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:time.mode", 2);
+		comboboxMode.setPreferredSize(new Dimension(200, 20));
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		addLine(labelMode, comboboxMode);
+		add(entryTime);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 }

@@ -17,15 +17,6 @@ public class TellrawOptionsPanel extends OptionsPanel
 	public TellrawOptionsPanel()
 	{
 		super();
-
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
-		panelJson = new ListSelectionPanel("GUI:json.text", CGConstants.OBJECT_JSON);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(panelPlayer);
-		gbc.gridy++;
-		add(panelJson);
 	}
 
 	@Override
@@ -44,5 +35,23 @@ public class TellrawOptionsPanel extends OptionsPanel
 
 		return "tellraw " + player.commandStructure() + " " + list.commandStructure();
 	}
+
+	@Override
+	protected void createComponents()
+	{
+		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelJson = new ListSelectionPanel("GUI:json.text", CGConstants.OBJECT_JSON);
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelPlayer);
+		add(panelJson);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 }

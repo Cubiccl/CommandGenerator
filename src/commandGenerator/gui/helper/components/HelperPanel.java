@@ -88,6 +88,24 @@ public abstract class HelperPanel extends JPanel implements CComponent
 		return this;
 	}
 
+	/** Adds a line of Components to the Panel.
+	 * 
+	 * @param components
+	 *            - <i>Components...</i> - The Components to add. */
+	public void addLine(Component... components)
+	{
+		JPanel panel = new JPanel(new GridBagLayout());
+		GridBagConstraints gbc2 = new GridBagConstraints();
+		gbc2.gridx = -1;
+		for (Component component : components)
+		{
+			gbc2.gridx++;
+			panel.add(component, gbc2);
+		}
+
+		add(panel);
+	}
+
 	/** Updates the height of this Panel when a component is added.
 	 * 
 	 * @param component

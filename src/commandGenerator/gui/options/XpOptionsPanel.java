@@ -16,15 +16,6 @@ public class XpOptionsPanel extends OptionsPanel
 	public XpOptionsPanel()
 	{
 		super();
-
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
-		panelXp = new XpSelectionPanel("GUI:xp.xp");
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(panelXp);
-		gbc.gridy++;
-		add(panelEntity);
 	}
 
 	@Override
@@ -37,5 +28,23 @@ public class XpOptionsPanel extends OptionsPanel
 
 		return "xp " + xp + " " + player.commandStructure();
 	}
+
+	@Override
+	protected void createComponents()
+	{
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelXp = new XpSelectionPanel("GUI:xp.xp");
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelXp);
+		add(panelEntity);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 }

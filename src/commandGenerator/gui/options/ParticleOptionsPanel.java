@@ -26,40 +26,6 @@ public class ParticleOptionsPanel extends OptionsPanel
 	public ParticleOptionsPanel()
 	{
 		super();
-
-		checkBoxEntity = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:particle.target");
-		checkBoxEntity.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				panelEntity.setEnabled(checkBoxEntity.isSelected());
-				panelEntity.setEnabledContent(checkBoxEntity.isSelected());
-			}
-		});
-
-		panelParticle = new ParticleSelectionPanel("GUI:particle");
-		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:particle.start", true, false);
-		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:particle.end", true, false);
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
-		panelEntity.setEnabled(false);
-		panelEntity.setEnabledContent(false);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridwidth = 2;
-		add(panelParticle);
-		gbc.gridwidth = 1;
-		gbc.gridy++;
-		add(panelCoord1);
-		gbc.gridx++;
-		add(panelCoord2);
-		gbc.gridx--;
-		gbc.gridy++;
-		gbc.gridwidth = 2;
-		add(checkBoxEntity);
-		gbc.gridy++;
-		add(panelEntity);
-		gbc.gridwidth = 1;
 	}
 
 	@Override
@@ -101,6 +67,42 @@ public class ParticleOptionsPanel extends OptionsPanel
 	{
 		super.setupFrom(data);
 		panelEntity.setEnabledContent((boolean) data.get(CGConstants.DATAID_CHECK));
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		checkBoxEntity = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:particle.target");
+
+		panelParticle = new ParticleSelectionPanel("GUI:particle");
+		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:particle.start", true, false);
+		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:particle.end", true, false);
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntity.setEnabled(false);
+		panelEntity.setEnabledContent(false);
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelParticle);
+		add(panelCoord1);
+		add(panelCoord2);
+		add(checkBoxEntity);
+		add(panelEntity);
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		checkBoxEntity.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				panelEntity.setEnabled(checkBoxEntity.isSelected());
+				panelEntity.setEnabledContent(checkBoxEntity.isSelected());
+			}
+		});
 	}
 
 }

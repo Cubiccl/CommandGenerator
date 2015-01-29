@@ -1,6 +1,5 @@
 package commandGenerator.gui.options;
 
-import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -28,56 +27,6 @@ public class TpOptionsPanel extends OptionsPanel
 	public TpOptionsPanel()
 	{
 		super();
-
-		panelTarget = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
-		panelDestinationEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET2, "GUI:tp.destination.entity", CGConstants.ENTITIES_ALL);
-		panelDestinationEntity.setEnabled(false);
-		panelDestinationEntity.setEnabledContent(false);
-		panelDestinationCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:tp.destination.coords", true, true);
-
-		radiobuttonCoords = new JRadioButton(Lang.get("GUI:tp.coords"));
-		radiobuttonCoords.setSelected(true);
-		radiobuttonCoords.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				panelDestinationCoords.setEnabled(true);
-				panelDestinationCoords.setEnabledContent(true);
-				panelDestinationEntity.setEnabled(false);
-				panelDestinationEntity.setEnabledContent(false);
-			}
-		});
-		radiobuttonEntity = new JRadioButton(Lang.get("GUI:tp.entity"));
-		radiobuttonEntity.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				panelDestinationCoords.setEnabled(false);
-				panelDestinationCoords.setEnabledContent(false);
-				panelDestinationEntity.setEnabled(true);
-				panelDestinationEntity.setEnabledContent(true);
-			}
-		});
-		radiobuttonGroup = new ButtonGroup();
-		radiobuttonGroup.add(radiobuttonCoords);
-		radiobuttonGroup.add(radiobuttonEntity);
-
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridwidth = 2;
-		add(panelTarget);
-		gbc.gridy++;
-		gbc.gridwidth = 1;
-		add(radiobuttonCoords);
-		gbc.gridx++;
-		add(radiobuttonEntity);
-		gbc.gridx--;
-		gbc.gridy++;
-		add(panelDestinationCoords);
-		gbc.gridx++;
-		add(panelDestinationEntity);
-
 	}
 
 	@Override
@@ -130,6 +79,57 @@ public class TpOptionsPanel extends OptionsPanel
 		radiobuttonEntity.setSelected((boolean) data.get(CGConstants.DATAID_ENTITY));
 		panelDestinationCoords.setEnabledContent(!(boolean) data.get(CGConstants.DATAID_ENTITY));
 		panelDestinationEntity.setEnabledContent((boolean) data.get(CGConstants.DATAID_ENTITY));
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		panelTarget = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelDestinationEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET2, "GUI:tp.destination.entity", CGConstants.ENTITIES_ALL);
+		panelDestinationEntity.setEnabled(false);
+		panelDestinationEntity.setEnabledContent(false);
+		panelDestinationCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:tp.destination.coords", true, true);
+
+		radiobuttonCoords = new JRadioButton(Lang.get("GUI:tp.coords"));
+		radiobuttonCoords.setSelected(true);
+		radiobuttonEntity = new JRadioButton(Lang.get("GUI:tp.entity"));
+		radiobuttonGroup = new ButtonGroup();
+		radiobuttonGroup.add(radiobuttonCoords);
+		radiobuttonGroup.add(radiobuttonEntity);
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelTarget);
+		addLine(radiobuttonCoords, radiobuttonEntity);
+		add(panelDestinationCoords);
+		add(panelDestinationEntity);
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		radiobuttonEntity.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				panelDestinationCoords.setEnabled(false);
+				panelDestinationCoords.setEnabledContent(false);
+				panelDestinationEntity.setEnabled(true);
+				panelDestinationEntity.setEnabledContent(true);
+			}
+		});
+		radiobuttonCoords.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				panelDestinationCoords.setEnabled(true);
+				panelDestinationCoords.setEnabledContent(true);
+				panelDestinationEntity.setEnabled(false);
+				panelDestinationEntity.setEnabledContent(false);
+			}
+		});
 	}
 
 }

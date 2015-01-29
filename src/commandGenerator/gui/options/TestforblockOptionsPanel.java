@@ -19,15 +19,6 @@ public class TestforblockOptionsPanel extends OptionsPanel
 	public TestforblockOptionsPanel()
 	{
 		super();
-
-		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:block.coords", true, false);
-		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:testforblocks.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(panelCoord);
-		gbc.gridy++;
-		add(panelBlock);
 	}
 
 	@Override
@@ -48,5 +39,23 @@ public class TestforblockOptionsPanel extends OptionsPanel
 
 		return command;
 	}
+
+	@Override
+	protected void createComponents()
+	{
+		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:block.coords", true, false);
+		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:testforblocks.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelCoord);
+		add(panelBlock);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 }

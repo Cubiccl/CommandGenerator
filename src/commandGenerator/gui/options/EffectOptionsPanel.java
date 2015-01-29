@@ -17,15 +17,6 @@ public class EffectOptionsPanel extends OptionsPanel
 	public EffectOptionsPanel()
 	{
 		super();
-
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
-		panelEffect = new EffectSelectionPanel(CGConstants.PANELID_EFFECT, "GENERAL:effect");
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(panelEntity);
-		gbc.gridy++;
-		add(panelEffect);
 	}
 
 	@Override
@@ -38,5 +29,23 @@ public class EffectOptionsPanel extends OptionsPanel
 
 		return "effect " + entity.commandStructure() + " " + effect.commandStructure();
 	}
+
+	@Override
+	protected void createComponents()
+	{
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEffect = new EffectSelectionPanel(CGConstants.PANELID_EFFECT, "GENERAL:effect");
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelEntity);
+		add(panelEffect);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 }

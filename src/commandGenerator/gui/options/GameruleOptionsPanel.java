@@ -1,7 +1,6 @@
 package commandGenerator.gui.options;
 
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -31,49 +30,6 @@ public class GameruleOptionsPanel extends OptionsPanel
 	public GameruleOptionsPanel()
 	{
 		super();
-
-		labelGamerule = new CLabel("GUI:gamerule.choose");
-
-		textfieldTickSpeed = new JTextField();
-		textfieldTickSpeed.setEnabled(false);
-
-		buttonHelp = new JButton("?");
-		buttonHelp.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				DisplayHelper.showHelp(Lang.get("HELP:gamerule." + (String) comboboxGamerule.getSelectedItem()), (String) comboboxGamerule.getSelectedItem());
-			}
-		});
-
-		comboboxGamerule = new JComboBox<String>(gamerules);
-		comboboxGamerule.setPreferredSize(new Dimension(200, 20));
-		comboboxGamerule.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				comboboxTrueFalse.setEnabled(!comboboxGamerule.getSelectedItem().equals("randomTickSpeed"));
-				textfieldTickSpeed.setEnabled(comboboxGamerule.getSelectedItem().equals("randomTickSpeed"));
-			}
-		});
-		comboboxTrueFalse = new JComboBox<String>(new String[] { Lang.get("GENERAL:true"), Lang.get("GENERAL:false") });
-		comboboxTrueFalse.setPreferredSize(new Dimension(200, 20));
-
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(labelGamerule);
-		gbc.gridx++;
-		add(comboboxGamerule);
-		gbc.gridx--;
-		gbc.gridy++;
-		add(comboboxTrueFalse);
-		gbc.gridx++;
-		add(textfieldTickSpeed);
-		gbc.gridx++;
-		gbc.gridy--;
-		add(buttonHelp);
-
 	}
 
 	@Override
@@ -115,6 +71,52 @@ public class GameruleOptionsPanel extends OptionsPanel
 		else if (data.get(CGConstants.DATAID_VALUE).equals("true")) comboboxTrueFalse.setSelectedIndex(0);
 		else comboboxTrueFalse.setSelectedIndex(1);
 
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		labelGamerule = new CLabel("GUI:gamerule.choose");
+
+		textfieldTickSpeed = new JTextField();
+		textfieldTickSpeed.setEnabled(false);
+
+		buttonHelp = new JButton("?");
+
+		comboboxGamerule = new JComboBox<String>(gamerules);
+		comboboxGamerule.setPreferredSize(new Dimension(200, 20));
+		comboboxTrueFalse = new JComboBox<String>(new String[] { Lang.get("GENERAL:true"), Lang.get("GENERAL:false") });
+		comboboxTrueFalse.setPreferredSize(new Dimension(200, 20));
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(labelGamerule);
+		add(comboboxGamerule);
+		add(comboboxTrueFalse);
+		add(textfieldTickSpeed);
+		add(buttonHelp);
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		comboboxGamerule.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				comboboxTrueFalse.setEnabled(!comboboxGamerule.getSelectedItem().equals("randomTickSpeed"));
+				textfieldTickSpeed.setEnabled(comboboxGamerule.getSelectedItem().equals("randomTickSpeed"));
+			}
+		});
+		buttonHelp.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				DisplayHelper.showHelp(Lang.get("HELP:gamerule." + (String) comboboxGamerule.getSelectedItem()), (String) comboboxGamerule.getSelectedItem());
+			}
+		});
 	}
 
 }

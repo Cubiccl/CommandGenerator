@@ -18,15 +18,6 @@ public class GiveOptionsPanel extends OptionsPanel
 	public GiveOptionsPanel()
 	{
 		super();
-
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
-		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:give.item", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(panelPlayer);
-		gbc.gridy++;
-		add(panelItem);
 	}
 
 	@Override
@@ -43,5 +34,23 @@ public class GiveOptionsPanel extends OptionsPanel
 				+ panelItem.getItemTag().commandStructure().substring(panelItem.getItemTag().getId().length() + 1);
 		return text;
 	}
+
+	@Override
+	protected void createComponents()
+	{
+		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:give.item", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelPlayer);
+		add(panelItem);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 }

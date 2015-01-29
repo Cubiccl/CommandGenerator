@@ -28,43 +28,6 @@ public class TestforblocksOptionsPanel extends OptionsPanel
 	public TestforblocksOptionsPanel()
 	{
 		super();
-
-		labelMode = new CLabel("GUI:testforblocks.mode");
-
-		buttonHelp = new JButton("?");
-		buttonHelp.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				DisplayHelper.showHelp(Lang.get("HELP:testforblocks_" + comboboxMode.getSelectedIndex()), (String) comboboxMode.getSelectedItem());
-			}
-		});
-
-		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:testforblocks.mode", 2);
-		comboboxMode.setPreferredSize(new Dimension(200, 20));
-
-		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:testforblocks.start", true, false);
-		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:testforblocks.end", true, false);
-		panelCoordDest = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:testforblocks.destination", true, false);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(panelCoord1);
-		gbc.gridx++;
-		gbc.gridwidth = 3;
-		add(panelCoord2);
-
-		gbc.gridx--;
-		gbc.gridy++;
-		gbc.gridwidth = 1;
-		add(panelCoordDest);
-
-		gbc.gridx++;
-		add(labelMode);
-		gbc.gridx++;
-		add(comboboxMode);
-		gbc.gridx++;
-		add(buttonHelp);
 	}
 
 	@Override
@@ -77,7 +40,45 @@ public class TestforblocksOptionsPanel extends OptionsPanel
 
 		if (coord1 == null || coord2 == null || coordDestination == null) return null;
 
-		return "clone " + coord1.commandStructure() + " " + coord2.commandStructure() + " " + coordDestination.commandStructure() + " " + modes[comboboxMode.getSelectedIndex()];
+		return "clone " + coord1.commandStructure() + " " + coord2.commandStructure() + " " + coordDestination.commandStructure() + " "
+				+ modes[comboboxMode.getSelectedIndex()];
+	}
+
+	@Override
+	protected void createComponents()
+	{
+
+		labelMode = new CLabel("GUI:testforblocks.mode");
+
+		buttonHelp = new JButton("?");
+
+		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:testforblocks.mode", 2);
+		comboboxMode.setPreferredSize(new Dimension(200, 20));
+
+		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:testforblocks.start", true, false);
+		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:testforblocks.end", true, false);
+		panelCoordDest = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:testforblocks.destination", true, false);
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelCoord1);
+		add(panelCoord2);
+		add(panelCoordDest);
+		addLine(labelMode, comboboxMode, buttonHelp);
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		buttonHelp.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				DisplayHelper.showHelp(Lang.get("HELP:testforblocks_" + comboboxMode.getSelectedIndex()), (String) comboboxMode.getSelectedItem());
+			}
+		});
 	}
 
 }

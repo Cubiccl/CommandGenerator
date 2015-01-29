@@ -9,6 +9,7 @@ import commandGenerator.main.CGConstants;
 public abstract class OptionsPanel extends HelperPanel implements CComponent
 {
 
+	/** The default width for an Option Panel. */
 	private static final int WIDTH = 950;
 
 	/** Creates a new Options Panel. */
@@ -18,6 +19,7 @@ public abstract class OptionsPanel extends HelperPanel implements CComponent
 		setPreferredSize(new Dimension(WIDTH, getPreferredSize().height));
 	}
 
+	/** Generates the command corresponding to the arguments selected by the user. */
 	public abstract String generateCommand();
 
 	@Override

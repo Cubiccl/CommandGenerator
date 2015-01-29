@@ -1,6 +1,5 @@
 package commandGenerator.gui.options;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -29,65 +28,6 @@ public class CloneOptionsPanel extends OptionsPanel
 	public CloneOptionsPanel()
 	{
 		super();
-
-		labelMode1 = new CLabel("GUI:clone.mode1");
-		labelMode2 = new CLabel("GUI:clone.mode2");
-
-		buttonHelp1 = new JButton("?");
-		buttonHelp1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				DisplayHelper.showHelp(Lang.get("HELP:setblock.mode_" + comboboxMode1.getSelectedIndex()), (String) comboboxMode1.getSelectedItem());
-			}
-		});
-		buttonHelp2 = new JButton("?");
-		buttonHelp2.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				DisplayHelper.showHelp(Lang.get("HELP:clone.mode_" + comboboxMode2.getSelectedIndex()), (String) comboboxMode2.getSelectedItem());
-			}
-		});
-
-		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:clone.start", true, false);
-		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:clone.end", true, false);
-		panelDestination = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:clone.destination", true, false);
-
-		comboboxMode1 = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:setblock.mode", 3);
-		comboboxMode1.setPreferredSize(new Dimension(200, 20));
-		comboboxMode2 = new LangComboBox(CGConstants.DATAID_MODE2, "RESOURCES:clone.mode", 3);
-		comboboxMode2.setPreferredSize(new Dimension(200, 20));
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(panelCoord1);
-		gbc.gridx++;
-		gbc.gridwidth = 3;
-		add(panelCoord2);
-
-		gbc.gridx--;
-		gbc.gridy++;
-		gbc.gridheight = 2;
-		gbc.gridwidth = 1;
-		add(panelDestination);
-
-		gbc.gridx++;
-		gbc.gridheight = 1;
-		add(labelMode1);
-		gbc.gridx++;
-		add(comboboxMode1);
-		gbc.gridx++;
-		add(buttonHelp1);
-
-		gbc.gridx--;
-		gbc.gridx--;
-		gbc.gridy++;
-		add(labelMode2);
-		gbc.gridx++;
-		add(comboboxMode2);
-		gbc.gridx++;
-		add(buttonHelp2);
 	}
 
 	@Override
@@ -102,6 +42,52 @@ public class CloneOptionsPanel extends OptionsPanel
 
 		return "clone " + coord1.commandStructure() + " " + coord2.commandStructure() + " " + coordDestination.commandStructure() + " "
 				+ modes1[comboboxMode1.getSelectedIndex()] + " " + modes2[comboboxMode2.getSelectedIndex()];
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		labelMode1 = new CLabel("GUI:clone.mode1");
+		labelMode2 = new CLabel("GUI:clone.mode2");
+
+		buttonHelp1 = new JButton("?");
+		buttonHelp2 = new JButton("?");
+
+		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:clone.start", true, false);
+		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:clone.end", true, false);
+		panelDestination = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:clone.destination", true, false);
+
+		comboboxMode1 = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:setblock.mode", 3);
+		comboboxMode2 = new LangComboBox(CGConstants.DATAID_MODE2, "RESOURCES:clone.mode", 3);
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelCoord1);
+		add(panelCoord2);
+		add(panelDestination);
+		addLine(labelMode1, comboboxMode1, buttonHelp1);
+		addLine(labelMode2, comboboxMode2, buttonHelp2);
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		buttonHelp1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				DisplayHelper.showHelp(Lang.get("HELP:setblock.mode_" + comboboxMode1.getSelectedIndex()), (String) comboboxMode1.getSelectedItem());
+			}
+		});
+		buttonHelp2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				DisplayHelper.showHelp(Lang.get("HELP:clone.mode_" + comboboxMode2.getSelectedIndex()), (String) comboboxMode2.getSelectedItem());
+			}
+		});
 	}
 
 }

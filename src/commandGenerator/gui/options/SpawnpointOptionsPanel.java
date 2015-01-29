@@ -17,15 +17,6 @@ public class SpawnpointOptionsPanel extends OptionsPanel
 	public SpawnpointOptionsPanel()
 	{
 		super();
-
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_ALL);
-		panelCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:spawnpoint.coords", false, false);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(panelEntity);
-		gbc.gridy++;
-		add(panelCoords);
 	}
 
 	@Override
@@ -39,5 +30,23 @@ public class SpawnpointOptionsPanel extends OptionsPanel
 
 		return "spawnpoint " + player.commandStructure() + " " + coords.commandStructure();
 	}
+
+	@Override
+	protected void createComponents()
+	{
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_ALL);
+		panelCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:spawnpoint.coords", false, false);
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelEntity);
+		add(panelCoords);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 }
