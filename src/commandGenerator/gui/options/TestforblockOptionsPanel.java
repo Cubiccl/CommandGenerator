@@ -4,9 +4,9 @@ import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.tags.TagCompound;
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
@@ -25,9 +25,9 @@ public class TestforblockOptionsPanel extends OptionsPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(panelCoord, gbc);
+		add(panelCoord);
 		gbc.gridy++;
-		add(panelBlock, gbc);
+		add(panelBlock);
 	}
 
 	@Override

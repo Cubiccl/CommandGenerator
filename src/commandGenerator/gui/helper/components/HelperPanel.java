@@ -18,10 +18,13 @@ import commandGenerator.main.Lang;
 public abstract class HelperPanel extends JPanel implements CComponent
 {
 
+	/** The data ID of this Panel. */
 	private String id;
+	/** The language ID of this Panel's title. */
 	protected String title;
-	protected boolean gray;
-	public GridBagConstraints gbc = new GridBagConstraints();
+	/** Object to place the elements in the panel. */
+	private GridBagConstraints gbc = new GridBagConstraints();
+	/** List containing all of this Panel's elements. */
 	private List<CComponent> components;
 
 	/** A basic JPanel.
@@ -34,39 +37,70 @@ public abstract class HelperPanel extends JPanel implements CComponent
 	 *            - The panel width.
 	 * @param height
 	 *            - The panel height. */
-	public HelperPanel(String id, String title, int width, int height)
+	public HelperPanel(String id, String title)
 	{
 		super(new GridBagLayout());
 		this.id = id;
 		this.title = title;
-		this.gray = false;
 		setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Lang.get(title)));
-		setPreferredSize(new Dimension(width, height));
+		setPreferredSize(new Dimension(2, 2));
 		components = new ArrayList<CComponent>();
+
+		createComponents();
+		addComponents();
+		createListeners();
 
 	}
 
+	/** Creates all of this Panel's components. */
+	protected abstract void createComponents();
+
+	/** Adds all components to this Panel. */
+	protected abstract void addComponents();
+
+	/** Creates all of this Panel's components' Listeners. */
+	protected abstract void createListeners();
+
+	/** Updates the title when changing language. */
 	protected void updateTitle()
 	{
 		setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Lang.get(title)));
 	}
 
-	public void setTitle(String title)
-	{
-		this.title = title;
-		updateTitle();
-	}
-
+	/** Gets this Panel's data ID. */
 	public String getPanelId()
 	{
 		return id;
 	}
 
-	/** Adds a component to the panel */
-	public void add(Component component, GridBagConstraints gbc)
+	/** Adds a component to the Panel.
+	 * 
+	 * @param component
+	 *            - <i>Component</i> - The component to add. */
+	public Component add(Component component)
 	{
-		super.add(component, gbc);
+		super.add(component);
+
+		gbc.gridy++;
 		if (component instanceof CComponent) components.add((CComponent) component);
+		updateSize(component);
+
+		return this;
+	}
+
+	/** Updates the height of this Panel when a component is added.
+	 * 
+	 * @param component
+	 *            - <i>Component</i> - The new component. */
+	protected void updateSize(Component component)
+	{
+		int width = getPreferredSize().width;
+		int height = getPreferredSize().height;
+
+		if (component.getPreferredSize().width > width) width = component.getPreferredSize().width + 2;
+		height += component.getPreferredSize().height;
+
+		setPreferredSize(new Dimension(width, height));
 	}
 
 	public void updateLang()

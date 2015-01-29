@@ -7,12 +7,12 @@ import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.dataTag.NBTTagPanel;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.IBox;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
@@ -41,22 +41,22 @@ public class EntityDataOptionsPanel extends OptionsPanel implements IBox
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(labelExplain, gbc);
+		add(labelExplain);
 		gbc.gridy++;
-		add(comboboxEntity, gbc);
+		add(comboboxEntity);
 		gbc.gridy++;
-		add(label, gbc);
+		add(label);
 
 		gbc.gridx++;
 		gbc.gridy = 0;
 		gbc.gridheight = 3;
-		add(panelEntity, gbc);
+		add(panelEntity);
 		gbc.gridheight = 1;
 
 		gbc.gridx--;
 		gbc.gridy = 3;
 		gbc.gridwidth = 2;
-		add(panelEntitydata, gbc);
+		add(panelEntitydata);
 		gbc.gridwidth = 1;
 
 		updateCombobox();

@@ -35,6 +35,8 @@ public class InitObjects
 		initTags(convertedData.get("ENTITYTAGS"), 2);
 		initTags(convertedData.get("GENERATEDTAGS"), 3);
 
+		Registerer.setupEntityList();
+
 	}
 
 	private static void initTags(String[] tags, int type)
@@ -104,8 +106,6 @@ public class InitObjects
 		entities = entities[0].split(",");
 		for (String id : entities)
 			new Entity(id);
-
-		Registerer.setupEntityList();
 	}
 
 	private static void initEffects(String[] effects)

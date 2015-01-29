@@ -7,12 +7,12 @@ import java.util.Map;
 
 import javax.swing.JButton;
 
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.commandSpecific.worldborder.AddBorderPanel;
 import commandGenerator.gui.helper.commandSpecific.worldborder.CenterBorderPanel;
 import commandGenerator.gui.helper.commandSpecific.worldborder.DamageBorderPanel;
 import commandGenerator.gui.helper.commandSpecific.worldborder.WarningBorderPanel;
 import commandGenerator.gui.helper.components.LangComboBox;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
@@ -75,11 +75,11 @@ public class WorldborderOptionsPanel extends OptionsPanel
 		gbc.gridx--;
 		gbc.gridy++;
 		gbc.gridwidth = 2;
-		add(panelAdd, gbc);
-		add(panelCenter, gbc);
-		add(panelDamage, gbc);
-		add(panelSet, gbc);
-		add(panelWarning, gbc);
+		add(panelAdd);
+		add(panelCenter);
+		add(panelDamage);
+		add(panelSet);
+		add(panelWarning);
 	}
 
 	@Override

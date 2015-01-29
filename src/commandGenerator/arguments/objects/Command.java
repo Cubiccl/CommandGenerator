@@ -3,7 +3,7 @@ package commandGenerator.arguments.objects;
 import java.util.HashMap;
 import java.util.Map;
 
-import commandGenerator.gui.OptionsPanel;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.gui.options.AchievementOptionsPanel;
 import commandGenerator.gui.options.BlockdataOptionsPanel;
 import commandGenerator.gui.options.ClearOptionsPanel;

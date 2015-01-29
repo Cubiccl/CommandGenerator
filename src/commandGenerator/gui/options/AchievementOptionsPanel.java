@@ -10,11 +10,11 @@ import javax.swing.JComboBox;
 
 import commandGenerator.arguments.objects.Achievement;
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.AchievementSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.LangComboBox;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
@@ -49,13 +49,13 @@ public class AchievementOptionsPanel extends OptionsPanel
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(comboboxMode, gbc);
+		add(comboboxMode);
 		gbc.gridy++;
-		add(checkbox, gbc);
+		add(checkbox);
 		gbc.gridy++;
-		add(panelTarget, gbc);
+		add(panelTarget);
 		gbc.gridy++;
-		add(panelAchievement, gbc);
+		add(panelAchievement);
 
 	}
 

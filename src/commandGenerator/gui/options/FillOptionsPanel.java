@@ -5,10 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.commandSpecific.fill.FillNormalPanel;
 import commandGenerator.gui.helper.commandSpecific.fill.FillReplacePanel;
 import commandGenerator.gui.helper.components.LangComboBox;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
@@ -20,7 +20,7 @@ public class FillOptionsPanel extends OptionsPanel
 
 	public FillOptionsPanel()
 	{
-		super(1000);
+		super();
 
 		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE2, "RESOURCES:fill.mode2", 2);
 		comboboxMode.setPreferredSize(new Dimension(200, 20));
@@ -39,10 +39,10 @@ public class FillOptionsPanel extends OptionsPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(comboboxMode, gbc);
+		add(comboboxMode);
 		gbc.gridy++;
-		add(panelNormal, gbc);
-		add(panelReplace, gbc);
+		add(panelNormal);
+		add(panelReplace);
 	}
 
 	public void setupFrom(Map<String, Object> data)

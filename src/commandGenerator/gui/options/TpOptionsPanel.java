@@ -10,9 +10,9 @@ import javax.swing.JRadioButton;
 
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 
@@ -66,17 +66,17 @@ public class TpOptionsPanel extends OptionsPanel
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 2;
-		add(panelTarget, gbc);
+		add(panelTarget);
 		gbc.gridy++;
 		gbc.gridwidth = 1;
-		add(radiobuttonCoords, gbc);
+		add(radiobuttonCoords);
 		gbc.gridx++;
-		add(radiobuttonEntity, gbc);
+		add(radiobuttonEntity);
 		gbc.gridx--;
 		gbc.gridy++;
-		add(panelDestinationCoords, gbc);
+		add(panelDestinationCoords);
 		gbc.gridx++;
-		add(panelDestinationEntity, gbc);
+		add(panelDestinationEntity);
 
 	}
 

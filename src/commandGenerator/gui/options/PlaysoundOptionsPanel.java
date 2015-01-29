@@ -8,11 +8,11 @@ import java.util.Map;
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Sound;
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.SoundSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
@@ -47,14 +47,14 @@ public class PlaysoundOptionsPanel extends OptionsPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(panelPlayer, gbc);
+		add(panelPlayer);
 		gbc.gridy++;
-		add(panelSound, gbc);
+		add(panelSound);
 		gbc.gridy--;
 		gbc.gridx++;
-		add(panelCoords, gbc);
+		add(panelCoords);
 		gbc.gridy++;
-		add(checkboxCoords, gbc);
+		add(checkboxCoords);
 	}
 
 	@Override

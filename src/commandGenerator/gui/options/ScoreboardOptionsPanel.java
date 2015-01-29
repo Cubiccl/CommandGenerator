@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.commandSpecific.scoreboard.ObjectivesAddPanel;
 import commandGenerator.gui.helper.commandSpecific.scoreboard.ObjectivesRemovePanel;
 import commandGenerator.gui.helper.commandSpecific.scoreboard.ObjectivesSetdisplayPanel;
@@ -25,6 +24,7 @@ import commandGenerator.gui.helper.commandSpecific.scoreboard.TeamsLeavePanel;
 import commandGenerator.gui.helper.commandSpecific.scoreboard.TeamsOptionPanel;
 import commandGenerator.gui.helper.commandSpecific.scoreboard.TeamsRemovePanel;
 import commandGenerator.gui.helper.components.LangComboBox;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
@@ -82,16 +82,16 @@ public class ScoreboardOptionsPanel extends OptionsPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(comboboxMode1, gbc);
+		add(comboboxMode1);
 		gbc.gridx++;
-		add(comboboxMode2, gbc);
+		add(comboboxMode2);
 		gbc.gridx++;
-		add(buttonHelp, gbc);
+		add(buttonHelp);
 
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.gridwidth = 3;
-		add(panelScore, gbc);
+		add(panelScore);
 		gbc.gridwidth = 1;
 	}
 

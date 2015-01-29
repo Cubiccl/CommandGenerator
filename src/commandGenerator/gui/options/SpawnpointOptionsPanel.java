@@ -2,9 +2,9 @@ package commandGenerator.gui.options;
 
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
@@ -23,9 +23,9 @@ public class SpawnpointOptionsPanel extends OptionsPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(panelEntity, gbc);
+		add(panelEntity);
 		gbc.gridy++;
-		add(panelCoords, gbc);
+		add(panelCoords);
 	}
 
 	@Override

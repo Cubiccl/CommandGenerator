@@ -7,11 +7,11 @@ import java.util.Map;
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Particle;
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ParticleSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
@@ -25,7 +25,7 @@ public class ParticleOptionsPanel extends OptionsPanel
 
 	public ParticleOptionsPanel()
 	{
-		super(900);
+		super();
 
 		checkBoxEntity = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:particle.target");
 		checkBoxEntity.addActionListener(new ActionListener() {
@@ -47,18 +47,18 @@ public class ParticleOptionsPanel extends OptionsPanel
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 2;
-		add(panelParticle, gbc);
+		add(panelParticle);
 		gbc.gridwidth = 1;
 		gbc.gridy++;
-		add(panelCoord1, gbc);
+		add(panelCoord1);
 		gbc.gridx++;
-		add(panelCoord2, gbc);
+		add(panelCoord2);
 		gbc.gridx--;
 		gbc.gridy++;
 		gbc.gridwidth = 2;
-		add(checkBoxEntity, gbc);
+		add(checkBoxEntity);
 		gbc.gridy++;
-		add(panelEntity, gbc);
+		add(panelEntity);
 		gbc.gridwidth = 1;
 	}
 

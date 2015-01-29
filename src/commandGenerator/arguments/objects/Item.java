@@ -76,11 +76,8 @@ public class Item extends ObjectBase
 	/** Returns this Item's name. */
 	public String getName(int damage)
 	{
-		String category;
-		if (isBlock) category = "BLOCKS:";
-		else category = "ITEMS:";
-		if (getMaxDamage() == 0) return Lang.get(category + getId());
-		return Lang.get(category + getId() + "_" + damage);
+		if (getMaxDamage() == 0) return Lang.get("ITEMS:" + getId());
+		return Lang.get("ITEMS:" + getId() + "_" + damage);
 	}
 
 	/** Returns this Item's texture. */

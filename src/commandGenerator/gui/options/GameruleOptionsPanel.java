@@ -10,8 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.components.CLabel;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
@@ -62,17 +62,17 @@ public class GameruleOptionsPanel extends OptionsPanel
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(labelGamerule, gbc);
+		add(labelGamerule);
 		gbc.gridx++;
-		add(comboboxGamerule, gbc);
+		add(comboboxGamerule);
 		gbc.gridx--;
 		gbc.gridy++;
-		add(comboboxTrueFalse, gbc);
+		add(comboboxTrueFalse);
 		gbc.gridx++;
-		add(textfieldTickSpeed, gbc);
+		add(textfieldTickSpeed);
 		gbc.gridx++;
 		gbc.gridy--;
-		add(buttonHelp, gbc);
+		add(buttonHelp);
 
 	}
 

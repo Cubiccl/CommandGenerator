@@ -1,9 +1,9 @@
 package commandGenerator.gui.options;
 
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.commandSpecific.SpreadPanel;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
@@ -22,9 +22,9 @@ public class SpreadOptionsPanel extends OptionsPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(panelSpreadOptions, gbc);
+		add(panelSpreadOptions);
 		gbc.gridy++;
-		add(panelPlayer, gbc);
+		add(panelPlayer);
 	}
 
 	@Override

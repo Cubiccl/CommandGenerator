@@ -29,7 +29,7 @@ public abstract class ObjectBase
 	{
 		this.id = id;
 		this.type = type;
-		Registerer.registerObject(type, this);
+		if (type != CGConstants.OBJECT_TAG) Registerer.registerObject(type, this);
 	}
 
 	/** Returns the Object's ID. */

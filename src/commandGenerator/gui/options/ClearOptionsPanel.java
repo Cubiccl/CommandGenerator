@@ -6,10 +6,10 @@ import java.awt.event.ActionListener;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
@@ -41,14 +41,14 @@ public class ClearOptionsPanel extends OptionsPanel
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 2;
-		add(panelPlayer, gbc);
+		add(panelPlayer);
 		gbc.gridy++;
-		add(panelItem, gbc);
+		add(panelItem);
 		gbc.gridwidth = 1;
 		gbc.gridy++;
-		add(checkboxInventory, gbc);
+		add(checkboxInventory);
 		gbc.gridx++;
-		add(checkboxMaxCount, gbc);
+		add(checkboxMaxCount);
 	}
 
 	@Override

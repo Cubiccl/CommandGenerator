@@ -13,12 +13,12 @@ import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.PanelCommandSelection;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 
@@ -35,7 +35,7 @@ public class ExecuteOptionsPanel extends OptionsPanel
 
 	public ExecuteOptionsPanel()
 	{
-		super(700);
+		super();
 		storedCommand = "achievement give openInventory @a";
 
 		checkboxDetect = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:execute.detect");
@@ -60,18 +60,18 @@ public class ExecuteOptionsPanel extends OptionsPanel
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 2;
-		add(panelEntity, gbc);
+		add(panelEntity);
 		gbc.gridwidth = 1;
 		gbc.gridy++;
-		add(panelCoord, gbc);
+		add(panelCoord);
 		gbc.gridx++;
-		add(panelCoordDetect, gbc);
+		add(panelCoordDetect);
 		gbc.gridx--;
 		gbc.gridy++;
 		gbc.gridwidth = 2;
-		add(checkboxDetect, gbc);
+		add(checkboxDetect);
 		gbc.gridy++;
-		add(panelBlock, gbc);
+		add(panelBlock);
 	}
 
 	@Override

@@ -32,6 +32,7 @@ import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.gui.helper.components.CButton;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CLabel;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.gui.options.AchievementOptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;

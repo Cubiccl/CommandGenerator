@@ -7,7 +7,7 @@ import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
 public class ItemData extends Item
-{//TODO re-do this
+{// TODO re-do this
 
 	/** List of the damages this Item has. */
 	private int[] damageList;
@@ -33,13 +33,7 @@ public class ItemData extends Item
 	@Override
 	public String getName(int damage)
 	{
-
-		String category;
-		if (isBlock()) category = "BLOCKS:";
-		else category = "ITEMS:";
-
-		if (damage >= damageList.length) return Lang.get(category + getId() + "_" + damageList[0]);
-		return Lang.get(category + getId() + "_" + damageList[damage]);
+		return Lang.get("ITEMS:" + getId() + "_0");
 	}
 
 	@Override

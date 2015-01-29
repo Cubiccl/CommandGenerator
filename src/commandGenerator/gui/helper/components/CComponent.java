@@ -10,7 +10,10 @@ public interface CComponent
 	/** Updates this component so it adapts to the selected language. */
 	public abstract void updateLang();
 
-	/** Setups the component as if it was filled by the user thanks to the data argument. */
+	/** Setups the component as if it was filled by the user thanks to the data argument.
+	 * 
+	 * @param data
+	 *            - <i>Map:String->Object</i> - The data to use. */
 	public abstract void setupFrom(Map<String, Object> data);
 
 	/** Resets the component to its original situation */

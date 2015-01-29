@@ -2,10 +2,10 @@ package commandGenerator.gui.options;
 
 import java.awt.Dimension;
 
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.LangComboBox;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
@@ -31,13 +31,13 @@ public class TimeOptionsPanel extends OptionsPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(labelMode, gbc);
+		add(labelMode);
 		gbc.gridx++;
-		add(comboboxMode, gbc);
+		add(comboboxMode);
 		gbc.gridx--;
 		gbc.gridy++;
 		gbc.gridwidth = 2;
-		add(entryTime, gbc);
+		add(entryTime);
 		gbc.gridwidth = 1;
 	}
 

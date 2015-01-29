@@ -85,7 +85,7 @@ public class Registerer
 		if (objects.get(type) == null) objects.put(type, new HashMap<String, ObjectBase>());
 
 		objects.get(type).put(object.getId(), object);
-		if (type < CGConstants.TYPES.length) DisplayHelper.log("Registered " + CGConstants.TYPES[type] + " : " + object.getName());
+		DisplayHelper.log("Registered " + CGConstants.TYPES[type] + " : " + object.getId());
 	}
 
 	/** Returns the Object corresponding to this ID.

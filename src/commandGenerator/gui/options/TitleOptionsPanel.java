@@ -6,11 +6,11 @@ import java.awt.event.ActionListener;
 
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.TagList;
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.dataTag.ListSelectionPanel;
 import commandGenerator.gui.helper.commandSpecific.TitleDetailsPanel;
 import commandGenerator.gui.helper.components.LangComboBox;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
@@ -46,12 +46,12 @@ public class TitleOptionsPanel extends OptionsPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(comboboxMode, gbc);
+		add(comboboxMode);
 		gbc.gridy++;
-		add(panelPlayer, gbc);
+		add(panelPlayer);
 		gbc.gridy++;
-		add(panelDetails, gbc);
-		add(panelJson, gbc);
+		add(panelDetails);
+		add(panelJson);
 	}
 
 	@Override

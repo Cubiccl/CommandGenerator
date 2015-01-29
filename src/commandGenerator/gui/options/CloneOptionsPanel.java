@@ -7,10 +7,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import commandGenerator.arguments.objects.Coordinates;
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.LangComboBox;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
@@ -61,33 +61,33 @@ public class CloneOptionsPanel extends OptionsPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(panelCoord1, gbc);
+		add(panelCoord1);
 		gbc.gridx++;
 		gbc.gridwidth = 3;
-		add(panelCoord2, gbc);
+		add(panelCoord2);
 
 		gbc.gridx--;
 		gbc.gridy++;
 		gbc.gridheight = 2;
 		gbc.gridwidth = 1;
-		add(panelDestination, gbc);
+		add(panelDestination);
 
 		gbc.gridx++;
 		gbc.gridheight = 1;
-		add(labelMode1, gbc);
+		add(labelMode1);
 		gbc.gridx++;
-		add(comboboxMode1, gbc);
+		add(comboboxMode1);
 		gbc.gridx++;
-		add(buttonHelp1, gbc);
+		add(buttonHelp1);
 
 		gbc.gridx--;
 		gbc.gridx--;
 		gbc.gridy++;
-		add(labelMode2, gbc);
+		add(labelMode2);
 		gbc.gridx++;
-		add(comboboxMode2, gbc);
+		add(comboboxMode2);
 		gbc.gridx++;
-		add(buttonHelp2, gbc);
+		add(buttonHelp2);
 	}
 
 	@Override

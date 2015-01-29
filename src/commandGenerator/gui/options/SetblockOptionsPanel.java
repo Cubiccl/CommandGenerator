@@ -10,10 +10,10 @@ import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.tags.TagCompound;
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.components.LangComboBox;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
@@ -50,16 +50,16 @@ public class SetblockOptionsPanel extends OptionsPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(comboboxMode, gbc);
+		add(comboboxMode);
 		gbc.gridx++;
-		add(buttonHelp, gbc);
+		add(buttonHelp);
 		gbc.gridx++;
-		add(panelCoord, gbc);
+		add(panelCoord);
 
 		gbc.gridx = 0;
 		gbc.gridy++;
 		gbc.gridwidth = 3;
-		add(panelBlock, gbc);
+		add(panelBlock);
 	}
 
 	@Override

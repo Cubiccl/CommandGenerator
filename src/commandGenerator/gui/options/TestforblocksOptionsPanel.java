@@ -7,10 +7,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import commandGenerator.arguments.objects.Coordinates;
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.LangComboBox;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
@@ -49,22 +49,22 @@ public class TestforblocksOptionsPanel extends OptionsPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(panelCoord1, gbc);
+		add(panelCoord1);
 		gbc.gridx++;
 		gbc.gridwidth = 3;
-		add(panelCoord2, gbc);
+		add(panelCoord2);
 
 		gbc.gridx--;
 		gbc.gridy++;
 		gbc.gridwidth = 1;
-		add(panelCoordDest, gbc);
+		add(panelCoordDest);
 
 		gbc.gridx++;
-		add(labelMode, gbc);
+		add(labelMode);
 		gbc.gridx++;
-		add(comboboxMode, gbc);
+		add(comboboxMode);
 		gbc.gridx++;
-		add(buttonHelp, gbc);
+		add(buttonHelp);
 	}
 
 	@Override

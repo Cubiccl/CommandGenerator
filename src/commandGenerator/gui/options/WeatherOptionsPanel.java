@@ -3,10 +3,10 @@ package commandGenerator.gui.options;
 import java.awt.Dimension;
 import java.util.Map;
 
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.LangComboBox;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
@@ -32,14 +32,14 @@ public class WeatherOptionsPanel extends OptionsPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(labelWeather, gbc);
+		add(labelWeather);
 		gbc.gridx++;
-		add(comboboxWeather, gbc);
+		add(comboboxWeather);
 
 		gbc.gridx = 0;
 		gbc.gridy++;
 		gbc.gridwidth = 2;
-		add(entryDuration, gbc);
+		add(entryDuration);
 		gbc.gridwidth = 1;
 	}
 

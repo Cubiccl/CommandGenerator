@@ -5,11 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import commandGenerator.arguments.objects.Registerer;
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
 import commandGenerator.gui.helper.commandSpecific.ReplaceitemEntityPanel;
 import commandGenerator.gui.helper.components.LangComboBox;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
@@ -25,7 +25,7 @@ public class ReplaceitemOptionsPanel extends OptionsPanel
 
 	public ReplaceitemOptionsPanel()
 	{
-		super(800);
+		super();
 
 		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:replaceitem.mode", 2);
 		comboboxMode.setPreferredSize(new Dimension(200, 20));
@@ -45,12 +45,12 @@ public class ReplaceitemOptionsPanel extends OptionsPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(comboboxMode, gbc);
+		add(comboboxMode);
 		gbc.gridy++;
-		add(panelBlock, gbc);
-		add(panelEntity, gbc);
+		add(panelBlock);
+		add(panelEntity);
 		gbc.gridy++;
-		add(panelItem, gbc);
+		add(panelItem);
 	}
 
 	@Override

@@ -2,9 +2,9 @@ package commandGenerator.gui.options;
 
 import commandGenerator.arguments.objects.Enchantment;
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.EnchantSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
@@ -23,9 +23,9 @@ public class EnchantOptionsPanel extends OptionsPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(panelPlayer, gbc);
+		add(panelPlayer);
 		gbc.gridy++;
-		add(panelEnchant, gbc);
+		add(panelEnchant);
 	}
 
 	@Override

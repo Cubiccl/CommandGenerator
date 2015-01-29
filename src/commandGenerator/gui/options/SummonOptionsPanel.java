@@ -9,11 +9,11 @@ import commandGenerator.arguments.objects.Entity;
 import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
-import commandGenerator.gui.OptionsPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.dataTag.NBTTagPanel;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.IBox;
+import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
@@ -39,20 +39,20 @@ public class SummonOptionsPanel extends OptionsPanel implements IBox
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(comboboxEntity, gbc);
+		add(comboboxEntity);
 		gbc.gridy++;
-		add(label, gbc);
+		add(label);
 
 		gbc.gridx++;
 		gbc.gridy--;
 		gbc.gridheight = 2;
-		add(panelCoord, gbc);
+		add(panelCoord);
 		gbc.gridheight = 1;
 		gbc.gridx--;
 		gbc.gridy++;
 		gbc.gridy++;
 		gbc.gridwidth = 2;
-		add(panelTag, gbc);
+		add(panelTag);
 		gbc.gridwidth = 1;
 	}
 
