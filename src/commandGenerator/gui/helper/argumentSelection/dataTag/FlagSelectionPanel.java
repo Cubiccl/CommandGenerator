@@ -27,19 +27,19 @@ public class FlagSelectionPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(label, gbc);
+		add(label);
 		gbc.gridy++;
-		add(enchant, gbc);
+		add(enchant);
 		gbc.gridy++;
-		add(unbreak, gbc);
+		add(unbreak);
 		gbc.gridy++;
-		add(destroy, gbc);
+		add(destroy);
 		gbc.gridy++;
-		add(attribute, gbc);
+		add(attribute);
 		gbc.gridy++;
-		add(place, gbc);
+		add(place);
 		gbc.gridy++;
-		add(other, gbc);
+		add(other);
 	}
 
 	public int getHideFlags()

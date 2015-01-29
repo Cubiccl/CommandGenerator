@@ -43,10 +43,10 @@ public class ObjectiveSelectionPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(comboboxMain, gbc);
+		add(comboboxMain);
 		gbc.gridy++;
-		add(comboboxPrecise, gbc);
-		add(comboboxPrecise2, gbc);
+		add(comboboxPrecise);
+		add(comboboxPrecise2);
 	}
 
 	private void setupChoices()

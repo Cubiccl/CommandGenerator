@@ -26,17 +26,17 @@ public class DisabledSlotsPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(label, gbc);
+		add(label);
 		gbc.gridy++;
-		add(hand, gbc);
+		add(hand);
 		gbc.gridy++;
-		add(head, gbc);
+		add(head);
 		gbc.gridy++;
-		add(chest, gbc);
+		add(chest);
 		gbc.gridy++;
-		add(legs, gbc);
+		add(legs);
 		gbc.gridy++;
-		add(feet, gbc);
+		add(feet);
 	}
 
 	public int getDisabledSlots()

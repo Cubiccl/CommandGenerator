@@ -99,32 +99,32 @@ public class DisplaySelectionPanel extends JPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(textfieldName, gbc);
+		add(textfieldName);
 		gbc.gridx++;
-		add(checkboxName, gbc);
+		add(checkboxName);
 
 		gbc.gridx--;
 		gbc.gridy++;
-		add(textfieldLore, gbc);
+		add(textfieldLore);
 		gbc.gridx++;
-		add(buttonAdd, gbc);
+		add(buttonAdd);
 
 		gbc.gridx--;
 		gbc.gridy++;
-		add(checkboxColor, gbc);
+		add(checkboxColor);
 		gbc.gridx++;
-		add(buttonRemove, gbc);
+		add(buttonRemove);
 
 		gbc.gridx--;
 		gbc.gridy++;
 		gbc.gridwidth = 3;
-		add(panel, gbc);
+		add(panel);
 		gbc.gridwidth = 1;
 
 		gbc.gridx = 2;
 		gbc.gridy = 0;
 		gbc.gridheight = 3;
-		add(scrollpane, gbc);
+		add(scrollpane);
 
 	}
 

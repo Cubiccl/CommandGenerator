@@ -29,9 +29,9 @@ public class AchievementSelectionPanel extends HelperPanel implements IBox
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(achievementBox, gbc);
+		add(achievementBox);
 		gbc.gridx++;
-		add(image, gbc);
+		add(image);
 	}
 
 	@Override

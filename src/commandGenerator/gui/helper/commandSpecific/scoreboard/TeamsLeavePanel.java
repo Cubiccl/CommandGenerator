@@ -42,14 +42,14 @@ public class TeamsLeavePanel extends ScoreboardPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(checkboxTeam, gbc);
+		add(checkboxTeam);
 		gbc.gridx++;
-		add(textfieldTeam, gbc);
+		add(textfieldTeam);
 
 		gbc.gridx--;
 		gbc.gridy++;
 		gbc.gridwidth = 2;
-		add(panelPlayer, gbc);
+		add(panelPlayer);
 		gbc.gridwidth = 1;
 	}
 

@@ -30,42 +30,7 @@ public class FillNormalPanel extends HelperPanel
 
 	public FillNormalPanel(int height)
 	{
-		super(CGConstants.PANELID_OPTIONS, "GENERAL:options", 900, height);
-
-		buttonHelp = new JButton("?");
-		buttonHelp.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				DisplayHelper.showHelp(Lang.get("HELP:fill_" + comboboxMode.getSelectedIndex()), (String) comboboxMode.getSelectedItem());
-			}
-		});
-
-		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:fill.mode", 5);
-		comboboxMode.setPreferredSize(new Dimension(200, 20));
-
-		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:fill.start", true, false);
-		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:fill.end", true, false);
-		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:fill.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(comboboxMode, gbc);
-		gbc.gridx++;
-		add(buttonHelp, gbc);
-
-		gbc.gridx = 0;
-		gbc.gridy++;
-		add(panelCoord1, gbc);
-		gbc.gridx++;
-		add(panelCoord2, gbc);
-
-		gbc.gridx--;
-		gbc.gridy++;
-		gbc.gridwidth = 2;
-		add(panelBlock, gbc);
-		gbc.gridwidth = 1;
-
+		super(CGConstants.PANELID_OPTIONS, "GENERAL:options");
 	}
 
 	public String generateCommand()
@@ -85,6 +50,40 @@ public class FillNormalPanel extends HelperPanel
 				+ tag.commandStructure().substring(tag.getId().length() + 1);
 
 		return command;
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		buttonHelp = new JButton("?");
+
+		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:fill.mode", 5);
+		comboboxMode.setPreferredSize(new Dimension(200, 20));
+
+		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:fill.start", true, false);
+		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:fill.end", true, false);
+		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:fill.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		addLine(comboboxMode, buttonHelp);
+		add(panelCoord1);
+		add(panelCoord2);
+		add(panelBlock);
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		buttonHelp.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				DisplayHelper.showHelp(Lang.get("HELP:fill_" + comboboxMode.getSelectedIndex()), (String) comboboxMode.getSelectedItem());
+			}
+		});
 	}
 
 }

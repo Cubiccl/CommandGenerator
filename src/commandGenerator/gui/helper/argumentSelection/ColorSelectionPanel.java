@@ -66,26 +66,26 @@ public class ColorSelectionPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(labelRed, gbc);
+		add(labelRed);
 		gbc.gridy++;
-		add(labelGreen, gbc);
+		add(labelGreen);
 		gbc.gridy++;
-		add(labelBlue, gbc);
+		add(labelBlue);
 		gbc.gridy++;
-		add(Box.createGlue(), gbc);
+		add(Box.createGlue());
 
 		gbc.gridx++;
 		gbc.gridy = 0;
-		add(sliderRed, gbc);
+		add(sliderRed);
 		gbc.gridy++;
-		add(sliderGreen, gbc);
+		add(sliderGreen);
 		gbc.gridy++;
-		add(sliderBlue, gbc);
+		add(sliderBlue);
 
 		gbc.gridx++;
 		gbc.gridy = 0;
 		gbc.gridheight = 4;
-		add(panelColor, gbc);
+		add(panelColor);
 		gbc.gridheight = 1;
 	}
 

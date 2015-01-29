@@ -26,9 +26,9 @@ public class FireworksSelectionPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(spinnerFlight, gbc);
+		add(spinnerFlight);
 		gbc.gridy++;
-		add(explosionsPanel, gbc);
+		add(explosionsPanel);
 	}
 
 	public TagList getExplosions()

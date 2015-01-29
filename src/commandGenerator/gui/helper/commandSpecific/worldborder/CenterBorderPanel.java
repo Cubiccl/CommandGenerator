@@ -15,16 +15,7 @@ public class CenterBorderPanel extends HelperPanel
 
 	public CenterBorderPanel()
 	{
-		super(CGConstants.PANELID_OPTIONS, "GENERAL:options", 300, 100);
-
-		entryX = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.x");
-		entryZ = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.z");
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(entryX, gbc);
-		gbc.gridy++;
-		add(entryZ, gbc);
+		super(CGConstants.PANELID_OPTIONS, "GENERAL:options");
 	}
 
 	public String generateText()
@@ -53,5 +44,23 @@ public class CenterBorderPanel extends HelperPanel
 		entryX.setTextField(options[0]);
 		entryZ.setTextField(options[1]);
 	}
+
+	@Override
+	protected void createComponents()
+	{
+		entryX = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.x");
+		entryZ = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.z");
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(entryX);
+		add(entryZ);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 }

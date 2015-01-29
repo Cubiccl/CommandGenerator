@@ -68,20 +68,20 @@ public class PatternSelectionPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(labelColor, gbc);
+		add(labelColor);
 		gbc.gridy++;
-		add(labelPattern, gbc);
+		add(labelPattern);
 
 		gbc.gridx++;
 		gbc.gridy--;
-		add(comboboxColor, gbc);
+		add(comboboxColor);
 		gbc.gridy++;
-		add(comboboxPattern, gbc);
+		add(comboboxPattern);
 
 		gbc.gridx = 0;
 		gbc.gridy++;
 		gbc.gridwidth = 2;
-		add(labelImage, gbc);
+		add(labelImage);
 		gbc.gridwidth = 1;
 	}
 

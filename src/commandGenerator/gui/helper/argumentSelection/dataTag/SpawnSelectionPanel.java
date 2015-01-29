@@ -49,19 +49,19 @@ public class SpawnSelectionPanel extends JPanel implements IBox
 		gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(labelType, gbc);
+		add(labelType);
 		gbc.gridy++;
-		add(labelWeight, gbc);
+		add(labelWeight);
 		gbc.gridy++;
 		gbc.gridwidth = 2;
-		add(panelTag, gbc);
+		add(panelTag);
 		gbc.gridwidth = 1;
 
 		gbc.gridx++;
 		gbc.gridy = 0;
-		add(combobox, gbc);
+		add(combobox);
 		gbc.gridy++;
-		add(textfieldWeight, gbc);
+		add(textfieldWeight);
 	}
 
 	public TagCompound getTag()

@@ -42,10 +42,10 @@ public class EnchantSelectionPanel extends HelperPanel implements IBox
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(comboboxEnchant, gbc);
+		add(comboboxEnchant);
 		gbc.gridy++;
-		add(spinnerLevel, gbc);
-		add(entryLevel, gbc);
+		add(spinnerLevel);
+		add(entryLevel);
 	}
 
 	public Enchantment generateEnchantment()

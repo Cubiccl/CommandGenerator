@@ -100,18 +100,18 @@ public class ListSelectionPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(buttonAdd, gbc);
+		add(buttonAdd);
 		gbc.gridy++;
-		add(buttonEdit, gbc);
+		add(buttonEdit);
 		gbc.gridy++;
-		add(buttonRemove, gbc);
+		add(buttonRemove);
 
 		gbc.gridx++;
 		gbc.gridy = 0;
 		gbc.gridheight = 3;
-		add(scrolllist, gbc);
+		add(scrolllist);
 		gbc.gridx++;
-		add(scrollpane, gbc);
+		add(scrollpane);
 	}
 
 	private void edit()

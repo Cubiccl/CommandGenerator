@@ -33,11 +33,11 @@ public class PoseRotPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(spinnerX, gbc);
+		add(spinnerX);
 		gbc.gridy++;
-		add(spinnerY, gbc);
+		add(spinnerY);
 		gbc.gridy++;
-		add(spinnerZ, gbc);
+		add(spinnerZ);
 	}
 
 	public TagList getPose()

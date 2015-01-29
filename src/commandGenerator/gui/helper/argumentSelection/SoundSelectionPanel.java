@@ -63,20 +63,20 @@ public class SoundSelectionPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(comboboxSound, gbc);
+		add(comboboxSound);
 		gbc.gridx++;
-		add(buttonHelpSound, gbc);
+		add(buttonHelpSound);
 
 		gbc.gridx = 0;
 		gbc.gridy++;
 		gbc.gridwidth = 2;
-		add(checkboxOptions, gbc);
+		add(checkboxOptions);
 		gbc.gridy++;
-		add(entryVolume, gbc);
+		add(entryVolume);
 		gbc.gridy++;
-		add(entryPitch, gbc);
+		add(entryPitch);
 		gbc.gridy++;
-		add(entryVolumeMin, gbc);
+		add(entryVolumeMin);
 	}
 
 	public Sound getSelectedSound()

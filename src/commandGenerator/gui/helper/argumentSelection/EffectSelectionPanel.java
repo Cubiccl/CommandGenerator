@@ -49,18 +49,18 @@ public class EffectSelectionPanel extends HelperPanel implements IBox
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(comboboxEffect, gbc);
+		add(comboboxEffect);
 		gbc.gridy++;
-		add(entryDuration, gbc);
+		add(entryDuration);
 		gbc.gridy++;
-		add(spinnerAmplifier, gbc);
+		add(spinnerAmplifier);
 		gbc.gridy++;
-		add(checkboxHideParticles, gbc);
+		add(checkboxHideParticles);
 
 		gbc.gridx++;
 		gbc.gridy = 0;
 		gbc.gridheight = 4;
-		add(labelImage, gbc);
+		add(labelImage);
 		gbc.gridheight = 1;
 	}
 

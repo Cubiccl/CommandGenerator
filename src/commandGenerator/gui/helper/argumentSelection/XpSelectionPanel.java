@@ -23,9 +23,9 @@ public class XpSelectionPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(entryXp, gbc);
+		add(entryXp);
 		gbc.gridx++;
-		add(checkboxLevel, gbc);
+		add(checkboxLevel);
 	}
 
 	public String generateXp()

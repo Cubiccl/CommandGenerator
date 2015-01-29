@@ -30,9 +30,9 @@ public class ScoreDisplayPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(entryObjective, gbc);
+		add(entryObjective);
 		gbc.gridy++;
-		add(panelEntity, gbc);
+		add(panelEntity);
 	}
 
 	public TagCompound generateScore()

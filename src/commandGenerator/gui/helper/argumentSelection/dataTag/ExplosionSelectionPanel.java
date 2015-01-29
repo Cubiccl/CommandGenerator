@@ -88,30 +88,30 @@ public class ExplosionSelectionPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(checkboxFlicker, gbc);
+		add(checkboxFlicker);
 		gbc.gridx++;
-		add(checkboxTrail, gbc);
+		add(checkboxTrail);
 		gbc.gridx++;
 
 		gbc.gridheight = 4;
-		add(scrollpane, gbc);
+		add(scrollpane);
 		gbc.gridheight = 1;
 
 		gbc.gridx = 0;
 		gbc.gridy++;
 		gbc.gridwidth = 2;
-		add(comboboxType, gbc);
+		add(comboboxType);
 		gbc.gridwidth = 1;
 
 		gbc.gridy++;
-		add(buttonColors, gbc);
+		add(buttonColors);
 		gbc.gridx++;
-		add(buttonFadeColors, gbc);
+		add(buttonFadeColors);
 
 		gbc.gridx--;
 		gbc.gridy++;
 		gbc.gridwidth++;
-		add(buttonRemoveColor, gbc);
+		add(buttonRemoveColor);
 	}
 
 	private void remove()

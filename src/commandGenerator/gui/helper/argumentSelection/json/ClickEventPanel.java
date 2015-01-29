@@ -42,12 +42,12 @@ public class ClickEventPanel extends HelperPanel
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 2;
-		add(comboboxAction, gbc);
+		add(comboboxAction);
 		gbc.gridwidth = 1;
 		gbc.gridy++;
-		add(entryText, gbc);
+		add(entryText);
 		gbc.gridx++;
-		add(entryText, gbc);
+		add(entryText);
 	}
 
 	public TagCompound generateClickEvent()

@@ -26,9 +26,9 @@ public class PlayersEnablePanel extends ScoreboardPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(entryObjective, gbc);
+		add(entryObjective);
 		gbc.gridy++;
-		add(panelEntity, gbc);
+		add(panelEntity);
 	}
 
 	@Override

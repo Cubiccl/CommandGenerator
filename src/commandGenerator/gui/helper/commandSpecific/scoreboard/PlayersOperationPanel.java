@@ -56,26 +56,26 @@ public class PlayersOperationPanel extends ScoreboardPanel
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 3;
-		add(entryObj1, gbc);
+		add(entryObj1);
 		gbc.gridwidth = 1;
 
 		gbc.gridy++;
-		add(labelOperation, gbc);
+		add(labelOperation);
 		gbc.gridx++;
-		add(comboboxOperation, gbc);
+		add(comboboxOperation);
 		gbc.gridx++;
-		add(buttonHelp, gbc);
+		add(buttonHelp);
 
 		gbc.gridx = 0;
 		gbc.gridy++;
 		gbc.gridwidth = 3;
-		add(entryObj2, gbc);
+		add(entryObj2);
 
 		gbc.gridy++;
-		add(panelEntity1, gbc);
+		add(panelEntity1);
 
 		gbc.gridy++;
-		add(panelEntity2, gbc);
+		add(panelEntity2);
 		gbc.gridwidth = 1;
 	}
 

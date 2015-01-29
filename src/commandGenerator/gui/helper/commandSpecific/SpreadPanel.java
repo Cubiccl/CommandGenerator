@@ -15,26 +15,7 @@ public class SpreadPanel extends HelperPanel
 
 	public SpreadPanel(String title)
 	{
-		super(CGConstants.PANELID_NONE, title, 400, 200);
-
-		entryX = new CEntry(CGConstants.DATAID_SPREAD_X, "GUI:spread.x");
-		entryZ = new CEntry(CGConstants.DATAID_SPREAD_Z, "GUI:spread.z");
-		entryDistance = new CEntry(CGConstants.DATAID_SPREAD_DIST, "GUI:spread.distance");
-		entryDistanceMax = new CEntry(CGConstants.DATAID_SPREAD_DISTMAX, "GUI:spread.distance_max");
-
-		checkboxRespectTeams = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:spread.respect");
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(entryX, gbc);
-		gbc.gridy++;
-		add(entryZ, gbc);
-		gbc.gridy++;
-		add(entryDistance, gbc);
-		gbc.gridy++;
-		add(entryDistanceMax, gbc);
-		gbc.gridy++;
-		add(checkboxRespectTeams, gbc);
+		super(CGConstants.PANELID_NONE, title);
 	}
 
 	public String[] generateOptions()
@@ -65,5 +46,30 @@ public class SpreadPanel extends HelperPanel
 		if (checkboxRespectTeams.isSelected()) return new String[] { x, z, distance, distanceMax, "true" };
 		else return new String[] { x, z, distance, distanceMax, "false" };
 	}
+
+	@Override
+	protected void createComponents()
+	{
+		entryX = new CEntry(CGConstants.DATAID_SPREAD_X, "GUI:spread.x");
+		entryZ = new CEntry(CGConstants.DATAID_SPREAD_Z, "GUI:spread.z");
+		entryDistance = new CEntry(CGConstants.DATAID_SPREAD_DIST, "GUI:spread.distance");
+		entryDistanceMax = new CEntry(CGConstants.DATAID_SPREAD_DISTMAX, "GUI:spread.distance_max");
+
+		checkboxRespectTeams = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:spread.respect");
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(entryX);
+		add(entryZ);
+		add(entryDistance);
+		add(entryDistanceMax);
+		add(checkboxRespectTeams);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 }

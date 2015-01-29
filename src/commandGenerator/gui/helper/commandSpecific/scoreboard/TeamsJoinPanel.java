@@ -31,14 +31,14 @@ public class TeamsJoinPanel extends ScoreboardPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(labelTeam, gbc);
+		add(labelTeam);
 		gbc.gridx++;
-		add(textfieldTeam, gbc);
+		add(textfieldTeam);
 
 		gbc.gridx--;
 		gbc.gridy++;
 		gbc.gridwidth = 2;
-		add(panelPlayer, gbc);
+		add(panelPlayer);
 		gbc.gridwidth = 1;
 	}
 

@@ -52,17 +52,17 @@ public class TeamsOptionPanel extends ScoreboardPanel
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 2;
-		add(entryTeam, gbc);
+		add(entryTeam);
 		gbc.gridwidth = 1;
 		gbc.gridy++;
-		add(labelMode, gbc);
+		add(labelMode);
 		gbc.gridy++;
-		add(labelValue, gbc);
+		add(labelValue);
 		gbc.gridx++;
 		gbc.gridy--;
-		add(comboboxMode, gbc);
+		add(comboboxMode);
 		gbc.gridy++;
-		add(comboboxValue, gbc);
+		add(comboboxValue);
 	}
 
 	@Override

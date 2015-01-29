@@ -63,21 +63,21 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(comboboxId, gbc);
+		add(comboboxId);
 		gbc.gridy++;
-		add(spinnerDamage, gbc);
+		add(spinnerDamage);
 		gbc.gridy++;
-		add(spinnerCount, gbc);
+		add(spinnerCount);
 		if (slot)
 		{
 			gbc.gridy++;
-			add(spinnerSlot, gbc);
+			add(spinnerSlot);
 		}
 		if (withData)
 		{
 			gbc.gridy++;
 			gbc.gridwidth = 2;
-			add(panelData, gbc);
+			add(panelData);
 			panelData.updateCombobox((Item) itemList[0]);
 			gbc.gridwidth = 1;
 		}
@@ -86,12 +86,12 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin
 		gbc.gridx++;
 		gbc.gridheight = 2;
 		if (slot) gbc.gridheight++;
-		add(labelImage, gbc);
+		add(labelImage);
 
 		gbc.gridy = 2;
 		if (slot) gbc.gridy++;
 		gbc.gridheight = 1;
-		add(labelName, gbc);
+		add(labelName);
 
 		updateSpinner();
 	}

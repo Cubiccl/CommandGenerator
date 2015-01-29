@@ -42,14 +42,14 @@ public class PlayersResetPanel extends ScoreboardPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(checkboxObjective, gbc);
+		add(checkboxObjective);
 		gbc.gridx++;
-		add(textfieldObjective, gbc);
+		add(textfieldObjective);
 
 		gbc.gridx--;
 		gbc.gridy++;
 		gbc.gridwidth = 2;
-		add(panelEntity, gbc);
+		add(panelEntity);
 		gbc.gridwidth = 2;
 	}
 

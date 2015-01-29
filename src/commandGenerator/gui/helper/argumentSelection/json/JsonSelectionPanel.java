@@ -71,35 +71,35 @@ public class JsonSelectionPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(comboboxMode, gbc);
+		add(comboboxMode);
 		gbc.gridy++;
-		add(entryText, gbc);
-		add(panelEntity, gbc);
-		add(panelScore, gbc);
+		add(entryText);
+		add(panelEntity);
+		add(panelScore);
 		gbc.gridy++;
-		add(comboboxColor, gbc);
+		add(comboboxColor);
 		gbc.gridy++;
-		add(checkboxBold, gbc);
+		add(checkboxBold);
 		gbc.gridy++;
-		add(checkboxUnderlined, gbc);
+		add(checkboxUnderlined);
 		gbc.gridy++;
-		add(checkboxItalic, gbc);
+		add(checkboxItalic);
 		gbc.gridy++;
-		add(checkboxStrikethrough, gbc);
+		add(checkboxStrikethrough);
 		gbc.gridy++;
-		add(checkboxObfuscated, gbc);
+		add(checkboxObfuscated);
 		gbc.gridy++;
-		add(entryInsertion, gbc);
+		add(entryInsertion);
 		gbc.gridy++;
-		add(entryInsertion, gbc);
+		add(entryInsertion);
 		gbc.gridy++;
-		if (events) add(checkboxHover, gbc);
+		if (events) add(checkboxHover);
 		gbc.gridy++;
-		if (events) add(panelHover, gbc);
+		if (events) add(panelHover);
 		gbc.gridy++;
-		if (events) add(checkboxClick, gbc);
+		if (events) add(checkboxClick);
 		gbc.gridy++;
-		if (events) add(panelClick, gbc);
+		if (events) add(panelClick);
 	}
 
 	public TagCompound getTag()

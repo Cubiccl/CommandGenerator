@@ -61,22 +61,22 @@ public class CoordSelectionPanel extends HelperPanel
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 1;
-		add(entryX, gbc);
+		add(entryX);
 		gbc.gridy++;
-		add(entryY, gbc);
+		add(entryY);
 		gbc.gridy++;
-		add(entryZ, gbc);
+		add(entryZ);
 		gbc.gridy++;
 		if (relative)
 		{
-			add(checkboxRelative, gbc);
+			add(checkboxRelative);
 			gbc.gridy++;
 		}
 		if (rotation)
 		{
-			add(checkboxRotation, gbc);
+			add(checkboxRotation);
 			gbc.gridy++;
-			add(panelRotation, gbc);
+			add(panelRotation);
 		}
 
 	}

@@ -140,32 +140,32 @@ public class EquipmentSelectionPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(buttonAddHead, gbc);
+		add(buttonAddHead);
 		gbc.gridy++;
-		add(buttonAddChest, gbc);
+		add(buttonAddChest);
 		gbc.gridy++;
-		add(buttonAddLegs, gbc);
+		add(buttonAddLegs);
 		gbc.gridy++;
-		add(buttonAddFeet, gbc);
+		add(buttonAddFeet);
 		gbc.gridy++;
-		add(buttonAddHand, gbc);
+		add(buttonAddHand);
 
 		gbc.gridx++;
 		gbc.gridy = 0;
-		add(buttonRemoveHead, gbc);
+		add(buttonRemoveHead);
 		gbc.gridy++;
-		add(buttonRemoveChest, gbc);
+		add(buttonRemoveChest);
 		gbc.gridy++;
-		add(buttonRemoveLegs, gbc);
+		add(buttonRemoveLegs);
 		gbc.gridy++;
-		add(buttonRemoveFeet, gbc);
+		add(buttonRemoveFeet);
 		gbc.gridy++;
-		add(buttonRemoveHand, gbc);
+		add(buttonRemoveHand);
 
 		gbc.gridx++;
 		gbc.gridy = 0;
 		gbc.gridheight = 5;
-		add(scrollpane, gbc);
+		add(scrollpane);
 		gbc.gridheight = 1;
 	}
 

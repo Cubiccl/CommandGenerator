@@ -54,22 +54,22 @@ public class TradeSelectionPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(entryUses, gbc);
+		add(entryUses);
 		gbc.gridx++;
-		add(entryMaxUses, gbc);
+		add(entryMaxUses);
 		gbc.gridx++;
-		add(checkboxRewardExp, gbc);
+		add(checkboxRewardExp);
 		gbc.gridx++;
-		add(checkboxBuyB, gbc);
+		add(checkboxBuyB);
 
 		gbc.gridx = 0;
 		gbc.gridwidth = 4;
 		gbc.gridy++;
-		add(panelBuy, gbc);
+		add(panelBuy);
 		gbc.gridy++;
-		add(panelSell, gbc);
+		add(panelSell);
 		gbc.gridy++;
-		add(panelBuyB, gbc);
+		add(panelBuyB);
 	}
 
 	public TagCompound generateTrade()

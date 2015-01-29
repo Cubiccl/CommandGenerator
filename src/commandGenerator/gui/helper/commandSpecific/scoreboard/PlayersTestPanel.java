@@ -48,20 +48,20 @@ public class PlayersTestPanel extends ScoreboardPanel
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 2;
-		add(entryObjective, gbc);
+		add(entryObjective);
 		gbc.gridy++;
-		add(entryScore, gbc);
+		add(entryScore);
 		gbc.gridwidth = 1;
 
 		gbc.gridy++;
-		add(checkboxMax, gbc);
+		add(checkboxMax);
 		gbc.gridx++;
-		add(textfieldMax, gbc);
+		add(textfieldMax);
 
 		gbc.gridx--;
 		gbc.gridy++;
 		gbc.gridwidth = 2;
-		add(panelEntity, gbc);
+		add(panelEntity);
 		gbc.gridwidth = 1;
 	}
 

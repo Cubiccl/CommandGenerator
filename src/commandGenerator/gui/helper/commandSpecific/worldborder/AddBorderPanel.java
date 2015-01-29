@@ -20,31 +20,9 @@ public class AddBorderPanel extends HelperPanel
 
 	public AddBorderPanel(boolean canBeNegative)
 	{
-		super(CGConstants.PANELID_OPTIONS, "GENERAL:options", 400, 100);
+		super(CGConstants.PANELID_OPTIONS, "GENERAL:options");
 
 		this.canBeNegative = canBeNegative;
-
-		entrySize = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.add.size");
-		entryTime = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.add.time");
-		entryTime.setEnabledContent(false);
-
-		checkboxTime = new CCheckBox(CGConstants.DATAID_NONE, "GUI:worldborder.add.timer");
-		checkboxTime.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				entryTime.setEnabledContent(checkboxTime.isSelected());
-			}
-		});
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(entrySize, gbc);
-		gbc.gridy++;
-		add(checkboxTime, gbc);
-		gbc.gridy++;
-		add(entryTime, gbc);
-
 	}
 
 	public String generateText()
@@ -98,6 +76,36 @@ public class AddBorderPanel extends HelperPanel
 		if (options.length > 1) entryTime.setTextField((String) options[1]);
 		checkboxTime.setSelected(options.length > 1);
 		entryTime.setEnabledContent(options.length > 1);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		entrySize = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.add.size");
+		entryTime = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.add.time");
+		entryTime.setEnabledContent(false);
+
+		checkboxTime = new CCheckBox(CGConstants.DATAID_NONE, "GUI:worldborder.add.timer");
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(entrySize);
+		add(checkboxTime);
+		add(entryTime);
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		checkboxTime.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				entryTime.setEnabledContent(checkboxTime.isSelected());
+			}
+		});
 	}
 
 }

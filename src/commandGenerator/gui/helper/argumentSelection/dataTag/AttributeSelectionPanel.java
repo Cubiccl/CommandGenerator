@@ -32,11 +32,11 @@ public class AttributeSelectionPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(entryAmount, gbc);
+		add(entryAmount);
 		gbc.gridy++;
-		add(comboboxAttribute, gbc);
+		add(comboboxAttribute);
 		gbc.gridy++;
-		add(comboboxOperation, gbc);
+		add(comboboxOperation);
 
 	}
 

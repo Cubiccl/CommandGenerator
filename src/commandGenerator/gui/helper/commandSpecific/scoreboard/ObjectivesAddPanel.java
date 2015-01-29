@@ -45,14 +45,14 @@ public class ObjectivesAddPanel extends ScoreboardPanel
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 2;
-		add(entryName, gbc);
+		add(entryName);
 		gbc.gridy++;
-		add(panelCriteria, gbc);
+		add(panelCriteria);
 		gbc.gridwidth = 1;
 		gbc.gridy++;
-		add(checkboxDisplay, gbc);
+		add(checkboxDisplay);
 		gbc.gridx++;
-		add(textfieldDisplay, gbc);
+		add(textfieldDisplay);
 	}
 
 	@Override

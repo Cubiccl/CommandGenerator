@@ -38,17 +38,17 @@ public class DropChancesSelectionPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(label, gbc);
+		add(label);
 		gbc.gridy++;
-		add(entryHand, gbc);
+		add(entryHand);
 		gbc.gridy++;
-		add(entryHead, gbc);
+		add(entryHead);
 		gbc.gridy++;
-		add(entryChest, gbc);
+		add(entryChest);
 		gbc.gridy++;
-		add(entryLegs, gbc);
+		add(entryLegs);
 		gbc.gridy++;
-		add(entryFeet, gbc);
+		add(entryFeet);
 	}
 
 	public List<Tag> getDropChances()

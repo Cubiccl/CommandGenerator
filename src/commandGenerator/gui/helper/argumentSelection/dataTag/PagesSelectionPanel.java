@@ -89,24 +89,24 @@ public class PagesSelectionPanel extends JPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(buttonAddText, gbc);
+		add(buttonAddText);
 		gbc.gridx++;
-		add(buttonAddJson, gbc);
+		add(buttonAddJson);
 
 		gbc.gridx = 0;
 		gbc.gridy++;
 		gbc.gridwidth = 2;
-		add(buttonEdit, gbc);
+		add(buttonEdit);
 		gbc.gridy++;
-		add(buttonRemove, gbc);
+		add(buttonRemove);
 
 		gbc.gridx = 2;
 		gbc.gridy = 0;
 		gbc.gridwidth = 1;
 		gbc.gridheight = 3;
-		add(scrolllist, gbc);
+		add(scrolllist);
 		gbc.gridx++;
-		add(scrollpane, gbc);
+		add(scrollpane);
 
 	}
 

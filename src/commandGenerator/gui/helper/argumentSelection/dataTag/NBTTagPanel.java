@@ -66,15 +66,15 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 3;
-		add(displayer, gbc);
+		add(displayer);
 		gbc.gridwidth = 1;
 
 		gbc.gridy++;
-		add(buttonAdd, gbc);
+		add(buttonAdd);
 		gbc.gridx++;
-		add(buttonRemove, gbc);
+		add(buttonRemove);
 		gbc.gridx++;
-		add(buttonHelp, gbc);
+		add(buttonHelp);
 	}
 
 	public TagCompound getNbtTags(String id)

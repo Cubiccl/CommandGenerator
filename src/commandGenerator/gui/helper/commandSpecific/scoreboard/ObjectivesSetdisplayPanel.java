@@ -43,16 +43,16 @@ public class ObjectivesSetdisplayPanel extends ScoreboardPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(labelDisplay, gbc);
+		add(labelDisplay);
 		gbc.gridx++;
-		add(comboboxDisplay, gbc);
+		add(comboboxDisplay);
 
 		gbc.gridx = 0;
 		gbc.gridy++;
 		gbc.gridwidth = 2;
-		add(checkboxClear, gbc);
+		add(checkboxClear);
 		gbc.gridy++;
-		add(entryName, gbc);
+		add(entryName);
 	}
 
 	@Override

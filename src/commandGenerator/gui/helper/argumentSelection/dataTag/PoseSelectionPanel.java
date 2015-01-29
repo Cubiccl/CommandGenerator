@@ -27,19 +27,19 @@ public class PoseSelectionPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(body, gbc);
+		add(body);
 		gbc.gridx++;
-		add(lArm, gbc);
+		add(lArm);
 		gbc.gridx++;
-		add(rArm, gbc);
+		add(rArm);
 
 		gbc.gridx = 0;
 		gbc.gridy++;
-		add(head, gbc);
+		add(head);
 		gbc.gridx++;
-		add(lLeg, gbc);
+		add(lLeg);
 		gbc.gridx++;
-		add(rLeg, gbc);
+		add(rLeg);
 	}
 
 	public List<Tag> getPose()

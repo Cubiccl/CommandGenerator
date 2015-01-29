@@ -20,10 +20,7 @@ public class FillReplacePanel extends FillNormalPanel
 
 		remove(buttonHelp);
 		remove(comboboxMode);
-		gbc.gridy++;
-		gbc.gridwidth = 2;
-		add(panelBlockReplace, gbc);
-		gbc.gridwidth = 1;
+		add(panelBlockReplace);
 	}
 
 	@Override

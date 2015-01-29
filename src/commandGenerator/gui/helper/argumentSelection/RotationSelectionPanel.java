@@ -32,15 +32,15 @@ public class RotationSelectionPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(labelX, gbc);
+		add(labelX);
 		gbc.gridy++;
-		add(labelY, gbc);
+		add(labelY);
 
 		gbc.gridx++;
 		gbc.gridy--;
-		add(spinnerX, gbc);
+		add(spinnerX);
 		gbc.gridy++;
-		add(spinnerY, gbc);
+		add(spinnerY);
 	}
 
 	public List<Tag> getRotations()

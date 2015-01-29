@@ -59,12 +59,12 @@ public class HoverEventPanel extends HelperPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(comboboxAction, gbc);
+		add(comboboxAction);
 		gbc.gridy++;
-		add(textfieldText, gbc);
-		add(panelJson, gbc);
-		add(panelItem, gbc);
-		add(panelStat, gbc);
+		add(textfieldText);
+		add(panelJson);
+		add(panelItem);
+		add(panelStat);
 	}
 
 	public TagCompound generateHoverEvent()

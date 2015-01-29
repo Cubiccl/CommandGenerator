@@ -59,18 +59,18 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(comboboxId, gbc);
+		add(comboboxId);
 		gbc.gridx++;
-		add(labelImage, gbc);
+		add(labelImage);
 		gbc.gridx--;
 		gbc.gridy++;
-		add(spinnerDamage, gbc);
+		add(spinnerDamage);
 		gbc.gridx++;
-		add(labelName, gbc);
+		add(labelName);
 		gbc.gridx--;
 		gbc.gridy++;
 		gbc.gridwidth = 2;
-		if (data) add(panelData, gbc);
+		if (data) add(panelData);
 		gbc.gridwidth = 1;
 
 	}

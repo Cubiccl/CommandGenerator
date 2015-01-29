@@ -139,40 +139,40 @@ public class EntitySelectionPanel extends HelperPanel
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 1;
-		add(labelEntity, gbc);
+		add(labelEntity);
 		gbc.gridx++;
-		add(boxEntities, gbc);
+		add(boxEntities);
 		gbc.gridx++;
-		add(buttonHelpEntity, gbc);
+		add(buttonHelpEntity);
 
 		gbc.gridx = 0;
 		gbc.gridy++;
 		gbc.gridwidth = 3;
-		add(entryPlayer, gbc);
+		add(entryPlayer);
 
 		gbc.gridx = 0;
 		gbc.gridy++;
 		gbc.gridwidth = 1;
-		add(labelSelector, gbc);
+		add(labelSelector);
 		gbc.gridx++;
-		add(boxSelectors, gbc);
+		add(boxSelectors);
 		gbc.gridx++;
-		add(buttonHelpSelector, gbc);
+		add(buttonHelpSelector);
 
 		gbc.gridx = 0;
 		gbc.gridy++;
-		add(buttonAdd, gbc);
+		add(buttonAdd);
 		gbc.gridx++;
 		gbc.gridwidth = 2;
-		add(buttonRemove, gbc);
+		add(buttonRemove);
 
 		gbc.gridx = 0;
 		gbc.gridy++;
 		gbc.gridwidth = 1;
-		add(labelSelectors, gbc);
+		add(labelSelectors);
 		gbc.gridx++;
 		gbc.gridwidth = 2;
-		add(scrollpane, gbc);
+		add(scrollpane);
 
 	}
 
@@ -258,9 +258,9 @@ public class EntitySelectionPanel extends HelperPanel
 			JPanel panel = new JPanel(new GridBagLayout());
 			gbc.gridx = 0;
 			gbc.gridy = 0;
-			panel.add(label, gbc);
+			panel.add(label);
 			gbc.gridy++;
-			panel.add(spinner, gbc);
+			panel.add(spinner);
 			boolean cancel = DisplayHelper.showQuestion(panel, title);
 			if (cancel) return;
 			value = Integer.toString((int) spinner.getValue());
@@ -272,9 +272,9 @@ public class EntitySelectionPanel extends HelperPanel
 			JPanel panel = new JPanel(new GridBagLayout());
 			gbc.gridx = 0;
 			gbc.gridy = 0;
-			panel.add(label, gbc);
+			panel.add(label);
 			gbc.gridy++;
-			panel.add(spinner, gbc);
+			panel.add(spinner);
 			boolean cancel = DisplayHelper.showQuestion(panel, title);
 			if (cancel) return;
 			value = Integer.toString((int) spinner.getValue());
@@ -298,17 +298,17 @@ public class EntitySelectionPanel extends HelperPanel
 			gbc.gridheight = 1;
 			gbc.gridx = 0;
 			gbc.gridy = 0;
-			panel.add(label, gbc);
+			panel.add(label);
 			gbc.gridy++;
 			gbc.gridwidth = 1;
-			panel.add(labelScore, gbc);
+			panel.add(labelScore);
 			gbc.gridy++;
-			panel.add(labelValue, gbc);
+			panel.add(labelValue);
 			gbc.gridx++;
 			gbc.gridy--;
-			panel.add(textfieldScore, gbc);
+			panel.add(textfieldScore);
 			gbc.gridy++;
-			panel.add(textfieldValue, gbc);
+			panel.add(textfieldValue);
 			panel.setPreferredSize(new Dimension(400, 100));
 			boolean cancel = DisplayHelper.showQuestion(panel, title);
 			if (cancel) return;

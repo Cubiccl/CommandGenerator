@@ -69,26 +69,26 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(comboboxParticle, gbc);
+		add(comboboxParticle);
 		gbc.gridx++;
-		add(buttonHelp, gbc);
+		add(buttonHelp);
 
 		gbc.gridx--;
 		gbc.gridy++;
 		gbc.gridwidth = 2;
-		add(entrySpeed, gbc);
+		add(entrySpeed);
 		gbc.gridwidth = 1;
 
 		gbc.gridy++;
-		add(checkboxCount, gbc);
+		add(checkboxCount);
 		gbc.gridx++;
-		add(textfieldCount, gbc);
+		add(textfieldCount);
 
 		gbc.gridx--;
 		gbc.gridy++;
 		gbc.gridwidth = 2;
-		add(panelBlock, gbc);
-		add(panelItem, gbc);
+		add(panelBlock);
+		add(panelItem);
 		gbc.gridwidth = 1;
 
 	}
