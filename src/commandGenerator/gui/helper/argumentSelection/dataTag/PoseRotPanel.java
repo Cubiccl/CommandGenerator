@@ -19,10 +19,20 @@ public class PoseRotPanel extends HelperPanel
 
 	public PoseRotPanel(String name, String id)
 	{
-		super(CGConstants.DATAID_NONE, name, 300, 150);
+		super(CGConstants.DATAID_NONE, name, id);
+	}
 
-		this.id = id;
+	@Override
+	protected void addComponents()
+	{
+		add(spinnerX);
+		add(spinnerY);
+		add(spinnerZ);
+	}
 
+	@Override
+	protected void createComponents()
+	{
 		spinnerX = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:rotation.x", -128, 127, null);
 		spinnerY = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:rotation.y", -128, 127, null);
 		spinnerZ = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:rotation.z", -128, 127, null);
@@ -30,15 +40,11 @@ public class PoseRotPanel extends HelperPanel
 		spinnerX.setSelected(0);
 		spinnerY.setSelected(0);
 		spinnerZ.setSelected(0);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(spinnerX);
-		gbc.gridy++;
-		add(spinnerY);
-		gbc.gridy++;
-		add(spinnerZ);
 	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	public TagList getPose()
 	{
@@ -55,14 +61,6 @@ public class PoseRotPanel extends HelperPanel
 		return tag.setValue(list);
 	}
 
-	@Override
-	public void updateLang()
-	{
-		spinnerX.updateLang();
-		spinnerY.updateLang();
-		spinnerZ.updateLang();
-	}
-
 	public void setup(TagList tag)
 	{
 		int x = (int) ((TagFloat) tag.get(0)).getValue();
@@ -71,6 +69,20 @@ public class PoseRotPanel extends HelperPanel
 		spinnerX.setSelected(x);
 		spinnerY.setSelected(y);
 		spinnerZ.setSelected(z);
+	}
+
+	@Override
+	protected void setupDetails(Object[] details)
+	{
+		id = (String) details[0];
+	}
+
+	@Override
+	public void updateLang()
+	{
+		spinnerX.updateLang();
+		spinnerY.updateLang();
+		spinnerZ.updateLang();
 	}
 
 }

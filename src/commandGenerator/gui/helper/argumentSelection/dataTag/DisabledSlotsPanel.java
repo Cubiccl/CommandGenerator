@@ -9,13 +9,28 @@ import commandGenerator.main.CGConstants;
 public class DisabledSlotsPanel extends HelperPanel
 {
 
-	private CLabel label;
 	private CCheckBox hand, feet, legs, chest, head;
+	private CLabel label;
 
 	public DisabledSlotsPanel()
 	{
-		super(CGConstants.DATAID_NONE, "GUI:disabledslot.title", 400, 300);
+		super(CGConstants.DATAID_NONE, "GUI:disabledslot.title");
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(label);
+		add(hand);
+		add(head);
+		add(chest);
+		add(legs);
+		add(feet);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		label = new CLabel("GUI:disabledslot.label");
 
 		hand = new CCheckBox(CGConstants.DATAID_NONE, "GUI:slot.hand");
@@ -23,21 +38,11 @@ public class DisabledSlotsPanel extends HelperPanel
 		legs = new CCheckBox(CGConstants.DATAID_NONE, "GUI:slot.legs");
 		chest = new CCheckBox(CGConstants.DATAID_NONE, "GUI:slot.chest");
 		head = new CCheckBox(CGConstants.DATAID_NONE, "GUI:slot.head");
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(label);
-		gbc.gridy++;
-		add(hand);
-		gbc.gridy++;
-		add(head);
-		gbc.gridy++;
-		add(chest);
-		gbc.gridy++;
-		add(legs);
-		gbc.gridy++;
-		add(feet);
 	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	public int getDisabledSlots()
 	{
@@ -49,10 +54,6 @@ public class DisabledSlotsPanel extends HelperPanel
 		if (!head.isSelected()) flag += 16;
 		return flag;
 	}
-
-	@Override
-	public void updateLang()
-	{}
 
 	public void setupFrom(int value)
 	{
@@ -88,5 +89,9 @@ public class DisabledSlotsPanel extends HelperPanel
 		chest.setSelected(!checked[3]);
 		head.setSelected(!checked[4]);
 	}
+
+	@Override
+	public void updateLang()
+	{}
 
 }

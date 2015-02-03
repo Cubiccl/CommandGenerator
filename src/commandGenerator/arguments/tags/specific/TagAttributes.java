@@ -27,20 +27,6 @@ public class TagAttributes extends TagList
 	}
 
 	@Override
-	public String commandStructure()
-	{
-		String command = super.commandStructure();
-		if (!forMob) return command;
-
-		String newCommand = command.substring(0, command.indexOf('['));
-		newCommand += "{";
-		newCommand += command.substring(command.indexOf('[') + 1, command.length() - 1);
-		newCommand += "}";
-
-		return newCommand;
-	}
-
-	@Override
 	public void askValue()
 	{
 		panel = new ListSelectionPanel("TAGS:" + getId(), CGConstants.OBJECT_ATTRIBUTE);
@@ -64,6 +50,20 @@ public class TagAttributes extends TagList
 		tag.add(new TagDouble("Base").setValue(1.0d));
 
 		setValue(tag);
+	}
+
+	@Override
+	public String commandStructure()
+	{
+		String command = super.commandStructure();
+		if (!forMob) return command;
+
+		String newCommand = command.substring(0, command.indexOf('['));
+		newCommand += "{";
+		newCommand += command.substring(command.indexOf('[') + 1, command.length() - 1);
+		newCommand += "}";
+
+		return newCommand;
 	}
 
 	@Override

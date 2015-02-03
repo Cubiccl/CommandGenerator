@@ -16,14 +16,45 @@ import commandGenerator.main.DisplayHelper;
 public class WarningBorderPanel extends HelperPanel
 {
 
-	private CLabel labelMode;
-	private CEntry entryValue;
-	private LangComboBox comboboxMode;
 	private static final String[] modes = { "distance", "time" };
+	private LangComboBox comboboxMode;
+	private CEntry entryValue;
+	private CLabel labelMode;
 
 	public WarningBorderPanel()
 	{
 		super(CGConstants.PANELID_OPTIONS, "GENERAL:options");
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		addLine(labelMode, comboboxMode);
+		add(entryValue);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		labelMode = new CLabel("GUI:worldborder.mode");
+
+		entryValue = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.warning.distance");
+
+		comboboxMode = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:worldborder.warning.mode", 2);
+		comboboxMode.setPreferredSize(new Dimension(200, 20));
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		comboboxMode.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				if (comboboxMode.getSelectedIndex() == 0) entryValue.setText("GUI:worldborder.warning.distance");
+				else entryValue.setText("GUI:worldborder.warning.time");
+			}
+		});
 	}
 
 	public String generateText()
@@ -53,37 +84,6 @@ public class WarningBorderPanel extends HelperPanel
 		Object[] options = (Object[]) data.get(getPanelId());
 		comboboxMode.setSelectedIndex((int) options[0]);
 		entryValue.setTextField((String) options[1]);
-	}
-
-	@Override
-	protected void createComponents()
-	{
-		labelMode = new CLabel("GUI:worldborder.mode");
-
-		entryValue = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.warning.distance");
-
-		comboboxMode = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:worldborder.warning.mode", 2);
-		comboboxMode.setPreferredSize(new Dimension(200, 20));
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		addLine(labelMode, comboboxMode);
-		add(entryValue);
-	}
-
-	@Override
-	protected void createListeners()
-	{
-		comboboxMode.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				if (comboboxMode.getSelectedIndex() == 0) entryValue.setText("GUI:worldborder.warning.distance");
-				else entryValue.setText("GUI:worldborder.warning.time");
-			}
-		});
 	}
 
 }

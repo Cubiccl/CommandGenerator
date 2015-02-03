@@ -11,13 +11,31 @@ import commandGenerator.main.CGConstants;
 public class EffectOptionsPanel extends OptionsPanel
 {
 
-	private EntitySelectionPanel panelEntity;
 	private EffectSelectionPanel panelEffect;
+	private EntitySelectionPanel panelEntity;
 
 	public EffectOptionsPanel()
 	{
 		super();
 	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelEntity);
+		add(panelEffect);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEffect = new EffectSelectionPanel(CGConstants.PANELID_EFFECT, "GENERAL:effect");
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	@Override
 	public String generateCommand()
@@ -29,23 +47,5 @@ public class EffectOptionsPanel extends OptionsPanel
 
 		return "effect " + entity.commandStructure() + " " + effect.commandStructure();
 	}
-
-	@Override
-	protected void createComponents()
-	{
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
-		panelEffect = new EffectSelectionPanel(CGConstants.PANELID_EFFECT, "GENERAL:effect");
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		add(panelEntity);
-		add(panelEffect);
-	}
-
-	@Override
-	protected void createListeners()
-	{}
 
 }

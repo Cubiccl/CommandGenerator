@@ -30,14 +30,14 @@ import commandGenerator.main.Lang;
 public class TagDisplayer extends JPanel implements CComponent
 {
 
-	private ObjectBase object;
+	private JEditorPane editorPane;
+	private GridBagConstraints gbc = new GridBagConstraints();
 	private String id;
 	private JList<String> list;
-	private JEditorPane editorPane;
+	private ObjectBase object;
 	private JScrollPane scrollPane, scrollList;
 	private Tag[] tags;
 	private List<Tag> values;
-	private GridBagConstraints gbc = new GridBagConstraints();
 
 	public TagDisplayer(String id, Tag[] tags)
 	{
@@ -92,31 +92,6 @@ public class TagDisplayer extends JPanel implements CComponent
 		display();
 	}
 
-	public void remove()
-	{
-		for (int i = 0; i < values.size(); i++)
-		{
-			if (values.get(i).getId().equals(getSelected().getId()))
-			{
-				values.remove(i);
-				break;
-			}
-		}
-		display();
-	}
-
-	public void help()
-	{
-		if (tags.length == 0) return;
-		Tag tag = getSelected();
-		DisplayHelper.showHelp(tag.getDescription(), tag.getName());
-	}
-
-	public List<Tag> getTagList()
-	{
-		return values;
-	}
-
 	private void display()
 	{
 		Tag sel = getSelected();
@@ -136,11 +111,65 @@ public class TagDisplayer extends JPanel implements CComponent
 		return null;
 	}
 
+	public List<Tag> getTagList()
+	{
+		return values;
+	}
+
+	public void help()
+	{
+		if (tags.length == 0) return;
+		Tag tag = getSelected();
+		DisplayHelper.showHelp(tag.getDescription(), tag.getName());
+	}
+
+	public void remove()
+	{
+		for (int i = 0; i < values.size(); i++)
+		{
+			if (values.get(i).getId().equals(getSelected().getId()))
+			{
+				values.remove(i);
+				break;
+			}
+		}
+		display();
+	}
+
+	@Override
+	public void reset()
+	{
+		values.clear();
+		display();
+	}
+
 	@Override
 	public void setEnabledContent(boolean enable)
 	{
 		list.setEnabled(enable);
 		editorPane.setEnabled(enable);
+	}
+
+	public void setList(Tag[] nbtTags)
+	{
+		tags = nbtTags;
+		updateList(object);
+	}
+
+	public void setSize(int width, int height)
+	{
+		super.setPreferredSize(new Dimension(width, height));
+		scrollList.setPreferredSize(new Dimension((width - 10) / 2, height - 10));
+		scrollPane.setPreferredSize(new Dimension((width - 10) / 2, height - 10));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void setupFrom(Map<String, Object> data)
+	{
+
+		if (data.get(id) != null) values = (List<Tag>) data.get(id);
+		display();
 	}
 
 	@Override
@@ -154,22 +183,6 @@ public class TagDisplayer extends JPanel implements CComponent
 
 		if (TagSelection.getAllowedTags(tags, object).length == 0) editorPane.setText(Lang.get("GUI:tag.none"));
 		else list.setSelectedIndex(0);
-		display();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public void setupFrom(Map<String, Object> data)
-	{
-
-		if (data.get(id) != null) values = (List<Tag>) data.get(id);
-		display();
-	}
-
-	@Override
-	public void reset()
-	{
-		values.clear();
 		display();
 	}
 
@@ -198,12 +211,5 @@ public class TagDisplayer extends JPanel implements CComponent
 		for (int i = 0; i < tags.length; i++)
 			if (tags[i] instanceof TagBlockEntity) ((TagBlockEntity) tags[i]).setItem((Item) object);
 
-	}
-
-	public void setSize(int width, int height)
-	{
-		super.setPreferredSize(new Dimension(width, height));
-		scrollList.setPreferredSize(new Dimension((width - 10) / 2, height - 10));
-		scrollPane.setPreferredSize(new Dimension((width - 10) / 2, height - 10));
 	}
 }

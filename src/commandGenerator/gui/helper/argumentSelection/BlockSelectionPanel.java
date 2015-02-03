@@ -1,11 +1,9 @@
 package commandGenerator.gui.helper.argumentSelection;
 
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.util.Map;
 
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
@@ -25,55 +23,43 @@ import commandGenerator.main.CGConstants;
 public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 {
 
-	private JLabel labelName, labelImage;
-	private NumberSpinner spinnerDamage;
-	private TextCombobox comboboxId;
-	private NBTTagPanel panelData;
 	private Item[] blockList;
+	private TextCombobox comboboxId;
 	private boolean data;
+	private JLabel labelName, labelImage;
+	private NBTTagPanel panelData;
+	private NumberSpinner spinnerDamage;
 
 	public BlockSelectionPanel(String id, String title, ObjectBase[] blockList, boolean data)
 	{
-		super(id, title, 800, 300);
-		this.data = data;
-		this.blockList = new Item[blockList.length];
-		for (int i = 0; i < blockList.length; i++)
-			this.blockList[i] = (Item) blockList[i];
+		super(id, title);
+	}
 
-		if (!data) setPreferredSize(new Dimension(600, 100));
+	@Override
+	protected void addComponents()
+	{
+		addLine(comboboxId, labelImage);
+		addLine(spinnerDamage, labelName);
+		if (data) add(panelData);
+	}
 
-		labelImage = new JLabel(((Item) blockList[0]).getTexture(0));
-		labelName = new JLabel(((Item) blockList[0]).getName(0), SwingConstants.CENTER);
+	@Override
+	protected void createComponents()
+	{
+		labelImage = new JLabel();
+		labelName = new JLabel();
 		labelName.setPreferredSize(new Dimension(250, 20));
 
-		spinnerDamage = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:block.damage", 0, ((Item) blockList[0]).getMaxDamage(), this);
+		spinnerDamage = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:block.damage", 0, 0, this);
 
-		String[] ids = new String[blockList.length];
-		for (int i = 0; i < ids.length; i++)
-			ids[i] = blockList[i].getId();
-		comboboxId = new TextCombobox(CGConstants.DATAID_NONE, "GUI:block.id", ids, this);
+		comboboxId = new TextCombobox(CGConstants.DATAID_NONE, "GUI:block.id", new String[0], this);
 
 		if (data) panelData = new NBTTagPanel("GUI:tag.block", Registerer.getObjectFromId("air"), DataTags.blocks);
-
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(comboboxId);
-		gbc.gridx++;
-		add(labelImage);
-		gbc.gridx--;
-		gbc.gridy++;
-		add(spinnerDamage);
-		gbc.gridx++;
-		add(labelName);
-		gbc.gridx--;
-		gbc.gridy++;
-		gbc.gridwidth = 2;
-		if (data) add(panelData);
-		gbc.gridwidth = 1;
-
 	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	public Item generateBlock()
 	{
@@ -83,6 +69,11 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 	public Item[] getBlockList()
 	{
 		return blockList;
+	}
+
+	public TagCompound getBlockTag()
+	{
+		return panelData.getNbtTags("BlockEntityTags");
 	}
 
 	public int getDamage()
@@ -97,32 +88,22 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 		labelName.setEnabled(enable);
 	}
 
-	public TagCompound getBlockTag()
-	{
-		return panelData.getNbtTags("BlockEntityTags");
-	}
-
 	@Override
-	public void updateLang()
+	protected void setupDetails(Object[] details)
 	{
-		super.updateLang();
-		updateSpinner();
-	}
+		ObjectBase[] list = (ObjectBase[]) details [0];
+		this.data = (boolean) details[1];
+		
+		this.blockList = new Item[list.length];
+		for (int i = 0; i < list.length; i++)
+			this.blockList[i] = (Item) list[i];
+		
+		String[] ids = new String[list.length];
+		for (int i = 0; i < ids.length; i++)
+			ids[i] = list[i].getId();
+		comboboxId.setData(ids);
 
-	@Override
-	public void updateCombobox()
-	{
-		spinnerDamage.setValues(0, generateBlock().getMaxDamage());
-		if (data) panelData.updateCombobox((Item) Registerer.getObjectFromId(comboboxId.getValue()));
-		labelImage.setIcon(generateBlock().getTexture(getDamage()));
-		labelName.setText(generateBlock().getName(getDamage()));
-	}
-
-	@Override
-	public void updateSpinner()
-	{
-		labelImage.setIcon(generateBlock().getTexture(getDamage()));
-		labelName.setText(generateBlock().getName(getDamage()));
+		updateCombobox();
 	}
 
 	@Override
@@ -142,6 +123,29 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 			if (block.getTag() != null) data.put(CGConstants.PANELID_NBT, block.getTag().getValue());
 			panelData.setupFrom(data);
 		}
+	}
+
+	@Override
+	public void updateCombobox()
+	{
+		spinnerDamage.setValues(0, generateBlock().getMaxDamage());
+		if (data) panelData.updateCombobox((Item) Registerer.getObjectFromId(comboboxId.getValue()));
+		labelImage.setIcon(generateBlock().getTexture(getDamage()));
+		labelName.setText(generateBlock().getName(getDamage()));
+	}
+
+	@Override
+	public void updateLang()
+	{
+		super.updateLang();
+		updateSpinner();
+	}
+
+	@Override
+	public void updateSpinner()
+	{
+		labelImage.setIcon(generateBlock().getTexture(getDamage()));
+		labelName.setText(generateBlock().getName(getDamage()));
 	}
 
 }

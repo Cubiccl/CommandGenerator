@@ -12,24 +12,33 @@ import commandGenerator.main.CGConstants;
 public class FireworksSelectionPanel extends HelperPanel
 {
 
-	private NumberSpinner spinnerFlight;
 	private ListSelectionPanel explosionsPanel;
+	private NumberSpinner spinnerFlight;
 
 	public FireworksSelectionPanel(String title)
 	{
-		super(CGConstants.DATAID_NONE, title, 710, 300);
+		super(CGConstants.DATAID_NONE, title);
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(spinnerFlight);
+		add(explosionsPanel);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		spinnerFlight = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:fireworks.flight", -128, 127, null);
 		spinnerFlight.setSelected(0);
 
 		explosionsPanel = new ListSelectionPanel("TAGS:Explosions", CGConstants.OBJECT_TAG_EXPLOSION);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(spinnerFlight);
-		gbc.gridy++;
-		add(explosionsPanel);
 	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	public TagList getExplosions()
 	{
@@ -47,18 +56,18 @@ public class FireworksSelectionPanel extends HelperPanel
 		return (int) spinnerFlight.getValue();
 	}
 
+	public void setup(int flight, List<Tag> list)
+	{
+		spinnerFlight.setSelected(flight);
+		if (list != null) explosionsPanel.setList(list);
+	}
+
 	@Override
 	public void updateLang()
 	{
 		updateTitle();
 		spinnerFlight.updateLang();
 		explosionsPanel.updateLang();
-	}
-
-	public void setup(int flight, List<Tag> list)
-	{
-		spinnerFlight.setSelected(flight);
-		if (list != null) explosionsPanel.setList(list);
 	}
 
 }

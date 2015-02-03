@@ -17,13 +17,9 @@ public class WorldspawnOptionsPanel extends OptionsPanel
 	}
 
 	@Override
-	public String generateCommand()
+	protected void addComponents()
 	{
-		Coordinates coords = panelCoords.generateCoord();
-
-		if (coords == null) return null;
-
-		return "setworldspawn " + coords.commandStructure();
+		add(panelCoords);
 	}
 
 	@Override
@@ -33,13 +29,17 @@ public class WorldspawnOptionsPanel extends OptionsPanel
 	}
 
 	@Override
-	protected void addComponents()
-	{
-		add(panelCoords);
-	}
-
-	@Override
 	protected void createListeners()
 	{}
+
+	@Override
+	public String generateCommand()
+	{
+		Coordinates coords = panelCoords.generateCoord();
+
+		if (coords == null) return null;
+
+		return "setworldspawn " + coords.commandStructure();
+	}
 
 }

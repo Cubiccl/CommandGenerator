@@ -1,5 +1,6 @@
 package commandGenerator.gui.helper.components;
 
+import java.awt.Dimension;
 import java.util.Map;
 
 import javax.swing.JButton;
@@ -23,22 +24,12 @@ public class CButton extends JButton implements CComponent
 		super(id);
 		this.id = id;
 		this.lang = lang;
+		setPreferredSize(new Dimension(200, 20));
 		updateLang();
 	}
 
-	public void setTitle(String id)
-	{
-		this.id = id;
-		updateLang();
-	}
-
-	public void updateLang()
-	{
-		if (lang) setText(Lang.get(id));
-		else setText(id);
-	}
-
-	public void setupFrom(Map<String, Object> data)
+	@Override
+	public void reset()
 	{}
 
 	@Override
@@ -47,8 +38,19 @@ public class CButton extends JButton implements CComponent
 		setEnabled(enable);
 	}
 
-	@Override
-	public void reset()
+	public void setTitle(String id)
+	{
+		this.id = id;
+		updateLang();
+	}
+
+	public void setupFrom(Map<String, Object> data)
 	{}
+
+	public void updateLang()
+	{
+		if (lang) setText(Lang.get(id));
+		else setText(id);
+	}
 
 }

@@ -13,15 +13,36 @@ import commandGenerator.main.DisplayHelper;
 public class WeatherOptionsPanel extends OptionsPanel
 {
 
-	private CLabel labelWeather;
-	private CEntry entryDuration;
-	private LangComboBox comboboxWeather;
 	private static final String[] modes = { "clear", "rain", "thunder" };
+	private LangComboBox comboboxWeather;
+	private CEntry entryDuration;
+	private CLabel labelWeather;
 
 	public WeatherOptionsPanel()
 	{
 		super();
 	}
+
+	@Override
+	protected void addComponents()
+	{
+		addLine(labelWeather, comboboxWeather);
+		add(entryDuration);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		labelWeather = new CLabel("GUI:weather.select");
+
+		entryDuration = new CEntry(CGConstants.DATAID_NONE, "GUI:weather.duration");
+
+		comboboxWeather = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:weather.type", 3);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	@Override
 	public String generateCommand()
@@ -52,26 +73,5 @@ public class WeatherOptionsPanel extends OptionsPanel
 		super.setupFrom(data);
 		if (data.get(CGConstants.DATAID_VALUE) != null) entryDuration.setTextField((String) data.get(CGConstants.DATAID_VALUE));
 	}
-
-	@Override
-	protected void createComponents()
-	{
-		labelWeather = new CLabel("GUI:weather.select");
-
-		entryDuration = new CEntry(CGConstants.DATAID_NONE, "GUI:weather.duration");
-
-		comboboxWeather = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:weather.type", 3);
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		addLine(labelWeather, comboboxWeather);
-		add(entryDuration);
-	}
-
-	@Override
-	protected void createListeners()
-	{}
 
 }

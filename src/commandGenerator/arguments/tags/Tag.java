@@ -17,13 +17,13 @@ import commandGenerator.main.Lang;
 public abstract class Tag extends ObjectBase
 {
 
-	public static final int NONE = 0, MIN = 1, MAX = 2, BOTH = 3;
 	public static final byte BOOLEAN = 0, STRING = 1, INT = 2, FLOAT = 3, COMPOUND = 4, LIST = 5;
+	public static final int NONE = 0, MIN = 1, MAX = 2, BOTH = 3;
 
 	private ObjectBase[] applicable;
-	protected JPanel panel;
 	protected GridBagConstraints gbc;
 	private boolean isEmpty;
+	protected JPanel panel;
 	private byte type;
 
 	/** The base tag.
@@ -67,19 +67,13 @@ public abstract class Tag extends ObjectBase
 	/** Called when the user adds this tag. Asks the user for all parameters needed. Returns true if the user canceled */
 	public abstract void askValue();
 
-	/** Is this tag empty? */
-	public boolean isEmpty()
-	{
-		return isEmpty;
-	}
+	/** Generates the NBT structure for the command. */
+	public abstract String commandStructure();
 
 	/** Displays the Tag to the user.
 	 * 
 	 * @param details */
 	public abstract String display(int details, int lvls);
-
-	/** Generates the NBT structure for the command. */
-	public abstract String commandStructure();
 
 	public ObjectBase[] getApplicable()
 	{
@@ -107,9 +101,20 @@ public abstract class Tag extends ObjectBase
 		return Lang.get("TAGS:" + getId());
 	}
 
+	public byte getTagType()
+	{
+		return type;
+	}
+
 	public ImageIcon getTexture()
 	{
 		return null;
+	}
+
+	/** Is this tag empty? */
+	public boolean isEmpty()
+	{
+		return isEmpty;
 	}
 
 	/** Displays the Tag panel. Returns true if the user canceled. */
@@ -124,10 +129,5 @@ public abstract class Tag extends ObjectBase
 	public String toString()
 	{
 		return display(true);
-	}
-
-	public byte getTagType()
-	{
-		return type;
 	}
 }

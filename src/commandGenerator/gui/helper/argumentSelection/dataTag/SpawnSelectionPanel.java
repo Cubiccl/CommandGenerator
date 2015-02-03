@@ -1,12 +1,9 @@
 package commandGenerator.gui.helper.argumentSelection.dataTag;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import commandGenerator.arguments.objects.Entity;
@@ -18,24 +15,36 @@ import commandGenerator.arguments.tags.TagInt;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.CLabel;
+import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class SpawnSelectionPanel extends JPanel implements IBox
+public class SpawnSelectionPanel extends HelperPanel implements IBox
 {
 
-	private CLabel labelType, labelWeight;
-	private JTextField textfieldWeight;
 	private CComboBox combobox;
+	private CLabel labelType, labelWeight;
 	private NBTTagPanel panelTag;
-	private GridBagConstraints gbc;
+	private JTextField textfieldWeight;
 
 	public SpawnSelectionPanel()
 	{
-		super(new GridBagLayout());
+		super(CGConstants.PANELID_NONE, "GUI:spawn.entity");
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		addLine(labelType, combobox);
+		addLine(labelWeight, textfieldWeight);
+		add(panelTag);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		labelType = new CLabel("GUI:spawn.entity");
 		labelWeight = new CLabel("GUI:spawn.weight");
 
@@ -45,24 +54,11 @@ public class SpawnSelectionPanel extends JPanel implements IBox
 		combobox = new CComboBox(CGConstants.DATAID_NONE, "GUI:entity.select", Entity.getListNoPlayer(), this);
 
 		panelTag = new NBTTagPanel("GUI:entity.tags", Entity.player, DataTags.entities);
-
-		gbc = new GridBagConstraints();
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(labelType);
-		gbc.gridy++;
-		add(labelWeight);
-		gbc.gridy++;
-		gbc.gridwidth = 2;
-		add(panelTag);
-		gbc.gridwidth = 1;
-
-		gbc.gridx++;
-		gbc.gridy = 0;
-		add(combobox);
-		gbc.gridy++;
-		add(textfieldWeight);
 	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	public TagCompound getTag()
 	{
@@ -92,12 +88,6 @@ public class SpawnSelectionPanel extends JPanel implements IBox
 		return tag;
 	}
 
-	@Override
-	public void updateCombobox()
-	{
-		panelTag.updateCombobox((Entity) combobox.getValue());
-	}
-
 	public void setup(TagCompound nbt)
 	{
 		for (int i = 0; i < nbt.size(); i++)
@@ -112,6 +102,12 @@ public class SpawnSelectionPanel extends JPanel implements IBox
 				panelTag.setupFrom(data);
 			}
 		}
+	}
+
+	@Override
+	public void updateCombobox()
+	{
+		panelTag.updateCombobox((Entity) combobox.getValue());
 	}
 
 }

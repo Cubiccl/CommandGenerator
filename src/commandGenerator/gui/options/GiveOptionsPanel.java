@@ -12,13 +12,31 @@ import commandGenerator.main.CGConstants;
 public class GiveOptionsPanel extends OptionsPanel
 {
 
-	private EntitySelectionPanel panelPlayer;
 	private ItemSelectionPanel panelItem;
+	private EntitySelectionPanel panelPlayer;
 
 	public GiveOptionsPanel()
 	{
 		super();
 	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelPlayer);
+		add(panelItem);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:give.item", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	@Override
 	public String generateCommand()
@@ -34,23 +52,5 @@ public class GiveOptionsPanel extends OptionsPanel
 				+ panelItem.getItemTag().commandStructure().substring(panelItem.getItemTag().getId().length() + 1);
 		return text;
 	}
-
-	@Override
-	protected void createComponents()
-	{
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
-		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:give.item", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		add(panelPlayer);
-		add(panelItem);
-	}
-
-	@Override
-	protected void createListeners()
-	{}
 
 }

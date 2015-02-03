@@ -13,21 +13,6 @@ public class Lang
 	private static final String[] objectCategories = { "ITEMS", "ENTITIES", "ACHIEVEMENTS", "ATTRIBUTES", "EFFECTS", "ENCHANTS", "PARTICLES",
 			"SOUNDS", "TAGS", "END" }, guiCategories = { "GUI", "GENERAL", "WARNING", "HELP", "RESOURCES", "END" };
 
-	/** Updates the language dictionaries. */
-	public static void updateLang()
-	{
-		dictGui = FileHelper.readLanguageFile(Settings.languages[CommandGenerator.opt.getLanguage()] + "_gui", guiCategories);
-		dictObjects = FileHelper.readLanguageFile(Settings.languages[CommandGenerator.opt.getLanguage()] + "_objects", objectCategories);
-		CommandGenerator.gui.updateLang();
-	}
-
-	/** Initializes the language dictionaries. */
-	public static void initLang()
-	{
-		dictGui = FileHelper.readLanguageFile(Settings.languages[CommandGenerator.opt.getLanguage()] + "_gui", guiCategories);
-		dictObjects = FileHelper.readLanguageFile(Settings.languages[CommandGenerator.opt.getLanguage()] + "_objects", objectCategories);
-	}
-
 	/** Returns true if the translation exists.
 	 * 
 	 * @param dict
@@ -67,6 +52,21 @@ public class Lang
 			return details[1];
 		}
 		return dict.get(details[0]).get(details[1]).replaceAll("N/L", "\n");
+	}
+
+	/** Initializes the language dictionaries. */
+	public static void initLang()
+	{
+		dictGui = FileHelper.readLanguageFile(Settings.languages[CommandGenerator.opt.getLanguage()] + "_gui", guiCategories);
+		dictObjects = FileHelper.readLanguageFile(Settings.languages[CommandGenerator.opt.getLanguage()] + "_objects", objectCategories);
+	}
+
+	/** Updates the language dictionaries. */
+	public static void updateLang()
+	{
+		dictGui = FileHelper.readLanguageFile(Settings.languages[CommandGenerator.opt.getLanguage()] + "_gui", guiCategories);
+		dictObjects = FileHelper.readLanguageFile(Settings.languages[CommandGenerator.opt.getLanguage()] + "_objects", objectCategories);
+		CommandGenerator.gui.updateLang();
 	}
 
 }

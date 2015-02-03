@@ -13,13 +13,31 @@ import commandGenerator.main.CGConstants;
 public class TestforblockOptionsPanel extends OptionsPanel
 {
 
-	private CoordSelectionPanel panelCoord;
 	private BlockSelectionPanel panelBlock;
+	private CoordSelectionPanel panelCoord;
 
 	public TestforblockOptionsPanel()
 	{
 		super();
 	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelCoord);
+		add(panelBlock);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:block.coords", true, false);
+		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:testforblocks.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	@Override
 	public String generateCommand()
@@ -39,23 +57,5 @@ public class TestforblockOptionsPanel extends OptionsPanel
 
 		return command;
 	}
-
-	@Override
-	protected void createComponents()
-	{
-		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:block.coords", true, false);
-		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:testforblocks.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		add(panelCoord);
-		add(panelBlock);
-	}
-
-	@Override
-	protected void createListeners()
-	{}
 
 }

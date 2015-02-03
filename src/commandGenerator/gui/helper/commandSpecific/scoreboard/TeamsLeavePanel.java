@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.commandSpecific.scoreboard;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -17,19 +16,37 @@ import commandGenerator.main.DisplayHelper;
 public class TeamsLeavePanel extends ScoreboardPanel
 {
 
-	private JTextField textfieldTeam;
 	private CCheckBox checkboxTeam;
 	private EntitySelectionPanel panelPlayer;
+	private JTextField textfieldTeam;
 
 	public TeamsLeavePanel()
 	{
 		super();
-		setPreferredSize(new Dimension(500, 300));
 
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		addLine(checkboxTeam, textfieldTeam);
+		add(panelPlayer);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		textfieldTeam = new JTextField(15);
 
 		checkboxTeam = new CCheckBox(CGConstants.DATAID_NONE, "GUI:scoreboard.teams.leave");
 		checkboxTeam.setSelected(true);
+
+		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+	}
+
+	@Override
+	protected void createListeners()
+	{
 		checkboxTeam.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -37,20 +54,6 @@ public class TeamsLeavePanel extends ScoreboardPanel
 				textfieldTeam.setEnabled(checkboxTeam.isSelected());
 			}
 		});
-
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(checkboxTeam);
-		gbc.gridx++;
-		add(textfieldTeam);
-
-		gbc.gridx--;
-		gbc.gridy++;
-		gbc.gridwidth = 2;
-		add(panelPlayer);
-		gbc.gridwidth = 1;
 	}
 
 	@Override

@@ -28,9 +28,9 @@ import commandGenerator.main.Settings;
 public class CGMenubar extends JMenuBar
 {
 
+	private static JMenuItem english, english_gb;
 	private static JMenu menu, lang;
 	private static JMenuItem reset, changelog, link, folder, exit;
-	private static JMenuItem english, english_gb;
 
 	/** The program's menubar. */
 	public CGMenubar()

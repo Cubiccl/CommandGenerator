@@ -13,9 +13,9 @@ public abstract class OptionsPanel extends HelperPanel implements CComponent
 	private static final int WIDTH = 950;
 
 	/** Creates a new Options Panel. */
-	public OptionsPanel()
+	public OptionsPanel(Object... details)
 	{
-		super(CGConstants.PANELID_NONE, "GENERAL:options");
+		super(CGConstants.PANELID_NONE, "GENERAL:options", details);
 		setPreferredSize(new Dimension(WIDTH, getPreferredSize().height));
 	}
 

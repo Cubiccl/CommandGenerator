@@ -19,14 +19,10 @@ public class XpOptionsPanel extends OptionsPanel
 	}
 
 	@Override
-	public String generateCommand()
+	protected void addComponents()
 	{
-		Target player = panelEntity.generateEntity();
-		String xp = panelXp.generateXp();
-
-		if (player == null || xp == null) return null;
-
-		return "xp " + xp + " " + player.commandStructure();
+		add(panelXp);
+		add(panelEntity);
 	}
 
 	@Override
@@ -37,14 +33,18 @@ public class XpOptionsPanel extends OptionsPanel
 	}
 
 	@Override
-	protected void addComponents()
-	{
-		add(panelXp);
-		add(panelEntity);
-	}
-
-	@Override
 	protected void createListeners()
 	{}
+
+	@Override
+	public String generateCommand()
+	{
+		Target player = panelEntity.generateEntity();
+		String xp = panelXp.generateXp();
+
+		if (player == null || xp == null) return null;
+
+		return "xp " + xp + " " + player.commandStructure();
+	}
 
 }

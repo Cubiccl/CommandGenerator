@@ -10,12 +10,12 @@ import commandGenerator.main.Lang;
 public class Enchantment
 {
 
-	/** This Enchantment's type. */
-	private EnchantType type;
-	/** This Enchantment's level. */
-	private int level;
 	/** True if this Enchantment should respect Survival maximum levels. */
 	private boolean checkMax;
+	/** This Enchantment's level. */
+	private int level;
+	/** This Enchantment's type. */
+	private EnchantType type;
 
 	/** Creates a new Enchantment.
 	 * 
@@ -43,10 +43,10 @@ public class Enchantment
 		this.checkMax = checkMax;
 	}
 
-	/** Returns this Enchantment's type. */
-	public EnchantType getType()
+	/** Returns a String version of this Enchantment to be displayed to the user. */
+	public String display()
 	{
-		return type;
+		return Lang.get("GUI:enchant.display").replaceAll("<type>", Lang.get("ENCHANTS:" + type.getId())).replaceAll("<lvl>", Integer.toString(level + 1));
 	}
 
 	/** Returns this Enchantment's level. */
@@ -60,6 +60,12 @@ public class Enchantment
 	{
 
 		return type.getName();
+	}
+
+	/** Returns this Enchantment's type. */
+	public EnchantType getType()
+	{
+		return type;
 	}
 
 	/** Checks if the Enchantment is valid. */
@@ -83,12 +89,6 @@ public class Enchantment
 		tag.addTag(new TagInt("id").setValue(type.getIdNum()));
 		tag.addTag(new TagInt("lvl").setValue(level));
 		return tag;
-	}
-
-	/** Returns a String version of this Enchantment to be displayed to the user. */
-	public String display()
-	{
-		return Lang.get("GUI:enchant.display").replaceAll("<type>", Lang.get("ENCHANTS:" + type.getId())).replaceAll("<lvl>", Integer.toString(level + 1));
 	}
 
 }

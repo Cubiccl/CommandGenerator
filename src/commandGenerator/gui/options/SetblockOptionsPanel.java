@@ -26,12 +26,45 @@ public class SetblockOptionsPanel extends OptionsPanel
 
 	private JButton buttonHelp;
 	private LangComboBox comboboxMode;
-	private CoordSelectionPanel panelCoord;
 	private BlockSelectionPanel panelBlock;
+	private CoordSelectionPanel panelCoord;
 
 	public SetblockOptionsPanel()
 	{
 		super();
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(comboboxMode);
+		add(buttonHelp);
+		add(panelCoord);
+		add(panelBlock);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		buttonHelp = new JButton("?");
+
+		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:placeblock.mode", 3);
+		comboboxMode.setPreferredSize(new Dimension(200, 20));
+
+		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:setblock.coords", true, false);
+		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:setblock.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		buttonHelp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				DisplayHelper.showHelp(Lang.get("HELP:placeblock.mode_" + comboboxMode.getSelectedIndex()),
+						Lang.get("RESOURCES:placeblock.mode_" + comboboxMode.getSelectedIndex()));
+			}
+		});
 	}
 
 	@Override
@@ -51,39 +84,6 @@ public class SetblockOptionsPanel extends OptionsPanel
 				+ tag.commandStructure().substring(tag.getId().length() + 1);
 
 		return command;
-	}
-
-	@Override
-	protected void createComponents()
-	{
-		buttonHelp = new JButton("?");
-
-		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:placeblock.mode", 3);
-		comboboxMode.setPreferredSize(new Dimension(200, 20));
-
-		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:setblock.coords", true, false);
-		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:setblock.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		add(comboboxMode);
-		add(buttonHelp);
-		add(panelCoord);
-		add(panelBlock);
-	}
-
-	@Override
-	protected void createListeners()
-	{
-		buttonHelp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				DisplayHelper.showHelp(Lang.get("HELP:placeblock.mode_" + comboboxMode.getSelectedIndex()),
-						Lang.get("RESOURCES:placeblock.mode_" + comboboxMode.getSelectedIndex()));
-			}
-		});
 	}
 
 }

@@ -13,8 +13,8 @@ import commandGenerator.main.Resources;
 public class MainWindow extends JFrame
 {
 
-	public static PanelCommandSelection panelGeneral;
 	public static CGMenubar menubar;
+	public static PanelCommandSelection panelGeneral;
 
 	/** The window of the program. */
 	public MainWindow()

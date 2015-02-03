@@ -20,14 +20,26 @@ public class TeamsOptionPanel extends ScoreboardPanel
 	public static final String[] scoreboardTeamsOptionList = { "color", "friendlyfire", "seeFriendlyInvisibles", "nametagVisibility", "deathMessageVisibility" },
 			visibilityList = { "never", "hideForOtherTeams", "hideForOwnTeam", "always" };
 
-	private CLabel labelMode, labelValue;
-	private CEntry entryTeam;
 	private LangComboBox comboboxMode, comboboxValue;
+	private CEntry entryTeam;
+	private CLabel labelMode, labelValue;
 
 	public TeamsOptionPanel()
 	{
 		super();
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(entryTeam);
+		addLine(labelMode, comboboxMode);
+		addLine(labelValue, comboboxValue);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		labelMode = new CLabel("GUI:scoreboard.teams.option.option");
 		labelValue = new CLabel("GUI:scoreboard.teams.option.value");
 
@@ -35,6 +47,14 @@ public class TeamsOptionPanel extends ScoreboardPanel
 
 		comboboxMode = new LangComboBox(CGConstants.DATAID_CHECK, "RESOURCES:scoreboard.teams.option", 5);
 		comboboxMode.setPreferredSize(new Dimension(200, 20));
+
+		comboboxValue = new LangComboBox(CGConstants.DATAID_VALUE, "RESOURCES:color", 17);
+		comboboxValue.setPreferredSize(new Dimension(200, 20));
+	}
+
+	@Override
+	protected void createListeners()
+	{
 		comboboxMode.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -45,24 +65,6 @@ public class TeamsOptionPanel extends ScoreboardPanel
 				if (comboboxMode.getSelectedIndex() >= 3) comboboxValue.setText("RESOURCES:scoreboard.teams.visibility", 4);
 			}
 		});
-
-		comboboxValue = new LangComboBox(CGConstants.DATAID_VALUE, "RESOURCES:color", 17);
-		comboboxValue.setPreferredSize(new Dimension(200, 20));
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridwidth = 2;
-		add(entryTeam);
-		gbc.gridwidth = 1;
-		gbc.gridy++;
-		add(labelMode);
-		gbc.gridy++;
-		add(labelValue);
-		gbc.gridx++;
-		gbc.gridy--;
-		add(comboboxMode);
-		gbc.gridy++;
-		add(comboboxValue);
 	}
 
 	@Override

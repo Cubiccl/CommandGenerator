@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.argumentSelection;
 
-import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -17,18 +16,34 @@ import commandGenerator.main.DisplayHelper;
 public class CoordSelectionPanel extends HelperPanel
 {
 
-	private boolean rotation, relative;
-	protected CEntry entryX, entryY, entryZ;
 	private CCheckBox checkboxRotation, checkboxRelative;
+	protected CEntry entryX, entryY, entryZ;
 	private RotationSelectionPanel panelRotation;
+	private boolean rotation, relative;
 
 	public CoordSelectionPanel(String id, String title, boolean relative, boolean rotation)
 	{
+		super(id, title, relative, rotation);
+	}
 
-		super(id, title, 250, 250);
-		this.relative = relative;
-		this.rotation = rotation;
+	@Override
+	protected void addComponents()
+	{
+		add(entryX);
+		add(entryY);
+		add(entryZ);
+		if (relative) add(checkboxRelative);
 
+		if (rotation)
+		{
+			add(checkboxRotation);
+			add(panelRotation);
+		}
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		entryX = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.x");
 		entryY = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.y");
 		entryZ = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.z");
@@ -53,33 +68,14 @@ public class CoordSelectionPanel extends HelperPanel
 
 		if (rotation)
 		{
-			panelRotation = new RotationSelectionPanel(id, "GUI:coord.rotation");
+			panelRotation = new RotationSelectionPanel(getPanelId(), "GUI:coord.rotation");
 			panelRotation.setEnabledContent(false);
 		}
-
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridwidth = 1;
-		add(entryX);
-		gbc.gridy++;
-		add(entryY);
-		gbc.gridy++;
-		add(entryZ);
-		gbc.gridy++;
-		if (relative)
-		{
-			add(checkboxRelative);
-			gbc.gridy++;
-		}
-		if (rotation)
-		{
-			add(checkboxRotation);
-			gbc.gridy++;
-			add(panelRotation);
-		}
-
 	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	public Coordinates generateCoord()
 	{
@@ -125,6 +121,13 @@ public class CoordSelectionPanel extends HelperPanel
 			panelRotation.setEnabledContent(false);
 		}
 
+	}
+
+	@Override
+	protected void setupDetails(Object[] details)
+	{
+		relative = (boolean) details[0];
+		rotation = (boolean) details[1];
 	}
 
 	@Override

@@ -21,19 +21,19 @@ import commandGenerator.main.CGConstants;
 public class TextCombobox extends JPanel implements CComponent
 {
 
+	private JComboBox<String> box;
 	private String id;
+	private CLabel label;
+	private String[] names;
 	private IBox parent;
 	private JTextField text;
-	private CLabel label;
-	private JComboBox<String> box;
-	private String[] names;
 
 	public TextCombobox(String id, String title, String[] names, final IBox parent)
 	{
 		super(new GridBagLayout());
 		text = new JTextField(18);
 		text.addKeyListener(new KeyListener() {
-			public void keyTyped(KeyEvent arg0)
+			public void keyPressed(KeyEvent arg0)
 			{}
 
 			public void keyReleased(KeyEvent e)
@@ -41,7 +41,7 @@ public class TextCombobox extends JPanel implements CComponent
 				search(e);
 			}
 
-			public void keyPressed(KeyEvent arg0)
+			public void keyTyped(KeyEvent arg0)
 			{}
 		});
 
@@ -82,6 +82,26 @@ public class TextCombobox extends JPanel implements CComponent
 		if (parent != null) parent.updateCombobox();
 	}
 
+	/** Returns the selected index. */
+	public int getIndex()
+	{
+		return box.getSelectedIndex();
+	}
+
+	/** Returns the selected Object. */
+	public String getValue()
+	{
+		if (box.getSelectedItem() == null) return null;
+		return (String) box.getSelectedItem();
+	}
+
+	@Override
+	public void reset()
+	{
+		text.setText("");
+		box.setSelectedIndex(0);
+	}
+
 	private void search(KeyEvent key)
 	{
 
@@ -107,35 +127,12 @@ public class TextCombobox extends JPanel implements CComponent
 
 	}
 
-	public void updateLang()
-	{
-		label.updateLang();
-	}
-
-	/** Returns the selected Object. */
-	public String getValue()
-	{
-		if (box.getSelectedItem() == null) return null;
-		return (String) box.getSelectedItem();
-	}
-
-	/** Returns the selected index. */
-	public int getIndex()
-	{
-		return box.getSelectedIndex();
-	}
-
 	public void setData(String[] names)
 	{
 		this.names = names;
 		text.setText("");
 		search(null);
 		box.setPreferredSize(new Dimension(200, 20));
-	}
-
-	public void setSelected(String selection)
-	{
-		box.setSelectedItem(selection);
 	}
 
 	public void setEnabledContent(boolean enable)
@@ -145,17 +142,20 @@ public class TextCombobox extends JPanel implements CComponent
 		box.setEnabled(enable);
 	}
 
+	public void setSelected(String selection)
+	{
+		box.setSelectedItem(selection);
+	}
+
 	@Override
 	public void setupFrom(Map<String, Object> data)
 	{
 		if (!id.equals(CGConstants.DATAID_NONE)) box.setSelectedIndex((int) data.get(id));
 	}
 
-	@Override
-	public void reset()
+	public void updateLang()
 	{
-		text.setText("");
-		box.setSelectedIndex(0);
+		label.updateLang();
 	}
 
 }

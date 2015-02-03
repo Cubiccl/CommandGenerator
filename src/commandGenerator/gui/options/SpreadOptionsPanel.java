@@ -10,13 +10,31 @@ import commandGenerator.main.CGConstants;
 public class SpreadOptionsPanel extends OptionsPanel
 {
 
-	private SpreadPanel panelSpreadOptions;
 	private EntitySelectionPanel panelPlayer;
+	private SpreadPanel panelSpreadOptions;
 
 	public SpreadOptionsPanel()
 	{
 		super();
 	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelSpreadOptions);
+		add(panelPlayer);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		panelSpreadOptions = new SpreadPanel("GENERAL:options");
+		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	@Override
 	public String generateCommand()
@@ -37,23 +55,5 @@ public class SpreadOptionsPanel extends OptionsPanel
 
 		return command;
 	}
-
-	@Override
-	protected void createComponents()
-	{
-		panelSpreadOptions = new SpreadPanel("GENERAL:options");
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		add(panelSpreadOptions);
-		add(panelPlayer);
-	}
-
-	@Override
-	protected void createListeners()
-	{}
 
 }

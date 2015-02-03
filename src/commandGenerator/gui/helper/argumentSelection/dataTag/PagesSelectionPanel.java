@@ -30,14 +30,14 @@ import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
 public class PagesSelectionPanel extends JPanel
-{
+{//TODO Turn into HelperPanel
 
 	private CButton buttonAddText, buttonAddJson, buttonEdit, buttonRemove;
-	private JList<String> list;
 	private JEditorPane editorpane;
-	private JScrollPane scrollpane, scrolllist;
 	private GridBagConstraints gbc = new GridBagConstraints();
+	private JList<String> list;
 	private List<String> pages = new ArrayList<String>();
+	private JScrollPane scrollpane, scrolllist;
 
 	public PagesSelectionPanel()
 	{
@@ -110,11 +110,32 @@ public class PagesSelectionPanel extends JPanel
 
 	}
 
-	private void remove()
+	private void addJson()
 	{
-		if (list.getSelectedIndex() == -1) return;
-		pages.remove(list.getSelectedIndex());
+		ListSelectionPanel panel = new ListSelectionPanel("GENERAL:text", CGConstants.OBJECT_JSON);
+		if (DisplayHelper.showQuestion(panel, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
+
+		TagList tag = new TagList() {
+			public void askValue()
+			{}
+		};
+		tag.setValue(panel.getList());
+		pages.add(tag.commandStructure());
 		setupList();
+	}
+
+	private void addText()
+	{
+		JTextArea area = new JTextArea();
+		area.setPreferredSize(new Dimension(400, 400));
+		if (DisplayHelper.showQuestion(area, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
+		pages.add(area.getText());
+		setupList();
+	}
+
+	private void display()
+	{
+		if (list.getSelectedIndex() != -1) editorpane.setText(pages.get(list.getSelectedIndex()));
 	}
 
 	private void edit()
@@ -153,43 +174,6 @@ public class PagesSelectionPanel extends JPanel
 		setupList();
 	}
 
-	private void addJson()
-	{
-		ListSelectionPanel panel = new ListSelectionPanel("GENERAL:text", CGConstants.OBJECT_JSON);
-		if (DisplayHelper.showQuestion(panel, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
-
-		TagList tag = new TagList() {
-			public void askValue()
-			{}
-		};
-		tag.setValue(panel.getList());
-		pages.add(tag.commandStructure());
-		setupList();
-	}
-
-	private void addText()
-	{
-		JTextArea area = new JTextArea();
-		area.setPreferredSize(new Dimension(400, 400));
-		if (DisplayHelper.showQuestion(area, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
-		pages.add(area.getText());
-		setupList();
-	}
-
-	private void setupList()
-	{
-		String[] names = new String[pages.size()];
-		for (int i = 0; i < names.length; i++)
-			names[i] = Lang.get("GENERAL:text") + " " + (i + 1);
-		list.setListData(names);
-		display();
-	}
-
-	private void display()
-	{
-		if (list.getSelectedIndex() != -1) editorpane.setText(pages.get(list.getSelectedIndex()));
-	}
-
 	public List<Tag> getPages()
 	{
 		List<Tag> tags = new ArrayList<Tag>();
@@ -200,12 +184,28 @@ public class PagesSelectionPanel extends JPanel
 		return tags;
 	}
 
+	private void remove()
+	{
+		if (list.getSelectedIndex() == -1) return;
+		pages.remove(list.getSelectedIndex());
+		setupList();
+	}
+
 	public void setup(List<Tag> value)
 	{
 		if (value == null) return;
 		pages.clear();
 		for (int i = 0; i < value.size(); i++)
 			pages.add(((TagString) value.get(i)).getValue());
+	}
+
+	private void setupList()
+	{
+		String[] names = new String[pages.size()];
+		for (int i = 0; i < names.length; i++)
+			names[i] = Lang.get("GENERAL:text") + " " + (i + 1);
+		list.setListData(names);
+		display();
 	}
 
 }

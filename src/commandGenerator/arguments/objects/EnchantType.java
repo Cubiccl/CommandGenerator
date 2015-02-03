@@ -13,8 +13,17 @@ public class EnchantType extends ObjectBase
 
 	private static Map<Integer, EnchantType> enchants = new HashMap<Integer, EnchantType>();
 
+	/** Returns the Enchantment type for the specified ID.
+	 * 
+	 * @param id
+	 *            - <i>int</i> - The Enchantment's ID. */
+	public static ObjectBase getEnchantFromIdNum(int id)
+	{
+		return enchants.get(id);
+	}
 	/** This Enchantment's numercial ID. */
 	private int idNum;
+
 	/** This Enchantment's maximum level. */
 	private int max;
 
@@ -34,16 +43,16 @@ public class EnchantType extends ObjectBase
 		enchants.put(idNum, this);
 	}
 
-	/** Returns this Enchantment's maximum level. */
-	public int getMax()
-	{
-		return max;
-	}
-
 	/** Returns this Enchantment's numerical ID. */
 	public int getIdNum()
 	{
 		return idNum;
+	}
+
+	/** Returns this Enchantment's maximum level. */
+	public int getMax()
+	{
+		return max;
 	}
 
 	/** Returns this Enchantment's name. */
@@ -56,15 +65,6 @@ public class EnchantType extends ObjectBase
 	public ImageIcon getTexture()
 	{
 		return null;
-	}
-
-	/** Returns the Enchantment type for the specified ID.
-	 * 
-	 * @param id
-	 *            - <i>int</i> - The Enchantment's ID. */
-	public static ObjectBase getEnchantFromIdNum(int id)
-	{
-		return enchants.get(id);
 	}
 
 }

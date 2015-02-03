@@ -17,15 +17,50 @@ import commandGenerator.main.CGConstants;
 public class TitleOptionsPanel extends OptionsPanel
 {
 
+	private static final String[] modes = { "title", "subtitle", "times" };
 	private LangComboBox comboboxMode;
-	private EntitySelectionPanel panelPlayer;
 	private TitleDetailsPanel panelDetails;
 	private ListSelectionPanel panelJson;
-	private static final String[] modes = { "title", "subtitle", "times" };
+	private EntitySelectionPanel panelPlayer;
 
 	public TitleOptionsPanel()
 	{
 		super();
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(comboboxMode);
+		add(panelPlayer);
+		add(panelDetails);
+		add(panelJson);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:title.mode", 3);
+		comboboxMode.setPreferredSize(new Dimension(200, 20));
+
+		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelDetails = new TitleDetailsPanel("GENERAL:options");
+		panelDetails.setVisible(false);
+		panelJson = new ListSelectionPanel("GUI:title.json", CGConstants.OBJECT_JSON);
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		comboboxMode.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				panelDetails.setVisible(comboboxMode.getSelectedIndex() == 2);
+				panelJson.setVisible(comboboxMode.getSelectedIndex() != 2);
+				panelPlayer.updateLang();
+			}
+		});
 	}
 
 	@Override
@@ -50,41 +85,6 @@ public class TitleOptionsPanel extends OptionsPanel
 			list.setValue(panelJson.getList());
 			return "title " + player.commandStructure() + " " + modes[comboboxMode.getSelectedIndex()] + " " + list.commandStructure();
 		}
-	}
-
-	@Override
-	protected void createComponents()
-	{
-		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:title.mode", 3);
-		comboboxMode.setPreferredSize(new Dimension(200, 20));
-
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
-		panelDetails = new TitleDetailsPanel("GENERAL:options");
-		panelDetails.setVisible(false);
-		panelJson = new ListSelectionPanel("GUI:title.json", CGConstants.OBJECT_JSON);
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		add(comboboxMode);
-		add(panelPlayer);
-		add(panelDetails);
-		add(panelJson);
-	}
-
-	@Override
-	protected void createListeners()
-	{
-		comboboxMode.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				panelDetails.setVisible(comboboxMode.getSelectedIndex() == 2);
-				panelJson.setVisible(comboboxMode.getSelectedIndex() != 2);
-				panelPlayer.updateLang();
-			}
-		});
 	}
 
 }

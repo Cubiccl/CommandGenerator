@@ -16,32 +16,35 @@ import commandGenerator.main.DisplayHelper;
 public class AttributeSelectionPanel extends HelperPanel
 {
 
-	private CEntry entryAmount;
 	private CComboBox comboboxAttribute;
 	private LangComboBox comboboxOperation;
+	private CEntry entryAmount;
 
 	public AttributeSelectionPanel()
 	{
-		super(CGConstants.PANELID_OPTIONS, "GUI:add.attribute", 600, 400);
+		super(CGConstants.PANELID_OPTIONS, "GUI:add.attribute");
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(entryAmount);
+		add(comboboxAttribute);
+		add(comboboxOperation);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		entryAmount = new CEntry(CGConstants.DATAID_NONE, "GUI:attribute.amount");
 		entryAmount.setTextField("1");
 
 		comboboxAttribute = new CComboBox(CGConstants.DATAID_NONE, "GUI:attribute.select", Registerer.getObjectList(CGConstants.OBJECT_ATTRIBUTE), null);
 		comboboxOperation = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:attribute.operation", 3);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(entryAmount);
-		gbc.gridy++;
-		add(comboboxAttribute);
-		gbc.gridy++;
-		add(comboboxOperation);
-
 	}
 
 	@Override
-	public void updateLang()
+	protected void createListeners()
 	{}
 
 	public Attribute getAttribute()
@@ -66,5 +69,9 @@ public class AttributeSelectionPanel extends HelperPanel
 		entryAmount.setTextField(Double.toString(attribute.getAmount()));
 		comboboxAttribute.setSelected(attribute.getType());
 	}
+
+	@Override
+	public void updateLang()
+	{}
 
 }

@@ -86,56 +86,6 @@ public class Command
 		Registerer.registerCommand(this);
 	}
 
-	/** Returns the Panel to use to display the Command's options. */
-	public OptionsPanel getOptionsPanel()
-	{
-		if (id.equals("achievement")) return new AchievementOptionsPanel();
-		if (id.equals("blockdata")) return new BlockdataOptionsPanel();
-		if (id.equals("clear")) return new ClearOptionsPanel();
-		if (id.equals("clone")) return new CloneOptionsPanel();
-		if (id.equals("effect")) return new EffectOptionsPanel();
-		if (id.equals("enchant")) return new EnchantOptionsPanel();
-		if (id.equals("entitydata") || id.equals("testfor")) return new EntityDataOptionsPanel(id);
-		if (id.equals("execute")) return new ExecuteOptionsPanel();
-		if (id.equals("fill")) return new FillOptionsPanel();
-		if (id.equals("gamerule")) return new GameruleOptionsPanel();
-		if (id.equals("give")) return new GiveOptionsPanel();
-		if (id.equals("kill")) return new KillOptionsPanel();
-		if (id.equals("particle")) return new ParticleOptionsPanel();
-		if (id.equals("playsound")) return new PlaysoundOptionsPanel();
-		if (id.equals("replaceitem")) return new ReplaceitemOptionsPanel();
-		if (id.equals("scoreboard")) return new ScoreboardOptionsPanel();
-		if (id.equals("setblock")) return new SetblockOptionsPanel();
-		if (id.equals("setworldspawn")) return new WorldspawnOptionsPanel();
-		if (id.equals("spawnpoint")) return new SpawnpointOptionsPanel();
-		if (id.equals("spreadplayers")) return new SpreadOptionsPanel();
-		if (id.equals("summon")) return new SummonOptionsPanel();
-		if (id.equals("tellraw")) return new TellrawOptionsPanel();
-		if (id.equals("testforblock")) return new TestforblockOptionsPanel();
-		if (id.equals("testforblocks")) return new TestforblocksOptionsPanel();
-		if (id.equals("time")) return new TimeOptionsPanel();
-		if (id.equals("title")) return new TitleOptionsPanel();
-		if (id.equals("tp")) return new TpOptionsPanel();
-		if (id.equals("weather")) return new WeatherOptionsPanel();
-		if (id.equals("worldborder")) return new WorldborderOptionsPanel();
-		if (id.equals("xp")) return new XpOptionsPanel();
-
-		DisplayHelper.log("No options panel was found for command /" + id);
-		return null;
-	}
-
-	/** Returns the Command's ID */
-	public String getId()
-	{
-		return id;
-	}
-
-	/** Returns the Command's description */
-	public String getDescription()
-	{
-		return Lang.get("HELP:command." + id);
-	}
-
 	/** Generates the data used for the GUI from an already generated command
 	 * 
 	 * @param command
@@ -176,6 +126,56 @@ public class Command
 
 		DisplayHelper.log("No generation setup was found for command /" + id);
 		return new HashMap<String, Object>();
+	}
+
+	/** Returns the Command's description */
+	public String getDescription()
+	{
+		return Lang.get("HELP:command." + id);
+	}
+
+	/** Returns the Command's ID */
+	public String getId()
+	{
+		return id;
+	}
+
+	/** Returns the Panel to use to display the Command's options. */
+	public OptionsPanel getOptionsPanel()
+	{
+		if (id.equals("achievement")) return new AchievementOptionsPanel();
+		if (id.equals("blockdata")) return new BlockdataOptionsPanel();
+		if (id.equals("clear")) return new ClearOptionsPanel();
+		if (id.equals("clone")) return new CloneOptionsPanel();
+		if (id.equals("effect")) return new EffectOptionsPanel();
+		if (id.equals("enchant")) return new EnchantOptionsPanel();
+		if (id.equals("entitydata") || id.equals("testfor")) return new EntityDataOptionsPanel(id);
+		if (id.equals("execute")) return new ExecuteOptionsPanel();
+		if (id.equals("fill")) return new FillOptionsPanel();
+		if (id.equals("gamerule")) return new GameruleOptionsPanel();
+		if (id.equals("give")) return new GiveOptionsPanel();
+		if (id.equals("kill")) return new KillOptionsPanel();
+		if (id.equals("particle")) return new ParticleOptionsPanel();
+		if (id.equals("playsound")) return new PlaysoundOptionsPanel();
+		if (id.equals("replaceitem")) return new ReplaceitemOptionsPanel();
+		if (id.equals("scoreboard")) return new ScoreboardOptionsPanel();
+		if (id.equals("setblock")) return new SetblockOptionsPanel();
+		if (id.equals("setworldspawn")) return new WorldspawnOptionsPanel();
+		if (id.equals("spawnpoint")) return new SpawnpointOptionsPanel();
+		if (id.equals("spreadplayers")) return new SpreadOptionsPanel();
+		if (id.equals("summon")) return new SummonOptionsPanel();
+		if (id.equals("tellraw")) return new TellrawOptionsPanel();
+		if (id.equals("testforblock")) return new TestforblockOptionsPanel();
+		if (id.equals("testforblocks")) return new TestforblocksOptionsPanel();
+		if (id.equals("time")) return new TimeOptionsPanel();
+		if (id.equals("title")) return new TitleOptionsPanel();
+		if (id.equals("tp")) return new TpOptionsPanel();
+		if (id.equals("weather")) return new WeatherOptionsPanel();
+		if (id.equals("worldborder")) return new WorldborderOptionsPanel();
+		if (id.equals("xp")) return new XpOptionsPanel();
+
+		DisplayHelper.log("No options panel was found for command /" + id);
+		return null;
 	}
 
 }

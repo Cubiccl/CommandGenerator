@@ -14,7 +14,7 @@ public class FillReplacePanel extends FillNormalPanel
 
 	public FillReplacePanel()
 	{
-		super(900);
+		super();
 
 		panelBlockReplace = new BlockSelectionPanel(CGConstants.PANELID_ITEM, "GUI:fill.blocks_replace", Registerer.getList(CGConstants.LIST_BLOCKS), true);
 

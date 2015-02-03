@@ -41,51 +41,132 @@ public class ListSelectionPanel extends HelperPanel
 {
 
 	private CButton buttonAdd, buttonEdit, buttonRemove;
-	private JList<String> jlist;
 	private JEditorPane editorpane;
-	private JScrollPane scrollpane, scrolllist;
-	private final int type;
-
+	private JList<String> jlist;
 	private Object[] list;
 	private List<Object> objects;
 
+	private JScrollPane scrollpane, scrolllist;
+	private int type;
+
 	public ListSelectionPanel(String id, int type, Object... list)
 	{
-		super(CGConstants.DATAID_NONE, id, 600, 200);
+		super(CGConstants.DATAID_NONE, id, type, list);
+	}
 
-		this.type = type;
-		this.list = list;
-		this.objects = new ArrayList<Object>();
+	private void add()
+	{
+		switch (type)
+		{
+			case CGConstants.OBJECT_ATTRIBUTE:
+				AttributeSelectionPanel panelA = new AttributeSelectionPanel();
+				if (DisplayHelper.showQuestion(panelA, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:attribute")))) return;
+				if (panelA.getAttribute() == null) return;
+				objects.add(panelA.getAttribute());
+				break;
 
+			case CGConstants.OBJECT_EFFECT:
+				EffectSelectionPanel panelEf = new EffectSelectionPanel(CGConstants.DATAID_NONE, "GENERAL:effect");
+				if (DisplayHelper.showQuestion(panelEf, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:effect")))) return;
+				objects.add(panelEf.generateEffect());
+				break;
+
+			case CGConstants.OBJECT_ENCHANT:
+				EnchantSelectionPanel panelEn = new EnchantSelectionPanel(CGConstants.DATAID_NONE, "GENERAL:enchant", false);
+				if (DisplayHelper.showQuestion(panelEn, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:enchant")))) return;
+				if (panelEn.generateEnchantment() == null) return;
+				objects.add(panelEn.generateEnchantment());
+				break;
+
+			case CGConstants.OBJECT_ENTITY:
+				SpawnSelectionPanel panelSp = new SpawnSelectionPanel();
+				if (DisplayHelper.showQuestion(panelSp, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:entity")))) return;
+				if (panelSp.getTag() == null) return;
+				objects.add(panelSp.getTag());
+				break;
+
+			case CGConstants.OBJECT_ITEM:
+				Item[] items = new Item[list.length];
+				for (int i = 0; i < items.length; i++)
+					items[i] = (Item) list[i];
+				ItemSelectionPanel panelI = new ItemSelectionPanel(CGConstants.DATAID_NONE, "GENERAL:item", items, true, true);
+				if (DisplayHelper.showQuestion(panelI, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:item")))) return;
+				objects.add(panelI.getItemStack());
+				break;
+
+			case CGConstants.OBJECT_TAG_EXPLOSION:
+				TagExplosion explosion = new TagExplosion();
+				explosion.askValue();
+				objects.add(explosion);
+				break;
+
+			case CGConstants.OBJECT_TAG_TRADE:
+				TradeSelectionPanel panelT = new TradeSelectionPanel("GENERAL:trade");
+				JScrollPane scrollpaneT = new JScrollPane(panelT);
+				scrollpaneT.getVerticalScrollBar().setUnitIncrement(20);
+				scrollpaneT.getHorizontalScrollBar().setUnitIncrement(20);
+				scrollpaneT.setPreferredSize(new Dimension(840, 600));
+				if (DisplayHelper.showQuestion(scrollpaneT, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:trade")))) return;
+				if (panelT.generateTrade() == null) return;
+				objects.add(panelT.generateTrade());
+				break;
+
+			case CGConstants.OBJECT_JSON:
+				JsonSelectionPanel panelJ = new JsonSelectionPanel("GENERAL:text", true);
+				JScrollPane scrollpaneJ = new JScrollPane(panelJ);
+				scrollpaneJ.getVerticalScrollBar().setUnitIncrement(20);
+				scrollpaneJ.getHorizontalScrollBar().setUnitIncrement(20);
+				scrollpaneJ.setPreferredSize(new Dimension(840, 600));
+				if (DisplayHelper.showQuestion(scrollpaneJ, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
+				if (panelJ.getTag() == null) return;
+				objects.add(panelJ.getTag());
+				break;
+
+			case CGConstants.OBJECT_TAG_PATTERN:
+				PatternSelectionPanel panelP = new PatternSelectionPanel();
+				if (DisplayHelper.showQuestion(panelP, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:pattern")))) return;
+				if (panelP.getPattern() == null) return;
+				objects.add(panelP.getPattern());
+				break;
+
+			case CGConstants.OBJECT_STRING:
+				String[] strings = new String[list.length];
+				for (int i = 0; i < strings.length; i++)
+					strings[i] = (String) list[i];
+				JPanel panelSt = new JPanel();
+				JLabel label = new JLabel(Lang.get("GENERAL:add_only"));
+				JComboBox<String> box = new JComboBox<String>(strings);
+
+				panelSt.add(label);
+				panelSt.add(box);
+
+				if (DisplayHelper.showQuestion(panelSt, Lang.get("GENERAL:add_only"))) return;
+				objects.add(new TagString().setValue((String) box.getSelectedItem()));
+				break;
+
+			default:
+				break;
+		}
+
+		setupList();
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(scrolllist);
+		add(scrollpane);
+		addLine(buttonAdd, buttonEdit, buttonRemove);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		buttonAdd = new CButton("GENERAL:add_only");
-		buttonAdd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				add();
-			}
-		});
 		buttonEdit = new CButton("GENERAL:edit_only");
-		buttonEdit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				edit();
-			}
-		});
 		buttonRemove = new CButton("GENERAL:remove");
-		buttonRemove.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
-				remove();
-			}
-		});
 
 		jlist = new JList<String>(new String[0]);
-		jlist.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e)
-			{
-				display();
-			}
-		});
 
 		scrolllist = new JScrollPane(jlist);
 		scrolllist.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
@@ -97,21 +178,40 @@ public class ListSelectionPanel extends HelperPanel
 		scrollpane = new JScrollPane(editorpane);
 		scrollpane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
 		scrollpane.setPreferredSize(new Dimension(300, 120));
+	}
 
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(buttonAdd);
-		gbc.gridy++;
-		add(buttonEdit);
-		gbc.gridy++;
-		add(buttonRemove);
+	@Override
+	protected void createListeners()
+	{
+		buttonAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				add();
+			}
+		});
+		buttonEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				edit();
+			}
+		});
+		buttonRemove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)
+			{
+				remove();
+			}
+		});
+		jlist.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e)
+			{
+				display();
+			}
+		});
+	}
 
-		gbc.gridx++;
-		gbc.gridy = 0;
-		gbc.gridheight = 3;
-		add(scrolllist);
-		gbc.gridx++;
-		add(scrollpane);
+	private void display()
+	{
+		if (jlist.getSelectedIndex() != -1) editorpane.setText(ObjectBase.display(objects.get(jlist.getSelectedIndex())));
 	}
 
 	private void edit()
@@ -238,101 +338,12 @@ public class ListSelectionPanel extends HelperPanel
 		display();
 	}
 
-	private void add()
+	public List<Tag> getList()
 	{
-		switch (type)
-		{
-			case CGConstants.OBJECT_ATTRIBUTE:
-				AttributeSelectionPanel panelA = new AttributeSelectionPanel();
-				if (DisplayHelper.showQuestion(panelA, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:attribute")))) return;
-				if (panelA.getAttribute() == null) return;
-				objects.add(panelA.getAttribute());
-				break;
-
-			case CGConstants.OBJECT_EFFECT:
-				EffectSelectionPanel panelEf = new EffectSelectionPanel(CGConstants.DATAID_NONE, "GENERAL:effect");
-				if (DisplayHelper.showQuestion(panelEf, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:effect")))) return;
-				objects.add(panelEf.generateEffect());
-				break;
-
-			case CGConstants.OBJECT_ENCHANT:
-				EnchantSelectionPanel panelEn = new EnchantSelectionPanel(CGConstants.DATAID_NONE, "GENERAL:enchant", false);
-				if (DisplayHelper.showQuestion(panelEn, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:enchant")))) return;
-				if (panelEn.generateEnchantment() == null) return;
-				objects.add(panelEn.generateEnchantment());
-				break;
-
-			case CGConstants.OBJECT_ENTITY:
-				SpawnSelectionPanel panelSp = new SpawnSelectionPanel();
-				if (DisplayHelper.showQuestion(panelSp, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:entity")))) return;
-				if (panelSp.getTag() == null) return;
-				objects.add(panelSp.getTag());
-				break;
-
-			case CGConstants.OBJECT_ITEM:
-				Item[] items = new Item[list.length];
-				for (int i = 0; i < items.length; i++)
-					items[i] = (Item) list[i];
-				ItemSelectionPanel panelI = new ItemSelectionPanel(CGConstants.DATAID_NONE, "GENERAL:item", items, true, true);
-				if (DisplayHelper.showQuestion(panelI, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:item")))) return;
-				objects.add(panelI.getItemStack());
-				break;
-
-			case CGConstants.OBJECT_TAG_EXPLOSION:
-				TagExplosion explosion = new TagExplosion();
-				explosion.askValue();
-				objects.add(explosion);
-				break;
-
-			case CGConstants.OBJECT_TAG_TRADE:
-				TradeSelectionPanel panelT = new TradeSelectionPanel("GENERAL:trade");
-				JScrollPane scrollpaneT = new JScrollPane(panelT);
-				scrollpaneT.getVerticalScrollBar().setUnitIncrement(20);
-				scrollpaneT.getHorizontalScrollBar().setUnitIncrement(20);
-				scrollpaneT.setPreferredSize(new Dimension(840, 600));
-				if (DisplayHelper.showQuestion(scrollpaneT, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:trade")))) return;
-				if (panelT.generateTrade() == null) return;
-				objects.add(panelT.generateTrade());
-				break;
-
-			case CGConstants.OBJECT_JSON:
-				JsonSelectionPanel panelJ = new JsonSelectionPanel("GENERAL:text", true);
-				JScrollPane scrollpaneJ = new JScrollPane(panelJ);
-				scrollpaneJ.getVerticalScrollBar().setUnitIncrement(20);
-				scrollpaneJ.getHorizontalScrollBar().setUnitIncrement(20);
-				scrollpaneJ.setPreferredSize(new Dimension(840, 600));
-				if (DisplayHelper.showQuestion(scrollpaneJ, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
-				if (panelJ.getTag() == null) return;
-				objects.add(panelJ.getTag());
-				break;
-
-			case CGConstants.OBJECT_TAG_PATTERN:
-				PatternSelectionPanel panelP = new PatternSelectionPanel();
-				if (DisplayHelper.showQuestion(panelP, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:pattern")))) return;
-				if (panelP.getPattern() == null) return;
-				objects.add(panelP.getPattern());
-				break;
-
-			case CGConstants.OBJECT_STRING:
-				String[] strings = new String[list.length];
-				for (int i = 0; i < strings.length; i++)
-					strings[i] = (String) list[i];
-				JPanel panelSt = new JPanel();
-				JLabel label = new JLabel(Lang.get("GENERAL:add_only"));
-				JComboBox<String> box = new JComboBox<String>(strings);
-
-				panelSt.add(label);
-				panelSt.add(box);
-
-				if (DisplayHelper.showQuestion(panelSt, Lang.get("GENERAL:add_only"))) return;
-				objects.add(new TagString().setValue((String) box.getSelectedItem()));
-				break;
-
-			default:
-				break;
-		}
-
-		setupList();
+		List<Tag> tags = new ArrayList<Tag>();
+		for (int i = 0; i < objects.size(); i++)
+			tags.add(ObjectBase.toNBT(objects.get(i)));
+		return tags;
 	}
 
 	private void remove()
@@ -341,12 +352,23 @@ public class ListSelectionPanel extends HelperPanel
 		setupList();
 	}
 
-	@Override
-	public void updateLang()
+	public void setList(List<Tag> list)
 	{
-		buttonAdd.updateLang();
-		buttonRemove.updateLang();
+		if (list == null) return;
+
+		objects.clear();
+		for (int i = 0; i < list.size(); i++)
+			objects.add(ObjectBase.toObject(list.get(i), type));
+
 		setupList();
+	}
+
+	@Override
+	protected void setupDetails(Object[] details)
+	{
+		type = (int) details[0];
+		list = (Object[]) details[1];
+		objects = new ArrayList<Object>();
 	}
 
 	private void setupList()
@@ -394,27 +416,11 @@ public class ListSelectionPanel extends HelperPanel
 		display();
 	}
 
-	private void display()
+	@Override
+	public void updateLang()
 	{
-		if (jlist.getSelectedIndex() != -1) editorpane.setText(ObjectBase.display(objects.get(jlist.getSelectedIndex())));
-	}
-
-	public List<Tag> getList()
-	{
-		List<Tag> tags = new ArrayList<Tag>();
-		for (int i = 0; i < objects.size(); i++)
-			tags.add(ObjectBase.toNBT(objects.get(i)));
-		return tags;
-	}
-
-	public void setList(List<Tag> list)
-	{
-		if (list == null) return;
-		
-		objects.clear();
-		for (int i = 0; i < list.size(); i++)
-			objects.add(ObjectBase.toObject(list.get(i), type));
-		
+		buttonAdd.updateLang();
+		buttonRemove.updateLang();
 		setupList();
 	}
 

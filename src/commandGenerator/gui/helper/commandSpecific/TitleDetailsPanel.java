@@ -18,6 +18,26 @@ public class TitleDetailsPanel extends HelperPanel
 		super(CGConstants.PANELID_OPTIONS, title);
 	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(entryFadeIn);
+		add(entryStay);
+		add(entryFadeOut);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		entryFadeIn = new CEntry(CGConstants.DATAID_NONE, "GUI:title.fade_in");
+		entryStay = new CEntry(CGConstants.DATAID_NONE, "GUI:title.stay");
+		entryFadeOut = new CEntry(CGConstants.DATAID_NONE, "GUI:title.fade_out");
+	}
+
+	@Override
+	protected void createListeners()
+	{}
+
 	public String[] generateOptions()
 	{
 		DisplayHelper.log("Generating title details");
@@ -55,25 +75,5 @@ public class TitleDetailsPanel extends HelperPanel
 		entryStay.setTextField(Integer.toString(opt[1]));
 		entryFadeOut.setTextField(Integer.toString(opt[2]));
 	}
-
-	@Override
-	protected void createComponents()
-	{
-		entryFadeIn = new CEntry(CGConstants.DATAID_NONE, "GUI:title.fade_in");
-		entryStay = new CEntry(CGConstants.DATAID_NONE, "GUI:title.stay");
-		entryFadeOut = new CEntry(CGConstants.DATAID_NONE, "GUI:title.fade_out");
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		add(entryFadeIn);
-		add(entryStay);
-		add(entryFadeOut);
-	}
-
-	@Override
-	protected void createListeners()
-	{}
 
 }

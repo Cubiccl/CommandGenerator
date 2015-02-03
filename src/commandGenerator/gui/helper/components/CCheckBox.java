@@ -20,20 +20,10 @@ public class CCheckBox extends JCheckBox implements CComponent
 		this.title = title;
 	}
 
-	public void setTitle(String title)
+	@Override
+	public void reset()
 	{
-		this.title = title;
-		updateLang();
-	}
-
-	public void updateLang()
-	{
-		setText(Lang.get(title));
-	}
-
-	public void setupFrom(Map<String, Object> data)
-	{
-		if (!id.equals(CGConstants.DATAID_NONE)) setSelected((boolean) data.get(id));
+		setSelected(false);
 	}
 
 	@Override
@@ -42,10 +32,20 @@ public class CCheckBox extends JCheckBox implements CComponent
 		setEnabled(enable);
 	}
 
-	@Override
-	public void reset()
+	public void setTitle(String title)
 	{
-		setSelected(false);
+		this.title = title;
+		updateLang();
+	}
+
+	public void setupFrom(Map<String, Object> data)
+	{
+		if (!id.equals(CGConstants.DATAID_NONE)) setSelected((boolean) data.get(id));
+	}
+
+	public void updateLang()
+	{
+		setText(Lang.get(title));
 	}
 
 }

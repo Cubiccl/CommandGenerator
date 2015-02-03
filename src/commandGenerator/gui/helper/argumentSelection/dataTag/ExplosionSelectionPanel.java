@@ -31,47 +31,35 @@ public class ExplosionSelectionPanel extends HelperPanel
 
 	private CButton buttonColors, buttonFadeColors, buttonRemoveColor;
 	private CCheckBox checkboxFlicker, checkboxTrail;
+	private List<Integer> colors, colorsFade;
 	private LangComboBox comboboxType;
 	private JEditorPane editorpane;
 	private JScrollPane scrollpane;
-	private List<Integer> colors, colorsFade;
 
 	public ExplosionSelectionPanel()
 	{
-		super(CGConstants.DATAID_NONE, "TAGS:Explosion", 600, 200);
+		super(CGConstants.DATAID_NONE, "TAGS:Explosion");
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(comboboxType);
+		add(checkboxFlicker);
+		add(checkboxTrail);
+		add(scrollpane);
+		addLine(buttonColors, buttonFadeColors, buttonRemoveColor);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		colors = new ArrayList<Integer>();
 		colorsFade = new ArrayList<Integer>();
 
 		buttonColors = new CButton("GUI:color.add");
-		buttonColors.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				ColorSelectionPanel panelColor = new ColorSelectionPanel("GUI:color.add");
-				if (DisplayHelper.showQuestion(panelColor, "GUI:color.add")) return;
-				colors.add(panelColor.getColor());
-				displayColors();
-			}
-		});
 		buttonFadeColors = new CButton("GUI:color.add_fade");
-		buttonFadeColors.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				ColorSelectionPanel panelColor = new ColorSelectionPanel("GUI:color.add_fade");
-				if (DisplayHelper.showQuestion(panelColor, "GUI:color.add_fade")) return;
-				colorsFade.add(panelColor.getColor());
-				displayColors();
-			}
-		});
 		buttonRemoveColor = new CButton("GUI:color.remove");
-		buttonRemoveColor.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				remove();
-			}
-		});
 
 		checkboxFlicker = new CCheckBox(CGConstants.DATAID_NONE, "GUI:fireworks.twinkle");
 		checkboxTrail = new CCheckBox(CGConstants.DATAID_NONE, "GUI:fireworks.trail");
@@ -85,53 +73,37 @@ public class ExplosionSelectionPanel extends HelperPanel
 
 		scrollpane = new JScrollPane(editorpane);
 		scrollpane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(checkboxFlicker);
-		gbc.gridx++;
-		add(checkboxTrail);
-		gbc.gridx++;
-
-		gbc.gridheight = 4;
-		add(scrollpane);
-		gbc.gridheight = 1;
-
-		gbc.gridx = 0;
-		gbc.gridy++;
-		gbc.gridwidth = 2;
-		add(comboboxType);
-		gbc.gridwidth = 1;
-
-		gbc.gridy++;
-		add(buttonColors);
-		gbc.gridx++;
-		add(buttonFadeColors);
-
-		gbc.gridx--;
-		gbc.gridy++;
-		gbc.gridwidth++;
-		add(buttonRemoveColor);
 	}
 
-	private void remove()
+	@Override
+	protected void createListeners()
 	{
-		String[] colorArray = new String[colors.size() + colorsFade.size()];
-		for (int i = 0; i < colors.size(); i++)
-			colorArray[i] = Integer.toString(colors.get(i));
-		for (int i = 0; i < colorsFade.size(); i++)
-			colorArray[colors.size() + i] = Lang.get("GUI:color.fade") + " : " + colorsFade.get(i);
-
-		JPanel panel = new JPanel();
-		JComboBox<String> box = new JComboBox<String>(colorArray);
-		panel.add(box);
-		if (DisplayHelper.showQuestion(panel, Lang.get("GUI:color.remove"))) return;
-
-		int index = box.getSelectedIndex();
-		if (index < colors.size()) colors.remove(index);
-		else colorsFade.remove(index - colors.size());
-		displayColors();
-
+		buttonColors.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				ColorSelectionPanel panelColor = new ColorSelectionPanel("GUI:color.add");
+				if (DisplayHelper.showQuestion(panelColor, "GUI:color.add")) return;
+				colors.add(panelColor.getColor());
+				displayColors();
+			}
+		});
+		buttonFadeColors.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				ColorSelectionPanel panelColor = new ColorSelectionPanel("GUI:color.add_fade");
+				if (DisplayHelper.showQuestion(panelColor, "GUI:color.add_fade")) return;
+				colorsFade.add(panelColor.getColor());
+				displayColors();
+			}
+		});
+		buttonRemoveColor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				remove();
+			}
+		});
 	}
 
 	private void displayColors()
@@ -198,15 +170,24 @@ public class ExplosionSelectionPanel extends HelperPanel
 		return checkboxTrail.isSelected();
 	}
 
-	@Override
-	public void updateLang()
+	private void remove()
 	{
-		updateTitle();
-		buttonColors.updateLang();
-		buttonFadeColors.updateLang();
-		checkboxFlicker.updateLang();
-		checkboxTrail.updateLang();
-		comboboxType.updateLang();
+		String[] colorArray = new String[colors.size() + colorsFade.size()];
+		for (int i = 0; i < colors.size(); i++)
+			colorArray[i] = Integer.toString(colors.get(i));
+		for (int i = 0; i < colorsFade.size(); i++)
+			colorArray[colors.size() + i] = Lang.get("GUI:color.fade") + " : " + colorsFade.get(i);
+
+		JPanel panel = new JPanel();
+		JComboBox<String> box = new JComboBox<String>(colorArray);
+		panel.add(box);
+		if (DisplayHelper.showQuestion(panel, Lang.get("GUI:color.remove"))) return;
+
+		int index = box.getSelectedIndex();
+		if (index < colors.size()) colors.remove(index);
+		else colorsFade.remove(index - colors.size());
+		displayColors();
+
 	}
 
 	public void setup(boolean flicker, boolean trail, int type, TagList color, TagList fade)
@@ -227,6 +208,17 @@ public class ExplosionSelectionPanel extends HelperPanel
 				colorsFade.add(((TagInt) fade.getValue().get(i)).getValue());
 		}
 		displayColors();
+	}
+
+	@Override
+	public void updateLang()
+	{
+		updateTitle();
+		buttonColors.updateLang();
+		buttonFadeColors.updateLang();
+		checkboxFlicker.updateLang();
+		checkboxTrail.updateLang();
+		comboboxType.updateLang();
 	}
 
 }

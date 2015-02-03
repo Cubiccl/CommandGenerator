@@ -29,144 +29,25 @@ public class EquipmentSelectionPanel extends HelperPanel
 	private CButton buttonAddHand, buttonAddFeet, buttonAddLegs, buttonAddChest, buttonAddHead, buttonRemoveHand, buttonRemoveFeet, buttonRemoveLegs,
 			buttonRemoveChest, buttonRemoveHead;
 	private JEditorPane editorpane;
-	private JScrollPane scrollpane;
 	private ItemStack[] equipment;
+	private JScrollPane scrollpane;
 
 	public EquipmentSelectionPanel(String title)
 	{
-		super(CGConstants.DATAID_NONE, title, 600, 200);
+		super(CGConstants.DATAID_NONE, title);
 
 		equipment = new ItemStack[] { null, null, null, null, null };
+	}
 
-		buttonAddHand = new CButton("GUI:equipment.add.hand");
-		buttonAddHand.setPreferredSize(new Dimension(150, 20));
-		buttonAddHand.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				addItem(0);
-			}
-		});
-		buttonAddFeet = new CButton("GUI:equipment.add.feet");
-		buttonAddFeet.setPreferredSize(new Dimension(150, 20));
-		buttonAddFeet.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				addItem(1);
-			}
-		});
-		buttonAddLegs = new CButton("GUI:equipment.add.legs");
-		buttonAddLegs.setPreferredSize(new Dimension(150, 20));
-		buttonAddLegs.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				addItem(2);
-			}
-		});
-		buttonAddChest = new CButton("GUI:equipment.add.chest");
-		buttonAddChest.setPreferredSize(new Dimension(150, 20));
-		buttonAddChest.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				addItem(3);
-			}
-		});
-		buttonAddHead = new CButton("GUI:equipment.add.head");
-		buttonAddHead.setPreferredSize(new Dimension(150, 20));
-		buttonAddHead.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				addItem(4);
-			}
-		});
-
-		buttonRemoveHand = new CButton("GUI:equipment.remove.hand");
-		buttonRemoveHand.setPreferredSize(new Dimension(200, 20));
-		buttonRemoveHand.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				removeItem(0);
-			}
-		});
-		buttonRemoveFeet = new CButton("GUI:equipment.remove.feet");
-		buttonRemoveFeet.setPreferredSize(new Dimension(200, 20));
-		buttonRemoveFeet.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				removeItem(1);
-			}
-		});
-		buttonRemoveLegs = new CButton("GUI:equipment.remove.legs");
-		buttonRemoveLegs.setPreferredSize(new Dimension(200, 20));
-		buttonRemoveLegs.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				removeItem(2);
-			}
-		});
-		buttonRemoveChest = new CButton("GUI:equipment.remove.chest");
-		buttonRemoveChest.setPreferredSize(new Dimension(200, 20));
-		buttonRemoveChest.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				removeItem(3);
-			}
-		});
-		buttonRemoveHead = new CButton("GUI:equipment.remove.head");
-		buttonRemoveHead.setPreferredSize(new Dimension(200, 20));
-		buttonRemoveHead.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				removeItem(4);
-			}
-		});
-
-		editorpane = new JEditorPane("text/html", "");
-		editorpane.setEditable(false);
-		editorpane.setPreferredSize(new Dimension(200, 120));
-		displayItems();
-
-		scrollpane = new JScrollPane(editorpane);
-		scrollpane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(buttonAddHead);
-		gbc.gridy++;
-		add(buttonAddChest);
-		gbc.gridy++;
-		add(buttonAddLegs);
-		gbc.gridy++;
-		add(buttonAddFeet);
-		gbc.gridy++;
-		add(buttonAddHand);
-
-		gbc.gridx++;
-		gbc.gridy = 0;
-		add(buttonRemoveHead);
-		gbc.gridy++;
-		add(buttonRemoveChest);
-		gbc.gridy++;
-		add(buttonRemoveLegs);
-		gbc.gridy++;
-		add(buttonRemoveFeet);
-		gbc.gridy++;
-		add(buttonRemoveHand);
-
-		gbc.gridx++;
-		gbc.gridy = 0;
-		gbc.gridheight = 5;
+	@Override
+	protected void addComponents()
+	{
+		addLine(buttonAddHead, buttonRemoveHead);
+		addLine(buttonAddChest, buttonRemoveChest);
+		addLine(buttonAddLegs, buttonRemoveLegs);
+		addLine(buttonAddFeet, buttonRemoveFeet);
+		addLine(buttonAddHand, buttonRemoveHand);
 		add(scrollpane);
-		gbc.gridheight = 1;
 	}
 
 	private void addItem(int slot)
@@ -175,6 +56,104 @@ public class EquipmentSelectionPanel extends HelperPanel
 		if (DisplayHelper.showQuestion(panel, Lang.get("GUI:item.add"))) return;
 		equipment[slot] = new ItemStack(panel.generateItem(), panel.getDamage(), panel.getCount(), panel.getItemTag());
 		displayItems();
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		buttonAddHand = new CButton("GUI:equipment.add.hand");
+		buttonAddFeet = new CButton("GUI:equipment.add.feet");
+		buttonAddLegs = new CButton("GUI:equipment.add.legs");
+		buttonAddChest = new CButton("GUI:equipment.add.chest");
+		buttonAddHead = new CButton("GUI:equipment.add.head");
+		buttonRemoveHand = new CButton("GUI:equipment.remove.hand");
+		buttonRemoveFeet = new CButton("GUI:equipment.remove.feet");
+		buttonRemoveLegs = new CButton("GUI:equipment.remove.legs");
+		buttonRemoveChest = new CButton("GUI:equipment.remove.chest");
+		buttonRemoveHead = new CButton("GUI:equipment.remove.head");
+
+		editorpane = new JEditorPane("text/html", "");
+		editorpane.setEditable(false);
+		editorpane.setPreferredSize(new Dimension(200, 120));
+		displayItems();
+
+		scrollpane = new JScrollPane(editorpane);
+		scrollpane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		buttonAddHand.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				addItem(0);
+			}
+		});
+		buttonAddFeet.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				addItem(1);
+			}
+		});
+		buttonAddLegs.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				addItem(2);
+			}
+		});
+		buttonAddChest.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				addItem(3);
+			}
+		});
+		buttonAddHead.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				addItem(4);
+			}
+		});
+		buttonRemoveHand.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				removeItem(0);
+			}
+		});
+		buttonRemoveFeet.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				removeItem(1);
+			}
+		});
+		buttonRemoveLegs.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				removeItem(2);
+			}
+		});
+		buttonRemoveChest.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				removeItem(3);
+			}
+		});
+		buttonRemoveHead.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				removeItem(4);
+			}
+		});
 	}
 
 	private void displayItems()
@@ -214,6 +193,21 @@ public class EquipmentSelectionPanel extends HelperPanel
 		displayItems();
 	}
 
+	public void setup(List<Tag> value)
+	{
+		if (value.size() < 5) DisplayHelper.log("Error : Missing Equipment.");
+
+		for (int i = 0; i < value.size() && i < 5; i++)
+			equipment[i] = ItemStack.generateFrom((TagCompound) value.get(i));
+		displayItems();
+	}
+
+	@Override
+	protected void setupDetails(Object[] details)
+	{
+		equipment = new ItemStack[] { null, null, null, null, null };
+	}
+
 	@Override
 	public void updateLang()
 	{
@@ -227,15 +221,6 @@ public class EquipmentSelectionPanel extends HelperPanel
 		buttonRemoveHand.updateLang();
 		buttonRemoveHead.updateLang();
 		buttonRemoveLegs.updateLang();
-		displayItems();
-	}
-
-	public void setup(List<Tag> value)
-	{
-		if (value.size() < 5) DisplayHelper.log("Error : Missing Equipment.");
-
-		for (int i = 0; i < value.size() && i < 5; i++)
-			equipment[i] = ItemStack.generateFrom((TagCompound) value.get(i));
 		displayItems();
 	}
 

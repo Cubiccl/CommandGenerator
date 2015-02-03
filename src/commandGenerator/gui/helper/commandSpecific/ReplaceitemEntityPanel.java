@@ -20,38 +20,23 @@ import commandGenerator.main.CGConstants;
 public class ReplaceitemEntityPanel extends HelperPanel
 {
 
-	private CLabel labelSlot;
 	private JComboBox<String> comboboxSlot;
-	private JSpinner spinnerSlot;
+	private CLabel labelSlot;
 	private EntitySelectionPanel panelEntity;
+	private JSpinner spinnerSlot;
 
 	public ReplaceitemEntityPanel()
 	{
 		super(CGConstants.PANELID_OPTIONS, "GUI:replaceitem.entity.title");
 	}
 
-	public String generateCommand()
+	@Override
+	protected void addComponents()
 	{
-
-		Target entity = panelEntity.generateEntity();
-
-		if (entity == null) return null;
-
-		if (spinnerSlot.getValue() == null) return entity.commandStructure() + " " + (String) comboboxSlot.getSelectedItem();
-		if (comboboxSlot.getSelectedIndex() == 0) return entity.commandStructure() + " " + (String) comboboxSlot.getSelectedItem()
-				+ (String) spinnerSlot.getValue();
-		return entity.commandStructure() + " " + (String) comboboxSlot.getSelectedItem() + Integer.toString((int) spinnerSlot.getValue());
-	}
-
-	public void setupFrom(Map<String, Object> data)
-	{
-		super.setupFrom(data);
-		Object[] slot = (Object[]) data.get(CGConstants.DATAID_VALUE);
-		if (slot == null) return;
-
-		comboboxSlot.setSelectedIndex((int) slot[0]);
-		spinnerSlot.setValue(slot[1]);
-		spinnerSlot.setEnabled((boolean) slot[2]);
+		add(labelSlot);
+		add(comboboxSlot);
+		add(spinnerSlot);
+		add(panelEntity);
 	}
 
 	@Override
@@ -67,15 +52,6 @@ public class ReplaceitemEntityPanel extends HelperPanel
 		spinnerSlot.setPreferredSize(new Dimension(100, 20));
 
 		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		add(labelSlot);
-		add(comboboxSlot);
-		add(spinnerSlot);
-		add(panelEntity);
 	}
 
 	@Override
@@ -137,6 +113,30 @@ public class ReplaceitemEntityPanel extends HelperPanel
 				}
 			}
 		});
+	}
+
+	public String generateCommand()
+	{
+
+		Target entity = panelEntity.generateEntity();
+
+		if (entity == null) return null;
+
+		if (spinnerSlot.getValue() == null) return entity.commandStructure() + " " + (String) comboboxSlot.getSelectedItem();
+		if (comboboxSlot.getSelectedIndex() == 0) return entity.commandStructure() + " " + (String) comboboxSlot.getSelectedItem()
+				+ (String) spinnerSlot.getValue();
+		return entity.commandStructure() + " " + (String) comboboxSlot.getSelectedItem() + Integer.toString((int) spinnerSlot.getValue());
+	}
+
+	public void setupFrom(Map<String, Object> data)
+	{
+		super.setupFrom(data);
+		Object[] slot = (Object[]) data.get(CGConstants.DATAID_VALUE);
+		if (slot == null) return;
+
+		comboboxSlot.setSelectedIndex((int) slot[0]);
+		spinnerSlot.setValue(slot[1]);
+		spinnerSlot.setEnabled((boolean) slot[2]);
 	}
 
 }

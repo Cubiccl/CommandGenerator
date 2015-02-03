@@ -20,17 +20,70 @@ import commandGenerator.main.Lang;
 public class WorldborderOptionsPanel extends OptionsPanel
 {
 
+	private static final String[] modes = { "add", "center", "damage", "set", "warning" };
 	private JButton buttonHelp;
 	private LangComboBox comboboxMode;
 	private AddBorderPanel panelAdd, panelSet;
 	private CenterBorderPanel panelCenter;
 	private DamageBorderPanel panelDamage;
 	private WarningBorderPanel panelWarning;
-	private static final String[] modes = { "add", "center", "damage", "set", "warning" };
 
 	public WorldborderOptionsPanel()
 	{
 		super();
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		addLine(comboboxMode, buttonHelp);
+		add(panelAdd);
+		add(panelCenter);
+		add(panelDamage);
+		add(panelSet);
+		add(panelWarning);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		buttonHelp = new JButton("?");
+
+		comboboxMode = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:worldborder.mode", 5);
+
+		panelAdd = new AddBorderPanel(true);
+		panelCenter = new CenterBorderPanel();
+		panelCenter.setVisible(false);
+		panelDamage = new DamageBorderPanel();
+		panelDamage.setVisible(false);
+		panelSet = new AddBorderPanel(false);
+		panelSet.setVisible(false);
+		panelWarning = new WarningBorderPanel();
+		panelWarning.setVisible(false);
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		buttonHelp.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				DisplayHelper.showHelp(Lang.get("HELP:worldborder_" + comboboxMode.getSelectedIndex()), (String) comboboxMode.getSelectedItem());
+			}
+		});
+
+		comboboxMode.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				panelAdd.setVisible(comboboxMode.getSelectedIndex() == 0);
+				panelCenter.setVisible(comboboxMode.getSelectedIndex() == 1);
+				panelDamage.setVisible(comboboxMode.getSelectedIndex() == 2);
+				panelSet.setVisible(comboboxMode.getSelectedIndex() == 3);
+				panelWarning.setVisible(comboboxMode.getSelectedIndex() == 4);
+			}
+		});
 	}
 
 	@Override
@@ -75,59 +128,6 @@ public class WorldborderOptionsPanel extends OptionsPanel
 			default:
 				break;
 		}
-	}
-
-	@Override
-	protected void createComponents()
-	{
-		buttonHelp = new JButton("?");
-
-		comboboxMode = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:worldborder.mode", 5);
-
-		panelAdd = new AddBorderPanel(true);
-		panelCenter = new CenterBorderPanel();
-		panelCenter.setVisible(false);
-		panelDamage = new DamageBorderPanel();
-		panelDamage.setVisible(false);
-		panelSet = new AddBorderPanel(false);
-		panelSet.setVisible(false);
-		panelWarning = new WarningBorderPanel();
-		panelWarning.setVisible(false);
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		addLine(comboboxMode, buttonHelp);
-		add(panelAdd);
-		add(panelCenter);
-		add(panelDamage);
-		add(panelSet);
-		add(panelWarning);
-	}
-
-	@Override
-	protected void createListeners()
-	{
-		buttonHelp.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				DisplayHelper.showHelp(Lang.get("HELP:worldborder_" + comboboxMode.getSelectedIndex()), (String) comboboxMode.getSelectedItem());
-			}
-		});
-
-		comboboxMode.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				panelAdd.setVisible(comboboxMode.getSelectedIndex() == 0);
-				panelCenter.setVisible(comboboxMode.getSelectedIndex() == 1);
-				panelDamage.setVisible(comboboxMode.getSelectedIndex() == 2);
-				panelSet.setVisible(comboboxMode.getSelectedIndex() == 3);
-				panelWarning.setVisible(comboboxMode.getSelectedIndex() == 4);
-			}
-		});
 	}
 
 }

@@ -19,21 +19,20 @@ public class FileHelper
 	/** Writer used to edit files. */
 	private static PrintWriter writer;
 
-	/** Opens a file. Returns true if it couldn't.
-	 * 
-	 * @param fileName
-	 *            - <i>String</i> - The URL of the file. Starts from the Command Generator resource folder. */
-	private static boolean openFile(String fileName)
+	/** Creates the settings file. */
+	private static void createOptions()
 	{
 		try
 		{
-			scanner = new Scanner(new File(folder + fileName));
+			writer = new PrintWriter(folder + "options.txt", "UTF-8");
+			writer.println("lang = 0");
+			writer.println("version = 5.0");
+			writer.println("english_gb = false");
+			writer.close();
 		} catch (Exception e)
 		{
-			DisplayHelper.log("Couldn't open file : " + fileName);
-			return true;
+			DisplayHelper.log("Couldn't create the Options.");
 		}
-		return false;
 	}
 
 	/** Returns the option in the settings file.
@@ -59,67 +58,21 @@ public class FileHelper
 		return option;
 	}
 
-	/** Creates the settings file. */
-	private static void createOptions()
-	{
-		try
-		{
-			writer = new PrintWriter(folder + "options.txt", "UTF-8");
-			writer.println("lang = 0");
-			writer.println("version = 5.0");
-			writer.println("english_gb = false");
-			writer.close();
-		} catch (Exception e)
-		{
-			DisplayHelper.log("Couldn't create the Options.");
-		}
-	}
-
-	/** Changes an option in the settings file.
+	/** Opens a file. Returns true if it couldn't.
 	 * 
-	 * @param id
-	 *            - <i>String</i> - The ID of the option to change.
-	 * @param value
-	 *            - <i>String</i> - The new value of the option. */
-	public static void setOption(String id, String value)
+	 * @param fileName
+	 *            - <i>String</i> - The URL of the file. Starts from the Command Generator resource folder. */
+	private static boolean openFile(String fileName)
 	{
-
 		try
 		{
-			scanner = new Scanner(new File(folder + "options.txt"));
+			scanner = new Scanner(new File(folder + fileName));
 		} catch (Exception e)
 		{
-			DisplayHelper.log("Couldn't open the Options file.");
-			return;
+			DisplayHelper.log("Couldn't open file : " + fileName);
+			return true;
 		}
-		List<String> options = new ArrayList<String>();
-		while (scanner.hasNextLine())
-		{
-			options.add(scanner.nextLine());
-		}
-		scanner.close();
-
-		for (int i = 0; i < options.size(); i++)
-		{
-			if (options.get(i).startsWith(id))
-			{
-				options.set(i, id + " = " + value);
-				break;
-			}
-		}
-
-		try
-		{
-			writer = new PrintWriter(folder + "options.txt", "UTF-8");
-			for (int i = 0; i < options.size(); i++)
-			{
-				writer.println(options.get(i));
-			}
-			writer.close();
-		} catch (Exception e)
-		{
-			DisplayHelper.log("Couldn't set option : " + id + " -> " + value);
-		}
+		return false;
 	}
 
 	/** Returns an ArrayList containing all lines of the specified file.
@@ -184,6 +137,53 @@ public class FileHelper
 
 		scanner.close();
 		return dict;
+	}
+
+	/** Changes an option in the settings file.
+	 * 
+	 * @param id
+	 *            - <i>String</i> - The ID of the option to change.
+	 * @param value
+	 *            - <i>String</i> - The new value of the option. */
+	public static void setOption(String id, String value)
+	{
+
+		try
+		{
+			scanner = new Scanner(new File(folder + "options.txt"));
+		} catch (Exception e)
+		{
+			DisplayHelper.log("Couldn't open the Options file.");
+			return;
+		}
+		List<String> options = new ArrayList<String>();
+		while (scanner.hasNextLine())
+		{
+			options.add(scanner.nextLine());
+		}
+		scanner.close();
+
+		for (int i = 0; i < options.size(); i++)
+		{
+			if (options.get(i).startsWith(id))
+			{
+				options.set(i, id + " = " + value);
+				break;
+			}
+		}
+
+		try
+		{
+			writer = new PrintWriter(folder + "options.txt", "UTF-8");
+			for (int i = 0; i < options.size(); i++)
+			{
+				writer.println(options.get(i));
+			}
+			writer.close();
+		} catch (Exception e)
+		{
+			DisplayHelper.log("Couldn't set option : " + id + " -> " + value);
+		}
 	}
 
 	/** Creates and sets up the Command Generator resource folder. */

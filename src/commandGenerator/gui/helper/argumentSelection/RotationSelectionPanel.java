@@ -22,26 +22,29 @@ public class RotationSelectionPanel extends HelperPanel
 
 	public RotationSelectionPanel(String id, String title)
 	{
-		super(id, title, 200, 200);
+		super(id, title);
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		addLine(labelX, spinnerX);
+		addLine(labelY, spinnerY);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		labelX = new CLabel("GUI:rotation.horizontal");
 		labelY = new CLabel("GUI:rotation.vertical");
 
 		spinnerX = new JSpinner(new SpinnerNumberModel(0, 0, 360, 1));
 		spinnerY = new JSpinner(new SpinnerNumberModel(0, -90, 90, 1));
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(labelX);
-		gbc.gridy++;
-		add(labelY);
-
-		gbc.gridx++;
-		gbc.gridy--;
-		add(spinnerX);
-		gbc.gridy++;
-		add(spinnerY);
 	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	public List<Tag> getRotations()
 	{

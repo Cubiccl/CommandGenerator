@@ -17,42 +17,46 @@ import commandGenerator.main.Resources;
 public class ObjectivesSetdisplayPanel extends ScoreboardPanel
 {
 
-	private CLabel labelDisplay;
 	private CCheckBox checkboxClear;
-	private CEntry entryName;
 	private LangComboBox comboboxDisplay;
+	private CEntry entryName;
+	private CLabel labelDisplay;
 
 	public ObjectivesSetdisplayPanel()
 	{
 		super();
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		addLine(labelDisplay, comboboxDisplay);
+		add(checkboxClear);
+		add(entryName);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		labelDisplay = new CLabel("GUI:scoreboard.slot");
 
 		checkboxClear = new CCheckBox(CGConstants.DATAID_NONE, "GUI:scoreboard.slot.clear");
+
+		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective");
+
+		comboboxDisplay = new LangComboBox(CGConstants.DATAID_VALUE, "RESOURCES:scoreboard.slot", 19);
+		comboboxDisplay.setPreferredSize(new Dimension(200, 20));
+	}
+
+	@Override
+	protected void createListeners()
+	{
 		checkboxClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
 			{
 				entryName.setEnabledContent(!checkboxClear.isSelected());
 			}
 		});
-
-		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective");
-
-		comboboxDisplay = new LangComboBox(CGConstants.DATAID_VALUE, "RESOURCES:scoreboard.slot", 19);
-		comboboxDisplay.setPreferredSize(new Dimension(200, 20));
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(labelDisplay);
-		gbc.gridx++;
-		add(comboboxDisplay);
-
-		gbc.gridx = 0;
-		gbc.gridy++;
-		gbc.gridwidth = 2;
-		add(checkboxClear);
-		gbc.gridy++;
-		add(entryName);
 	}
 
 	@Override

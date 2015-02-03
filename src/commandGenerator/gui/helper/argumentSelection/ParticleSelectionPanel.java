@@ -23,26 +23,32 @@ import commandGenerator.main.DisplayHelper;
 public class ParticleSelectionPanel extends HelperPanel implements IBox
 {
 
-	private JTextField textfieldCount;
 	private JButton buttonHelp;
 	private CCheckBox checkboxCount;
-	private CEntry entrySpeed;
 	private CComboBox comboboxParticle;
+	private CEntry entrySpeed;
 	private BlockSelectionPanel panelBlock;
 	private ItemSelectionPanel panelItem;
+	private JTextField textfieldCount;
 
 	public ParticleSelectionPanel(String title)
 	{
-		super(CGConstants.PANELID_PARTICLE, title, 900, 400);
+		super(CGConstants.PANELID_PARTICLE, title);
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		addLine(comboboxParticle, buttonHelp);
+		add(entrySpeed);
+		addLine(checkboxCount, textfieldCount);
+		addLine(panelBlock, panelItem);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		buttonHelp = new JButton("?");
-		buttonHelp.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				DisplayHelper.showHelp(((Particle) comboboxParticle.getValue()).getDescription(), comboboxParticle.getValue().getName());
-			}
-		});
 
 		textfieldCount = new JTextField(15);
 		textfieldCount.setEnabled(false);
@@ -50,13 +56,6 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 		entrySpeed = new CEntry(CGConstants.DATAID_NONE, "GUI:particle.speed");
 
 		checkboxCount = new CCheckBox(CGConstants.DATAID_NONE, "GUI:particle.count");
-		checkboxCount.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				textfieldCount.setEnabled(checkboxCount.isSelected());
-			}
-		});
 
 		comboboxParticle = new CComboBox(CGConstants.PANELID_PARTICLE, "GUI:particle", Registerer.getObjectList(CGConstants.OBJECT_PARTICLE), this);
 
@@ -66,31 +65,25 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:particle.item", Registerer.getList(CGConstants.LIST_ICONS), false, false);
 		panelItem.setVisible(false);
 		panelItem.setPreferredSize(new Dimension(800, 150));
+	}
 
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(comboboxParticle);
-		gbc.gridx++;
-		add(buttonHelp);
-
-		gbc.gridx--;
-		gbc.gridy++;
-		gbc.gridwidth = 2;
-		add(entrySpeed);
-		gbc.gridwidth = 1;
-
-		gbc.gridy++;
-		add(checkboxCount);
-		gbc.gridx++;
-		add(textfieldCount);
-
-		gbc.gridx--;
-		gbc.gridy++;
-		gbc.gridwidth = 2;
-		add(panelBlock);
-		add(panelItem);
-		gbc.gridwidth = 1;
-
+	@Override
+	protected void createListeners()
+	{
+		buttonHelp.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				DisplayHelper.showHelp(((Particle) comboboxParticle.getValue()).getDescription(), comboboxParticle.getValue().getName());
+			}
+		});
+		checkboxCount.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				textfieldCount.setEnabled(checkboxCount.isSelected());
+			}
+		});
 	}
 
 	public Particle generateParticle()
@@ -140,6 +133,12 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 		else return panelItem.generateItem();
 	}
 
+	public String getItemProperties(boolean isItem)
+	{
+		if (isItem) return getItem().getId() + "_" + getDamage();
+		return Integer.toString(getItem().getIdNum() | (getDamage() << 12));
+	}
+
 	public int getSpeed()
 	{
 		String speed = entrySpeed.getText();
@@ -161,19 +160,6 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 		return Integer.parseInt(speed);
 	}
 
-	public String getItemProperties(boolean isItem)
-	{
-		if (isItem) return getItem().getId() + "_" + getDamage();
-		return Integer.toString(getItem().getIdNum() | (getDamage() << 12));
-	}
-
-	@Override
-	public void updateCombobox()
-	{
-		panelBlock.setVisible(((Particle) comboboxParticle.getValue()).getParticleType() == Particle.BLOCK);
-		panelItem.setVisible(((Particle) comboboxParticle.getValue()).getParticleType() == Particle.ITEM);
-	}
-
 	@Override
 	public void setupFrom(Map<String, Object> data)
 	{
@@ -183,6 +169,13 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 		checkboxCount.setSelected(opt[1] != -1);
 		textfieldCount.setEnabled(opt[1] != -1);
 		if (opt[1] != -1) textfieldCount.setText(Integer.toString(opt[1]));
+	}
+
+	@Override
+	public void updateCombobox()
+	{
+		panelBlock.setVisible(((Particle) comboboxParticle.getValue()).getParticleType() == Particle.BLOCK);
+		panelItem.setVisible(((Particle) comboboxParticle.getValue()).getParticleType() == Particle.ITEM);
 	}
 
 }

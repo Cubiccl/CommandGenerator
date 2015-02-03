@@ -19,37 +19,26 @@ import commandGenerator.main.CGConstants;
 public class EntityDataOptionsPanel extends OptionsPanel implements IBox
 {
 
-	private String command;
-	private CLabel labelExplain;
-	private JLabel label;
 	private CComboBox comboboxEntity;
+	private String command;
+	private JLabel label;
+	private CLabel labelExplain;
 	private EntitySelectionPanel panelEntity;
 	private NBTTagPanel panelEntitydata;
 
 	public EntityDataOptionsPanel(String command)
 	{
-		super();
-		this.command = command;
-
-		updateCombobox();
+		super(command);
 	}
 
 	@Override
-	public String generateCommand()
+	protected void addComponents()
 	{
-		Target entity = panelEntity.generateEntity();
-		TagCompound tag = panelEntitydata.getNbtTags("tag");
-		String commandG = command + " ";
-
-		if (entity == null || tag == null) return null;
-
-		return commandG + entity.commandStructure() + " " + tag.commandStructure().substring(tag.getId().length() + 1);
-	}
-
-	@Override
-	public void updateCombobox()
-	{
-		panelEntitydata.updateCombobox((Entity) comboboxEntity.getValue());
+		add(labelExplain);
+		add(comboboxEntity);
+		add(label);
+		add(panelEntity);
+		add(panelEntitydata);
 	}
 
 	@Override
@@ -65,17 +54,31 @@ public class EntityDataOptionsPanel extends OptionsPanel implements IBox
 	}
 
 	@Override
-	protected void addComponents()
+	protected void createListeners()
+	{}
+
+	@Override
+	public String generateCommand()
 	{
-		add(labelExplain);
-		add(comboboxEntity);
-		add(label);
-		add(panelEntity);
-		add(panelEntitydata);
+		Target entity = panelEntity.generateEntity();
+		TagCompound tag = panelEntitydata.getNbtTags("tag");
+		String commandG = command + " ";
+
+		if (entity == null || tag == null) return null;
+
+		return commandG + entity.commandStructure() + " " + tag.commandStructure().substring(tag.getId().length() + 1);
 	}
 
 	@Override
-	protected void createListeners()
-	{}
+	protected void setupDetails(Object[] details)
+	{
+		this.command = (String) details[0];
+	}
+
+	@Override
+	public void updateCombobox()
+	{
+		panelEntitydata.updateCombobox((Entity) comboboxEntity.getValue());
+	}
 
 }

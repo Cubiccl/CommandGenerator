@@ -20,16 +20,29 @@ import commandGenerator.main.DisplayHelper;
 public class EffectSelectionPanel extends HelperPanel implements IBox
 {
 
-	private JLabel labelImage;
-	private CEntry entryDuration;
-	private NumberSpinner spinnerAmplifier;
-	private CComboBox comboboxEffect;
 	private CCheckBox checkboxHideParticles;
+	private CComboBox comboboxEffect;
+	private CEntry entryDuration;
+	private JLabel labelImage;
+	private NumberSpinner spinnerAmplifier;
 
 	public EffectSelectionPanel(String id, String title)
 	{
-		super(id, title, 500, 200);
+		super(id, title);
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		addLine(comboboxEffect, labelImage);
+		add(entryDuration);
+		add(spinnerAmplifier);
+		add(checkboxHideParticles);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		labelImage = new JLabel();
 		try
 		{
@@ -46,23 +59,11 @@ public class EffectSelectionPanel extends HelperPanel implements IBox
 		comboboxEffect = new CComboBox(CGConstants.DATAID_NONE, "GUI:effect.choose", Registerer.getObjectList(CGConstants.OBJECT_EFFECT), this);
 
 		checkboxHideParticles = new CCheckBox(CGConstants.DATAID_NONE, "GUI:effect.hide");
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(comboboxEffect);
-		gbc.gridy++;
-		add(entryDuration);
-		gbc.gridy++;
-		add(spinnerAmplifier);
-		gbc.gridy++;
-		add(checkboxHideParticles);
-
-		gbc.gridx++;
-		gbc.gridy = 0;
-		gbc.gridheight = 4;
-		add(labelImage);
-		gbc.gridheight = 1;
 	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	public Effect generateEffect()
 	{
@@ -88,13 +89,14 @@ public class EffectSelectionPanel extends HelperPanel implements IBox
 	}
 
 	@Override
-	public void updateLang()
+	public void setupFrom(Map<String, Object> data)
 	{
-		updateTitle();
-		spinnerAmplifier.updateLang();
-		entryDuration.updateLang();
-		checkboxHideParticles.updateLang();
-		comboboxEffect.updateLang();
+		Effect effect = (Effect) data.get(getPanelId());
+
+		entryDuration.setTextField(Integer.toString(effect.getDuration()));
+		spinnerAmplifier.setSelected(effect.getAmplifier());
+		comboboxEffect.setSelected(effect.getType());
+		checkboxHideParticles.setSelected(!effect.showParticles());
 	}
 
 	@Override
@@ -110,14 +112,13 @@ public class EffectSelectionPanel extends HelperPanel implements IBox
 	}
 
 	@Override
-	public void setupFrom(Map<String, Object> data)
+	public void updateLang()
 	{
-		Effect effect = (Effect) data.get(getPanelId());
-
-		entryDuration.setTextField(Integer.toString(effect.getDuration()));
-		spinnerAmplifier.setSelected(effect.getAmplifier());
-		comboboxEffect.setSelected(effect.getType());
-		checkboxHideParticles.setSelected(!effect.showParticles());
+		updateTitle();
+		spinnerAmplifier.updateLang();
+		entryDuration.updateLang();
+		checkboxHideParticles.updateLang();
+		comboboxEffect.updateLang();
 	}
 
 }

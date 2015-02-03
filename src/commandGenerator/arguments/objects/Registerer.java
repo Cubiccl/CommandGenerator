@@ -16,22 +16,19 @@ public class Registerer
 	/** Map containing registered Objects. */
 	private static Map<Byte, Map<String, ObjectBase>> objects = new HashMap<Byte, Map<String, ObjectBase>>();
 
-	/** Registers a list.
+	/** Returns an array containing all registered commands. */
+	public static Command[] getCommandArray()
+	{
+		return commands.values().toArray(new Command[0]);
+	}
+
+	/** Returns a Command from its ID.
 	 * 
 	 * @param id
-	 *            - <i>String</i> - The list's ID.
-	 * @param listNew
-	 *            - <i>String[]</i> - The list itself. */
-	public static void registerList(String id, String[] listNew)
+	 *            - <i>String</i> - The Command's ID. */
+	public static Command getCommandFromId(String id)
 	{
-		ObjectBase[] objects = new ObjectBase[listNew.length];
-		for (int i = 0; i < objects.length; i++)
-		{
-			objects[i] = getObjectFromId(listNew[i]);
-		}
-		list.put(id, objects);
-
-		DisplayHelper.log("New list registered : " + id);
+		return commands.get(id);
 	}
 
 	/** Returns the Object list from its name.
@@ -46,46 +43,6 @@ public class Registerer
 			return new ObjectBase[0];
 		}
 		return list.get(listName);
-	}
-
-	/** Returns a Command from its ID.
-	 * 
-	 * @param id
-	 *            - <i>String</i> - The Command's ID. */
-	public static Command getCommandFromId(String id)
-	{
-		return commands.get(id);
-	}
-
-	/** Registers a command
-	 * 
-	 * @param command
-	 *            - <i>Command</i> - The Command to register. */
-
-	public static void registerCommand(Command command)
-	{
-		commands.put(command.getId(), command);
-	}
-
-	/** Returns an array containing all registered commands. */
-	public static Command[] getCommandArray()
-	{
-		return commands.values().toArray(new Command[0]);
-	}
-
-	/** Registers an Object
-	 * 
-	 * @param type
-	 *            - <i>byte</i> - The Object type.
-	 * @param object
-	 *            - <i>ObjectBase</i> - The Object to register. */
-	public static void registerObject(byte type, ObjectBase object)
-	{
-		if (object.getId().equals("")) return;
-		if (objects.get(type) == null) objects.put(type, new HashMap<String, ObjectBase>());
-
-		objects.get(type).put(object.getId(), object);
-		DisplayHelper.log("Registered " + CGConstants.TYPES[type] + " : " + object.getId());
 	}
 
 	/** Returns the Object corresponding to this ID.
@@ -141,10 +98,83 @@ public class Registerer
 		return objects.get(type).values().toArray(new ObjectBase[0]);
 	}
 
-	/** Creates the Entities list. */
-	public static void setupEntityList()
+	/** Registers a command
+	 * 
+	 * @param command
+	 *            - <i>Command</i> - The Command to register. */
+
+	public static void registerCommand(Command command)
+	{
+		commands.put(command.getId(), command);
+	}
+
+	/** Registers a list.
+	 * 
+	 * @param id
+	 *            - <i>String</i> - The list's ID.
+	 * @param listNew
+	 *            - <i>String[]</i> - The list itself. */
+	public static void registerList(String id, String[] listNew)
+	{
+		ObjectBase[] objects = new ObjectBase[listNew.length];
+		for (int i = 0; i < objects.length; i++)
+			objects[i] = getObjectFromId(listNew[i]);
+
+		list.put(id, objects);
+	}
+
+	/** Registers an Object
+	 * 
+	 * @param type
+	 *            - <i>byte</i> - The Object type.
+	 * @param object
+	 *            - <i>ObjectBase</i> - The Object to register. */
+	public static void registerObject(byte type, ObjectBase object)
+	{
+		if (object.getId().equals("")) return;
+		if (objects.get(type) == null) objects.put(type, new HashMap<String, ObjectBase>());
+
+		objects.get(type).put(object.getId(), object);
+	}
+
+	/** Finalizes the registration. */
+	public static void end()
 	{
 		registerList("allEntities", objects.get(CGConstants.OBJECT_ENTITY).keySet().toArray(new String[0]));
+		displayList(CGConstants.OBJECT_ITEM);
+		displayList(CGConstants.OBJECT_ENTITY);
+		displayList(CGConstants.OBJECT_ENCHANT);
+		displayList(CGConstants.OBJECT_EFFECT);
+		displayList(CGConstants.OBJECT_ACHIEVEMENT);
+		displayList(CGConstants.OBJECT_ATTRIBUTE);
+		displayList(CGConstants.OBJECT_SOUND);
+		displayList(CGConstants.OBJECT_PARTICLE);
+
+	}
+
+	/** Displays the list of all registered objects of the specified type.
+	 * 
+	 * @param objectType
+	 *            - <i>byte</i> - The Objects' type. */
+	private static void displayList(byte objectType)
+	{
+		String log = "Registered " + CGConstants.TYPES[objectType] + "s : ";
+		ObjectBase[] items = objects.get(objectType).values().toArray(new ObjectBase[0]);
+		int size = 0;
+		for (int i = 0; i < objects.get(objectType).size(); i++)
+		{
+			log += items[i].getId() + ", ";
+			size += items[i].getId().length();
+			if (size >= 400)
+			{
+				log += "\n";
+				size = 0;
+			}
+		}
+
+		log = log.substring(0, log.length() - 2) + ".";
+
+		DisplayHelper.log(log);
 	}
 
 }

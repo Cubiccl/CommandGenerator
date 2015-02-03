@@ -22,25 +22,12 @@ public class FillOptionsPanel extends OptionsPanel
 		super();
 	}
 
-	public void setupFrom(Map<String, Object> data)
-	{
-		comboboxMode.setupFrom(data);
-		if (comboboxMode.getSelectedIndex() == 0)
-		{
-			panelNormal.setupFrom(data);
-		} else
-		{
-			panelReplace.setupFrom(data);
-		}
-		panelNormal.setVisible(comboboxMode.getSelectedIndex() == 0);
-		panelReplace.setVisible(comboboxMode.getSelectedIndex() == 1);
-	}
-
 	@Override
-	public String generateCommand()
+	protected void addComponents()
 	{
-		if (comboboxMode.getSelectedIndex() == 0) return panelNormal.generateCommand();
-		else return panelReplace.generateCommand();
+		add(comboboxMode);
+		add(panelNormal);
+		add(panelReplace);
 	}
 
 	@Override
@@ -48,17 +35,9 @@ public class FillOptionsPanel extends OptionsPanel
 	{
 		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE2, "RESOURCES:fill.mode2", 2);
 
-		panelNormal = new FillNormalPanel(600);
+		panelNormal = new FillNormalPanel();
 		panelReplace = new FillReplacePanel();
 		panelReplace.setVisible(false);
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		add(comboboxMode);
-		add(panelNormal);
-		add(panelReplace);
 	}
 
 	@Override
@@ -72,6 +51,27 @@ public class FillOptionsPanel extends OptionsPanel
 				panelReplace.setVisible(comboboxMode.getSelectedIndex() == 1);
 			}
 		});
+	}
+
+	@Override
+	public String generateCommand()
+	{
+		if (comboboxMode.getSelectedIndex() == 0) return panelNormal.generateCommand();
+		else return panelReplace.generateCommand();
+	}
+
+	public void setupFrom(Map<String, Object> data)
+	{
+		comboboxMode.setupFrom(data);
+		if (comboboxMode.getSelectedIndex() == 0)
+		{
+			panelNormal.setupFrom(data);
+		} else
+		{
+			panelReplace.setupFrom(data);
+		}
+		panelNormal.setVisible(comboboxMode.getSelectedIndex() == 0);
+		panelReplace.setVisible(comboboxMode.getSelectedIndex() == 1);
 	}
 
 }

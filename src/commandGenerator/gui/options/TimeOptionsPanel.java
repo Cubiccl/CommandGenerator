@@ -13,15 +13,37 @@ import commandGenerator.main.DisplayHelper;
 public class TimeOptionsPanel extends OptionsPanel
 {
 
-	private CLabel labelMode;
-	private CEntry entryTime;
-	private LangComboBox comboboxMode;
 	private static final String[] modes = { "set", "add" };
+	private LangComboBox comboboxMode;
+	private CEntry entryTime;
+	private CLabel labelMode;
 
 	public TimeOptionsPanel()
 	{
 		super();
 	}
+
+	@Override
+	protected void addComponents()
+	{
+		addLine(labelMode, comboboxMode);
+		add(entryTime);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		labelMode = new CLabel("GUI:time.mode");
+
+		entryTime = new CEntry(CGConstants.DATAID_VALUE, "GUI:time.time");
+
+		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:time.mode", 2);
+		comboboxMode.setPreferredSize(new Dimension(200, 20));
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	@Override
 	public String generateCommand()
@@ -44,27 +66,5 @@ public class TimeOptionsPanel extends OptionsPanel
 
 		return "time " + modes[comboboxMode.getSelectedIndex()] + " " + time;
 	}
-
-	@Override
-	protected void createComponents()
-	{
-		labelMode = new CLabel("GUI:time.mode");
-
-		entryTime = new CEntry(CGConstants.DATAID_VALUE, "GUI:time.time");
-
-		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:time.mode", 2);
-		comboboxMode.setPreferredSize(new Dimension(200, 20));
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		addLine(labelMode, comboboxMode);
-		add(entryTime);
-	}
-
-	@Override
-	protected void createListeners()
-	{}
 
 }

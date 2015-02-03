@@ -10,8 +10,8 @@ import commandGenerator.main.Lang;
 public class CLabel extends JLabel implements CComponent
 {
 
-	private String id;
 	private boolean html;
+	private String id;
 
 	public CLabel(String id)
 	{
@@ -28,10 +28,13 @@ public class CLabel extends JLabel implements CComponent
 		setText("<html>" + Lang.get(id).replaceAll("\n", "<br />") + "</html>");
 	}
 
-	public void updateLang()
+	@Override
+	public void reset()
+	{}
+
+	public void setEnabledContent(boolean enable)
 	{
-		if (html) setText("<html>" + Lang.get(id).replaceAll("\n", "<br />") + "</html>");
-		else setText(Lang.get(id));
+		setEnabled(enable);
 	}
 
 	public void setTitle(String id)
@@ -40,16 +43,13 @@ public class CLabel extends JLabel implements CComponent
 		updateLang();
 	}
 
-	public void setEnabledContent(boolean enable)
-	{
-		setEnabled(enable);
-	}
-
 	public void setupFrom(Map<String, Object> data)
 	{}
 
-	@Override
-	public void reset()
-	{}
+	public void updateLang()
+	{
+		if (html) setText("<html>" + Lang.get(id).replaceAll("\n", "<br />") + "</html>");
+		else setText(Lang.get(id));
+	}
 
 }

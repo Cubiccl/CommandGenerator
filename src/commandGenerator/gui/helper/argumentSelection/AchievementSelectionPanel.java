@@ -16,29 +16,31 @@ import commandGenerator.main.DisplayHelper;
 public class AchievementSelectionPanel extends HelperPanel implements IBox
 {
 
-	private JLabel image;
 	private CComboBox achievementBox;
+	private JLabel image;
 
 	public AchievementSelectionPanel()
 	{
-		super(CGConstants.PANELID_ACHIEVEMENT, "GUI:achievement.title", 200, 200);
-
-		image = new JLabel(((Achievement) Registerer.getObjectFromId("openInventory")).getTexture());
-		achievementBox = new CComboBox(CGConstants.PANELID_ACHIEVEMENT, "GUI:achievement.select", Registerer.getObjectList(CGConstants.OBJECT_ACHIEVEMENT),
-				this);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(achievementBox);
-		gbc.gridx++;
-		add(image);
+		super(CGConstants.PANELID_ACHIEVEMENT, "GUI:achievement.title");
 	}
 
 	@Override
-	public void updateCombobox()
+	protected void addComponents()
 	{
-		image.setIcon(((Achievement) achievementBox.getValue()).getTexture());
+		addLine(achievementBox, image);
 	}
+
+	@Override
+	protected void createComponents()
+	{
+		image = new JLabel(((Achievement) Registerer.getObjectFromId("openInventory")).getTexture());
+		achievementBox = new CComboBox(CGConstants.PANELID_ACHIEVEMENT, "GUI:achievement.select", Registerer.getObjectList(CGConstants.OBJECT_ACHIEVEMENT),
+				this);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	public Achievement getSelectedAchievement()
 	{
@@ -56,6 +58,12 @@ public class AchievementSelectionPanel extends HelperPanel implements IBox
 	public void setupFrom(Map<String, Object> data)
 	{
 		if (data.get(CGConstants.DATAID_CHECK) != null && !((boolean) data.get(CGConstants.DATAID_CHECK))) achievementBox.setupFrom(data);
+	}
+
+	@Override
+	public void updateCombobox()
+	{
+		image.setIcon(((Achievement) achievementBox.getValue()).getTexture());
 	}
 
 }

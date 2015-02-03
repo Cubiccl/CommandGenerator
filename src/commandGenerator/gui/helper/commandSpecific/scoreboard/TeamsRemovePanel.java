@@ -13,13 +13,23 @@ public class TeamsRemovePanel extends ScoreboardPanel
 	public TeamsRemovePanel()
 	{
 		super();
+	}
 
-		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.teams.remove.label");
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
+	@Override
+	protected void addComponents()
+	{
 		add(entryName);
 	}
+
+	@Override
+	protected void createComponents()
+	{
+		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.teams.remove.label");
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	@Override
 	public String generateText()

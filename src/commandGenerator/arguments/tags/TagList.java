@@ -11,15 +11,28 @@ public abstract class TagList extends Tag
 
 	private List<Tag> value;
 
+	public TagList()
+	{
+		this("");
+	}
+
 	public TagList(String id, String... applicable)
 	{
 		super(id, Tag.LIST, applicable);
 		value = new ArrayList<Tag>();
 	}
 
-	public TagList()
+	@Override
+	public String commandStructure()
 	{
-		this("");
+		String nbt = getId() + ":[";
+		if (nbt.equals(":[")) nbt = "[";
+		for (int i = 0; i < value.size(); i++)
+		{
+			if (i != 0) nbt += ",";
+			nbt += value.get(i).commandStructure();
+		}
+		return nbt + "]";
 	}
 
 	@Override
@@ -41,11 +54,9 @@ public abstract class TagList extends Tag
 		return text;
 	}
 
-	public TagList setValue(List<Tag> value)
+	public Tag get(int index)
 	{
-		if (value == null) return this;
-		this.value = value;
-		return this;
+		return value.get(index);
 	}
 
 	public List<Tag> getValue()
@@ -53,22 +64,11 @@ public abstract class TagList extends Tag
 		return value;
 	}
 
-	@Override
-	public String commandStructure()
+	public TagList setValue(List<Tag> value)
 	{
-		String nbt = getId() + ":[";
-		if (nbt.equals(":[")) nbt = "[";
-		for (int i = 0; i < value.size(); i++)
-		{
-			if (i != 0) nbt += ",";
-			nbt += value.get(i).commandStructure();
-		}
-		return nbt + "]";
-	}
-
-	public Tag get(int index)
-	{
-		return value.get(index);
+		if (value == null) return this;
+		this.value = value;
+		return this;
 	}
 
 }

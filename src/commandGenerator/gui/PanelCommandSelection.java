@@ -43,17 +43,17 @@ import commandGenerator.main.Resources;
 public class PanelCommandSelection extends JPanel
 {
 
-	private CLabel labelChooseCommand, labelWarning;
-	private JButton buttonHelpCommand;
+	public static PanelCommandSelection instance;
 	private CButton buttonGenerate, buttonCopy, buttonGenerator;
+	private JButton buttonHelpCommand;
 	private CCheckBox checkboxEdit;
-	private JTextField textfieldSearchbar, textfieldCommand;
-	private JTextArea textareaStructure;
 	private JComboBox<String> comboboxRegisterer;
+	private GridBagConstraints gbc = new GridBagConstraints();
+	private CLabel labelChooseCommand, labelWarning;
 	public OptionsPanel panelOptions;
 	private JScrollPane scrollpane;
-	private GridBagConstraints gbc = new GridBagConstraints();
-	public static PanelCommandSelection instance;
+	private JTextArea textareaStructure;
+	private JTextField textfieldSearchbar, textfieldCommand;
 
 	/** The panel used to select the Command. */
 	public PanelCommandSelection(boolean main)
@@ -264,6 +264,11 @@ public class PanelCommandSelection extends JPanel
 
 	}
 
+	public String generateCommand()
+	{
+		return panelOptions.generateCommand();
+	}
+
 	private void generator()
 	{
 		JPanel panel = new JPanel(new GridLayout(2, 1));
@@ -296,11 +301,6 @@ public class PanelCommandSelection extends JPanel
 		setOptionsPanel(panelNew);
 	}
 
-	public String generateCommand()
-	{
-		return panelOptions.generateCommand();
-	}
-
 	/** Changes the command panel. */
 	public void setOptionsPanel(OptionsPanel panel)
 	{
@@ -324,6 +324,12 @@ public class PanelCommandSelection extends JPanel
 
 	}
 
+	public void setSelectedCommand(Command command)
+	{
+		comboboxRegisterer.setSelectedItem(command.getId());
+		setOptionsPanel(command.getOptionsPanel());
+	}
+
 	public void updateLang()
 	{
 		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), Lang.get("GUI:command")));
@@ -333,12 +339,6 @@ public class PanelCommandSelection extends JPanel
 		buttonCopy.updateLang();
 		buttonGenerate.updateLang();
 		panelOptions.updateLang();
-	}
-
-	public void setSelectedCommand(Command command)
-	{
-		comboboxRegisterer.setSelectedItem(command.getId());
-		setOptionsPanel(command.getOptionsPanel());
 	}
 
 }

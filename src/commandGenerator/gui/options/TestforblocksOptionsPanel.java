@@ -19,11 +19,11 @@ import commandGenerator.main.Lang;
 public class TestforblocksOptionsPanel extends OptionsPanel
 {
 
-	private CLabel labelMode;
+	private static final String[] modes = { "masked", "all" };
 	private JButton buttonHelp;
 	private LangComboBox comboboxMode;
+	private CLabel labelMode;
 	private CoordSelectionPanel panelCoord1, panelCoord2, panelCoordDest;
-	private static final String[] modes = { "masked", "all" };
 
 	public TestforblocksOptionsPanel()
 	{
@@ -31,17 +31,12 @@ public class TestforblocksOptionsPanel extends OptionsPanel
 	}
 
 	@Override
-	public String generateCommand()
+	protected void addComponents()
 	{
-
-		Coordinates coord1 = panelCoord1.generateCoord();
-		Coordinates coord2 = panelCoord2.generateCoord();
-		Coordinates coordDestination = panelCoordDest.generateCoord();
-
-		if (coord1 == null || coord2 == null || coordDestination == null) return null;
-
-		return "clone " + coord1.commandStructure() + " " + coord2.commandStructure() + " " + coordDestination.commandStructure() + " "
-				+ modes[comboboxMode.getSelectedIndex()];
+		add(panelCoord1);
+		add(panelCoord2);
+		add(panelCoordDest);
+		addLine(labelMode, comboboxMode, buttonHelp);
 	}
 
 	@Override
@@ -61,15 +56,6 @@ public class TestforblocksOptionsPanel extends OptionsPanel
 	}
 
 	@Override
-	protected void addComponents()
-	{
-		add(panelCoord1);
-		add(panelCoord2);
-		add(panelCoordDest);
-		addLine(labelMode, comboboxMode, buttonHelp);
-	}
-
-	@Override
 	protected void createListeners()
 	{
 		buttonHelp.addActionListener(new ActionListener() {
@@ -79,6 +65,20 @@ public class TestforblocksOptionsPanel extends OptionsPanel
 				DisplayHelper.showHelp(Lang.get("HELP:testforblocks_" + comboboxMode.getSelectedIndex()), (String) comboboxMode.getSelectedItem());
 			}
 		});
+	}
+
+	@Override
+	public String generateCommand()
+	{
+
+		Coordinates coord1 = panelCoord1.generateCoord();
+		Coordinates coord2 = panelCoord2.generateCoord();
+		Coordinates coordDestination = panelCoordDest.generateCoord();
+
+		if (coord1 == null || coord2 == null || coordDestination == null) return null;
+
+		return "clone " + coord1.commandStructure() + " " + coord2.commandStructure() + " " + coordDestination.commandStructure() + " "
+				+ modes[comboboxMode.getSelectedIndex()];
 	}
 
 }

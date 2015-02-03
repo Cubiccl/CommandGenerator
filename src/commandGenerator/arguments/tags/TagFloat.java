@@ -9,10 +9,15 @@ import commandGenerator.main.Lang;
 public class TagFloat extends Tag
 {
 
-	private float value, min, max;
-	private int type;
 	private JLabel label;
 	private JTextField textfield;
+	private int type;
+	private float value, min, max;
+
+	public TagFloat()
+	{
+		this("");
+	}
 
 	public TagFloat(String id, String... applicable)
 	{
@@ -26,11 +31,6 @@ public class TagFloat extends Tag
 		panel.add(textfield, gbc);
 	}
 
-	public TagFloat()
-	{
-		this("");
-	}
-
 	@Override
 	public void askValue()
 	{
@@ -40,6 +40,13 @@ public class TagFloat extends Tag
 		if (!isValueOk(textfield.getText())) return;
 		value = Float.parseFloat(textfield.getText());
 
+	}
+
+	@Override
+	public String commandStructure()
+	{
+		if (getId().equals("")) return Float.toString(value) + "F";
+		return getId() + ":" + value + "F";
 	}
 
 	@Override
@@ -80,17 +87,11 @@ public class TagFloat extends Tag
 		return !flag;
 	}
 
-	public Tag setValue(float value)
+	public void setMax(float max)
 	{
-		this.value = value;
-		return this;
-	}
-
-	@Override
-	public String commandStructure()
-	{
-		if (getId().equals("")) return Float.toString(value) + "F";
-		return getId() + ":" + value + "F";
+		if (type == NONE) type = MAX;
+		else if (type == MIN) type = BOTH;
+		this.max = max;
 	}
 
 	public void setMin(float min)
@@ -100,11 +101,10 @@ public class TagFloat extends Tag
 		this.min = min;
 	}
 
-	public void setMax(float max)
+	public Tag setValue(float value)
 	{
-		if (type == NONE) type = MAX;
-		else if (type == MIN) type = BOTH;
-		this.max = max;
+		this.value = value;
+		return this;
 	}
 
 }

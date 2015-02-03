@@ -12,13 +12,83 @@ public class Coordinates
 
 	public static final int X = 0, Y = 1, Z = 2;
 
+	/** Generates Coordinates from command structure. */
+	public static Coordinates generateFrom(String x, String y, String z)
+	{
+		double cx, cy, cz;
+		boolean relative = x.startsWith("~");
+
+		try
+		{
+
+			if (relative)
+			{
+				x = x.substring(1);
+				y = y.substring(1);
+				z = z.substring(1);
+			}
+
+			if (!x.equals("")) cx = Double.parseDouble(x);
+			else cx = 0;
+			if (!y.equals("")) cy = Double.parseDouble(y);
+			else cy = 0;
+			if (!z.equals("")) cz = Double.parseDouble(z);
+			else cz = 0;
+
+			Coordinates coords = new Coordinates(cx, cy, cz, relative);
+			DisplayHelper.log("Created coordinates : " + coords.commandStructure());
+			return coords;
+
+		} catch (Exception e)
+		{
+			DisplayHelper.log("There was an error while creating coordinates : " + x + " " + y + " " + z);
+			return null;
+		}
+
+	}
+
+	/** Generates Coordinates from command structure. */
+	public static Coordinates generateFromWithRot(String x, String y, String z, float rotX, float rotY)
+	{
+		double cx, cy, cz;
+		boolean relative = x.startsWith("~");
+
+		try
+		{
+
+			if (relative)
+			{
+				x = x.substring(1);
+				y = y.substring(1);
+				z = z.substring(1);
+			}
+
+			if (!x.equals("")) cx = Double.parseDouble(x);
+			else cx = 0;
+			if (!y.equals("")) cy = Double.parseDouble(y);
+			else cy = 0;
+			if (!z.equals("")) cz = Double.parseDouble(z);
+			else cz = 0;
+
+			Coordinates coords = new Coordinates(cx, cy, cz, rotX, rotY, relative);
+			DisplayHelper.log("Created coordinates : " + coords.commandStructure());
+			return coords;
+
+		} catch (Exception e)
+		{
+			DisplayHelper.log("There was an error while creating coordinates : " + x + " " + y + " " + z);
+			return null;
+		}
+
+	}
+	/** Details about this Coordinates. */
+	private boolean areRelative, isRotation;
+
 	/** The Coordinates' positions. */
 	private double x, y, z;
 
 	/** The Coordinates rotations. */
 	private float xRotation, yRotation;
-	/** Details about this Coordinates. */
-	private boolean areRelative, isRotation;
 
 	/** Creates new Coordinates. */
 	public Coordinates(double x, double y, double z)
@@ -91,6 +161,12 @@ public class Coordinates
 		}
 	}
 
+	/** Returns true if this Coordinates are relative. */
+	public boolean getRelative()
+	{
+		return areRelative;
+	}
+
 	public float getRot(int rot)
 	{
 		switch (rot)
@@ -104,6 +180,12 @@ public class Coordinates
 		}
 	}
 
+	/** Returns true if this Coordinates has rotations. */
+	public boolean getRotation()
+	{
+		return isRotation;
+	}
+
 	/** Turns the Coordinates into a TagList. */
 	public List<Tag> toTagPos()
 	{
@@ -112,88 +194,6 @@ public class Coordinates
 		tag.add(new TagDouble().setValue(y));
 		tag.add(new TagDouble().setValue(z));
 		return tag;
-	}
-
-	/** Returns true if this Coordinates are relative. */
-	public boolean getRelative()
-	{
-		return areRelative;
-	}
-
-	/** Returns true if this Coordinates has rotations. */
-	public boolean getRotation()
-	{
-		return isRotation;
-	}
-
-	/** Generates Coordinates from command structure. */
-	public static Coordinates generateFrom(String x, String y, String z)
-	{
-		double cx, cy, cz;
-		boolean relative = x.startsWith("~");
-
-		try
-		{
-
-			if (relative)
-			{
-				x = x.substring(1);
-				y = y.substring(1);
-				z = z.substring(1);
-			}
-
-			if (!x.equals("")) cx = Double.parseDouble(x);
-			else cx = 0;
-			if (!y.equals("")) cy = Double.parseDouble(y);
-			else cy = 0;
-			if (!z.equals("")) cz = Double.parseDouble(z);
-			else cz = 0;
-
-			Coordinates coords = new Coordinates(cx, cy, cz, relative);
-			DisplayHelper.log("Created coordinates : " + coords.commandStructure());
-			return coords;
-
-		} catch (Exception e)
-		{
-			DisplayHelper.log("There was an error while creating coordinates : " + x + " " + y + " " + z);
-			return null;
-		}
-
-	}
-
-	/** Generates Coordinates from command structure. */
-	public static Coordinates generateFromWithRot(String x, String y, String z, float rotX, float rotY)
-	{
-		double cx, cy, cz;
-		boolean relative = x.startsWith("~");
-
-		try
-		{
-
-			if (relative)
-			{
-				x = x.substring(1);
-				y = y.substring(1);
-				z = z.substring(1);
-			}
-
-			if (!x.equals("")) cx = Double.parseDouble(x);
-			else cx = 0;
-			if (!y.equals("")) cy = Double.parseDouble(y);
-			else cy = 0;
-			if (!z.equals("")) cz = Double.parseDouble(z);
-			else cz = 0;
-
-			Coordinates coords = new Coordinates(cx, cy, cz, rotX, rotY, relative);
-			DisplayHelper.log("Created coordinates : " + coords.commandStructure());
-			return coords;
-
-		} catch (Exception e)
-		{
-			DisplayHelper.log("There was an error while creating coordinates : " + x + " " + y + " " + z);
-			return null;
-		}
-
 	}
 
 }

@@ -21,16 +21,27 @@ import commandGenerator.main.Lang;
 public class EnchantSelectionPanel extends HelperPanel implements IBox
 {
 
-	private boolean limited;
-	private CEntry entryLevel;
-	private NumberSpinner spinnerLevel;
 	private CComboBox comboboxEnchant;
+	private CEntry entryLevel;
+	private boolean limited;
+	private NumberSpinner spinnerLevel;
 
 	public EnchantSelectionPanel(String id, String title, boolean limited)
 	{
-		super(id, title, 500, 200);
-		this.limited = limited;
+		super(id, title, limited);
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(comboboxEnchant);
+		add(spinnerLevel);
+		add(entryLevel);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		entryLevel = new CEntry(CGConstants.DATAID_NONE, "GUI:enchant.level");
 		entryLevel.setVisible(!limited);
 
@@ -39,14 +50,11 @@ public class EnchantSelectionPanel extends HelperPanel implements IBox
 
 		comboboxEnchant = new CComboBox(CGConstants.DATAID_NONE, "GUI:enchant.choose", Registerer.getObjectList(CGConstants.OBJECT_ENCHANT), this);
 		comboboxEnchant.setPreferredSize(new Dimension(390, 50));
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(comboboxEnchant);
-		gbc.gridy++;
-		add(spinnerLevel);
-		add(entryLevel);
 	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	public Enchantment generateEnchantment()
 	{
@@ -76,9 +84,9 @@ public class EnchantSelectionPanel extends HelperPanel implements IBox
 	}
 
 	@Override
-	public void updateCombobox()
+	protected void setupDetails(Object[] details)
 	{
-		spinnerLevel.setValues(1, ((EnchantType) comboboxEnchant.getValue()).getMax());
+		limited = (boolean) details[0];
 	}
 
 	@Override
@@ -88,6 +96,12 @@ public class EnchantSelectionPanel extends HelperPanel implements IBox
 		comboboxEnchant.setSelected(enchant.getType());
 		spinnerLevel.setSelected(enchant.getLevel() + 1);
 		entryLevel.setTextField(Integer.toString(enchant.getLevel() + 1));
+	}
+
+	@Override
+	public void updateCombobox()
+	{
+		spinnerLevel.setValues(1, ((EnchantType) comboboxEnchant.getValue()).getMax());
 	}
 
 }

@@ -18,8 +18,8 @@ import commandGenerator.main.CGConstants;
 public class SummonOptionsPanel extends OptionsPanel implements IBox
 {
 
-	private JLabel label;
 	private CComboBox comboboxEntity;
+	private JLabel label;
 	private CoordSelectionPanel panelCoord;
 	private NBTTagPanel panelTag;
 
@@ -27,6 +27,30 @@ public class SummonOptionsPanel extends OptionsPanel implements IBox
 	{
 		super();
 	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(comboboxEntity);
+		add(label);
+		add(panelCoord);
+		add(panelTag);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		label = new JLabel(Registerer.getObjectFromId("Item").getTexture());
+
+		comboboxEntity = new CComboBox(CGConstants.DATAID_ENTITY, "GUI:entity.select", Entity.getListNoPlayer(), this);
+
+		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:summon.coords", true, false);
+		panelTag = new NBTTagPanel("GUI:entity.tags", Registerer.getObjectFromId("Item"), DataTags.entities);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	@Override
 	public String generateCommand()
@@ -47,29 +71,5 @@ public class SummonOptionsPanel extends OptionsPanel implements IBox
 		panelTag.updateCombobox((Entity) comboboxEntity.getValue());
 		label.setIcon(comboboxEntity.getValue().getTexture());
 	}
-
-	@Override
-	protected void createComponents()
-	{
-		label = new JLabel(Registerer.getObjectFromId("Item").getTexture());
-
-		comboboxEntity = new CComboBox(CGConstants.DATAID_ENTITY, "GUI:entity.select", Entity.getListNoPlayer(), this);
-
-		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:summon.coords", true, false);
-		panelTag = new NBTTagPanel("GUI:entity.tags", Registerer.getObjectFromId("Item"), DataTags.entities);
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		add(comboboxEntity);
-		add(label);
-		add(panelCoord);
-		add(panelTag);
-	}
-
-	@Override
-	protected void createListeners()
-	{}
 
 }

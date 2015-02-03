@@ -9,13 +9,29 @@ import commandGenerator.main.CGConstants;
 public class FlagSelectionPanel extends HelperPanel
 {
 
-	private CLabel label;
 	private CCheckBox enchant, attribute, unbreak, destroy, place, other;
+	private CLabel label;
 
 	public FlagSelectionPanel()
 	{
-		super(CGConstants.DATAID_NONE, "GUI:flag.title", 400, 300);
+		super(CGConstants.DATAID_NONE, "GUI:flag.title");
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(label);
+		add(enchant);
+		add(unbreak);
+		add(destroy);
+		add(attribute);
+		add(place);
+		add(other);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		label = new CLabel("GUI:flag.select");
 
 		enchant = new CCheckBox(CGConstants.DATAID_NONE, "GUI:flag.enchant");
@@ -24,23 +40,11 @@ public class FlagSelectionPanel extends HelperPanel
 		destroy = new CCheckBox(CGConstants.DATAID_NONE, "GUI:flag.destroy");
 		place = new CCheckBox(CGConstants.DATAID_NONE, "GUI:flag.place");
 		other = new CCheckBox(CGConstants.DATAID_NONE, "GUI:flag.other");
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(label);
-		gbc.gridy++;
-		add(enchant);
-		gbc.gridy++;
-		add(unbreak);
-		gbc.gridy++;
-		add(destroy);
-		gbc.gridy++;
-		add(attribute);
-		gbc.gridy++;
-		add(place);
-		gbc.gridy++;
-		add(other);
 	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	public int getHideFlags()
 	{

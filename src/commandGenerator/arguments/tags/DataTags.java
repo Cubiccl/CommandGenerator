@@ -35,154 +35,33 @@ public class DataTags
 
 	public static String[][] blocks, items, entities, generated;
 
-	public static Tag init(String[] tag)
+	private static String[] genElements(String nbt)
 	{
-		if (tag[1].equals("boolean")) return new TagBoolean(tag[0], tag[2]);
-		if (tag[1].equals("string")) return initString(tag);
-		if (tag[1].equals("int")) return initInt(tag);
-		if (tag[1].equals("float")) return initFloat(tag);
-		if (tag[1].equals("double")) return initDouble(tag);
-		if (tag[1].equals("item")) return initItem(tag);
-		if (tag[1].equals("item_list")) return initItemList(tag);
-		if (tag[1].equals("custom")) return initCustom(tag);
-		if (tag[1].equals("list")) return new TagList(tag[0]) {
-			public void askValue()
-			{}
-		};
-		return new TagCompound() {
-			public void askValue()
-			{}
-		};
-	}
+		List<String> elements = new ArrayList<String>();
+		String[] base = nbt.split(",");
 
-	private static Tag initCustom(String[] tagData)
-	{
-		String id = tagData[0];
-		if (id.equals("SpawnPotentials")) return new TagSpawnPotentials();
-		if (id.equals("Patterns")) return new TagPatterns();
-
-		if (id.equals("display")) return new TagDisplay();
-		if (id.equals("HideFlags")) return new TagHideFlags();
-		if (id.equals("ench")) return new TagEnchants(id, "LIST=items");
-		if (id.equals("StoredEnchantments")) return new TagEnchants(id, "enchanted_book");
-		if (id.equals("AttributeModifiers")) return new TagAttributes(id, false, "LIST=items");
-		if (id.equals("CanDestroy")) return new TagCanDestroy();
-		if (id.equals("CanPlaceOn")) return new TagCanPlace();
-		if (id.equals("CustomPotionEffects")) return new TagEffects(id, "potion");
-		if (id.equals("pages")) return new TagPages();
-		if (id.equals("Explosion")) return new TagExplosion();
-		if (id.equals("Fireworks")) return new TagFireworks();
-		if (id.equals("BlockEntityTags")) return new TagBlockEntity("BlockEntityTag", "LIST=tileentity");
-
-		if (id.equals("Pos") || id.equals("Motion")) return new TagPos(id, "LIST=allEntities");
-		if (id.equals("Rotation")) return new TagRotation();
-		if (id.equals("Riding")) return new TagRiding();
-		if (id.equals("ActiveEffects")) return new TagEffects(id, "LIST=mob");
-		if (id.equals("Attributes")) return new TagAttributes(id, true, "LIST=mob");
-		if (id.equals("Equipment")) return new TagEquipment();
-		if (id.equals("DropChances")) return new TagDropChances();
-		if (id.equals("Offers")) return new TagOffers();
-		if (id.equals("DisabledSlots")) return new TagDisabledSlots();
-		if (id.equals("Pose")) return new TagPose();
-
-		return null;
-	}
-
-	private static Tag initItemList(String[] tagData)
-	{
-		TagItems tag = new TagItems(tagData[0], tagData[2]);
-		return tag;
-	}
-
-	private static Tag initItem(String[] tagData)
-	{
-		TagItem tag;
-		if (!tagData[3].startsWith("LIST=")) tag = new TagItem(tagData[0], tagData[3].split(":"), false, tagData[2]);
-		else
+		int realIndex = 0, brackCurv = 0, brackRect = 0;
+		boolean inString = false;
+		for (int i = 0; i < base.length; i++)
 		{
-			List<String> objects = new ArrayList<String>();
-			for (ObjectBase object : Registerer.getList(tagData[3].substring("LIST=".length())))
-				objects.add(object.getId());
-			tag = new TagItem(tagData[0], objects.toArray(new String[0]), false, tagData[2]);
-		}
-		return tag;
-	}
-
-	private static Tag initString(String[] tagData)
-	{
-		TagString tag = new TagString(tagData[0], tagData[2]);
-		if (tagData.length > 3)
-		{
-			for (int i = 3; i < tagData.length; i++)
+			for (int j = 0; j < base[i].length(); j++)
 			{
-				String data = tagData[i];
-				if (data.startsWith("custom"))
+				if (base[i].charAt(j) == '"')
 				{
-					data = data.substring("custom=".length());
-					tag.setOptions(data.split(":"));
+					if (j == 0) inString = !inString;
+					else if (base[i].charAt(j - 1) != '\\') inString = !inString;
 				}
+				if (base[i].charAt(j) == '[' && !inString) brackRect++;
+				if (base[i].charAt(j) == ']' && !inString) brackRect--;
+				if (base[i].charAt(j) == '{' && !inString) brackCurv++;
+				if (base[i].charAt(j) == '}' && !inString) brackCurv--;
 			}
+			if (elements.size() <= realIndex) elements.add(base[i]);
+			else elements.set(realIndex, elements.get(realIndex) + "," + base[i]);
+			if (!inString && brackCurv == 0 && brackRect == 0) realIndex++;
 		}
-		return tag;
-	}
 
-	private static Tag initInt(String[] tagData)
-	{
-		TagInt tag = new TagInt(tagData[0], tagData[2]);
-		if (tagData.length > 3)
-		{
-			for (int i = 3; i < tagData.length; i++)
-			{
-				String data = tagData[i];
-				if (data.startsWith("min"))
-				{
-					data = data.substring("min=".length());
-					tag.setMin(Integer.parseInt(data));
-				}
-				if (data.startsWith("max"))
-				{
-					data = data.substring("max=".length());
-					tag.setMax(Integer.parseInt(data));
-				}
-				if (data.startsWith("labeled"))
-				{
-					data = data.substring("labeled=".length());
-					String[] options = data.split(":");
-					tag.setMin(Integer.parseInt(options[0]));
-					tag.setMax(Integer.parseInt(options[1]));
-					tag.setChoices(options[2]);
-				}
-			}
-		}
-		return tag;
-	}
-
-	private static Tag initFloat(String[] tagData)
-	{
-		TagFloat tag = new TagFloat(tagData[0], tagData[2]);
-		if (tagData.length > 3)
-		{
-			for (int i = 3; i < tagData.length; i++)
-			{
-				String data = tagData[i];
-				if (data.startsWith("min"))
-				{
-					data = data.substring("min=".length());
-					tag.setMin(Integer.parseInt(data));
-				}
-				if (data.startsWith("max"))
-				{
-					data = data.substring("max=".length());
-					tag.setMax(Integer.parseInt(data));
-				}
-			}
-		}
-		return tag;
-	}
-
-	private static Tag initDouble(String[] tagData)
-	{
-		return new TagDouble(tagData[0], tagData[2]);
+		return elements.toArray(new String[0]);
 	}
 
 	public static List<Tag> generateListFrom(String nbt)
@@ -292,35 +171,6 @@ public class DataTags
 		return tag;
 	}
 
-	private static String[] genElements(String nbt)
-	{
-		List<String> elements = new ArrayList<String>();
-		String[] base = nbt.split(",");
-
-		int realIndex = 0, brackCurv = 0, brackRect = 0;
-		boolean inString = false;
-		for (int i = 0; i < base.length; i++)
-		{
-			for (int j = 0; j < base[i].length(); j++)
-			{
-				if (base[i].charAt(j) == '"')
-				{
-					if (j == 0) inString = !inString;
-					else if (base[i].charAt(j - 1) != '\\') inString = !inString;
-				}
-				if (base[i].charAt(j) == '[' && !inString) brackRect++;
-				if (base[i].charAt(j) == ']' && !inString) brackRect--;
-				if (base[i].charAt(j) == '{' && !inString) brackCurv++;
-				if (base[i].charAt(j) == '}' && !inString) brackCurv--;
-			}
-			if (elements.size() <= realIndex) elements.add(base[i]);
-			else elements.set(realIndex, elements.get(realIndex) + "," + base[i]);
-			if (!inString && brackCurv == 0 && brackRect == 0) realIndex++;
-		}
-
-		return elements.toArray(new String[0]);
-	}
-
 	public static ObjectBase getObjectFromTags(List<Tag> list)
 	{
 		if (list.size() == 0) return Registerer.getObjectFromId("air");
@@ -345,6 +195,156 @@ public class DataTags
 
 		if (applicable.size() == 0) return null;
 		return applicable.get(0);
+	}
+
+	public static Tag init(String[] tag)
+	{
+		if (tag[1].equals("boolean")) return new TagBoolean(tag[0], tag[2]);
+		if (tag[1].equals("string")) return initString(tag);
+		if (tag[1].equals("int")) return initInt(tag);
+		if (tag[1].equals("float")) return initFloat(tag);
+		if (tag[1].equals("double")) return initDouble(tag);
+		if (tag[1].equals("item")) return initItem(tag);
+		if (tag[1].equals("item_list")) return initItemList(tag);
+		if (tag[1].equals("custom")) return initCustom(tag);
+		if (tag[1].equals("list")) return new TagList(tag[0]) {
+			public void askValue()
+			{}
+		};
+		return new TagCompound() {
+			public void askValue()
+			{}
+		};
+	}
+
+	private static Tag initCustom(String[] tagData)
+	{
+		String id = tagData[0];
+		if (id.equals("SpawnPotentials")) return new TagSpawnPotentials();
+		if (id.equals("Patterns")) return new TagPatterns();
+
+		if (id.equals("display")) return new TagDisplay();
+		if (id.equals("HideFlags")) return new TagHideFlags();
+		if (id.equals("ench")) return new TagEnchants(id, "LIST=items");
+		if (id.equals("StoredEnchantments")) return new TagEnchants(id, "enchanted_book");
+		if (id.equals("AttributeModifiers")) return new TagAttributes(id, false, "LIST=items");
+		if (id.equals("CanDestroy")) return new TagCanDestroy();
+		if (id.equals("CanPlaceOn")) return new TagCanPlace();
+		if (id.equals("CustomPotionEffects")) return new TagEffects(id, "potion");
+		if (id.equals("pages")) return new TagPages();
+		if (id.equals("Explosion")) return new TagExplosion();
+		if (id.equals("Fireworks")) return new TagFireworks();
+		if (id.equals("BlockEntityTags")) return new TagBlockEntity("BlockEntityTag", "LIST=tileentity");
+
+		if (id.equals("Pos") || id.equals("Motion")) return new TagPos(id, "LIST=allEntities");
+		if (id.equals("Rotation")) return new TagRotation();
+		if (id.equals("Riding")) return new TagRiding();
+		if (id.equals("ActiveEffects")) return new TagEffects(id, "LIST=mob");
+		if (id.equals("Attributes")) return new TagAttributes(id, true, "LIST=mob");
+		if (id.equals("Equipment")) return new TagEquipment();
+		if (id.equals("DropChances")) return new TagDropChances();
+		if (id.equals("Offers")) return new TagOffers();
+		if (id.equals("DisabledSlots")) return new TagDisabledSlots();
+		if (id.equals("Pose")) return new TagPose();
+
+		return null;
+	}
+
+	private static Tag initDouble(String[] tagData)
+	{
+		return new TagDouble(tagData[0], tagData[2]);
+	}
+
+	private static Tag initFloat(String[] tagData)
+	{
+		TagFloat tag = new TagFloat(tagData[0], tagData[2]);
+		if (tagData.length > 3)
+		{
+			for (int i = 3; i < tagData.length; i++)
+			{
+				String data = tagData[i];
+				if (data.startsWith("min"))
+				{
+					data = data.substring("min=".length());
+					tag.setMin(Integer.parseInt(data));
+				}
+				if (data.startsWith("max"))
+				{
+					data = data.substring("max=".length());
+					tag.setMax(Integer.parseInt(data));
+				}
+			}
+		}
+		return tag;
+	}
+
+	private static Tag initInt(String[] tagData)
+	{
+		TagInt tag = new TagInt(tagData[0], tagData[2]);
+		if (tagData.length > 3)
+		{
+			for (int i = 3; i < tagData.length; i++)
+			{
+				String data = tagData[i];
+				if (data.startsWith("min"))
+				{
+					data = data.substring("min=".length());
+					tag.setMin(Integer.parseInt(data));
+				}
+				if (data.startsWith("max"))
+				{
+					data = data.substring("max=".length());
+					tag.setMax(Integer.parseInt(data));
+				}
+				if (data.startsWith("labeled"))
+				{
+					data = data.substring("labeled=".length());
+					String[] options = data.split(":");
+					tag.setMin(Integer.parseInt(options[0]));
+					tag.setMax(Integer.parseInt(options[1]));
+					tag.setChoices(options[2]);
+				}
+			}
+		}
+		return tag;
+	}
+
+	private static Tag initItem(String[] tagData)
+	{
+		TagItem tag;
+		if (!tagData[3].startsWith("LIST=")) tag = new TagItem(tagData[0], tagData[3].split(":"), false, tagData[2]);
+		else
+		{
+			List<String> objects = new ArrayList<String>();
+			for (ObjectBase object : Registerer.getList(tagData[3].substring("LIST=".length())))
+				objects.add(object.getId());
+			tag = new TagItem(tagData[0], objects.toArray(new String[0]), false, tagData[2]);
+		}
+		return tag;
+	}
+
+	private static Tag initItemList(String[] tagData)
+	{
+		TagItems tag = new TagItems(tagData[0], tagData[2]);
+		return tag;
+	}
+
+	private static Tag initString(String[] tagData)
+	{
+		TagString tag = new TagString(tagData[0], tagData[2]);
+		if (tagData.length > 3)
+		{
+			for (int i = 3; i < tagData.length; i++)
+			{
+				String data = tagData[i];
+				if (data.startsWith("custom"))
+				{
+					data = data.substring("custom=".length());
+					tag.setOptions(data.split(":"));
+				}
+			}
+		}
+		return tag;
 	}
 
 }

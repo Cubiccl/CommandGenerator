@@ -10,9 +10,9 @@ import commandGenerator.main.Lang;
 public class TagBoolean extends Tag
 {
 
-	private boolean value;
-	private JLabel label;
 	private JComboBox<String> combobox;
+	private JLabel label;
+	private boolean value;
 
 	public TagBoolean(String id, String... applicable)
 	{
@@ -40,19 +40,6 @@ public class TagBoolean extends Tag
 	}
 
 	@Override
-	public String display(int details, int lvls)
-	{
-		if (value) return getName() + " : " + Lang.get("GENERAL:yes");
-		else return getName() + " : " + Lang.get("GENERAL:no");
-	}
-
-	public TagBoolean setValue(boolean value)
-	{
-		this.value = value;
-		return this;
-	}
-
-	@Override
 	public String commandStructure()
 	{
 		String text = getId();
@@ -61,9 +48,22 @@ public class TagBoolean extends Tag
 		else return text + "0b";
 	}
 
+	@Override
+	public String display(int details, int lvls)
+	{
+		if (value) return getName() + " : " + Lang.get("GENERAL:yes");
+		else return getName() + " : " + Lang.get("GENERAL:no");
+	}
+
 	public boolean getValue()
 	{
 		return value;
+	}
+
+	public TagBoolean setValue(boolean value)
+	{
+		this.value = value;
+		return this;
 	}
 
 }

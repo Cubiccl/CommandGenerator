@@ -29,14 +29,16 @@ public class LangComboBox extends JComboBox<String> implements CComponent
 		setModel(new JComboBox<String>(names).getModel());
 	}
 
-	public void updateLang()
+	@Override
+	public void reset()
 	{
-		String[] names = new String[size];
-		for (int i = 0; i < names.length; i++)
-		{
-			names[i] = Lang.get(title + "_" + i);
-		}
-		setModel(new JComboBox<String>(names).getModel());
+		setSelectedIndex(0);
+	}
+
+	@Override
+	public void setEnabledContent(boolean enable)
+	{
+		setEnabled(enable);
 	}
 
 	public void setText(String title, int size)
@@ -47,21 +49,19 @@ public class LangComboBox extends JComboBox<String> implements CComponent
 	}
 
 	@Override
-	public void setEnabledContent(boolean enable)
-	{
-		setEnabled(enable);
-	}
-
-	@Override
 	public void setupFrom(Map<String, Object> data)
 	{
 		if (!id.equals(CGConstants.DATAID_NONE)) setSelectedIndex((int) data.get(id));
 	}
 
-	@Override
-	public void reset()
+	public void updateLang()
 	{
-		setSelectedIndex(0);
+		String[] names = new String[size];
+		for (int i = 0; i < names.length; i++)
+		{
+			names[i] = Lang.get(title + "_" + i);
+		}
+		setModel(new JComboBox<String>(names).getModel());
 	}
 
 }

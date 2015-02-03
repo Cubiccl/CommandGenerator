@@ -14,47 +14,6 @@ import commandGenerator.main.CGConstants;
 public abstract class ObjectBase
 {
 
-	/** The Object's ID. */
-	private final String id;
-	/** The Object's type. */
-	private final byte type;
-
-	/** Creates a new ObjectBase.
-	 * 
-	 * @param id
-	 *            - <i>String</i> - This Object's ID.
-	 * @param type
-	 *            - <i>Byte</i> - This Object's type. */
-	public ObjectBase(String id, byte type)
-	{
-		this.id = id;
-		this.type = type;
-		if (type != CGConstants.OBJECT_TAG) Registerer.registerObject(type, this);
-	}
-
-	/** Returns the Object's ID. */
-	public String getId()
-	{
-		return id;
-	}
-
-	/** Returns the Object's type. */
-	public byte getType()
-	{
-		return type;
-	}
-
-	/** Returns the name to display to the user. */
-	public abstract String getName();
-
-	/** Returns the image to use when displaying the object */
-	public abstract ImageIcon getTexture();
-
-	public String toString()
-	{
-		return getName();
-	}
-
 	/** Returns a String version of the Object to be displayed to the user.
 	 * 
 	 * @param object
@@ -70,7 +29,6 @@ public abstract class ObjectBase
 
 		return object.toString();
 	}
-
 	/** Returns a Tag version of the Object.
 	 * 
 	 * @param object
@@ -161,5 +119,47 @@ public abstract class ObjectBase
 			default:
 				return ((TagString) nbt);
 		}
+	}
+
+	/** The Object's ID. */
+	private final String id;
+
+	/** The Object's type. */
+	private final byte type;
+
+	/** Creates a new ObjectBase.
+	 * 
+	 * @param id
+	 *            - <i>String</i> - This Object's ID.
+	 * @param type
+	 *            - <i>Byte</i> - This Object's type. */
+	public ObjectBase(String id, byte type)
+	{
+		this.id = id;
+		this.type = type;
+		if (type != CGConstants.OBJECT_TAG) Registerer.registerObject(type, this);
+	}
+
+	/** Returns the Object's ID. */
+	public String getId()
+	{
+		return id;
+	}
+
+	/** Returns the name to display to the user. */
+	public abstract String getName();
+
+	/** Returns the image to use when displaying the object */
+	public abstract ImageIcon getTexture();
+
+	/** Returns the Object's type. */
+	public byte getType()
+	{
+		return type;
+	}
+
+	public String toString()
+	{
+		return getName();
 	}
 }

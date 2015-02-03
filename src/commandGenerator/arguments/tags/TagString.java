@@ -7,11 +7,16 @@ import javax.swing.JTextField;
 public class TagString extends Tag
 {
 
+	private JComboBox<String> box;
 	private String[] choices;
-	private String value;
 	private JLabel label;
 	private JTextField textfield;
-	private JComboBox<String> box;
+	private String value;
+
+	public TagString()
+	{
+		this("");
+	}
 
 	public TagString(String id, String... applicable)
 	{
@@ -26,11 +31,6 @@ public class TagString extends Tag
 		panel.add(label, gbc);
 		gbc.gridy++;
 		panel.add(textfield, gbc);
-	}
-
-	public TagString()
-	{
-		this("");
 	}
 
 	@Override
@@ -48,6 +48,13 @@ public class TagString extends Tag
 			if (showPanel()) return;
 			value = (String) box.getSelectedItem();
 		}
+	}
+
+	@Override
+	public String commandStructure()
+	{
+		if (getId().equals("")) return "\"" + value + "\"";
+		return getId() + ":\"" + value + "\"";
 	}
 
 	@Override
@@ -75,12 +82,5 @@ public class TagString extends Tag
 	{
 		this.value = value;
 		return this;
-	}
-
-	@Override
-	public String commandStructure()
-	{
-		if (getId().equals("")) return "\"" + value + "\"";
-		return getId() + ":\"" + value + "\"";
 	}
 }

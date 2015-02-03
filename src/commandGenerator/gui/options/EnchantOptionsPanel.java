@@ -11,13 +11,31 @@ import commandGenerator.main.CGConstants;
 public class EnchantOptionsPanel extends OptionsPanel
 {
 
-	private EntitySelectionPanel panelPlayer;
 	private EnchantSelectionPanel panelEnchant;
+	private EntitySelectionPanel panelPlayer;
 
 	public EnchantOptionsPanel()
 	{
 		super();
 	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelPlayer);
+		add(panelEnchant);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelEnchant = new EnchantSelectionPanel(CGConstants.PANELID_ENCHANT, "GENERAL:enchant", true);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	@Override
 	public String generateCommand()
@@ -29,23 +47,5 @@ public class EnchantOptionsPanel extends OptionsPanel
 
 		return "enchant " + player.commandStructure() + " " + enchant.getType().getId() + " " + Integer.toString(enchant.getLevel());
 	}
-
-	@Override
-	protected void createComponents()
-	{
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
-		panelEnchant = new EnchantSelectionPanel(CGConstants.PANELID_ENCHANT, "GENERAL:enchant", true);
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		add(panelPlayer);
-		add(panelEnchant);
-	}
-
-	@Override
-	protected void createListeners()
-	{}
 
 }

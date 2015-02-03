@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.commandSpecific.scoreboard;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -18,16 +17,28 @@ import commandGenerator.main.DisplayHelper;
 public class PlayersTestPanel extends ScoreboardPanel
 {
 
-	private CEntry entryObjective, entryScore;
-	private JTextField textfieldMax;
 	private CCheckBox checkboxMax;
+	private CEntry entryObjective, entryScore;
 	private EntitySelectionPanel panelEntity;
+	private JTextField textfieldMax;
 
 	public PlayersTestPanel()
 	{
 		super();
-		setPreferredSize(new Dimension(500, 300));
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(entryObjective);
+		add(entryScore);
+		addLine(checkboxMax, textfieldMax);
+		add(panelEntity);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		entryObjective = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective");
 		entryScore = new CEntry(CGConstants.DATAID_VALUE, "GUI:scoreboard.score.min");
 
@@ -35,6 +46,13 @@ public class PlayersTestPanel extends ScoreboardPanel
 		textfieldMax.setEnabled(false);
 
 		checkboxMax = new CCheckBox(CGConstants.DATAID_NONE, "GUI:scoreboard.score.max");
+
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+	}
+
+	@Override
+	protected void createListeners()
+	{
 		checkboxMax.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e)
@@ -42,27 +60,6 @@ public class PlayersTestPanel extends ScoreboardPanel
 				textfieldMax.setEnabled(checkboxMax.isSelected());
 			}
 		});
-
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridwidth = 2;
-		add(entryObjective);
-		gbc.gridy++;
-		add(entryScore);
-		gbc.gridwidth = 1;
-
-		gbc.gridy++;
-		add(checkboxMax);
-		gbc.gridx++;
-		add(textfieldMax);
-
-		gbc.gridx--;
-		gbc.gridy++;
-		gbc.gridwidth = 2;
-		add(panelEntity);
-		gbc.gridwidth = 1;
 	}
 
 	@Override

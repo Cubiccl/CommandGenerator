@@ -11,13 +11,31 @@ import commandGenerator.main.CGConstants;
 public class TellrawOptionsPanel extends OptionsPanel
 {
 
-	private EntitySelectionPanel panelPlayer;
 	private ListSelectionPanel panelJson;
+	private EntitySelectionPanel panelPlayer;
 
 	public TellrawOptionsPanel()
 	{
 		super();
 	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelPlayer);
+		add(panelJson);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelJson = new ListSelectionPanel("GUI:json.text", CGConstants.OBJECT_JSON);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	@Override
 	public String generateCommand()
@@ -35,23 +53,5 @@ public class TellrawOptionsPanel extends OptionsPanel
 
 		return "tellraw " + player.commandStructure() + " " + list.commandStructure();
 	}
-
-	@Override
-	protected void createComponents()
-	{
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
-		panelJson = new ListSelectionPanel("GUI:json.text", CGConstants.OBJECT_JSON);
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		add(panelPlayer);
-		add(panelJson);
-	}
-
-	@Override
-	protected void createListeners()
-	{}
 
 }

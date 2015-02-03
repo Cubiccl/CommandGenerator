@@ -21,12 +21,12 @@ import commandGenerator.main.CGConstants;
 public class NumberSpinner extends JPanel implements CComponent
 {
 
-	private String id;
-	private int max, min;
-	private CLabel label;
-	private JSpinner spinner;
 	private JButton buttonMax, button0;
 	private GridBagConstraints gbc = new GridBagConstraints();
+	private String id;
+	private CLabel label;
+	private int max, min;
+	private JSpinner spinner;
 
 	public NumberSpinner(String id, String title, int min, int max, final ISpin parent)
 	{
@@ -76,33 +76,16 @@ public class NumberSpinner extends JPanel implements CComponent
 		add(buttonMax);
 	}
 
-	private void setMin()
-	{
-		setSelected(min);
-	}
-
-	private void setMax()
-	{
-		setSelected(max);
-	}
-
-	public void setValues(int min, int max)
-	{
-		this.max = max;
-		this.min = min;
-		int selected = (int) spinner.getValue();
-		if (selected <= max) spinner.setModel(new SpinnerNumberModel(selected, min, max, 1));
-		else spinner.setModel(new SpinnerNumberModel(min, min, max, 1));
-	}
-
 	public int getValue()
 	{
 		return (int) spinner.getValue();
 	}
 
-	public void updateLang()
+	@Override
+	public void reset()
 	{
-		label.updateLang();
+		if (min <= 0 && max >= 0) spinner.setValue(0);
+		else spinner.setValue(0);
 	}
 
 	public void setEnabledContent(boolean enable)
@@ -110,6 +93,16 @@ public class NumberSpinner extends JPanel implements CComponent
 		setEnabled(enable);
 		label.setEnabled(enable);
 		spinner.setEnabled(enable);
+	}
+
+	private void setMax()
+	{
+		setSelected(max);
+	}
+
+	private void setMin()
+	{
+		setSelected(min);
 	}
 
 	public void setSelected(int value)
@@ -123,10 +116,17 @@ public class NumberSpinner extends JPanel implements CComponent
 		if (!id.equals(CGConstants.DATAID_NONE)) spinner.setValue(data.get(id));
 	}
 
-	@Override
-	public void reset()
+	public void setValues(int min, int max)
 	{
-		if (min <= 0 && max >= 0) spinner.setValue(0);
-		else spinner.setValue(0);
+		this.max = max;
+		this.min = min;
+		int selected = (int) spinner.getValue();
+		if (selected <= max) spinner.setModel(new SpinnerNumberModel(selected, min, max, 1));
+		else spinner.setModel(new SpinnerNumberModel(min, min, max, 1));
+	}
+
+	public void updateLang()
+	{
+		label.updateLang();
 	}
 }

@@ -11,14 +11,78 @@ import commandGenerator.main.DisplayHelper;
 public class ItemStack
 {
 
-	/** The Item this stack is composed of. */
-	private Item item;
-	/** The Damage of the Item. */
-	private int damage;
+	/** Generates a new ItemStack from the following data :
+	 * 
+	 * @param id
+	 *            - <i>String</i> - The Item ID.
+	 * @param damage
+	 *            - <i>int</i> - The Item damage.
+	 * @param nbt
+	 *            - <i>ArrayList:Tag</i> - The NBT Tags as a list. */
+	public static ItemStack generateBlockFrom(String id, int damage, List<Tag> nbt)
+	{
+		return generateFrom(id, damage, -1, nbt, -1);
+	}
+	/** Generates a new ItemStack from the following data :
+	 * 
+	 * @param id
+	 *            - <i>String</i> - The Item ID.
+	 * @param damage
+	 *            - <i>int</i> - The Item damage.
+	 * @param count
+	 *            - <i>int</i> - The number of Items.
+	 * @param nbt
+	 *            - <i>ArrayList:Tag</i> - The NBT Tags as a list.
+	 * @param slot
+	 *            - <i>int</i> - The slot of this stack. */
+	public static ItemStack generateFrom(String id, int damage, int count, List<Tag> nbt, int slot)
+	{
+		Item item = (Item) Registerer.getObjectFromId(id);
+		if (!(item instanceof Item)) return null;
+		TagCompound tag = new TagCompound("tag") {
+			public void askValue()
+			{}
+		};
+		tag.setValue(nbt);
+
+		DisplayHelper.log("Created Item : " + count + " " + ((Item) Registerer.getObjectFromId(id)).getName(damage) + " in slot " + slot);
+		return new ItemStack(item, damage, count, tag, slot);
+	}
+	/** Generates an ItemStack from a TagCompound.
+	 * 
+	 * @param tag
+	 *            - <i>TagCompount</i> - The tag used to generate. */
+	public static ItemStack generateFrom(TagCompound tag)
+	{
+		Item item = (Item) Registerer.getObjectFromId("stone");
+		int damage = 0, count = 1, slot = -1;
+		TagCompound nbt = new TagCompound() {
+			public void askValue()
+			{}
+		};
+		for (int i = 0; i < tag.size(); i++)
+		{
+			Tag part = tag.get(i);
+			if (part.getId().equals("id")) item = (Item) Registerer.getObjectFromId(((TagString) part).getValue());
+			if (part.getId().equals("Damage")) damage = ((TagInt) part).getValue();
+			if (part.getId().equals("Count")) count = ((TagInt) part).getValue();
+			if (part.getId().equals("Slot")) slot = ((TagInt) part).getValue();
+			if (part.getId().equals("tag")) nbt = ((TagCompound) part);
+		}
+
+		return new ItemStack(item, damage, count, nbt, slot);
+	}
 	/** The number of Items in this Stack. */
 	private int count;
+	/** The Damage of the Item. */
+	private int damage;
+
+	/** The Item this stack is composed of. */
+	private Item item;
+
 	/** The slot this stack's Items are in. */
 	private int slot;
+
 	/** The NBT Tags this stack's Items have. */
 	private TagCompound tag;
 
@@ -91,12 +155,6 @@ public class ItemStack
 		return display;
 	}
 
-	/** Returns the slot this Stack's Items are in. */
-	public int getSlot()
-	{
-		return slot;
-	}
-
 	/** Returns the number of Items in this Stack. */
 	public int getCount()
 	{
@@ -113,6 +171,12 @@ public class ItemStack
 	public Item getItem()
 	{
 		return item;
+	}
+
+	/** Returns the slot this Stack's Items are in. */
+	public int getSlot()
+	{
+		return slot;
 	}
 
 	/** Returns the NBT Tags this Stack's Items have. */
@@ -136,70 +200,6 @@ public class ItemStack
 		if (tag != null && !tag.commandStructure().substring(tag.getId().length() + 1).equals("{}")) item.addTag(this.tag);
 
 		return item;
-	}
-
-	/** Generates an ItemStack from a TagCompound.
-	 * 
-	 * @param tag
-	 *            - <i>TagCompount</i> - The tag used to generate. */
-	public static ItemStack generateFrom(TagCompound tag)
-	{
-		Item item = (Item) Registerer.getObjectFromId("stone");
-		int damage = 0, count = 1, slot = -1;
-		TagCompound nbt = new TagCompound() {
-			public void askValue()
-			{}
-		};
-		for (int i = 0; i < tag.size(); i++)
-		{
-			Tag part = tag.get(i);
-			if (part.getId().equals("id")) item = (Item) Registerer.getObjectFromId(((TagString) part).getValue());
-			if (part.getId().equals("Damage")) damage = ((TagInt) part).getValue();
-			if (part.getId().equals("Count")) count = ((TagInt) part).getValue();
-			if (part.getId().equals("Slot")) slot = ((TagInt) part).getValue();
-			if (part.getId().equals("tag")) nbt = ((TagCompound) part);
-		}
-
-		return new ItemStack(item, damage, count, nbt, slot);
-	}
-
-	/** Generates a new ItemStack from the following data :
-	 * 
-	 * @param id
-	 *            - <i>String</i> - The Item ID.
-	 * @param damage
-	 *            - <i>int</i> - The Item damage.
-	 * @param count
-	 *            - <i>int</i> - The number of Items.
-	 * @param nbt
-	 *            - <i>ArrayList:Tag</i> - The NBT Tags as a list.
-	 * @param slot
-	 *            - <i>int</i> - The slot of this stack. */
-	public static ItemStack generateFrom(String id, int damage, int count, List<Tag> nbt, int slot)
-	{
-		Item item = (Item) Registerer.getObjectFromId(id);
-		if (!(item instanceof Item)) return null;
-		TagCompound tag = new TagCompound("tag") {
-			public void askValue()
-			{}
-		};
-		tag.setValue(nbt);
-
-		DisplayHelper.log("Created Item : " + count + " " + ((Item) Registerer.getObjectFromId(id)).getName(damage) + " in slot " + slot);
-		return new ItemStack(item, damage, count, tag, slot);
-	}
-
-	/** Generates a new ItemStack from the following data :
-	 * 
-	 * @param id
-	 *            - <i>String</i> - The Item ID.
-	 * @param damage
-	 *            - <i>int</i> - The Item damage.
-	 * @param nbt
-	 *            - <i>ArrayList:Tag</i> - The NBT Tags as a list. */
-	public static ItemStack generateBlockFrom(String id, int damage, List<Tag> nbt)
-	{
-		return generateFrom(id, damage, -1, nbt, -1);
 	}
 
 }

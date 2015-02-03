@@ -13,13 +13,23 @@ public class ObjectivesRemovePanel extends ScoreboardPanel
 	public ObjectivesRemovePanel()
 	{
 		super();
+	}
 
-		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective");
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
+	@Override
+	protected void addComponents()
+	{
 		add(entryName);
 	}
+
+	@Override
+	protected void createComponents()
+	{
+		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective");
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	@Override
 	public String generateText()

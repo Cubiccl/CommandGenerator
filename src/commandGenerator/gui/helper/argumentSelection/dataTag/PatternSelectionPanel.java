@@ -1,7 +1,6 @@
 package commandGenerator.gui.helper.argumentSelection.dataTag;
 
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,18 +22,30 @@ import commandGenerator.main.Resources;
 public class PatternSelectionPanel extends HelperPanel
 {
 
-	private String[] patternIds = { "bs", "ts", "ls", "rs", "ms", "cs", "ss", "drs", "dls", "cr", "sc", "ld", "rd", "hh", "vh", "bl", "br", "tl", "tr", "bt",
-			"tt", "bts", "tts", "mc", "mr", "bo", "cbo", "bri", "cre", "sku", "flo", "moj", "gra" };
+	private LangComboBox comboboxColor, comboboxPattern;
 
 	private CLabel labelColor, labelPattern;
 
 	private JLabel labelImage;
-	private LangComboBox comboboxColor, comboboxPattern;
+	private String[] patternIds = { "bs", "ts", "ls", "rs", "ms", "cs", "ss", "drs", "dls", "cr", "sc", "ld", "rd", "hh", "vh", "bl", "br", "tl", "tr", "bt",
+			"tt", "bts", "tts", "mc", "mr", "bo", "cbo", "bri", "cre", "sku", "flo", "moj", "gra" };
 
 	public PatternSelectionPanel()
 	{
-		super(CGConstants.DATAID_NONE, "TAG:pattern", 600, 400);
+		super(CGConstants.DATAID_NONE, "TAG:pattern");
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		addLine(labelColor, comboboxColor);
+		addLine(labelPattern, comboboxPattern);
+		add(labelImage);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		labelColor = new CLabel("GUI:pattern.color");
 		labelPattern = new CLabel("GUI:pattern.type");
 		labelImage = new JLabel();
@@ -50,6 +61,11 @@ public class PatternSelectionPanel extends HelperPanel
 		comboboxColor.setPreferredSize(new Dimension(200, 20));
 		comboboxPattern = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:pattern", patternIds.length);
 		comboboxPattern.setPreferredSize(new Dimension(300, 20));
+	}
+
+	@Override
+	protected void createListeners()
+	{
 		comboboxPattern.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -63,26 +79,6 @@ public class PatternSelectionPanel extends HelperPanel
 				}
 			}
 		});
-
-		gbc = new GridBagConstraints();
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(labelColor);
-		gbc.gridy++;
-		add(labelPattern);
-
-		gbc.gridx++;
-		gbc.gridy--;
-		add(comboboxColor);
-		gbc.gridy++;
-		add(comboboxPattern);
-
-		gbc.gridx = 0;
-		gbc.gridy++;
-		gbc.gridwidth = 2;
-		add(labelImage);
-		gbc.gridwidth = 1;
 	}
 
 	public TagCompound getPattern()
@@ -95,10 +91,6 @@ public class PatternSelectionPanel extends HelperPanel
 		tag.addTag(new TagString("Pattern").setValue(patternIds[comboboxPattern.getSelectedIndex()]));
 		return tag;
 	}
-
-	@Override
-	public void updateLang()
-	{}
 
 	public void setup(TagCompound nbt)
 	{
@@ -113,5 +105,9 @@ public class PatternSelectionPanel extends HelperPanel
 			}
 		}
 	}
+
+	@Override
+	public void updateLang()
+	{}
 
 }

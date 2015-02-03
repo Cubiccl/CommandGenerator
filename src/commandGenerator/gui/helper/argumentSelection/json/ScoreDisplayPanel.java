@@ -22,18 +22,27 @@ public class ScoreDisplayPanel extends HelperPanel
 
 	public ScoreDisplayPanel(String title)
 	{
-		super(CGConstants.DATAID_NONE, title, 500, 300);
+		super(CGConstants.DATAID_NONE, title);
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(entryObjective);
+		add(panelEntity);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		entryObjective = new CEntry(CGConstants.DATAID_NONE, "GUI:scoreboard.objective");
 
 		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(entryObjective);
-		gbc.gridy++;
-		add(panelEntity);
 	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	public TagCompound generateScore()
 	{
@@ -58,14 +67,6 @@ public class ScoreDisplayPanel extends HelperPanel
 		return tag;
 	}
 
-	@Override
-	public void updateLang()
-	{
-		updateTitle();
-		entryObjective.updateLang();
-		panelEntity.updateLang();
-	}
-
 	public void setup(TagCompound nbt)
 	{
 		for (int i = 0; i < nbt.size(); i++)
@@ -79,5 +80,13 @@ public class ScoreDisplayPanel extends HelperPanel
 				panelEntity.setupFrom(data);
 			}
 		}
+	}
+
+	@Override
+	public void updateLang()
+	{
+		updateTitle();
+		entryObjective.updateLang();
+		panelEntity.updateLang();
 	}
 }

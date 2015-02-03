@@ -13,11 +13,16 @@ import commandGenerator.main.Lang;
 public class TagInt extends Tag
 {
 
-	protected int value, type, min, max;
+	private String choicesId;
 	private JLabel label;
 	protected JTextField textfield;
-	private String choicesId;
+	protected int value, type, min, max;
 	private int[] values;
+
+	public TagInt()
+	{
+		this("");
+	}
 
 	public TagInt(String id, String... applicable)
 	{
@@ -28,11 +33,6 @@ public class TagInt extends Tag
 		panel = new JPanel(new GridBagLayout());
 		gbc.gridy++;
 		label = new JLabel();
-	}
-
-	public TagInt()
-	{
-		this("");
 	}
 
 	@Override
@@ -71,10 +71,22 @@ public class TagInt extends Tag
 	}
 
 	@Override
+	public String commandStructure()
+	{
+		if (getId().equals("")) return Integer.toString(value);
+		return getId() + ":" + value;
+	}
+
+	@Override
 	public String display(int details, int lvls)
 	{
 		if (getId().equals("")) return Integer.toString(value);
 		return getName() + " : " + value;
+	}
+
+	public int getValue()
+	{
+		return value;
 	}
 
 	private boolean isValueOk(String value)
@@ -109,22 +121,11 @@ public class TagInt extends Tag
 		return this;
 	}
 
-	public TagInt setValue(int value)
+	public void setMax(int max)
 	{
-		this.value = value;
-		return this;
-	}
-
-	@Override
-	public String commandStructure()
-	{
-		if (getId().equals("")) return Integer.toString(value);
-		return getId() + ":" + value;
-	}
-
-	public int getValue()
-	{
-		return value;
+		if (type == NONE) type = MAX;
+		else if (type == MIN) type = BOTH;
+		this.max = max;
 	}
 
 	public void setMin(int min)
@@ -134,11 +135,10 @@ public class TagInt extends Tag
 		this.min = min;
 	}
 
-	public void setMax(int max)
+	public TagInt setValue(int value)
 	{
-		if (type == NONE) type = MAX;
-		else if (type == MIN) type = BOTH;
-		this.max = max;
+		this.value = value;
+		return this;
 	}
 
 }

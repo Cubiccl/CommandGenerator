@@ -15,6 +15,17 @@ public class Entity extends ObjectBase
 
 	public static Entity player = new Entity("Player"), entity = new Entity("");
 
+	/** Returns an array containing all registered Entities, except Player. */
+	public static Entity[] getListNoPlayer()
+	{
+		List<Entity> entityList = new ArrayList<Entity>();
+		ObjectBase[] list = Registerer.getObjectList(CGConstants.OBJECT_ENTITY);
+		for (int i = 0; i < list.length; i++)
+			if (!list[i].getId().equals("Player")) entityList.add((Entity) list[i]);
+
+		return entityList.toArray(new Entity[0]);
+	}
+
 	/** Creates a new Entity.
 	 * 
 	 * @param id
@@ -43,17 +54,6 @@ public class Entity extends ObjectBase
 			DisplayHelper.missingTexture(path);
 			return null;
 		}
-	}
-
-	/** Returns an array containing all registered Entities, except Player. */
-	public static Entity[] getListNoPlayer()
-	{
-		List<Entity> entityList = new ArrayList<Entity>();
-		ObjectBase[] list = Registerer.getObjectList(CGConstants.OBJECT_ENTITY);
-		for (int i = 0; i < list.length; i++)
-			if (!list[i].getId().equals("Player")) entityList.add((Entity) list[i]);
-
-		return entityList.toArray(new Entity[0]);
 	}
 
 }

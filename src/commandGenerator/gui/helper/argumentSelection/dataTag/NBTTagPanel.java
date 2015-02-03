@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.swing.JButton;
 
-import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
@@ -25,13 +24,34 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 	private CButton buttonAdd, buttonRemove;
 	private JButton buttonHelp;
 	private TagDisplayer displayer;
-	private Item item;
+	private Tag[] nbtTags;
+	private ObjectBase object;
 
 	public NBTTagPanel(String title, ObjectBase object, String[][] nbtTags)
 	{
-		super(CGConstants.PANELID_NBT, title, 780, 160);
+		super(CGConstants.PANELID_NBT, title, object, nbtTags);
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(displayer);
+		addLine(buttonAdd, buttonRemove, buttonHelp);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		buttonAdd = new CButton("GUI:tag.add");
+		buttonRemove = new CButton("GUI:tag.remove");
+		buttonHelp = new JButton("?");
+
+		displayer = new TagDisplayer(getPanelId(), nbtTags);
+	}
+
+	@Override
+	protected void createListeners()
+	{
 		buttonAdd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -39,7 +59,6 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 				displayer.add();
 			}
 		});
-		buttonRemove = new CButton("GUI:tag.remove");
 		buttonRemove.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -47,7 +66,6 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 				displayer.remove();
 			}
 		});
-		buttonHelp = new JButton("?");
 		buttonHelp.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -55,26 +73,6 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 				displayer.help();
 			}
 		});
-
-		Tag[] tags = new Tag[nbtTags.length];
-		for (int i = 0; i < tags.length; i++)
-			tags[i] = DataTags.init(nbtTags[i]);
-
-		displayer = new TagDisplayer(getPanelId(), tags);
-		displayer.updateList(object);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridwidth = 3;
-		add(displayer);
-		gbc.gridwidth = 1;
-
-		gbc.gridy++;
-		add(buttonAdd);
-		gbc.gridx++;
-		add(buttonRemove);
-		gbc.gridx++;
-		add(buttonHelp);
 	}
 
 	public TagCompound getNbtTags(String id)
@@ -104,8 +102,26 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 		displayer.setEnabledContent(enable);
 	}
 
+	public void setSize(int width, int height)
+	{
+		super.setPreferredSize(new Dimension(width, height));
+		displayer.setSize(width - 50, height - 50);
+	}
+
+	@Override
+	protected void setupDetails(Object[] details)
+	{
+		this.object = (ObjectBase) details[0];
+		String[][] list = (String[][]) details[1];
+		
+		this.nbtTags = new Tag[list.length];
+		for (int i = 0; i < list.length; i++)
+			this.nbtTags[i] = DataTags.init(list[i]);
+	}
+
 	public void updateCombobox(ObjectBase object)
 	{
+		this.object = object;
 		displayer.updateList(object);
 	}
 
@@ -113,13 +129,7 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 	public void updateLang()
 	{
 		super.updateLang();
-		updateCombobox(item);
-	}
-
-	public void setSize(int width, int height)
-	{
-		super.setPreferredSize(new Dimension(width, height));
-		displayer.setSize(width - 50, height - 50);
+		updateCombobox(object);
 	}
 
 }

@@ -25,16 +25,16 @@ import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class DisplaySelectionPanel extends JPanel
-{
+{// Turn into Helper Panel
 
-	private JTextField textfieldName, textfieldLore;
 	private CButton buttonAdd, buttonRemove;
 	private CCheckBox checkboxName, checkboxColor;
 	private JEditorPane editorpane;
-	private JScrollPane scrollpane;
-	private ColorSelectionPanel panel;
 	private GridBagConstraints gbc;
 	private List<String> lores;
+	private ColorSelectionPanel panel;
+	private JScrollPane scrollpane;
+	private JTextField textfieldName, textfieldLore;
 
 	public DisplaySelectionPanel()
 	{

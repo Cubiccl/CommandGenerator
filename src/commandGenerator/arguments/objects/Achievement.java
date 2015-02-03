@@ -8,6 +8,19 @@ import commandGenerator.main.Lang;
 
 public class Achievement extends ObjectBase
 {
+	/** Generates an Achievement from its command structure.
+	 * 
+	 * @param data
+	 *            - <i>String</i> - The command structure. */
+	public static Achievement generateFrom(String data)
+	{
+		if (data.contains("achievement.")) data = data.substring("achievement.".length());
+
+		Achievement ach = (Achievement) Registerer.getObjectFromId(data);
+		if (ach != null) DisplayHelper.log("Created achievement " + ach.getId());
+		return ach;
+	}
+
 	/** The Item which texture should be used as this Achievement's texture. */
 	private Item itemTexture;
 
@@ -39,19 +52,6 @@ public class Achievement extends ObjectBase
 	public ImageIcon getTexture()
 	{
 		return itemTexture.getTexture(0);
-	}
-
-	/** Generates an Achievement from its command structure.
-	 * 
-	 * @param data
-	 *            - <i>String</i> - The command structure. */
-	public static Achievement generateFrom(String data)
-	{
-		if (data.contains("achievement.")) data = data.substring("achievement.".length());
-
-		Achievement ach = (Achievement) Registerer.getObjectFromId(data);
-		if (ach != null) DisplayHelper.log("Created achievement " + ach.getId());
-		return ach;
 	}
 
 }

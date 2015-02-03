@@ -9,7 +9,7 @@ public abstract class ScoreboardPanel extends HelperPanel
 
 	public ScoreboardPanel()
 	{
-		super(CGConstants.PANELID_OPTIONS, "GENERAL:options", 400, 300);
+		super(CGConstants.PANELID_OPTIONS, "GENERAL:options");
 	}
 
 	public abstract String generateText();

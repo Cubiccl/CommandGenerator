@@ -16,10 +16,10 @@ import commandGenerator.main.CGConstants;
 public class TextSpinner extends JPanel implements CComponent
 {
 
+	private String[] choices;
 	private String id;
 	private CLabel label;
 	private JSpinner spinner;
-	private String[] choices;
 
 	public TextSpinner(String id, String title, String[] choices, final ISpin parent)
 	{
@@ -41,14 +41,14 @@ public class TextSpinner extends JPanel implements CComponent
 		add(spinner);
 	}
 
-	public void setText(String id)
-	{
-		label.setTitle(id);
-	}
-
 	public String getValue()
 	{
 		return (String) spinner.getValue();
+	}
+
+	public void reset()
+	{
+		spinner.setValue(choices[0]);
 	}
 
 	public void setEnabledContent(boolean enable)
@@ -57,9 +57,9 @@ public class TextSpinner extends JPanel implements CComponent
 		spinner.setEnabled(enable);
 	}
 
-	public void updateLang()
+	public void setText(String id)
 	{
-		label.updateLang();
+		label.setTitle(id);
 	}
 
 	public void setupFrom(Map<String, Object> data)
@@ -67,9 +67,9 @@ public class TextSpinner extends JPanel implements CComponent
 		if (!id.equals(CGConstants.DATAID_NONE)) spinner.setValue(data.get(id));
 	}
 
-	public void reset()
+	public void updateLang()
 	{
-		spinner.setValue(choices[0]);
+		label.updateLang();
 	}
 
 }

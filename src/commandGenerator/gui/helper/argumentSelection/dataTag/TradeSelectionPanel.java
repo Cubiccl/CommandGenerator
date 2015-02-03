@@ -23,14 +23,30 @@ import commandGenerator.main.DisplayHelper;
 public class TradeSelectionPanel extends HelperPanel
 {
 
-	private CEntry entryMaxUses, entryUses;
 	private CCheckBox checkboxRewardExp, checkboxBuyB;
+	private CEntry entryMaxUses, entryUses;
 	private ItemSelectionPanel panelBuy, panelBuyB, panelSell;
 
 	public TradeSelectionPanel(String title)
 	{
-		super(CGConstants.PANELID_OPTIONS, title, 810, 1100);
+		super(CGConstants.PANELID_OPTIONS, title);
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(entryUses);
+		add(entryMaxUses);
+		add(checkboxRewardExp);
+		add(panelBuy);
+		add(panelSell);
+		add(checkboxBuyB);
+		add(panelBuyB);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		entryUses = new CEntry(CGConstants.DATAID_NAME, "GUI:trade.use");
 		entryMaxUses = new CEntry(CGConstants.DATAID_NAME2, "GUI:trade.use_max");
 
@@ -39,6 +55,16 @@ public class TradeSelectionPanel extends HelperPanel
 
 		checkboxRewardExp = new CCheckBox(CGConstants.DATAID_MODE, "GUI:trade.xp");
 		checkboxBuyB = new CCheckBox(CGConstants.DATAID_MODE2, "GUI:trade.buyb.use");
+
+		panelBuy = new ItemSelectionPanel(CGConstants.PANELID_TARGET, "GUI:trade.buy", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
+		panelBuyB = new ItemSelectionPanel(CGConstants.PANELID_TARGET2, "GUI:trade.buyb", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
+		panelBuyB.setEnabledContent(false);
+		panelSell = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:trade.sell", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
+	}
+
+	@Override
+	protected void createListeners()
+	{
 		checkboxBuyB.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -46,30 +72,6 @@ public class TradeSelectionPanel extends HelperPanel
 				panelBuyB.setEnabledContent(checkboxBuyB.isSelected());
 			}
 		});
-
-		panelBuy = new ItemSelectionPanel(CGConstants.PANELID_TARGET, "GUI:trade.buy", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
-		panelBuyB = new ItemSelectionPanel(CGConstants.PANELID_TARGET2, "GUI:trade.buyb", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
-		panelBuyB.setEnabledContent(false);
-		panelSell = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:trade.sell", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(entryUses);
-		gbc.gridx++;
-		add(entryMaxUses);
-		gbc.gridx++;
-		add(checkboxRewardExp);
-		gbc.gridx++;
-		add(checkboxBuyB);
-
-		gbc.gridx = 0;
-		gbc.gridwidth = 4;
-		gbc.gridy++;
-		add(panelBuy);
-		gbc.gridy++;
-		add(panelSell);
-		gbc.gridy++;
-		add(panelBuyB);
 	}
 
 	public TagCompound generateTrade()
@@ -115,10 +117,6 @@ public class TradeSelectionPanel extends HelperPanel
 	}
 
 	@Override
-	public void updateLang()
-	{}
-
-	@Override
 	public void setupFrom(Map<String, Object> data)
 	{
 		TagCompound trade = (TagCompound) data.get(getPanelId());
@@ -154,5 +152,9 @@ public class TradeSelectionPanel extends HelperPanel
 
 		super.setupFrom(clean);
 	}
+
+	@Override
+	public void updateLang()
+	{}
 
 }

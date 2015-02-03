@@ -2,6 +2,7 @@ package commandGenerator.gui.helper.argumentSelection;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,166 +41,31 @@ public class EntitySelectionPanel extends HelperPanel
 	public static final String[] selectors = { "x", "y", "z", "dx", "dy", "dz", "r", "rm", "rx", "rxm", "ry", "rym", "m", "c", "l", "lm", "team", "name",
 			"type" };
 
-	private int mode;
-	private String[] targets;
-	private CLabel labelSelectors, labelEntity, labelSelector;
-	private CEntry entryPlayer;
-	private JButton buttonHelpEntity, buttonHelpSelector;
-	private CButton buttonAdd, buttonRemove;
-	private JComboBox<String> boxEntities, boxSelectors;
-	private JScrollPane scrollpane;
-	private JEditorPane textarea;
 	private List<String[]> addedSelectors;
+	private JComboBox<String> boxEntities, boxSelectors;
+	private CButton buttonAdd, buttonRemove;
+	private JButton buttonHelpEntity, buttonHelpSelector;
+	private CEntry entryPlayer;
+	private GridBagConstraints gbc = new GridBagConstraints();
+	private CLabel labelSelectors, labelEntity, labelSelector;
+	private int mode;
+	private JScrollPane scrollpane;
+	private String[] targets;
+	private JEditorPane textarea;
 
 	public EntitySelectionPanel(String id, String title, int mode)
 	{
-		super(id, title, 400, 200);
-
-		this.mode = mode;
-		addedSelectors = new ArrayList<String[]>();
-		switch (mode)
-		{
-			case CGConstants.ENTITIES_PLAYERS:
-				targets = new String[] { "@a", "@p", "@r", Lang.get("GUI:selector.player") };
-				break;
-			case CGConstants.ENTITIES_NPCS:
-				targets = new String[] { "@e" };
-				break;
-
-			default:
-				targets = new String[] { "@a", "@p", "@r", "@e", Lang.get("GUI:selector.player") };
-				break;
-		}
-
-		labelEntity = new CLabel("GUI:selector.entity");
-		labelSelector = new CLabel("GUI:selector.choose");
-		labelSelectors = new CLabel("GUI:selector.list");
-
-		entryPlayer = new CEntry(CGConstants.DATAID_NONE, "GUI:player.name");
-		entryPlayer.setEnabledContent(false);
-
-		buttonHelpEntity = new JButton("?");
-		buttonHelpEntity.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
-				DisplayHelper.showHelp(Lang.get("HELP:selector." + boxEntities.getSelectedItem()),
-						Lang.get("HELP:title").replaceAll("<name>", (String) boxEntities.getSelectedItem()));
-			}
-		});
-		buttonHelpSelector = new JButton("?");
-		buttonHelpSelector.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
-				DisplayHelper.showHelp(Lang.get("HELP:selector." + boxSelectors.getSelectedItem()),
-						Lang.get("HELP:title").replaceAll("<name>", (String) boxSelectors.getSelectedItem()));
-			}
-		});
-
-		buttonAdd = new CButton("GUI:selector.add");
-		buttonAdd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
-				addSelector();
-			}
-		});
-		buttonRemove = new CButton("GUI:selector.remove");
-		buttonRemove.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
-				removeSelector();
-			}
-		});
-
-		boxEntities = new JComboBox<String>(targets);
-		boxEntities.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
-				boolean player = boxEntities.getSelectedItem().equals(Lang.get("GUI:selector.player"));
-				entryPlayer.setEnabledContent(player);
-				buttonAdd.setEnabled(!player);
-				buttonRemove.setEnabled(!player);
-				boxSelectors.setEnabled(!player);
-				buttonHelpSelector.setEnabled(!player);
-				labelSelectors.setEnabled(!player);
-				textarea.setEnabled(!player);
-				if (player) scrollpane.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-				else scrollpane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
-			}
-		});
-
-		boxSelectors = new JComboBox<String>(selectors);
-
-		textarea = new JEditorPane("text/html", "");
-		textarea.setEditable(false);
-		scrollpane = new JScrollPane(textarea);
-		scrollpane.getVerticalScrollBar().setUnitIncrement(20);
-		scrollpane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
-		scrollpane.setPreferredSize(new Dimension(200, 50));
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridwidth = 1;
-		add(labelEntity);
-		gbc.gridx++;
-		add(boxEntities);
-		gbc.gridx++;
-		add(buttonHelpEntity);
-
-		gbc.gridx = 0;
-		gbc.gridy++;
-		gbc.gridwidth = 3;
-		add(entryPlayer);
-
-		gbc.gridx = 0;
-		gbc.gridy++;
-		gbc.gridwidth = 1;
-		add(labelSelector);
-		gbc.gridx++;
-		add(boxSelectors);
-		gbc.gridx++;
-		add(buttonHelpSelector);
-
-		gbc.gridx = 0;
-		gbc.gridy++;
-		add(buttonAdd);
-		gbc.gridx++;
-		gbc.gridwidth = 2;
-		add(buttonRemove);
-
-		gbc.gridx = 0;
-		gbc.gridy++;
-		gbc.gridwidth = 1;
-		add(labelSelectors);
-		gbc.gridx++;
-		gbc.gridwidth = 2;
-		add(scrollpane);
-
+		super(id, title, mode);
 	}
 
-	private void removeSelector()
+	@Override
+	protected void addComponents()
 	{
-		if (addedSelectors.size() == 0)
-		{
-			DisplayHelper.showWarning("WARNING:remove.selector");
-			return;
-		}
-
-		String[] options = new String[addedSelectors.size()];
-		for (int i = 0; i < addedSelectors.size(); i++)
-		{
-			options[i] = DisplayHelper.displaySelector(addedSelectors.get(i));
-		}
-
-		String selector = (String) JOptionPane.showInputDialog(null, Lang.get("GUI:remove.selector.ask"), Lang.get("GUI:remove.selector.title"),
-				JOptionPane.OK_CANCEL_OPTION, null, options, options[0]);
-		if (selector == null) return;
-
-		for (int i = 0; i < addedSelectors.size(); i++)
-		{
-			if (selector.equals(DisplayHelper.displaySelector(addedSelectors.get(i)))) addedSelectors.remove(i);
-		}
-
-		displaySelectors();
+		addLine(labelEntity, boxEntities, buttonHelpEntity);
+		add(entryPlayer);
+		addLine(labelSelector, boxSelectors, buttonHelpSelector);
+		addLine(buttonAdd, buttonRemove);
+		addLine(labelSelectors, scrollpane);
 	}
 
 	private void addSelector()
@@ -341,33 +207,76 @@ public class EntitySelectionPanel extends HelperPanel
 	}
 
 	@Override
-	public void updateLang()
+	protected void createComponents()
 	{
-		labelEntity.updateLang();
-		labelSelector.updateLang();
-		labelSelectors.updateLang();
-		buttonAdd.updateLang();
-		buttonRemove.updateLang();
+		labelEntity = new CLabel("GUI:selector.entity");
+		labelSelector = new CLabel("GUI:selector.choose");
+		labelSelectors = new CLabel("GUI:selector.list");
 
-		switch (mode)
-		{
-			case CGConstants.ENTITIES_PLAYERS:
-				targets = new String[] { "@a", "@p", "@r", Lang.get("GUI:selector.player") };
-				break;
-			case CGConstants.ENTITIES_NPCS:
-				targets = new String[] { "@e" };
-				break;
+		entryPlayer = new CEntry(CGConstants.DATAID_NONE, "GUI:player.name");
+		entryPlayer.setEnabledContent(false);
 
-			default:
-				targets = new String[] { "@a", "@p", "@r", "@e", Lang.get("GUI:selector.player") };
-				break;
-		}
+		buttonHelpEntity = new JButton("?");
+		buttonHelpSelector = new JButton("?");
 
-		int index = boxEntities.getSelectedIndex();
-		boxEntities.setModel(new JComboBox<String>(targets).getModel());
-		boxEntities.setSelectedIndex(index);
+		buttonAdd = new CButton("GUI:selector.add");
+		buttonRemove = new CButton("GUI:selector.remove");
 
-		displaySelectors();
+		boxEntities = new JComboBox<String>(new String[0]);
+		boxSelectors = new JComboBox<String>(selectors);
+
+		textarea = new JEditorPane("text/html", "");
+		textarea.setEditable(false);
+		scrollpane = new JScrollPane(textarea);
+		scrollpane.getVerticalScrollBar().setUnitIncrement(20);
+		scrollpane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
+		scrollpane.setPreferredSize(new Dimension(200, 50));
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		buttonHelpEntity.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)
+			{
+				DisplayHelper.showHelp(Lang.get("HELP:selector." + boxEntities.getSelectedItem()),
+						Lang.get("HELP:title").replaceAll("<name>", (String) boxEntities.getSelectedItem()));
+			}
+		});
+		buttonHelpSelector.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)
+			{
+				DisplayHelper.showHelp(Lang.get("HELP:selector." + boxSelectors.getSelectedItem()),
+						Lang.get("HELP:title").replaceAll("<name>", (String) boxSelectors.getSelectedItem()));
+			}
+		});
+		buttonAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)
+			{
+				addSelector();
+			}
+		});
+		buttonRemove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)
+			{
+				removeSelector();
+			}
+		});
+		boxEntities.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)
+			{
+				boolean player = boxEntities.getSelectedItem().equals(Lang.get("GUI:selector.player"));
+				entryPlayer.setEnabledContent(player);
+				buttonAdd.setEnabled(!player);
+				buttonRemove.setEnabled(!player);
+				boxSelectors.setEnabled(!player);
+				buttonHelpSelector.setEnabled(!player);
+				labelSelectors.setEnabled(!player);
+				textarea.setEnabled(!player);
+				if (player) scrollpane.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+				else scrollpane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
+			}
+		});
 	}
 
 	private void displaySelectors()
@@ -413,6 +322,52 @@ public class EntitySelectionPanel extends HelperPanel
 		return entity;
 	}
 
+	private void removeSelector()
+	{
+		if (addedSelectors.size() == 0)
+		{
+			DisplayHelper.showWarning("WARNING:remove.selector");
+			return;
+		}
+
+		String[] options = new String[addedSelectors.size()];
+		for (int i = 0; i < addedSelectors.size(); i++)
+		{
+			options[i] = DisplayHelper.displaySelector(addedSelectors.get(i));
+		}
+
+		String selector = (String) JOptionPane.showInputDialog(null, Lang.get("GUI:remove.selector.ask"), Lang.get("GUI:remove.selector.title"),
+				JOptionPane.OK_CANCEL_OPTION, null, options, options[0]);
+		if (selector == null) return;
+
+		for (int i = 0; i < addedSelectors.size(); i++)
+		{
+			if (selector.equals(DisplayHelper.displaySelector(addedSelectors.get(i)))) addedSelectors.remove(i);
+		}
+
+		displaySelectors();
+	}
+
+	@Override
+	protected void setupDetails(Object[] details)
+	{
+		this.mode = (int) details[0];
+		addedSelectors = new ArrayList<String[]>();
+		switch (mode)
+		{
+			case CGConstants.ENTITIES_PLAYERS:
+				targets = new String[] { "@a", "@p", "@r", Lang.get("GUI:selector.player") };
+				break;
+			case CGConstants.ENTITIES_NPCS:
+				targets = new String[] { "@e" };
+				break;
+
+			default:
+				targets = new String[] { "@a", "@p", "@r", "@e", Lang.get("GUI:selector.player") };
+				break;
+		}
+	}
+
 	@Override
 	public void setupFrom(Map<String, Object> data)
 	{
@@ -435,5 +390,35 @@ public class EntitySelectionPanel extends HelperPanel
 		}
 
 		else boxEntities.setSelectedItem(Target.selectorsTypes[entity.getType()]);
+	}
+
+	@Override
+	public void updateLang()
+	{
+		labelEntity.updateLang();
+		labelSelector.updateLang();
+		labelSelectors.updateLang();
+		buttonAdd.updateLang();
+		buttonRemove.updateLang();
+
+		switch (mode)
+		{
+			case CGConstants.ENTITIES_PLAYERS:
+				targets = new String[] { "@a", "@p", "@r", Lang.get("GUI:selector.player") };
+				break;
+			case CGConstants.ENTITIES_NPCS:
+				targets = new String[] { "@e" };
+				break;
+
+			default:
+				targets = new String[] { "@a", "@p", "@r", "@e", Lang.get("GUI:selector.player") };
+				break;
+		}
+
+		int index = boxEntities.getSelectedIndex();
+		boxEntities.setModel(new JComboBox<String>(targets).getModel());
+		boxEntities.setSelectedIndex(index);
+
+		displaySelectors();
 	}
 }

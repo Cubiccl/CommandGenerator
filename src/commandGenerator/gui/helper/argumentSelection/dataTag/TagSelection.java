@@ -14,6 +14,22 @@ import commandGenerator.main.Lang;
 public class TagSelection
 {
 
+	public static void askRemove(List<Tag> tags)
+	{
+		if (tags.size() == 0)
+		{
+			DisplayHelper.showWarning("WARNING:tag.remove.none");
+		}
+		tags.remove(JOptionPane.showInputDialog(null, Lang.get("GUI:tag.remove.desc"), Lang.get("GUI:tag.remove.title"), JOptionPane.QUESTION_MESSAGE, null,
+				tags.toArray(new Tag[0]), tags.get(0)));
+	}
+
+	public static void askRemoveText(List<String> texts)
+	{
+		texts.remove(JOptionPane.showInputDialog(null, Lang.get("GUI:text.remove.desc"), Lang.get("GUI:text.remove.title"), JOptionPane.QUESTION_MESSAGE, null,
+				texts.toArray(new String[0]), texts.get(0)));
+	}
+
 	public static Tag[] getAllowedTags(Tag[] tags, ObjectBase item)
 	{
 		if (item == null) return new Tag[0];
@@ -29,22 +45,6 @@ public class TagSelection
 		}
 
 		return allowed.toArray(new Tag[0]);
-	}
-
-	public static void askRemove(List<Tag> tags)
-	{
-		if (tags.size() == 0)
-		{
-			DisplayHelper.showWarning("WARNING:tag.remove.none");
-		}
-		tags.remove(JOptionPane.showInputDialog(null, Lang.get("GUI:tag.remove.desc"), Lang.get("GUI:tag.remove.title"), JOptionPane.QUESTION_MESSAGE, null,
-				tags.toArray(new Tag[0]), tags.get(0)));
-	}
-
-	public static void askRemoveText(List<String> texts)
-	{
-		texts.remove(JOptionPane.showInputDialog(null, Lang.get("GUI:text.remove.desc"), Lang.get("GUI:text.remove.title"), JOptionPane.QUESTION_MESSAGE, null,
-				texts.toArray(new String[0]), texts.get(0)));
 	}
 
 }

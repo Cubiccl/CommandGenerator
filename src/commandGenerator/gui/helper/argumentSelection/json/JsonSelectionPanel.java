@@ -22,20 +22,42 @@ import commandGenerator.main.Resources;
 public class JsonSelectionPanel extends HelperPanel
 {
 
-	private CEntry entryText, entryInsertion;
 	private CCheckBox checkboxBold, checkboxUnderlined, checkboxItalic, checkboxStrikethrough, checkboxObfuscated, checkboxHover, checkboxClick;
 	private LangComboBox comboboxMode, comboboxColor;
-	private EntitySelectionPanel panelEntity;
-	private ScoreDisplayPanel panelScore;
-	private HoverEventPanel panelHover;
-	private ClickEventPanel panelClick;
+	private CEntry entryText, entryInsertion;
 	private boolean events;
+	private ClickEventPanel panelClick;
+	private EntitySelectionPanel panelEntity;
+	private HoverEventPanel panelHover;
+	private ScoreDisplayPanel panelScore;
 
 	public JsonSelectionPanel(String title, boolean events)
 	{
-		super(CGConstants.DATAID_NONE, title, 630, 1200);
-		this.events = events;
+		super(CGConstants.DATAID_NONE, title, events);
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(comboboxMode);
+		addLine(entryText, panelEntity, panelScore);
+		add(comboboxColor);
+		add(checkboxBold);
+		add(checkboxUnderlined);
+		add(checkboxItalic);
+		add(checkboxStrikethrough);
+		add(checkboxObfuscated);
+		add(entryInsertion);
+		add(entryInsertion);
+		if (events) add(checkboxHover);
+		if (events) add(panelHover);
+		if (events) add(checkboxClick);
+		if (events) add(panelClick);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		entryText = new CEntry(CGConstants.DATAID_NONE, "GUI:json.text");
 		entryInsertion = new CEntry(CGConstants.DATAID_NONE, "GUI:json.insertion");
 
@@ -49,15 +71,6 @@ public class JsonSelectionPanel extends HelperPanel
 
 		comboboxMode = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:json.mode", 3);
 		comboboxMode.setPreferredSize(new Dimension(200, 20));
-		comboboxMode.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				entryText.setVisible(comboboxMode.getSelectedIndex() == 0);
-				panelScore.setVisible(comboboxMode.getSelectedIndex() == 1);
-				panelEntity.setVisible(comboboxMode.getSelectedIndex() == 2);
-			}
-		});
 		comboboxColor = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:color", 16);
 		comboboxColor.setPreferredSize(new Dimension(200, 20));
 		comboboxColor.setSelectedIndex(15);
@@ -68,38 +81,20 @@ public class JsonSelectionPanel extends HelperPanel
 		panelScore.setVisible(false);
 		if (events) panelHover = new HoverEventPanel("GUI:json.hover");
 		if (events) panelClick = new ClickEventPanel("GUI:json.click");
+	}
 
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(comboboxMode);
-		gbc.gridy++;
-		add(entryText);
-		add(panelEntity);
-		add(panelScore);
-		gbc.gridy++;
-		add(comboboxColor);
-		gbc.gridy++;
-		add(checkboxBold);
-		gbc.gridy++;
-		add(checkboxUnderlined);
-		gbc.gridy++;
-		add(checkboxItalic);
-		gbc.gridy++;
-		add(checkboxStrikethrough);
-		gbc.gridy++;
-		add(checkboxObfuscated);
-		gbc.gridy++;
-		add(entryInsertion);
-		gbc.gridy++;
-		add(entryInsertion);
-		gbc.gridy++;
-		if (events) add(checkboxHover);
-		gbc.gridy++;
-		if (events) add(panelHover);
-		gbc.gridy++;
-		if (events) add(checkboxClick);
-		gbc.gridy++;
-		if (events) add(panelClick);
+	@Override
+	protected void createListeners()
+	{
+		comboboxMode.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				entryText.setVisible(comboboxMode.getSelectedIndex() == 0);
+				panelScore.setVisible(comboboxMode.getSelectedIndex() == 1);
+				panelEntity.setVisible(comboboxMode.getSelectedIndex() == 2);
+			}
+		});
 	}
 
 	public TagCompound getTag()
@@ -138,23 +133,6 @@ public class JsonSelectionPanel extends HelperPanel
 		if (events && checkboxHover.isSelected()) tag.addTag(panelHover.generateHoverEvent());
 
 		return tag;
-	}
-
-	@Override
-	public void updateLang()
-	{
-		updateTitle();
-		entryText.updateLang();
-		entryInsertion.updateLang();
-		checkboxBold.updateLang();
-		checkboxClick.updateLang();
-		checkboxHover.updateLang();
-		checkboxItalic.updateLang();
-		checkboxObfuscated.updateLang();
-		checkboxStrikethrough.updateLang();
-		checkboxUnderlined.updateLang();
-		comboboxColor.updateLang();
-		comboboxMode.updateLang();
 	}
 
 	public void setup(TagCompound nbt)
@@ -196,5 +174,28 @@ public class JsonSelectionPanel extends HelperPanel
 		entryText.setVisible(comboboxMode.getSelectedIndex() == 0);
 		panelScore.setVisible(comboboxMode.getSelectedIndex() == 1);
 		panelEntity.setVisible(comboboxMode.getSelectedIndex() == 2);
+	}
+
+	@Override
+	protected void setupDetails(Object[] details)
+	{
+		events = (boolean) details[0];
+	}
+
+	@Override
+	public void updateLang()
+	{
+		updateTitle();
+		entryText.updateLang();
+		entryInsertion.updateLang();
+		checkboxBold.updateLang();
+		checkboxClick.updateLang();
+		checkboxHover.updateLang();
+		checkboxItalic.updateLang();
+		checkboxObfuscated.updateLang();
+		checkboxStrikethrough.updateLang();
+		checkboxUnderlined.updateLang();
+		comboboxColor.updateLang();
+		comboboxMode.updateLang();
 	}
 }

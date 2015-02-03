@@ -11,13 +11,31 @@ import commandGenerator.main.CGConstants;
 public class SpawnpointOptionsPanel extends OptionsPanel
 {
 
-	private EntitySelectionPanel panelEntity;
 	private CoordSelectionPanel panelCoords;
+	private EntitySelectionPanel panelEntity;
 
 	public SpawnpointOptionsPanel()
 	{
 		super();
 	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelEntity);
+		add(panelCoords);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_ALL);
+		panelCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:spawnpoint.coords", false, false);
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	@Override
 	public String generateCommand()
@@ -30,23 +48,5 @@ public class SpawnpointOptionsPanel extends OptionsPanel
 
 		return "spawnpoint " + player.commandStructure() + " " + coords.commandStructure();
 	}
-
-	@Override
-	protected void createComponents()
-	{
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_ALL);
-		panelCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:spawnpoint.coords", false, false);
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		add(panelEntity);
-		add(panelCoords);
-	}
-
-	@Override
-	protected void createListeners()
-	{}
 
 }

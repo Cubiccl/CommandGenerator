@@ -16,31 +16,34 @@ public class PoseSelectionPanel extends HelperPanel
 
 	public PoseSelectionPanel()
 	{
-		super(CGConstants.DATAID_NONE, "TAGS:Pose", 1000, 500);
+		super(CGConstants.DATAID_NONE, "TAGS:Pose");
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(body);
+		add(lArm);
+		add(rArm);
+		add(head);
+		add(lLeg);
+		add(rLeg);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		body = new PoseRotPanel("GUI:pose.body", "Body");
 		lArm = new PoseRotPanel("GUI:pose.arm_left", "LeftArm");
 		rArm = new PoseRotPanel("GUI:pose.arm_right", "RightArm");
 		head = new PoseRotPanel("GUI:pose.head", "Head");
 		lLeg = new PoseRotPanel("GUI:pose.leg_left", "LeftLeg");
 		rLeg = new PoseRotPanel("GUI:pose.leg_right", "RightLeg");
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(body);
-		gbc.gridx++;
-		add(lArm);
-		gbc.gridx++;
-		add(rArm);
-
-		gbc.gridx = 0;
-		gbc.gridy++;
-		add(head);
-		gbc.gridx++;
-		add(lLeg);
-		gbc.gridx++;
-		add(rLeg);
 	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	public List<Tag> getPose()
 	{
@@ -61,10 +64,6 @@ public class PoseSelectionPanel extends HelperPanel
 		return list;
 	}
 
-	@Override
-	public void updateLang()
-	{}
-
 	public void setup(List<Tag> value)
 	{
 		for (int i = 0; i < value.size(); i++)
@@ -77,5 +76,9 @@ public class PoseSelectionPanel extends HelperPanel
 			if (value.get(i).getId().equals("RightLeg")) rLeg.setup((TagList) value.get(i));
 		}
 	}
+
+	@Override
+	public void updateLang()
+	{}
 
 }

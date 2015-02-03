@@ -1,7 +1,5 @@
 package commandGenerator.gui.helper.commandSpecific.scoreboard;
 
-import java.awt.Dimension;
-
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.components.CEntry;
@@ -18,18 +16,26 @@ public class PlayersEnablePanel extends ScoreboardPanel
 	public PlayersEnablePanel()
 	{
 		super();
-		setPreferredSize(new Dimension(500, 300));
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(entryObjective);
+		add(panelEntity);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		entryObjective = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective");
 
 		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(entryObjective);
-		gbc.gridy++;
-		add(panelEntity);
 	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	@Override
 	public String generateText()

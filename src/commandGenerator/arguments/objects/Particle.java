@@ -37,16 +37,16 @@ public class Particle extends ObjectBase
 		return Lang.get("PARTICLES:" + getId());
 	}
 
-	/** Returns the type of this Particle. */
-	public int getParticleType()
-	{
-		return type;
-	}
-
 	@Override
 	public String getName()
 	{
 		return getId();
+	}
+
+	/** Returns the type of this Particle. */
+	public int getParticleType()
+	{
+		return type;
 	}
 
 	@Override

@@ -18,14 +18,14 @@ import commandGenerator.main.Lang;
 public abstract class HelperPanel extends JPanel implements CComponent
 {
 
+	/** List containing all of this Panel's elements. */
+	private List<CComponent> components;
+	/** Object to place the elements in the panel. */
+	private GridBagConstraints gbc = new GridBagConstraints();
 	/** The data ID of this Panel. */
 	private String id;
 	/** The language ID of this Panel's title. */
 	protected String title;
-	/** Object to place the elements in the panel. */
-	private GridBagConstraints gbc = new GridBagConstraints();
-	/** List containing all of this Panel's elements. */
-	private List<CComponent> components;
 
 	/** A basic JPanel.
 	 * 
@@ -37,40 +37,20 @@ public abstract class HelperPanel extends JPanel implements CComponent
 	 *            - The panel width.
 	 * @param height
 	 *            - The panel height. */
-	public HelperPanel(String id, String title)
+	public HelperPanel(String id, String title, Object... details)
 	{
 		super(new GridBagLayout());
 		this.id = id;
 		this.title = title;
-		setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Lang.get(title)));
-		setPreferredSize(new Dimension(2, 2));
+		if (!title.equals("GENERAL:options")) setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Lang.get(title)));
+		setPreferredSize(new Dimension(10, 10));
 		components = new ArrayList<CComponent>();
 
+		if (details.length > 0) setupDetails(details);
 		createComponents();
-		addComponents();
 		createListeners();
+		addComponents();
 
-	}
-
-	/** Creates all of this Panel's components. */
-	protected abstract void createComponents();
-
-	/** Adds all components to this Panel. */
-	protected abstract void addComponents();
-
-	/** Creates all of this Panel's components' Listeners. */
-	protected abstract void createListeners();
-
-	/** Updates the title when changing language. */
-	protected void updateTitle()
-	{
-		setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Lang.get(title)));
-	}
-
-	/** Gets this Panel's data ID. */
-	public String getPanelId()
-	{
-		return id;
 	}
 
 	/** Adds a component to the Panel.
@@ -79,7 +59,7 @@ public abstract class HelperPanel extends JPanel implements CComponent
 	 *            - <i>Component</i> - The component to add. */
 	public Component add(Component component)
 	{
-		super.add(component);
+		super.add(component, gbc);
 
 		gbc.gridy++;
 		if (component instanceof CComponent) components.add((CComponent) component);
@@ -87,6 +67,9 @@ public abstract class HelperPanel extends JPanel implements CComponent
 
 		return this;
 	}
+
+	/** Adds all components to this Panel. */
+	protected abstract void addComponents();
 
 	/** Adds a line of Components to the Panel.
 	 * 
@@ -106,37 +89,16 @@ public abstract class HelperPanel extends JPanel implements CComponent
 		add(panel);
 	}
 
-	/** Updates the height of this Panel when a component is added.
-	 * 
-	 * @param component
-	 *            - <i>Component</i> - The new component. */
-	protected void updateSize(Component component)
+	/** Creates all of this Panel's components. */
+	protected abstract void createComponents();;
+
+	/** Creates all of this Panel's components' Listeners. */
+	protected abstract void createListeners();
+
+	/** Gets this Panel's data ID. */
+	public String getPanelId()
 	{
-		int width = getPreferredSize().width;
-		int height = getPreferredSize().height;
-
-		if (component.getPreferredSize().width > width) width = component.getPreferredSize().width + 2;
-		height += component.getPreferredSize().height;
-
-		setPreferredSize(new Dimension(width, height));
-	}
-
-	public void updateLang()
-	{
-		updateTitle();
-		for (int i = 0; i < components.size(); i++)
-		{
-			components.get(i).updateLang();
-		}
-	}
-
-	public void setupFrom(Map<String, Object> data)
-	{
-		if (!isEnabled() || !isVisible()) return;
-		for (int i = 0; i < components.size(); i++)
-		{
-			components.get(i).setupFrom(data);
-		}
+		return id;
 	}
 
 	public void reset()
@@ -154,6 +116,51 @@ public abstract class HelperPanel extends JPanel implements CComponent
 		{
 			components.get(i).setEnabledContent(enable);
 		}
+	}
+
+	/** Setups details needed to create the GUI. */
+	protected void setupDetails(Object[] details)
+	{
+		System.out.println("This needs to be overriden! " + getPanelId());
+	}
+
+	public void setupFrom(Map<String, Object> data)
+	{
+		if (!isEnabled() || !isVisible()) return;
+		for (int i = 0; i < components.size(); i++)
+		{
+			components.get(i).setupFrom(data);
+		}
+	}
+
+	public void updateLang()
+	{
+		updateTitle();
+		for (int i = 0; i < components.size(); i++)
+		{
+			components.get(i).updateLang();
+		}
+	}
+
+	/** Updates the height of this Panel when a component is added.
+	 * 
+	 * @param component
+	 *            - <i>Component</i> - The new component. */
+	protected void updateSize(Component component)
+	{
+		int width = getPreferredSize().width;
+		int height = getPreferredSize().height;
+
+		if (component.getPreferredSize().width > width) width = component.getPreferredSize().width + 10;
+		height += component.getPreferredSize().height;
+
+		setPreferredSize(new Dimension(width, height));
+	}
+
+	/** Updates the title when changing language. */
+	protected void updateTitle()
+	{
+		if (!title.equals("GENERAL:options")) setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Lang.get(title)));
 	}
 
 }

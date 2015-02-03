@@ -12,8 +12,8 @@ import commandGenerator.main.CGConstants;
 public class TagItem extends TagCompound
 {
 
-	private boolean slot;
 	private String[] ids;
+	private boolean slot;
 
 	public TagItem(String id, String[] usableItems, boolean slot, String... applicable)
 	{

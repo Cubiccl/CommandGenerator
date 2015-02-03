@@ -10,23 +10,32 @@ import commandGenerator.main.DisplayHelper;
 public class XpSelectionPanel extends HelperPanel
 {
 
-	private CEntry entryXp;
 	private CCheckBox checkboxLevel;
+	private CEntry entryXp;
 
 	public XpSelectionPanel(String title)
 	{
-		super(CGConstants.PANELID_XP, title, 400, 50);
+		super(CGConstants.PANELID_XP, title);
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(entryXp);
+		add(checkboxLevel);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		entryXp = new CEntry(CGConstants.DATAID_VALUE, "GUI:xp.xp");
 
 		checkboxLevel = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:xp.levels");
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(entryXp);
-		gbc.gridx++;
-		add(checkboxLevel);
 	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	public String generateXp()
 	{

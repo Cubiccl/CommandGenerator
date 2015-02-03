@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.commandSpecific.scoreboard;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -22,14 +21,34 @@ public class ObjectiveSelectionPanel extends HelperPanel
 			"drop", "fallOneCm", "fishCaught", "flyOneCm", "horseOneCm", "jump", "junkFished", "leaveGame", "minecartOneCm", "mobKills", "pigOneCm",
 			"playerKills", "playOneMinute", "sprintOneCm", "swimOneCm", "timeSinceDeath", "treasureFished", "walkOneCm" };
 
-	private CComboBox comboboxPrecise;
 	private LangComboBox comboboxMain, comboboxPrecise2;
+	private CComboBox comboboxPrecise;
 
 	public ObjectiveSelectionPanel(String title)
 	{
-		super(CGConstants.PANELID_OPTIONS, title, 600, 150);
+		super(CGConstants.PANELID_OPTIONS, title);
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(comboboxMain);
+		add(comboboxPrecise);
+		add(comboboxPrecise2);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		comboboxMain = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:criteria", criteriaList.length);
-		comboboxMain.setPreferredSize(new Dimension(200, 20));
+		comboboxPrecise = new CComboBox(CGConstants.DATAID_NONE, "", new ObjectBase[0], null);
+		comboboxPrecise2 = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:color", 16);
+		comboboxPrecise2.setVisible(false);
+	}
+
+	@Override
+	protected void createListeners()
+	{
 		comboboxMain.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e)
@@ -37,16 +56,16 @@ public class ObjectiveSelectionPanel extends HelperPanel
 				setupChoices();
 			}
 		});
-		comboboxPrecise = new CComboBox(CGConstants.DATAID_NONE, "", new ObjectBase[0], null);
-		comboboxPrecise2 = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:color", 16);
-		comboboxPrecise2.setVisible(false);
+	}
 
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(comboboxMain);
-		gbc.gridy++;
-		add(comboboxPrecise);
-		add(comboboxPrecise2);
+	public String generateObjective()
+	{
+		int index = comboboxMain.getSelectedIndex();
+		if (index < 6) return criteriaList[index];
+		if (index >= 7 && index <= 10) return criteriaList[index] + ".minecraft." + ((String) comboboxPrecise.getValue().getId());
+		if (index == 6 || index == 11 || index == 12) return criteriaList[index] + "." + ((String) comboboxPrecise.getValue().getId());
+		if (index == 13) return criteriaList[index] + "." + statList[comboboxPrecise2.getSelectedIndex()];
+		return criteriaList[index] + "." + Resources.colors[comboboxPrecise2.getSelectedIndex()];
 	}
 
 	private void setupChoices()
@@ -77,16 +96,6 @@ public class ObjectiveSelectionPanel extends HelperPanel
 
 			comboboxPrecise.setData(itemList);
 		}
-	}
-
-	public String generateObjective()
-	{
-		int index = comboboxMain.getSelectedIndex();
-		if (index < 6) return criteriaList[index];
-		if (index >= 7 && index <= 10) return criteriaList[index] + ".minecraft." + ((String) comboboxPrecise.getValue().getId());
-		if (index == 6 || index == 11 || index == 12) return criteriaList[index] + "." + ((String) comboboxPrecise.getValue().getId());
-		if (index == 13) return criteriaList[index] + "." + statList[comboboxPrecise2.getSelectedIndex()];
-		return criteriaList[index] + "." + Resources.colors[comboboxPrecise2.getSelectedIndex()];
 	}
 
 	@Override

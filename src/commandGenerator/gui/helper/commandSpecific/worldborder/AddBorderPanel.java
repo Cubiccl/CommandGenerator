@@ -15,14 +15,42 @@ public class AddBorderPanel extends HelperPanel
 {
 
 	private boolean canBeNegative;
-	private CEntry entrySize, entryTime;
 	private CCheckBox checkboxTime;
+	private CEntry entrySize, entryTime;
 
 	public AddBorderPanel(boolean canBeNegative)
 	{
-		super(CGConstants.PANELID_OPTIONS, "GENERAL:options");
+		super(CGConstants.PANELID_OPTIONS, "GENERAL:options", canBeNegative);
+	}
 
-		this.canBeNegative = canBeNegative;
+	@Override
+	protected void addComponents()
+	{
+		add(entrySize);
+		add(checkboxTime);
+		add(entryTime);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		entrySize = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.add.size");
+		entryTime = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.add.time");
+		entryTime.setEnabledContent(false);
+
+		checkboxTime = new CCheckBox(CGConstants.DATAID_NONE, "GUI:worldborder.add.timer");
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		checkboxTime.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				entryTime.setEnabledContent(checkboxTime.isSelected());
+			}
+		});
 	}
 
 	public String generateText()
@@ -69,6 +97,12 @@ public class AddBorderPanel extends HelperPanel
 	}
 
 	@Override
+	protected void setupDetails(Object[] details)
+	{
+		this.canBeNegative = (boolean) details[0];
+	}
+
+	@Override
 	public void setupFrom(Map<String, Object> data)
 	{
 		Object[] options = (Object[]) data.get(getPanelId());
@@ -76,36 +110,6 @@ public class AddBorderPanel extends HelperPanel
 		if (options.length > 1) entryTime.setTextField((String) options[1]);
 		checkboxTime.setSelected(options.length > 1);
 		entryTime.setEnabledContent(options.length > 1);
-	}
-
-	@Override
-	protected void createComponents()
-	{
-		entrySize = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.add.size");
-		entryTime = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.add.time");
-		entryTime.setEnabledContent(false);
-
-		checkboxTime = new CCheckBox(CGConstants.DATAID_NONE, "GUI:worldborder.add.timer");
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		add(entrySize);
-		add(checkboxTime);
-		add(entryTime);
-	}
-
-	@Override
-	protected void createListeners()
-	{
-		checkboxTime.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				entryTime.setEnabledContent(checkboxTime.isSelected());
-			}
-		});
 	}
 
 }

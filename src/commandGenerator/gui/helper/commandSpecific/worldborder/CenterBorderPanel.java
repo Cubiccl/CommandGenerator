@@ -18,6 +18,24 @@ public class CenterBorderPanel extends HelperPanel
 		super(CGConstants.PANELID_OPTIONS, "GENERAL:options");
 	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(entryX);
+		add(entryZ);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		entryX = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.x");
+		entryZ = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.z");
+	}
+
+	@Override
+	protected void createListeners()
+	{}
+
 	public String generateText()
 	{
 		String x = entryX.getText();
@@ -44,23 +62,5 @@ public class CenterBorderPanel extends HelperPanel
 		entryX.setTextField(options[0]);
 		entryZ.setTextField(options[1]);
 	}
-
-	@Override
-	protected void createComponents()
-	{
-		entryX = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.x");
-		entryZ = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.z");
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		add(entryX);
-		add(entryZ);
-	}
-
-	@Override
-	protected void createListeners()
-	{}
 
 }

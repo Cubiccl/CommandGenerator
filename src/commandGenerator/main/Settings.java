@@ -10,33 +10,16 @@ public class Settings
 	public static final int ENGLISH = 0, ENGLISH_GB = 1;
 	public static final String[] languages = { "english", "english_gb" };
 
-	/** The previous version the program was launched with. */
-	public String previousVersion;
 	/** Is it the first launch? */
 	public boolean firstLaunch;
 	/** The language selected by the user. */
 	private int language;
-	/** The selected command. */
-	public Command selectedCommand;
+	/** The previous version the program was launched with. */
+	public String previousVersion;
 	/** All saved objects */
 	public List<String> savedObjects;
-
-	/** Returns the selected language. */
-	public int getLanguage()
-	{
-		return language;
-	}
-
-	/** Changes the selected languages. Updates the translations.
-	 * 
-	 * @param language
-	 *            - <i>int</i> - The language to use. */
-	public void setLanguage(int language)
-	{
-		this.language = language;
-		FileHelper.setOption("lang", Integer.toString(language));
-		Lang.updateLang();
-	}
+	/** The selected command. */
+	public Command selectedCommand;
 
 	/** Creates new Settings. */
 	public Settings()
@@ -61,6 +44,23 @@ public class Settings
 			if (Resources.versions[i].equals(previousVersion)) indexPrev = i;
 		}
 		return indexPrev >= indexVersion;
+	}
+
+	/** Returns the selected language. */
+	public int getLanguage()
+	{
+		return language;
+	}
+
+	/** Changes the selected languages. Updates the translations.
+	 * 
+	 * @param language
+	 *            - <i>int</i> - The language to use. */
+	public void setLanguage(int language)
+	{
+		this.language = language;
+		FileHelper.setOption("lang", Integer.toString(language));
+		Lang.updateLang();
 	}
 
 }

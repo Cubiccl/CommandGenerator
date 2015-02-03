@@ -20,13 +20,48 @@ public class PlaysoundOptionsPanel extends OptionsPanel
 {
 
 	private CCheckBox checkboxCoords;
-	private EntitySelectionPanel panelPlayer;
 	private CoordSelectionPanel panelCoords;
+	private EntitySelectionPanel panelPlayer;
 	private SoundSelectionPanel panelSound;
 
 	public PlaysoundOptionsPanel()
 	{
 		super();
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelPlayer);
+		add(panelSound);
+		add(panelCoords);
+		add(checkboxCoords);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		checkboxCoords = new CCheckBox(CGConstants.DATAID_SOUND_COORDS, "GUI:playsound.usecoords");
+
+		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:playsound.coords", true, false);
+		panelCoords.setPreferredSize(new Dimension(250, 200));
+		panelCoords.setEnabled(false);
+		panelCoords.setEnabledContent(false);
+		panelSound = new SoundSelectionPanel("GENERAL:options");
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		checkboxCoords.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				panelCoords.setEnabled(checkboxCoords.isSelected());
+				panelCoords.setEnabledContent(checkboxCoords.isSelected());
+			}
+		});
 	}
 
 	@Override
@@ -56,41 +91,6 @@ public class PlaysoundOptionsPanel extends OptionsPanel
 	{
 		super.setupFrom(data);
 		panelCoords.setEnabledContent(checkboxCoords.isSelected());
-	}
-
-	@Override
-	protected void createComponents()
-	{
-		checkboxCoords = new CCheckBox(CGConstants.DATAID_SOUND_COORDS, "GUI:playsound.usecoords");
-
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
-		panelCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:playsound.coords", true, false);
-		panelCoords.setPreferredSize(new Dimension(250, 200));
-		panelCoords.setEnabled(false);
-		panelCoords.setEnabledContent(false);
-		panelSound = new SoundSelectionPanel("GENERAL:options");
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		add(panelPlayer);
-		add(panelSound);
-		add(panelCoords);
-		add(checkboxCoords);
-	}
-
-	@Override
-	protected void createListeners()
-	{
-		checkboxCoords.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				panelCoords.setEnabled(checkboxCoords.isSelected());
-				panelCoords.setEnabledContent(checkboxCoords.isSelected());
-			}
-		});
 	}
 
 }

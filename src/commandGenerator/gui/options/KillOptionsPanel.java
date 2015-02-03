@@ -16,9 +16,9 @@ public class KillOptionsPanel extends OptionsPanel
 	}
 
 	@Override
-	public String generateCommand()
+	protected void addComponents()
 	{
-		return "kill " + panelEntity.generateEntity().commandStructure();
+		add(panelEntity);
 	}
 
 	@Override
@@ -28,13 +28,13 @@ public class KillOptionsPanel extends OptionsPanel
 	}
 
 	@Override
-	protected void addComponents()
-	{
-		add(panelEntity);
-	}
-
-	@Override
 	protected void createListeners()
 	{}
+
+	@Override
+	public String generateCommand()
+	{
+		return "kill " + panelEntity.generateEntity().commandStructure();
+	}
 
 }

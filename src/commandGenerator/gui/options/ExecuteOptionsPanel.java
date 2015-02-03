@@ -27,16 +27,53 @@ public class ExecuteOptionsPanel extends OptionsPanel
 {
 
 	private CCheckBox checkboxDetect;
-	private CoordSelectionPanel panelCoord, panelCoordDetect;
-	private EntitySelectionPanel panelEntity;
 	private BlockSelectionPanel panelBlock;
 	private PanelCommandSelection panelCommand;
+	private CoordSelectionPanel panelCoord, panelCoordDetect;
+	private EntitySelectionPanel panelEntity;
 	private String storedCommand;
 
 	public ExecuteOptionsPanel()
 	{
 		super();
-		storedCommand = "achievement give openInventory @a";
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelEntity);
+		add(panelCoord);
+		add(panelCoordDetect);
+		add(checkboxDetect);
+		add(panelBlock);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		checkboxDetect = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:execute.detect");
+
+		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:execute.coords", true, false);
+		panelCoordDetect = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:execute.block_coords", true, false);
+		panelCoordDetect.setEnabledContent(false);
+
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+
+		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:execute.block", Registerer.getList(CGConstants.LIST_BLOCKS), false);
+		panelBlock.setEnabledContent(false);
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		checkboxDetect.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				panelCoordDetect.setEnabledContent(checkboxDetect.isSelected());
+				panelBlock.setEnabledContent(checkboxDetect.isSelected());
+			}
+		});
 	}
 
 	@Override
@@ -71,49 +108,17 @@ public class ExecuteOptionsPanel extends OptionsPanel
 		return command + panelCommand.generateCommand();
 	}
 
+	@Override
+	protected void setupDetails(Object[] details)
+	{
+		storedCommand = "achievement give openInventory @a";
+	}
+
 	public void setupFrom(Map<String, Object> data)
 	{
 		super.setupFrom(data);
 		storedCommand = (String) data.get(CGConstants.DATAID_VALUE);
 		panelCoordDetect.setEnabledContent(checkboxDetect.isSelected());
 		panelBlock.setEnabledContent(checkboxDetect.isSelected());
-	}
-
-	@Override
-	protected void createComponents()
-	{
-		checkboxDetect = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:execute.detect");
-
-		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:execute.coords", true, false);
-		panelCoordDetect = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:execute.block_coords", true, false);
-		panelCoordDetect.setEnabledContent(false);
-
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
-
-		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:execute.block", Registerer.getList(CGConstants.LIST_BLOCKS), false);
-		panelBlock.setEnabledContent(false);
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		add(panelEntity);
-		add(panelCoord);
-		add(panelCoordDetect);
-		add(checkboxDetect);
-		add(panelBlock);
-	}
-
-	@Override
-	protected void createListeners()
-	{
-		checkboxDetect.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				panelCoordDetect.setEnabledContent(checkboxDetect.isSelected());
-				panelBlock.setEnabledContent(checkboxDetect.isSelected());
-			}
-		});
 	}
 }

@@ -13,13 +13,23 @@ public class TeamsEmptyPanel extends ScoreboardPanel
 	public TeamsEmptyPanel()
 	{
 		super();
+	}
 
-		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.team");
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
+	@Override
+	protected void addComponents()
+	{
 		add(entryName);
 	}
+
+	@Override
+	protected void createComponents()
+	{
+		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.team");
+	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	@Override
 	public String generateText()

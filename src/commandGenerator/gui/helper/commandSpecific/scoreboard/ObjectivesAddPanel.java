@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.commandSpecific.scoreboard;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -16,22 +15,40 @@ import commandGenerator.main.DisplayHelper;
 public class ObjectivesAddPanel extends ScoreboardPanel
 {
 
-	private CEntry entryName;
-	private JTextField textfieldDisplay;
 	private CCheckBox checkboxDisplay;
+	private CEntry entryName;
 	private ObjectiveSelectionPanel panelCriteria;
+	private JTextField textfieldDisplay;
 
 	public ObjectivesAddPanel()
 	{
 		super();
-		setPreferredSize(new Dimension(700, 300));
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(entryName);
+		add(panelCriteria);
+		addLine(checkboxDisplay, textfieldDisplay);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective");
 
 		textfieldDisplay = new JTextField(20);
 		textfieldDisplay.setEnabled(false);
 
 		checkboxDisplay = new CCheckBox(CGConstants.DATAID_NONE, "GUI:scoreboard.display");
+
+		panelCriteria = new ObjectiveSelectionPanel("GUI:scoreboard.objective.type");
+	}
+
+	@Override
+	protected void createListeners()
+	{
 		checkboxDisplay.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e)
@@ -39,20 +56,6 @@ public class ObjectivesAddPanel extends ScoreboardPanel
 				textfieldDisplay.setEnabled(checkboxDisplay.isSelected());
 			}
 		});
-
-		panelCriteria = new ObjectiveSelectionPanel("GUI:scoreboard.objective.type");
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridwidth = 2;
-		add(entryName);
-		gbc.gridy++;
-		add(panelCriteria);
-		gbc.gridwidth = 1;
-		gbc.gridy++;
-		add(checkboxDisplay);
-		gbc.gridx++;
-		add(textfieldDisplay);
 	}
 
 	@Override

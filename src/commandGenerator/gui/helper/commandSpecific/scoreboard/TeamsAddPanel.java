@@ -15,20 +15,36 @@ import commandGenerator.main.DisplayHelper;
 public class TeamsAddPanel extends ScoreboardPanel
 {
 
+	private CCheckBox checkboxDisplay;
 	private CEntry entryName;
 	private JTextField textfieldDisplay;
-	private CCheckBox checkboxDisplay;
 
 	public TeamsAddPanel()
 	{
 		super();
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(entryName);
+		addLine(checkboxDisplay, textfieldDisplay);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.team");
 
 		textfieldDisplay = new JTextField(15);
 		textfieldDisplay.setEnabled(false);
 
 		checkboxDisplay = new CCheckBox(CGConstants.DATAID_NONE, "GUI:scoreboard.display");
+	}
+
+	@Override
+	protected void createListeners()
+	{
 		checkboxDisplay.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -36,16 +52,6 @@ public class TeamsAddPanel extends ScoreboardPanel
 				textfieldDisplay.setEnabled(checkboxDisplay.isSelected());
 			}
 		});
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridwidth = 2;
-		add(entryName);
-		gbc.gridwidth = 1;
-		gbc.gridy++;
-		add(checkboxDisplay);
-		gbc.gridx++;
-		add(textfieldDisplay);
 	}
 
 	@Override

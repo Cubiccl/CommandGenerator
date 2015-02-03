@@ -18,17 +18,33 @@ public class ClickEventPanel extends HelperPanel
 {
 	private static final String[] clickEvents = { "open_url", "run_command", "suggest_command" };
 
-	private CEntry entryText;
 	private LangComboBox comboboxAction;
+	private CEntry entryText;
 
 	public ClickEventPanel(String title)
 	{
-		super(CGConstants.DATAID_NONE, title, 400, 100);
+		super(CGConstants.DATAID_NONE, title);
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(comboboxAction);
+		add(entryText);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		entryText = new CEntry(CGConstants.DATAID_NONE, "GUI:json.click.url");
 
 		comboboxAction = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:json.click", 3);
 		comboboxAction.setPreferredSize(new Dimension(200, 20));
+	}
+
+	@Override
+	protected void createListeners()
+	{
 		comboboxAction.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e)
@@ -38,16 +54,6 @@ public class ClickEventPanel extends HelperPanel
 				if (comboboxAction.getSelectedIndex() == 2) entryText.setText("GUI:json.click.suggest");
 			}
 		});
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridwidth = 2;
-		add(comboboxAction);
-		gbc.gridwidth = 1;
-		gbc.gridy++;
-		add(entryText);
-		gbc.gridx++;
-		add(entryText);
 	}
 
 	public TagCompound generateClickEvent()
@@ -70,14 +76,6 @@ public class ClickEventPanel extends HelperPanel
 		return tag;
 	}
 
-	@Override
-	public void updateLang()
-	{
-		updateTitle();
-		entryText.updateLang();
-		comboboxAction.updateLang();
-	}
-
 	public void setup(TagCompound nbt)
 	{
 		String action = "open_url", value = "";
@@ -94,6 +92,14 @@ public class ClickEventPanel extends HelperPanel
 		if (action.equals("suggest_command")) comboboxAction.setSelectedIndex(2);
 
 		entryText.setTextField(value);
+	}
+
+	@Override
+	public void updateLang()
+	{
+		updateTitle();
+		entryText.updateLang();
+		comboboxAction.updateLang();
 	}
 
 }

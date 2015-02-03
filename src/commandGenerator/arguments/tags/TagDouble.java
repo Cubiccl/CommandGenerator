@@ -9,10 +9,15 @@ import commandGenerator.main.Lang;
 public class TagDouble extends Tag
 {
 
-	private double value, min, max;
-	private int type;
 	private JLabel label;
 	private JTextField textfield;
+	private int type;
+	private double value, min, max;
+
+	public TagDouble()
+	{
+		this("");
+	}
 
 	public TagDouble(String id, String... applicable)
 	{
@@ -24,11 +29,6 @@ public class TagDouble extends Tag
 		panel.add(label, gbc);
 		gbc.gridy++;
 		panel.add(textfield, gbc);
-	}
-
-	public TagDouble()
-	{
-		this("");
 	}
 
 	@Override
@@ -43,10 +43,22 @@ public class TagDouble extends Tag
 	}
 
 	@Override
+	public String commandStructure()
+	{
+		if (getId().equals("")) return Double.toString(value) + "D";
+		return getId() + ":" + value + "D";
+	}
+
+	@Override
 	public String display(int details, int lvls)
 	{
 		if (getId().equals("")) return Double.toString(value);
 		return getName() + " : " + value;
+	}
+
+	public double getValue()
+	{
+		return value;
 	}
 
 	private boolean isValueOk(String value)
@@ -88,18 +100,6 @@ public class TagDouble extends Tag
 	{
 		this.value = value;
 		return this;
-	}
-
-	public double getValue()
-	{
-		return value;
-	}
-
-	@Override
-	public String commandStructure()
-	{
-		if (getId().equals("")) return Double.toString(value) + "D";
-		return getId() + ":" + value + "D";
 	}
 
 }

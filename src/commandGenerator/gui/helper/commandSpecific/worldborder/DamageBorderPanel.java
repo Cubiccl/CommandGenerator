@@ -16,14 +16,45 @@ import commandGenerator.main.DisplayHelper;
 public class DamageBorderPanel extends HelperPanel
 {
 
-	private CLabel labelMode;
-	private CEntry entryValue;
-	private LangComboBox comboboxMode;
 	private static final String[] modes = { "amount", "buffer" };
+	private LangComboBox comboboxMode;
+	private CEntry entryValue;
+	private CLabel labelMode;
 
 	public DamageBorderPanel()
 	{
 		super(CGConstants.PANELID_OPTIONS, "GENERAL:options");
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		addLine(labelMode, comboboxMode);
+		add(entryValue);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		labelMode = new CLabel("GUI:worldborder.mode");
+
+		entryValue = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.damage");
+
+		comboboxMode = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:worldborder.damage.mode", 2);
+		comboboxMode.setPreferredSize(new Dimension(200, 20));
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		comboboxMode.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				if (comboboxMode.getSelectedIndex() == 0) entryValue.setText("GUI:worldborder.damage");
+				else entryValue.setText("GUI:worldborder.buffer");
+			}
+		});
 	}
 
 	public String generateText()
@@ -54,37 +85,6 @@ public class DamageBorderPanel extends HelperPanel
 		comboboxMode.setSelectedIndex((int) options[0]);
 		entryValue.setTextField((String) options[1]);
 
-	}
-
-	@Override
-	protected void createComponents()
-	{
-		labelMode = new CLabel("GUI:worldborder.mode");
-
-		entryValue = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.damage");
-
-		comboboxMode = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:worldborder.damage.mode", 2);
-		comboboxMode.setPreferredSize(new Dimension(200, 20));
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		add(labelMode, comboboxMode);
-		add(entryValue);
-	}
-
-	@Override
-	protected void createListeners()
-	{
-		comboboxMode.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				if (comboboxMode.getSelectedIndex() == 0) entryValue.setText("GUI:worldborder.damage");
-				else entryValue.setText("GUI:worldborder.buffer");
-			}
-		});
 	}
 
 }

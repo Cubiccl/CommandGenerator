@@ -20,10 +20,10 @@ public class CloneOptionsPanel extends OptionsPanel
 
 	private static final String[] modes1 = { "replace", "masked", "filtered" }, modes2 = { "normal", "force", "move" };
 
-	private CLabel labelMode1, labelMode2;
 	private JButton buttonHelp1, buttonHelp2;
-	private CoordSelectionPanel panelCoord1, panelCoord2, panelDestination;
 	private LangComboBox comboboxMode1, comboboxMode2;
+	private CLabel labelMode1, labelMode2;
+	private CoordSelectionPanel panelCoord1, panelCoord2, panelDestination;
 
 	public CloneOptionsPanel()
 	{
@@ -31,17 +31,13 @@ public class CloneOptionsPanel extends OptionsPanel
 	}
 
 	@Override
-	public String generateCommand()
+	protected void addComponents()
 	{
-
-		Coordinates coord1 = panelCoord1.generateCoord();
-		Coordinates coord2 = panelCoord2.generateCoord();
-		Coordinates coordDestination = panelDestination.generateCoord();
-
-		if (coord1 == null || coord2 == null || coordDestination == null) return null;
-
-		return "clone " + coord1.commandStructure() + " " + coord2.commandStructure() + " " + coordDestination.commandStructure() + " "
-				+ modes1[comboboxMode1.getSelectedIndex()] + " " + modes2[comboboxMode2.getSelectedIndex()];
+		add(panelCoord1);
+		add(panelCoord2);
+		add(panelDestination);
+		addLine(labelMode1, comboboxMode1, buttonHelp1);
+		addLine(labelMode2, comboboxMode2, buttonHelp2);
 	}
 
 	@Override
@@ -62,16 +58,6 @@ public class CloneOptionsPanel extends OptionsPanel
 	}
 
 	@Override
-	protected void addComponents()
-	{
-		add(panelCoord1);
-		add(panelCoord2);
-		add(panelDestination);
-		addLine(labelMode1, comboboxMode1, buttonHelp1);
-		addLine(labelMode2, comboboxMode2, buttonHelp2);
-	}
-
-	@Override
 	protected void createListeners()
 	{
 		buttonHelp1.addActionListener(new ActionListener() {
@@ -88,6 +74,20 @@ public class CloneOptionsPanel extends OptionsPanel
 				DisplayHelper.showHelp(Lang.get("HELP:clone.mode_" + comboboxMode2.getSelectedIndex()), (String) comboboxMode2.getSelectedItem());
 			}
 		});
+	}
+
+	@Override
+	public String generateCommand()
+	{
+
+		Coordinates coord1 = panelCoord1.generateCoord();
+		Coordinates coord2 = panelCoord2.generateCoord();
+		Coordinates coordDestination = panelDestination.generateCoord();
+
+		if (coord1 == null || coord2 == null || coordDestination == null) return null;
+
+		return "clone " + coord1.commandStructure() + " " + coord2.commandStructure() + " " + coordDestination.commandStructure() + " "
+				+ modes1[comboboxMode1.getSelectedIndex()] + " " + modes2[comboboxMode2.getSelectedIndex()];
 	}
 
 }

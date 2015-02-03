@@ -11,15 +11,15 @@ public abstract class TagCompound extends Tag
 
 	private List<Tag> value;
 
+	public TagCompound()
+	{
+		this("");
+	}
+
 	public TagCompound(String id, String... applicable)
 	{
 		super(id, Tag.COMPOUND, applicable);
 		value = new ArrayList<Tag>();
-	}
-
-	public TagCompound()
-	{
-		this("");
 	}
 
 	public void addTag(Tag tag)
@@ -31,6 +31,22 @@ public abstract class TagCompound extends Tag
 	public void clear()
 	{
 		value.clear();
+	}
+
+	@Override
+	public String commandStructure()
+	{
+		String nbt = "";
+		if (!getId().equals("")) nbt += getId() + ":";
+		nbt += "{";
+
+		for (int i = 0; i < value.size(); i++)
+		{
+			if (i != 0) nbt += ",";
+			nbt += value.get(i).commandStructure();
+		}
+
+		return nbt + "}";
 	}
 
 	public void deleteTag(String id)
@@ -79,6 +95,16 @@ public abstract class TagCompound extends Tag
 		return value.get(index);
 	}
 
+	public Tag getTag(int index)
+	{
+		return value.get(index);
+	}
+
+	public List<Tag> getValue()
+	{
+		return value;
+	}
+
 	public void setValue(List<Tag> value)
 	{
 		if (value == null) return;
@@ -88,32 +114,6 @@ public abstract class TagCompound extends Tag
 	public int size()
 	{
 		return value.size();
-	}
-
-	@Override
-	public String commandStructure()
-	{
-		String nbt = "";
-		if (!getId().equals("")) nbt += getId() + ":";
-		nbt += "{";
-
-		for (int i = 0; i < value.size(); i++)
-		{
-			if (i != 0) nbt += ",";
-			nbt += value.get(i).commandStructure();
-		}
-
-		return nbt + "}";
-	}
-
-	public Tag getTag(int index)
-	{
-		return value.get(index);
-	}
-
-	public List<Tag> getValue()
-	{
-		return value;
 	}
 
 }

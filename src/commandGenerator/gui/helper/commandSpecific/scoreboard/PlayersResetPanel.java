@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.commandSpecific.scoreboard;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -17,19 +16,36 @@ import commandGenerator.main.DisplayHelper;
 public class PlayersResetPanel extends ScoreboardPanel
 {
 
-	private JTextField textfieldObjective;
 	private CCheckBox checkboxObjective;
 	private EntitySelectionPanel panelEntity;
+	private JTextField textfieldObjective;
 
 	public PlayersResetPanel()
 	{
 		super();
-		setPreferredSize(new Dimension(500, 300));
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		addLine(checkboxObjective, textfieldObjective);
+		add(panelEntity);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		textfieldObjective = new JTextField(15);
 
 		checkboxObjective = new CCheckBox(CGConstants.DATAID_NONE, "GUI:scoreboard.players.clear.objective");
 		checkboxObjective.setSelected(true);
+
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+	}
+
+	@Override
+	protected void createListeners()
+	{
 		checkboxObjective.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -37,20 +53,6 @@ public class PlayersResetPanel extends ScoreboardPanel
 				textfieldObjective.setEnabled(checkboxObjective.isSelected());
 			}
 		});
-
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(checkboxObjective);
-		gbc.gridx++;
-		add(textfieldObjective);
-
-		gbc.gridx--;
-		gbc.gridy++;
-		gbc.gridwidth = 2;
-		add(panelEntity);
-		gbc.gridwidth = 2;
 	}
 
 	@Override

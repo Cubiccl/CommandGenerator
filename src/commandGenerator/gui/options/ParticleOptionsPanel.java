@@ -19,13 +19,49 @@ public class ParticleOptionsPanel extends OptionsPanel
 {
 
 	private CCheckBox checkBoxEntity;
-	private ParticleSelectionPanel panelParticle;
 	private CoordSelectionPanel panelCoord1, panelCoord2;
 	private EntitySelectionPanel panelEntity;
+	private ParticleSelectionPanel panelParticle;
 
 	public ParticleOptionsPanel()
 	{
 		super();
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		add(panelParticle);
+		add(panelCoord1);
+		add(panelCoord2);
+		add(checkBoxEntity);
+		add(panelEntity);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		checkBoxEntity = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:particle.target");
+
+		panelParticle = new ParticleSelectionPanel("GUI:particle");
+		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:particle.start", true, false);
+		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:particle.end", true, false);
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntity.setEnabled(false);
+		panelEntity.setEnabledContent(false);
+	}
+
+	@Override
+	protected void createListeners()
+	{
+		checkBoxEntity.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				panelEntity.setEnabled(checkBoxEntity.isSelected());
+				panelEntity.setEnabledContent(checkBoxEntity.isSelected());
+			}
+		});
 	}
 
 	@Override
@@ -67,42 +103,6 @@ public class ParticleOptionsPanel extends OptionsPanel
 	{
 		super.setupFrom(data);
 		panelEntity.setEnabledContent((boolean) data.get(CGConstants.DATAID_CHECK));
-	}
-
-	@Override
-	protected void createComponents()
-	{
-		checkBoxEntity = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:particle.target");
-
-		panelParticle = new ParticleSelectionPanel("GUI:particle");
-		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:particle.start", true, false);
-		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:particle.end", true, false);
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
-		panelEntity.setEnabled(false);
-		panelEntity.setEnabledContent(false);
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		add(panelParticle);
-		add(panelCoord1);
-		add(panelCoord2);
-		add(checkBoxEntity);
-		add(panelEntity);
-	}
-
-	@Override
-	protected void createListeners()
-	{
-		checkBoxEntity.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				panelEntity.setEnabled(checkBoxEntity.isSelected());
-				panelEntity.setEnabledContent(checkBoxEntity.isSelected());
-			}
-		});
 	}
 
 }

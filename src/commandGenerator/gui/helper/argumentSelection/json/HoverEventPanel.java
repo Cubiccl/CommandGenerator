@@ -26,17 +26,42 @@ public class HoverEventPanel extends HelperPanel
 {
 
 	private LangComboBox comboboxAction;
-	private JTextField textfieldText;
 	private ItemSelectionPanel panelItem;
-	private AchievementSelectionPanel panelStat;
 	private JsonSelectionPanel panelJson;
+	private AchievementSelectionPanel panelStat;
+	private JTextField textfieldText;
 
 	public HoverEventPanel(String title)
 	{
-		super(CGConstants.DATAID_NONE, title, 620, 350);
+		super(CGConstants.DATAID_NONE, title);
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(comboboxAction);
+		addLine(textfieldText, panelJson, panelItem, panelStat);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		comboboxAction = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:json.hover", 4);
 		comboboxAction.setPreferredSize(new Dimension(200, 20));
+
+		textfieldText = new JTextField(20);
+
+		panelJson = new JsonSelectionPanel("GUI:json.text", false);
+		panelJson.setVisible(false);
+		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:json.item", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
+		panelItem.setVisible(false);
+		panelStat = new AchievementSelectionPanel();
+		panelStat.setVisible(false);
+	}
+
+	@Override
+	protected void createListeners()
+	{
 		comboboxAction.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -47,24 +72,6 @@ public class HoverEventPanel extends HelperPanel
 				panelStat.setVisible(comboboxAction.getSelectedIndex() == 3);
 			}
 		});
-
-		textfieldText = new JTextField(20);
-
-		panelJson = new JsonSelectionPanel("GUI:json.text", false);
-		panelJson.setVisible(false);
-		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:json.item", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
-		panelItem.setVisible(false);
-		panelStat = new AchievementSelectionPanel();
-		panelStat.setVisible(false);
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(comboboxAction);
-		gbc.gridy++;
-		add(textfieldText);
-		add(panelJson);
-		add(panelItem);
-		add(panelStat);
 	}
 
 	public TagCompound generateHoverEvent()
@@ -102,13 +109,6 @@ public class HoverEventPanel extends HelperPanel
 		}
 
 		return tag;
-	}
-
-	@Override
-	public void updateLang()
-	{
-		updateTitle();
-		comboboxAction.updateLang();
 	}
 
 	public void setup(TagCompound nbt)
@@ -164,5 +164,12 @@ public class HoverEventPanel extends HelperPanel
 		panelJson.setVisible(comboboxAction.getSelectedIndex() == 1);
 		panelItem.setVisible(comboboxAction.getSelectedIndex() == 2);
 		panelStat.setVisible(comboboxAction.getSelectedIndex() == 3);
+	}
+
+	@Override
+	public void updateLang()
+	{
+		updateTitle();
+		comboboxAction.updateLang();
 	}
 }

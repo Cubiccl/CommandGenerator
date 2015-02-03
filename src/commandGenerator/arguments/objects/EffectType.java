@@ -13,6 +13,15 @@ public class EffectType extends ObjectBase
 {
 	private static Map<Integer, EffectType> effects = new HashMap<Integer, EffectType>();
 
+	/** Returns an Effect from its numerical ID.
+	 * 
+	 * @param id
+	 *            - <i>int</i> - The Effect's ID. */
+	public static ObjectBase getEffectFromIdNum(int id)
+	{
+		return effects.get(id);
+	}
+
 	/** This Effect's numerical ID. */
 	private int idNum;
 
@@ -46,15 +55,6 @@ public class EffectType extends ObjectBase
 	public ImageIcon getTexture()
 	{
 		return new ImageIcon(Resources.folder + "textures/effects/" + getId() + ".png");
-	}
-
-	/** Returns an Effect from its numerical ID.
-	 * 
-	 * @param id
-	 *            - <i>int</i> - The Effect's ID. */
-	public static ObjectBase getEffectFromIdNum(int id)
-	{
-		return effects.get(id);
 	}
 
 }

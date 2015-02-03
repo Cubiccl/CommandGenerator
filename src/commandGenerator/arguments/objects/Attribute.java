@@ -8,12 +8,12 @@ import commandGenerator.arguments.tags.TagString;
 public class Attribute
 {
 
-	/** The type of the Attribute */
-	private AttributeType type;
 	/** The amount given by the Attribute */
 	private double amount;
 	/** The operation used by the Attribute */
 	private int operation;
+	/** The type of the Attribute */
+	private AttributeType type;
 
 	/** New Attribute
 	 * 
@@ -61,6 +61,12 @@ public class Attribute
 		return operation;
 	}
 
+	/** Returns this Attribute's type. */
+	public AttributeType getType()
+	{
+		return type;
+	}
+
 	/** @return TagCompound - A Tag version of the Attribute */
 	public TagCompound toNBT()
 	{
@@ -77,12 +83,6 @@ public class Attribute
 		tag.addTag(new TagInt("UUIDLeast").setValue(100000));
 
 		return tag;
-	}
-
-	/** Returns this Attribute's type. */
-	public AttributeType getType()
-	{
-		return type;
 	}
 
 }

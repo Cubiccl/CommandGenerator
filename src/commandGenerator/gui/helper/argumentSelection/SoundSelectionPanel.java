@@ -22,15 +22,29 @@ import commandGenerator.main.Lang;
 public class SoundSelectionPanel extends HelperPanel
 {
 
-	private CEntry entryVolume, entryPitch, entryVolumeMin;
 	private JButton buttonHelpSound;
 	private CCheckBox checkboxOptions;
 	private CComboBox comboboxSound;
+	private CEntry entryVolume, entryPitch, entryVolumeMin;
 
 	public SoundSelectionPanel(String title)
 	{
-		super(CGConstants.PANELID_SOUND, title, 500, 200);
+		super(CGConstants.PANELID_SOUND, title);
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		addLine(comboboxSound, buttonHelpSound);
+		add(checkboxOptions);
+		add(entryVolume);
+		add(entryPitch);
+		add(entryVolumeMin);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		entryVolume = new CEntry(CGConstants.DATAID_NONE, "GUI:playsound.volume");
 		entryVolume.setEnabledContent(false);
 		entryPitch = new CEntry(CGConstants.DATAID_NONE, "GUI:playsound.pitch");
@@ -39,6 +53,16 @@ public class SoundSelectionPanel extends HelperPanel
 		entryVolumeMin.setEnabledContent(false);
 
 		buttonHelpSound = new JButton("?");
+
+		checkboxOptions = new CCheckBox(CGConstants.DATAID_NONE, "GUI:playsound.advanced");
+
+		comboboxSound = new CComboBox(CGConstants.DATAID_NONE, "GUI:playsound.choose", Registerer.getObjectList(CGConstants.OBJECT_SOUND), null);
+		comboboxSound.setPreferredSize(new Dimension(450, 100));
+	}
+
+	@Override
+	protected void createListeners()
+	{
 		buttonHelpSound.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e)
@@ -46,8 +70,6 @@ public class SoundSelectionPanel extends HelperPanel
 				DisplayHelper.showHelp(Lang.get("HELP:sound." + comboboxSound.getValue().getId()), comboboxSound.getValue().getName());
 			}
 		});
-
-		checkboxOptions = new CCheckBox(CGConstants.DATAID_NONE, "GUI:playsound.advanced");
 		checkboxOptions.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -57,26 +79,6 @@ public class SoundSelectionPanel extends HelperPanel
 				entryVolumeMin.setEnabledContent(checkboxOptions.isSelected());
 			}
 		});
-
-		comboboxSound = new CComboBox(CGConstants.DATAID_NONE, "GUI:playsound.choose", Registerer.getObjectList(CGConstants.OBJECT_SOUND), null);
-		comboboxSound.setPreferredSize(new Dimension(450, 100));
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(comboboxSound);
-		gbc.gridx++;
-		add(buttonHelpSound);
-
-		gbc.gridx = 0;
-		gbc.gridy++;
-		gbc.gridwidth = 2;
-		add(checkboxOptions);
-		gbc.gridy++;
-		add(entryVolume);
-		gbc.gridy++;
-		add(entryPitch);
-		gbc.gridy++;
-		add(entryVolumeMin);
 	}
 
 	public Sound getSelectedSound()
@@ -115,17 +117,6 @@ public class SoundSelectionPanel extends HelperPanel
 	}
 
 	@Override
-	public void updateLang()
-	{
-		updateTitle();
-		entryPitch.updateLang();
-		entryVolume.updateLang();
-		entryVolumeMin.updateLang();
-		checkboxOptions.updateLang();
-		comboboxSound.updateLang();
-	}
-
-	@Override
 	public void setupFrom(Map<String, Object> data)
 	{
 		comboboxSound.setSelected((ObjectBase) data.get(getPanelId()));
@@ -137,6 +128,17 @@ public class SoundSelectionPanel extends HelperPanel
 		if (data.get(CGConstants.DATAID_SOUND_VOL) != null) entryVolume.setTextField((String) data.get(CGConstants.DATAID_SOUND_VOL));
 		if (data.get(CGConstants.DATAID_SOUND_PITCH) != null) entryPitch.setTextField((String) data.get(CGConstants.DATAID_SOUND_PITCH));
 		if (data.get(CGConstants.DATAID_SOUND_VOLMIN) != null) entryVolumeMin.setTextField((String) data.get(CGConstants.DATAID_SOUND_VOLMIN));
+	}
+
+	@Override
+	public void updateLang()
+	{
+		updateTitle();
+		entryPitch.updateLang();
+		entryVolume.updateLang();
+		entryVolumeMin.updateLang();
+		checkboxOptions.updateLang();
+		comboboxSound.updateLang();
 	}
 
 }

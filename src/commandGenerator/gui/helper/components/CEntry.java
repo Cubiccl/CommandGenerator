@@ -13,8 +13,8 @@ public class CEntry extends JPanel implements CComponent
 {
 
 	private String id;
-	private JTextField text;
 	private CLabel label;
+	private JTextField text;
 
 	public CEntry(String id, String title)
 	{
@@ -33,6 +33,18 @@ public class CEntry extends JPanel implements CComponent
 		return text.getText();
 	}
 
+	@Override
+	public void reset()
+	{
+		setTextField("");
+	}
+
+	public void setEnabledContent(boolean enabled)
+	{
+		text.setEnabled(enabled);
+		label.setEnabled(enabled);
+	}
+
 	public void setText(String title)
 	{
 		label.setTitle(title);
@@ -43,27 +55,15 @@ public class CEntry extends JPanel implements CComponent
 		this.text.setText(text);
 	}
 
-	public void setEnabledContent(boolean enabled)
-	{
-		text.setEnabled(enabled);
-		label.setEnabled(enabled);
-	}
-
-	public void updateLang()
-	{
-		label.updateLang();
-	}
-
 	@Override
 	public void setupFrom(Map<String, Object> data)
 	{
 		if (!id.equals(CGConstants.DATAID_NONE) && data.get(id) != null) setTextField((String) data.get(id));
 	}
 
-	@Override
-	public void reset()
+	public void updateLang()
 	{
-		setTextField("");
+		label.updateLang();
 	}
 
 }

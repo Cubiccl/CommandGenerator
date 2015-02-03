@@ -176,6 +176,36 @@ public class Generator
 		}
 	}
 
+	/** Generates the different elements of the command
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command which elements should be identified. */
+	private static String[] genElements(String command)
+	{
+		List<String> elements = new ArrayList<String>();
+		String[] base = command.split(" ");
+
+		int realIndex = 0;
+		boolean inString = false;
+		for (int i = 0; i < base.length; i++)
+		{
+			for (int j = 0; j < base[i].length(); j++)
+			{
+
+				if (base[i].charAt(j) == '"')
+				{
+					if (j == 0) inString = !inString;
+					else if (base[i].charAt(j - 1) != '\\') inString = !inString;
+				}
+			}
+			if (elements.size() <= realIndex) elements.add(base[i]);
+			else elements.set(realIndex, elements.get(realIndex) + " " + base[i]);
+			if (!inString) realIndex++;
+		}
+
+		return elements.toArray(new String[0]);
+	}
+
 	/** Generates the data for the /enchant command.
 	 * 
 	 * @param command
@@ -224,6 +254,46 @@ public class Generator
 			e.printStackTrace();
 			return wrong();
 		}
+	}
+
+	/** Generates the slot caracteristics.
+	 * 
+	 * @param slot
+	 *            - <i>String</i> - The slot to generate from. */
+	private static Object[] generateSlot(String slot)
+	{
+
+		boolean visible = true;
+		int index = 0, spin = 0;
+		String type = slot.split("\\.")[1];
+
+		if (type.equals("armor")) return new Object[] { index, slot.split("\\.")[2], visible };
+
+		if (type.equals("enderchest") || (type.equals("horse") && slot.split("\\.")[2].equals("chest")) || type.equals("hotbar") || type.equals("inventory")
+				|| type.equals("villager"))
+		{
+			if (!type.equals("horse")) spin = Integer.parseInt(slot.split("\\.")[2]);
+			else spin = Integer.parseInt(slot.split("\\.")[3]);
+
+			if (type.equals("enderchest")) index = 1;
+			if (type.equals("horse")) index = 3;
+			if (type.equals("hotbar")) index = 5;
+			if (type.equals("inventory")) index = 6;
+			if (type.equals("villager")) index = 7;
+		}
+
+		if (type.equals("weapon") || (type.equals("horse") && !slot.split("\\.")[2].equals("chest")))
+		{
+			if (type.equals("weapon")) index = 8;
+			else
+			{
+				if (slot.split("\\.")[2].equals("armor")) index = 2;
+				if (slot.split("\\.")[2].equals("saddle")) index = 4;
+			}
+			visible = false;
+		}
+
+		return new Object[] { index, spin, visible };
 	}
 
 	/** Generates the data for the /execute command.
@@ -473,44 +543,84 @@ public class Generator
 		}
 	}
 
-	/** Generates the slot caracteristics.
+	/** Generates the data details for /scoreboard.
 	 * 
-	 * @param slot
-	 *            - <i>String</i> - The slot to generate from. */
-	private static Object[] generateSlot(String slot)
+	 * @param data
+	 *            - <i>Map:String->Object</i> - The data storage.
+	 * @param elements
+	 *            - <i>String[]</i> -The elements of the command. */
+	private static void genScore(Map<String, Object> data, String[] elements)
 	{
+		String[][] scoreboardModes = { { "objectives", "add", "remove", "setdisplay" },
+				{ "players", "set", "add", "remove", "reset", "enable", "test", "operation" }, { "teams", "add", "remove", "empty", "join", "leave", "option" } };
 
-		boolean visible = true;
-		int index = 0, spin = 0;
-		String type = slot.split("\\.")[1];
+		String mode = scoreboardModes[(int) data.get(CGConstants.DATAID_MODE)][0];
+		String mode2 = scoreboardModes[(int) data.get(CGConstants.DATAID_MODE)][(int) data.get(CGConstants.DATAID_MODE2) + 1];
 
-		if (type.equals("armor")) return new Object[] { index, slot.split("\\.")[2], visible };
-
-		if (type.equals("enderchest") || (type.equals("horse") && slot.split("\\.")[2].equals("chest")) || type.equals("hotbar") || type.equals("inventory")
-				|| type.equals("villager"))
+		if (mode.equals("objectives"))
 		{
-			if (!type.equals("horse")) spin = Integer.parseInt(slot.split("\\.")[2]);
-			else spin = Integer.parseInt(slot.split("\\.")[3]);
-
-			if (type.equals("enderchest")) index = 1;
-			if (type.equals("horse")) index = 3;
-			if (type.equals("hotbar")) index = 5;
-			if (type.equals("inventory")) index = 6;
-			if (type.equals("villager")) index = 7;
-		}
-
-		if (type.equals("weapon") || (type.equals("horse") && !slot.split("\\.")[2].equals("chest")))
-		{
-			if (type.equals("weapon")) index = 8;
-			else
+			if (mode2.equals("add") || mode2.equals("remove")) data.put(CGConstants.DATAID_NAME, elements[3]);
+			if (mode2.equals("add"))
 			{
-				if (slot.split("\\.")[2].equals("armor")) index = 2;
-				if (slot.split("\\.")[2].equals("saddle")) index = 4;
+				data.put(CGConstants.DATAID_VALUE, elements[4]);
+				if (elements.length > 5) data.put(CGConstants.DATAID_NAME2, elements[5]);
 			}
-			visible = false;
+			if (mode2.equals("setdisplay"))
+			{
+				data.put(CGConstants.DATAID_VALUE, 0);
+				for (int i = 0; i < Resources.displayList.length; i++)
+				{
+					if (elements[3].equals(Resources.displayList[i])) data.put(CGConstants.DATAID_VALUE, i);
+				}
+				if (elements.length > 4) data.put(CGConstants.DATAID_NAME, elements[4]);
+			}
 		}
 
-		return new Object[] { index, spin, visible };
+		if (mode.equals("players"))
+		{
+			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[3]));
+			if (!mode2.equals("reset") || elements.length > 4) data.put(CGConstants.DATAID_NAME, elements[4]);
+			if (mode2.equals("set") || mode2.equals("add") || mode2.equals("remove") || mode2.equals("test")) data.put(CGConstants.DATAID_VALUE, elements[5]);
+			if (mode2.equals("test") && elements.length > 6) data.put(CGConstants.DATAID_CHECK, elements[6]);
+			if (mode2.equals("operation"))
+			{
+				data.put(CGConstants.PANELID_TARGET2, Target.generateFrom(elements[6]));
+				data.put(CGConstants.DATAID_NAME2, elements[7]);
+				data.put(CGConstants.DATAID_VALUE, 0);
+				for (int i = 0; i < PlayersOperationPanel.operationList.length; i++)
+					if (PlayersOperationPanel.operationList[i].equals(elements[5])) data.put(CGConstants.DATAID_VALUE, i);
+
+			}
+		}
+
+		if (mode.equals("teams"))
+		{
+			if (!mode2.equals("leave") || elements.length > 4) data.put(CGConstants.DATAID_NAME, elements[3]);
+			if (mode2.equals("add") && elements.length > 4) data.put(CGConstants.DATAID_NAME2, elements[4]);
+			if (mode2.equals("join")) data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[4]));
+			if (mode2.equals("leave"))
+			{
+				if (elements.length > 4) data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[4]));
+				else data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[3]));
+			}
+			if (mode2.equals("option"))
+			{
+				String mode3 = elements[4];
+				data.put(CGConstants.DATAID_CHECK, 0);
+				data.put(CGConstants.DATAID_VALUE, 0);
+
+				for (int i = 0; i < TeamsOptionPanel.scoreboardTeamsOptionList.length; i++)
+					if (mode3.equals(TeamsOptionPanel.scoreboardTeamsOptionList[i])) data.put(CGConstants.DATAID_CHECK, i);
+
+				if (mode3.equals("color")) for (int i = 0; i < Resources.colors.length; i++)
+					if (elements[5].equals(Resources.colors[i])) data.put(CGConstants.DATAID_VALUE, i);
+				if (mode3.equals("deathMessageVisibility") || mode3.equals("nametagVisibility")) for (int i = 0; i < TeamsOptionPanel.visibilityList.length; i++)
+					if (elements[5].equals(TeamsOptionPanel.visibilityList[i])) data.put(CGConstants.DATAID_VALUE, i);
+				if ((mode3.equals("seeFriendlyInvisibles ") || mode3.equals("friendlyfire")) && elements[5].equals("false")) data.put(CGConstants.DATAID_VALUE,
+						1);
+
+			}
+		}
 	}
 
 	/** Generates the data for the /scoreboard command.
@@ -936,115 +1046,5 @@ public class Generator
 	{
 		DisplayHelper.showWarning("WARNING:wrong_command");
 		return null;
-	}
-
-	/** Generates the different elements of the command
-	 * 
-	 * @param command
-	 *            - <i>String</i> - The command which elements should be identified. */
-	private static String[] genElements(String command)
-	{
-		List<String> elements = new ArrayList<String>();
-		String[] base = command.split(" ");
-
-		int realIndex = 0;
-		boolean inString = false;
-		for (int i = 0; i < base.length; i++)
-		{
-			for (int j = 0; j < base[i].length(); j++)
-			{
-
-				if (base[i].charAt(j) == '"')
-				{
-					if (j == 0) inString = !inString;
-					else if (base[i].charAt(j - 1) != '\\') inString = !inString;
-				}
-			}
-			if (elements.size() <= realIndex) elements.add(base[i]);
-			else elements.set(realIndex, elements.get(realIndex) + " " + base[i]);
-			if (!inString) realIndex++;
-		}
-
-		return elements.toArray(new String[0]);
-	}
-
-	/** Generates the data details for /scoreboard.
-	 * 
-	 * @param data
-	 *            - <i>Map:String->Object</i> - The data storage.
-	 * @param elements
-	 *            - <i>String[]</i> -The elements of the command. */
-	private static void genScore(Map<String, Object> data, String[] elements)
-	{
-		String[][] scoreboardModes = { { "objectives", "add", "remove", "setdisplay" },
-				{ "players", "set", "add", "remove", "reset", "enable", "test", "operation" }, { "teams", "add", "remove", "empty", "join", "leave", "option" } };
-
-		String mode = scoreboardModes[(int) data.get(CGConstants.DATAID_MODE)][0];
-		String mode2 = scoreboardModes[(int) data.get(CGConstants.DATAID_MODE)][(int) data.get(CGConstants.DATAID_MODE2) + 1];
-
-		if (mode.equals("objectives"))
-		{
-			if (mode2.equals("add") || mode2.equals("remove")) data.put(CGConstants.DATAID_NAME, elements[3]);
-			if (mode2.equals("add"))
-			{
-				data.put(CGConstants.DATAID_VALUE, elements[4]);
-				if (elements.length > 5) data.put(CGConstants.DATAID_NAME2, elements[5]);
-			}
-			if (mode2.equals("setdisplay"))
-			{
-				data.put(CGConstants.DATAID_VALUE, 0);
-				for (int i = 0; i < Resources.displayList.length; i++)
-				{
-					if (elements[3].equals(Resources.displayList[i])) data.put(CGConstants.DATAID_VALUE, i);
-				}
-				if (elements.length > 4) data.put(CGConstants.DATAID_NAME, elements[4]);
-			}
-		}
-
-		if (mode.equals("players"))
-		{
-			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[3]));
-			if (!mode2.equals("reset") || elements.length > 4) data.put(CGConstants.DATAID_NAME, elements[4]);
-			if (mode2.equals("set") || mode2.equals("add") || mode2.equals("remove") || mode2.equals("test")) data.put(CGConstants.DATAID_VALUE, elements[5]);
-			if (mode2.equals("test") && elements.length > 6) data.put(CGConstants.DATAID_CHECK, elements[6]);
-			if (mode2.equals("operation"))
-			{
-				data.put(CGConstants.PANELID_TARGET2, Target.generateFrom(elements[6]));
-				data.put(CGConstants.DATAID_NAME2, elements[7]);
-				data.put(CGConstants.DATAID_VALUE, 0);
-				for (int i = 0; i < PlayersOperationPanel.operationList.length; i++)
-					if (PlayersOperationPanel.operationList[i].equals(elements[5])) data.put(CGConstants.DATAID_VALUE, i);
-
-			}
-		}
-
-		if (mode.equals("teams"))
-		{
-			if (!mode2.equals("leave") || elements.length > 4) data.put(CGConstants.DATAID_NAME, elements[3]);
-			if (mode2.equals("add") && elements.length > 4) data.put(CGConstants.DATAID_NAME2, elements[4]);
-			if (mode2.equals("join")) data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[4]));
-			if (mode2.equals("leave"))
-			{
-				if (elements.length > 4) data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[4]));
-				else data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[3]));
-			}
-			if (mode2.equals("option"))
-			{
-				String mode3 = elements[4];
-				data.put(CGConstants.DATAID_CHECK, 0);
-				data.put(CGConstants.DATAID_VALUE, 0);
-
-				for (int i = 0; i < TeamsOptionPanel.scoreboardTeamsOptionList.length; i++)
-					if (mode3.equals(TeamsOptionPanel.scoreboardTeamsOptionList[i])) data.put(CGConstants.DATAID_CHECK, i);
-
-				if (mode3.equals("color")) for (int i = 0; i < Resources.colors.length; i++)
-					if (elements[5].equals(Resources.colors[i])) data.put(CGConstants.DATAID_VALUE, i);
-				if (mode3.equals("deathMessageVisibility") || mode3.equals("nametagVisibility")) for (int i = 0; i < TeamsOptionPanel.visibilityList.length; i++)
-					if (elements[5].equals(TeamsOptionPanel.visibilityList[i])) data.put(CGConstants.DATAID_VALUE, i);
-				if ((mode3.equals("seeFriendlyInvisibles ") || mode3.equals("friendlyfire")) && elements[5].equals("false")) data.put(CGConstants.DATAID_VALUE,
-						1);
-
-			}
-		}
 	}
 }

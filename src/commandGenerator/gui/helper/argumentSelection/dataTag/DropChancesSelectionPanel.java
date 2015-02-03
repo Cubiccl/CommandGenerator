@@ -15,13 +15,28 @@ import commandGenerator.main.DisplayHelper;
 public class DropChancesSelectionPanel extends HelperPanel
 {
 
-	private CLabel label;
 	private CEntry entryHand, entryHead, entryChest, entryLegs, entryFeet;
+	private CLabel label;
 
 	public DropChancesSelectionPanel(String title)
 	{
-		super(CGConstants.DATAID_NONE, title, 600, 200);
+		super(CGConstants.DATAID_NONE, title);
+	}
 
+	@Override
+	protected void addComponents()
+	{
+		add(label);
+		add(entryHand);
+		add(entryHead);
+		add(entryChest);
+		add(entryLegs);
+		add(entryFeet);
+	}
+
+	@Override
+	protected void createComponents()
+	{
 		label = new CLabel("GUI:desc.drop_chances");
 
 		entryHand = new CEntry(CGConstants.DATAID_NONE, "GUI:slot.hand");
@@ -35,21 +50,11 @@ public class DropChancesSelectionPanel extends HelperPanel
 		entryChest.setTextField("0");
 		entryLegs.setTextField("0");
 		entryFeet.setTextField("0");
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(label);
-		gbc.gridy++;
-		add(entryHand);
-		gbc.gridy++;
-		add(entryHead);
-		gbc.gridy++;
-		add(entryChest);
-		gbc.gridy++;
-		add(entryLegs);
-		gbc.gridy++;
-		add(entryFeet);
 	}
+
+	@Override
+	protected void createListeners()
+	{}
 
 	public List<Tag> getDropChances()
 	{
@@ -88,18 +93,6 @@ public class DropChancesSelectionPanel extends HelperPanel
 		return tag;
 	}
 
-	@Override
-	public void updateLang()
-	{
-		updateTitle();
-		label.updateLang();
-		entryChest.updateLang();
-		entryFeet.updateLang();
-		entryHand.updateLang();
-		entryHead.updateLang();
-		entryLegs.updateLang();
-	}
-
 	public void setup(List<Tag> data)
 	{
 		if (data.size() < 5) DisplayHelper.log("Error : missing drop chances");
@@ -113,6 +106,18 @@ public class DropChancesSelectionPanel extends HelperPanel
 		entryLegs.setTextField(Float.toString(chances[2]));
 		entryChest.setTextField(Float.toString(chances[3]));
 		entryHead.setTextField(Float.toString(chances[4]));
+	}
+
+	@Override
+	public void updateLang()
+	{
+		updateTitle();
+		label.updateLang();
+		entryChest.updateLang();
+		entryFeet.updateLang();
+		entryHand.updateLang();
+		entryHead.updateLang();
+		entryLegs.updateLang();
 	}
 
 }

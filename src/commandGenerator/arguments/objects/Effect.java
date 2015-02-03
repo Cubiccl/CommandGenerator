@@ -8,14 +8,14 @@ import commandGenerator.main.Lang;
 public class Effect
 {
 
-	/** This Effect's type. */
-	private EffectType type;
 	/** This Effect's level. */
 	private int amplifier;
 	/** This Effect's duration. */
 	private int duration;
 	/** True if this Effect's particles should be shown. */
 	private boolean showParticles;
+	/** This Effect's type. */
+	private EffectType type;
 
 	/** Creates a new Effect
 	 * 

@@ -22,13 +22,13 @@ import commandGenerator.main.CGConstants;
 public class CComboBox extends JPanel implements CComponent
 {
 
+	private JComboBox<String> box;
+	private List<ObjectBase> displayed = new ArrayList<ObjectBase>();
 	private String id;
+	private CLabel label;
+	private ObjectBase[] objects;
 	private IBox parent;
 	private JTextField text;
-	private CLabel label;
-	private JComboBox<String> box;
-	private ObjectBase[] objects;
-	private List<ObjectBase> displayed = new ArrayList<ObjectBase>();
 
 	public CComboBox(String id, String title, ObjectBase[] objects, IBox parent)
 	{
@@ -43,7 +43,7 @@ public class CComboBox extends JPanel implements CComponent
 
 		text = new JTextField(18);
 		text.addKeyListener(new KeyListener() {
-			public void keyTyped(KeyEvent arg0)
+			public void keyPressed(KeyEvent arg0)
 			{}
 
 			public void keyReleased(KeyEvent e)
@@ -51,7 +51,7 @@ public class CComboBox extends JPanel implements CComponent
 				search(e);
 			}
 
-			public void keyPressed(KeyEvent arg0)
+			public void keyTyped(KeyEvent arg0)
 			{}
 		});
 
@@ -98,6 +98,26 @@ public class CComboBox extends JPanel implements CComponent
 		box.setSelectedItem(selected.getName());
 	}
 
+	/** Returns the selected index. */
+	public int getIndex()
+	{
+		return box.getSelectedIndex();
+	}
+
+	/** Returns the selected Object. */
+	public ObjectBase getValue()
+	{
+		if (box.getSelectedItem() == null) return null;
+		return displayed.get(box.getSelectedIndex());
+	}
+
+	@Override
+	public void reset()
+	{
+		text.setText("");
+		box.setSelectedIndex(0);
+	}
+
 	protected void search(KeyEvent key)
 	{
 
@@ -134,19 +154,6 @@ public class CComboBox extends JPanel implements CComponent
 
 	}
 
-	/** Returns the selected Object. */
-	public ObjectBase getValue()
-	{
-		if (box.getSelectedItem() == null) return null;
-		return displayed.get(box.getSelectedIndex());
-	}
-
-	/** Returns the selected index. */
-	public int getIndex()
-	{
-		return box.getSelectedIndex();
-	}
-
 	public void setData(ObjectBase[] objects)
 	{
 		this.objects = objects;
@@ -168,6 +175,11 @@ public class CComboBox extends JPanel implements CComponent
 		box.setSelectedItem(object.getName());
 	}
 
+	public void setupFrom(Map<String, Object> data)
+	{
+		if (!id.equals(CGConstants.DATAID_NONE)) setSelected((ObjectBase) data.get(id));
+	}
+
 	public void updateLang()
 	{
 		label.updateLang();
@@ -179,18 +191,6 @@ public class CComboBox extends JPanel implements CComponent
 			displayed.add(objects[i]);
 		}
 		box.setModel(new JComboBox<String>(names).getModel());
-	}
-
-	public void setupFrom(Map<String, Object> data)
-	{
-		if (!id.equals(CGConstants.DATAID_NONE)) setSelected((ObjectBase) data.get(id));
-	}
-
-	@Override
-	public void reset()
-	{
-		text.setText("");
-		box.setSelectedIndex(0);
 	}
 
 }

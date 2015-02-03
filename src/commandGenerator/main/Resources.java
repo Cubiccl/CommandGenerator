@@ -2,11 +2,15 @@ package commandGenerator.main;
 
 public class Resources
 {
-	/** The Minecraft version this program is for. */
-	public static String versionMinecraft;
+	/** List of the colors used for displays. */
+	public static String[] colors = { "black", "dark_blue", "dark_green", "dark_aqua", "dark_red", "dark_purple", "gold", "gray", "ark_gray", "blue", "green",
+			"aqua", "red", "light_purple", "yellow", "white", "reset" };
 
-	/** The list of all versions this program has had. */
-	public static String[] versions, changelog;
+	/** List of the display slots for the scoreboard. */
+	public static String[] displayList = { "list", "sidebar", "belowName", "sidebar.team.black", "sidebar.team.dark_blue", "sidebar.team.dark_green",
+			"sidebar.team.dark_aqua", "sidebar.team.dark_red", "sidebar.team.dark_purple", "sidebar.team.gold", "sidebar.team.gray", "sidebar.team.dark_gray",
+			"sidebar.team.blue", "sidebar.team.green", "sidebar.team.aqua", "sidebar.team.red", "sidebar.team.light_purple", "sidebar.team.yellow",
+			"sidebar.team.white" };
 
 	/** The URL to the Command Generator resource folder. */
 	public static String folder;
@@ -34,15 +38,11 @@ public class Resources
 			"/tp <target> <destinationEntity>\n/tp <target> <x> <y> <z> [x-rotation] [y-rotation]", "/weather <clear|rain|thunder> <duration>",
 			"/worldborder <add|center|damage|set|warning> <options ...>", "/xp <amount>[L] <player>" };
 
-	/** List of the colors used for displays. */
-	public static String[] colors = { "black", "dark_blue", "dark_green", "dark_aqua", "dark_red", "dark_purple", "gold", "gray", "ark_gray", "blue", "green",
-			"aqua", "red", "light_purple", "yellow", "white", "reset" };
+	/** The Minecraft version this program is for. */
+	public static String versionMinecraft;
 
-	/** List of the display slots for the scoreboard. */
-	public static String[] displayList = { "list", "sidebar", "belowName", "sidebar.team.black", "sidebar.team.dark_blue", "sidebar.team.dark_green",
-			"sidebar.team.dark_aqua", "sidebar.team.dark_red", "sidebar.team.dark_purple", "sidebar.team.gold", "sidebar.team.gray", "sidebar.team.dark_gray",
-			"sidebar.team.blue", "sidebar.team.green", "sidebar.team.aqua", "sidebar.team.red", "sidebar.team.light_purple", "sidebar.team.yellow",
-			"sidebar.team.white" };
+	/** The list of all versions this program has had. */
+	public static String[] versions, changelog;
 
 	/** Returns the changelog for the specified version.
 	 * 
