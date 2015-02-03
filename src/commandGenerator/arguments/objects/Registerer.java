@@ -1,6 +1,9 @@
 package commandGenerator.arguments.objects;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import commandGenerator.main.CGConstants;
@@ -16,10 +19,65 @@ public class Registerer
 	/** Map containing registered Objects. */
 	private static Map<Byte, Map<String, ObjectBase>> objects = new HashMap<Byte, Map<String, ObjectBase>>();
 
+	/** Displays the list of all registered objects of the specified type.
+	 * 
+	 * @param objectType
+	 *            - <i>byte</i> - The Objects' type. */
+	private static void displayList(byte objectType)
+	{
+		String log = "Registered " + CGConstants.TYPES[objectType] + "s : ";
+		ObjectBase[] items = getObjectList(objectType);
+		int size = 0;
+		for (int i = 0; i < objects.get(objectType).size(); i++)
+		{
+			log += items[i].getId() + ", ";
+			size += items[i].getId().length();
+			if (size >= 400)
+			{
+				log += "\n";
+				size = 0;
+			}
+		}
+
+		log = log.substring(0, log.length() - 2) + ".";
+
+		DisplayHelper.log(log);
+	}
+
+	/** Finalizes the registration. */
+	public static void end()
+	{
+		registerList("allEntities", objects.get(CGConstants.OBJECT_ENTITY).keySet().toArray(new String[0]));
+		displayList(CGConstants.OBJECT_ITEM);
+		displayList(CGConstants.OBJECT_ENTITY);
+		displayList(CGConstants.OBJECT_ENCHANT);
+		displayList(CGConstants.OBJECT_EFFECT);
+		displayList(CGConstants.OBJECT_ACHIEVEMENT);
+		displayList(CGConstants.OBJECT_ATTRIBUTE);
+		displayList(CGConstants.OBJECT_SOUND);
+		displayList(CGConstants.OBJECT_PARTICLE);
+
+	}
+
 	/** Returns an array containing all registered commands. */
 	public static Command[] getCommandArray()
 	{
-		return commands.values().toArray(new Command[0]);
+		Command[] commandArray = commands.values().toArray(new Command[0]);
+		List<Command> commandList = new ArrayList<Command>();
+		for (int i = 0; i < commandArray.length; i++)
+			commandList.add(commandArray[i]);
+
+		commandList.sort(new Comparator<Command>() {
+			public int compare(Command c1, Command c2)
+			{
+				int diff = c1.getId().compareTo(c2.getId());
+				if (diff < 0) diff = -1;
+				if (diff > 0) diff = 1;
+				return diff;
+			}
+		});
+
+		return commandList.toArray(new Command[0]);
 	}
 
 	/** Returns a Command from its ID.
@@ -95,7 +153,14 @@ public class Registerer
 	 *            - <i>byte</i> - The Objects' type. */
 	public static ObjectBase[] getObjectList(byte type)
 	{
-		return objects.get(type).values().toArray(new ObjectBase[0]);
+		ObjectBase[] objectArray = objects.get(type).values().toArray(new ObjectBase[0]);
+		List<ObjectBase> objectList = new ArrayList<ObjectBase>();
+		for (int i = 0; i < objectArray.length; i++)
+			objectList.add(objectArray[i]);
+
+		if (type == CGConstants.OBJECT_ITEM || type == CGConstants.OBJECT_ENCHANT || type == CGConstants.OBJECT_EFFECT) sortIdsNum(objectList);
+		else sortIds(objectList);
+		return objectList.toArray(new ObjectBase[0]);
 	}
 
 	/** Registers a command
@@ -137,44 +202,41 @@ public class Registerer
 		objects.get(type).put(object.getId(), object);
 	}
 
-	/** Finalizes the registration. */
-	public static void end()
-	{
-		registerList("allEntities", objects.get(CGConstants.OBJECT_ENTITY).keySet().toArray(new String[0]));
-		displayList(CGConstants.OBJECT_ITEM);
-		displayList(CGConstants.OBJECT_ENTITY);
-		displayList(CGConstants.OBJECT_ENCHANT);
-		displayList(CGConstants.OBJECT_EFFECT);
-		displayList(CGConstants.OBJECT_ACHIEVEMENT);
-		displayList(CGConstants.OBJECT_ATTRIBUTE);
-		displayList(CGConstants.OBJECT_SOUND);
-		displayList(CGConstants.OBJECT_PARTICLE);
-
-	}
-
-	/** Displays the list of all registered objects of the specified type.
+	/** Sorts the Object list according to these Objects' IDs.
 	 * 
 	 * @param objectType
-	 *            - <i>byte</i> - The Objects' type. */
-	private static void displayList(byte objectType)
+	 *            - <i>List:ObjectBase</i> - The list of Objects to sort. */
+	private static void sortIds(List<ObjectBase> list)
 	{
-		String log = "Registered " + CGConstants.TYPES[objectType] + "s : ";
-		ObjectBase[] items = objects.get(objectType).values().toArray(new ObjectBase[0]);
-		int size = 0;
-		for (int i = 0; i < objects.get(objectType).size(); i++)
-		{
-			log += items[i].getId() + ", ";
-			size += items[i].getId().length();
-			if (size >= 400)
+		list.sort(new Comparator<ObjectBase>() {
+			public int compare(ObjectBase o1, ObjectBase o2)
 			{
-				log += "\n";
-				size = 0;
+				int diff = o1.getId().compareTo(o2.getId());
+				if (diff < 0) diff = -1;
+				if (diff > 0) diff = 1;
+				return diff;
 			}
-		}
+		});
+	}
 
-		log = log.substring(0, log.length() - 2) + ".";
-
-		DisplayHelper.log(log);
+	/** Sorts the Object list according to these Objects' numerical IDs.
+	 * 
+	 * @param objectType
+	 *            - <i>List:ObjectBase</i> - The list of Objects to sort. */
+	private static void sortIdsNum(List<ObjectBase> list)
+	{
+		list.sort(new Comparator<ObjectBase>() {
+			public int compare(ObjectBase o1, ObjectBase o2)
+			{
+				int diff = 0;
+				if (o1.getType() == CGConstants.OBJECT_ITEM) diff = ((Item) o1).getIdNum() - ((Item) o2).getIdNum();
+				if (o1.getType() == CGConstants.OBJECT_ENCHANT) diff = ((EnchantType) o1).getIdNum() - ((EnchantType) o2).getIdNum();
+				if (o1.getType() == CGConstants.OBJECT_EFFECT) diff = ((EffectType) o1).getIdNum() - ((EffectType) o2).getIdNum();
+				if (diff < 0) diff = -1;
+				if (diff > 0) diff = 1;
+				return diff;
+			}
+		});
 	}
 
 }

@@ -47,7 +47,7 @@ public class PanelCommandSelection extends JPanel
 	private CButton buttonGenerate, buttonCopy, buttonGenerator;
 	private JButton buttonHelpCommand;
 	private CCheckBox checkboxEdit;
-	private JComboBox<String> comboboxRegisterer;
+	private JComboBox<String> comboboxCommand;
 	private GridBagConstraints gbc = new GridBagConstraints();
 	private CLabel labelChooseCommand, labelWarning;
 	public OptionsPanel panelOptions;
@@ -73,8 +73,8 @@ public class PanelCommandSelection extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				DisplayHelper.showHelp(Registerer.getCommandFromId((String) comboboxRegisterer.getSelectedItem()).getDescription(),
-						(String) comboboxRegisterer.getSelectedItem());
+				DisplayHelper.showHelp(Registerer.getCommandFromId((String) comboboxCommand.getSelectedItem()).getDescription(),
+						(String) comboboxCommand.getSelectedItem());
 			}
 		});
 
@@ -143,8 +143,8 @@ public class PanelCommandSelection extends JPanel
 				if (arg0.getKeyCode() == 10)
 				{
 
-					if (comboboxRegisterer.getSelectedItem() == null) return;
-					String commandName = ((String) comboboxRegisterer.getSelectedItem()).toLowerCase();
+					if (comboboxCommand.getSelectedItem() == null) return;
+					String commandName = ((String) comboboxCommand.getSelectedItem()).toLowerCase();
 					Command[] commands = Registerer.getCommandArray();
 
 					for (int i = 0; i < commands.length; i++)
@@ -156,8 +156,8 @@ public class PanelCommandSelection extends JPanel
 							{
 								names[j] = commands[j].getId();
 							}
-							comboboxRegisterer.setModel(new JComboBox<String>(names).getModel());
-							comboboxRegisterer.setSelectedIndex(i);
+							comboboxCommand.setModel(new JComboBox<String>(names).getModel());
+							comboboxCommand.setSelectedIndex(i);
 						}
 					}
 
@@ -174,7 +174,7 @@ public class PanelCommandSelection extends JPanel
 					if (commands[i].getId().contains(name)) matchingNames.add(commands[i].getId());
 				}
 
-				comboboxRegisterer.setModel(new JComboBox<String>(matchingNames.toArray(new String[matchingNames.size()])).getModel());
+				comboboxCommand.setModel(new JComboBox<String>(matchingNames.toArray(new String[matchingNames.size()])).getModel());
 			}
 
 			@Override
@@ -191,13 +191,14 @@ public class PanelCommandSelection extends JPanel
 		{
 			names[j] = commands[j].getId();
 		}
-		comboboxRegisterer = new JComboBox<String>(names);
-		comboboxRegisterer.setPreferredSize(new Dimension(300, 20));
-		comboboxRegisterer.addActionListener(new ActionListener() {
+		
+		comboboxCommand = new JComboBox<String>(names);
+		comboboxCommand.setPreferredSize(new Dimension(300, 20));
+		comboboxCommand.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				CommandGenerator.opt.selectedCommand = Registerer.getCommandFromId((String) comboboxRegisterer.getSelectedItem());
+				CommandGenerator.opt.selectedCommand = Registerer.getCommandFromId((String) comboboxCommand.getSelectedItem());
 				Command[] commands = Registerer.getCommandArray();
 
 				String[] names = new String[commands.length];
@@ -205,10 +206,10 @@ public class PanelCommandSelection extends JPanel
 				{
 					names[j] = commands[j].getId();
 				}
-				comboboxRegisterer.setModel(new JComboBox<String>(names).getModel());
-				comboboxRegisterer.setSelectedItem(CommandGenerator.opt.selectedCommand.getId());
+				comboboxCommand.setModel(new JComboBox<String>(names).getModel());
+				comboboxCommand.setSelectedItem(CommandGenerator.opt.selectedCommand.getId());
 				textfieldSearchbar.setText("");
-				textareaStructure.setText(Resources.structureList[comboboxRegisterer.getSelectedIndex()]);
+				textareaStructure.setText(Resources.structureList[comboboxCommand.getSelectedIndex()]);
 				DisplayHelper.log("Setting up /" + CommandGenerator.opt.selectedCommand.getId());
 				setOptionsPanel(CommandGenerator.opt.selectedCommand.getOptionsPanel());
 			}
@@ -229,7 +230,7 @@ public class PanelCommandSelection extends JPanel
 		gbc.gridheight = 1;
 		add(textfieldSearchbar, gbc);
 		gbc.gridy++;
-		add(comboboxRegisterer, gbc);
+		add(comboboxCommand, gbc);
 		gbc.gridx++;
 		gbc.gridheight = 2;
 		if (main) add(checkboxEdit, gbc);
@@ -290,7 +291,7 @@ public class PanelCommandSelection extends JPanel
 			return;
 		}
 		CommandGenerator.opt.selectedCommand = selected;
-		comboboxRegisterer.setSelectedItem(CommandGenerator.opt.selectedCommand.getId());
+		comboboxCommand.setSelectedItem(CommandGenerator.opt.selectedCommand.getId());
 
 		OptionsPanel panelNew = selected.getOptionsPanel();
 		Map<String, Object> data = selected.generateSetup(field.getText());
@@ -326,7 +327,7 @@ public class PanelCommandSelection extends JPanel
 
 	public void setSelectedCommand(Command command)
 	{
-		comboboxRegisterer.setSelectedItem(command.getId());
+		comboboxCommand.setSelectedItem(command.getId());
 		setOptionsPanel(command.getOptionsPanel());
 	}
 
