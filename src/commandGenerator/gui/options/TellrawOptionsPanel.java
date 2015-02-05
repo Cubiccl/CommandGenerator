@@ -2,7 +2,7 @@ package commandGenerator.gui.options;
 
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.TagList;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.dataTag.ListSelectionPanel;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
@@ -12,7 +12,7 @@ public class TellrawOptionsPanel extends OptionsPanel
 {
 
 	private ListSelectionPanel panelJson;
-	private EntitySelectionPanel panelPlayer;
+	private TargetSelectionPanel panelPlayer;
 
 	public TellrawOptionsPanel()
 	{
@@ -29,7 +29,7 @@ public class TellrawOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelPlayer = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
 		panelJson = new ListSelectionPanel("GUI:json.text", CGConstants.OBJECT_JSON);
 	}
 

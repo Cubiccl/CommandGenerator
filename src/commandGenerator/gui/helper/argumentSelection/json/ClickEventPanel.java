@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.argumentSelection.json;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -39,7 +38,6 @@ public class ClickEventPanel extends HelperPanel
 		entryText = new CEntry(CGConstants.DATAID_NONE, "GUI:json.click.url");
 
 		comboboxAction = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:json.click", 3);
-		comboboxAction.setPreferredSize(new Dimension(200, 20));
 	}
 
 	@Override

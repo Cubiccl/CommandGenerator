@@ -3,7 +3,7 @@ package commandGenerator.gui.options;
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
@@ -12,7 +12,7 @@ public class SpawnpointOptionsPanel extends OptionsPanel
 {
 
 	private CoordSelectionPanel panelCoords;
-	private EntitySelectionPanel panelEntity;
+	private TargetSelectionPanel panelEntity;
 
 	public SpawnpointOptionsPanel()
 	{
@@ -29,7 +29,7 @@ public class SpawnpointOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_ALL);
+		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_ALL);
 		panelCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:spawnpoint.coords", false, false);
 	}
 

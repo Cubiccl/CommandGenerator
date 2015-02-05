@@ -54,8 +54,11 @@ public class CComboBox extends JPanel implements CComponent
 			public void keyTyped(KeyEvent arg0)
 			{}
 		});
+		text.setPreferredSize(new Dimension(200, 20));
+		text.setMinimumSize(new Dimension(200, 20));
 
 		label = new CLabel(title);
+
 		box = new JComboBox<String>(names);
 		box.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
@@ -64,11 +67,11 @@ public class CComboBox extends JPanel implements CComponent
 			}
 		});
 		box.setPreferredSize(new Dimension(200, 20));
+		box.setMinimumSize(new Dimension(200, 20));
+
 		this.objects = objects;
 		this.parent = parent;
 		this.id = id;
-
-		setPreferredSize(new Dimension(310, 60));
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
@@ -80,6 +83,9 @@ public class CComboBox extends JPanel implements CComponent
 		add(text, gbc);
 		gbc.gridy++;
 		add(box, gbc);
+
+		setPreferredSize(new Dimension(label.getPreferredSize().width + 202, 42));
+		setMinimumSize(new Dimension(label.getPreferredSize().width + 202, 42));
 	}
 
 	private void boxSelect()

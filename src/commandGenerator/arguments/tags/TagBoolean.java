@@ -20,6 +20,7 @@ public class TagBoolean extends Tag
 		value = false;
 
 		combobox = new JComboBox<String>(new String[] { Lang.get("GENERAL:true"), Lang.get("GENERAL:false") });
+		combobox.setMinimumSize(new Dimension(200, 20));
 		combobox.setPreferredSize(new Dimension(200, 20));
 		label = new JLabel();
 		panel.add(label, gbc);

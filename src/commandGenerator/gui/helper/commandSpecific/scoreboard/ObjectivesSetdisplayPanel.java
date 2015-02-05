@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.commandSpecific.scoreboard;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -45,7 +44,6 @@ public class ObjectivesSetdisplayPanel extends ScoreboardPanel
 		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective");
 
 		comboboxDisplay = new LangComboBox(CGConstants.DATAID_VALUE, "RESOURCES:scoreboard.slot", 19);
-		comboboxDisplay.setPreferredSize(new Dimension(200, 20));
 	}
 
 	@Override

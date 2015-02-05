@@ -8,8 +8,8 @@ import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Particle;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ParticleSelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
@@ -20,7 +20,7 @@ public class ParticleOptionsPanel extends OptionsPanel
 
 	private CCheckBox checkBoxEntity;
 	private CoordSelectionPanel panelCoord1, panelCoord2;
-	private EntitySelectionPanel panelEntity;
+	private TargetSelectionPanel panelEntity;
 	private ParticleSelectionPanel panelParticle;
 
 	public ParticleOptionsPanel()
@@ -46,7 +46,7 @@ public class ParticleOptionsPanel extends OptionsPanel
 		panelParticle = new ParticleSelectionPanel("GUI:particle");
 		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:particle.start", true, false);
 		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:particle.end", true, false);
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 		panelEntity.setEnabled(false);
 		panelEntity.setEnabledContent(false);
 	}

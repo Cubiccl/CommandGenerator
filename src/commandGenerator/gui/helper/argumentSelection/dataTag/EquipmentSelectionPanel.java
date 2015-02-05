@@ -35,8 +35,6 @@ public class EquipmentSelectionPanel extends HelperPanel
 	public EquipmentSelectionPanel(String title)
 	{
 		super(CGConstants.DATAID_NONE, title);
-
-		equipment = new ItemStack[] { null, null, null, null, null };
 	}
 
 	@Override
@@ -61,6 +59,8 @@ public class EquipmentSelectionPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
+		equipment = new ItemStack[] { null, null, null, null, null };
+		
 		buttonAddHand = new CButton("GUI:equipment.add.hand");
 		buttonAddFeet = new CButton("GUI:equipment.add.feet");
 		buttonAddLegs = new CButton("GUI:equipment.add.legs");
@@ -74,11 +74,12 @@ public class EquipmentSelectionPanel extends HelperPanel
 
 		editorpane = new JEditorPane("text/html", "");
 		editorpane.setEditable(false);
-		editorpane.setPreferredSize(new Dimension(200, 120));
 		displayItems();
 
 		scrollpane = new JScrollPane(editorpane);
 		scrollpane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
+		scrollpane.setPreferredSize(new Dimension(200, 120));
+		scrollpane.setMinimumSize(new Dimension(200, 120));
 	}
 
 	@Override

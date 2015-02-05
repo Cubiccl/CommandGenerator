@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.argumentSelection;
 
-import java.awt.Dimension;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
@@ -49,7 +48,6 @@ public class EnchantSelectionPanel extends HelperPanel implements IBox
 		spinnerLevel.setVisible(limited);
 
 		comboboxEnchant = new CComboBox(CGConstants.DATAID_NONE, "GUI:enchant.choose", Registerer.getObjectList(CGConstants.OBJECT_ENCHANT), this);
-		comboboxEnchant.setPreferredSize(new Dimension(390, 50));
 	}
 
 	@Override

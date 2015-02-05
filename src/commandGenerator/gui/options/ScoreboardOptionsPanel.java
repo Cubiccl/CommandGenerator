@@ -1,6 +1,5 @@
 package commandGenerator.gui.options;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -60,9 +59,7 @@ public class ScoreboardOptionsPanel extends OptionsPanel
 		buttonHelp = new JButton("?");
 
 		comboboxMode1 = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:scoreboard.mode", 3);
-		comboboxMode1.setPreferredSize(new Dimension(200, 20));
 		comboboxMode2 = new LangComboBox(CGConstants.DATAID_MODE2, "RESOURCES:scoreboard.mode.objectives", 3);
-		comboboxMode2.setPreferredSize(new Dimension(200, 20));
 
 		panelScore = new ObjectivesAddPanel();
 	}

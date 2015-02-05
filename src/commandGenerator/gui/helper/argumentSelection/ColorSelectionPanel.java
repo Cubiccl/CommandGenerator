@@ -2,10 +2,8 @@ package commandGenerator.gui.helper.argumentSelection;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -19,8 +17,6 @@ import commandGenerator.main.CGConstants;
 @SuppressWarnings("serial")
 public class ColorSelectionPanel extends HelperPanel
 {
-
-	private GridBagConstraints gbc = new GridBagConstraints();
 	private JLabel labelColor;
 	private CLabel labelRed, labelGreen, labelBlue;
 	private JPanel panelColor;
@@ -34,29 +30,10 @@ public class ColorSelectionPanel extends HelperPanel
 	@Override
 	protected void addComponents()
 	{
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(labelRed);
-		gbc.gridy++;
-		add(labelGreen);
-		gbc.gridy++;
-		add(labelBlue);
-		gbc.gridy++;
-		add(Box.createGlue());
-
-		gbc.gridx++;
-		gbc.gridy = 0;
-		add(sliderRed);
-		gbc.gridy++;
-		add(sliderGreen);
-		gbc.gridy++;
-		add(sliderBlue);
-
-		gbc.gridx++;
-		gbc.gridy = 0;
-		gbc.gridheight = 4;
+		addLine(labelRed, sliderRed);
+		addLine(labelGreen, sliderGreen);
+		addLine(labelBlue, sliderBlue);
 		add(panelColor);
-		gbc.gridheight = 1;
 	}
 
 	@Override
@@ -71,8 +48,13 @@ public class ColorSelectionPanel extends HelperPanel
 		sliderGreen = new JSlider(0, 255);
 		sliderBlue = new JSlider(0, 255);
 
+		sliderRed.setPreferredSize(new Dimension(100, 20));
+		sliderGreen.setPreferredSize(new Dimension(100, 20));
+		sliderBlue.setPreferredSize(new Dimension(100, 20));
+
 		panelColor = new JPanel();
 		panelColor.setPreferredSize(new Dimension(150, 150));
+		panelColor.setMinimumSize(new Dimension(150, 150));
 		panelColor.setBackground(new Color(sliderRed.getValue(), sliderGreen.getValue(), sliderBlue.getValue()));
 		panelColor.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		panelColor.add(labelColor);

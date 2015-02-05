@@ -25,6 +25,7 @@ public class CButton extends JButton implements CComponent
 		this.id = id;
 		this.lang = lang;
 		setPreferredSize(new Dimension(200, 20));
+		setMinimumSize(new Dimension(140, 20));
 		updateLang();
 	}
 

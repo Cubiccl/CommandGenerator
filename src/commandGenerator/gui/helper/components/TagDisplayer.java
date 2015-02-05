@@ -43,6 +43,7 @@ public class TagDisplayer extends JPanel implements CComponent
 	{
 		super(new GridBagLayout());
 		setPreferredSize(new Dimension(620, 100));
+		setMinimumSize(new Dimension(620, 100));
 		this.tags = tags;
 		this.id = id;
 		values = new ArrayList<Tag>();
@@ -59,13 +60,15 @@ public class TagDisplayer extends JPanel implements CComponent
 		scrollList = new JScrollPane(list);
 		scrollList.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
 		scrollList.setPreferredSize(new Dimension(200, 90));
+		scrollList.setMinimumSize(new Dimension(200, 90));
 
-		editorPane = new JEditorPane("text/html", "YOLO");
+		editorPane = new JEditorPane("text/html", "");
 		editorPane.setEditable(false);
 
 		scrollPane = new JScrollPane(editorPane);
 		scrollPane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
 		scrollPane.setPreferredSize(new Dimension(400, 90));
+		scrollPane.setMinimumSize(new Dimension(400, 90));
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -154,13 +157,6 @@ public class TagDisplayer extends JPanel implements CComponent
 	{
 		tags = nbtTags;
 		updateList(object);
-	}
-
-	public void setSize(int width, int height)
-	{
-		super.setPreferredSize(new Dimension(width, height));
-		scrollList.setPreferredSize(new Dimension((width - 10) / 2, height - 10));
-		scrollPane.setPreferredSize(new Dimension((width - 10) / 2, height - 10));
 	}
 
 	@SuppressWarnings("unchecked")

@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.components;
 
-import java.awt.Component;
 import java.awt.Dimension;
 
 import commandGenerator.main.CGConstants;
@@ -23,9 +22,9 @@ public abstract class OptionsPanel extends HelperPanel implements CComponent
 	public abstract String generateCommand();
 
 	@Override
-	protected void updateSize(Component component)
+	protected void setupSize()
 	{
-		super.updateSize(component);
+		super.setupSize();
 		setPreferredSize(new Dimension(WIDTH, getPreferredSize().height));
 	}
 }

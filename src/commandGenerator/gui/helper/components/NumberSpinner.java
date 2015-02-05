@@ -21,7 +21,7 @@ import commandGenerator.main.CGConstants;
 public class NumberSpinner extends JPanel implements CComponent
 {
 
-	private JButton buttonMax, button0;
+	private JButton buttonMax, buttonMin;
 	private GridBagConstraints gbc = new GridBagConstraints();
 	private String id;
 	private CLabel label;
@@ -35,6 +35,7 @@ public class NumberSpinner extends JPanel implements CComponent
 		label = new CLabel(title);
 		spinner = new JSpinner(new SpinnerNumberModel(min, min, max, 1));
 		spinner.setPreferredSize(new Dimension(200, 20));
+		spinner.setMinimumSize(new Dimension(200, 20));
 		spinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0)
 			{
@@ -44,6 +45,7 @@ public class NumberSpinner extends JPanel implements CComponent
 
 		buttonMax = new JButton("++");
 		buttonMax.setPreferredSize(new Dimension(50, 20));
+		buttonMax.setMinimumSize(new Dimension(50, 20));
 		buttonMax.setFont(new Font(buttonMax.getName(), Font.PLAIN, 8));
 		buttonMax.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
@@ -51,10 +53,11 @@ public class NumberSpinner extends JPanel implements CComponent
 				setMax();
 			}
 		});
-		button0 = new JButton("--");
-		button0.setPreferredSize(new Dimension(50, 20));
-		button0.setFont(new Font(button0.getName(), Font.PLAIN, 8));
-		button0.addActionListener(new ActionListener() {
+		buttonMin = new JButton("--");
+		buttonMin.setPreferredSize(new Dimension(50, 20));
+		buttonMin.setMinimumSize(new Dimension(50, 20));
+		buttonMin.setFont(new Font(buttonMin.getName(), Font.PLAIN, 8));
+		buttonMin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
 				setMin();
@@ -71,7 +74,7 @@ public class NumberSpinner extends JPanel implements CComponent
 		gbc.gridx++;
 		add(spinner);
 		gbc.gridx++;
-		add(button0);
+		add(buttonMin);
 		gbc.gridx++;
 		add(buttonMax);
 	}

@@ -7,7 +7,7 @@ import java.util.Map;
 import javax.swing.JTextField;
 
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
@@ -17,7 +17,7 @@ public class PlayersResetPanel extends ScoreboardPanel
 {
 
 	private CCheckBox checkboxObjective;
-	private EntitySelectionPanel panelEntity;
+	private TargetSelectionPanel panelEntity;
 	private JTextField textfieldObjective;
 
 	public PlayersResetPanel()
@@ -40,7 +40,7 @@ public class PlayersResetPanel extends ScoreboardPanel
 		checkboxObjective = new CCheckBox(CGConstants.DATAID_NONE, "GUI:scoreboard.players.clear.objective");
 		checkboxObjective.setSelected(true);
 
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 	}
 
 	@Override

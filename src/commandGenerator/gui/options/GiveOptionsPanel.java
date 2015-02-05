@@ -3,8 +3,8 @@ package commandGenerator.gui.options;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
@@ -13,7 +13,7 @@ public class GiveOptionsPanel extends OptionsPanel
 {
 
 	private ItemSelectionPanel panelItem;
-	private EntitySelectionPanel panelPlayer;
+	private TargetSelectionPanel panelPlayer;
 
 	public GiveOptionsPanel()
 	{
@@ -30,7 +30,7 @@ public class GiveOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelPlayer = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
 		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:give.item", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
 	}
 

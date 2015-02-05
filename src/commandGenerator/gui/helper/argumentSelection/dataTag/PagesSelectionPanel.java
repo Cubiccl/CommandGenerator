@@ -82,10 +82,12 @@ public class PagesSelectionPanel extends JPanel
 		});
 		scrolllist = new JScrollPane(list);
 		scrolllist.setPreferredSize(new Dimension(100, 120));
+		scrolllist.setMinimumSize(new Dimension(100, 120));
 
 		editorpane = new JEditorPane("text/html", "");
 		scrollpane = new JScrollPane(editorpane);
 		scrollpane.setPreferredSize(new Dimension(300, 120));
+		scrollpane.setMinimumSize(new Dimension(300, 120));
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -128,6 +130,7 @@ public class PagesSelectionPanel extends JPanel
 	{
 		JTextArea area = new JTextArea();
 		area.setPreferredSize(new Dimension(400, 400));
+		area.setMinimumSize(new Dimension(400, 400));
 		if (DisplayHelper.showQuestion(area, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
 		pages.add(area.getText());
 		setupList();

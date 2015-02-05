@@ -1,6 +1,5 @@
 package commandGenerator.gui.options;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -10,7 +9,7 @@ import javax.swing.JComboBox;
 import commandGenerator.arguments.objects.Achievement;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.AchievementSelectionPanel;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
@@ -23,7 +22,7 @@ public class AchievementOptionsPanel extends OptionsPanel
 	private static CCheckBox checkbox;
 	private static JComboBox<String> comboboxMode;
 	private static AchievementSelectionPanel panelAchievement;
-	private static EntitySelectionPanel panelTarget;
+	private static TargetSelectionPanel panelTarget;
 
 	public AchievementOptionsPanel()
 	{
@@ -45,9 +44,8 @@ public class AchievementOptionsPanel extends OptionsPanel
 		checkbox = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:achievement.all");
 
 		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "GUI:achievement.mode", 2);
-		comboboxMode.setPreferredSize(new Dimension(200, 20));
 
-		panelTarget = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelTarget = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
 
 		panelAchievement = new AchievementSelectionPanel();
 	}

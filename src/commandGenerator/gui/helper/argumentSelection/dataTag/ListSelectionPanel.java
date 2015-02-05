@@ -171,6 +171,7 @@ public class ListSelectionPanel extends HelperPanel
 		scrolllist = new JScrollPane(jlist);
 		scrolllist.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
 		scrolllist.setPreferredSize(new Dimension(100, 120));
+		scrolllist.setMinimumSize(new Dimension(100, 120));
 
 		editorpane = new JEditorPane("text/html", "");
 		editorpane.setEditable(false);
@@ -178,6 +179,7 @@ public class ListSelectionPanel extends HelperPanel
 		scrollpane = new JScrollPane(editorpane);
 		scrollpane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
 		scrollpane.setPreferredSize(new Dimension(300, 120));
+		scrollpane.setMinimumSize(new Dimension(300, 120));
 	}
 
 	@Override

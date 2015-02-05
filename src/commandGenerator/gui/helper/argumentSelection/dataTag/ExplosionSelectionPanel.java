@@ -65,14 +65,14 @@ public class ExplosionSelectionPanel extends HelperPanel
 		checkboxTrail = new CCheckBox(CGConstants.DATAID_NONE, "GUI:fireworks.trail");
 
 		comboboxType = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:fireworks", 5);
-		comboboxType.setPreferredSize(new Dimension(200, 20));
 
 		editorpane = new JEditorPane("text/html", "");
 		editorpane.setEditable(false);
-		editorpane.setPreferredSize(new Dimension(200, 120));
 
 		scrollpane = new JScrollPane(editorpane);
 		scrollpane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
+		scrollpane.setPreferredSize(new Dimension(200, 120));
+		scrollpane.setMinimumSize(new Dimension(200, 120));
 	}
 
 	@Override

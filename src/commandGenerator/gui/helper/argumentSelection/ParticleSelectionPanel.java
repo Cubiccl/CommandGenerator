@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.argumentSelection;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -61,10 +60,8 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 
 		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:particle.block", Registerer.getList(CGConstants.LIST_BLOCKS), false);
 		panelBlock.setVisible(false);
-		panelBlock.setPreferredSize(new Dimension(800, 150));
 		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:particle.item", Registerer.getList(CGConstants.LIST_ICONS), false, false);
 		panelItem.setVisible(false);
-		panelItem.setPreferredSize(new Dimension(800, 150));
 	}
 
 	@Override

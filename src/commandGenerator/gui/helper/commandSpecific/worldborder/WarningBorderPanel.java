@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.commandSpecific.worldborder;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -41,7 +40,6 @@ public class WarningBorderPanel extends HelperPanel
 		entryValue = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.warning.distance");
 
 		comboboxMode = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:worldborder.warning.mode", 2);
-		comboboxMode.setPreferredSize(new Dimension(200, 20));
 	}
 
 	@Override

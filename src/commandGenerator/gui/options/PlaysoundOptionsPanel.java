@@ -1,6 +1,5 @@
 package commandGenerator.gui.options;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -9,8 +8,8 @@ import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Sound;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.SoundSelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
@@ -21,7 +20,7 @@ public class PlaysoundOptionsPanel extends OptionsPanel
 
 	private CCheckBox checkboxCoords;
 	private CoordSelectionPanel panelCoords;
-	private EntitySelectionPanel panelPlayer;
+	private TargetSelectionPanel panelPlayer;
 	private SoundSelectionPanel panelSound;
 
 	public PlaysoundOptionsPanel()
@@ -43,9 +42,8 @@ public class PlaysoundOptionsPanel extends OptionsPanel
 	{
 		checkboxCoords = new CCheckBox(CGConstants.DATAID_SOUND_COORDS, "GUI:playsound.usecoords");
 
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelPlayer = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
 		panelCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:playsound.coords", true, false);
-		panelCoords.setPreferredSize(new Dimension(250, 200));
 		panelCoords.setEnabled(false);
 		panelCoords.setEnabledContent(false);
 		panelSound = new SoundSelectionPanel("GENERAL:options");

@@ -54,11 +54,13 @@ public class TextCombobox extends JPanel implements CComponent
 			}
 		});
 		box.setPreferredSize(new Dimension(200, 20));
+		box.setPreferredSize(new Dimension(100, 20));
 		this.names = names;
 		this.parent = parent;
 		this.id = id;
 
 		setPreferredSize(new Dimension(300, 60));
+		setPreferredSize(new Dimension(140, 20));
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
@@ -132,7 +134,6 @@ public class TextCombobox extends JPanel implements CComponent
 		this.names = names;
 		text.setText("");
 		search(null);
-		box.setPreferredSize(new Dimension(200, 20));
 	}
 
 	public void setEnabledContent(boolean enable)

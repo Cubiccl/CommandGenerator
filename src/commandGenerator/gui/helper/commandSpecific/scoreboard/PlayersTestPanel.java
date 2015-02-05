@@ -7,7 +7,7 @@ import java.util.Map;
 import javax.swing.JTextField;
 
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.main.CGConstants;
@@ -19,7 +19,7 @@ public class PlayersTestPanel extends ScoreboardPanel
 
 	private CCheckBox checkboxMax;
 	private CEntry entryObjective, entryScore;
-	private EntitySelectionPanel panelEntity;
+	private TargetSelectionPanel panelEntity;
 	private JTextField textfieldMax;
 
 	public PlayersTestPanel()
@@ -47,7 +47,7 @@ public class PlayersTestPanel extends ScoreboardPanel
 
 		checkboxMax = new CCheckBox(CGConstants.DATAID_NONE, "GUI:scoreboard.score.max");
 
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 	}
 
 	@Override

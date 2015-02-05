@@ -7,7 +7,7 @@ import java.util.Map;
 import javax.swing.JTextField;
 
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
@@ -17,7 +17,7 @@ public class TeamsLeavePanel extends ScoreboardPanel
 {
 
 	private CCheckBox checkboxTeam;
-	private EntitySelectionPanel panelPlayer;
+	private TargetSelectionPanel panelPlayer;
 	private JTextField textfieldTeam;
 
 	public TeamsLeavePanel()
@@ -41,7 +41,7 @@ public class TeamsLeavePanel extends ScoreboardPanel
 		checkboxTeam = new CCheckBox(CGConstants.DATAID_NONE, "GUI:scoreboard.teams.leave");
 		checkboxTeam.setSelected(true);
 
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelPlayer = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 	}
 
 	@Override

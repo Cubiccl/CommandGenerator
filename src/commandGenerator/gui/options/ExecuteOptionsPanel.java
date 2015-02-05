@@ -16,7 +16,7 @@ import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.PanelCommandSelection;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
@@ -30,7 +30,7 @@ public class ExecuteOptionsPanel extends OptionsPanel
 	private BlockSelectionPanel panelBlock;
 	private PanelCommandSelection panelCommand;
 	private CoordSelectionPanel panelCoord, panelCoordDetect;
-	private EntitySelectionPanel panelEntity;
+	private TargetSelectionPanel panelEntity;
 	private String storedCommand;
 
 	public ExecuteOptionsPanel()
@@ -57,7 +57,7 @@ public class ExecuteOptionsPanel extends OptionsPanel
 		panelCoordDetect = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:execute.block_coords", true, false);
 		panelCoordDetect.setEnabledContent(false);
 
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 
 		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:execute.block", Registerer.getList(CGConstants.LIST_BLOCKS), false);
 		panelBlock.setEnabledContent(false);

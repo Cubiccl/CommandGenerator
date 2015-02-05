@@ -11,7 +11,7 @@ import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerNumberModel;
 
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.main.CGConstants;
@@ -22,7 +22,7 @@ public class ReplaceitemEntityPanel extends HelperPanel
 
 	private JComboBox<String> comboboxSlot;
 	private CLabel labelSlot;
-	private EntitySelectionPanel panelEntity;
+	private TargetSelectionPanel panelEntity;
 	private JSpinner spinnerSlot;
 
 	public ReplaceitemEntityPanel()
@@ -47,11 +47,13 @@ public class ReplaceitemEntityPanel extends HelperPanel
 		comboboxSlot = new JComboBox<String>(new String[] { "slot.armor.", "slot.enderchest.", "slot.horse.armor", "slot.horse.chest.", "slot.horse.saddle",
 				"slot.hotbar.", "slot.inventory.", "slot.villager.", "slot.weapon" });
 		comboboxSlot.setPreferredSize(new Dimension(200, 20));
+		comboboxSlot.setMinimumSize(new Dimension(200, 20));
 
 		spinnerSlot = new JSpinner(new SpinnerListModel(new String[] { "feet", "legs", "chest", "head" }));
 		spinnerSlot.setPreferredSize(new Dimension(100, 20));
+		spinnerSlot.setMinimumSize(new Dimension(100, 20));
 
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 	}
 
 	@Override

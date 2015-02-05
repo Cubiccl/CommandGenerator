@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.argumentSelection.json;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -47,7 +46,6 @@ public class HoverEventPanel extends HelperPanel
 	protected void createComponents()
 	{
 		comboboxAction = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:json.hover", 4);
-		comboboxAction.setPreferredSize(new Dimension(200, 20));
 
 		textfieldText = new JTextField(20);
 

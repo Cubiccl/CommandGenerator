@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.argumentSelection;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -57,7 +56,6 @@ public class SoundSelectionPanel extends HelperPanel
 		checkboxOptions = new CCheckBox(CGConstants.DATAID_NONE, "GUI:playsound.advanced");
 
 		comboboxSound = new CComboBox(CGConstants.DATAID_NONE, "GUI:playsound.choose", Registerer.getObjectList(CGConstants.OBJECT_SOUND), null);
-		comboboxSound.setPreferredSize(new Dimension(450, 100));
 	}
 
 	@Override

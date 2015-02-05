@@ -1,7 +1,5 @@
 package commandGenerator.gui.options;
 
-import java.awt.Dimension;
-
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.LangComboBox;
@@ -38,7 +36,6 @@ public class TimeOptionsPanel extends OptionsPanel
 		entryTime = new CEntry(CGConstants.DATAID_VALUE, "GUI:time.time");
 
 		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:time.mode", 2);
-		comboboxMode.setPreferredSize(new Dimension(200, 20));
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.argumentSelection.json;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -10,7 +9,7 @@ import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagString;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.HelperPanel;
@@ -27,7 +26,7 @@ public class JsonSelectionPanel extends HelperPanel
 	private CEntry entryText, entryInsertion;
 	private boolean events;
 	private ClickEventPanel panelClick;
-	private EntitySelectionPanel panelEntity;
+	private TargetSelectionPanel panelEntity;
 	private HoverEventPanel panelHover;
 	private ScoreDisplayPanel panelScore;
 
@@ -70,12 +69,10 @@ public class JsonSelectionPanel extends HelperPanel
 		if (events) checkboxClick = new CCheckBox(CGConstants.DATAID_NONE, "GUI:json.click.use");
 
 		comboboxMode = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:json.mode", 3);
-		comboboxMode.setPreferredSize(new Dimension(200, 20));
 		comboboxColor = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:color", 16);
-		comboboxColor.setPreferredSize(new Dimension(200, 20));
 		comboboxColor.setSelectedIndex(15);
 
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GUI:json.display.entity", CGConstants.ENTITIES_PLAYERS);
+		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GUI:json.display.entity", CGConstants.ENTITIES_PLAYERS);
 		panelEntity.setVisible(false);
 		panelScore = new ScoreDisplayPanel("GUI:json.display.score");
 		panelScore.setVisible(false);

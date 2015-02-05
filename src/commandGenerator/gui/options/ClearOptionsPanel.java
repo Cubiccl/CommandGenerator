@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
@@ -18,7 +18,7 @@ public class ClearOptionsPanel extends OptionsPanel
 
 	private CCheckBox checkboxInventory, checkboxMaxCount;
 	private ItemSelectionPanel panelItem;
-	private EntitySelectionPanel panelPlayer;
+	private TargetSelectionPanel panelPlayer;
 
 	public ClearOptionsPanel()
 	{
@@ -38,8 +38,9 @@ public class ClearOptionsPanel extends OptionsPanel
 	protected void createComponents()
 	{
 		checkboxInventory = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:clear.inventory");
+		checkboxMaxCount = new CCheckBox(CGConstants.DATAID_CLEAR_ITEM, "GUI:clear.items");
 
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelPlayer = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
 		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:clear.item", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
 	}
 
@@ -54,7 +55,6 @@ public class ClearOptionsPanel extends OptionsPanel
 				panelItem.setEnabledContent(!checkboxInventory.isSelected());
 			}
 		});
-		checkboxMaxCount = new CCheckBox(CGConstants.DATAID_CLEAR_ITEM, "GUI:clear.items");
 	}
 
 	@Override

@@ -30,6 +30,7 @@ public class TextSpinner extends JPanel implements CComponent
 		label = new CLabel(title);
 		spinner = new JSpinner(new SpinnerListModel(choices));
 		spinner.setPreferredSize(new Dimension(200, 20));
+		spinner.setMinimumSize(new Dimension(200, 20));
 		spinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0)
 			{

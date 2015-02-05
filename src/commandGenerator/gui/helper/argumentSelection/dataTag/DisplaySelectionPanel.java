@@ -88,6 +88,7 @@ public class DisplaySelectionPanel extends JPanel
 		editorpane = new JEditorPane("text/html", "");
 		editorpane.setEditable(false);
 		editorpane.setPreferredSize(new Dimension(200, 120));
+		editorpane.setMinimumSize(new Dimension(200, 120));
 
 		scrollpane = new JScrollPane(editorpane);
 		scrollpane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
@@ -99,32 +100,32 @@ public class DisplaySelectionPanel extends JPanel
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(textfieldName);
+		add(textfieldName, gbc);
 		gbc.gridx++;
-		add(checkboxName);
+		add(checkboxName, gbc);
 
 		gbc.gridx--;
 		gbc.gridy++;
-		add(textfieldLore);
+		add(textfieldLore, gbc);
 		gbc.gridx++;
-		add(buttonAdd);
+		add(buttonAdd, gbc);
 
 		gbc.gridx--;
 		gbc.gridy++;
-		add(checkboxColor);
+		add(checkboxColor, gbc);
 		gbc.gridx++;
-		add(buttonRemove);
+		add(buttonRemove, gbc);
 
 		gbc.gridx--;
 		gbc.gridy++;
 		gbc.gridwidth = 3;
-		add(panel);
+		add(panel, gbc);
 		gbc.gridwidth = 1;
 
 		gbc.gridx = 2;
 		gbc.gridy = 0;
 		gbc.gridheight = 3;
-		add(scrollpane);
+		add(scrollpane, gbc);
 
 	}
 

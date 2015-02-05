@@ -3,7 +3,7 @@ package commandGenerator.gui.helper.commandSpecific.scoreboard;
 import javax.swing.JTextField;
 
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
@@ -13,7 +13,7 @@ public class TeamsJoinPanel extends ScoreboardPanel
 {
 
 	private CLabel labelTeam;
-	private EntitySelectionPanel panelPlayer;
+	private TargetSelectionPanel panelPlayer;
 	private JTextField textfieldTeam;
 
 	public TeamsJoinPanel()
@@ -35,7 +35,7 @@ public class TeamsJoinPanel extends ScoreboardPanel
 
 		textfieldTeam = new JTextField(15);
 
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelPlayer = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 	}
 
 	@Override

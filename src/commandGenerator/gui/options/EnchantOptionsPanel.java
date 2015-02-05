@@ -3,7 +3,7 @@ package commandGenerator.gui.options;
 import commandGenerator.arguments.objects.Enchantment;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.EnchantSelectionPanel;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
@@ -12,7 +12,7 @@ public class EnchantOptionsPanel extends OptionsPanel
 {
 
 	private EnchantSelectionPanel panelEnchant;
-	private EntitySelectionPanel panelPlayer;
+	private TargetSelectionPanel panelPlayer;
 
 	public EnchantOptionsPanel()
 	{
@@ -29,7 +29,7 @@ public class EnchantOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelPlayer = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
 		panelEnchant = new EnchantSelectionPanel(CGConstants.PANELID_ENCHANT, "GENERAL:enchant", true);
 	}
 

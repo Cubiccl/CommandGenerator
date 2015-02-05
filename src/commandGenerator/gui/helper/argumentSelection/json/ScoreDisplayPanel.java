@@ -7,7 +7,7 @@ import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagString;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.main.CGConstants;
@@ -18,7 +18,7 @@ public class ScoreDisplayPanel extends HelperPanel
 {
 
 	private CEntry entryObjective;
-	private EntitySelectionPanel panelEntity;
+	private TargetSelectionPanel panelEntity;
 
 	public ScoreDisplayPanel(String title)
 	{
@@ -37,7 +37,7 @@ public class ScoreDisplayPanel extends HelperPanel
 	{
 		entryObjective = new CEntry(CGConstants.DATAID_NONE, "GUI:scoreboard.objective");
 
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 	}
 
 	@Override

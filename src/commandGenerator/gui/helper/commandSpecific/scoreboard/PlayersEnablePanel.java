@@ -1,7 +1,7 @@
 package commandGenerator.gui.helper.commandSpecific.scoreboard;
 
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
@@ -11,7 +11,7 @@ public class PlayersEnablePanel extends ScoreboardPanel
 {
 
 	private CEntry entryObjective;
-	private EntitySelectionPanel panelEntity;
+	private TargetSelectionPanel panelEntity;
 
 	public PlayersEnablePanel()
 	{
@@ -30,7 +30,7 @@ public class PlayersEnablePanel extends ScoreboardPanel
 	{
 		entryObjective = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective");
 
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 	}
 
 	@Override

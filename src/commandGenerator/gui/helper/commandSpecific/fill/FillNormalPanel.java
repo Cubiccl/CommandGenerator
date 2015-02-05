@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.commandSpecific.fill;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -48,7 +47,6 @@ public class FillNormalPanel extends HelperPanel
 		buttonHelp = new JButton("?");
 
 		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:fill.mode", 5);
-		comboboxMode.setPreferredSize(new Dimension(200, 20));
 
 		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:fill.start", true, false);
 		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:fill.end", true, false);

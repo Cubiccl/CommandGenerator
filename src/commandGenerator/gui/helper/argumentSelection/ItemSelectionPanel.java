@@ -3,7 +3,6 @@ package commandGenerator.gui.helper.argumentSelection;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.util.Map;
 
 import javax.swing.JLabel;
@@ -45,19 +44,23 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin
 	@Override
 	protected void addComponents()
 	{
-		int rows = 3;
-		if (slot) rows++;
-		JPanel pan1 = new JPanel(new GridLayout(rows, 1));
-		add(comboboxId);
-		add(spinnerDamage);
-		add(spinnerCount);
-		if (slot) add(spinnerSlot);
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		JPanel pan1 = new JPanel(new GridBagLayout());
+		pan1.add(comboboxId, gbc);
+		gbc.gridy++;
+		pan1.add(spinnerDamage, gbc);
+		gbc.gridy++;
+		pan1.add(spinnerCount, gbc);
+		gbc.gridy++;
+		if (slot) pan1.add(spinnerSlot, gbc);
 
 		JPanel pan2 = new JPanel(new GridBagLayout());
-		GridBagConstraints gbc = new GridBagConstraints();
-		add(labelImage, gbc);
+		gbc.gridy = 0;
+		pan2.add(labelImage, gbc);
 		gbc.gridy++;
-		add(labelName, gbc);
+		pan2.add(labelName, gbc);
 
 		addLine(pan1, pan2);
 
@@ -75,17 +78,20 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin
 	{
 		labelImage = new JLabel();
 		labelName = new JLabel();
-		labelName.setPreferredSize(new Dimension(250, 20));
+		labelName.setPreferredSize(new Dimension(20, 20));
+		labelName.setMinimumSize(new Dimension(20, 20));
 
-		comboboxId = new TextCombobox(CGConstants.DATAID_NONE, "GUI:item.id", new String[0], this);
-		spinnerDamage = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:item.damage", 0, 0, this);
+		String[] ids = new String[itemList.length];
+		for (int i = 0; i < ids.length; i++)
+			ids[i] = itemList[i].getId();
+
+		comboboxId = new TextCombobox(CGConstants.DATAID_NONE, "GUI:item.id", ids, this);
+		spinnerDamage = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:item.damage", 0, itemList[0].getMaxDamage(), this);
 		spinnerCount = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:item.count", 1, 64, null);
 		if (slot) spinnerSlot = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:item.slot", 0, 27, null);
 
-		if (withData)
-		{
-			panelData = new NBTTagPanel("GUI:item.nbt", Registerer.getObjectFromId("stone"), DataTags.items);
-		}
+		if (withData) panelData = new NBTTagPanel("GUI:item.nbt", itemList[0], DataTags.items);
+
 	}
 
 	@Override
@@ -160,13 +166,6 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin
 
 		for (int i = 0; i < list.length; i++)
 			this.itemList[i] = (Item) list[i];
-		String[] ids = new String[list.length];
-		for (int i = 0; i < ids.length; i++)
-			ids[i] = list[i].getId();
-		
-		comboboxId.setData(ids);
-
-		updateCombobox();
 	}
 
 	public void setupFrom(Map<String, Object> data)

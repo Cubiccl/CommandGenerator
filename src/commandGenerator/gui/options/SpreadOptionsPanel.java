@@ -1,7 +1,7 @@
 package commandGenerator.gui.options;
 
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.commandSpecific.SpreadPanel;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
@@ -10,7 +10,7 @@ import commandGenerator.main.CGConstants;
 public class SpreadOptionsPanel extends OptionsPanel
 {
 
-	private EntitySelectionPanel panelPlayer;
+	private TargetSelectionPanel panelPlayer;
 	private SpreadPanel panelSpreadOptions;
 
 	public SpreadOptionsPanel()
@@ -29,7 +29,7 @@ public class SpreadOptionsPanel extends OptionsPanel
 	protected void createComponents()
 	{
 		panelSpreadOptions = new SpreadPanel("GENERAL:options");
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelPlayer = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
 	}
 
 	@Override

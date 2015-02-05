@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.commandSpecific.scoreboard;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -9,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.main.CGConstants;
@@ -25,7 +24,7 @@ public class PlayersOperationPanel extends ScoreboardPanel
 	private JComboBox<String> comboboxOperation;
 	private CEntry entryObj1, entryObj2;
 	private CLabel labelOperation;
-	private EntitySelectionPanel panelEntity1, panelEntity2;
+	private TargetSelectionPanel panelEntity1, panelEntity2;
 
 	public PlayersOperationPanel()
 	{
@@ -53,10 +52,9 @@ public class PlayersOperationPanel extends ScoreboardPanel
 		buttonHelp = new JButton("?");
 
 		comboboxOperation = new JComboBox<String>(operationList);
-		comboboxOperation.setPreferredSize(new Dimension(200, 20));
 
-		panelEntity1 = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GUI:scoreboard.player1", CGConstants.ENTITIES_ALL);
-		panelEntity2 = new EntitySelectionPanel(CGConstants.PANELID_TARGET2, "GUI:scoreboard.player2", CGConstants.ENTITIES_ALL);
+		panelEntity1 = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GUI:scoreboard.player1", CGConstants.ENTITIES_ALL);
+		panelEntity2 = new TargetSelectionPanel(CGConstants.PANELID_TARGET2, "GUI:scoreboard.player2", CGConstants.ENTITIES_ALL);
 	}
 
 	@Override

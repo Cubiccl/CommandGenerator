@@ -3,7 +3,7 @@ package commandGenerator.gui.options;
 import commandGenerator.arguments.objects.Effect;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.EffectSelectionPanel;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
@@ -12,7 +12,7 @@ public class EffectOptionsPanel extends OptionsPanel
 {
 
 	private EffectSelectionPanel panelEffect;
-	private EntitySelectionPanel panelEntity;
+	private TargetSelectionPanel panelEntity;
 
 	public EffectOptionsPanel()
 	{
@@ -29,7 +29,7 @@ public class EffectOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 		panelEffect = new EffectSelectionPanel(CGConstants.PANELID_EFFECT, "GENERAL:effect");
 	}
 

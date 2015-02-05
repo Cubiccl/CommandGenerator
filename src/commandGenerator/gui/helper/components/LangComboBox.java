@@ -1,5 +1,6 @@
 package commandGenerator.gui.helper.components;
 
+import java.awt.Dimension;
 import java.util.Map;
 
 import javax.swing.JComboBox;
@@ -27,6 +28,8 @@ public class LangComboBox extends JComboBox<String> implements CComponent
 			names[i] = Lang.get(title + "_" + i);
 		}
 		setModel(new JComboBox<String>(names).getModel());
+		setPreferredSize(new Dimension(200, 20));
+		setMinimumSize(new Dimension(200, 20));
 	}
 
 	@Override

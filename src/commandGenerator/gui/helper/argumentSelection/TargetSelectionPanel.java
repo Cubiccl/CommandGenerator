@@ -35,7 +35,7 @@ import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class EntitySelectionPanel extends HelperPanel
+public class TargetSelectionPanel extends HelperPanel
 {
 
 	public static final String[] selectors = { "x", "y", "z", "dx", "dy", "dz", "r", "rm", "rx", "rxm", "ry", "rym", "m", "c", "l", "lm", "team", "name",
@@ -53,7 +53,7 @@ public class EntitySelectionPanel extends HelperPanel
 	private String[] targets;
 	private JEditorPane textarea;
 
-	public EntitySelectionPanel(String id, String title, int mode)
+	public TargetSelectionPanel(String id, String title, int mode)
 	{
 		super(id, title, mode);
 	}
@@ -222,7 +222,7 @@ public class EntitySelectionPanel extends HelperPanel
 		buttonAdd = new CButton("GUI:selector.add");
 		buttonRemove = new CButton("GUI:selector.remove");
 
-		boxEntities = new JComboBox<String>(new String[0]);
+		boxEntities = new JComboBox<String>(targets);
 		boxSelectors = new JComboBox<String>(selectors);
 
 		textarea = new JEditorPane("text/html", "");
@@ -230,7 +230,8 @@ public class EntitySelectionPanel extends HelperPanel
 		scrollpane = new JScrollPane(textarea);
 		scrollpane.getVerticalScrollBar().setUnitIncrement(20);
 		scrollpane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
-		scrollpane.setPreferredSize(new Dimension(200, 50));
+		scrollpane.setPreferredSize(new Dimension(200, 100));
+		scrollpane.setMinimumSize(new Dimension(200, 100));
 	}
 
 	@Override

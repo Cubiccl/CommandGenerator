@@ -21,11 +21,13 @@ public abstract class HelperPanel extends JPanel implements CComponent
 	/** List containing all of this Panel's elements. */
 	private List<CComponent> components;
 	/** Object to place the elements in the panel. */
-	private GridBagConstraints gbc = new GridBagConstraints();
+	private GridBagConstraints gbc;
 	/** The data ID of this Panel. */
 	private String id;
 	/** The language ID of this Panel's title. */
 	protected String title;
+	
+	private static final int MIN = 20;
 
 	/** A basic JPanel.
 	 * 
@@ -42,15 +44,20 @@ public abstract class HelperPanel extends JPanel implements CComponent
 		super(new GridBagLayout());
 		this.id = id;
 		this.title = title;
-		if (!title.equals("GENERAL:options")) setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Lang.get(title)));
-		setPreferredSize(new Dimension(10, 10));
+		if (!title.equals("GENERAL:options")) setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
+				Lang.get(title)));
+		setPreferredSize(new Dimension(MIN, MIN));
 		components = new ArrayList<CComponent>();
+
+		gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
 
 		if (details.length > 0) setupDetails(details);
 		createComponents();
-		createListeners();
 		addComponents();
-
+		createListeners();
+		setupSize();
 	}
 
 	/** Adds a component to the Panel.
@@ -63,7 +70,6 @@ public abstract class HelperPanel extends JPanel implements CComponent
 
 		gbc.gridy++;
 		if (component instanceof CComponent) components.add((CComponent) component);
-		updateSize(component);
 
 		return this;
 	}
@@ -79,18 +85,25 @@ public abstract class HelperPanel extends JPanel implements CComponent
 	{
 		JPanel panel = new JPanel(new GridBagLayout());
 		GridBagConstraints gbc2 = new GridBagConstraints();
-		gbc2.gridx = -1;
+		gbc2.gridx = 0;
+		gbc2.gridy = 0;
+		int width = MIN, height = MIN;
+
 		for (Component component : components)
 		{
-			gbc2.gridx++;
 			panel.add(component, gbc2);
+			if (component instanceof CComponent) this.components.add((CComponent) component);
+			gbc2.gridx++;
+			if (component.getPreferredSize().height > height) height = component.getPreferredSize().height + MIN;
+			width += component.getPreferredSize().width;
 		}
 
+		panel.setPreferredSize(new Dimension(width, height));
 		add(panel);
 	}
 
 	/** Creates all of this Panel's components. */
-	protected abstract void createComponents();;
+	protected abstract void createComponents();
 
 	/** Creates all of this Panel's components' Listeners. */
 	protected abstract void createListeners();
@@ -133,6 +146,23 @@ public abstract class HelperPanel extends JPanel implements CComponent
 		}
 	}
 
+	/** Sets this Panel's size according to its components. */
+	protected void setupSize()
+	{
+		int width = getPreferredSize().width;
+		int height = getPreferredSize().height;
+
+		for (Component component : getComponents())
+		{
+			if (component.getPreferredSize().width > width) width = component.getPreferredSize().width + MIN;
+			height += component.getPreferredSize().height;
+		}
+
+		setPreferredSize(new Dimension(width, height));
+		setMinimumSize(new Dimension(width, height));
+
+	}
+
 	public void updateLang()
 	{
 		updateTitle();
@@ -142,25 +172,11 @@ public abstract class HelperPanel extends JPanel implements CComponent
 		}
 	}
 
-	/** Updates the height of this Panel when a component is added.
-	 * 
-	 * @param component
-	 *            - <i>Component</i> - The new component. */
-	protected void updateSize(Component component)
-	{
-		int width = getPreferredSize().width;
-		int height = getPreferredSize().height;
-
-		if (component.getPreferredSize().width > width) width = component.getPreferredSize().width + 10;
-		height += component.getPreferredSize().height;
-
-		setPreferredSize(new Dimension(width, height));
-	}
-
 	/** Updates the title when changing language. */
 	protected void updateTitle()
 	{
-		if (!title.equals("GENERAL:options")) setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), Lang.get(title)));
+		if (!title.equals("GENERAL:options")) setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
+				Lang.get(title)));
 	}
 
 }

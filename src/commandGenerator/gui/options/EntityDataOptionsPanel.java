@@ -7,7 +7,7 @@ import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.dataTag.NBTTagPanel;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.CLabel;
@@ -23,7 +23,7 @@ public class EntityDataOptionsPanel extends OptionsPanel implements IBox
 	private String command;
 	private JLabel label;
 	private CLabel labelExplain;
-	private EntitySelectionPanel panelEntity;
+	private TargetSelectionPanel panelEntity;
 	private NBTTagPanel panelEntitydata;
 
 	public EntityDataOptionsPanel(String command)
@@ -49,7 +49,7 @@ public class EntityDataOptionsPanel extends OptionsPanel implements IBox
 
 		comboboxEntity = new CComboBox(CGConstants.DATAID_ENTITY, "GUI:entity.select", Registerer.getObjectList(CGConstants.OBJECT_ENTITY), this);
 
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 		panelEntitydata = new NBTTagPanel("GUI:entity.tags", Entity.player, DataTags.entities);
 	}
 

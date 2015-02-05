@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.argumentSelection.dataTag;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -100,12 +99,6 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 		buttonRemove.setEnabled(enable);
 		buttonHelp.setEnabled(enable);
 		displayer.setEnabledContent(enable);
-	}
-
-	public void setSize(int width, int height)
-	{
-		super.setPreferredSize(new Dimension(width, height));
-		displayer.setSize(width - 50, height - 50);
 	}
 
 	@Override

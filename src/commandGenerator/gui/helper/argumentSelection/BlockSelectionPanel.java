@@ -32,7 +32,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 
 	public BlockSelectionPanel(String id, String title, ObjectBase[] blockList, boolean data)
 	{
-		super(id, title);
+		super(id, title, blockList, data);
 	}
 
 	@Override
@@ -48,13 +48,17 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 	{
 		labelImage = new JLabel();
 		labelName = new JLabel();
-		labelName.setPreferredSize(new Dimension(250, 20));
+		labelName.setPreferredSize(new Dimension(20, 20));
+		labelName.setMinimumSize(new Dimension(20, 20));
 
 		spinnerDamage = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:block.damage", 0, 0, this);
 
-		comboboxId = new TextCombobox(CGConstants.DATAID_NONE, "GUI:block.id", new String[0], this);
+		String[] ids = new String[blockList.length];
+		for (int i = 0; i < ids.length; i++)
+			ids[i] = blockList[i].getId();
+		comboboxId = new TextCombobox(CGConstants.DATAID_NONE, "GUI:block.id", ids, this);
 
-		if (data) panelData = new NBTTagPanel("GUI:tag.block", Registerer.getObjectFromId("air"), DataTags.blocks);
+		if (data) panelData = new NBTTagPanel("GUI:tag.block", blockList[0], DataTags.blocks);
 	}
 
 	@Override
@@ -97,13 +101,6 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 		this.blockList = new Item[list.length];
 		for (int i = 0; i < list.length; i++)
 			this.blockList[i] = (Item) list[i];
-		
-		String[] ids = new String[list.length];
-		for (int i = 0; i < ids.length; i++)
-			ids[i] = list[i].getId();
-		comboboxId.setData(ids);
-
-		updateCombobox();
 	}
 
 	@Override

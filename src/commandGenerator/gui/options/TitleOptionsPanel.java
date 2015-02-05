@@ -1,12 +1,11 @@
 package commandGenerator.gui.options;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.TagList;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.dataTag.ListSelectionPanel;
 import commandGenerator.gui.helper.commandSpecific.TitleDetailsPanel;
 import commandGenerator.gui.helper.components.LangComboBox;
@@ -21,7 +20,7 @@ public class TitleOptionsPanel extends OptionsPanel
 	private LangComboBox comboboxMode;
 	private TitleDetailsPanel panelDetails;
 	private ListSelectionPanel panelJson;
-	private EntitySelectionPanel panelPlayer;
+	private TargetSelectionPanel panelPlayer;
 
 	public TitleOptionsPanel()
 	{
@@ -41,9 +40,8 @@ public class TitleOptionsPanel extends OptionsPanel
 	protected void createComponents()
 	{
 		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:title.mode", 3);
-		comboboxMode.setPreferredSize(new Dimension(200, 20));
 
-		panelPlayer = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelPlayer = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
 		panelDetails = new TitleDetailsPanel("GENERAL:options");
 		panelDetails.setVisible(false);
 		panelJson = new ListSelectionPanel("GUI:title.json", CGConstants.OBJECT_JSON);

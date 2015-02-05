@@ -97,6 +97,9 @@ public class PanelCommandSelection extends JPanel
 					}
 				}
 			});
+			buttonGenerate.setPreferredSize(new Dimension(200, 40));
+			buttonGenerate.setForeground(Color.BLUE);
+			
 			buttonCopy = new CButton("GUI:command.clipboard");
 			buttonCopy.addActionListener(new ActionListener() {
 				@Override
@@ -117,6 +120,7 @@ public class PanelCommandSelection extends JPanel
 					generator();
 				}
 			});
+			buttonGenerator.setPreferredSize(new Dimension(200, 20));
 
 			textfieldCommand = new JTextField();
 			textfieldCommand.setEditable(false);

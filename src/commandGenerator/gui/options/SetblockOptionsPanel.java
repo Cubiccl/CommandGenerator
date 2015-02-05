@@ -1,6 +1,5 @@
 package commandGenerator.gui.options;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -49,7 +48,6 @@ public class SetblockOptionsPanel extends OptionsPanel
 		buttonHelp = new JButton("?");
 
 		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:placeblock.mode", 3);
-		comboboxMode.setPreferredSize(new Dimension(200, 20));
 
 		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:setblock.coords", true, false);
 		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:setblock.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);

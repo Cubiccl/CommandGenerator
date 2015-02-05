@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.argumentSelection.dataTag;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,7 +26,7 @@ public class PatternSelectionPanel extends HelperPanel
 	private CLabel labelColor, labelPattern;
 
 	private JLabel labelImage;
-	private String[] patternIds = { "bs", "ts", "ls", "rs", "ms", "cs", "ss", "drs", "dls", "cr", "sc", "ld", "rd", "hh", "vh", "bl", "br", "tl", "tr", "bt",
+	private static final String[] patternIds = { "bs", "ts", "ls", "rs", "ms", "cs", "ss", "drs", "dls", "cr", "sc", "ld", "rd", "hh", "vh", "bl", "br", "tl", "tr", "bt",
 			"tt", "bts", "tts", "mc", "mr", "bo", "cbo", "bri", "cre", "sku", "flo", "moj", "gra" };
 
 	public PatternSelectionPanel()
@@ -58,9 +57,7 @@ public class PatternSelectionPanel extends HelperPanel
 		}
 
 		comboboxColor = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:color_wool", 16);
-		comboboxColor.setPreferredSize(new Dimension(200, 20));
 		comboboxPattern = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:pattern", patternIds.length);
-		comboboxPattern.setPreferredSize(new Dimension(300, 20));
 	}
 
 	@Override

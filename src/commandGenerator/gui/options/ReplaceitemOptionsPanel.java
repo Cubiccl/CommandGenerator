@@ -1,6 +1,5 @@
 package commandGenerator.gui.options;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -41,7 +40,6 @@ public class ReplaceitemOptionsPanel extends OptionsPanel
 	protected void createComponents()
 	{
 		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:replaceitem.mode", 2);
-		comboboxMode.setPreferredSize(new Dimension(200, 20));
 
 		panelBlock = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:block.coords", true, false);
 		panelEntity = new ReplaceitemEntityPanel();

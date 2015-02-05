@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.commandSpecific.scoreboard;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -46,10 +45,7 @@ public class TeamsOptionPanel extends ScoreboardPanel
 		entryTeam = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.team");
 
 		comboboxMode = new LangComboBox(CGConstants.DATAID_CHECK, "RESOURCES:scoreboard.teams.option", 5);
-		comboboxMode.setPreferredSize(new Dimension(200, 20));
-
 		comboboxValue = new LangComboBox(CGConstants.DATAID_VALUE, "RESOURCES:color", 17);
-		comboboxValue.setPreferredSize(new Dimension(200, 20));
 	}
 
 	@Override

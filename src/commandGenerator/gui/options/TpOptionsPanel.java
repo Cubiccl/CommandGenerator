@@ -10,7 +10,7 @@ import javax.swing.JRadioButton;
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
-import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
@@ -20,7 +20,7 @@ public class TpOptionsPanel extends OptionsPanel
 {
 
 	private static CoordSelectionPanel panelDestinationCoords;
-	private static EntitySelectionPanel panelTarget, panelDestinationEntity;
+	private static TargetSelectionPanel panelTarget, panelDestinationEntity;
 	private static JRadioButton radiobuttonCoords, radiobuttonEntity;
 	private static ButtonGroup radiobuttonGroup;
 
@@ -41,8 +41,8 @@ public class TpOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		panelTarget = new EntitySelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
-		panelDestinationEntity = new EntitySelectionPanel(CGConstants.PANELID_TARGET2, "GUI:tp.destination.entity", CGConstants.ENTITIES_ALL);
+		panelTarget = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelDestinationEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET2, "GUI:tp.destination.entity", CGConstants.ENTITIES_ALL);
 		panelDestinationEntity.setEnabled(false);
 		panelDestinationEntity.setEnabledContent(false);
 		panelDestinationCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:tp.destination.coords", true, true);
