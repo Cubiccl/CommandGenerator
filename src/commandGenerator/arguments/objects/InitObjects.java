@@ -150,7 +150,6 @@ public class InitObjects
 					if (data[0].equals("damage_custom")) create = new ItemData(Boolean.parseBoolean(itemData[0]), Integer.parseInt(itemData[1]), itemData[2],
 							convertMeta(data[1]));
 					else if (data[0].equals("damage")) create.setMaxDamage(data[1]);
-					else if (data[0].equals("gif")) create.setHasGif(data[1]);
 					else if (data[0].equals("durability")) create.setDurability(data[1]);
 				}
 			}

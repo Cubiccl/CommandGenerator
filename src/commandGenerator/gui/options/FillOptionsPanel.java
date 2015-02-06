@@ -1,21 +1,27 @@
 package commandGenerator.gui.options;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Map;
-
-import commandGenerator.gui.helper.commandSpecific.fill.FillNormalPanel;
-import commandGenerator.gui.helper.commandSpecific.fill.FillReplacePanel;
+import commandGenerator.arguments.objects.Coordinates;
+import commandGenerator.arguments.objects.Item;
+import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.tags.TagCompound;
+import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
+import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
+import commandGenerator.gui.helper.components.HelpButton;
+import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
+import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class FillOptionsPanel extends OptionsPanel
+public class FillOptionsPanel extends OptionsPanel implements IBox
 {
+	private static final String[] modes = { "destroy", "hollow", "keep", "outline", "replace" };
 
-	private LangComboBox comboboxMode;
-	private FillNormalPanel panelNormal, panelReplace;
+	private HelpButton buttonHelp;
+	private LangComboBox comboboxMode, comboboxModeFill;
+	private CoordSelectionPanel panelCoordStart, panelCoordEnd;
+	private BlockSelectionPanel panelBlock, panelBlockReplace;
 
 	public FillOptionsPanel()
 	{
@@ -25,53 +31,65 @@ public class FillOptionsPanel extends OptionsPanel
 	@Override
 	protected void addComponents()
 	{
-		add(comboboxMode);
-		add(panelNormal);
-		add(panelReplace);
+		add(comboboxModeFill);
+		addLine(panelCoordStart, panelCoordEnd);
+		addLine(comboboxMode, buttonHelp);
+		add(panelBlock);
+		add(panelBlockReplace);
 	}
 
 	@Override
 	protected void createComponents()
 	{
-		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE2, "RESOURCES:fill.mode2", 2);
+		buttonHelp = new HelpButton(Lang.get("HELP:fill.mode_0"), Lang.get("RESOURCES:fill.mode_0"));
 
-		panelNormal = new FillNormalPanel();
-		panelReplace = new FillReplacePanel();
-		panelReplace.setVisible(false);
+		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:fill.mode", 5);
+		comboboxModeFill = new LangComboBox(CGConstants.DATAID_MODE2, "RESOURCES:fill.mode2", 2);
+		comboboxMode.addListener(this);
+		comboboxModeFill.addListener(this);
+
+		panelCoordStart = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:fill.start", true, false);
+		panelCoordEnd = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:fill.end", true, false);
+
+		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:fill.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);
+		panelBlockReplace = new BlockSelectionPanel(CGConstants.PANELID_ITEM, "GUI:fill.block.replace", Registerer.getList(CGConstants.LIST_BLOCKS), false);
+		panelBlockReplace.setEnabledContent(false);
 	}
 
 	@Override
 	protected void createListeners()
-	{
-		comboboxMode.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				panelNormal.setVisible(comboboxMode.getSelectedIndex() == 0);
-				panelReplace.setVisible(comboboxMode.getSelectedIndex() == 1);
-			}
-		});
-	}
+	{}
 
 	@Override
 	public String generateCommand()
 	{
-		if (comboboxMode.getSelectedIndex() == 0) return panelNormal.generateCommand();
-		else return panelReplace.generateCommand();
+		Coordinates start = panelCoordStart.generateCoord(), end = panelCoordEnd.generateCoord();
+		Item block = panelBlock.generateBlock(), blockReplace = panelBlockReplace.generateBlock();
+
+		if (start == null || end == null) return null;
+
+		String command = "fill " + start.commandStructure() + " " + end.commandStructure() + " " + block.getId() + " " + panelBlock.getDamage() + " ";
+
+		if (comboboxModeFill.getSelectedIndex() == 0)
+		{
+			command += modes[comboboxMode.getSelectedIndex()] + " ";
+			TagCompound tag = panelBlock.getBlockTag();
+			if (!tag.commandStructure().endsWith("{}")) command += tag.commandStructure().substring(tag.getId().length() + 1);
+		}
+
+		else command += "replace " + blockReplace.getId() + " " + panelBlockReplace.getDamage();
+
+		return command;
 	}
 
-	public void setupFrom(Map<String, Object> data)
+	@Override
+	public void updateCombobox()
 	{
-		comboboxMode.setupFrom(data);
-		if (comboboxMode.getSelectedIndex() == 0)
-		{
-			panelNormal.setupFrom(data);
-		} else
-		{
-			panelReplace.setupFrom(data);
-		}
-		panelNormal.setVisible(comboboxMode.getSelectedIndex() == 0);
-		panelReplace.setVisible(comboboxMode.getSelectedIndex() == 1);
+		buttonHelp.setData(Lang.get("HELP:fill.mode_" + comboboxMode.getSelectedIndex()), (String) comboboxMode.getSelectedItem());
+		boolean replace = comboboxModeFill.getSelectedIndex() == 1;
+		comboboxMode.setEnabledContent(!replace);
+		buttonHelp.setEnabledContent(!replace);
+		panelBlockReplace.setEnabledContent(replace);
 	}
 
 }

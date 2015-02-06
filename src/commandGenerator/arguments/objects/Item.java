@@ -17,8 +17,6 @@ public class Item extends ObjectBase
 	public static List<String> durabilityList = new ArrayList<String>();
 	/** This Item's durability. */
 	private int durability;
-	/** True if this Item's texture is an animated Gif. */
-	private boolean hasGif;
 	/** This Item's numerical ID. */
 	private int idNum;
 	/** True if this Item is a Block. */
@@ -33,11 +31,7 @@ public class Item extends ObjectBase
 	 * @param idNum
 	 *            - <i>int</i> - The Item's numerical ID.
 	 * @param idString
-	 *            - <i>String</i> - The Item's text ID.
-	 * @param maxDamage
-	 *            - <i>int</i> - The Item's maximum damage.
-	 * @param hasGif
-	 *            - <i>boolean</i> - Does this Item have an animated image? */
+	 *            - <i>String</i> - The Item's text ID. */
 	public Item(boolean isBlock, int idNum, String idString)
 	{
 		super(idString, CGConstants.OBJECT_ITEM);
@@ -45,7 +39,6 @@ public class Item extends ObjectBase
 		this.idNum = idNum;
 		this.maxDamage = 0;
 		this.durability = 0;
-		this.hasGif = false;
 	}
 
 	/** Returns this Item's durability. */
@@ -105,12 +98,10 @@ public class Item extends ObjectBase
 		if (maxDamage > 0) path += getId() + "/" + Integer.toString(damageToUse);
 		else
 		{
-			if (isBlock) path += "other_blocks/" + getId();
-			else path += "other_items/" + getId();
+			if (isBlock) path += "other_blocks/" + getId() + ".png";
+			else path += "other_items/" + getId() + ".png";
 		}
 
-		if (hasGif) path += ".gif";
-		else path += ".png";
 		try
 		{
 			return new ImageIcon(path);
@@ -119,12 +110,6 @@ public class Item extends ObjectBase
 			DisplayHelper.missingTexture(path);
 			return null;
 		}
-	}
-
-	/** Returns true if this Items has an animated Gif as texture. */
-	public boolean hasGif()
-	{
-		return hasGif;
 	}
 
 	/** Returns true if this Item is a Block. */
@@ -138,12 +123,6 @@ public class Item extends ObjectBase
 	{
 		this.durability = Integer.parseInt(durability);
 		durabilityList.add(this.getId());
-	}
-
-	/** Sets this Item's Gif property */
-	public void setHasGif(String data)
-	{
-		this.hasGif = Boolean.parseBoolean(data);
 	}
 
 	/** Sets this Item's maximum damage. */
