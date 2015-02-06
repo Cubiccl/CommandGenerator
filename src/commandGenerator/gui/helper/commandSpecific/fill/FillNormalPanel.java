@@ -1,28 +1,24 @@
 package commandGenerator.gui.helper.commandSpecific.fill;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
+import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.gui.helper.components.HelperPanel;
+import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.main.CGConstants;
-import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class FillNormalPanel extends HelperPanel
+public class FillNormalPanel extends HelperPanel implements IBox
 {
 
 	private static final String[] modes = { "replace", "destroy", "keep", "hollow", "outline" };
-	protected JButton buttonHelp;
+	protected HelpButton buttonHelp;
 	protected LangComboBox comboboxMode;
 	protected BlockSelectionPanel panelBlock;
 	protected CoordSelectionPanel panelCoord1, panelCoord2;
@@ -44,9 +40,10 @@ public class FillNormalPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		buttonHelp = new JButton("?");
+		buttonHelp = new HelpButton(Lang.get("HELP:fill_0"), Lang.get("RESOURCES:fill.mode_0"));
 
 		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:fill.mode", 5);
+		comboboxMode.addListener(this);
 
 		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:fill.start", true, false);
 		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:fill.end", true, false);
@@ -55,15 +52,7 @@ public class FillNormalPanel extends HelperPanel
 
 	@Override
 	protected void createListeners()
-	{
-		buttonHelp.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				DisplayHelper.showHelp(Lang.get("HELP:fill_" + comboboxMode.getSelectedIndex()), (String) comboboxMode.getSelectedItem());
-			}
-		});
-	}
+	{}
 
 	public String generateCommand()
 	{
@@ -82,6 +71,12 @@ public class FillNormalPanel extends HelperPanel
 				+ tag.commandStructure().substring(tag.getId().length() + 1);
 
 		return command;
+	}
+
+	@Override
+	public void updateCombobox()
+	{
+		buttonHelp.setData(Lang.get("HELP:fill_" + comboboxMode.getSelectedIndex()), (String) comboboxMode.getSelectedItem());
 	}
 
 }

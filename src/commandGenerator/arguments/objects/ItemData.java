@@ -7,7 +7,7 @@ import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
 public class ItemData extends Item
-{// TODO re-do this
+{
 
 	/** List of the damages this Item has. */
 	private int[] damageList;
@@ -21,19 +21,23 @@ public class ItemData extends Item
 	 * @param idString
 	 *            - <i>String</i> - The Item's text ID.
 	 * @param damageList
-	 *            - <i>int[]</i>- The Item's damage list.
-	 * @param hasGif
-	 *            - Does this Item have an animated image? */
+	 *            - <i>int[]</i>- The Item's damage list. */
 	public ItemData(boolean isBlock, int idNum, String idString, int[] damageList)
 	{
 		super(isBlock, idNum, idString);
 		this.damageList = damageList;
 	}
 
+	/** Returns the different damage list. */
+	public int[] getDamageList()
+	{
+		return damageList;
+	}
+
 	@Override
 	public String getName(int damage)
 	{
-		return Lang.get("ITEMS:" + getId() + "_0");
+		return Lang.get("ITEMS:" + getId() + "_" + damage);
 	}
 
 	@Override
@@ -41,17 +45,12 @@ public class ItemData extends Item
 	{
 
 		String path = Resources.folder + "textures/";
-		int damageToUse = 0;
 
 		if (isBlock()) path += "blocks/";
 		else path += "items/";
 
-		if (damage <= getMaxDamage()) damageToUse = damage;
+		path += getId() + "/" + Integer.toString(damage) + ".png";
 
-		path += getId() + "/" + Integer.toString(damageList[damageToUse]);
-
-		if (hasGif()) path += ".gif";
-		else path += ".png";
 		try
 		{
 			return new ImageIcon(path);

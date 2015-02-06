@@ -54,13 +54,13 @@ public class TextCombobox extends JPanel implements CComponent
 			}
 		});
 		box.setPreferredSize(new Dimension(200, 20));
-		box.setPreferredSize(new Dimension(100, 20));
+		box.setMinimumSize(new Dimension(200, 20));
 		this.names = names;
 		this.parent = parent;
 		this.id = id;
 
 		setPreferredSize(new Dimension(300, 60));
-		setPreferredSize(new Dimension(140, 20));
+		setMinimumSize(new Dimension(300, 60));
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;

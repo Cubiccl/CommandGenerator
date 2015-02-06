@@ -1,25 +1,21 @@
 package commandGenerator.gui.options;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.components.CLabel;
+import commandGenerator.gui.helper.components.HelpButton;
+import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
-import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class TestforblocksOptionsPanel extends OptionsPanel
+public class TestforblocksOptionsPanel extends OptionsPanel implements IBox
 {
 
 	private static final String[] modes = { "masked", "all" };
-	private JButton buttonHelp;
+	private HelpButton buttonHelp;
 	private LangComboBox comboboxMode;
 	private CLabel labelMode;
 	private CoordSelectionPanel panelCoord1, panelCoord2, panelCoordDest;
@@ -44,9 +40,10 @@ public class TestforblocksOptionsPanel extends OptionsPanel
 
 		labelMode = new CLabel("GUI:testforblocks.mode");
 
-		buttonHelp = new JButton("?");
+		buttonHelp = new HelpButton(Lang.get("HELP:testforblocks_0"), Lang.get("RESOURCES:testforblocks.mode_0"));
 
 		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:testforblocks.mode", 2);
+		comboboxMode.addListener(this);
 
 		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:testforblocks.start", true, false);
 		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:testforblocks.end", true, false);
@@ -55,15 +52,7 @@ public class TestforblocksOptionsPanel extends OptionsPanel
 
 	@Override
 	protected void createListeners()
-	{
-		buttonHelp.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				DisplayHelper.showHelp(Lang.get("HELP:testforblocks_" + comboboxMode.getSelectedIndex()), (String) comboboxMode.getSelectedItem());
-			}
-		});
-	}
+	{}
 
 	@Override
 	public String generateCommand()
@@ -77,6 +66,12 @@ public class TestforblocksOptionsPanel extends OptionsPanel
 
 		return "clone " + coord1.commandStructure() + " " + coord2.commandStructure() + " " + coordDestination.commandStructure() + " "
 				+ modes[comboboxMode.getSelectedIndex()];
+	}
+
+	@Override
+	public void updateCombobox()
+	{
+		buttonHelp.setData(Lang.get("HELP:testforblocks_" + comboboxMode.getSelectedIndex()), (String) comboboxMode.getSelectedItem());
 	}
 
 }

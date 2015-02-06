@@ -42,8 +42,6 @@ public class TagDisplayer extends JPanel implements CComponent
 	public TagDisplayer(String id, Tag[] tags)
 	{
 		super(new GridBagLayout());
-		setPreferredSize(new Dimension(620, 100));
-		setMinimumSize(new Dimension(620, 100));
 		this.tags = tags;
 		this.id = id;
 		values = new ArrayList<Tag>();
@@ -75,6 +73,9 @@ public class TagDisplayer extends JPanel implements CComponent
 		add(scrollList, gbc);
 		gbc.gridx++;
 		add(scrollPane, gbc);
+		
+		setPreferredSize(new Dimension(620, 100));
+		setMinimumSize(new Dimension(620, 100));
 	}
 
 	public void add()
@@ -123,6 +124,7 @@ public class TagDisplayer extends JPanel implements CComponent
 	{
 		if (tags.length == 0) return;
 		Tag tag = getSelected();
+		if (tag == null) return;
 		DisplayHelper.showHelp(tag.getDescription(), tag.getName());
 	}
 

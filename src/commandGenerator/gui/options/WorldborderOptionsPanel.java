@@ -4,24 +4,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
-import javax.swing.JButton;
-
 import commandGenerator.gui.helper.commandSpecific.worldborder.AddBorderPanel;
 import commandGenerator.gui.helper.commandSpecific.worldborder.CenterBorderPanel;
 import commandGenerator.gui.helper.commandSpecific.worldborder.DamageBorderPanel;
 import commandGenerator.gui.helper.commandSpecific.worldborder.WarningBorderPanel;
+import commandGenerator.gui.helper.components.HelpButton;
+import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
-import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class WorldborderOptionsPanel extends OptionsPanel
+public class WorldborderOptionsPanel extends OptionsPanel implements IBox
 {
 
 	private static final String[] modes = { "add", "center", "damage", "set", "warning" };
-	private JButton buttonHelp;
+	private HelpButton buttonHelp;
 	private LangComboBox comboboxMode;
 	private AddBorderPanel panelAdd, panelSet;
 	private CenterBorderPanel panelCenter;
@@ -47,9 +46,10 @@ public class WorldborderOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		buttonHelp = new JButton("?");
+		buttonHelp = new HelpButton(Lang.get("HELP:worldborder_0"), Lang.get("RESOURCES:worldborder.mode_0"));
 
 		comboboxMode = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:worldborder.mode", 5);
+		comboboxMode.addListener(this);
 
 		panelAdd = new AddBorderPanel(true);
 		panelCenter = new CenterBorderPanel();
@@ -65,14 +65,6 @@ public class WorldborderOptionsPanel extends OptionsPanel
 	@Override
 	protected void createListeners()
 	{
-		buttonHelp.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				DisplayHelper.showHelp(Lang.get("HELP:worldborder_" + comboboxMode.getSelectedIndex()), (String) comboboxMode.getSelectedItem());
-			}
-		});
-
 		comboboxMode.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -128,6 +120,12 @@ public class WorldborderOptionsPanel extends OptionsPanel
 			default:
 				break;
 		}
+	}
+
+	@Override
+	public void updateCombobox()
+	{
+		buttonHelp.setData(Lang.get("HELP:worldborder_" + comboboxMode.getSelectedIndex()), (String) comboboxMode.getSelectedItem());
 	}
 
 }

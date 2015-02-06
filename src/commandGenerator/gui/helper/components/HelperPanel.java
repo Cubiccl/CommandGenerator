@@ -99,6 +99,7 @@ public abstract class HelperPanel extends JPanel implements CComponent
 		}
 
 		panel.setPreferredSize(new Dimension(width, height));
+		panel.setMinimumSize(new Dimension(width, height));
 		add(panel);
 	}
 
@@ -154,7 +155,8 @@ public abstract class HelperPanel extends JPanel implements CComponent
 
 		for (Component component : getComponents())
 		{
-			if (component.getPreferredSize().width > width) width = component.getPreferredSize().width + MIN;
+			if (component.getPreferredSize().width >= width) width = component.getPreferredSize().width + MIN;
+			if (component.getMinimumSize().width >= width-MIN) width = component.getMinimumSize().width + MIN;
 			height += component.getPreferredSize().height;
 		}
 

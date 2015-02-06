@@ -4,24 +4,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
-import javax.swing.JButton;
-
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.objects.Sound;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.CEntry;
+import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.gui.helper.components.HelperPanel;
+import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class SoundSelectionPanel extends HelperPanel
+public class SoundSelectionPanel extends HelperPanel implements IBox
 {
 
-	private JButton buttonHelpSound;
+	private HelpButton buttonHelpSound;
 	private CCheckBox checkboxOptions;
 	private CComboBox comboboxSound;
 	private CEntry entryVolume, entryPitch, entryVolumeMin;
@@ -51,23 +51,17 @@ public class SoundSelectionPanel extends HelperPanel
 		entryVolumeMin = new CEntry(CGConstants.DATAID_NONE, "GUI:playsound.volume_min");
 		entryVolumeMin.setEnabledContent(false);
 
-		buttonHelpSound = new JButton("?");
+		ObjectBase[] list = Registerer.getObjectList(CGConstants.OBJECT_SOUND);
+		buttonHelpSound = new HelpButton(Lang.get("HELP:sound." + list[0].getId()), list[0].getId());
 
 		checkboxOptions = new CCheckBox(CGConstants.DATAID_NONE, "GUI:playsound.advanced");
 
-		comboboxSound = new CComboBox(CGConstants.DATAID_NONE, "GUI:playsound.choose", Registerer.getObjectList(CGConstants.OBJECT_SOUND), null);
+		comboboxSound = new CComboBox(CGConstants.DATAID_NONE, "GUI:playsound.choose", list, this);
 	}
 
 	@Override
 	protected void createListeners()
 	{
-		buttonHelpSound.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				DisplayHelper.showHelp(Lang.get("HELP:sound." + comboboxSound.getValue().getId()), comboboxSound.getValue().getName());
-			}
-		});
 		checkboxOptions.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -137,6 +131,12 @@ public class SoundSelectionPanel extends HelperPanel
 		entryVolumeMin.updateLang();
 		checkboxOptions.updateLang();
 		comboboxSound.updateLang();
+	}
+
+	@Override
+	public void updateCombobox()
+	{
+		buttonHelpSound.setData(Lang.get("HELP:sound." + comboboxSound.getValue().getId()), comboboxSound.getValue().getName());
 	}
 
 }

@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import commandGenerator.arguments.objects.Item;
+import commandGenerator.arguments.objects.ItemData;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registerer;
@@ -77,9 +78,11 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin
 	protected void createComponents()
 	{
 		labelImage = new JLabel();
-		labelName = new JLabel();
-		labelName.setPreferredSize(new Dimension(20, 20));
-		labelName.setMinimumSize(new Dimension(20, 20));
+		labelImage.setPreferredSize(new Dimension(40, 40));
+		labelImage.setMinimumSize(new Dimension(40, 40));
+		labelName = new JLabel("", JLabel.CENTER);
+		labelName.setPreferredSize(new Dimension(200, 20));
+		labelName.setMinimumSize(new Dimension(200, 20));
 
 		String[] ids = new String[itemList.length];
 		for (int i = 0; i < ids.length; i++)
@@ -87,6 +90,7 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin
 
 		comboboxId = new TextCombobox(CGConstants.DATAID_NONE, "GUI:item.id", ids, this);
 		spinnerDamage = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:item.damage", 0, itemList[0].getMaxDamage(), this);
+		if (itemList[0] instanceof ItemData) spinnerDamage.setData(((ItemData) itemList[0]).getDamageList());
 		spinnerCount = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:item.count", 1, 64, null);
 		if (slot) spinnerSlot = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:item.slot", 0, 27, null);
 
@@ -189,7 +193,8 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin
 	public void updateCombobox()
 	{
 		Item item = generateItem();
-		spinnerDamage.setValues(0, item.getMaxDamage());
+		if (item instanceof ItemData) spinnerDamage.setData(((ItemData) item).getDamageList());
+		else spinnerDamage.setValues(0, item.getMaxDamage());
 		if (item.getDurability() > 0) spinnerDamage.setValues(0, item.getDurability());
 		if (withData) panelData.updateCombobox(item);
 		labelImage.setIcon(item.getTexture(spinnerDamage.getValue()));

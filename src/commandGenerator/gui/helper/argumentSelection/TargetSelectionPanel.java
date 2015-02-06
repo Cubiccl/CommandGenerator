@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
@@ -29,6 +28,7 @@ import commandGenerator.gui.helper.components.CButton;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
+import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
@@ -44,7 +44,7 @@ public class TargetSelectionPanel extends HelperPanel
 	private List<String[]> addedSelectors;
 	private JComboBox<String> boxEntities, boxSelectors;
 	private CButton buttonAdd, buttonRemove;
-	private JButton buttonHelpEntity, buttonHelpSelector;
+	private HelpButton buttonHelpEntity, buttonHelpSelector;
 	private CEntry entryPlayer;
 	private GridBagConstraints gbc = new GridBagConstraints();
 	private CLabel labelSelectors, labelEntity, labelSelector;
@@ -216,14 +216,18 @@ public class TargetSelectionPanel extends HelperPanel
 		entryPlayer = new CEntry(CGConstants.DATAID_NONE, "GUI:player.name");
 		entryPlayer.setEnabledContent(false);
 
-		buttonHelpEntity = new JButton("?");
-		buttonHelpSelector = new JButton("?");
+		buttonHelpEntity = new HelpButton(Lang.get("HELP:selector." + targets[0]), targets[0]);
+		buttonHelpSelector = new HelpButton(Lang.get("HELP:selector.x"), "x");
 
 		buttonAdd = new CButton("GUI:selector.add");
 		buttonRemove = new CButton("GUI:selector.remove");
 
 		boxEntities = new JComboBox<String>(targets);
+		boxEntities.setPreferredSize(new Dimension(100, 20));
+		boxEntities.setMinimumSize(new Dimension(100, 20));
 		boxSelectors = new JComboBox<String>(selectors);
+		boxSelectors.setPreferredSize(new Dimension(100, 20));
+		boxSelectors.setMinimumSize(new Dimension(100, 20));
 
 		textarea = new JEditorPane("text/html", "");
 		textarea.setEditable(false);
@@ -237,20 +241,6 @@ public class TargetSelectionPanel extends HelperPanel
 	@Override
 	protected void createListeners()
 	{
-		buttonHelpEntity.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
-				DisplayHelper.showHelp(Lang.get("HELP:selector." + boxEntities.getSelectedItem()),
-						Lang.get("HELP:title").replaceAll("<name>", (String) boxEntities.getSelectedItem()));
-			}
-		});
-		buttonHelpSelector.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
-				DisplayHelper.showHelp(Lang.get("HELP:selector." + boxSelectors.getSelectedItem()),
-						Lang.get("HELP:title").replaceAll("<name>", (String) boxSelectors.getSelectedItem()));
-			}
-		});
 		buttonAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
 			{
@@ -276,6 +266,14 @@ public class TargetSelectionPanel extends HelperPanel
 				textarea.setEnabled(!player);
 				if (player) scrollpane.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 				else scrollpane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
+
+				buttonHelpEntity.setData(Lang.get("HELP:selector." + boxEntities.getSelectedItem()), (String) boxEntities.getSelectedItem());
+			}
+		});
+		boxSelectors.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				buttonHelpSelector.setData(Lang.get("HELP:selector." + boxSelectors.getSelectedItem()), (String) boxSelectors.getSelectedItem());
 			}
 		});
 	}

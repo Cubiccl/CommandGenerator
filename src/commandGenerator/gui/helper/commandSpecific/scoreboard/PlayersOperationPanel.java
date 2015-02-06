@@ -4,13 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
+import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
@@ -20,7 +20,7 @@ public class PlayersOperationPanel extends ScoreboardPanel
 {
 	public static final String[] operationList = { "+=", "-=", "*=", "/=", "%=", "=", "<", ">", "><" };
 
-	private JButton buttonHelp;
+	private HelpButton buttonHelp;
 	private JComboBox<String> comboboxOperation;
 	private CEntry entryObj1, entryObj2;
 	private CLabel labelOperation;
@@ -49,7 +49,7 @@ public class PlayersOperationPanel extends ScoreboardPanel
 		entryObj1 = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.operation.player1");
 		entryObj2 = new CEntry(CGConstants.DATAID_NAME2, "GUI:scoreboard.operation.player2");
 
-		buttonHelp = new JButton("?");
+		buttonHelp = new HelpButton(Lang.get("HELP:scoreboard.operation_0"), "+=");
 
 		comboboxOperation = new JComboBox<String>(operationList);
 
@@ -60,12 +60,10 @@ public class PlayersOperationPanel extends ScoreboardPanel
 	@Override
 	protected void createListeners()
 	{
-		buttonHelp.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
+		comboboxOperation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
 			{
-				DisplayHelper.showHelp(Lang.get("HELP:scoreboard.operation_" + comboboxOperation.getSelectedItem()),
-						(String) comboboxOperation.getSelectedItem());
+				buttonHelp.setData(Lang.get("HELP:scoreboard.operation_" + comboboxOperation.getSelectedItem()), (String) comboboxOperation.getSelectedItem());
 			}
 		});
 	}

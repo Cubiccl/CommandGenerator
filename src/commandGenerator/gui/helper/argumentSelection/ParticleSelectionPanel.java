@@ -4,15 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
-import javax.swing.JButton;
 import javax.swing.JTextField;
 
 import commandGenerator.arguments.objects.Item;
+import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Particle;
 import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.CEntry;
+import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.main.CGConstants;
@@ -22,7 +23,7 @@ import commandGenerator.main.DisplayHelper;
 public class ParticleSelectionPanel extends HelperPanel implements IBox
 {
 
-	private JButton buttonHelp;
+	private HelpButton buttonHelp;
 	private CCheckBox checkboxCount;
 	private CComboBox comboboxParticle;
 	private CEntry entrySpeed;
@@ -47,7 +48,8 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 	@Override
 	protected void createComponents()
 	{
-		buttonHelp = new JButton("?");
+		ObjectBase[] list = Registerer.getObjectList(CGConstants.OBJECT_PARTICLE);
+		buttonHelp = new HelpButton(((Particle) list[0]).getDescription(), list[0].getName());
 
 		textfieldCount = new JTextField(15);
 		textfieldCount.setEnabled(false);
@@ -56,7 +58,7 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 
 		checkboxCount = new CCheckBox(CGConstants.DATAID_NONE, "GUI:particle.count");
 
-		comboboxParticle = new CComboBox(CGConstants.PANELID_PARTICLE, "GUI:particle", Registerer.getObjectList(CGConstants.OBJECT_PARTICLE), this);
+		comboboxParticle = new CComboBox(CGConstants.PANELID_PARTICLE, "GUI:particle", list, this);
 
 		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:particle.block", Registerer.getList(CGConstants.LIST_BLOCKS), false);
 		panelBlock.setVisible(false);
@@ -67,13 +69,6 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 	@Override
 	protected void createListeners()
 	{
-		buttonHelp.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				DisplayHelper.showHelp(((Particle) comboboxParticle.getValue()).getDescription(), comboboxParticle.getValue().getName());
-			}
-		});
 		checkboxCount.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -173,6 +168,7 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 	{
 		panelBlock.setVisible(((Particle) comboboxParticle.getValue()).getParticleType() == Particle.BLOCK);
 		panelItem.setVisible(((Particle) comboboxParticle.getValue()).getParticleType() == Particle.ITEM);
+		buttonHelp.setData(((Particle) comboboxParticle.getValue()).getDescription(), comboboxParticle.getValue().getName());
 	}
 
 }

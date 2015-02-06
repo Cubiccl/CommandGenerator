@@ -1,9 +1,12 @@
 package commandGenerator.gui.helper.argumentSelection;
 
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.Map;
 
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
@@ -38,18 +41,40 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 	@Override
 	protected void addComponents()
 	{
-		addLine(comboboxId, labelImage);
-		addLine(spinnerDamage, labelName);
-		if (data) add(panelData);
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		JPanel pan1 = new JPanel(new GridBagLayout());
+		pan1.add(comboboxId, gbc);
+		gbc.gridy++;
+		pan1.add(spinnerDamage, gbc);
+
+		JPanel pan2 = new JPanel(new GridBagLayout());
+		gbc.gridy = 0;
+		pan2.add(labelImage, gbc);
+		gbc.gridy++;
+		pan2.add(labelName, gbc);
+
+		addLine(pan1, pan2);
+
+		if (data)
+		{
+			add(panelData);
+			panelData.updateCombobox((Item) blockList[0]);
+		}
+		
+		updateCombobox();
 	}
 
 	@Override
 	protected void createComponents()
 	{
 		labelImage = new JLabel();
-		labelName = new JLabel();
-		labelName.setPreferredSize(new Dimension(20, 20));
-		labelName.setMinimumSize(new Dimension(20, 20));
+		labelImage.setPreferredSize(new Dimension(40, 40));
+		labelImage.setMinimumSize(new Dimension(40, 40));
+		labelName = new JLabel("", JLabel.CENTER);
+		labelName.setPreferredSize(new Dimension(200, 20));
+		labelName.setMinimumSize(new Dimension(200, 20));
 
 		spinnerDamage = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:block.damage", 0, 0, this);
 

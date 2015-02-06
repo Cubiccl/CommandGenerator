@@ -3,8 +3,6 @@ package commandGenerator.gui.options;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-
 import commandGenerator.gui.helper.commandSpecific.scoreboard.ObjectivesAddPanel;
 import commandGenerator.gui.helper.commandSpecific.scoreboard.ObjectivesRemovePanel;
 import commandGenerator.gui.helper.commandSpecific.scoreboard.ObjectivesSetdisplayPanel;
@@ -22,20 +20,21 @@ import commandGenerator.gui.helper.commandSpecific.scoreboard.TeamsJoinPanel;
 import commandGenerator.gui.helper.commandSpecific.scoreboard.TeamsLeavePanel;
 import commandGenerator.gui.helper.commandSpecific.scoreboard.TeamsOptionPanel;
 import commandGenerator.gui.helper.commandSpecific.scoreboard.TeamsRemovePanel;
+import commandGenerator.gui.helper.components.HelpButton;
+import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
-import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class ScoreboardOptionsPanel extends OptionsPanel
+public class ScoreboardOptionsPanel extends OptionsPanel implements IBox
 {
 
 	private static final String[][] scoreboardModes = { { "objectives", "add", "remove", "setdisplay" },
 			{ "players", "set", "add", "remove", "reset", "enable", "test", "operation" }, { "teams", "add", "remove", "empty", "join", "leave", "option" } };
 
-	private JButton buttonHelp;
+	private HelpButton buttonHelp;
 	private LangComboBox comboboxMode1, comboboxMode2;
 	private ScoreboardPanel panelScore;
 
@@ -56,10 +55,13 @@ public class ScoreboardOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		buttonHelp = new JButton("?");
+		buttonHelp = new HelpButton(Lang.get("HELP:scoreboard.objectives_0"), Lang.get("RESOURCES:scoreboard.mode_0") + " "
+				+ Lang.get("RESOURCES:scoreboard.mode.objectives_0"));
 
 		comboboxMode1 = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:scoreboard.mode", 3);
 		comboboxMode2 = new LangComboBox(CGConstants.DATAID_MODE2, "RESOURCES:scoreboard.mode.objectives", 3);
+		comboboxMode1.addListener(this);
+		comboboxMode2.addListener(this);
 
 		panelScore = new ObjectivesAddPanel();
 	}
@@ -67,16 +69,6 @@ public class ScoreboardOptionsPanel extends OptionsPanel
 	@Override
 	protected void createListeners()
 	{
-		buttonHelp.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				DisplayHelper.showHelp(
-						Lang.get("HELP:scoreboard." + scoreboardModes[comboboxMode1.getSelectedIndex()][0] + "_" + comboboxMode2.getSelectedIndex()),
-						(String) comboboxMode1.getSelectedItem() + " " + (String) comboboxMode2.getSelectedItem());
-			}
-		});
-
 		comboboxMode1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -133,6 +125,13 @@ public class ScoreboardOptionsPanel extends OptionsPanel
 		panelScore.setVisible(true);
 		/* gbc.gridx = 0; gbc.gridy = 1; gbc.gridwidth = 3; add(panelScore, gbc); gbc.gridwidth = 1; */
 		System.out.println("Check this out for scoreboards.");
+	}
+
+	@Override
+	public void updateCombobox()
+	{
+		buttonHelp.setData(Lang.get("HELP:scoreboard." + scoreboardModes[comboboxMode1.getSelectedIndex()][0] + "_" + comboboxMode2.getSelectedIndex()),
+				(String) comboboxMode1.getSelectedItem() + " " + (String) comboboxMode2.getSelectedItem());
 	}
 
 }

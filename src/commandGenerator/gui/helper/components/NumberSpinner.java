@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -27,6 +28,7 @@ public class NumberSpinner extends JPanel implements CComponent
 	private CLabel label;
 	private int max, min;
 	private JSpinner spinner;
+	private Integer[] values = new Integer[0];
 
 	public NumberSpinner(String id, String title, int min, int max, final ISpin parent)
 	{
@@ -96,6 +98,8 @@ public class NumberSpinner extends JPanel implements CComponent
 		setEnabled(enable);
 		label.setEnabled(enable);
 		spinner.setEnabled(enable);
+		buttonMax.setEnabled(enable);
+		buttonMin.setEnabled(enable);
 	}
 
 	private void setMax()
@@ -131,5 +135,14 @@ public class NumberSpinner extends JPanel implements CComponent
 	public void updateLang()
 	{
 		label.updateLang();
+	}
+
+	public void setData(int[] values)
+	{
+		this.values = new Integer[values.length];
+		for (int i = 0; i < values.length; i++) this.values[i] = values[i];
+		this.min = values[0];
+		this.max = values[values.length - 1];
+		spinner.setModel(new SpinnerListModel(this.values));
 	}
 }

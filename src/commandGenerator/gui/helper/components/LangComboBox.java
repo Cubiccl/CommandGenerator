@@ -1,6 +1,8 @@
 package commandGenerator.gui.helper.components;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Map;
 
 import javax.swing.JComboBox;
@@ -65,6 +67,16 @@ public class LangComboBox extends JComboBox<String> implements CComponent
 			names[i] = Lang.get(title + "_" + i);
 		}
 		setModel(new JComboBox<String>(names).getModel());
+	}
+
+	public void addListener(final IBox parent)
+	{
+		addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				parent.updateCombobox();
+			}
+		});
 	}
 
 }

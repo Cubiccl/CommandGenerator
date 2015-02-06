@@ -1,5 +1,7 @@
 package commandGenerator.gui.helper.argumentSelection.dataTag;
 
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -44,6 +46,9 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 		buttonAdd = new CButton("GUI:tag.add");
 		buttonRemove = new CButton("GUI:tag.remove");
 		buttonHelp = new JButton("?");
+		buttonHelp.setFont(new Font(getName(), Font.PLAIN, 11));
+		buttonHelp.setPreferredSize(new Dimension(40, 20));
+		buttonHelp.setMinimumSize(new Dimension(40, 20));
 
 		displayer = new TagDisplayer(getPanelId(), nbtTags);
 	}
@@ -106,7 +111,7 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 	{
 		this.object = (ObjectBase) details[0];
 		String[][] list = (String[][]) details[1];
-		
+
 		this.nbtTags = new Tag[list.length];
 		for (int i = 0; i < list.length; i++)
 			this.nbtTags[i] = DataTags.init(list[i]);

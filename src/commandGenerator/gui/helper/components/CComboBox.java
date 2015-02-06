@@ -85,7 +85,7 @@ public class CComboBox extends JPanel implements CComponent
 		add(box, gbc);
 
 		setPreferredSize(new Dimension(label.getPreferredSize().width + 202, 42));
-		setMinimumSize(new Dimension(label.getPreferredSize().width + 202, 42));
+		setMinimumSize(new Dimension(label.getMinimumSize().width + 202, 42));
 	}
 
 	private void boxSelect()
