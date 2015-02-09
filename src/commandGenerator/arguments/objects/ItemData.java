@@ -49,7 +49,7 @@ public class ItemData extends Item
 		if (isBlock()) path += "blocks/";
 		else path += "items/";
 
-		path += getId() + "/" + Integer.toString(damage) + ".png";
+		path += getCommandId() + "/" + Integer.toString(damage) + ".png";
 
 		try
 		{

@@ -47,7 +47,7 @@ public class GiveOptionsPanel extends OptionsPanel
 
 		if (player == null || item == null) return null;
 
-		String text = "give " + player.commandStructure() + " " + item.getId() + " " + Integer.toString(amount) + " " + Integer.toString(damage);
+		String text = "give " + player.commandStructure() + " " + item.getCommandId() + " " + Integer.toString(amount) + " " + Integer.toString(damage);
 		if (!panelItem.getItemTag().commandStructure().substring(panelItem.getItemTag().getId().length() + 1).equals("{}")) text += " "
 				+ panelItem.getItemTag().commandStructure().substring(panelItem.getItemTag().getId().length() + 1);
 		return text;

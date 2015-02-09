@@ -73,7 +73,7 @@ public class TagDisplayer extends JPanel implements CComponent
 		add(scrollList, gbc);
 		gbc.gridx++;
 		add(scrollPane, gbc);
-		
+
 		setPreferredSize(new Dimension(620, 100));
 		setMinimumSize(new Dimension(620, 100));
 	}
@@ -165,7 +165,6 @@ public class TagDisplayer extends JPanel implements CComponent
 	@Override
 	public void setupFrom(Map<String, Object> data)
 	{
-
 		if (data.get(id) != null) values = (List<Tag>) data.get(id);
 		display();
 	}
@@ -197,7 +196,7 @@ public class TagDisplayer extends JPanel implements CComponent
 			boolean flag = false;
 			for (int j = 0; j < allowedTags.length; j++)
 			{
-				if (values.get(i).getName().equals(allowedTags[j])) flag = true;
+				if (values.get(i).getId().equals(allowedTags[j].getId())) flag = true;
 			}
 			if (flag) newTags.add(values.get(i));
 		}

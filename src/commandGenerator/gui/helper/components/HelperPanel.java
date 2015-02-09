@@ -26,7 +26,7 @@ public abstract class HelperPanel extends JPanel implements CComponent
 	private String id;
 	/** The language ID of this Panel's title. */
 	protected String title;
-	
+
 	private static final int MIN = 20;
 
 	/** A basic JPanel.
@@ -142,9 +142,8 @@ public abstract class HelperPanel extends JPanel implements CComponent
 	{
 		if (!isEnabled() || !isVisible()) return;
 		for (int i = 0; i < components.size(); i++)
-		{
 			components.get(i).setupFrom(data);
-		}
+
 	}
 
 	/** Sets this Panel's size according to its components. */
@@ -155,8 +154,8 @@ public abstract class HelperPanel extends JPanel implements CComponent
 
 		for (Component component : getComponents())
 		{
-			if (component.getPreferredSize().width >= width) width = component.getPreferredSize().width + MIN;
-			if (component.getMinimumSize().width >= width-MIN) width = component.getMinimumSize().width + MIN;
+			if (component.getPreferredSize().width >= width - MIN) width = component.getPreferredSize().width + MIN;
+			if (component.getMinimumSize().width >= width - MIN) width = component.getMinimumSize().width + MIN;
 			height += component.getPreferredSize().height;
 		}
 

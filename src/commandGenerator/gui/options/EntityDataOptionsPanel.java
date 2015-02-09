@@ -1,30 +1,22 @@
 package commandGenerator.gui.options;
 
-import javax.swing.JLabel;
-
-import commandGenerator.arguments.objects.Entity;
 import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
+import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
-import commandGenerator.gui.helper.argumentSelection.dataTag.NBTTagPanel;
-import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.CLabel;
-import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
-public class EntityDataOptionsPanel extends OptionsPanel implements IBox
+public class EntityDataOptionsPanel extends OptionsPanel
 {
 
-	private CComboBox comboboxEntity;
 	private String command;
-	private JLabel label;
 	private CLabel labelExplain;
-	private TargetSelectionPanel panelEntity;
-	private NBTTagPanel panelEntitydata;
+	private TargetSelectionPanel panelSelector;
+	private EntitySelectionPanel panelEntity;
 
 	public EntityDataOptionsPanel(String command)
 	{
@@ -34,23 +26,18 @@ public class EntityDataOptionsPanel extends OptionsPanel implements IBox
 	@Override
 	protected void addComponents()
 	{
+		add(panelSelector);
 		add(labelExplain);
-		add(comboboxEntity);
-		add(label);
 		add(panelEntity);
-		add(panelEntitydata);
 	}
 
 	@Override
 	protected void createComponents()
 	{
-		label = new JLabel(((Entity) Registerer.getObjectFromId("Item")).getTexture());
 		labelExplain = new CLabel("GUI:entity.explain", true);
 
-		comboboxEntity = new CComboBox(CGConstants.DATAID_ENTITY, "GUI:entity.select", Registerer.getObjectList(CGConstants.OBJECT_ENTITY), this);
-
-		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
-		panelEntitydata = new NBTTagPanel("GUI:entity.tags", Entity.player, DataTags.entities);
+		panelSelector = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_ENTITY, "GUI:entity.title", Registerer.getObjectList(CGConstants.OBJECT_ENTITY));
 	}
 
 	@Override
@@ -60,8 +47,8 @@ public class EntityDataOptionsPanel extends OptionsPanel implements IBox
 	@Override
 	public String generateCommand()
 	{
-		Target entity = panelEntity.generateEntity();
-		TagCompound tag = panelEntitydata.getNbtTags("tag");
+		Target entity = panelSelector.generateEntity();
+		TagCompound tag = panelEntity.getEntityTag();
 		String commandG = command + " ";
 
 		if (entity == null || tag == null) return null;
@@ -73,12 +60,6 @@ public class EntityDataOptionsPanel extends OptionsPanel implements IBox
 	protected void setupDetails(Object[] details)
 	{
 		this.command = (String) details[0];
-	}
-
-	@Override
-	public void updateCombobox()
-	{
-		panelEntitydata.updateCombobox((Entity) comboboxEntity.getValue());
 	}
 
 }

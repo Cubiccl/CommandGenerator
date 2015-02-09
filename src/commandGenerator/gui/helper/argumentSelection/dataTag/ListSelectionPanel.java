@@ -267,8 +267,7 @@ public class ListSelectionPanel extends HelperPanel
 					items[i] = (Item) list[i];
 				ItemSelectionPanel panelI = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GENERAL:item", items, true, true);
 				ItemStack stack = (ItemStack) objects.get(nbr);
-				map.put(CGConstants.PANELID_ITEM, new Object[] { stack.getItem().getId(), stack.getDamage(), stack.getCount(), stack.getSlot() });
-				map.put(CGConstants.PANELID_NBT, stack.getTag().getValue());
+				map.put(CGConstants.PANELID_ITEM, ItemStack.generateFrom(stack.getItem().getId(), stack.getDamage(), stack.getCount(), stack.getTag().getValue(), stack.getSlot()));
 				panelI.setupFrom(map);
 
 				if (DisplayHelper.showQuestion(panelI, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:item")))) return;

@@ -94,7 +94,7 @@ public class ExecuteOptionsPanel extends OptionsPanel
 			int damage = panelBlock.getDamage();
 
 			if (coordDetect == null || item == null) return null;
-			command += "detect " + coordDetect.commandStructure() + " " + item.getId() + " " + Integer.toString(damage) + " ";
+			command += "detect " + coordDetect.commandStructure() + " " + item.getCommandId() + " " + Integer.toString(damage) + " ";
 		}
 
 		panelCommand = new PanelCommandSelection(false);

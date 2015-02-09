@@ -73,7 +73,7 @@ public class ClearOptionsPanel extends OptionsPanel
 
 			if (item == null || damage < 0) return null;
 
-			command += " " + item.getId() + " " + Integer.toString(damage);
+			command += " " + item.getCommandId() + " " + Integer.toString(damage);
 			if (!checkboxMaxCount.isSelected())
 			{
 				command += " " + Integer.toString(panelItem.getCount());

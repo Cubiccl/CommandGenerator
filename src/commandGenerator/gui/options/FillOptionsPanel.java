@@ -68,7 +68,7 @@ public class FillOptionsPanel extends OptionsPanel implements IBox
 
 		if (start == null || end == null) return null;
 
-		String command = "fill " + start.commandStructure() + " " + end.commandStructure() + " " + block.getId() + " " + panelBlock.getDamage() + " ";
+		String command = "fill " + start.commandStructure() + " " + end.commandStructure() + " " + block.getCommandId() + " " + panelBlock.getDamage() + " ";
 
 		if (comboboxModeFill.getSelectedIndex() == 0)
 		{
@@ -77,7 +77,7 @@ public class FillOptionsPanel extends OptionsPanel implements IBox
 			if (!tag.commandStructure().endsWith("{}")) command += tag.commandStructure().substring(tag.getId().length() + 1);
 		}
 
-		else command += "replace " + blockReplace.getId() + " " + panelBlockReplace.getDamage();
+		else command += "replace " + blockReplace.getCommandId() + " " + panelBlockReplace.getDamage();
 
 		return command;
 	}

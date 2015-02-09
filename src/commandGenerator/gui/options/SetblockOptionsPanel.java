@@ -63,7 +63,7 @@ public class SetblockOptionsPanel extends OptionsPanel implements IBox
 
 		if (coords == null || block == null) return null;
 
-		String command = "setblock " + coords.commandStructure() + " " + block.getId() + " " + Integer.toString(damage) + " "
+		String command = "setblock " + coords.commandStructure() + " " + block.getCommandId() + " " + Integer.toString(damage) + " "
 				+ modes[comboboxMode.getSelectedIndex()];
 
 		if (!tag.commandStructure().substring(tag.getId().length() + 1).equals("{}")) command += " "

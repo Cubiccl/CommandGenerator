@@ -90,7 +90,7 @@ public class PanelCommandSelection extends JPanel
 							+ "  -----------------------------------------------------------");
 
 					String command = panelOptions.generateCommand();
-					if (!(command == null))
+					if (command != null)
 					{
 						textfieldCommand.setText("/" + command);
 						DisplayHelper.log("/" + CommandGenerator.opt.selectedCommand.getId() + " successfully generated!");
@@ -99,7 +99,7 @@ public class PanelCommandSelection extends JPanel
 			});
 			buttonGenerate.setPreferredSize(new Dimension(200, 40));
 			buttonGenerate.setForeground(Color.BLUE);
-			
+
 			buttonCopy = new CButton("GUI:command.clipboard");
 			buttonCopy.addActionListener(new ActionListener() {
 				@Override
@@ -195,7 +195,7 @@ public class PanelCommandSelection extends JPanel
 		{
 			names[j] = commands[j].getId();
 		}
-		
+
 		comboboxCommand = new JComboBox<String>(names);
 		comboboxCommand.setPreferredSize(new Dimension(300, 20));
 		comboboxCommand.addActionListener(new ActionListener() {

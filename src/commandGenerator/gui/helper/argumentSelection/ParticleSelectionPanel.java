@@ -127,7 +127,7 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 
 	public String getItemProperties(boolean isItem)
 	{
-		if (isItem) return getItem().getId() + "_" + getDamage();
+		if (isItem) return getItem().getCommandId() + "_" + getDamage();
 		return Integer.toString(getItem().getIdNum() | (getDamage() << 12));
 	}
 

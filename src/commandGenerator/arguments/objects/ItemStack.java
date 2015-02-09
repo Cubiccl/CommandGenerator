@@ -38,7 +38,7 @@ public class ItemStack
 	public static ItemStack generateFrom(String id, int damage, int count, List<Tag> nbt, int slot)
 	{
 		Item item = (Item) Registerer.getObjectFromId(id);
-		if (!(item instanceof Item)) return null;
+		if (item.isBlock()) item = (Item) Registerer.getObjectFromId(id + "_item");
 		TagCompound tag = new TagCompound("tag") {
 			public void askValue()
 			{}
@@ -193,7 +193,7 @@ public class ItemStack
 			{}
 		};
 
-		item.addTag(new TagString("id").setValue(getItem().getId()));
+		item.addTag(new TagString("id").setValue(getItem().getCommandId()));
 		item.addTag(new TagInt("Damage").setValue(getDamage()));
 		item.addTag(new TagInt("Count").setValue(getCount()));
 		if (slot != -1) item.addTag(new TagInt("Slot").setValue(this.slot));

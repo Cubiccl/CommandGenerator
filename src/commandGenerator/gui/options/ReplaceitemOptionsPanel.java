@@ -73,7 +73,7 @@ public class ReplaceitemOptionsPanel extends OptionsPanel
 		if (comboboxMode.getSelectedIndex() == 0) command += panelBlock.generateCoord().commandStructure() + " slot.container." + panelItem.getSlot();
 		if (comboboxMode.getSelectedIndex() == 1) command += panelEntity.generateCommand();
 
-		command += " " + panelItem.generateItem().getId() + " " + Integer.toString(panelItem.getCount()) + " " + Integer.toString(panelItem.getDamage());
+		command += " " + panelItem.generateItem().getCommandId() + " " + Integer.toString(panelItem.getCount()) + " " + Integer.toString(panelItem.getDamage());
 		if (!panelItem.getItemTag().commandStructure().substring(panelItem.getItemTag().getId().length() + 1).equals("{}")) command += " "
 				+ panelItem.getItemTag().commandStructure().substring(panelItem.getItemTag().getId().length() + 1);
 

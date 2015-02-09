@@ -41,6 +41,13 @@ public class Item extends ObjectBase
 		this.durability = 0;
 	}
 
+	public String getCommandId()
+	{
+		String id = getId();
+		if (id.endsWith("_item")) return id.substring(0, id.length() - "_item".length());
+		else return id;
+	}
+
 	/** Returns this Item's durability. */
 	public int getDurability()
 	{
@@ -95,11 +102,11 @@ public class Item extends ObjectBase
 
 		if (damage <= maxDamage) damageToUse = damage;
 
-		if (maxDamage > 0) path += getId() + "/" + Integer.toString(damageToUse);
+		if (maxDamage > 0) path += getCommandId() + "/" + Integer.toString(damageToUse) + ".png";
 		else
 		{
-			if (isBlock) path += "other_blocks/" + getId() + ".png";
-			else path += "other_items/" + getId() + ".png";
+			if (isBlock) path += "other_blocks/" + getCommandId() + ".png";
+			else path += "other_items/" + getCommandId() + ".png";
 		}
 
 		try

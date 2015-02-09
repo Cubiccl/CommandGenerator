@@ -68,6 +68,7 @@ public class Generator
 			return data;
 		} catch (Exception e)
 		{
+			e.printStackTrace();
 			return wrong();
 		}
 	}

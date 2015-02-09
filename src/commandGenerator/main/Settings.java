@@ -1,7 +1,5 @@
 package commandGenerator.main;
 
-import java.util.List;
-
 import commandGenerator.arguments.objects.Command;
 
 public class Settings
@@ -16,8 +14,6 @@ public class Settings
 	private int language;
 	/** The previous version the program was launched with. */
 	public String previousVersion;
-	/** All saved objects */
-	public List<String> savedObjects;
 	/** The selected command. */
 	public Command selectedCommand;
 
@@ -28,7 +24,6 @@ public class Settings
 		language = Integer.parseInt(FileHelper.getOption("lang"));
 		previousVersion = FileHelper.getOption("version");
 		firstLaunch = !previousVersion.equals(Resources.versions[Resources.versions.length - 1]);
-		savedObjects = FileHelper.readFileArray("savedObjects.txt");
 	}
 
 	/** Returns true if the version has already been updated.

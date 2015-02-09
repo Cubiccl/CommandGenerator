@@ -26,30 +26,30 @@ public abstract class Tag extends ObjectBase
 	protected JPanel panel;
 	private byte type;
 
-	/** The base tag.
+	/** The Base Tag.
 	 * 
 	 * @param id
-	 *            - The Tag ID.
-	 * @param applicable
-	 *            - The list of objects this tag is applicable to. */
+	 *            - <i>String</i> - The Tag's ID.
+	 * @param type
+	 *            - <i>byte</i> - The type of this Tag.
+	 * @param ids
+	 *            - <i>String[]</i> - The list of Object IDs this Tag can be applied to. */
 	public Tag(String id, byte type, String... ids)
 	{
 		super(id, CGConstants.OBJECT_TAG);
 		List<ObjectBase> objects = new ArrayList<ObjectBase>();
-		for (String objectId : ids)
+		if (ids.length == 1)
 		{
-			if (!objectId.startsWith("LIST="))
+			for (String objectId : ids[0].split(":"))
 			{
-				String[] objectsIds = objectId.split(":");
-				for (String id1 : objectsIds)
-					objects.add(Registerer.getObjectFromId(id1));
+				if (!objectId.startsWith("LIST=")) objects.add(Registerer.getObjectFromId(objectId));
+				else
+				{
+					objectId = objectId.substring("LIST=".length());
+					for (ObjectBase object : Registerer.getList(objectId))
+						objects.add(object);
 
-			} else
-			{
-				objectId = objectId.substring("LIST=".length());
-				for (ObjectBase object : Registerer.getList(objectId))
-					objects.add(object);
-
+				}
 			}
 		}
 		applicable = objects.toArray(new ObjectBase[0]);

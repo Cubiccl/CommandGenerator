@@ -10,8 +10,8 @@ public class Lang
 	/** Contains all translations. */
 	private static Map<String, Map<String, String>> dictObjects, dictGui;
 	/** Language categories. */
-	private static final String[] objectCategories = { "ITEMS", "ENTITIES", "ACHIEVEMENTS", "ATTRIBUTES", "EFFECTS", "ENCHANTS", "PARTICLES",
-			"SOUNDS", "TAGS", "END" }, guiCategories = { "GUI", "GENERAL", "WARNING", "HELP", "RESOURCES", "END" };
+	private static final String[] objectCategories = { "ITEMS", "ENTITIES", "ACHIEVEMENTS", "ATTRIBUTES", "EFFECTS", "ENCHANTS", "PARTICLES", "SOUNDS", "TAGS",
+			"END" }, guiCategories = { "GUI", "GENERAL", "WARNING", "HELP", "RESOURCES", "END" };
 
 	/** Returns true if the translation exists.
 	 * 

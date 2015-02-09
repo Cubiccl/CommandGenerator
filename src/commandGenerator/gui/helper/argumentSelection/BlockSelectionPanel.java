@@ -150,10 +150,11 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 	@Override
 	public void updateCombobox()
 	{
-		spinnerDamage.setValues(0, generateBlock().getMaxDamage());
+		Item item = generateBlock();
+		spinnerDamage.setValues(0, item.getMaxDamage());
 		if (data) panelData.updateCombobox((Item) Registerer.getObjectFromId(comboboxId.getValue()));
-		labelImage.setIcon(generateBlock().getTexture(getDamage()));
-		labelName.setText(generateBlock().getName(getDamage()));
+		labelImage.setIcon(item.getTexture(getDamage()));
+		labelName.setText(item.getName(getDamage()));
 	}
 
 	@Override

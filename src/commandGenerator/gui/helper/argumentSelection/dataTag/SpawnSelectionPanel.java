@@ -4,30 +4,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 import commandGenerator.arguments.objects.Entity;
 import commandGenerator.arguments.objects.Registerer;
-import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagInt;
 import commandGenerator.arguments.tags.TagString;
-import commandGenerator.gui.helper.components.CComboBox;
-import commandGenerator.gui.helper.components.CLabel;
+import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
+import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class SpawnSelectionPanel extends HelperPanel implements IBox
+public class SpawnSelectionPanel extends HelperPanel
 {
 
-	private CComboBox combobox;
-	private CLabel labelType, labelWeight;
-	private NBTTagPanel panelTag;
-	private JTextField textfieldWeight;
+	private CEntry entryWeight;
+	private EntitySelectionPanel panelEntity;
 
 	public SpawnSelectionPanel()
 	{
@@ -37,23 +32,17 @@ public class SpawnSelectionPanel extends HelperPanel implements IBox
 	@Override
 	protected void addComponents()
 	{
-		addLine(labelType, combobox);
-		addLine(labelWeight, textfieldWeight);
-		add(panelTag);
+		addLine(entryWeight);
+		add(panelEntity);
 	}
 
 	@Override
 	protected void createComponents()
 	{
-		labelType = new CLabel("GUI:spawn.entity");
-		labelWeight = new CLabel("GUI:spawn.weight");
+		entryWeight = new CEntry(CGConstants.DATAID_NONE, "GUI:spawn.weight");
+		entryWeight.setTextField("1");
 
-		textfieldWeight = new JTextField(18);
-		textfieldWeight.setText("1");
-
-		combobox = new CComboBox(CGConstants.DATAID_NONE, "GUI:entity.select", Entity.getListNoPlayer(), this);
-
-		panelTag = new NBTTagPanel("GUI:entity.tags", Entity.player, DataTags.entities);
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_ENTITY, "GUI:entity.select", Entity.getListNoPlayer());
 	}
 
 	@Override
@@ -63,7 +52,7 @@ public class SpawnSelectionPanel extends HelperPanel implements IBox
 	public TagCompound getTag()
 	{
 
-		String weight = textfieldWeight.getText();
+		String weight = entryWeight.getText();
 		try
 		{
 			int test = Integer.parseInt(weight);
@@ -82,32 +71,32 @@ public class SpawnSelectionPanel extends HelperPanel implements IBox
 			public void askValue()
 			{}
 		};
-		tag.addTag(new TagString("Type").setValue(combobox.getValue().getId()));
+		tag.addTag(new TagString("Type").setValue(panelEntity.getEntity().getId()));
 		tag.addTag(new TagInt("Weight").setValue(Integer.parseInt(weight)));
-		tag.addTag(panelTag.getNbtTags("Properties"));
+		tag.addTag(panelEntity.getEntityTag());
 		return tag;
 	}
 
 	public void setup(TagCompound nbt)
 	{
+		Entity sel = (Entity) Registerer.getObjectFromId("ArmorStand");
 		for (int i = 0; i < nbt.size(); i++)
 		{
 			Tag tag = nbt.get(i);
-			if (tag.getId().equals("Type")) combobox.setSelected(Registerer.getObjectFromId(((TagString) tag).getValue()));
-			if (tag.getId().equals("Weight")) textfieldWeight.setText(Integer.toString(((TagInt) tag).getValue()));
+			if (tag.getId().equals("Type"))
+			{
+				panelEntity.setSelected((Entity) Registerer.getObjectFromId(((TagString) tag).getValue()));
+				sel = (Entity) Registerer.getObjectFromId(((TagString) tag).getValue());
+			}
+			if (tag.getId().equals("Weight")) entryWeight.setTextField(Integer.toString(((TagInt) tag).getValue()));
 			if (tag.getId().equals("Properties"))
 			{
+				System.out.println(sel.getName());
 				Map<String, Object> data = new HashMap<String, Object>();
+				data.put(CGConstants.PANELID_ENTITY, sel);
 				data.put(CGConstants.PANELID_NBT, ((TagCompound) tag).getValue());
-				panelTag.setupFrom(data);
+				panelEntity.setupFrom(data);
 			}
 		}
 	}
-
-	@Override
-	public void updateCombobox()
-	{
-		panelTag.updateCombobox((Entity) combobox.getValue());
-	}
-
 }

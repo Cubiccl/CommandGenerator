@@ -50,7 +50,7 @@ public class TestforblockOptionsPanel extends OptionsPanel
 
 		if (coords == null || block == null) return null;
 
-		String command = "testforblock " + coords.commandStructure() + " " + block.getId() + " " + Integer.toString(damage);
+		String command = "testforblock " + coords.commandStructure() + " " + block.getCommandId() + " " + Integer.toString(damage);
 
 		if (!tag.commandStructure().substring(tag.getId().length() + 1).equals("{}")) command += " "
 				+ tag.commandStructure().substring(tag.getId().length() + 1);

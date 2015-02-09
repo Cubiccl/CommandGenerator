@@ -75,8 +75,7 @@ public class DataTags
 		for (String tag : tags)
 		{
 			Tag result = genTagFromString(tag, inList);
-			if (result == null) return null;
-			list.add(result);
+			if (result != null) list.add(result);
 		}
 
 		return list;
@@ -108,11 +107,29 @@ public class DataTags
 			value = nbt.substring(sep + 1);
 
 			for (String[] block : blocks)
-				if (block[0].equals(id)) corresponding = block;
+				if (block[0].equals(id))
+				{
+					corresponding[0] = block[0];
+					corresponding[1] = block[1];
+					if (corresponding[2].equals("air")) corresponding[2] = block[2];
+					else corresponding[2] += ":" + block[2];
+				}
 			for (String[] item : items)
-				if (item[0].equals(id)) corresponding = item;
+				if (item[0].equals(id))
+				{
+					corresponding[0] = item[0];
+					corresponding[1] = item[1];
+					if (corresponding[2].equals("air")) corresponding[2] = item[2];
+					else corresponding[2] += ":" + item[2];
+				}
 			for (String[] entity : entities)
-				if (entity[0].equals(id)) corresponding = entity;
+				if (entity[0].equals(id))
+				{
+					corresponding[0] = entity[0];
+					corresponding[1] = entity[1];
+					if (corresponding[2].equals("air")) corresponding[2] = entity[2];
+					else corresponding[2] += ":" + entity[2];
+				}
 			for (String[] generate : generated)
 			{
 				if (generate[0].equals(id)) corresponding = generate;
@@ -127,6 +144,11 @@ public class DataTags
 		}
 
 		Tag tag = init(corresponding);
+		if (tag == null)
+		{
+			DisplayHelper.log("Unknown tag : " + nbt);
+			return null;
+		}
 		byte type = tag.getTagType();
 
 		try
@@ -211,10 +233,11 @@ public class DataTags
 			public void askValue()
 			{}
 		};
-		return new TagCompound() {
+		if (tag[1].equals("compound")) return new TagCompound() {
 			public void askValue()
 			{}
 		};
+		return null;
 	}
 
 	private static Tag initCustom(String[] tagData)
