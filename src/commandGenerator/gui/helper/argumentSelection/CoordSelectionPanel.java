@@ -133,14 +133,7 @@ public class CoordSelectionPanel extends HelperPanel
 		entryX.setEnabledContent(enable);
 		entryY.setEnabledContent(enable);
 		entryZ.setEnabledContent(enable);
-
-		if (relative)
-		{
-			checkboxRelativeAll.setEnabledContent(enable);
-			checkRelX.setEnabledContent(enable);
-			checkRelY.setEnabledContent(enable);
-			checkRelZ.setEnabledContent(enable);
-		}
+		checkboxRelativeAll.setEnabled(enable);
 
 		if (rotation && enable && checkboxRotation.isSelected())
 		{

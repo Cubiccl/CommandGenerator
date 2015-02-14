@@ -181,7 +181,7 @@ public class Generator
 	 * 
 	 * @param command
 	 *            - <i>String</i> - The command which elements should be identified. */
-	public static String[] genElements(String command)
+	private static String[] genElements(String command)
 	{
 		List<String> elements = new ArrayList<String>();
 		String[] base = command.split(" ");

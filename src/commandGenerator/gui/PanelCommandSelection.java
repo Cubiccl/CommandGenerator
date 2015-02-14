@@ -28,9 +28,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import commandGenerator.CommandGenerator;
+import commandGenerator.arguments.objects.Command;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.Registerer;
-import commandGenerator.arguments.objects.command.Command;
 import commandGenerator.gui.helper.components.CButton;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CLabel;
@@ -38,7 +38,6 @@ import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.gui.options.AchievementOptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Generator;
 import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
@@ -317,7 +316,7 @@ public class PanelCommandSelection extends JPanel
 		comboboxCommand.setSelectedItem(CommandGenerator.opt.selectedCommand.getId());
 
 		OptionsPanel panelNew = selected.getOptionsPanel();
-		Map<String, Object> data = selected.generateData(Generator.genElements(field.getText()));
+		Map<String, Object> data = selected.generateSetup(field.getText());
 		if (data != null)
 		{
 			panelNew.setupFrom(data);

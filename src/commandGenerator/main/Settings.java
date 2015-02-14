@@ -1,6 +1,6 @@
 package commandGenerator.main;
 
-import commandGenerator.arguments.objects.command.Command;
+import commandGenerator.arguments.objects.Command;
 
 public class Settings
 {
