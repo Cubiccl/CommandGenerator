@@ -38,8 +38,8 @@ public class Coordinates
 
 		} catch (Exception e)
 		{
-			DisplayHelper.log("There was an error while creating coordinates : " + x + " " + y + " " + z);
-			return null;
+			DisplayHelper.log("There was an error while creating coordinates : " + x + " " + y + " " + z + ". Using default.");
+			return new Coordinates(0D, 0D, 0D);
 		}
 
 	}
@@ -127,11 +127,11 @@ public class Coordinates
 		if (relativeness[0]) display += "~";
 		if (x != 0d || !relativeness[0]) display += Double.toString(x);
 		display += " ";
-		
+
 		if (relativeness[1]) display += "~";
 		if (y != 0d || !relativeness[1]) display += Double.toString(y);
 		display += " ";
-		
+
 		if (relativeness[2] && relativeness[2]) display += "~";
 		if (z != 0d || !relativeness[2]) display += Double.toString(z);
 

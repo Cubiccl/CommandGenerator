@@ -26,6 +26,7 @@ import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
+import commandGenerator.main.Generator;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
@@ -111,7 +112,7 @@ public class ExecuteOptionsPanel extends OptionsPanel
 		panelCommand.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), Lang.get("GUI:execute.command")));
 		panelCommand.setPreferredSize(new Dimension(1100, 650));
 		panelCommand.setSelectedCommand(Registerer.getCommandFromId(storedCommand.split(" ")[0]));
-		panelCommand.panelOptions.setupFrom(Registerer.getCommandFromId(storedCommand.split(" ")[0]).generateSetup(storedCommand));
+		panelCommand.panelOptions.setupFrom(Registerer.getCommandFromId(storedCommand.split(" ")[0]).generateData(Generator.genElements(storedCommand)));
 
 		// Setting the JDialog resizable
 		panelCommand.addHierarchyListener(new HierarchyListener() {

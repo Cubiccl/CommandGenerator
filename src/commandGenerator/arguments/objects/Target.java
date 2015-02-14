@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Generator;
 
 public class Target
 {
@@ -43,10 +42,11 @@ public class Target
 			return sel;
 		} catch (Exception e)
 		{
-			Generator.wrong();
-			return null;
+			DisplayHelper.log("Wrong entity selectors : " + text + ". Using default.");
+			return new Target(Target.CLOSEST, new ArrayList<String[]>());
 		}
 	}
+
 	/** Returns the type of the Target from the String input.
 	 * 
 	 * @param sel
@@ -59,6 +59,7 @@ public class Target
 		if (sel.equals("@r")) return RANDOM;
 		return PLAYER;
 	}
+
 	/** This Target's name. */
 	private String name;
 
