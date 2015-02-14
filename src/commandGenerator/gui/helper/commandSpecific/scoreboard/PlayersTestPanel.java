@@ -39,8 +39,8 @@ public class PlayersTestPanel extends ScoreboardPanel
 	@Override
 	protected void createComponents()
 	{
-		entryObjective = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective");
-		entryScore = new CEntry(CGConstants.DATAID_VALUE, "GUI:scoreboard.score.min");
+		entryObjective = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective", "");
+		entryScore = new CEntry(CGConstants.DATAID_VALUE, "GUI:scoreboard.score.min", "1");
 
 		textfieldMax = new JTextField(15);
 		textfieldMax.setEnabled(false);

@@ -25,7 +25,7 @@ public class WorldspawnOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		panelCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:worldspawn.coords", false, false);
+		panelCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:worldspawn.coords", true, false);
 	}
 
 	@Override

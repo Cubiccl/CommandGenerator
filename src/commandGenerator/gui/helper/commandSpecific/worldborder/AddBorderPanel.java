@@ -34,8 +34,8 @@ public class AddBorderPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		entrySize = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.add.size");
-		entryTime = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.add.time");
+		entrySize = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.add.size", "10");
+		entryTime = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.add.time", "10");
 		entryTime.setEnabledContent(false);
 
 		checkboxTime = new CCheckBox(CGConstants.DATAID_NONE, "GUI:worldborder.add.timer");

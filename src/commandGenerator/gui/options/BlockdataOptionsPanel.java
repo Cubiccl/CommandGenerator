@@ -31,7 +31,7 @@ public class BlockdataOptionsPanel extends OptionsPanel
 	protected void createComponents()
 	{
 		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:blockdata.coords", true, false);
-		panelBlockdata = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:blockdata.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);
+		panelBlockdata = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:blockdata.block", Registerer.getList(CGConstants.LIST_TILEENTITY), true);
 	}
 
 	@Override

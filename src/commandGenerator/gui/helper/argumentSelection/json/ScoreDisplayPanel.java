@@ -35,7 +35,7 @@ public class ScoreDisplayPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		entryObjective = new CEntry(CGConstants.DATAID_NONE, "GUI:scoreboard.objective");
+		entryObjective = new CEntry(CGConstants.DATAID_NONE, "GUI:scoreboard.objective", "");
 
 		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 	}

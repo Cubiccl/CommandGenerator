@@ -37,7 +37,7 @@ public class DamageBorderPanel extends HelperPanel
 	{
 		labelMode = new CLabel("GUI:worldborder.mode");
 
-		entryValue = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.damage");
+		entryValue = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.damage", "1");
 
 		comboboxMode = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:worldborder.damage.mode", 2);
 	}

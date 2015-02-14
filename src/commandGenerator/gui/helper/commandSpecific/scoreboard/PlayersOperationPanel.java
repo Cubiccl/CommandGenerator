@@ -46,8 +46,8 @@ public class PlayersOperationPanel extends ScoreboardPanel
 	{
 		labelOperation = new CLabel("GUI:scoreboard.operation");
 
-		entryObj1 = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.operation.player1");
-		entryObj2 = new CEntry(CGConstants.DATAID_NAME2, "GUI:scoreboard.operation.player2");
+		entryObj1 = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.operation.player1", "");
+		entryObj2 = new CEntry(CGConstants.DATAID_NAME2, "GUI:scoreboard.operation.player2", "");
 
 		buttonHelp = new HelpButton(Lang.get("HELP:scoreboard.operation_0"), "+=");
 

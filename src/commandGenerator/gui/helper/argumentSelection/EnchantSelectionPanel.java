@@ -41,7 +41,7 @@ public class EnchantSelectionPanel extends HelperPanel implements IBox
 	@Override
 	protected void createComponents()
 	{
-		entryLevel = new CEntry(CGConstants.DATAID_NONE, "GUI:enchant.level");
+		entryLevel = new CEntry(CGConstants.DATAID_NONE, "GUI:enchant.level", "1");
 		entryLevel.setVisible(!limited);
 
 		spinnerLevel = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:enchant.level", 1, 5, null);

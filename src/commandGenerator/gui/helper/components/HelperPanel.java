@@ -103,6 +103,31 @@ public abstract class HelperPanel extends JPanel implements CComponent
 		add(panel);
 	}
 
+	/** Adds a stack of Components, they will overlap each other.
+	 * 
+	 * @param components
+	 *            - <i>Components...</i> - The Components to add. */
+	public void addStack(Component... components)
+	{
+		JPanel panel = new JPanel(new GridBagLayout());
+		GridBagConstraints gbc2 = new GridBagConstraints();
+		gbc2.gridx = 0;
+		gbc2.gridy = 0;
+		int width = MIN, height = MIN;
+
+		for (Component component : components)
+		{
+			panel.add(component, gbc2);
+			if (component instanceof CComponent) this.components.add((CComponent) component);
+			if (component.getPreferredSize().height > height) height = component.getPreferredSize().height + MIN;
+			if (component.getPreferredSize().width > width) width = component.getPreferredSize().width + MIN;
+		}
+
+		panel.setPreferredSize(new Dimension(width, height));
+		panel.setMinimumSize(new Dimension(width, height));
+		add(panel);
+	}
+
 	/** Creates all of this Panel's components. */
 	protected abstract void createComponents();
 
@@ -149,8 +174,7 @@ public abstract class HelperPanel extends JPanel implements CComponent
 	/** Sets this Panel's size according to its components. */
 	protected void setupSize()
 	{
-		int width = getPreferredSize().width;
-		int height = getPreferredSize().height;
+		int width = MIN, height = MIN;
 
 		for (Component component : getComponents())
 		{

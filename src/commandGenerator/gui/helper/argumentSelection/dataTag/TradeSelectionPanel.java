@@ -47,11 +47,8 @@ public class TradeSelectionPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		entryUses = new CEntry(CGConstants.DATAID_NAME, "GUI:trade.use");
-		entryMaxUses = new CEntry(CGConstants.DATAID_NAME2, "GUI:trade.use_max");
-
-		entryUses.setTextField("0");
-		entryMaxUses.setTextField("10");
+		entryUses = new CEntry(CGConstants.DATAID_NAME, "GUI:trade.use", "0");
+		entryMaxUses = new CEntry(CGConstants.DATAID_NAME2, "GUI:trade.use_max", "10");
 
 		checkboxRewardExp = new CCheckBox(CGConstants.DATAID_MODE, "GUI:trade.xp");
 		checkboxBuyB = new CCheckBox(CGConstants.DATAID_MODE2, "GUI:trade.buyb.use");

@@ -70,20 +70,7 @@ public class TargetSelectionPanel extends HelperPanel
 
 	private void addSelector()
 	{
-		boolean flag = false;
 		String selector = (String) boxSelectors.getSelectedItem();
-
-		for (int i = 0; i < addedSelectors.size(); i++)
-		{
-			if (addedSelectors.get(i)[0].equals(selector) && !(selector.equals("score") || selector.equals("score_min") || selector.equals("team"))) flag = true;
-		}
-
-		if (flag)
-		{
-			DisplayHelper.showWarning("WARNING:selector.already_added");
-			return;
-		}
-
 		String value;
 		String title = Lang.get("GUI:selector.add") + " : " + boxSelectors.getSelectedItem();
 		String text = Lang.get("HELP:selector." + boxSelectors.getSelectedItem());
@@ -148,7 +135,7 @@ public class TargetSelectionPanel extends HelperPanel
 		} else if (selector.equals("type"))
 		{
 
-			CComboBox box = new CComboBox("GUI:selector.type", CGConstants.DATAID_NONE, Registerer.getObjectList(CGConstants.OBJECT_ENTITY), null);
+			CComboBox box = new CComboBox(CGConstants.DATAID_NONE, "GUI:selector.type", Registerer.getObjectList(CGConstants.OBJECT_ENTITY), null);
 			boolean cancel = DisplayHelper.showQuestion(box, title);
 			if (cancel) return;
 			value = box.getValue().getId();
@@ -202,7 +189,13 @@ public class TargetSelectionPanel extends HelperPanel
 			addedSelectors.add(new String[] { value, textfieldValue.getText() });
 		}
 
-		if (!(selector.equals("score") || selector.equals("score_min"))) addedSelectors.add(new String[] { (String) boxSelectors.getSelectedItem(), value });
+		if (!(selector.equals("score") || selector.equals("score_min")))
+		{
+			if (!selector.equals("team")) for (int i = 0; i < addedSelectors.size(); i++)
+				if (addedSelectors.get(i)[0].equals(selector)) addedSelectors.remove(i);
+
+			addedSelectors.add(new String[] { (String) boxSelectors.getSelectedItem(), value });
+		}
 		displaySelectors();
 	}
 
@@ -213,7 +206,7 @@ public class TargetSelectionPanel extends HelperPanel
 		labelSelector = new CLabel("GUI:selector.choose");
 		labelSelectors = new CLabel("GUI:selector.list");
 
-		entryPlayer = new CEntry(CGConstants.DATAID_NONE, "GUI:player.name");
+		entryPlayer = new CEntry(CGConstants.DATAID_NONE, "GUI:player.name", "");
 		entryPlayer.setEnabledContent(false);
 
 		buttonHelpEntity = new HelpButton(Lang.get("HELP:selector." + targets[0]), targets[0]);
@@ -267,7 +260,10 @@ public class TargetSelectionPanel extends HelperPanel
 				if (player) scrollpane.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 				else scrollpane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
 
-				buttonHelpEntity.setData(Lang.get("HELP:selector." + boxEntities.getSelectedItem()), (String) boxEntities.getSelectedItem());
+				String entity = (String) boxEntities.getSelectedItem();
+				if (!entity.equals("@e") && !entity.equals("@a") && !entity.equals("@p") && !entity.equals("@r")) buttonHelpEntity.setData(
+						Lang.get("HELP:selector.player"), (String) boxEntities.getSelectedItem());
+				else buttonHelpEntity.setData(Lang.get("HELP:selector." + boxEntities.getSelectedItem()), (String) boxEntities.getSelectedItem());
 			}
 		});
 		boxSelectors.addActionListener(new ActionListener() {
@@ -345,6 +341,16 @@ public class TargetSelectionPanel extends HelperPanel
 		}
 
 		displaySelectors();
+	}
+
+	@Override
+	public void setEnabledContent(boolean enable)
+	{
+		super.setEnabledContent(enable);
+		boxEntities.setEnabled(enable);
+		boxSelectors.setEnabled(enable);
+		if (enable) scrollpane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
+		else scrollpane.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 	}
 
 	@Override

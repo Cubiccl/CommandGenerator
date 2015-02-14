@@ -30,7 +30,7 @@ public class SpawnpointOptionsPanel extends OptionsPanel
 	protected void createComponents()
 	{
 		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_ALL);
-		panelCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:spawnpoint.coords", false, false);
+		panelCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:spawnpoint.coords", true, false);
 	}
 
 	@Override

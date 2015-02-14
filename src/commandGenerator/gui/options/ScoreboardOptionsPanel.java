@@ -123,8 +123,8 @@ public class ScoreboardOptionsPanel extends OptionsPanel implements IBox
 		else if (comboboxMode1.getSelectedIndex() == 2 && comboboxMode2.getSelectedIndex() == 5) panelScore = new TeamsOptionPanel();
 
 		panelScore.setVisible(true);
-		/* gbc.gridx = 0; gbc.gridy = 1; gbc.gridwidth = 3; add(panelScore, gbc); gbc.gridwidth = 1; */
-		System.out.println("Check this out for scoreboards.");
+		add(panelScore);
+		super.setupSize();
 	}
 
 	@Override

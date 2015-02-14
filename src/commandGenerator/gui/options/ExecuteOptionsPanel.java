@@ -1,13 +1,18 @@
 package commandGenerator.gui.options;
 
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.Dimension;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.HierarchyEvent;
+import java.awt.event.HierarchyListener;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Item;
@@ -18,6 +23,7 @@ import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
+import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
@@ -26,6 +32,7 @@ import commandGenerator.main.Lang;
 public class ExecuteOptionsPanel extends OptionsPanel
 {
 
+	private CLabel labelExplain;
 	private CCheckBox checkboxDetect;
 	private BlockSelectionPanel panelBlock;
 	private PanelCommandSelection panelCommand;
@@ -35,12 +42,13 @@ public class ExecuteOptionsPanel extends OptionsPanel
 
 	public ExecuteOptionsPanel()
 	{
-		super();
+		super(-1);
 	}
 
 	@Override
 	protected void addComponents()
 	{
+		add(labelExplain);
 		add(panelEntity);
 		add(panelCoord);
 		add(panelCoordDetect);
@@ -51,16 +59,16 @@ public class ExecuteOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
+		labelExplain = new CLabel("GUI:execute.explain");
+
 		checkboxDetect = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:execute.detect");
 
 		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:execute.coords", true, false);
 		panelCoordDetect = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:execute.block_coords", true, false);
-		panelCoordDetect.setEnabledContent(false);
 
 		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 
 		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:execute.block", Registerer.getList(CGConstants.LIST_BLOCKS), false);
-		panelBlock.setEnabledContent(false);
 	}
 
 	@Override
@@ -74,6 +82,8 @@ public class ExecuteOptionsPanel extends OptionsPanel
 				panelBlock.setEnabledContent(checkboxDetect.isSelected());
 			}
 		});
+		panelBlock.setEnabledContent(false);
+		panelCoordDetect.setEnabledContent(false);
 	}
 
 	@Override
@@ -103,9 +113,25 @@ public class ExecuteOptionsPanel extends OptionsPanel
 		panelCommand.setSelectedCommand(Registerer.getCommandFromId(storedCommand.split(" ")[0]));
 		panelCommand.panelOptions.setupFrom(Registerer.getCommandFromId(storedCommand.split(" ")[0]).generateSetup(storedCommand));
 
+		// Setting the JDialog resizable
+		panelCommand.addHierarchyListener(new HierarchyListener() {
+			public void hierarchyChanged(HierarchyEvent e)
+			{
+				Window window = SwingUtilities.getWindowAncestor(panelCommand);
+				if (window instanceof Dialog)
+				{
+					Dialog dialog = (Dialog) window;
+					if (!dialog.isResizable())
+					{
+						dialog.setResizable(true);
+					}
+				}
+			}
+		});
 		JOptionPane.showMessageDialog(null, panelCommand, Lang.get("GUI:execute.select"), JOptionPane.QUESTION_MESSAGE);
 		if (panelCommand.generateCommand() == null) return null;
-		return command + panelCommand.generateCommand();
+		storedCommand = panelCommand.generateCommand();
+		return command + storedCommand;
 	}
 
 	@Override

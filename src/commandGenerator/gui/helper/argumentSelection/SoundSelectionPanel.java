@@ -44,11 +44,11 @@ public class SoundSelectionPanel extends HelperPanel implements IBox
 	@Override
 	protected void createComponents()
 	{
-		entryVolume = new CEntry(CGConstants.DATAID_NONE, "GUI:playsound.volume");
+		entryVolume = new CEntry(CGConstants.DATAID_NONE, "GUI:playsound.volume", "1");
 		entryVolume.setEnabledContent(false);
-		entryPitch = new CEntry(CGConstants.DATAID_NONE, "GUI:playsound.pitch");
+		entryPitch = new CEntry(CGConstants.DATAID_NONE, "GUI:playsound.pitch", "1");
 		entryPitch.setEnabledContent(false);
-		entryVolumeMin = new CEntry(CGConstants.DATAID_NONE, "GUI:playsound.volume_min");
+		entryVolumeMin = new CEntry(CGConstants.DATAID_NONE, "GUI:playsound.volume_min", "1");
 		entryVolumeMin.setEnabledContent(false);
 
 		ObjectBase[] list = Registerer.getObjectList(CGConstants.OBJECT_SOUND);

@@ -28,8 +28,8 @@ public class CenterBorderPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		entryX = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.x");
-		entryZ = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.z");
+		entryX = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.x", "0");
+		entryZ = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.z", "0");
 	}
 
 	@Override

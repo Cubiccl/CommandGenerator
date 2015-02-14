@@ -23,7 +23,7 @@ public class CGConstants
 	 * </ul> */
 	public static final int ENTITIES_PLAYERS = 0, ENTITIES_NPCS = 1, ENTITIES_ALL = 2;
 	public static final String LIST_BLOCKS = "blocks", LIST_ITEMS = "items", LIST_ICONS = "icon", LIST_CRAFT = "craft", LIST_PLACE = "place",
-			LIST_MINE = "mine", LIST_USE = "use", LIST_MOBS = "mob";
+			LIST_MINE = "mine", LIST_USE = "use", LIST_MOBS = "mob", LIST_TILEENTITY = "tileentity";
 	public static final String NBTID_COLOR = "nbt_color";
 
 	public static final byte OBJECT_ITEM = 0, OBJECT_ENTITY = 1, OBJECT_EFFECT = 2, OBJECT_ENCHANT = 3, OBJECT_ACHIEVEMENT = 4, OBJECT_ATTRIBUTE = 5,

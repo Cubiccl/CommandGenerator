@@ -115,6 +115,9 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 		super.setEnabledContent(enable);
 		labelImage.setEnabled(enable);
 		labelName.setEnabled(enable);
+		comboboxId.setEnabledContent(enable);
+		spinnerDamage.setEnabledContent(enable);
+		if (data) panelData.setEnabledContent(enable);
 	}
 
 	@Override

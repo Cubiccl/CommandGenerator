@@ -8,15 +8,18 @@ import commandGenerator.arguments.tags.TagList;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.dataTag.ListSelectionPanel;
 import commandGenerator.gui.helper.commandSpecific.TitleDetailsPanel;
+import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.main.CGConstants;
+import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
 public class TitleOptionsPanel extends OptionsPanel
 {
 
 	private static final String[] modes = { "title", "subtitle", "times" };
+	private HelpButton buttonHelp;
 	private LangComboBox comboboxMode;
 	private TitleDetailsPanel panelDetails;
 	private ListSelectionPanel panelJson;
@@ -30,7 +33,7 @@ public class TitleOptionsPanel extends OptionsPanel
 	@Override
 	protected void addComponents()
 	{
-		add(comboboxMode);
+		addLine(comboboxMode, buttonHelp);
 		add(panelPlayer);
 		add(panelDetails);
 		add(panelJson);
@@ -39,6 +42,8 @@ public class TitleOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
+		buttonHelp = new HelpButton(Lang.get("HELP:title_0"), Lang.get("RESOURCES:title.mode_0"));
+
 		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:title.mode", 3);
 
 		panelPlayer = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
@@ -57,6 +62,7 @@ public class TitleOptionsPanel extends OptionsPanel
 				panelDetails.setVisible(comboboxMode.getSelectedIndex() == 2);
 				panelJson.setVisible(comboboxMode.getSelectedIndex() != 2);
 				panelPlayer.updateLang();
+				buttonHelp.setData(Lang.get("HELP:title_" + comboboxMode.getSelectedIndex()), (String) comboboxMode.getSelectedItem());
 			}
 		});
 	}

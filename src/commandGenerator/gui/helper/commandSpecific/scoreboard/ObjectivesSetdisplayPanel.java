@@ -41,7 +41,7 @@ public class ObjectivesSetdisplayPanel extends ScoreboardPanel
 
 		checkboxClear = new CCheckBox(CGConstants.DATAID_NONE, "GUI:scoreboard.slot.clear");
 
-		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective");
+		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective", "");
 
 		comboboxDisplay = new LangComboBox(CGConstants.DATAID_VALUE, "RESOURCES:scoreboard.slot", 19);
 	}

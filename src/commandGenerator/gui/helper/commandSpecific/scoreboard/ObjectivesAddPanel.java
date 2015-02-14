@@ -36,7 +36,7 @@ public class ObjectivesAddPanel extends ScoreboardPanel
 	@Override
 	protected void createComponents()
 	{
-		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective");
+		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective", "");
 
 		textfieldDisplay = new JTextField(20);
 		textfieldDisplay.setEnabled(false);

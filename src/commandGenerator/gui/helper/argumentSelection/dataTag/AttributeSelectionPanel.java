@@ -36,7 +36,7 @@ public class AttributeSelectionPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		entryAmount = new CEntry(CGConstants.DATAID_NONE, "GUI:attribute.amount");
+		entryAmount = new CEntry(CGConstants.DATAID_NONE, "GUI:attribute.amount", "1");
 		entryAmount.setTextField("1");
 
 		comboboxAttribute = new CComboBox(CGConstants.DATAID_NONE, "GUI:attribute.select", Registerer.getObjectList(CGConstants.OBJECT_ATTRIBUTE), null);

@@ -31,7 +31,7 @@ public class TagRotation extends TagList
 
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put(CGConstants.PANELID_COORDS, new Coordinates(0D, 0D, 0D, ((TagFloat) getValue().get(0)).getValue(), ((TagFloat) getValue().get(1)).getValue(),
-				false));
+				new boolean[] { false, false, false }));
 		((RotationSelectionPanel) panel).setupFrom(data);
 
 		if (showPanel()) return;

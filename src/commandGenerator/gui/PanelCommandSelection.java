@@ -10,6 +10,8 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -125,6 +127,7 @@ public class PanelCommandSelection extends JPanel
 			textfieldCommand = new JTextField();
 			textfieldCommand.setEditable(false);
 			textfieldCommand.setPreferredSize(new Dimension(600, 20));
+			textfieldCommand.setMinimumSize(new Dimension(600, 20));
 
 			checkboxEdit = new CCheckBox(CGConstants.DATAID_NONE, "GUI:command.edit");
 			checkboxEdit.addActionListener(new ActionListener() {
@@ -222,7 +225,7 @@ public class PanelCommandSelection extends JPanel
 		panelOptions = new AchievementOptionsPanel();
 		scrollpane = new JScrollPane(panelOptions);
 		scrollpane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GREEN), Lang.get("GENERAL:options")));
-		scrollpane.setPreferredSize(new Dimension(1000, 550));
+		scrollpane.setPreferredSize(new Dimension(getSize().width - 50, getSize().height - 180));
 		scrollpane.getVerticalScrollBar().setUnitIncrement(20);
 		scrollpane.getHorizontalScrollBar().setUnitIncrement(20);
 
@@ -267,6 +270,21 @@ public class PanelCommandSelection extends JPanel
 		add(scrollpane, gbc);
 		gbc.gridwidth = 1;
 
+		addComponentListener(new ComponentListener() {
+			public void componentShown(ComponentEvent arg0)
+			{
+			}
+			public void componentResized(ComponentEvent arg0)
+			{
+				scrollpane.setPreferredSize(new Dimension(getSize().width - 50, getSize().height - 180));
+			}
+			public void componentMoved(ComponentEvent arg0)
+			{
+			}
+			public void componentHidden(ComponentEvent arg0)
+			{
+			}
+		});
 	}
 
 	public String generateCommand()
@@ -309,13 +327,12 @@ public class PanelCommandSelection extends JPanel
 	/** Changes the command panel. */
 	public void setOptionsPanel(OptionsPanel panel)
 	{
-
 		remove(scrollpane);
 		panelOptions = panel;
 
 		scrollpane = new JScrollPane(panelOptions);
 		scrollpane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GREEN), Lang.get("GENERAL:options")));
-		scrollpane.setPreferredSize(new Dimension(1000, 550));
+		scrollpane.setPreferredSize(new Dimension(getSize().width - 50, getSize().height - 180));
 		scrollpane.getVerticalScrollBar().setUnitIncrement(20);
 		scrollpane.getHorizontalScrollBar().setUnitIncrement(20);
 

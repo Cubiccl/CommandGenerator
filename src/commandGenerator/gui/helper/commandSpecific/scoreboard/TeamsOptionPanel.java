@@ -42,7 +42,7 @@ public class TeamsOptionPanel extends ScoreboardPanel
 		labelMode = new CLabel("GUI:scoreboard.teams.option.option");
 		labelValue = new CLabel("GUI:scoreboard.teams.option.value");
 
-		entryTeam = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.team");
+		entryTeam = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.team", "");
 
 		comboboxMode = new LangComboBox(CGConstants.DATAID_CHECK, "RESOURCES:scoreboard.teams.option", 5);
 		comboboxValue = new LangComboBox(CGConstants.DATAID_VALUE, "RESOURCES:color", 17);

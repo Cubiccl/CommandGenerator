@@ -34,7 +34,7 @@ public class TeamsAddPanel extends ScoreboardPanel
 	@Override
 	protected void createComponents()
 	{
-		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.team");
+		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.team", "");
 
 		textfieldDisplay = new JTextField(15);
 		textfieldDisplay.setEnabled(false);

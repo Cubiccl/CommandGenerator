@@ -24,7 +24,7 @@ public class ObjectivesRemovePanel extends ScoreboardPanel
 	@Override
 	protected void createComponents()
 	{
-		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective");
+		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective", "");
 	}
 
 	@Override

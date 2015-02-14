@@ -31,10 +31,10 @@ public class SpreadPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		entryX = new CEntry(CGConstants.DATAID_SPREAD_X, "GUI:spread.x");
-		entryZ = new CEntry(CGConstants.DATAID_SPREAD_Z, "GUI:spread.z");
-		entryDistance = new CEntry(CGConstants.DATAID_SPREAD_DIST, "GUI:spread.distance");
-		entryDistanceMax = new CEntry(CGConstants.DATAID_SPREAD_DISTMAX, "GUI:spread.distance_max");
+		entryX = new CEntry(CGConstants.DATAID_SPREAD_X, "GUI:spread.x", "0");
+		entryZ = new CEntry(CGConstants.DATAID_SPREAD_Z, "GUI:spread.z", "0");
+		entryDistance = new CEntry(CGConstants.DATAID_SPREAD_DIST, "GUI:spread.distance", "10");
+		entryDistanceMax = new CEntry(CGConstants.DATAID_SPREAD_DISTMAX, "GUI:spread.distance_max", "20");
 
 		checkboxRespectTeams = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:spread.respect");
 	}

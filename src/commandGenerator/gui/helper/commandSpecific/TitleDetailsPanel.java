@@ -29,9 +29,9 @@ public class TitleDetailsPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		entryFadeIn = new CEntry(CGConstants.DATAID_NONE, "GUI:title.fade_in");
-		entryStay = new CEntry(CGConstants.DATAID_NONE, "GUI:title.stay");
-		entryFadeOut = new CEntry(CGConstants.DATAID_NONE, "GUI:title.fade_out");
+		entryFadeIn = new CEntry(CGConstants.DATAID_NONE, "GUI:title.fade_in", "1");
+		entryStay = new CEntry(CGConstants.DATAID_NONE, "GUI:title.stay", "1");
+		entryFadeOut = new CEntry(CGConstants.DATAID_NONE, "GUI:title.fade_out", "1");
 	}
 
 	@Override

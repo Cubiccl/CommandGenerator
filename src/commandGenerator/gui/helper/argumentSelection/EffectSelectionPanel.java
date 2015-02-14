@@ -10,6 +10,7 @@ import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.CEntry;
+import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.gui.helper.components.NumberSpinner;
@@ -20,6 +21,7 @@ import commandGenerator.main.DisplayHelper;
 public class EffectSelectionPanel extends HelperPanel implements IBox
 {
 
+	private CLabel labelTicks;
 	private CCheckBox checkboxHideParticles;
 	private CComboBox comboboxEffect;
 	private CEntry entryDuration;
@@ -36,6 +38,7 @@ public class EffectSelectionPanel extends HelperPanel implements IBox
 	{
 		addLine(comboboxEffect, labelImage);
 		add(entryDuration);
+		add(labelTicks);
 		add(spinnerAmplifier);
 		add(checkboxHideParticles);
 	}
@@ -43,6 +46,8 @@ public class EffectSelectionPanel extends HelperPanel implements IBox
 	@Override
 	protected void createComponents()
 	{
+		labelTicks = new CLabel("GUI:effect.ticks");
+		
 		labelImage = new JLabel();
 		try
 		{
@@ -52,7 +57,7 @@ public class EffectSelectionPanel extends HelperPanel implements IBox
 			DisplayHelper.missingTexture("effects/speed.png");
 		}
 
-		entryDuration = new CEntry(CGConstants.DATAID_NONE, "GUI:effect.duration");
+		entryDuration = new CEntry(CGConstants.DATAID_NONE, "GUI:effect.duration", "600");
 
 		spinnerAmplifier = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:effect.amplifier", 1, 256, null);
 

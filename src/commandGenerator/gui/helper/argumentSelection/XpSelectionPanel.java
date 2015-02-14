@@ -28,7 +28,7 @@ public class XpSelectionPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		entryXp = new CEntry(CGConstants.DATAID_VALUE, "GUI:xp.xp");
+		entryXp = new CEntry(CGConstants.DATAID_VALUE, "GUI:xp.xp", "1");
 
 		checkboxLevel = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:xp.levels");
 	}

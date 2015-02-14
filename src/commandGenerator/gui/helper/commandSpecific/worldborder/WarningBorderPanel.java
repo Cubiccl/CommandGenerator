@@ -37,7 +37,7 @@ public class WarningBorderPanel extends HelperPanel
 	{
 		labelMode = new CLabel("GUI:worldborder.mode");
 
-		entryValue = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.warning.distance");
+		entryValue = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.warning.distance", "10");
 
 		comboboxMode = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:worldborder.warning.mode", 2);
 	}

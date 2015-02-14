@@ -45,7 +45,7 @@ public class ParticleOptionsPanel extends OptionsPanel
 
 		panelParticle = new ParticleSelectionPanel("GUI:particle");
 		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:particle.start", true, false);
-		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:particle.end", true, false);
+		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:particle.end", false, false);
 		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 		panelEntity.setEnabled(false);
 		panelEntity.setEnabledContent(false);

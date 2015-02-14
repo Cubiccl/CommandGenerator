@@ -16,17 +16,14 @@ public class Coordinates
 	public static Coordinates generateFrom(String x, String y, String z)
 	{
 		double cx, cy, cz;
-		boolean relative = x.startsWith("~");
+		boolean[] relative = { x.startsWith("~"), y.startsWith("~"), z.startsWith("~") };
 
 		try
 		{
 
-			if (relative)
-			{
-				x = x.substring(1);
-				y = y.substring(1);
-				z = z.substring(1);
-			}
+			if (relative[0]) x = x.substring(1);
+			if (relative[1]) y = y.substring(1);
+			if (relative[2]) z = z.substring(1);
 
 			if (!x.equals("")) cx = Double.parseDouble(x);
 			else cx = 0;
@@ -51,17 +48,14 @@ public class Coordinates
 	public static Coordinates generateFromWithRot(String x, String y, String z, float rotX, float rotY)
 	{
 		double cx, cy, cz;
-		boolean relative = x.startsWith("~");
+		boolean[] relative = { x.startsWith("~"), y.startsWith("~"), z.startsWith("~") };
 
 		try
 		{
 
-			if (relative)
-			{
-				x = x.substring(1);
-				y = y.substring(1);
-				z = z.substring(1);
-			}
+			if (relative[0]) x = x.substring(1);
+			if (relative[1]) y = y.substring(1);
+			if (relative[2]) z = z.substring(1);
 
 			if (!x.equals("")) cx = Double.parseDouble(x);
 			else cx = 0;
@@ -81,11 +75,14 @@ public class Coordinates
 		}
 
 	}
+
 	/** Details about this Coordinates. */
-	private boolean areRelative, isRotation;
+	private boolean isRotation;
 
 	/** The Coordinates' positions. */
 	private double x, y, z;
+
+	private boolean[] relativeness;
 
 	/** The Coordinates rotations. */
 	private float xRotation, yRotation;
@@ -93,23 +90,23 @@ public class Coordinates
 	/** Creates new Coordinates. */
 	public Coordinates(double x, double y, double z)
 	{
-		this(x, y, z, false);
+		this(x, y, z, new boolean[] { false, false, false });
 	}
 
 	/** Creates new Coordinates. */
-	public Coordinates(double x, double y, double z, boolean areRelative)
+	public Coordinates(double x, double y, double z, boolean[] relative)
 	{
 
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		this.areRelative = areRelative;
+		this.relativeness = relative;
 
 		this.isRotation = false;
 	}
 
 	/** Creates new Coordinates. */
-	public Coordinates(double x, double y, double z, float xRotation, float yRotation, boolean areRelative)
+	public Coordinates(double x, double y, double z, float xRotation, float yRotation, boolean[] relative)
 	{
 
 		this.x = x;
@@ -117,7 +114,7 @@ public class Coordinates
 		this.z = z;
 		this.xRotation = xRotation;
 		this.yRotation = yRotation;
-		this.areRelative = areRelative;
+		this.relativeness = relative;
 		this.isRotation = true;
 
 	}
@@ -126,19 +123,17 @@ public class Coordinates
 	public String commandStructure()
 	{
 
-		if (x == 0 && y == 0 && z == 0 && this.areRelative)
-		{
-			if (this.isRotation) return "~ ~ ~ " + Float.toString(xRotation) + " " + Float.toString(yRotation);
-			else return "~ ~ ~";
-		}
-
 		String display = "";
-		if (this.areRelative) display += "~";
-		display += Double.toString(x) + " ";
-		if (this.areRelative) display += "~";
-		display += Double.toString(y) + " ";
-		if (this.areRelative) display += "~";
-		display += Double.toString(z);
+		if (relativeness[0]) display += "~";
+		if (x != 0d || !relativeness[0]) display += Double.toString(x);
+		display += " ";
+		
+		if (relativeness[1]) display += "~";
+		if (y != 0d || !relativeness[1]) display += Double.toString(y);
+		display += " ";
+		
+		if (relativeness[2] && relativeness[2]) display += "~";
+		if (z != 0d || !relativeness[2]) display += Double.toString(z);
 
 		if (this.isRotation) display += " " + Float.toString(xRotation) + " " + Float.toString(yRotation);
 
@@ -162,9 +157,10 @@ public class Coordinates
 	}
 
 	/** Returns true if this Coordinates are relative. */
-	public boolean getRelative()
+	public boolean isRelative(int coord)
 	{
-		return areRelative;
+		if (coord > 2 || coord < 0) return false;
+		return relativeness[coord];
 	}
 
 	public float getRot(int rot)

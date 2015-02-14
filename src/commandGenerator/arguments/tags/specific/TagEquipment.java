@@ -8,7 +8,7 @@ public class TagEquipment extends TagList
 
 	public TagEquipment()
 	{
-		super("entity.Equipment", "LIST=mob", "ArmorStand");
+		super("entity.Equipment", "LIST=mob:ArmorStand");
 	}
 
 	@Override

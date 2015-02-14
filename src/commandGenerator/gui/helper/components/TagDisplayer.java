@@ -153,6 +153,12 @@ public class TagDisplayer extends JPanel implements CComponent
 	{
 		list.setEnabled(enable);
 		editorPane.setEnabled(enable);
+		scrollList.setEnabled(enable);
+		scrollPane.setEnabled(enable);
+		if (enable) scrollList.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
+		else scrollList.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+		if (enable) scrollPane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
+		else scrollPane.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 	}
 
 	public void setList(Tag[] nbtTags)

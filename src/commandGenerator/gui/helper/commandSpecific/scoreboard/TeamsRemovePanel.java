@@ -24,7 +24,7 @@ public class TeamsRemovePanel extends ScoreboardPanel
 	@Override
 	protected void createComponents()
 	{
-		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.teams.remove.label");
+		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.teams.remove.label", "");
 	}
 
 	@Override

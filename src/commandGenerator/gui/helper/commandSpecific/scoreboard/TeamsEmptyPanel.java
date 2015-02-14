@@ -24,7 +24,7 @@ public class TeamsEmptyPanel extends ScoreboardPanel
 	@Override
 	protected void createComponents()
 	{
-		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.team");
+		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.team", "");
 	}
 
 	@Override

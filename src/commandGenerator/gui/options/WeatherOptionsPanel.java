@@ -35,7 +35,7 @@ public class WeatherOptionsPanel extends OptionsPanel
 	{
 		labelWeather = new CLabel("GUI:weather.select");
 
-		entryDuration = new CEntry(CGConstants.DATAID_NONE, "GUI:weather.duration");
+		entryDuration = new CEntry(CGConstants.DATAID_NONE, "GUI:weather.duration", "0");
 
 		comboboxWeather = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:weather.type", 3);
 	}

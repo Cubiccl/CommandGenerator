@@ -1,13 +1,18 @@
 package commandGenerator.arguments.tags;
 
+import java.awt.Dialog;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Window;
+import java.awt.event.HierarchyEvent;
+import java.awt.event.HierarchyListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registerer;
@@ -121,7 +126,22 @@ public abstract class Tag extends ObjectBase
 	protected boolean showPanel()
 	{
 		isEmpty = true;
-		boolean cancel = JOptionPane.showConfirmDialog(null, panel, Lang.get("GUI:tag.add") + getName(), JOptionPane.OK_CANCEL_OPTION) != JOptionPane.OK_OPTION;
+
+		panel.addHierarchyListener(new HierarchyListener() {
+			public void hierarchyChanged(HierarchyEvent e)
+			{
+				Window window = SwingUtilities.getWindowAncestor(panel);
+				if (window instanceof Dialog)
+				{
+					Dialog dialog = (Dialog) window;
+					if (!dialog.isResizable())
+					{
+						dialog.setResizable(true);
+					}
+				}
+			}
+		});
+		boolean cancel = JOptionPane.showConfirmDialog(null, panel, Lang.get("GUI:tag.add") + " : " + getName(), JOptionPane.OK_CANCEL_OPTION) != JOptionPane.OK_OPTION;
 		if (!cancel) isEmpty = false;
 		return cancel;
 	}

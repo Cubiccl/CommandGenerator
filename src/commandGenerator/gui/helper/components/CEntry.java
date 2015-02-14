@@ -12,17 +12,18 @@ import commandGenerator.main.CGConstants;
 public class CEntry extends JPanel implements CComponent
 {
 
-	private String id;
+	private String id, defaultValue;
 	private CLabel label;
 	private JTextField text;
 
-	public CEntry(String id, String title)
+	public CEntry(String id, String title, String defaultValue)
 	{
 		super(new GridLayout(1, 2));
 		this.id = id;
+		this.defaultValue = defaultValue;
 
 		label = new CLabel(title);
-		text = new JTextField();
+		text = new JTextField(defaultValue);
 
 		add(label);
 		add(text);
@@ -36,7 +37,7 @@ public class CEntry extends JPanel implements CComponent
 	@Override
 	public void reset()
 	{
-		setTextField("");
+		setTextField(defaultValue);
 	}
 
 	public void setEnabledContent(boolean enabled)

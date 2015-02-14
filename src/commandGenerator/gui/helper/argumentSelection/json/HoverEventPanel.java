@@ -30,16 +30,16 @@ public class HoverEventPanel extends HelperPanel
 	private AchievementSelectionPanel panelStat;
 	private JTextField textfieldText;
 
-	public HoverEventPanel(String title)
+	public HoverEventPanel()
 	{
-		super(CGConstants.DATAID_NONE, title);
+		super(CGConstants.DATAID_NONE, "GUI:json.hover");
 	}
 
 	@Override
 	protected void addComponents()
 	{
 		add(comboboxAction);
-		addLine(textfieldText, panelJson, panelItem, panelStat);
+		addStack(textfieldText, panelJson, panelItem, panelStat);
 	}
 
 	@Override

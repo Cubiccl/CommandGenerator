@@ -39,11 +39,11 @@ public class DropChancesSelectionPanel extends HelperPanel
 	{
 		label = new CLabel("GUI:desc.drop_chances");
 
-		entryHand = new CEntry(CGConstants.DATAID_NONE, "GUI:slot.hand");
-		entryHead = new CEntry(CGConstants.DATAID_NONE, "GUI:slot.head");
-		entryChest = new CEntry(CGConstants.DATAID_NONE, "GUI:slot.chest");
-		entryLegs = new CEntry(CGConstants.DATAID_NONE, "GUI:slot.legs");
-		entryFeet = new CEntry(CGConstants.DATAID_NONE, "GUI:slot.feet");
+		entryHand = new CEntry(CGConstants.DATAID_NONE, "GUI:slot.hand", "1.0");
+		entryHead = new CEntry(CGConstants.DATAID_NONE, "GUI:slot.head", "1.0");
+		entryChest = new CEntry(CGConstants.DATAID_NONE, "GUI:slot.chest", "1.0");
+		entryLegs = new CEntry(CGConstants.DATAID_NONE, "GUI:slot.legs", "1.0");
+		entryFeet = new CEntry(CGConstants.DATAID_NONE, "GUI:slot.feet", "1.0");
 
 		entryHand.setTextField("0");
 		entryHead.setTextField("0");

@@ -12,15 +12,18 @@ import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
+import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.main.CGConstants;
+import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
 @SuppressWarnings("serial")
 public class JsonSelectionPanel extends HelperPanel
 {
 
+	private HelpButton buttonHelpInsertion, buttonHelpHover, buttonHelpClick;
 	private CCheckBox checkboxBold, checkboxUnderlined, checkboxItalic, checkboxStrikethrough, checkboxObfuscated, checkboxHover, checkboxClick;
 	private LangComboBox comboboxMode, comboboxColor;
 	private CEntry entryText, entryInsertion;
@@ -39,34 +42,43 @@ public class JsonSelectionPanel extends HelperPanel
 	protected void addComponents()
 	{
 		add(comboboxMode);
-		addLine(entryText, panelEntity, panelScore);
+		addStack(entryText, panelEntity, panelScore);
 		add(comboboxColor);
 		add(checkboxBold);
 		add(checkboxUnderlined);
 		add(checkboxItalic);
 		add(checkboxStrikethrough);
 		add(checkboxObfuscated);
-		add(entryInsertion);
-		add(entryInsertion);
-		if (events) add(checkboxHover);
-		if (events) add(panelHover);
-		if (events) add(checkboxClick);
-		if (events) add(panelClick);
+		addLine(entryInsertion, buttonHelpInsertion);
+		if (events)
+		{
+			addLine(checkboxClick, buttonHelpClick);
+			add(panelClick);
+			addLine(checkboxHover, buttonHelpHover);
+			add(panelHover);
+		}
 	}
 
 	@Override
 	protected void createComponents()
 	{
-		entryText = new CEntry(CGConstants.DATAID_NONE, "GUI:json.text");
-		entryInsertion = new CEntry(CGConstants.DATAID_NONE, "GUI:json.insertion");
+		buttonHelpInsertion = new HelpButton(Lang.get("HELP:json.insertion"), "GUI:json.insertion");
+		buttonHelpHover = new HelpButton(Lang.get("HELP:json.hover"), "GUI:json.hover");
+		buttonHelpClick = new HelpButton(Lang.get("HELP:json.click"), "GUI:json.click");
+
+		entryText = new CEntry(CGConstants.DATAID_NONE, "GUI:json.text", "");
+		entryInsertion = new CEntry(CGConstants.DATAID_NONE, "GUI:json.insertion", "");
 
 		checkboxBold = new CCheckBox(CGConstants.DATAID_NONE, "GUI:json.bold");
 		checkboxUnderlined = new CCheckBox(CGConstants.DATAID_NONE, "GUI:json.underlined");
 		checkboxItalic = new CCheckBox(CGConstants.DATAID_NONE, "GUI:json.italic");
 		checkboxStrikethrough = new CCheckBox(CGConstants.DATAID_NONE, "GUI:json.strikethrough");
 		checkboxObfuscated = new CCheckBox(CGConstants.DATAID_NONE, "GUI:json.obfuscated");
-		if (events) checkboxHover = new CCheckBox(CGConstants.DATAID_NONE, "GUI:json.hover.use");
-		if (events) checkboxClick = new CCheckBox(CGConstants.DATAID_NONE, "GUI:json.click.use");
+		if (events)
+		{
+			checkboxHover = new CCheckBox(CGConstants.DATAID_NONE, "GUI:json.hover.use");
+			checkboxClick = new CCheckBox(CGConstants.DATAID_NONE, "GUI:json.click.use");
+		}
 
 		comboboxMode = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:json.mode", 3);
 		comboboxColor = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:color", 16);
@@ -76,13 +88,34 @@ public class JsonSelectionPanel extends HelperPanel
 		panelEntity.setVisible(false);
 		panelScore = new ScoreDisplayPanel("GUI:json.display.score");
 		panelScore.setVisible(false);
-		if (events) panelHover = new HoverEventPanel("GUI:json.hover");
-		if (events) panelClick = new ClickEventPanel("GUI:json.click");
+		if (events)
+		{
+			panelHover = new HoverEventPanel();
+			panelClick = new ClickEventPanel();
+
+			panelHover.setEnabledContent(false);
+			panelClick.setEnabledContent(false);
+		}
 	}
 
 	@Override
 	protected void createListeners()
 	{
+		if (events)
+		{
+			checkboxClick.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e)
+				{
+					panelClick.setEnabledContent(checkboxClick.isSelected());
+				}
+			});
+			checkboxHover.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e)
+				{
+					panelHover.setEnabledContent(checkboxHover.isSelected());
+				}
+			});
+		}
 		comboboxMode.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)

@@ -54,7 +54,7 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 		textfieldCount = new JTextField(15);
 		textfieldCount.setEnabled(false);
 
-		entrySpeed = new CEntry(CGConstants.DATAID_NONE, "GUI:particle.speed");
+		entrySpeed = new CEntry(CGConstants.DATAID_NONE, "GUI:particle.speed", "1");
 
 		checkboxCount = new CCheckBox(CGConstants.DATAID_NONE, "GUI:particle.count");
 

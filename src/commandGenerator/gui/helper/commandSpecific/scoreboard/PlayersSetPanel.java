@@ -29,8 +29,8 @@ public class PlayersSetPanel extends ScoreboardPanel
 	@Override
 	protected void createComponents()
 	{
-		entryObjective = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective");
-		entryScore = new CEntry(CGConstants.DATAID_VALUE, "GUI:scoreboard.score");
+		entryObjective = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective", "");
+		entryScore = new CEntry(CGConstants.DATAID_VALUE, "GUI:scoreboard.score", "1");
 
 		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 	}

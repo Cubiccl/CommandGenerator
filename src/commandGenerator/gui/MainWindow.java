@@ -2,6 +2,8 @@ package commandGenerator.gui;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -32,6 +34,7 @@ public class MainWindow extends JFrame
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		panelGeneral = new PanelCommandSelection(true);
+		panelGeneral.setSize(new Dimension(getSize().width - 10, getSize().height - 10));
 		JScrollPane scrollpane = new JScrollPane(panelGeneral);
 		scrollpane.getVerticalScrollBar().setUnitIncrement(20);
 		menubar = new CGMenubar();
@@ -39,6 +42,12 @@ public class MainWindow extends JFrame
 		add(scrollpane);
 		setJMenuBar(menubar);
 
+		addWindowStateListener(new WindowStateListener() {
+			public void windowStateChanged(WindowEvent arg0)
+			{
+				panelGeneral.setSize(new Dimension(getSize().width - 10, getSize().height - 10));
+			}
+		});
 	}
 
 	public void updateLang()
