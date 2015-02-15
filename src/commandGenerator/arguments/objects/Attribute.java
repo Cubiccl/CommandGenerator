@@ -37,7 +37,7 @@ public class Attribute
 
 		if (operation < 2 && amount >= 0) display += "+";
 
-		if (operation > 0) display += Double.toString(amount * 100) + "% " + type.getName();
+		if (operation > 0) display += Double.toString(amount) + "% " + type.getName();
 		else display += Double.toString(amount) + " " + type.getName();
 
 		return display;

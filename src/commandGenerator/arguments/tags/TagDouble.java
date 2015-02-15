@@ -34,7 +34,7 @@ public class TagDouble extends Tag
 	@Override
 	public void askValue()
 	{
-		label.setText(getDescription());
+		label.setText("<html>" + getDescription().replaceAll("\n", "<br />") + "</html>");
 		textfield.setText(Double.toString(value));
 		if (showPanel()) return;
 		if (!isValueOk(textfield.getText())) return;

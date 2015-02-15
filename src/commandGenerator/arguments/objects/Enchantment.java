@@ -46,7 +46,7 @@ public class Enchantment
 	/** Returns a String version of this Enchantment to be displayed to the user. */
 	public String display()
 	{
-		return Lang.get("GUI:enchant.display").replaceAll("<type>", Lang.get("ENCHANTS:" + type.getId())).replaceAll("<lvl>", Integer.toString(level + 1));
+		return Lang.get("GUI:enchant.display").replaceAll("<type>", Lang.get("ENCHANTS:" + type.getId())).replaceAll("<lvl>", Integer.toString(level));
 	}
 
 	/** Returns this Enchantment's level. */
@@ -71,7 +71,7 @@ public class Enchantment
 	/** Checks if the Enchantment is valid. */
 	public boolean isCorrect()
 	{
-		if (checkMax && (level > type.getMax() || level < 0))
+		if (checkMax && (level > type.getMax() || level < 1))
 		{
 			JOptionPane.showMessageDialog(null, Lang.get("WARNING:enchant.wrong_level").replaceAll("<max>", Integer.toString(type.getMax())),
 					Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);

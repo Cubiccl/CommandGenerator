@@ -36,7 +36,7 @@ public class TagString extends Tag
 	@Override
 	public void askValue()
 	{
-		label.setText(getDescription());
+		label.setText("<html>" + getDescription().replaceAll("\n", "<br />") + "</html>");
 		if (choices == null)
 		{
 			textfield.setText(value);

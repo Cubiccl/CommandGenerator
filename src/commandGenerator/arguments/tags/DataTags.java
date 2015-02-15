@@ -27,6 +27,7 @@ import commandGenerator.arguments.tags.specific.TagPos;
 import commandGenerator.arguments.tags.specific.TagPose;
 import commandGenerator.arguments.tags.specific.TagRiding;
 import commandGenerator.arguments.tags.specific.TagRotation;
+import commandGenerator.arguments.tags.specific.TagSpawnData;
 import commandGenerator.arguments.tags.specific.TagSpawnPotentials;
 import commandGenerator.main.DisplayHelper;
 
@@ -244,6 +245,7 @@ public class DataTags
 	{
 		String id = tagData[0];
 		if (id.equals("SpawnPotentials")) return new TagSpawnPotentials();
+		if (id.equals("SpawnData")) return new TagSpawnData();
 		if (id.equals("Patterns")) return new TagPatterns();
 
 		if (id.equals("display")) return new TagDisplay();

@@ -8,6 +8,7 @@ import java.awt.event.WindowStateListener;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
+import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
@@ -32,6 +33,12 @@ public class MainWindow extends JFrame
 		setResizable(true);
 		setLayout(new GridLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		try
+		{
+			setIconImage(Registerer.getObjectFromId("command_block").getTexture().getImage());
+		} catch (Exception e)
+		{
+		}
 
 		panelGeneral = new PanelCommandSelection(true);
 		panelGeneral.setSize(new Dimension(getSize().width - 10, getSize().height - 10));

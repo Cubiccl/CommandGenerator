@@ -76,7 +76,7 @@ public class EnchantSelectionPanel extends HelperPanel implements IBox
 				return null;
 			}
 		}
-		Enchantment enchant = new Enchantment((EnchantType) comboboxEnchant.getValue(), level - 1, limited);
+		Enchantment enchant = new Enchantment((EnchantType) comboboxEnchant.getValue(), level, limited);
 		if (limited & !enchant.isCorrect()) return null;
 		return enchant;
 	}

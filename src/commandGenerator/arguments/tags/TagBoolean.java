@@ -32,7 +32,7 @@ public class TagBoolean extends Tag
 	public void askValue()
 	{
 
-		label.setText(getDescription());
+		label.setText("<html>" + getDescription().replaceAll("\n", "<br />") + "</html>");
 		combobox.setSelectedIndex(0);
 		if (!value) combobox.setSelectedIndex(1);
 		if (showPanel()) return;

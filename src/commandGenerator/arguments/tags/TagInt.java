@@ -42,13 +42,13 @@ public class TagInt extends Tag
 		panel.removeAll();
 		gbc.gridy = 0;
 		panel.add(label, gbc);
-		label.setText(getDescription());
+		label.setText("<html>" + getDescription().replaceAll("\n", "<br />") + "</html>");
 
 		if (choicesId == null)
 		{
 			textfield = new JTextField(15);
 			textfield.setText(Integer.toString(value));
-			gbc.gridx++;
+			gbc.gridy++;
 			panel.add(textfield, gbc);
 			if (showPanel()) return;
 			if (!isValueOk(textfield.getText())) return;
@@ -60,7 +60,7 @@ public class TagInt extends Tag
 				names[i] = Lang.get("RESOURCES:" + choicesId + "_" + i);
 
 			JComboBox<String> combobox = new JComboBox<String>(names);
-			gbc.gridx++;
+			gbc.gridy++;
 			panel.add(combobox, gbc);
 
 			if (showPanel()) return;
