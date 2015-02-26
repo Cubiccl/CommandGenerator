@@ -15,7 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class TextCombobox extends JPanel implements CComponent
@@ -151,7 +151,7 @@ public class TextCombobox extends JPanel implements CComponent
 	@Override
 	public void setupFrom(Map<String, Object> data)
 	{
-		if (!id.equals(Constants.DATAID_NONE)) box.setSelectedIndex((int) data.get(id));
+		if (!id.equals(CGConstants.DATAID_NONE)) box.setSelectedIndex((int) data.get(id));
 	}
 
 	public void updateLang()

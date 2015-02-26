@@ -15,7 +15,7 @@ import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
@@ -28,7 +28,7 @@ public class SpawnSelectionPanel extends HelperPanel
 
 	public SpawnSelectionPanel()
 	{
-		super(Constants.PANELID_NONE, "GUI:spawn.entity");
+		super(CGConstants.PANELID_NONE, "GUI:spawn.entity");
 	}
 
 	@Override
@@ -43,10 +43,10 @@ public class SpawnSelectionPanel extends HelperPanel
 	{
 		buttonHelp = new HelpButton(Lang.get("HELP:weight"), Lang.get("TAGS:Weight"));
 		
-		entryWeight = new CEntry(Constants.DATAID_NONE, "GUI:spawn.weight", "1");
+		entryWeight = new CEntry(CGConstants.DATAID_NONE, "GUI:spawn.weight", "1");
 		entryWeight.setTextField("1");
 
-		panelEntity = new EntitySelectionPanel(Constants.PANELID_ENTITY, "GUI:entity.select", Entity.getListNoPlayer());
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_ENTITY, "GUI:entity.select", Entity.getListNoPlayer());
 	}
 
 	@Override
@@ -97,8 +97,8 @@ public class SpawnSelectionPanel extends HelperPanel
 			{
 				System.out.println(sel.getName());
 				Map<String, Object> data = new HashMap<String, Object>();
-				data.put(Constants.PANELID_ENTITY, sel);
-				data.put(Constants.PANELID_NBT, ((TagCompound) tag).getValue());
+				data.put(CGConstants.PANELID_ENTITY, sel);
+				data.put(CGConstants.PANELID_NBT, ((TagCompound) tag).getValue());
 				panelEntity.setupFrom(data);
 			}
 		}

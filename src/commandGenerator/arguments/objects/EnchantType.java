@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.swing.ImageIcon;
 
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 
 public class EnchantType extends ObjectBase
@@ -37,7 +37,7 @@ public class EnchantType extends ObjectBase
 	 *            - <i>int</i> - The Enchantment's max level. */
 	public EnchantType(int idNum, String idString, int max)
 	{
-		super(idString, Constants.OBJECT_ENCHANT);
+		super(idString, CGConstants.OBJECT_ENCHANT);
 		this.idNum = idNum;
 		this.max = max;
 		enchants.put(idNum, this);

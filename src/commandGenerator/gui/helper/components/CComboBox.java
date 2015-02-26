@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class CComboBox extends JPanel implements CComponent
@@ -183,7 +183,7 @@ public class CComboBox extends JPanel implements CComponent
 
 	public void setupFrom(Map<String, Object> data)
 	{
-		if (!id.equals(Constants.DATAID_NONE)) setSelected((ObjectBase) data.get(id));
+		if (!id.equals(CGConstants.DATAID_NONE)) setSelected((ObjectBase) data.get(id));
 	}
 
 	public void updateLang()

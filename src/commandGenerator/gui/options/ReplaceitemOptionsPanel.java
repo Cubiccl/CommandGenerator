@@ -9,7 +9,7 @@ import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
 import commandGenerator.gui.helper.commandSpecific.ReplaceitemEntityPanel;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class ReplaceitemOptionsPanel extends OptionsPanel
@@ -39,12 +39,12 @@ public class ReplaceitemOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		comboboxMode = new LangComboBox(Constants.DATAID_MODE, "RESOURCES:replaceitem.mode", 2);
+		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:replaceitem.mode", 2);
 
-		panelBlock = new CoordSelectionPanel(Constants.PANELID_COORDS, "GUI:block.coords", true, false);
+		panelBlock = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:block.coords", true, false);
 		panelEntity = new ReplaceitemEntityPanel();
 		panelEntity.setVisible(false);
-		panelItem = new ItemSelectionPanel(Constants.PANELID_ITEM, "GUI:replaceitem.item", Registerer.getList(Constants.LIST_ITEMS), true, true);
+		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:replaceitem.item", Registerer.getList(CGConstants.LIST_ITEMS), true, true);
 	}
 
 	@Override

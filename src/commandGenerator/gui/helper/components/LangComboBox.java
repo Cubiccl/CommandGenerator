@@ -7,7 +7,7 @@ import java.util.Map;
 
 import javax.swing.JComboBox;
 
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
@@ -56,7 +56,7 @@ public class LangComboBox extends JComboBox<String> implements CComponent
 	@Override
 	public void setupFrom(Map<String, Object> data)
 	{
-		if (!id.equals(Constants.DATAID_NONE)) setSelectedIndex((int) data.get(id));
+		if (!id.equals(CGConstants.DATAID_NONE)) setSelectedIndex((int) data.get(id));
 	}
 
 	public void updateLang()

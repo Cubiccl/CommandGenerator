@@ -5,7 +5,7 @@ import commandGenerator.arguments.tags.TagList;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.dataTag.ListSelectionPanel;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class TellrawOptionsPanel extends OptionsPanel
@@ -29,8 +29,8 @@ public class TellrawOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		panelPlayer = new TargetSelectionPanel(Constants.PANELID_TARGET, "GENERAL:target.player", Constants.ENTITIES_PLAYERS);
-		panelJson = new ListSelectionPanel("GUI:json.text", Constants.OBJECT_JSON);
+		panelPlayer = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelJson = new ListSelectionPanel("GUI:json.text", CGConstants.OBJECT_JSON);
 	}
 
 	@Override

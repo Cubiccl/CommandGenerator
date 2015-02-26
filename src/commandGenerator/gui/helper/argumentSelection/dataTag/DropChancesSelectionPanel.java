@@ -8,7 +8,7 @@ import commandGenerator.arguments.tags.TagFloat;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -20,7 +20,7 @@ public class DropChancesSelectionPanel extends HelperPanel
 
 	public DropChancesSelectionPanel(String title)
 	{
-		super(Constants.DATAID_NONE, title);
+		super(CGConstants.DATAID_NONE, title);
 	}
 
 	@Override
@@ -39,11 +39,11 @@ public class DropChancesSelectionPanel extends HelperPanel
 	{
 		label = new CLabel("GUI:desc.drop_chances");
 
-		entryHand = new CEntry(Constants.DATAID_NONE, "GUI:slot.hand", "1.0");
-		entryHead = new CEntry(Constants.DATAID_NONE, "GUI:slot.head", "1.0");
-		entryChest = new CEntry(Constants.DATAID_NONE, "GUI:slot.chest", "1.0");
-		entryLegs = new CEntry(Constants.DATAID_NONE, "GUI:slot.legs", "1.0");
-		entryFeet = new CEntry(Constants.DATAID_NONE, "GUI:slot.feet", "1.0");
+		entryHand = new CEntry(CGConstants.DATAID_NONE, "GUI:slot.hand", "1.0");
+		entryHead = new CEntry(CGConstants.DATAID_NONE, "GUI:slot.head", "1.0");
+		entryChest = new CEntry(CGConstants.DATAID_NONE, "GUI:slot.chest", "1.0");
+		entryLegs = new CEntry(CGConstants.DATAID_NONE, "GUI:slot.legs", "1.0");
+		entryFeet = new CEntry(CGConstants.DATAID_NONE, "GUI:slot.feet", "1.0");
 
 		entryHand.setTextField("0");
 		entryHead.setTextField("0");

@@ -4,7 +4,7 @@ import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.XpSelectionPanel;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class XpOptionsPanel extends OptionsPanel
@@ -28,7 +28,7 @@ public class XpOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		panelEntity = new TargetSelectionPanel(Constants.PANELID_TARGET, "GENERAL:target.player", Constants.ENTITIES_PLAYERS);
+		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
 		panelXp = new XpSelectionPanel("GUI:xp.xp");
 	}
 

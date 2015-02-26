@@ -6,7 +6,7 @@ import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class SummonOptionsPanel extends OptionsPanel
@@ -30,8 +30,8 @@ public class SummonOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		panelCoord = new CoordSelectionPanel(Constants.PANELID_COORDS, "GUI:summon.coords", true, false);
-		panelEntity = new EntitySelectionPanel(Constants.PANELID_ENTITY, "GUI:entity.title", Entity.getListNoPlayer());
+		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:summon.coords", true, false);
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_ENTITY, "GUI:entity.title", Entity.getListNoPlayer());
 	}
 
 	@Override

@@ -1,15 +1,12 @@
 package commandGenerator.main;
 
-import java.util.Scanner;
-
 import commandGenerator.arguments.objects.Command;
-import commandGenerator.gui.SettingsPanel;
 
 public class Settings
 {
 
-	public static final String[] languages = { "english" };
-	public static final String[] languageNames = { "English (US)" };
+	public static final int ENGLISH = 0, ENGLISH_GB = 1;
+	public static final String[] languages = { "english", "english_gb" };
 
 	/** Is it the first launch? */
 	public boolean firstLaunch;
@@ -19,8 +16,6 @@ public class Settings
 	public String previousVersion;
 	/** The selected command. */
 	public Command selectedCommand;
-	/** The path to the save folder */
-	private String folder;
 
 	/** Creates new Settings. */
 	public Settings()
@@ -61,11 +56,6 @@ public class Settings
 		this.language = language;
 		FileHelper.setOption("lang", Integer.toString(language));
 		Lang.updateLang();
-	}
-
-	public void update(SettingsPanel panel)
-	{
-		setLanguage(panel.getLanguage());
 	}
 
 }

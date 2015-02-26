@@ -7,7 +7,7 @@ import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class EntityDataOptionsPanel extends OptionsPanel
@@ -36,8 +36,8 @@ public class EntityDataOptionsPanel extends OptionsPanel
 	{
 		labelExplain = new CLabel("GUI:entity.explain", true);
 
-		panelSelector = new TargetSelectionPanel(Constants.PANELID_TARGET, "GENERAL:target.entity", Constants.ENTITIES_ALL);
-		panelEntity = new EntitySelectionPanel(Constants.PANELID_ENTITY, "GUI:entity.title", Registerer.getObjectList(Constants.OBJECT_ENTITY));
+		panelSelector = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_ENTITY, "GUI:entity.title", Registerer.getObjectList(CGConstants.OBJECT_ENTITY));
 	}
 
 	@Override

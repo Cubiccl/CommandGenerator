@@ -4,7 +4,7 @@ import java.util.Map;
 
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -15,7 +15,7 @@ public class CenterBorderPanel extends HelperPanel
 
 	public CenterBorderPanel()
 	{
-		super(Constants.PANELID_OPTIONS, "GENERAL:options");
+		super(CGConstants.PANELID_OPTIONS, "GENERAL:options");
 	}
 
 	@Override
@@ -28,8 +28,8 @@ public class CenterBorderPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		entryX = new CEntry(Constants.DATAID_NONE, "GUI:coord.x", "0");
-		entryZ = new CEntry(Constants.DATAID_NONE, "GUI:coord.z", "0");
+		entryX = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.x", "0");
+		entryZ = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.z", "0");
 	}
 
 	@Override

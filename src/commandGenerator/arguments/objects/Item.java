@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
@@ -34,7 +34,7 @@ public class Item extends ObjectBase
 	 *            - <i>String</i> - The Item's text ID. */
 	public Item(boolean isBlock, int idNum, String idString)
 	{
-		super(idString, Constants.OBJECT_ITEM);
+		super(idString, CGConstants.OBJECT_ITEM);
 		this.isBlock = isBlock;
 		this.idNum = idNum;
 		this.maxDamage = 0;

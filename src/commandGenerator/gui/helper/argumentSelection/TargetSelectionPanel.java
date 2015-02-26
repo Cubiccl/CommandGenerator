@@ -30,7 +30,7 @@ import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
@@ -135,7 +135,7 @@ public class TargetSelectionPanel extends HelperPanel
 		} else if (selector.equals("type"))
 		{
 
-			CComboBox box = new CComboBox(Constants.DATAID_NONE, "GUI:selector.type", Registerer.getObjectList(Constants.OBJECT_ENTITY), null);
+			CComboBox box = new CComboBox(CGConstants.DATAID_NONE, "GUI:selector.type", Registerer.getObjectList(CGConstants.OBJECT_ENTITY), null);
 			boolean cancel = DisplayHelper.showQuestion(box, title);
 			if (cancel) return;
 			value = box.getValue().getId();
@@ -206,7 +206,7 @@ public class TargetSelectionPanel extends HelperPanel
 		labelSelector = new CLabel("GUI:selector.choose");
 		labelSelectors = new CLabel("GUI:selector.list");
 
-		entryPlayer = new CEntry(Constants.DATAID_NONE, "GUI:player.name", "");
+		entryPlayer = new CEntry(CGConstants.DATAID_NONE, "GUI:player.name", "");
 		entryPlayer.setEnabledContent(false);
 
 		buttonHelpEntity = new HelpButton(Lang.get("HELP:selector." + targets[0]), targets[0]);
@@ -360,10 +360,10 @@ public class TargetSelectionPanel extends HelperPanel
 		addedSelectors = new ArrayList<String[]>();
 		switch (mode)
 		{
-			case Constants.ENTITIES_PLAYERS:
+			case CGConstants.ENTITIES_PLAYERS:
 				targets = new String[] { "@a", "@p", "@r", Lang.get("GUI:selector.player") };
 				break;
-			case Constants.ENTITIES_NPCS:
+			case CGConstants.ENTITIES_NPCS:
 				targets = new String[] { "@e" };
 				break;
 
@@ -408,10 +408,10 @@ public class TargetSelectionPanel extends HelperPanel
 
 		switch (mode)
 		{
-			case Constants.ENTITIES_PLAYERS:
+			case CGConstants.ENTITIES_PLAYERS:
 				targets = new String[] { "@a", "@p", "@r", Lang.get("GUI:selector.player") };
 				break;
-			case Constants.ENTITIES_NPCS:
+			case CGConstants.ENTITIES_NPCS:
 				targets = new String[] { "@e" };
 				break;
 

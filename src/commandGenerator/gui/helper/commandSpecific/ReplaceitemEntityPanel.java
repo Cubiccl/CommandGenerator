@@ -14,7 +14,7 @@ import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class ReplaceitemEntityPanel extends HelperPanel
@@ -27,7 +27,7 @@ public class ReplaceitemEntityPanel extends HelperPanel
 
 	public ReplaceitemEntityPanel()
 	{
-		super(Constants.PANELID_OPTIONS, "GUI:replaceitem.entity.title");
+		super(CGConstants.PANELID_OPTIONS, "GUI:replaceitem.entity.title");
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class ReplaceitemEntityPanel extends HelperPanel
 		spinnerSlot.setPreferredSize(new Dimension(100, 20));
 		spinnerSlot.setMinimumSize(new Dimension(100, 20));
 
-		panelEntity = new TargetSelectionPanel(Constants.PANELID_TARGET, "GENERAL:target.entity", Constants.ENTITIES_ALL);
+		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 	}
 
 	@Override
@@ -133,7 +133,7 @@ public class ReplaceitemEntityPanel extends HelperPanel
 	public void setupFrom(Map<String, Object> data)
 	{
 		super.setupFrom(data);
-		Object[] slot = (Object[]) data.get(Constants.DATAID_VALUE);
+		Object[] slot = (Object[]) data.get(CGConstants.DATAID_VALUE);
 		if (slot == null) return;
 
 		comboboxSlot.setSelectedIndex((int) slot[0]);

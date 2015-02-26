@@ -7,7 +7,7 @@ import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
@@ -45,12 +45,12 @@ public class CloneOptionsPanel extends OptionsPanel implements IBox
 		buttonHelp1 = new HelpButton(Lang.get("HELP:setblock.mode_0"), Lang.get("RESOURCES:setblock.mode_0"));
 		buttonHelp2 = new HelpButton(Lang.get("HELP:clone.mode_0"), Lang.get("RESOURCES:clone.mode_0"));
 
-		panelCoord1 = new CoordSelectionPanel(Constants.PANELID_COORDS_START, "GUI:clone.start", true, false);
-		panelCoord2 = new CoordSelectionPanel(Constants.PANELID_COORDS_END, "GUI:clone.end", true, false);
-		panelDestination = new CoordSelectionPanel(Constants.PANELID_COORDS, "GUI:clone.destination", true, false);
+		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:clone.start", true, false);
+		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:clone.end", true, false);
+		panelDestination = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:clone.destination", true, false);
 
-		comboboxMode1 = new LangComboBox(Constants.DATAID_MODE, "RESOURCES:setblock.mode", 3);
-		comboboxMode2 = new LangComboBox(Constants.DATAID_MODE2, "RESOURCES:clone.mode", 3);
+		comboboxMode1 = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:setblock.mode", 3);
+		comboboxMode2 = new LangComboBox(CGConstants.DATAID_MODE2, "RESOURCES:clone.mode", 3);
 		comboboxMode1.addListener(this);
 		comboboxMode2.addListener(this);
 	}

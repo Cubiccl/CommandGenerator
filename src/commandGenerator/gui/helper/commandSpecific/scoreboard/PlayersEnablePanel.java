@@ -3,7 +3,7 @@ package commandGenerator.gui.helper.commandSpecific.scoreboard;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CEntry;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -28,9 +28,9 @@ public class PlayersEnablePanel extends ScoreboardPanel
 	@Override
 	protected void createComponents()
 	{
-		entryObjective = new CEntry(Constants.DATAID_NAME, "GUI:scoreboard.objective", "");
+		entryObjective = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective", "");
 
-		panelEntity = new TargetSelectionPanel(Constants.PANELID_TARGET, "GENERAL:target.entity", Constants.ENTITIES_ALL);
+		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.gui.helper.components.NumberSpinner;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
@@ -41,13 +41,13 @@ public class EnchantSelectionPanel extends HelperPanel implements IBox
 	@Override
 	protected void createComponents()
 	{
-		entryLevel = new CEntry(Constants.DATAID_NONE, "GUI:enchant.level", "1");
+		entryLevel = new CEntry(CGConstants.DATAID_NONE, "GUI:enchant.level", "1");
 		entryLevel.setVisible(!limited);
 
-		spinnerLevel = new NumberSpinner(Constants.DATAID_NONE, "GUI:enchant.level", 1, 5, null);
+		spinnerLevel = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:enchant.level", 1, 5, null);
 		spinnerLevel.setVisible(limited);
 
-		comboboxEnchant = new CComboBox(Constants.DATAID_NONE, "GUI:enchant.choose", Registerer.getObjectList(Constants.OBJECT_ENCHANT), this);
+		comboboxEnchant = new CComboBox(CGConstants.DATAID_NONE, "GUI:enchant.choose", Registerer.getObjectList(CGConstants.OBJECT_ENCHANT), this);
 	}
 
 	@Override

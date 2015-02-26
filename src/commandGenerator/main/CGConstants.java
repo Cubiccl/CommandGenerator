@@ -1,6 +1,6 @@
 package commandGenerator.main;
 
-public class Constants
+public class CGConstants
 {
 
 	public static final String DATAID_CLEAR_ITEM = "clear_item";

@@ -2,7 +2,7 @@ package commandGenerator.gui.helper.components;
 
 import java.awt.Dimension;
 
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public abstract class OptionsPanel extends HelperPanel implements CComponent
@@ -14,7 +14,7 @@ public abstract class OptionsPanel extends HelperPanel implements CComponent
 	/** Creates a new Options Panel. */
 	public OptionsPanel(Object... details)
 	{
-		super(Constants.PANELID_NONE, "GENERAL:options", details);
+		super(CGConstants.PANELID_NONE, "GENERAL:options", details);
 		setPreferredSize(new Dimension(WIDTH, getPreferredSize().height));
 	}
 

@@ -5,7 +5,7 @@ import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.EffectSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class EffectOptionsPanel extends OptionsPanel
@@ -29,8 +29,8 @@ public class EffectOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		panelEntity = new TargetSelectionPanel(Constants.PANELID_TARGET, "GENERAL:target.entity", Constants.ENTITIES_ALL);
-		panelEffect = new EffectSelectionPanel(Constants.PANELID_EFFECT, "GENERAL:effect");
+		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEffect = new EffectSelectionPanel(CGConstants.PANELID_EFFECT, "GENERAL:effect");
 	}
 
 	@Override

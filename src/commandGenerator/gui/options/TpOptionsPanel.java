@@ -12,7 +12,7 @@ import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
@@ -41,11 +41,11 @@ public class TpOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		panelTarget = new TargetSelectionPanel(Constants.PANELID_TARGET, "GENERAL:target.entity", Constants.ENTITIES_ALL);
-		panelDestinationEntity = new TargetSelectionPanel(Constants.PANELID_TARGET2, "GUI:tp.destination.entity", Constants.ENTITIES_ALL);
+		panelTarget = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelDestinationEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET2, "GUI:tp.destination.entity", CGConstants.ENTITIES_ALL);
 		panelDestinationEntity.setEnabled(false);
 		panelDestinationEntity.setEnabledContent(false);
-		panelDestinationCoords = new CoordSelectionPanel(Constants.PANELID_COORDS, "GUI:tp.destination.coords", true, true);
+		panelDestinationCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:tp.destination.coords", true, true);
 
 		radiobuttonCoords = new JRadioButton(Lang.get("GUI:tp.coords"));
 		radiobuttonCoords.setSelected(true);
@@ -118,10 +118,10 @@ public class TpOptionsPanel extends OptionsPanel
 	public void setupFrom(Map<String, Object> data)
 	{
 		super.setupFrom(data);
-		radiobuttonCoords.setSelected(!(boolean) data.get(Constants.DATAID_ENTITY));
-		radiobuttonEntity.setSelected((boolean) data.get(Constants.DATAID_ENTITY));
-		panelDestinationCoords.setEnabledContent(!(boolean) data.get(Constants.DATAID_ENTITY));
-		panelDestinationEntity.setEnabledContent((boolean) data.get(Constants.DATAID_ENTITY));
+		radiobuttonCoords.setSelected(!(boolean) data.get(CGConstants.DATAID_ENTITY));
+		radiobuttonEntity.setSelected((boolean) data.get(CGConstants.DATAID_ENTITY));
+		panelDestinationCoords.setEnabledContent(!(boolean) data.get(CGConstants.DATAID_ENTITY));
+		panelDestinationEntity.setEnabledContent((boolean) data.get(CGConstants.DATAID_ENTITY));
 	}
 
 	@Override

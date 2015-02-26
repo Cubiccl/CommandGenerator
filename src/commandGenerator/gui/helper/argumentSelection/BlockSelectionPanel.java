@@ -20,7 +20,7 @@ import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.gui.helper.components.ISpin;
 import commandGenerator.gui.helper.components.NumberSpinner;
 import commandGenerator.gui.helper.components.TextCombobox;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
@@ -76,12 +76,12 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 		labelName.setPreferredSize(new Dimension(200, 20));
 		labelName.setMinimumSize(new Dimension(200, 20));
 
-		spinnerDamage = new NumberSpinner(Constants.DATAID_NONE, "GUI:block.damage", 0, 0, this);
+		spinnerDamage = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:block.damage", 0, 0, this);
 
 		String[] ids = new String[blockList.length];
 		for (int i = 0; i < ids.length; i++)
 			ids[i] = blockList[i].getId();
-		comboboxId = new TextCombobox(Constants.DATAID_NONE, "GUI:block.id", ids, this);
+		comboboxId = new TextCombobox(CGConstants.DATAID_NONE, "GUI:block.id", ids, this);
 
 		if (data) panelData = new NBTTagPanel("GUI:tag.block", blockList[0], DataTags.blocks);
 	}
@@ -145,7 +145,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 		spinnerDamage.setSelected(block.getDamage());
 		if (this.data)
 		{
-			if (block.getTag() != null) data.put(Constants.PANELID_NBT, block.getTag().getValue());
+			if (block.getTag() != null) data.put(CGConstants.PANELID_NBT, block.getTag().getValue());
 			panelData.setupFrom(data);
 		}
 	}

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.swing.ImageIcon;
 
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
@@ -33,7 +33,7 @@ public class EffectType extends ObjectBase
 	 *            - <i>String</i> - The Effect's text ID. */
 	public EffectType(int idNum, String idString)
 	{
-		super(idString, Constants.OBJECT_EFFECT);
+		super(idString, CGConstants.OBJECT_EFFECT);
 		this.idNum = idNum;
 		effects.put(idNum, this);
 	}

@@ -3,7 +3,7 @@ package commandGenerator.arguments.tags.specific;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.gui.helper.argumentSelection.dataTag.ListSelectionPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 public class TagOffers extends TagCompound
 {
@@ -20,7 +20,7 @@ public class TagOffers extends TagCompound
 	@Override
 	public void askValue()
 	{
-		panel = new ListSelectionPanel("TAGS:Offers", Constants.OBJECT_TAG_TRADE);
+		panel = new ListSelectionPanel("TAGS:Offers", CGConstants.OBJECT_TAG_TRADE);
 		((ListSelectionPanel) panel).setList(((TagList) get(0)).getValue());
 
 		if (showPanel()) return;

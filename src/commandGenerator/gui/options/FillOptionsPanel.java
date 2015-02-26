@@ -10,7 +10,7 @@ import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
@@ -43,16 +43,16 @@ public class FillOptionsPanel extends OptionsPanel implements IBox
 	{
 		buttonHelp = new HelpButton(Lang.get("HELP:fill.mode_0"), Lang.get("RESOURCES:fill.mode_0"));
 
-		comboboxMode = new LangComboBox(Constants.DATAID_MODE, "RESOURCES:fill.mode", 5);
-		comboboxModeFill = new LangComboBox(Constants.DATAID_MODE2, "RESOURCES:fill.mode2", 2);
+		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:fill.mode", 5);
+		comboboxModeFill = new LangComboBox(CGConstants.DATAID_MODE2, "RESOURCES:fill.mode2", 2);
 		comboboxMode.addListener(this);
 		comboboxModeFill.addListener(this);
 
-		panelCoordStart = new CoordSelectionPanel(Constants.PANELID_COORDS_START, "GUI:fill.start", true, false);
-		panelCoordEnd = new CoordSelectionPanel(Constants.PANELID_COORDS_END, "GUI:fill.end", true, false);
+		panelCoordStart = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:fill.start", true, false);
+		panelCoordEnd = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:fill.end", true, false);
 
-		panelBlock = new BlockSelectionPanel(Constants.PANELID_BLOCK, "GUI:fill.block", Registerer.getList(Constants.LIST_BLOCKS), true);
-		panelBlockReplace = new BlockSelectionPanel(Constants.PANELID_ITEM, "GUI:fill.block.replace", Registerer.getList(Constants.LIST_BLOCKS), false);
+		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:fill.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);
+		panelBlockReplace = new BlockSelectionPanel(CGConstants.PANELID_ITEM, "GUI:fill.block.replace", Registerer.getList(CGConstants.LIST_BLOCKS), false);
 		panelBlockReplace.setEnabledContent(false);
 	}
 

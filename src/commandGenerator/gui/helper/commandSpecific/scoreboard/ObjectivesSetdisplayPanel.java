@@ -8,7 +8,7 @@ import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.LangComboBox;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Resources;
 
@@ -39,11 +39,11 @@ public class ObjectivesSetdisplayPanel extends ScoreboardPanel
 	{
 		labelDisplay = new CLabel("GUI:scoreboard.slot");
 
-		checkboxClear = new CCheckBox(Constants.DATAID_NONE, "GUI:scoreboard.slot.clear");
+		checkboxClear = new CCheckBox(CGConstants.DATAID_NONE, "GUI:scoreboard.slot.clear");
 
-		entryName = new CEntry(Constants.DATAID_NAME, "GUI:scoreboard.objective", "");
+		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective", "");
 
-		comboboxDisplay = new LangComboBox(Constants.DATAID_VALUE, "RESOURCES:scoreboard.slot", 19);
+		comboboxDisplay = new LangComboBox(CGConstants.DATAID_VALUE, "RESOURCES:scoreboard.slot", 19);
 	}
 
 	@Override
@@ -72,8 +72,8 @@ public class ObjectivesSetdisplayPanel extends ScoreboardPanel
 	public void setupFrom(Map<String, Object> data)
 	{
 		super.setupFrom(data);
-		checkboxClear.setSelected(data.get(Constants.DATAID_NAME) == null);
-		entryName.setEnabledContent(data.get(Constants.DATAID_NAME) != null);
+		checkboxClear.setSelected(data.get(CGConstants.DATAID_NAME) == null);
+		entryName.setEnabledContent(data.get(CGConstants.DATAID_NAME) != null);
 	}
 
 }

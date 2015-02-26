@@ -1,7 +1,7 @@
 package commandGenerator.gui.helper.commandSpecific.scoreboard;
 
 import commandGenerator.gui.helper.components.CEntry;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -24,7 +24,7 @@ public class TeamsRemovePanel extends ScoreboardPanel
 	@Override
 	protected void createComponents()
 	{
-		entryName = new CEntry(Constants.DATAID_NAME, "GUI:scoreboard.teams.remove.label", "");
+		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.teams.remove.label", "");
 	}
 
 	@Override

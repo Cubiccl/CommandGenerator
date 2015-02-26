@@ -7,7 +7,7 @@ import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class TestforblockOptionsPanel extends OptionsPanel
@@ -31,8 +31,8 @@ public class TestforblockOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		panelCoord = new CoordSelectionPanel(Constants.PANELID_COORDS, "GUI:block.coords", true, false);
-		panelBlock = new BlockSelectionPanel(Constants.PANELID_BLOCK, "GUI:testforblocks.block", Registerer.getList(Constants.LIST_BLOCKS), true);
+		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:block.coords", true, false);
+		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:testforblocks.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);
 	}
 
 	@Override

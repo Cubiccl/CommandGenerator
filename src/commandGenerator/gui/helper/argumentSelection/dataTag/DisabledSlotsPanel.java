@@ -3,7 +3,7 @@ package commandGenerator.gui.helper.argumentSelection.dataTag;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class DisabledSlotsPanel extends HelperPanel
@@ -14,7 +14,7 @@ public class DisabledSlotsPanel extends HelperPanel
 
 	public DisabledSlotsPanel()
 	{
-		super(Constants.DATAID_NONE, "GUI:disabledslot.title");
+		super(CGConstants.DATAID_NONE, "GUI:disabledslot.title");
 	}
 
 	@Override
@@ -33,11 +33,11 @@ public class DisabledSlotsPanel extends HelperPanel
 	{
 		label = new CLabel("GUI:disabledslot.label");
 
-		hand = new CCheckBox(Constants.DATAID_NONE, "GUI:slot.hand");
-		feet = new CCheckBox(Constants.DATAID_NONE, "GUI:slot.feet");
-		legs = new CCheckBox(Constants.DATAID_NONE, "GUI:slot.legs");
-		chest = new CCheckBox(Constants.DATAID_NONE, "GUI:slot.chest");
-		head = new CCheckBox(Constants.DATAID_NONE, "GUI:slot.head");
+		hand = new CCheckBox(CGConstants.DATAID_NONE, "GUI:slot.hand");
+		feet = new CCheckBox(CGConstants.DATAID_NONE, "GUI:slot.feet");
+		legs = new CCheckBox(CGConstants.DATAID_NONE, "GUI:slot.legs");
+		chest = new CCheckBox(CGConstants.DATAID_NONE, "GUI:slot.chest");
+		head = new CCheckBox(CGConstants.DATAID_NONE, "GUI:slot.head");
 	}
 
 	@Override

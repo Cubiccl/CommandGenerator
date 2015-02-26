@@ -38,40 +38,40 @@ import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Generator;
 import commandGenerator.main.Lang;
 
-public enum Command
+public class Command
 {
 
-	achievement("achievement"),
-	blockdata("blockdata"),
-	clear("clear"),
-	clone("clone"),
-	effect("effect"),
-	enchant("enchant"),
-	entitydata("entitydata"),
-	execute("execute"),
-	fill("fill"),
-	gamerule("gamerule"),
-	give("give"),
-	kill("kill"),
-	particle("particle"),
-	playsound("playsound"),
-	replaceitem("replaceitem"),
-	scoreboard("scoreboard"),
-	setblock("setblock"),
-	setworldspawn("setworldspawn"),
-	spawnpoint("spawnpoint"),
-	spreadplayers("spreadplayers"),
-	summon("summon"),
-	tellraw("tellraw"),
-	testfor("testfor"),
-	testforblock("testforblock"),
-	testforblocks("testforblocks"),
-	time("time"),
-	title("title"),
-	tp("tp"),
-	weather("weather"),
-	worldborder("worldborder"),
-	xp("xp");
+	public static Command achievement = new Command("achievement");
+	public static Command blockdata = new Command("blockdata");
+	public static Command clear = new Command("clear");
+	public static Command clone = new Command("clone");
+	public static Command effect = new Command("effect");
+	public static Command enchant = new Command("enchant");
+	public static Command entitydata = new Command("entitydata");
+	public static Command execute = new Command("execute");
+	public static Command fill = new Command("fill");
+	public static Command gamerule = new Command("gamerule");
+	public static Command give = new Command("give");
+	public static Command kill = new Command("kill");
+	public static Command particle = new Command("particle");
+	public static Command playsound = new Command("playsound");
+	public static Command replaceitem = new Command("replaceitem");
+	public static Command scoreboard = new Command("scoreboard");
+	public static Command setblock = new Command("setblock");
+	public static Command setworldspawn = new Command("setworldspawn");
+	public static Command spawnpoint = new Command("spawnpoint");
+	public static Command spreadplayers = new Command("spreadplayers");
+	public static Command summon = new Command("summon");
+	public static Command tellraw = new Command("tellraw");
+	public static Command testfor = new Command("testfor");
+	public static Command testforblock = new Command("testforblock");
+	public static Command testforblocks = new Command("testforblocks");
+	public static Command time = new Command("time");
+	public static Command title = new Command("title");
+	public static Command tp = new Command("tp");
+	public static Command weather = new Command("weather");
+	public static Command worldborder = new Command("worldborder");
+	public static Command xp = new Command("xp");
 
 	/** The Command's ID. */
 	private String id;
@@ -80,7 +80,7 @@ public enum Command
 	 * 
 	 * @param id
 	 *            - <i>String</i> - The Command's ID */
-	private Command(String id)
+	public Command(String id)
 	{
 		this.id = id;
 		Registerer.registerCommand(this);

@@ -15,7 +15,7 @@ import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 public class TagRiding extends TagCompound
 {
@@ -30,14 +30,14 @@ public class TagRiding extends TagCompound
 	public void askValue()
 	{
 		panel = new JPanel();
-		EntitySelectionPanel panelE = new EntitySelectionPanel(Constants.PANELID_ENTITY, "GUI:entity.title", Entity.getListNoPlayer());
+		EntitySelectionPanel panelE = new EntitySelectionPanel(CGConstants.PANELID_ENTITY, "GUI:entity.title", Entity.getListNoPlayer());
 
 		panel.add(panelE);
 
 		Map<String, Object> data = new HashMap<String, Object>();
-		data.put(Constants.PANELID_NBT, getValue());
-		data.put(Constants.PANELID_ENTITY, DataTags.getObjectFromTags(getValue()));
-		if (data.get(Constants.PANELID_ENTITY) instanceof Item) data.put(Constants.PANELID_ENTITY, Registerer.getObjectFromId("ArmorStand"));
+		data.put(CGConstants.PANELID_NBT, getValue());
+		data.put(CGConstants.PANELID_ENTITY, DataTags.getObjectFromTags(getValue()));
+		if (data.get(CGConstants.PANELID_ENTITY) instanceof Item) data.put(CGConstants.PANELID_ENTITY, Registerer.getObjectFromId("ArmorStand"));
 		((EntitySelectionPanel) panelE).setupFrom(data);
 
 		if (showPanel()) return;

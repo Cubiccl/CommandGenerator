@@ -12,7 +12,7 @@ import commandGenerator.gui.helper.argumentSelection.SoundSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class PlaysoundOptionsPanel extends OptionsPanel
@@ -40,10 +40,10 @@ public class PlaysoundOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		checkboxCoords = new CCheckBox(Constants.DATAID_SOUND_COORDS, "GUI:playsound.usecoords");
+		checkboxCoords = new CCheckBox(CGConstants.DATAID_SOUND_COORDS, "GUI:playsound.usecoords");
 
-		panelPlayer = new TargetSelectionPanel(Constants.PANELID_TARGET, "GENERAL:target.player", Constants.ENTITIES_PLAYERS);
-		panelCoords = new CoordSelectionPanel(Constants.PANELID_COORDS, "GUI:playsound.coords", true, false);
+		panelPlayer = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:playsound.coords", true, false);
 		panelCoords.setEnabled(false);
 		panelCoords.setEnabledContent(false);
 		panelSound = new SoundSelectionPanel("GENERAL:options");

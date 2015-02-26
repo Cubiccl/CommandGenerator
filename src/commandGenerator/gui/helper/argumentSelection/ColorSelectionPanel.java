@@ -12,7 +12,7 @@ import javax.swing.event.ChangeListener;
 
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class ColorSelectionPanel extends HelperPanel
@@ -24,7 +24,7 @@ public class ColorSelectionPanel extends HelperPanel
 
 	public ColorSelectionPanel(String title)
 	{
-		super(Constants.NBTID_COLOR, title);
+		super(CGConstants.NBTID_COLOR, title);
 	}
 
 	@Override

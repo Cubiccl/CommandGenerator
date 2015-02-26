@@ -24,7 +24,7 @@ import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.gui.helper.components.ISpin;
 import commandGenerator.gui.helper.components.NumberSpinner;
 import commandGenerator.gui.helper.components.TextCombobox;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin
@@ -88,12 +88,12 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin
 		for (int i = 0; i < ids.length; i++)
 			ids[i] = itemList[i].getId();
 
-		comboboxId = new TextCombobox(Constants.DATAID_NONE, "GUI:item.id", ids, this);
-		spinnerDamage = new NumberSpinner(Constants.DATAID_NONE, "GUI:item.damage", 0, itemList[0].getMaxDamage(), this);
+		comboboxId = new TextCombobox(CGConstants.DATAID_NONE, "GUI:item.id", ids, this);
+		spinnerDamage = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:item.damage", 0, itemList[0].getMaxDamage(), this);
 		if (itemList[0] instanceof ItemData) spinnerDamage.setData(((ItemData) itemList[0]).getDamageList());
 		else if (itemList[0].getDurability() > 0) spinnerDamage.setValues(0, itemList[0].getDurability());
-		spinnerCount = new NumberSpinner(Constants.DATAID_NONE, "GUI:item.count", 1, 64, null);
-		if (slot) spinnerSlot = new NumberSpinner(Constants.DATAID_NONE, "GUI:item.slot", 0, 27, null);
+		spinnerCount = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:item.count", 1, 64, null);
+		if (slot) spinnerSlot = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:item.slot", 0, 27, null);
 
 		if (withData) panelData = new NBTTagPanel("GUI:item.nbt", itemList[0], DataTags.items);
 
@@ -186,7 +186,7 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin
 		spinnerDamage.setSelected(item.getDamage());
 		spinnerCount.setSelected(item.getCount());
 		if (slot) spinnerSlot.setSelected(item.getSlot());
-		if (item.getTag() != null) data.put(Constants.PANELID_NBT, item.getTag().getValue());
+		if (item.getTag() != null) data.put(CGConstants.PANELID_NBT, item.getTag().getValue());
 		super.setupFrom(data);
 	}
 

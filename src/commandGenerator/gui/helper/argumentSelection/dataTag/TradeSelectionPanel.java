@@ -16,7 +16,7 @@ import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -29,7 +29,7 @@ public class TradeSelectionPanel extends HelperPanel
 
 	public TradeSelectionPanel(String title)
 	{
-		super(Constants.PANELID_OPTIONS, title);
+		super(CGConstants.PANELID_OPTIONS, title);
 	}
 
 	@Override
@@ -47,16 +47,16 @@ public class TradeSelectionPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		entryUses = new CEntry(Constants.DATAID_NAME, "GUI:trade.use", "0");
-		entryMaxUses = new CEntry(Constants.DATAID_NAME2, "GUI:trade.use_max", "10");
+		entryUses = new CEntry(CGConstants.DATAID_NAME, "GUI:trade.use", "0");
+		entryMaxUses = new CEntry(CGConstants.DATAID_NAME2, "GUI:trade.use_max", "10");
 
-		checkboxRewardExp = new CCheckBox(Constants.DATAID_MODE, "GUI:trade.xp");
-		checkboxBuyB = new CCheckBox(Constants.DATAID_MODE2, "GUI:trade.buyb.use");
+		checkboxRewardExp = new CCheckBox(CGConstants.DATAID_MODE, "GUI:trade.xp");
+		checkboxBuyB = new CCheckBox(CGConstants.DATAID_MODE2, "GUI:trade.buyb.use");
 
-		panelBuy = new ItemSelectionPanel(Constants.PANELID_TARGET, "GUI:trade.buy", Registerer.getList(Constants.LIST_ITEMS), true, false);
-		panelBuyB = new ItemSelectionPanel(Constants.PANELID_TARGET2, "GUI:trade.buyb", Registerer.getList(Constants.LIST_ITEMS), true, false);
+		panelBuy = new ItemSelectionPanel(CGConstants.PANELID_TARGET, "GUI:trade.buy", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
+		panelBuyB = new ItemSelectionPanel(CGConstants.PANELID_TARGET2, "GUI:trade.buyb", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
 		panelBuyB.setEnabledContent(false);
-		panelSell = new ItemSelectionPanel(Constants.PANELID_ITEM, "GUI:trade.sell", Registerer.getList(Constants.LIST_ITEMS), true, false);
+		panelSell = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:trade.sell", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
 	}
 
 	@Override
@@ -138,14 +138,14 @@ public class TradeSelectionPanel extends HelperPanel
 		}
 
 		Map<String, Object> clean = new HashMap<String, Object>();
-		clean.put(Constants.DATAID_NAME, Integer.toString(uses));
-		clean.put(Constants.DATAID_NAME2, Integer.toString(maxUses));
-		clean.put(Constants.DATAID_MODE, reward);
-		clean.put(Constants.DATAID_MODE2, buyb);
+		clean.put(CGConstants.DATAID_NAME, Integer.toString(uses));
+		clean.put(CGConstants.DATAID_NAME2, Integer.toString(maxUses));
+		clean.put(CGConstants.DATAID_MODE, reward);
+		clean.put(CGConstants.DATAID_MODE2, buyb);
 
-		clean.put(Constants.PANELID_TARGET, buy);
-		clean.put(Constants.PANELID_TARGET2, buyB);
-		clean.put(Constants.PANELID_ITEM, sell);
+		clean.put(CGConstants.PANELID_TARGET, buy);
+		clean.put(CGConstants.PANELID_TARGET2, buyB);
+		clean.put(CGConstants.PANELID_ITEM, sell);
 
 		super.setupFrom(clean);
 	}

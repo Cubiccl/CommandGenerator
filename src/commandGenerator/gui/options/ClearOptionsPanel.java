@@ -10,7 +10,7 @@ import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class ClearOptionsPanel extends OptionsPanel
@@ -37,11 +37,11 @@ public class ClearOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		checkboxInventory = new CCheckBox(Constants.DATAID_CHECK, "GUI:clear.inventory");
-		checkboxMaxCount = new CCheckBox(Constants.DATAID_CLEAR_ITEM, "GUI:clear.items");
+		checkboxInventory = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:clear.inventory");
+		checkboxMaxCount = new CCheckBox(CGConstants.DATAID_CLEAR_ITEM, "GUI:clear.items");
 
-		panelPlayer = new TargetSelectionPanel(Constants.PANELID_TARGET, "GENERAL:target.player", Constants.ENTITIES_PLAYERS);
-		panelItem = new ItemSelectionPanel(Constants.PANELID_ITEM, "GUI:clear.item", Registerer.getList(Constants.LIST_ITEMS), true, false);
+		panelPlayer = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:clear.item", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
 	}
 
 	@Override

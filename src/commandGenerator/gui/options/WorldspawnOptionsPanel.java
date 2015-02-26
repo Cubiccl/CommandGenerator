@@ -3,7 +3,7 @@ package commandGenerator.gui.options;
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class WorldspawnOptionsPanel extends OptionsPanel
@@ -25,7 +25,7 @@ public class WorldspawnOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		panelCoords = new CoordSelectionPanel(Constants.PANELID_COORDS, "GUI:worldspawn.coords", true, false);
+		panelCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:worldspawn.coords", true, false);
 	}
 
 	@Override

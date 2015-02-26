@@ -8,7 +8,7 @@ import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
@@ -39,11 +39,11 @@ public class TimeOptionsPanel extends OptionsPanel
 	{
 		labelMode = new CLabel("GUI:time.mode");
 
-		entryTime = new CEntry(Constants.DATAID_VALUE, "GUI:time.time", "0");
+		entryTime = new CEntry(CGConstants.DATAID_VALUE, "GUI:time.time", "0");
 		entryTime.setVisible(false);
 
-		comboboxMode = new LangComboBox(Constants.DATAID_MODE, "RESOURCES:time.mode", 3);
-		comboboxValue = new LangComboBox(Constants.DATAID_MODE, "RESOURCES:time.value", 3);
+		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:time.mode", 3);
+		comboboxValue = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:time.value", 3);
 
 		buttonHelp = new HelpButton(Lang.get("HELP:time_0"), (String) comboboxMode.getSelectedItem());
 	}

@@ -10,7 +10,7 @@ import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -39,15 +39,15 @@ public class PlayersTestPanel extends ScoreboardPanel
 	@Override
 	protected void createComponents()
 	{
-		entryObjective = new CEntry(Constants.DATAID_NAME, "GUI:scoreboard.objective", "");
-		entryScore = new CEntry(Constants.DATAID_VALUE, "GUI:scoreboard.score.min", "1");
+		entryObjective = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective", "");
+		entryScore = new CEntry(CGConstants.DATAID_VALUE, "GUI:scoreboard.score.min", "1");
 
 		textfieldMax = new JTextField(15);
 		textfieldMax.setEnabled(false);
 
-		checkboxMax = new CCheckBox(Constants.DATAID_NONE, "GUI:scoreboard.score.max");
+		checkboxMax = new CCheckBox(CGConstants.DATAID_NONE, "GUI:scoreboard.score.max");
 
-		panelEntity = new TargetSelectionPanel(Constants.PANELID_TARGET, "GENERAL:target.entity", Constants.ENTITIES_ALL);
+		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 	}
 
 	@Override
@@ -114,9 +114,9 @@ public class PlayersTestPanel extends ScoreboardPanel
 	public void setupFrom(Map<String, Object> data)
 	{
 		super.setupFrom(data);
-		checkboxMax.setSelected(data.get(Constants.DATAID_CHECK) != null);
-		textfieldMax.setEnabled(data.get(Constants.DATAID_CHECK) != null);
-		textfieldMax.setText((String) data.get(Constants.DATAID_CHECK));
+		checkboxMax.setSelected(data.get(CGConstants.DATAID_CHECK) != null);
+		textfieldMax.setEnabled(data.get(CGConstants.DATAID_CHECK) != null);
+		textfieldMax.setText((String) data.get(CGConstants.DATAID_CHECK));
 	}
 
 }

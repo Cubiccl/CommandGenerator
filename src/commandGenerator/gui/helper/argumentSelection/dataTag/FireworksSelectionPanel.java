@@ -6,7 +6,7 @@ import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.NumberSpinner;
-import commandGenerator.main.Constants;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class FireworksSelectionPanel extends HelperPanel
@@ -17,7 +17,7 @@ public class FireworksSelectionPanel extends HelperPanel
 
 	public FireworksSelectionPanel(String title)
 	{
-		super(Constants.DATAID_NONE, title);
+		super(CGConstants.DATAID_NONE, title);
 	}
 
 	@Override
@@ -30,10 +30,10 @@ public class FireworksSelectionPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		spinnerFlight = new NumberSpinner(Constants.DATAID_NONE, "GUI:fireworks.flight", -128, 127, null);
+		spinnerFlight = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:fireworks.flight", -128, 127, null);
 		spinnerFlight.setSelected(0);
 
-		explosionsPanel = new ListSelectionPanel("TAGS:Explosions", Constants.OBJECT_TAG_EXPLOSION);
+		explosionsPanel = new ListSelectionPanel("TAGS:Explosions", CGConstants.OBJECT_TAG_EXPLOSION);
 	}
 
 	@Override
