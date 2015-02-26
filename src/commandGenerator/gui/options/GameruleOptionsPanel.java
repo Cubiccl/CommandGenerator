@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
@@ -104,10 +104,10 @@ public class GameruleOptionsPanel extends OptionsPanel
 	{
 		for (int i = 0; i < gamerules.length; i++)
 		{
-			if (gamerules[i].equals(data.get(CGConstants.DATAID_MODE))) comboboxGamerule.setSelectedIndex(i);
+			if (gamerules[i].equals(data.get(Constants.DATAID_MODE))) comboboxGamerule.setSelectedIndex(i);
 		}
-		if (data.get(CGConstants.DATAID_MODE).equals("randomTickSpeed")) textfieldTickSpeed.setText((String) data.get(CGConstants.DATAID_VALUE));
-		else if (data.get(CGConstants.DATAID_VALUE).equals("true")) comboboxTrueFalse.setSelectedIndex(0);
+		if (data.get(Constants.DATAID_MODE).equals("randomTickSpeed")) textfieldTickSpeed.setText((String) data.get(Constants.DATAID_VALUE));
+		else if (data.get(Constants.DATAID_VALUE).equals("true")) comboboxTrueFalse.setSelectedIndex(0);
 		else comboboxTrueFalse.setSelectedIndex(1);
 
 	}

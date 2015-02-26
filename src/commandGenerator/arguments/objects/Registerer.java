@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 
 public class Registerer
@@ -25,7 +25,7 @@ public class Registerer
 	 *            - <i>byte</i> - The Objects' type. */
 	private static void displayList(byte objectType)
 	{
-		String log = "Registered " + CGConstants.TYPES[objectType] + "s : ";
+		String log = "Registered " + Constants.TYPES[objectType] + "s : ";
 		ObjectBase[] items = getObjectList(objectType);
 		int size = 0;
 		for (int i = 0; i < objects.get(objectType).size(); i++)
@@ -47,15 +47,15 @@ public class Registerer
 	/** Finalizes the registration. */
 	public static void end()
 	{
-		registerList("allEntities", objects.get(CGConstants.OBJECT_ENTITY).keySet().toArray(new String[0]));
-		displayList(CGConstants.OBJECT_ITEM);
-		displayList(CGConstants.OBJECT_ENTITY);
-		displayList(CGConstants.OBJECT_ENCHANT);
-		displayList(CGConstants.OBJECT_EFFECT);
-		displayList(CGConstants.OBJECT_ACHIEVEMENT);
-		displayList(CGConstants.OBJECT_ATTRIBUTE);
-		displayList(CGConstants.OBJECT_SOUND);
-		displayList(CGConstants.OBJECT_PARTICLE);
+		registerList("allEntities", objects.get(Constants.OBJECT_ENTITY).keySet().toArray(new String[0]));
+		displayList(Constants.OBJECT_ITEM);
+		displayList(Constants.OBJECT_ENTITY);
+		displayList(Constants.OBJECT_ENCHANT);
+		displayList(Constants.OBJECT_EFFECT);
+		displayList(Constants.OBJECT_ACHIEVEMENT);
+		displayList(Constants.OBJECT_ATTRIBUTE);
+		displayList(Constants.OBJECT_SOUND);
+		displayList(Constants.OBJECT_PARTICLE);
 
 	}
 
@@ -111,14 +111,14 @@ public class Registerer
 	{
 		if (id.startsWith("minecraft:") || id.startsWith("minecraft.")) id = id.substring("minecraft:".length());
 
-		ObjectBase object = objects.get(CGConstants.OBJECT_ITEM).get(id);
-		if (object == null) object = objects.get(CGConstants.OBJECT_ACHIEVEMENT).get(id);
-		if (object == null) object = objects.get(CGConstants.OBJECT_ATTRIBUTE).get(id);
-		if (object == null) object = objects.get(CGConstants.OBJECT_EFFECT).get(id);
-		if (object == null) object = objects.get(CGConstants.OBJECT_ENCHANT).get(id);
-		if (object == null) object = objects.get(CGConstants.OBJECT_ENTITY).get(id);
-		if (object == null) object = objects.get(CGConstants.OBJECT_PARTICLE).get(id);
-		if (object == null) object = objects.get(CGConstants.OBJECT_SOUND).get(id);
+		ObjectBase object = objects.get(Constants.OBJECT_ITEM).get(id);
+		if (object == null) object = objects.get(Constants.OBJECT_ACHIEVEMENT).get(id);
+		if (object == null) object = objects.get(Constants.OBJECT_ATTRIBUTE).get(id);
+		if (object == null) object = objects.get(Constants.OBJECT_EFFECT).get(id);
+		if (object == null) object = objects.get(Constants.OBJECT_ENCHANT).get(id);
+		if (object == null) object = objects.get(Constants.OBJECT_ENTITY).get(id);
+		if (object == null) object = objects.get(Constants.OBJECT_PARTICLE).get(id);
+		if (object == null) object = objects.get(Constants.OBJECT_SOUND).get(id);
 
 		if (object == null) DisplayHelper.log(id + " isn't the ID of any object.");
 		return object;
@@ -134,10 +134,10 @@ public class Registerer
 	{
 		switch (type)
 		{
-			case CGConstants.OBJECT_EFFECT:
+			case Constants.OBJECT_EFFECT:
 				return EffectType.getEffectFromIdNum(id);
 
-			case CGConstants.OBJECT_ENCHANT:
+			case Constants.OBJECT_ENCHANT:
 				return EnchantType.getEnchantFromIdNum(id);
 
 			default:
@@ -158,7 +158,7 @@ public class Registerer
 		for (int i = 0; i < objectArray.length; i++)
 			objectList.add(objectArray[i]);
 
-		if (type == CGConstants.OBJECT_ITEM || type == CGConstants.OBJECT_ENCHANT || type == CGConstants.OBJECT_EFFECT) sortIdsNum(objectList);
+		if (type == Constants.OBJECT_ITEM || type == Constants.OBJECT_ENCHANT || type == Constants.OBJECT_EFFECT) sortIdsNum(objectList);
 		else sortIds(objectList);
 		return objectList.toArray(new ObjectBase[0]);
 	}
@@ -229,9 +229,9 @@ public class Registerer
 			public int compare(ObjectBase o1, ObjectBase o2)
 			{
 				int diff = 0;
-				if (o1.getType() == CGConstants.OBJECT_ITEM) diff = ((Item) o1).getIdNum() - ((Item) o2).getIdNum();
-				if (o1.getType() == CGConstants.OBJECT_ENCHANT) diff = ((EnchantType) o1).getIdNum() - ((EnchantType) o2).getIdNum();
-				if (o1.getType() == CGConstants.OBJECT_EFFECT) diff = ((EffectType) o1).getIdNum() - ((EffectType) o2).getIdNum();
+				if (o1.getType() == Constants.OBJECT_ITEM) diff = ((Item) o1).getIdNum() - ((Item) o2).getIdNum();
+				if (o1.getType() == Constants.OBJECT_ENCHANT) diff = ((EnchantType) o1).getIdNum() - ((EnchantType) o2).getIdNum();
+				if (o1.getType() == Constants.OBJECT_EFFECT) diff = ((EffectType) o1).getIdNum() - ((EffectType) o2).getIdNum();
 				if (diff < 0) diff = -1;
 				if (diff > 0) diff = 1;
 				return diff;

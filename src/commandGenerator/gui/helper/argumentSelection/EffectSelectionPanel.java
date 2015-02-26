@@ -14,7 +14,7 @@ import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.gui.helper.components.NumberSpinner;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -57,13 +57,13 @@ public class EffectSelectionPanel extends HelperPanel implements IBox
 			DisplayHelper.missingTexture("effects/speed.png");
 		}
 
-		entryDuration = new CEntry(CGConstants.DATAID_NONE, "GUI:effect.duration", "600");
+		entryDuration = new CEntry(Constants.DATAID_NONE, "GUI:effect.duration", "600");
 
-		spinnerAmplifier = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:effect.amplifier", 1, 256, null);
+		spinnerAmplifier = new NumberSpinner(Constants.DATAID_NONE, "GUI:effect.amplifier", 1, 256, null);
 
-		comboboxEffect = new CComboBox(CGConstants.DATAID_NONE, "GUI:effect.choose", Registerer.getObjectList(CGConstants.OBJECT_EFFECT), this);
+		comboboxEffect = new CComboBox(Constants.DATAID_NONE, "GUI:effect.choose", Registerer.getObjectList(Constants.OBJECT_EFFECT), this);
 
-		checkboxHideParticles = new CCheckBox(CGConstants.DATAID_NONE, "GUI:effect.hide");
+		checkboxHideParticles = new CCheckBox(Constants.DATAID_NONE, "GUI:effect.hide");
 	}
 
 	@Override

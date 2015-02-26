@@ -6,7 +6,7 @@ import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -35,9 +35,9 @@ public class WeatherOptionsPanel extends OptionsPanel
 	{
 		labelWeather = new CLabel("GUI:weather.select");
 
-		entryDuration = new CEntry(CGConstants.DATAID_NONE, "GUI:weather.duration", "0");
+		entryDuration = new CEntry(Constants.DATAID_NONE, "GUI:weather.duration", "0");
 
-		comboboxWeather = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:weather.type", 3);
+		comboboxWeather = new LangComboBox(Constants.DATAID_MODE, "RESOURCES:weather.type", 3);
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class WeatherOptionsPanel extends OptionsPanel
 	public void setupFrom(Map<String, Object> data)
 	{
 		super.setupFrom(data);
-		if (data.get(CGConstants.DATAID_VALUE) != null) entryDuration.setTextField((String) data.get(CGConstants.DATAID_VALUE));
+		if (data.get(Constants.DATAID_VALUE) != null) entryDuration.setTextField((String) data.get(Constants.DATAID_VALUE));
 	}
 
 }

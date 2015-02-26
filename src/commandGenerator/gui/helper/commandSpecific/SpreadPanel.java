@@ -3,7 +3,7 @@ package commandGenerator.gui.helper.commandSpecific;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -15,7 +15,7 @@ public class SpreadPanel extends HelperPanel
 
 	public SpreadPanel(String title)
 	{
-		super(CGConstants.PANELID_NONE, title);
+		super(Constants.PANELID_NONE, title);
 	}
 
 	@Override
@@ -31,12 +31,12 @@ public class SpreadPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		entryX = new CEntry(CGConstants.DATAID_SPREAD_X, "GUI:spread.x", "0");
-		entryZ = new CEntry(CGConstants.DATAID_SPREAD_Z, "GUI:spread.z", "0");
-		entryDistance = new CEntry(CGConstants.DATAID_SPREAD_DIST, "GUI:spread.distance", "10");
-		entryDistanceMax = new CEntry(CGConstants.DATAID_SPREAD_DISTMAX, "GUI:spread.distance_max", "20");
+		entryX = new CEntry(Constants.DATAID_SPREAD_X, "GUI:spread.x", "0");
+		entryZ = new CEntry(Constants.DATAID_SPREAD_Z, "GUI:spread.z", "0");
+		entryDistance = new CEntry(Constants.DATAID_SPREAD_DIST, "GUI:spread.distance", "10");
+		entryDistanceMax = new CEntry(Constants.DATAID_SPREAD_DISTMAX, "GUI:spread.distance_max", "20");
 
-		checkboxRespectTeams = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:spread.respect");
+		checkboxRespectTeams = new CCheckBox(Constants.DATAID_CHECK, "GUI:spread.respect");
 	}
 
 	@Override

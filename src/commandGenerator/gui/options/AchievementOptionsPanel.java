@@ -13,7 +13,7 @@ import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 
 @SuppressWarnings("serial")
 public class AchievementOptionsPanel extends OptionsPanel
@@ -41,11 +41,11 @@ public class AchievementOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		checkbox = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:achievement.all");
+		checkbox = new CCheckBox(Constants.DATAID_CHECK, "GUI:achievement.all");
 
-		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "GUI:achievement.mode", 2);
+		comboboxMode = new LangComboBox(Constants.DATAID_MODE, "GUI:achievement.mode", 2);
 
-		panelTarget = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelTarget = new TargetSelectionPanel(Constants.PANELID_TARGET, "GENERAL:target.player", Constants.ENTITIES_PLAYERS);
 
 		panelAchievement = new AchievementSelectionPanel();
 	}
@@ -83,7 +83,7 @@ public class AchievementOptionsPanel extends OptionsPanel
 	public void setupFrom(Map<String, Object> data)
 	{
 		super.setupFrom(data);
-		panelAchievement.setEnabledContent(!(boolean) data.get(CGConstants.DATAID_CHECK));
+		panelAchievement.setEnabledContent(!(boolean) data.get(Constants.DATAID_CHECK));
 	}
 
 }

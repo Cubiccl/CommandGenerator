@@ -12,7 +12,7 @@ import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
@@ -48,7 +48,7 @@ public class WorldborderOptionsPanel extends OptionsPanel implements IBox
 	{
 		buttonHelp = new HelpButton(Lang.get("HELP:worldborder_0"), Lang.get("RESOURCES:worldborder.mode_0"));
 
-		comboboxMode = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:worldborder.mode", 5);
+		comboboxMode = new LangComboBox(Constants.DATAID_NONE, "RESOURCES:worldborder.mode", 5);
 		comboboxMode.addListener(this);
 
 		panelAdd = new AddBorderPanel(true);
@@ -98,8 +98,8 @@ public class WorldborderOptionsPanel extends OptionsPanel implements IBox
 	@Override
 	public void setupFrom(Map<String, Object> data)
 	{
-		comboboxMode.setSelectedIndex((int) data.get(CGConstants.DATAID_MODE));
-		switch ((int) data.get(CGConstants.DATAID_MODE))
+		comboboxMode.setSelectedIndex((int) data.get(Constants.DATAID_MODE));
+		switch ((int) data.get(Constants.DATAID_MODE))
 		{
 			case 0:
 				panelAdd.setupFrom(data);

@@ -11,7 +11,7 @@ import commandGenerator.gui.helper.commandSpecific.TitleDetailsPanel;
 import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
@@ -44,12 +44,12 @@ public class TitleOptionsPanel extends OptionsPanel
 	{
 		buttonHelp = new HelpButton(Lang.get("HELP:title_0"), Lang.get("RESOURCES:title.mode_0"));
 
-		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:title.mode", 3);
+		comboboxMode = new LangComboBox(Constants.DATAID_MODE, "RESOURCES:title.mode", 3);
 
-		panelPlayer = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_PLAYERS);
+		panelPlayer = new TargetSelectionPanel(Constants.PANELID_TARGET, "GENERAL:target.player", Constants.ENTITIES_PLAYERS);
 		panelDetails = new TitleDetailsPanel("GENERAL:options");
 		panelDetails.setVisible(false);
-		panelJson = new ListSelectionPanel("GUI:title.json", CGConstants.OBJECT_JSON);
+		panelJson = new ListSelectionPanel("GUI:title.json", Constants.OBJECT_JSON);
 	}
 
 	@Override

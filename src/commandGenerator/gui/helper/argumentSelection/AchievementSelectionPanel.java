@@ -9,7 +9,7 @@ import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.IBox;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -21,7 +21,7 @@ public class AchievementSelectionPanel extends HelperPanel implements IBox
 
 	public AchievementSelectionPanel()
 	{
-		super(CGConstants.PANELID_ACHIEVEMENT, "GUI:achievement.title");
+		super(Constants.PANELID_ACHIEVEMENT, "GUI:achievement.title");
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class AchievementSelectionPanel extends HelperPanel implements IBox
 	protected void createComponents()
 	{
 		image = new JLabel(((Achievement) Registerer.getObjectFromId("openInventory")).getTexture());
-		achievementBox = new CComboBox(CGConstants.PANELID_ACHIEVEMENT, "GUI:achievement.select", Registerer.getObjectList(CGConstants.OBJECT_ACHIEVEMENT),
+		achievementBox = new CComboBox(Constants.PANELID_ACHIEVEMENT, "GUI:achievement.select", Registerer.getObjectList(Constants.OBJECT_ACHIEVEMENT),
 				this);
 	}
 
@@ -57,7 +57,7 @@ public class AchievementSelectionPanel extends HelperPanel implements IBox
 	@Override
 	public void setupFrom(Map<String, Object> data)
 	{
-		if (data.get(CGConstants.DATAID_CHECK) != null && !((boolean) data.get(CGConstants.DATAID_CHECK))) achievementBox.setupFrom(data);
+		if (data.get(Constants.DATAID_CHECK) != null && !((boolean) data.get(Constants.DATAID_CHECK))) achievementBox.setupFrom(data);
 	}
 
 	@Override

@@ -11,7 +11,7 @@ import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.HelpButton;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
@@ -46,15 +46,15 @@ public class PlayersOperationPanel extends ScoreboardPanel
 	{
 		labelOperation = new CLabel("GUI:scoreboard.operation");
 
-		entryObj1 = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.operation.player1", "");
-		entryObj2 = new CEntry(CGConstants.DATAID_NAME2, "GUI:scoreboard.operation.player2", "");
+		entryObj1 = new CEntry(Constants.DATAID_NAME, "GUI:scoreboard.operation.player1", "");
+		entryObj2 = new CEntry(Constants.DATAID_NAME2, "GUI:scoreboard.operation.player2", "");
 
 		buttonHelp = new HelpButton(Lang.get("HELP:scoreboard.operation_0"), "+=");
 
 		comboboxOperation = new JComboBox<String>(operationList);
 
-		panelEntity1 = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GUI:scoreboard.player1", CGConstants.ENTITIES_ALL);
-		panelEntity2 = new TargetSelectionPanel(CGConstants.PANELID_TARGET2, "GUI:scoreboard.player2", CGConstants.ENTITIES_ALL);
+		panelEntity1 = new TargetSelectionPanel(Constants.PANELID_TARGET, "GUI:scoreboard.player1", Constants.ENTITIES_ALL);
+		panelEntity2 = new TargetSelectionPanel(Constants.PANELID_TARGET2, "GUI:scoreboard.player2", Constants.ENTITIES_ALL);
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class PlayersOperationPanel extends ScoreboardPanel
 	public void setupFrom(Map<String, Object> data)
 	{
 		super.setupFrom(data);
-		comboboxOperation.setSelectedIndex((int) data.get(CGConstants.DATAID_VALUE));
+		comboboxOperation.setSelectedIndex((int) data.get(Constants.DATAID_VALUE));
 	}
 
 }

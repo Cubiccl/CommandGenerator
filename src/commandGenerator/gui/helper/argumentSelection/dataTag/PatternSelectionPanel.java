@@ -13,7 +13,7 @@ import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.LangComboBox;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Resources;
 
@@ -31,7 +31,7 @@ public class PatternSelectionPanel extends HelperPanel
 
 	public PatternSelectionPanel()
 	{
-		super(CGConstants.DATAID_NONE, "TAG:pattern");
+		super(Constants.DATAID_NONE, "TAG:pattern");
 	}
 
 	@Override
@@ -56,8 +56,8 @@ public class PatternSelectionPanel extends HelperPanel
 			DisplayHelper.missingTexture("textures/banners/bs.png");
 		}
 
-		comboboxColor = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:color_wool", 16);
-		comboboxPattern = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:pattern", patternIds.length);
+		comboboxColor = new LangComboBox(Constants.DATAID_NONE, "RESOURCES:color_wool", 16);
+		comboboxPattern = new LangComboBox(Constants.DATAID_NONE, "RESOURCES:pattern", patternIds.length);
 	}
 
 	@Override

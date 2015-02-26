@@ -8,7 +8,7 @@ import javax.swing.JTextField;
 
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -34,12 +34,12 @@ public class TeamsAddPanel extends ScoreboardPanel
 	@Override
 	protected void createComponents()
 	{
-		entryName = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.team", "");
+		entryName = new CEntry(Constants.DATAID_NAME, "GUI:scoreboard.team", "");
 
 		textfieldDisplay = new JTextField(15);
 		textfieldDisplay.setEnabled(false);
 
-		checkboxDisplay = new CCheckBox(CGConstants.DATAID_NONE, "GUI:scoreboard.display");
+		checkboxDisplay = new CCheckBox(Constants.DATAID_NONE, "GUI:scoreboard.display");
 	}
 
 	@Override
@@ -71,9 +71,9 @@ public class TeamsAddPanel extends ScoreboardPanel
 	public void setupFrom(Map<String, Object> data)
 	{
 		super.setupFrom(data);
-		checkboxDisplay.setSelected(data.get(CGConstants.DATAID_NAME2) != null);
-		textfieldDisplay.setEnabled(data.get(CGConstants.DATAID_NAME2) != null);
-		textfieldDisplay.setText((String) data.get(CGConstants.DATAID_NAME2));
+		checkboxDisplay.setSelected(data.get(Constants.DATAID_NAME2) != null);
+		textfieldDisplay.setEnabled(data.get(Constants.DATAID_NAME2) != null);
+		textfieldDisplay.setText((String) data.get(Constants.DATAID_NAME2));
 	}
 
 }

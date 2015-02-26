@@ -10,7 +10,7 @@ import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
@@ -42,11 +42,11 @@ public class SetblockOptionsPanel extends OptionsPanel implements IBox
 	{
 		buttonHelp = new HelpButton(Lang.get("HELP:placeblock.mode_0"), Lang.get("RESOURCES:placeblock.mode_0"));
 
-		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:placeblock.mode", 3);
+		comboboxMode = new LangComboBox(Constants.DATAID_MODE, "RESOURCES:placeblock.mode", 3);
 		comboboxMode.addListener(this);
 
-		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:setblock.coords", true, false);
-		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:setblock.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);
+		panelCoord = new CoordSelectionPanel(Constants.PANELID_COORDS, "GUI:setblock.coords", true, false);
+		panelBlock = new BlockSelectionPanel(Constants.PANELID_BLOCK, "GUI:setblock.block", Registerer.getList(Constants.LIST_BLOCKS), true);
 	}
 
 	@Override

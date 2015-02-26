@@ -8,7 +8,7 @@ import commandGenerator.arguments.tags.TagFloat;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.NumberSpinner;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 
 @SuppressWarnings("serial")
 public class PoseRotPanel extends HelperPanel
@@ -19,7 +19,7 @@ public class PoseRotPanel extends HelperPanel
 
 	public PoseRotPanel(String name, String id)
 	{
-		super(CGConstants.DATAID_NONE, name, id);
+		super(Constants.DATAID_NONE, name, id);
 	}
 
 	@Override
@@ -33,9 +33,9 @@ public class PoseRotPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		spinnerX = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:rotation.x", -128, 127, null);
-		spinnerY = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:rotation.y", -128, 127, null);
-		spinnerZ = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:rotation.z", -128, 127, null);
+		spinnerX = new NumberSpinner(Constants.DATAID_NONE, "GUI:rotation.x", -128, 127, null);
+		spinnerY = new NumberSpinner(Constants.DATAID_NONE, "GUI:rotation.y", -128, 127, null);
+		spinnerZ = new NumberSpinner(Constants.DATAID_NONE, "GUI:rotation.z", -128, 127, null);
 
 		spinnerX.setSelected(0);
 		spinnerY.setSelected(0);

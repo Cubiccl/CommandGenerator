@@ -3,7 +3,7 @@ package commandGenerator.gui.helper.commandSpecific.scoreboard;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CEntry;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -29,10 +29,10 @@ public class PlayersRemovePanel extends ScoreboardPanel
 	@Override
 	protected void createComponents()
 	{
-		entryObjective = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.objective", "");
-		entryScore = new CEntry(CGConstants.DATAID_VALUE, "GUI:scoreboard.score", "1");
+		entryObjective = new CEntry(Constants.DATAID_NAME, "GUI:scoreboard.objective", "");
+		entryScore = new CEntry(Constants.DATAID_VALUE, "GUI:scoreboard.score", "1");
 
-		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntity = new TargetSelectionPanel(Constants.PANELID_TARGET, "GENERAL:target.entity", Constants.ENTITIES_ALL);
 	}
 
 	@Override

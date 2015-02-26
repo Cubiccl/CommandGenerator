@@ -16,7 +16,7 @@ import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.IBox;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -33,7 +33,7 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 
 	public ParticleSelectionPanel(String title)
 	{
-		super(CGConstants.PANELID_PARTICLE, title);
+		super(Constants.PANELID_PARTICLE, title);
 	}
 
 	@Override
@@ -48,21 +48,21 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 	@Override
 	protected void createComponents()
 	{
-		ObjectBase[] list = Registerer.getObjectList(CGConstants.OBJECT_PARTICLE);
+		ObjectBase[] list = Registerer.getObjectList(Constants.OBJECT_PARTICLE);
 		buttonHelp = new HelpButton(((Particle) list[0]).getDescription(), list[0].getName());
 
 		textfieldCount = new JTextField(15);
 		textfieldCount.setEnabled(false);
 
-		entrySpeed = new CEntry(CGConstants.DATAID_NONE, "GUI:particle.speed", "1");
+		entrySpeed = new CEntry(Constants.DATAID_NONE, "GUI:particle.speed", "1");
 
-		checkboxCount = new CCheckBox(CGConstants.DATAID_NONE, "GUI:particle.count");
+		checkboxCount = new CCheckBox(Constants.DATAID_NONE, "GUI:particle.count");
 
-		comboboxParticle = new CComboBox(CGConstants.PANELID_PARTICLE, "GUI:particle", list, this);
+		comboboxParticle = new CComboBox(Constants.PANELID_PARTICLE, "GUI:particle", list, this);
 
-		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:particle.block", Registerer.getList(CGConstants.LIST_BLOCKS), false);
+		panelBlock = new BlockSelectionPanel(Constants.PANELID_BLOCK, "GUI:particle.block", Registerer.getList(Constants.LIST_BLOCKS), false);
 		panelBlock.setVisible(false);
-		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:particle.item", Registerer.getList(CGConstants.LIST_ICONS), false, false);
+		panelItem = new ItemSelectionPanel(Constants.PANELID_ITEM, "GUI:particle.item", Registerer.getList(Constants.LIST_ICONS), false, false);
 		panelItem.setVisible(false);
 	}
 
@@ -156,7 +156,7 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 	public void setupFrom(Map<String, Object> data)
 	{
 		super.setupFrom(data);
-		int[] opt = (int[]) data.get(CGConstants.DATAID_VALUE);
+		int[] opt = (int[]) data.get(Constants.DATAID_VALUE);
 		entrySpeed.setTextField(Integer.toString(opt[0]));
 		checkboxCount.setSelected(opt[1] != -1);
 		textfieldCount.setEnabled(opt[1] != -1);

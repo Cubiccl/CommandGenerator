@@ -3,7 +3,7 @@ package commandGenerator.gui.helper.argumentSelection;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -15,7 +15,7 @@ public class XpSelectionPanel extends HelperPanel
 
 	public XpSelectionPanel(String title)
 	{
-		super(CGConstants.PANELID_XP, title);
+		super(Constants.PANELID_XP, title);
 	}
 
 	@Override
@@ -28,9 +28,9 @@ public class XpSelectionPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		entryXp = new CEntry(CGConstants.DATAID_VALUE, "GUI:xp.xp", "1");
+		entryXp = new CEntry(Constants.DATAID_VALUE, "GUI:xp.xp", "1");
 
-		checkboxLevel = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:xp.levels");
+		checkboxLevel = new CCheckBox(Constants.DATAID_CHECK, "GUI:xp.levels");
 	}
 
 	@Override

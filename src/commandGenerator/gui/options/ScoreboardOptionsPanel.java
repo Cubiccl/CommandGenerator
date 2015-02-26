@@ -24,7 +24,7 @@ import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
@@ -58,8 +58,8 @@ public class ScoreboardOptionsPanel extends OptionsPanel implements IBox
 		buttonHelp = new HelpButton(Lang.get("HELP:scoreboard.objectives_0"), Lang.get("RESOURCES:scoreboard.mode_0") + " "
 				+ Lang.get("RESOURCES:scoreboard.mode.objectives_0"));
 
-		comboboxMode1 = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:scoreboard.mode", 3);
-		comboboxMode2 = new LangComboBox(CGConstants.DATAID_MODE2, "RESOURCES:scoreboard.mode.objectives", 3);
+		comboboxMode1 = new LangComboBox(Constants.DATAID_MODE, "RESOURCES:scoreboard.mode", 3);
+		comboboxMode2 = new LangComboBox(Constants.DATAID_MODE2, "RESOURCES:scoreboard.mode.objectives", 3);
 		comboboxMode1.addListener(this);
 		comboboxMode2.addListener(this);
 

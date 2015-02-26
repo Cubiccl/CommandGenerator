@@ -9,7 +9,7 @@ import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.LangComboBox;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -22,7 +22,7 @@ public class AttributeSelectionPanel extends HelperPanel
 
 	public AttributeSelectionPanel()
 	{
-		super(CGConstants.PANELID_OPTIONS, "GUI:add.attribute");
+		super(Constants.PANELID_OPTIONS, "GUI:add.attribute");
 	}
 
 	@Override
@@ -36,11 +36,11 @@ public class AttributeSelectionPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		entryAmount = new CEntry(CGConstants.DATAID_NONE, "GUI:attribute.amount", "1");
+		entryAmount = new CEntry(Constants.DATAID_NONE, "GUI:attribute.amount", "1");
 		entryAmount.setTextField("1");
 
-		comboboxAttribute = new CComboBox(CGConstants.DATAID_NONE, "GUI:attribute.select", Registerer.getObjectList(CGConstants.OBJECT_ATTRIBUTE), null);
-		comboboxOperation = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:attribute.operation", 3);
+		comboboxAttribute = new CComboBox(Constants.DATAID_NONE, "GUI:attribute.select", Registerer.getObjectList(Constants.OBJECT_ATTRIBUTE), null);
+		comboboxOperation = new LangComboBox(Constants.DATAID_NONE, "RESOURCES:attribute.operation", 3);
 	}
 
 	@Override

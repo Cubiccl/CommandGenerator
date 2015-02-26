@@ -7,7 +7,7 @@ import java.util.Map;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -20,7 +20,7 @@ public class AddBorderPanel extends HelperPanel
 
 	public AddBorderPanel(boolean canBeNegative)
 	{
-		super(CGConstants.PANELID_OPTIONS, "GENERAL:options", canBeNegative);
+		super(Constants.PANELID_OPTIONS, "GENERAL:options", canBeNegative);
 	}
 
 	@Override
@@ -34,11 +34,11 @@ public class AddBorderPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		entrySize = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.add.size", "10");
-		entryTime = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.add.time", "10");
+		entrySize = new CEntry(Constants.DATAID_NONE, "GUI:worldborder.add.size", "10");
+		entryTime = new CEntry(Constants.DATAID_NONE, "GUI:worldborder.add.time", "10");
 		entryTime.setEnabledContent(false);
 
-		checkboxTime = new CCheckBox(CGConstants.DATAID_NONE, "GUI:worldborder.add.timer");
+		checkboxTime = new CCheckBox(Constants.DATAID_NONE, "GUI:worldborder.add.timer");
 	}
 
 	@Override

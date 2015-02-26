@@ -3,7 +3,7 @@ package commandGenerator.arguments.tags;
 import java.util.ArrayList;
 import java.util.List;
 
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.Lang;
 
 public abstract class TagList extends Tag
@@ -38,7 +38,7 @@ public abstract class TagList extends Tag
 	@Override
 	public String display(int details, int lvls)
 	{
-		if (details == CGConstants.DETAILS_NONE) return getName() + "...";
+		if (details == Constants.DETAILS_NONE) return getName() + "...";
 
 		String text = getName();
 		if (text != "") text += " : ";

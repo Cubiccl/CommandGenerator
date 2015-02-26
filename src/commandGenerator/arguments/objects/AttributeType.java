@@ -2,7 +2,7 @@ package commandGenerator.arguments.objects;
 
 import javax.swing.ImageIcon;
 
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.Lang;
 
 public class AttributeType extends ObjectBase
@@ -14,7 +14,7 @@ public class AttributeType extends ObjectBase
 	 *            - <i>String</i> - The Attribute type ID */
 	public AttributeType(String id)
 	{
-		super(id, CGConstants.OBJECT_ATTRIBUTE);
+		super(id, Constants.OBJECT_ATTRIBUTE);
 	}
 
 	/** Returns this Attribute's name. */

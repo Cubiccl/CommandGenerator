@@ -7,7 +7,7 @@ import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.gui.helper.components.IBox;
 import commandGenerator.gui.helper.components.LangComboBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
@@ -42,12 +42,12 @@ public class TestforblocksOptionsPanel extends OptionsPanel implements IBox
 
 		buttonHelp = new HelpButton(Lang.get("HELP:testforblocks_0"), Lang.get("RESOURCES:testforblocks.mode_0"));
 
-		comboboxMode = new LangComboBox(CGConstants.DATAID_MODE, "RESOURCES:testforblocks.mode", 2);
+		comboboxMode = new LangComboBox(Constants.DATAID_MODE, "RESOURCES:testforblocks.mode", 2);
 		comboboxMode.addListener(this);
 
-		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:testforblocks.start", true, false);
-		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:testforblocks.end", true, false);
-		panelCoordDest = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:testforblocks.destination", true, false);
+		panelCoord1 = new CoordSelectionPanel(Constants.PANELID_COORDS_START, "GUI:testforblocks.start", true, false);
+		panelCoord2 = new CoordSelectionPanel(Constants.PANELID_COORDS_END, "GUI:testforblocks.end", true, false);
+		panelCoordDest = new CoordSelectionPanel(Constants.PANELID_COORDS, "GUI:testforblocks.destination", true, false);
 	}
 
 	@Override

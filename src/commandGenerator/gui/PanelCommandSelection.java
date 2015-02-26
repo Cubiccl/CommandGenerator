@@ -36,7 +36,7 @@ import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.OptionsPanel;
 import commandGenerator.gui.options.AchievementOptionsPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
@@ -129,7 +129,7 @@ public class PanelCommandSelection extends JPanel
 			textfieldCommand.setPreferredSize(new Dimension(600, 20));
 			textfieldCommand.setMinimumSize(new Dimension(600, 20));
 
-			checkboxEdit = new CCheckBox(CGConstants.DATAID_NONE, "GUI:command.edit");
+			checkboxEdit = new CCheckBox(Constants.DATAID_NONE, "GUI:command.edit");
 			checkboxEdit.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0)
 				{

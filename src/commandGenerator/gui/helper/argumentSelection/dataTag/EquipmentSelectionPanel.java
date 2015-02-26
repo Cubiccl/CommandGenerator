@@ -18,7 +18,7 @@ import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
 import commandGenerator.gui.helper.components.CButton;
 import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
@@ -34,7 +34,7 @@ public class EquipmentSelectionPanel extends HelperPanel
 
 	public EquipmentSelectionPanel(String title)
 	{
-		super(CGConstants.DATAID_NONE, title);
+		super(Constants.DATAID_NONE, title);
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class EquipmentSelectionPanel extends HelperPanel
 
 	private void addItem(int slot)
 	{
-		ItemSelectionPanel panel = new ItemSelectionPanel(CGConstants.DATAID_NONE, "GUI:item", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
+		ItemSelectionPanel panel = new ItemSelectionPanel(Constants.DATAID_NONE, "GUI:item", Registerer.getList(Constants.LIST_ITEMS), true, false);
 		if (DisplayHelper.showQuestion(panel, Lang.get("GUI:item.add"))) return;
 		equipment[slot] = new ItemStack(panel.generateItem(), panel.getDamage(), panel.getCount(), panel.getItemTag());
 		displayItems();
@@ -166,7 +166,7 @@ public class EquipmentSelectionPanel extends HelperPanel
 		{
 			if (i != 0) text += "<br />";
 			if (equipment[i] == null) text += parts[i] + ": " + Lang.get("GENERAL:nothing");
-			else text += parts[i] + ": " + equipment[i].display(CGConstants.DETAILS_ALL, 0);
+			else text += parts[i] + ": " + equipment[i].display(Constants.DETAILS_ALL, 0);
 		}
 		editorpane.setText(text);
 	}

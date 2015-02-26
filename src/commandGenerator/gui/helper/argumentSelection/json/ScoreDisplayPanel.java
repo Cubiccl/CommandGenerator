@@ -10,7 +10,7 @@ import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -22,7 +22,7 @@ public class ScoreDisplayPanel extends HelperPanel
 
 	public ScoreDisplayPanel(String title)
 	{
-		super(CGConstants.DATAID_NONE, title);
+		super(Constants.DATAID_NONE, title);
 	}
 
 	@Override
@@ -35,9 +35,9 @@ public class ScoreDisplayPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		entryObjective = new CEntry(CGConstants.DATAID_NONE, "GUI:scoreboard.objective", "");
+		entryObjective = new CEntry(Constants.DATAID_NONE, "GUI:scoreboard.objective", "");
 
-		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntity = new TargetSelectionPanel(Constants.PANELID_TARGET, "GENERAL:target.entity", Constants.ENTITIES_ALL);
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class ScoreDisplayPanel extends HelperPanel
 			if (tag.getId().equals("name"))
 			{
 				Map<String, Object> data = new HashMap<String, Object>();
-				data.put(CGConstants.PANELID_TARGET, Target.generateFrom(((TagString) tag).getValue()));
+				data.put(Constants.PANELID_TARGET, Target.generateFrom(((TagString) tag).getValue()));
 				panelEntity.setupFrom(data);
 			}
 		}

@@ -9,7 +9,7 @@ import commandGenerator.arguments.tags.TagFloat;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -52,13 +52,13 @@ public class CoordSelectionPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		entryX = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.x", "0");
-		entryY = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.y", "0");
-		entryZ = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.z", "0");
+		entryX = new CEntry(Constants.DATAID_NONE, "GUI:coord.x", "0");
+		entryY = new CEntry(Constants.DATAID_NONE, "GUI:coord.y", "0");
+		entryZ = new CEntry(Constants.DATAID_NONE, "GUI:coord.z", "0");
 
 		if (rotation)
 		{
-			checkboxRotation = new CCheckBox(CGConstants.DATAID_NONE, "GUI:coord.rotations");
+			checkboxRotation = new CCheckBox(Constants.DATAID_NONE, "GUI:coord.rotations");
 			checkboxRotation.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0)
 				{
@@ -69,10 +69,10 @@ public class CoordSelectionPanel extends HelperPanel
 
 		if (relative)
 		{
-			checkboxRelativeAll = new CCheckBox(CGConstants.DATAID_NONE, "GUI:coord.relatives");
-			checkRelX = new CCheckBox(CGConstants.DATAID_NONE, "GUI:coord.relative");
-			checkRelY = new CCheckBox(CGConstants.DATAID_NONE, "GUI:coord.relative");
-			checkRelZ = new CCheckBox(CGConstants.DATAID_NONE, "GUI:coord.relative");
+			checkboxRelativeAll = new CCheckBox(Constants.DATAID_NONE, "GUI:coord.relatives");
+			checkRelX = new CCheckBox(Constants.DATAID_NONE, "GUI:coord.relative");
+			checkRelY = new CCheckBox(Constants.DATAID_NONE, "GUI:coord.relative");
+			checkRelZ = new CCheckBox(Constants.DATAID_NONE, "GUI:coord.relative");
 		}
 
 		if (rotation)

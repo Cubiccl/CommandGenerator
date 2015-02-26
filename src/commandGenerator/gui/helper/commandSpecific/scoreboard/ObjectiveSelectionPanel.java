@@ -9,7 +9,7 @@ import commandGenerator.arguments.objects.Registerer;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.LangComboBox;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.Resources;
 
 @SuppressWarnings("serial")
@@ -26,7 +26,7 @@ public class ObjectiveSelectionPanel extends HelperPanel
 
 	public ObjectiveSelectionPanel(String title)
 	{
-		super(CGConstants.PANELID_OPTIONS, title);
+		super(Constants.PANELID_OPTIONS, title);
 	}
 
 	@Override
@@ -40,9 +40,9 @@ public class ObjectiveSelectionPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		comboboxMain = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:criteria", criteriaList.length);
-		comboboxPrecise = new CComboBox(CGConstants.DATAID_NONE, "", new ObjectBase[0], null);
-		comboboxPrecise2 = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:color", 16);
+		comboboxMain = new LangComboBox(Constants.DATAID_NONE, "RESOURCES:criteria", criteriaList.length);
+		comboboxPrecise = new CComboBox(Constants.DATAID_NONE, "", new ObjectBase[0], null);
+		comboboxPrecise2 = new LangComboBox(Constants.DATAID_NONE, "RESOURCES:color", 16);
 		comboboxPrecise2.setVisible(false);
 	}
 
@@ -77,11 +77,11 @@ public class ObjectiveSelectionPanel extends HelperPanel
 
 		if (index < 6) comboboxPrecise.setData(new ObjectBase[0]);
 
-		else if (index == 6) comboboxPrecise.setData(Registerer.getObjectList(CGConstants.OBJECT_ACHIEVEMENT));
+		else if (index == 6) comboboxPrecise.setData(Registerer.getObjectList(Constants.OBJECT_ACHIEVEMENT));
 
 		else if (index == 13) comboboxPrecise2.setText("RESOURCES:stat", statList.length);
 
-		else if (index == 11 || index == 12) comboboxPrecise.setData(Registerer.getList(CGConstants.LIST_MOBS));
+		else if (index == 11 || index == 12) comboboxPrecise.setData(Registerer.getList(Constants.LIST_MOBS));
 
 		else if (index >= 14) comboboxPrecise2.setText("RESOURCES:color", 16);
 
@@ -89,10 +89,10 @@ public class ObjectiveSelectionPanel extends HelperPanel
 		{
 			comboboxPrecise.setEnabled(true);
 			ObjectBase[] itemList = new ObjectBase[0];
-			if (index == 7) itemList = Registerer.getList(CGConstants.LIST_CRAFT);
-			else if (index == 8) itemList = Registerer.getList(CGConstants.LIST_USE);
-			else if (index == 9) itemList = Registerer.getList(CGConstants.LIST_ITEMS);
-			else itemList = Registerer.getList(CGConstants.LIST_MINE);
+			if (index == 7) itemList = Registerer.getList(Constants.LIST_CRAFT);
+			else if (index == 8) itemList = Registerer.getList(Constants.LIST_USE);
+			else if (index == 9) itemList = Registerer.getList(Constants.LIST_ITEMS);
+			else itemList = Registerer.getList(Constants.LIST_MINE);
 
 			comboboxPrecise.setData(itemList);
 		}
@@ -101,7 +101,7 @@ public class ObjectiveSelectionPanel extends HelperPanel
 	@Override
 	public void setupFrom(Map<String, Object> data)
 	{
-		String criteria = (String) data.get(CGConstants.DATAID_VALUE);
+		String criteria = (String) data.get(Constants.DATAID_VALUE);
 		for (int i = 0; i < criteriaList.length; i++)
 		{
 			if (criteria.startsWith(criteriaList[i]))

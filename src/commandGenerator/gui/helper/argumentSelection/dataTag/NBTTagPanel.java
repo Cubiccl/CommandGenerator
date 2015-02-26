@@ -16,7 +16,7 @@ import commandGenerator.gui.helper.components.CButton;
 import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.TagDisplayer;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 
 @SuppressWarnings("serial")
 public class NBTTagPanel extends HelperPanel implements CComponent
@@ -30,7 +30,7 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 
 	public NBTTagPanel(String title, ObjectBase object, String[][] nbtTags)
 	{
-		super(CGConstants.PANELID_NBT, title, object, nbtTags);
+		super(Constants.PANELID_NBT, title, object, nbtTags);
 	}
 
 	@Override

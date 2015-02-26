@@ -21,7 +21,7 @@ import commandGenerator.gui.helper.components.CButton;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.LangComboBox;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
@@ -38,7 +38,7 @@ public class ExplosionSelectionPanel extends HelperPanel
 
 	public ExplosionSelectionPanel()
 	{
-		super(CGConstants.DATAID_NONE, "TAGS:Explosion");
+		super(Constants.DATAID_NONE, "TAGS:Explosion");
 	}
 
 	@Override
@@ -61,10 +61,10 @@ public class ExplosionSelectionPanel extends HelperPanel
 		buttonFadeColors = new CButton("GUI:color.add_fade");
 		buttonRemoveColor = new CButton("GUI:color.remove");
 
-		checkboxFlicker = new CCheckBox(CGConstants.DATAID_NONE, "GUI:fireworks.twinkle");
-		checkboxTrail = new CCheckBox(CGConstants.DATAID_NONE, "GUI:fireworks.trail");
+		checkboxFlicker = new CCheckBox(Constants.DATAID_NONE, "GUI:fireworks.twinkle");
+		checkboxTrail = new CCheckBox(Constants.DATAID_NONE, "GUI:fireworks.trail");
 
-		comboboxType = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:fireworks", 5);
+		comboboxType = new LangComboBox(Constants.DATAID_NONE, "RESOURCES:fireworks", 5);
 
 		editorpane = new JEditorPane("text/html", "");
 		editorpane.setEditable(false);

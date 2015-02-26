@@ -2,7 +2,7 @@ package commandGenerator.arguments.objects;
 
 import javax.swing.ImageIcon;
 
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
@@ -32,7 +32,7 @@ public class Achievement extends ObjectBase
 	 *            - <i>Item</i> - The item which will give its texture to the achievement */
 	public Achievement(String id, Item itemTexture)
 	{
-		super(id, CGConstants.OBJECT_ACHIEVEMENT);
+		super(id, Constants.OBJECT_ACHIEVEMENT);
 		this.itemTexture = itemTexture;
 	}
 

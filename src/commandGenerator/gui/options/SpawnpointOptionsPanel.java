@@ -5,7 +5,7 @@ import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 
 @SuppressWarnings("serial")
 public class SpawnpointOptionsPanel extends OptionsPanel
@@ -29,8 +29,8 @@ public class SpawnpointOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.player", CGConstants.ENTITIES_ALL);
-		panelCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:spawnpoint.coords", true, false);
+		panelEntity = new TargetSelectionPanel(Constants.PANELID_TARGET, "GENERAL:target.player", Constants.ENTITIES_ALL);
+		panelCoords = new CoordSelectionPanel(Constants.PANELID_COORDS, "GUI:spawnpoint.coords", true, false);
 	}
 
 	@Override

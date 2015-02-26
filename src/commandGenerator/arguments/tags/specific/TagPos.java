@@ -10,7 +10,7 @@ import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagDouble;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 
 public class TagPos extends TagList
 {
@@ -28,12 +28,12 @@ public class TagPos extends TagList
 	@Override
 	public void askValue()
 	{
-		panel = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "TAGS:" + getId(), false, false);
+		panel = new CoordSelectionPanel(Constants.PANELID_COORDS, "TAGS:" + getId(), false, false);
 
 		Coordinates coords = new Coordinates(((TagDouble) getValue().get(0)).getValue(), ((TagDouble) getValue().get(1)).getValue(), ((TagDouble) getValue()
 				.get(2)).getValue());
 		Map<String, Object> data = new HashMap<String, Object>();
-		data.put(CGConstants.PANELID_COORDS, coords);
+		data.put(Constants.PANELID_COORDS, coords);
 		((CoordSelectionPanel) panel).setupFrom(data);
 
 		if (showPanel()) return;

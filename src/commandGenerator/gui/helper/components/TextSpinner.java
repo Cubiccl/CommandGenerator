@@ -10,7 +10,7 @@ import javax.swing.SpinnerListModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 
 @SuppressWarnings("serial")
 public class TextSpinner extends JPanel implements CComponent
@@ -65,7 +65,7 @@ public class TextSpinner extends JPanel implements CComponent
 
 	public void setupFrom(Map<String, Object> data)
 	{
-		if (!id.equals(CGConstants.DATAID_NONE)) spinner.setValue(data.get(id));
+		if (!id.equals(Constants.DATAID_NONE)) spinner.setValue(data.get(id));
 	}
 
 	public void updateLang()

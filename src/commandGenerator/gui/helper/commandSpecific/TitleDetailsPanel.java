@@ -4,7 +4,7 @@ import java.util.Map;
 
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -15,7 +15,7 @@ public class TitleDetailsPanel extends HelperPanel
 
 	public TitleDetailsPanel(String title)
 	{
-		super(CGConstants.PANELID_OPTIONS, title);
+		super(Constants.PANELID_OPTIONS, title);
 	}
 
 	@Override
@@ -29,9 +29,9 @@ public class TitleDetailsPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		entryFadeIn = new CEntry(CGConstants.DATAID_NONE, "GUI:title.fade_in", "1");
-		entryStay = new CEntry(CGConstants.DATAID_NONE, "GUI:title.stay", "1");
-		entryFadeOut = new CEntry(CGConstants.DATAID_NONE, "GUI:title.fade_out", "1");
+		entryFadeIn = new CEntry(Constants.DATAID_NONE, "GUI:title.fade_in", "1");
+		entryStay = new CEntry(Constants.DATAID_NONE, "GUI:title.stay", "1");
+		entryFadeOut = new CEntry(Constants.DATAID_NONE, "GUI:title.fade_out", "1");
 	}
 
 	@Override
@@ -65,12 +65,12 @@ public class TitleDetailsPanel extends HelperPanel
 	@Override
 	public void setupFrom(Map<String, Object> data)
 	{
-		if (data.get(CGConstants.DATAID_VALUE) == null)
+		if (data.get(Constants.DATAID_VALUE) == null)
 		{
 			reset();
 			return;
 		}
-		int[] opt = (int[]) data.get(CGConstants.DATAID_VALUE);
+		int[] opt = (int[]) data.get(Constants.DATAID_VALUE);
 		entryFadeIn.setTextField(Integer.toString(opt[0]));
 		entryStay.setTextField(Integer.toString(opt[1]));
 		entryFadeOut.setTextField(Integer.toString(opt[2]));

@@ -12,7 +12,7 @@ import commandGenerator.gui.helper.argumentSelection.ParticleSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 
 @SuppressWarnings("serial")
 public class ParticleOptionsPanel extends OptionsPanel
@@ -41,12 +41,12 @@ public class ParticleOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		checkBoxEntity = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:particle.target");
+		checkBoxEntity = new CCheckBox(Constants.DATAID_CHECK, "GUI:particle.target");
 
 		panelParticle = new ParticleSelectionPanel("GUI:particle");
-		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:particle.start", true, false);
-		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:particle.end", false, false);
-		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelCoord1 = new CoordSelectionPanel(Constants.PANELID_COORDS_START, "GUI:particle.start", true, false);
+		panelCoord2 = new CoordSelectionPanel(Constants.PANELID_COORDS_END, "GUI:particle.end", false, false);
+		panelEntity = new TargetSelectionPanel(Constants.PANELID_TARGET, "GENERAL:target.entity", Constants.ENTITIES_ALL);
 		panelEntity.setEnabled(false);
 		panelEntity.setEnabledContent(false);
 	}
@@ -102,7 +102,7 @@ public class ParticleOptionsPanel extends OptionsPanel
 	public void setupFrom(Map<String, Object> data)
 	{
 		super.setupFrom(data);
-		panelEntity.setEnabledContent((boolean) data.get(CGConstants.DATAID_CHECK));
+		panelEntity.setEnabledContent((boolean) data.get(Constants.DATAID_CHECK));
 	}
 
 }

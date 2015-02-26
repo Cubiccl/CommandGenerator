@@ -22,7 +22,7 @@ import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.specific.TagBlockEntity;
 import commandGenerator.gui.helper.argumentSelection.dataTag.TagSelection;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
@@ -103,7 +103,7 @@ public class TagDisplayer extends JPanel implements CComponent
 
 		editorPane.setText(Lang.get("GUI:tag.empty"));
 		for (int i = 0; i < values.size(); i++)
-			if (values.get(i).getId().equals(sel.getId())) editorPane.setText(values.get(i).display(CGConstants.DETAILS_ALL, 0));
+			if (values.get(i).getId().equals(sel.getId())) editorPane.setText(values.get(i).display(Constants.DETAILS_ALL, 0));
 	}
 
 	private Tag getSelected()

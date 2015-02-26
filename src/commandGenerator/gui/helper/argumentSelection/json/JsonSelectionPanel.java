@@ -15,7 +15,7 @@ import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.HelpButton;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.LangComboBox;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
@@ -35,7 +35,7 @@ public class JsonSelectionPanel extends HelperPanel
 
 	public JsonSelectionPanel(String title, boolean events)
 	{
-		super(CGConstants.DATAID_NONE, title, events);
+		super(Constants.DATAID_NONE, title, events);
 	}
 
 	@Override
@@ -66,25 +66,25 @@ public class JsonSelectionPanel extends HelperPanel
 		buttonHelpHover = new HelpButton(Lang.get("HELP:json.hover"), "GUI:json.hover");
 		buttonHelpClick = new HelpButton(Lang.get("HELP:json.click"), "GUI:json.click");
 
-		entryText = new CEntry(CGConstants.DATAID_NONE, "GUI:json.text", "");
-		entryInsertion = new CEntry(CGConstants.DATAID_NONE, "GUI:json.insertion", "");
+		entryText = new CEntry(Constants.DATAID_NONE, "GUI:json.text", "");
+		entryInsertion = new CEntry(Constants.DATAID_NONE, "GUI:json.insertion", "");
 
-		checkboxBold = new CCheckBox(CGConstants.DATAID_NONE, "GUI:json.bold");
-		checkboxUnderlined = new CCheckBox(CGConstants.DATAID_NONE, "GUI:json.underlined");
-		checkboxItalic = new CCheckBox(CGConstants.DATAID_NONE, "GUI:json.italic");
-		checkboxStrikethrough = new CCheckBox(CGConstants.DATAID_NONE, "GUI:json.strikethrough");
-		checkboxObfuscated = new CCheckBox(CGConstants.DATAID_NONE, "GUI:json.obfuscated");
+		checkboxBold = new CCheckBox(Constants.DATAID_NONE, "GUI:json.bold");
+		checkboxUnderlined = new CCheckBox(Constants.DATAID_NONE, "GUI:json.underlined");
+		checkboxItalic = new CCheckBox(Constants.DATAID_NONE, "GUI:json.italic");
+		checkboxStrikethrough = new CCheckBox(Constants.DATAID_NONE, "GUI:json.strikethrough");
+		checkboxObfuscated = new CCheckBox(Constants.DATAID_NONE, "GUI:json.obfuscated");
 		if (events)
 		{
-			checkboxHover = new CCheckBox(CGConstants.DATAID_NONE, "GUI:json.hover.use");
-			checkboxClick = new CCheckBox(CGConstants.DATAID_NONE, "GUI:json.click.use");
+			checkboxHover = new CCheckBox(Constants.DATAID_NONE, "GUI:json.hover.use");
+			checkboxClick = new CCheckBox(Constants.DATAID_NONE, "GUI:json.click.use");
 		}
 
-		comboboxMode = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:json.mode", 3);
-		comboboxColor = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:color", 16);
+		comboboxMode = new LangComboBox(Constants.DATAID_NONE, "RESOURCES:json.mode", 3);
+		comboboxColor = new LangComboBox(Constants.DATAID_NONE, "RESOURCES:color", 16);
 		comboboxColor.setSelectedIndex(15);
 
-		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GUI:json.display.entity", CGConstants.ENTITIES_PLAYERS);
+		panelEntity = new TargetSelectionPanel(Constants.PANELID_TARGET, "GUI:json.display.entity", Constants.ENTITIES_PLAYERS);
 		panelEntity.setVisible(false);
 		panelScore = new ScoreDisplayPanel("GUI:json.display.score");
 		panelScore.setVisible(false);
@@ -196,7 +196,7 @@ public class JsonSelectionPanel extends HelperPanel
 			{
 				comboboxMode.setSelectedIndex(2);
 				Map<String, Object> data = new HashMap<String, Object>();
-				data.put(CGConstants.PANELID_TARGET, Target.generateFrom(((TagString) tag).getValue()));
+				data.put(Constants.PANELID_TARGET, Target.generateFrom(((TagString) tag).getValue()));
 				panelEntity.setupFrom(data);
 			}
 		}

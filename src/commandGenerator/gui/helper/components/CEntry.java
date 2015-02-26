@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 
 @SuppressWarnings("serial")
 public class CEntry extends JPanel implements CComponent
@@ -59,7 +59,7 @@ public class CEntry extends JPanel implements CComponent
 	@Override
 	public void setupFrom(Map<String, Object> data)
 	{
-		if (!id.equals(CGConstants.DATAID_NONE) && data.get(id) != null) setTextField((String) data.get(id));
+		if (!id.equals(Constants.DATAID_NONE) && data.get(id) != null) setTextField((String) data.get(id));
 	}
 
 	public void updateLang()

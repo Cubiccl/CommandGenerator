@@ -2,7 +2,7 @@ package commandGenerator.arguments.objects;
 
 import javax.swing.ImageIcon;
 
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 
 public class Sound extends ObjectBase
 {
@@ -13,7 +13,7 @@ public class Sound extends ObjectBase
 	 *            - <i>String</i> - The Sound's ID. */
 	public Sound(String id)
 	{
-		super(id, CGConstants.OBJECT_SOUND);
+		super(id, Constants.OBJECT_SOUND);
 	}
 
 	@Override

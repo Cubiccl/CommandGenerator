@@ -3,7 +3,7 @@ package commandGenerator.gui.helper.argumentSelection.dataTag;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 
 @SuppressWarnings("serial")
 public class FlagSelectionPanel extends HelperPanel
@@ -14,7 +14,7 @@ public class FlagSelectionPanel extends HelperPanel
 
 	public FlagSelectionPanel()
 	{
-		super(CGConstants.DATAID_NONE, "GUI:flag.title");
+		super(Constants.DATAID_NONE, "GUI:flag.title");
 	}
 
 	@Override
@@ -34,12 +34,12 @@ public class FlagSelectionPanel extends HelperPanel
 	{
 		label = new CLabel("GUI:flag.select");
 
-		enchant = new CCheckBox(CGConstants.DATAID_NONE, "GUI:flag.enchant");
-		attribute = new CCheckBox(CGConstants.DATAID_NONE, "GUI:flag.attribute");
-		unbreak = new CCheckBox(CGConstants.DATAID_NONE, "GUI:flag.unbreak");
-		destroy = new CCheckBox(CGConstants.DATAID_NONE, "GUI:flag.destroy");
-		place = new CCheckBox(CGConstants.DATAID_NONE, "GUI:flag.place");
-		other = new CCheckBox(CGConstants.DATAID_NONE, "GUI:flag.other");
+		enchant = new CCheckBox(Constants.DATAID_NONE, "GUI:flag.enchant");
+		attribute = new CCheckBox(Constants.DATAID_NONE, "GUI:flag.attribute");
+		unbreak = new CCheckBox(Constants.DATAID_NONE, "GUI:flag.unbreak");
+		destroy = new CCheckBox(Constants.DATAID_NONE, "GUI:flag.destroy");
+		place = new CCheckBox(Constants.DATAID_NONE, "GUI:flag.place");
+		other = new CCheckBox(Constants.DATAID_NONE, "GUI:flag.other");
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.LangComboBox;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -22,7 +22,7 @@ public class WarningBorderPanel extends HelperPanel
 
 	public WarningBorderPanel()
 	{
-		super(CGConstants.PANELID_OPTIONS, "GENERAL:options");
+		super(Constants.PANELID_OPTIONS, "GENERAL:options");
 	}
 
 	@Override
@@ -37,9 +37,9 @@ public class WarningBorderPanel extends HelperPanel
 	{
 		labelMode = new CLabel("GUI:worldborder.mode");
 
-		entryValue = new CEntry(CGConstants.DATAID_NONE, "GUI:worldborder.warning.distance", "10");
+		entryValue = new CEntry(Constants.DATAID_NONE, "GUI:worldborder.warning.distance", "10");
 
-		comboboxMode = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:worldborder.warning.mode", 2);
+		comboboxMode = new LangComboBox(Constants.DATAID_NONE, "RESOURCES:worldborder.warning.mode", 2);
 	}
 
 	@Override

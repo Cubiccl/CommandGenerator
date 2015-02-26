@@ -21,7 +21,7 @@ import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.argumentSelection.ColorSelectionPanel;
 import commandGenerator.gui.helper.components.CButton;
 import commandGenerator.gui.helper.components.CCheckBox;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 
 @SuppressWarnings("serial")
 public class DisplaySelectionPanel extends JPanel
@@ -66,7 +66,7 @@ public class DisplaySelectionPanel extends JPanel
 			}
 		});
 
-		checkboxName = new CCheckBox(CGConstants.DATAID_NONE, "GUI:display.custom_name");
+		checkboxName = new CCheckBox(Constants.DATAID_NONE, "GUI:display.custom_name");
 		checkboxName.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -75,7 +75,7 @@ public class DisplaySelectionPanel extends JPanel
 			}
 		});
 		checkboxName.setSelected(false);
-		checkboxColor = new CCheckBox(CGConstants.DATAID_NONE, "GUI:display.color");
+		checkboxColor = new CCheckBox(Constants.DATAID_NONE, "GUI:display.color");
 		checkboxColor.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e)

@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -37,10 +37,10 @@ public class PlayersResetPanel extends ScoreboardPanel
 	{
 		textfieldObjective = new JTextField(15);
 
-		checkboxObjective = new CCheckBox(CGConstants.DATAID_NONE, "GUI:scoreboard.players.clear.objective");
+		checkboxObjective = new CCheckBox(Constants.DATAID_NONE, "GUI:scoreboard.players.clear.objective");
 		checkboxObjective.setSelected(true);
 
-		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntity = new TargetSelectionPanel(Constants.PANELID_TARGET, "GENERAL:target.entity", Constants.ENTITIES_ALL);
 	}
 
 	@Override
@@ -79,9 +79,9 @@ public class PlayersResetPanel extends ScoreboardPanel
 	public void setupFrom(Map<String, Object> data)
 	{
 		super.setupFrom(data);
-		checkboxObjective.setSelected(data.get(CGConstants.DATAID_NAME) != null);
-		textfieldObjective.setEnabled(data.get(CGConstants.DATAID_NAME) != null);
-		textfieldObjective.setText((String) data.get(CGConstants.DATAID_NAME));
+		checkboxObjective.setSelected(data.get(Constants.DATAID_NAME) != null);
+		textfieldObjective.setEnabled(data.get(Constants.DATAID_NAME) != null);
+		textfieldObjective.setText((String) data.get(Constants.DATAID_NAME));
 	}
 
 }

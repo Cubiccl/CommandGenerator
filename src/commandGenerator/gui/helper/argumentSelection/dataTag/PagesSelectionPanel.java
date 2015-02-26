@@ -24,7 +24,7 @@ import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.components.CButton;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
@@ -114,7 +114,7 @@ public class PagesSelectionPanel extends JPanel
 
 	private void addJson()
 	{
-		ListSelectionPanel panel = new ListSelectionPanel("GENERAL:text", CGConstants.OBJECT_JSON);
+		ListSelectionPanel panel = new ListSelectionPanel("GENERAL:text", Constants.OBJECT_JSON);
 		if (DisplayHelper.showQuestion(panel, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
 
 		TagList tag = new TagList() {
@@ -163,8 +163,8 @@ public class PagesSelectionPanel extends JPanel
 	private void editJson(String text)
 	{
 		Map<String, Object> data = new HashMap<String, Object>();
-		data.put(CGConstants.PANELID_JSON, DataTags.generateListFrom(text));
-		ListSelectionPanel panel = new ListSelectionPanel("GENERAL:text", CGConstants.OBJECT_JSON);
+		data.put(Constants.PANELID_JSON, DataTags.generateListFrom(text));
+		ListSelectionPanel panel = new ListSelectionPanel("GENERAL:text", Constants.OBJECT_JSON);
 		panel.setupFrom(data);
 		if (DisplayHelper.showQuestion(panel, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
 

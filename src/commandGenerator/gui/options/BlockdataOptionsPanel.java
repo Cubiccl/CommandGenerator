@@ -6,7 +6,7 @@ import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 
 @SuppressWarnings("serial")
 public class BlockdataOptionsPanel extends OptionsPanel
@@ -30,8 +30,8 @@ public class BlockdataOptionsPanel extends OptionsPanel
 	@Override
 	protected void createComponents()
 	{
-		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:blockdata.coords", true, false);
-		panelBlockdata = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:blockdata.block", Registerer.getList(CGConstants.LIST_TILEENTITY), true);
+		panelCoord = new CoordSelectionPanel(Constants.PANELID_COORDS, "GUI:blockdata.coords", true, false);
+		panelBlockdata = new BlockSelectionPanel(Constants.PANELID_BLOCK, "GUI:blockdata.block", Registerer.getList(Constants.LIST_TILEENTITY), true);
 	}
 
 	@Override

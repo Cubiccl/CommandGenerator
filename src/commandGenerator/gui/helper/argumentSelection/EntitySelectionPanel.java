@@ -15,7 +15,7 @@ import commandGenerator.gui.helper.argumentSelection.dataTag.NBTTagPanel;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.IBox;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 
 @SuppressWarnings("serial")
 public class EntitySelectionPanel extends HelperPanel implements IBox
@@ -51,7 +51,7 @@ public class EntitySelectionPanel extends HelperPanel implements IBox
 		labelName.setPreferredSize(new Dimension(200, 20));
 		labelName.setMinimumSize(new Dimension(200, 20));
 
-		combobox = new CComboBox(CGConstants.DATAID_NONE, "GUI:entity.select", entityList, this);
+		combobox = new CComboBox(Constants.DATAID_NONE, "GUI:entity.select", entityList, this);
 
 		panelData = new NBTTagPanel("GUI:entity.tags", entityList[0], DataTags.entities);
 	}

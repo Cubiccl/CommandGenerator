@@ -18,7 +18,7 @@ import commandGenerator.gui.helper.argumentSelection.AchievementSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.LangComboBox;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 
 @SuppressWarnings("serial")
 public class HoverEventPanel extends HelperPanel
@@ -32,7 +32,7 @@ public class HoverEventPanel extends HelperPanel
 
 	public HoverEventPanel()
 	{
-		super(CGConstants.DATAID_NONE, "GUI:json.hover");
+		super(Constants.DATAID_NONE, "GUI:json.hover");
 	}
 
 	@Override
@@ -45,13 +45,13 @@ public class HoverEventPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		comboboxAction = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:json.hover", 4);
+		comboboxAction = new LangComboBox(Constants.DATAID_NONE, "RESOURCES:json.hover", 4);
 
 		textfieldText = new JTextField(20);
 
 		panelJson = new JsonSelectionPanel("GUI:json.text", false);
 		panelJson.setVisible(false);
-		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:json.item", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
+		panelItem = new ItemSelectionPanel(Constants.PANELID_ITEM, "GUI:json.item", Registerer.getList(Constants.LIST_ITEMS), true, false);
 		panelItem.setVisible(false);
 		panelStat = new AchievementSelectionPanel();
 		panelStat.setVisible(false);
@@ -147,14 +147,14 @@ public class HoverEventPanel extends HelperPanel
 			tag.setValue(DataTags.generateListFrom(value));
 
 			Map<String, Object> data = new HashMap<String, Object>();
-			data.put(CGConstants.PANELID_ITEM, ItemStack.generateFrom(tag));
+			data.put(Constants.PANELID_ITEM, ItemStack.generateFrom(tag));
 			panelItem.setupFrom(data);
 		}
 		if (action.equals("show_achievement"))
 		{
 			comboboxAction.setSelectedIndex(3);
 			Map<String, Object> data = new HashMap<String, Object>();
-			data.put(CGConstants.PANELID_ACHIEVEMENT, ((Achievement) Registerer.getObjectFromId(value)));
+			data.put(Constants.PANELID_ACHIEVEMENT, ((Achievement) Registerer.getObjectFromId(value)));
 			panelStat.setupFrom(data);
 		}
 

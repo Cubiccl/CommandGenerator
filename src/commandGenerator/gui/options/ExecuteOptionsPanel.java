@@ -25,7 +25,7 @@ import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.OptionsPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
@@ -61,14 +61,14 @@ public class ExecuteOptionsPanel extends OptionsPanel
 	{
 		labelExplain = new CLabel("GUI:execute.explain");
 
-		checkboxDetect = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:execute.detect");
+		checkboxDetect = new CCheckBox(Constants.DATAID_CHECK, "GUI:execute.detect");
 
-		panelCoord = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:execute.coords", true, false);
-		panelCoordDetect = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:execute.block_coords", true, false);
+		panelCoord = new CoordSelectionPanel(Constants.PANELID_COORDS, "GUI:execute.coords", true, false);
+		panelCoordDetect = new CoordSelectionPanel(Constants.PANELID_COORDS_START, "GUI:execute.block_coords", true, false);
 
-		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntity = new TargetSelectionPanel(Constants.PANELID_TARGET, "GENERAL:target.entity", Constants.ENTITIES_ALL);
 
-		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:execute.block", Registerer.getList(CGConstants.LIST_BLOCKS), false);
+		panelBlock = new BlockSelectionPanel(Constants.PANELID_BLOCK, "GUI:execute.block", Registerer.getList(Constants.LIST_BLOCKS), false);
 	}
 
 	@Override
@@ -143,7 +143,7 @@ public class ExecuteOptionsPanel extends OptionsPanel
 	public void setupFrom(Map<String, Object> data)
 	{
 		super.setupFrom(data);
-		storedCommand = (String) data.get(CGConstants.DATAID_VALUE);
+		storedCommand = (String) data.get(Constants.DATAID_VALUE);
 		panelCoordDetect.setEnabledContent(checkboxDetect.isSelected());
 		panelBlock.setEnabledContent(checkboxDetect.isSelected());
 	}

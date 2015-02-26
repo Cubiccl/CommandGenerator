@@ -13,7 +13,7 @@ import commandGenerator.arguments.tags.TagInt;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.argumentSelection.dataTag.ListSelectionPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.Lang;
 
 public class TagAttributes extends TagList
@@ -29,7 +29,7 @@ public class TagAttributes extends TagList
 	@Override
 	public void askValue()
 	{
-		panel = new ListSelectionPanel("TAGS:" + getId(), CGConstants.OBJECT_ATTRIBUTE);
+		panel = new ListSelectionPanel("TAGS:" + getId(), Constants.OBJECT_ATTRIBUTE);
 		((ListSelectionPanel) panel).setList(getValue());
 		if (showPanel()) return;
 		if (!forMob)

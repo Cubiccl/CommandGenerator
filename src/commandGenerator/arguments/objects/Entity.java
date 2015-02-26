@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
@@ -19,7 +19,7 @@ public class Entity extends ObjectBase
 	public static Entity[] getListNoPlayer()
 	{
 		List<Entity> entityList = new ArrayList<Entity>();
-		ObjectBase[] list = Registerer.getObjectList(CGConstants.OBJECT_ENTITY);
+		ObjectBase[] list = Registerer.getObjectList(Constants.OBJECT_ENTITY);
 		for (int i = 0; i < list.length; i++)
 			if (!list[i].getId().equals("Player")) entityList.add((Entity) list[i]);
 
@@ -32,7 +32,7 @@ public class Entity extends ObjectBase
 	 *            - <i>String</i> - The Entity's ID. */
 	public Entity(String id)
 	{
-		super(id, CGConstants.OBJECT_ENTITY);
+		super(id, Constants.OBJECT_ENTITY);
 	}
 
 	/** Returns this Entity's name. */

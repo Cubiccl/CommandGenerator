@@ -2,7 +2,7 @@ package commandGenerator.arguments.objects;
 
 import javax.swing.ImageIcon;
 
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.Lang;
 
 public class Particle extends ObjectBase
@@ -27,7 +27,7 @@ public class Particle extends ObjectBase
 	 *            - <i>int</i> - The Partcile's type. */
 	public Particle(String id, int type)
 	{
-		super(id, CGConstants.OBJECT_PARTICLE);
+		super(id, Constants.OBJECT_PARTICLE);
 		this.type = type;
 	}
 

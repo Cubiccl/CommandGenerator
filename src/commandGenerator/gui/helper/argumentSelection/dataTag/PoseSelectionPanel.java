@@ -6,7 +6,7 @@ import java.util.List;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 
 @SuppressWarnings("serial")
 public class PoseSelectionPanel extends HelperPanel
@@ -16,7 +16,7 @@ public class PoseSelectionPanel extends HelperPanel
 
 	public PoseSelectionPanel()
 	{
-		super(CGConstants.DATAID_NONE, "TAGS:Pose");
+		super(Constants.DATAID_NONE, "TAGS:Pose");
 	}
 
 	@Override

@@ -4,7 +4,7 @@ import java.util.Map;
 
 import javax.swing.JCheckBox;
 
-import commandGenerator.main.CGConstants;
+import commandGenerator.main.Constants;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
@@ -40,7 +40,7 @@ public class CCheckBox extends JCheckBox implements CComponent
 
 	public void setupFrom(Map<String, Object> data)
 	{
-		if (!id.equals(CGConstants.DATAID_NONE)) setSelected((boolean) data.get(id));
+		if (!id.equals(Constants.DATAID_NONE)) setSelected((boolean) data.get(id));
 	}
 
 	public void updateLang()
