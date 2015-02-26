@@ -74,7 +74,7 @@ public class TradeSelectionPanel extends HelperPanel
 	public TagCompound generateTrade()
 	{
 
-		String maxUses = entryMaxUses.getText(), uses = entryMaxUses.getText();
+		String maxUses = entryMaxUses.getText(), uses = entryUses.getText();
 		ItemStack buy, buyB, sell;
 
 		try

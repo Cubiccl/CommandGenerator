@@ -1,17 +1,22 @@
 package commandGenerator.main;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 import commandGenerator.arguments.objects.Command;
+import commandGenerator.gui.SettingsPanel;
 
 public class Settings
 {
 
-	public static final int ENGLISH = 0, ENGLISH_GB = 1;
-	public static final String[] languages = { "english", "english_gb" };
+	public static List<String[]> languages;
 
 	/** Is it the first launch? */
 	public boolean firstLaunch;
 	/** The language selected by the user. */
-	private int language;
+	private String language;
 	/** The previous version the program was launched with. */
 	public String previousVersion;
 	/** The selected command. */
@@ -21,9 +26,25 @@ public class Settings
 	public Settings()
 	{
 		selectedCommand = Command.achievement;
-		language = Integer.parseInt(FileHelper.getOption("lang"));
+		language = FileHelper.getOption("lang");
 		previousVersion = FileHelper.getOption("version");
 		firstLaunch = !previousVersion.equals(Resources.versions[Resources.versions.length - 1]);
+		createLangs();
+	}
+
+	private void createLangs()
+	{
+		languages = new ArrayList<String[]>();
+		try
+		{
+			Scanner sc = new Scanner(new File(Resources.folder + "downloads/langs.txt"));
+			while (sc.hasNextLine())
+				languages.add(sc.nextLine().split(","));
+			sc.close();
+
+		} catch (Exception e)
+		{}
+		if (!languages.contains(language) && languages.size() > 0) language = languages.get(0)[1];
 	}
 
 	/** Returns true if the version has already been updated.
@@ -42,7 +63,7 @@ public class Settings
 	}
 
 	/** Returns the selected language. */
-	public int getLanguage()
+	public String getLanguage()
 	{
 		return language;
 	}
@@ -50,12 +71,37 @@ public class Settings
 	/** Changes the selected languages. Updates the translations.
 	 * 
 	 * @param language
-	 *            - <i>int</i> - The language to use. */
-	public void setLanguage(int language)
+	 *            - <i>String</i> - The language to use. */
+	public void setLanguage(String language)
 	{
 		this.language = language;
-		FileHelper.setOption("lang", Integer.toString(language));
+		FileHelper.setOption("lang", language);
 		Lang.updateLang();
+	}
+
+	public void change()
+	{
+		SettingsPanel panel = new SettingsPanel();
+		DisplayHelper.showMessage(panel, Lang.get("GUI:menu.settings"));
+		
+		String newLang = getLangFromName(panel.getLang());
+		if (!language.equalsIgnoreCase(newLang)) setLanguage(newLang);
+		FileHelper.setOption("lang", newLang);
+		FileHelper.changePath(panel.getFolder());
+	}
+
+	private static String getLangFromName(String langName)
+	{
+		for (int i = 0; i < languages.size(); i++) if (languages.get(i)[0].equalsIgnoreCase(langName)) return languages.get(i)[1];
+		return null;
+	}
+
+	public String[] getLangs()
+	{
+		String[] langs = new String[languages.size()];
+		for (int i = 0; i < langs.length; i++)
+			langs[i] = languages.get(i)[0];
+		return langs;
 	}
 
 }

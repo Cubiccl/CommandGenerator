@@ -22,41 +22,34 @@ import commandGenerator.CommandGenerator;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
-import commandGenerator.main.Settings;
 
 @SuppressWarnings("serial")
 public class CGMenubar extends JMenuBar
 {
 
-	private static JMenuItem english, english_gb;
-	private static JMenu menu, lang;
-	private static JMenuItem reset, changelog, link, folder, exit;
+	private static JMenu menu;
+	private static JMenuItem reset, settings, changelog, link, folder, exit;
 
 	/** The program's menubar. */
 	public CGMenubar()
 	{
 
 		menu = new JMenu(Lang.get("GUI:menu"));
-		lang = new JMenu(Lang.get("GUI:menu.lang"));
 
 		reset = new JMenuItem(Lang.get("GUI:menu.reset"));
+		settings = new JMenuItem(Lang.get("GUI:menu.settings"));
 		changelog = new JMenuItem(Lang.get("GUI:menu.changelog"));
 		link = new JMenuItem(Lang.get("GUI:menu.link"));
 		folder = new JMenuItem(Lang.get("GUI:menu.folder"));
 		exit = new JMenuItem(Lang.get("GUI:menu.exit"));
 
-		english = new JMenuItem("English (US)");
-		english_gb = new JMenuItem("English (GB)");
-
 		menu.add(reset);
+		menu.add(settings);
 		menu.add(changelog);
 		menu.add(link);
 		menu.add(folder);
 		menu.add(exit);
 		add(menu);
-		lang.add(english);
-		lang.add(english_gb);
-		add(lang);
 
 		reset.addActionListener(new ActionListener() {
 
@@ -67,7 +60,13 @@ public class CGMenubar extends JMenuBar
 				CommandGenerator.gui.panelGeneral.panelOptions.reset();
 			}
 		});
-
+		settings.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				CommandGenerator.opt.change();
+			}
+		});
 		changelog.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -136,29 +135,14 @@ public class CGMenubar extends JMenuBar
 			}
 		});
 
-		english.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				CommandGenerator.opt.setLanguage(Settings.ENGLISH);
-			}
-		});
-		english_gb.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				CommandGenerator.opt.setLanguage(Settings.ENGLISH_GB);
-			}
-		});
-
 	}
 
 	public void updateLang()
 	{
 		menu.setText(Lang.get("GUI:menu"));
-		lang.setText(Lang.get("GUI:menu.lang"));
-		reset.setText("GUI:menu.reset");
-		changelog.setText(Lang.get("GUI:menu.changelog"));
+		reset.setText(Lang.get("GUI:reset"));
+		settings.setText(Lang.get("GUI:settings"));
+		changelog.setText(Lang.get(Lang.get("GUI:changelog")));
 		link.setText(Lang.get("GUI:menu.link"));
 		folder.setText(Lang.get("GUI:menu.folder"));
 		exit.setText(Lang.get("GUI:menu.exit"));

@@ -57,15 +57,14 @@ public class Lang
 	/** Initializes the language dictionaries. */
 	public static void initLang()
 	{
-		dictGui = FileHelper.readLanguageFile(Settings.languages[CommandGenerator.opt.getLanguage()] + "_gui", guiCategories);
-		dictObjects = FileHelper.readLanguageFile(Settings.languages[CommandGenerator.opt.getLanguage()] + "_objects", objectCategories);
+		dictGui = FileHelper.readLanguageFile(CommandGenerator.opt.getLanguage() + "_gui", guiCategories);
+		dictObjects = FileHelper.readLanguageFile(CommandGenerator.opt.getLanguage() + "_objects", objectCategories);
 	}
 
 	/** Updates the language dictionaries. */
 	public static void updateLang()
 	{
-		dictGui = FileHelper.readLanguageFile(Settings.languages[CommandGenerator.opt.getLanguage()] + "_gui", guiCategories);
-		dictObjects = FileHelper.readLanguageFile(Settings.languages[CommandGenerator.opt.getLanguage()] + "_objects", objectCategories);
+		initLang();
 		CommandGenerator.gui.updateLang();
 	}
 

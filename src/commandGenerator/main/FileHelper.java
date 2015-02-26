@@ -25,9 +25,8 @@ public class FileHelper
 		try
 		{
 			writer = new PrintWriter(folder + "options.txt", "UTF-8");
-			writer.println("lang = 0");
+			writer.println("lang = en_uk");
 			writer.println("version = 5.0");
-			writer.println("english_gb = false");
 			writer.close();
 		} catch (Exception e)
 		{
@@ -189,16 +188,16 @@ public class FileHelper
 	/** Creates and sets up the Command Generator resource folder. */
 	public static void setupFolder()
 	{
-		String directory;
-		String os = (System.getProperty("os.name")).toUpperCase();
-
-		if (os.contains("WIN")) directory = System.getenv("AppData");// Windows
-		else
+		folder = getDefaultFolder();
+		Scanner scan;
+		try
 		{
-			directory = System.getProperty("user.home");// Mac or Linux
-			directory += "/Library/Application Support";// Mac
+			scan = new Scanner(new File(folder + "path.txt"));
+			folder = scan.nextLine();
+		} catch (Exception e)
+		{
+			e.printStackTrace();
 		}
-		folder = directory + "/commandGenerator/";
 
 		if (new File(folder + "log.txt").exists()) new File(folder + "log.txt").delete();
 		try
@@ -212,7 +211,7 @@ public class FileHelper
 		{
 			try
 			{
-				Writer writer = new PrintWriter(folder + "customData.txt");
+				writer = new PrintWriter(folder + "customData.txt");
 				writer.write("/** BLOCKS **** ID,id **/\n\n/** ITEMS **** ID,id,maxDamage **/\n\n/** ENTITIES **/\n\n/** EFFECTS **/\n\n"
 						+ "/** ENCHANTMENTS **** ID,id,max_level **/\n\n/** ACHIEVEMENTS **** id,item **/\n\n/** ATTRIBUTES **/\n\n/** PARTICLES **/\n\n/** SOUNDS **/\n\n"
 						+ "/** LISTS **** name:elements **/\n\n/** BLOCKTAGS **** name,type,applicable **/\n\n/** ITEMTAGS **** name,type,applicable **/\n\n"
@@ -220,6 +219,36 @@ public class FileHelper
 				writer.close();
 			} catch (Exception e)
 			{}
+		}
+	}
+
+	public static String getDefaultFolder()
+	{
+
+		String directory;
+		String os = (System.getProperty("os.name")).toUpperCase();
+
+		if (os.contains("WIN")) directory = System.getenv("AppData");// Windows
+		else
+		{
+			directory = System.getProperty("user.home");// Mac or Linux
+			directory += "/Library/Application Support";// Mac
+		}
+		return directory + "/commandGenerator/";
+	}
+
+	public static void changePath(String folder)
+	{
+		String folderPath = getDefaultFolder();
+		try
+		{
+			new File(folderPath + "path.txt").delete();
+			writer = new PrintWriter(new File(folderPath + "path.txt"));
+			writer.write(folder);
+			writer.close();
+		} catch (Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 

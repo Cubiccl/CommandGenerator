@@ -49,8 +49,8 @@ public class RotationSelectionPanel extends HelperPanel
 	public List<Tag> getRotations()
 	{
 		List<Tag> rot = new ArrayList<Tag>();
-		rot.add(new TagFloat().setValue(Float.parseFloat(Integer.toString((int) spinnerX.getValue()))));
-		rot.add(new TagFloat().setValue(Float.parseFloat(Integer.toString((int) spinnerY.getValue()))));
+		rot.add(new TagFloat().setValue((float) spinnerX.getValue()));
+		rot.add(new TagFloat().setValue((float) spinnerY.getValue()));
 		return rot;
 	}
 
