@@ -51,8 +51,7 @@ public class Effect
 	/** Generates the command structure for the /effect command. */
 	public String commandStructure()
 	{
-		if (showParticles) return type.getId() + " " + Integer.toString(duration) + " " + Integer.toString(amplifier);
-		else return type.getId() + " " + Integer.toString(duration) + " " + Integer.toString(amplifier) + " true";
+		return type.getId() + " " + Integer.toString(duration) + " " + Integer.toString(amplifier) + " " + Boolean.toString(!showParticles);
 	}
 
 	/** Returns a String version of this Effect to be displayed to the user. */

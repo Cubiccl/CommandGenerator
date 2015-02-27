@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Particle;
-import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.CEntry;
@@ -48,7 +48,7 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 	@Override
 	protected void createComponents()
 	{
-		ObjectBase[] list = Registerer.getObjectList(CGConstants.OBJECT_PARTICLE);
+		ObjectBase[] list = Registry.getObjectList(CGConstants.OBJECT_PARTICLE);
 		buttonHelp = new HelpButton(((Particle) list[0]).getDescription(), list[0].getName());
 
 		textfieldCount = new JTextField(15);
@@ -60,9 +60,9 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 
 		comboboxParticle = new CComboBox(CGConstants.PANELID_PARTICLE, "GUI:particle", list, this);
 
-		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:particle.block", Registerer.getList(CGConstants.LIST_BLOCKS), false);
+		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:particle.block", Registry.getList(CGConstants.LIST_BLOCKS), false);
 		panelBlock.setVisible(false);
-		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:particle.item", Registerer.getList(CGConstants.LIST_ICONS), false, false);
+		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:particle.item", Registry.getList(CGConstants.LIST_ICONS), false, false);
 		panelItem.setVisible(false);
 	}
 

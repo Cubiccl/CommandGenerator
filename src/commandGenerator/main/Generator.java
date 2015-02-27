@@ -12,7 +12,7 @@ import commandGenerator.arguments.objects.EffectType;
 import commandGenerator.arguments.objects.EnchantType;
 import commandGenerator.arguments.objects.Enchantment;
 import commandGenerator.arguments.objects.ItemStack;
-import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
@@ -158,8 +158,8 @@ public class Generator
 		{
 			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[1]));
 
-			EffectType type = (EffectType) Registerer.getObjectFromId(elements[2]);
-			if (type == null) type = (EffectType) Registerer.getObjectFromIdNum(CGConstants.OBJECT_EFFECT, Integer.parseInt(elements[2]));
+			EffectType type = (EffectType) Registry.getObjectFromId(elements[2]);
+			if (type == null) type = (EffectType) Registry.getObjectFromIdNum(CGConstants.OBJECT_EFFECT, Integer.parseInt(elements[2]));
 			int duration = 30, level = 0;
 			boolean hide = false;
 			if (elements.length > 3) duration = Integer.parseInt(elements[3]);
@@ -219,8 +219,8 @@ public class Generator
 		try
 		{
 			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[1]));
-			EnchantType type = (EnchantType) Registerer.getObjectFromId(elements[2]);
-			if (type == null) type = (EnchantType) Registerer.getObjectFromIdNum(CGConstants.OBJECT_ENCHANT, Integer.parseInt(elements[2]));
+			EnchantType type = (EnchantType) Registry.getObjectFromId(elements[2]);
+			if (type == null) type = (EnchantType) Registry.getObjectFromIdNum(CGConstants.OBJECT_ENCHANT, Integer.parseInt(elements[2]));
 			data.put(CGConstants.PANELID_ENCHANT, new Enchantment(type, Integer.parseInt(elements[3]), true));
 			DisplayHelper.log("Created enchantment : " + ((Enchantment) data.get(CGConstants.PANELID_ENCHANT)).display());
 
@@ -451,7 +451,7 @@ public class Generator
 
 		try
 		{
-			data.put(CGConstants.PANELID_PARTICLE, Registerer.getObjectFromId(elements[1]));
+			data.put(CGConstants.PANELID_PARTICLE, Registry.getObjectFromId(elements[1]));
 			data.put(CGConstants.PANELID_COORDS_START, Coordinates.generateFrom(elements[2], elements[3], elements[4]));
 			data.put(CGConstants.PANELID_COORDS_END, Coordinates.generateFrom(elements[5], elements[6], elements[7]));
 			data.put(CGConstants.DATAID_VALUE, new int[] { Integer.parseInt(elements[8]), -1 });
@@ -478,7 +478,7 @@ public class Generator
 
 		try
 		{
-			data.put(CGConstants.PANELID_SOUND, Registerer.getObjectFromId(elements[1]));
+			data.put(CGConstants.PANELID_SOUND, Registry.getObjectFromId(elements[1]));
 			data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[2]));
 			if (elements.length > 5)
 			{
@@ -769,7 +769,7 @@ public class Generator
 
 		try
 		{
-			data.put(CGConstants.DATAID_ENTITY, Registerer.getObjectFromId(elements[1]));
+			data.put(CGConstants.DATAID_ENTITY, Registry.getObjectFromId(elements[1]));
 			if (elements.length > 2) data.put(CGConstants.PANELID_COORDS, Coordinates.generateFrom(elements[2], elements[3], elements[4]));
 			if (elements.length > 5) data.put(CGConstants.PANELID_NBT, DataTags.generateListFrom(elements[5]));
 

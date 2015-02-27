@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 
@@ -47,11 +47,11 @@ public abstract class Tag extends ObjectBase
 		{
 			for (String objectId : ids[0].split(":"))
 			{
-				if (!objectId.startsWith("LIST=")) objects.add(Registerer.getObjectFromId(objectId));
+				if (!objectId.startsWith("LIST=")) objects.add(Registry.getObjectFromId(objectId));
 				else
 				{
 					objectId = objectId.substring("LIST=".length());
-					for (ObjectBase object : Registerer.getList(objectId))
+					for (ObjectBase object : Registry.getList(objectId))
 						objects.add(object);
 
 				}

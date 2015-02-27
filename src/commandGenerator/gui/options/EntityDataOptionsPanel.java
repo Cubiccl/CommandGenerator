@@ -1,6 +1,6 @@
 package commandGenerator.gui.options;
 
-import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
@@ -37,7 +37,7 @@ public class EntityDataOptionsPanel extends OptionsPanel
 		labelExplain = new CLabel("GUI:entity.explain", true);
 
 		panelSelector = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_ENTITY, "GUI:entity.title", Registerer.getObjectList(CGConstants.OBJECT_ENTITY));
+		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_ENTITY, "GUI:entity.title", Registry.getObjectList(CGConstants.OBJECT_ENTITY));
 	}
 
 	@Override

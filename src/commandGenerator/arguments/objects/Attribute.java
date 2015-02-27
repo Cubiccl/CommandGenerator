@@ -85,4 +85,9 @@ public class Attribute
 		return tag;
 	}
 
+	public String save()
+	{
+		return type.getId() + " " + amount + " " + operation;
+	}
+
 }

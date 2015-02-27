@@ -19,7 +19,7 @@ public class Entity extends ObjectBase
 	public static Entity[] getListNoPlayer()
 	{
 		List<Entity> entityList = new ArrayList<Entity>();
-		ObjectBase[] list = Registerer.getObjectList(CGConstants.OBJECT_ENTITY);
+		ObjectBase[] list = Registry.getObjectList(CGConstants.OBJECT_ENTITY);
 		for (int i = 0; i < list.length; i++)
 			if (!list[i].getId().equals("Player")) entityList.add((Entity) list[i]);
 

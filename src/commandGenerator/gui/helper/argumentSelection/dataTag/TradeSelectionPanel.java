@@ -7,7 +7,7 @@ import java.util.Map;
 
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
-import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagBoolean;
 import commandGenerator.arguments.tags.TagCompound;
@@ -53,10 +53,10 @@ public class TradeSelectionPanel extends HelperPanel
 		checkboxRewardExp = new CCheckBox(CGConstants.DATAID_MODE, "GUI:trade.xp");
 		checkboxBuyB = new CCheckBox(CGConstants.DATAID_MODE2, "GUI:trade.buyb.use");
 
-		panelBuy = new ItemSelectionPanel(CGConstants.PANELID_TARGET, "GUI:trade.buy", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
-		panelBuyB = new ItemSelectionPanel(CGConstants.PANELID_TARGET2, "GUI:trade.buyb", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
+		panelBuy = new ItemSelectionPanel(CGConstants.PANELID_TARGET, "GUI:trade.buy", Registry.getList(CGConstants.LIST_ITEMS), true, false);
+		panelBuyB = new ItemSelectionPanel(CGConstants.PANELID_TARGET2, "GUI:trade.buyb", Registry.getList(CGConstants.LIST_ITEMS), true, false);
 		panelBuyB.setEnabledContent(false);
-		panelSell = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:trade.sell", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
+		panelSell = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:trade.sell", Registry.getList(CGConstants.LIST_ITEMS), true, false);
 	}
 
 	@Override
@@ -119,8 +119,8 @@ public class TradeSelectionPanel extends HelperPanel
 		TagCompound trade = (TagCompound) data.get(getPanelId());
 		int maxUses = 10, uses = 0;
 		boolean reward = false, buyb = false;
-		ItemStack buy = new ItemStack((Item) Registerer.getObjectFromId("stone"), 0), buyB = new ItemStack((Item) Registerer.getObjectFromId("stone"), 0), sell = new ItemStack(
-				(Item) Registerer.getObjectFromId("stone"), 0);
+		ItemStack buy = new ItemStack((Item) Registry.getObjectFromId("stone"), 0), buyB = new ItemStack((Item) Registry.getObjectFromId("stone"), 0), sell = new ItemStack(
+				(Item) Registry.getObjectFromId("stone"), 0);
 
 		for (int i = 0; i < trade.size(); i++)
 		{

@@ -75,7 +75,7 @@ public abstract class TagCompound extends Tag
 				text += "|";
 			text += "* " + value.get(i).display(details - 1, lvls + 1);
 		}
-		
+
 		if (size() == 0) return text + Lang.get("GENERAL:empty");
 		return text;
 	}
@@ -105,10 +105,10 @@ public abstract class TagCompound extends Tag
 		return value;
 	}
 
-	public void setValue(List<Tag> value)
+	public TagCompound setValue(List<Tag> value)
 	{
-		if (value == null) return;
-		this.value = value;
+		if (value != null) this.value = value;
+		return this;
 	}
 
 	public int size()

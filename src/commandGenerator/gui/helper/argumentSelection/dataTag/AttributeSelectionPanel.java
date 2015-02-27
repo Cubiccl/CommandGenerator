@@ -4,7 +4,7 @@ import java.util.Map;
 
 import commandGenerator.arguments.objects.Attribute;
 import commandGenerator.arguments.objects.AttributeType;
-import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.HelperPanel;
@@ -39,7 +39,7 @@ public class AttributeSelectionPanel extends HelperPanel
 		entryAmount = new CEntry(CGConstants.DATAID_NONE, "GUI:attribute.amount", "1");
 		entryAmount.setTextField("1");
 
-		comboboxAttribute = new CComboBox(CGConstants.DATAID_NONE, "GUI:attribute.select", Registerer.getObjectList(CGConstants.OBJECT_ATTRIBUTE), null);
+		comboboxAttribute = new CComboBox(CGConstants.DATAID_NONE, "GUI:attribute.select", Registry.getObjectList(CGConstants.OBJECT_ATTRIBUTE), null);
 		comboboxOperation = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:attribute.operation", 3);
 	}
 

@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 
 import commandGenerator.arguments.objects.Entity;
-import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagInt;
@@ -83,14 +83,14 @@ public class SpawnSelectionPanel extends HelperPanel
 
 	public void setup(TagCompound nbt)
 	{
-		Entity sel = (Entity) Registerer.getObjectFromId("ArmorStand");
+		Entity sel = (Entity) Registry.getObjectFromId("ArmorStand");
 		for (int i = 0; i < nbt.size(); i++)
 		{
 			Tag tag = nbt.get(i);
 			if (tag.getId().equals("Type"))
 			{
-				panelEntity.setSelected((Entity) Registerer.getObjectFromId(((TagString) tag).getValue()));
-				sel = (Entity) Registerer.getObjectFromId(((TagString) tag).getValue());
+				panelEntity.setSelected((Entity) Registry.getObjectFromId(((TagString) tag).getValue()));
+				sel = (Entity) Registry.getObjectFromId(((TagString) tag).getValue());
 			}
 			if (tag.getId().equals("Weight")) entryWeight.setTextField(Integer.toString(((TagInt) tag).getValue()));
 			if (tag.getId().equals("Properties"))

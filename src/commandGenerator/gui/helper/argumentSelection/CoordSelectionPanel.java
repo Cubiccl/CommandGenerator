@@ -16,7 +16,7 @@ import commandGenerator.main.DisplayHelper;
 public class CoordSelectionPanel extends HelperPanel
 {
 
-	private CCheckBox checkboxRotation, checkboxRelativeAll, checkRelX, checkRelY, checkRelZ;
+	private CCheckBox checkboxRotation, checkboxRelativeAll, checkRelX, checkRelY, checkRelZ, checkboxFloat;
 	protected CEntry entryX, entryY, entryZ;
 	private RotationSelectionPanel panelRotation;
 	private boolean rotation, relative;
@@ -34,7 +34,7 @@ public class CoordSelectionPanel extends HelperPanel
 			addLine(entryX, checkRelX);
 			addLine(entryY, checkRelY);
 			addLine(entryZ, checkRelZ);
-			add(checkboxRelativeAll);
+			addLine(checkboxFloat, checkboxRelativeAll);
 		} else
 		{
 			add(entryX);
@@ -55,6 +55,8 @@ public class CoordSelectionPanel extends HelperPanel
 		entryX = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.x", "0");
 		entryY = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.y", "0");
 		entryZ = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.z", "0");
+		
+		checkboxFloat = new CCheckBox(CGConstants.DATAID_NONE, "GUI:coord.float");
 
 		if (rotation)
 		{
@@ -122,8 +124,8 @@ public class CoordSelectionPanel extends HelperPanel
 		}
 
 		if (isRotation) return new Coordinates(x, y, z, ((TagFloat) panelRotation.getRotations().get(0)).getValue(), ((TagFloat) panelRotation.getRotations()
-				.get(1)).getValue(), relativeness);
-		else return new Coordinates(x, y, z, relativeness);
+				.get(1)).getValue(), relativeness, checkboxFloat.isSelected());
+		else return new Coordinates(x, y, z, relativeness, checkboxFloat.isSelected());
 	}
 
 	public void setEnabledContent(boolean enable)

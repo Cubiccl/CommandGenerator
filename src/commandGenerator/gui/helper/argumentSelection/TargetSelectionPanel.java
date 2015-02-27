@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 import commandGenerator.arguments.objects.Entity;
-import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.components.CButton;
 import commandGenerator.gui.helper.components.CComboBox;
@@ -135,7 +135,7 @@ public class TargetSelectionPanel extends HelperPanel
 		} else if (selector.equals("type"))
 		{
 
-			CComboBox box = new CComboBox(CGConstants.DATAID_NONE, "GUI:selector.type", Registerer.getObjectList(CGConstants.OBJECT_ENTITY), null);
+			CComboBox box = new CComboBox(CGConstants.DATAID_NONE, "GUI:selector.type", Registry.getObjectList(CGConstants.OBJECT_ENTITY), null);
 			boolean cancel = DisplayHelper.showQuestion(box, title);
 			if (cancel) return;
 			value = box.getValue().getId();
@@ -312,7 +312,7 @@ public class TargetSelectionPanel extends HelperPanel
 		Entity entity = Entity.player;
 		for (int i = 0; i < addedSelectors.size(); i++)
 		{
-			if (addedSelectors.get(i)[0].equals("type")) entity = (Entity) Registerer.getObjectFromId(addedSelectors.get(i)[1]);
+			if (addedSelectors.get(i)[0].equals("type")) entity = (Entity) Registry.getObjectFromId(addedSelectors.get(i)[1]);
 		}
 		return entity;
 	}

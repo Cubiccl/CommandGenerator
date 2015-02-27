@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.Map;
 
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.objects.Sound;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CComboBox;
@@ -51,7 +51,7 @@ public class SoundSelectionPanel extends HelperPanel implements IBox
 		entryVolumeMin = new CEntry(CGConstants.DATAID_NONE, "GUI:playsound.volume_min", "1");
 		entryVolumeMin.setEnabledContent(false);
 
-		ObjectBase[] list = Registerer.getObjectList(CGConstants.OBJECT_SOUND);
+		ObjectBase[] list = Registry.getObjectList(CGConstants.OBJECT_SOUND);
 		buttonHelpSound = new HelpButton(Lang.get("HELP:sound." + list[0].getId()), list[0].getId());
 
 		checkboxOptions = new CCheckBox(CGConstants.DATAID_NONE, "GUI:playsound.advanced");

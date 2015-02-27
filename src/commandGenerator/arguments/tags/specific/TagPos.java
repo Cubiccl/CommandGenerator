@@ -30,16 +30,15 @@ public class TagPos extends TagList
 	{
 		panel = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "TAGS:" + getId(), false, false);
 
-		Coordinates coords = new Coordinates(((TagDouble) getValue().get(0)).getValue(), ((TagDouble) getValue().get(1)).getValue(), ((TagDouble) getValue()
-				.get(2)).getValue());
+		double x = ((TagDouble) getValue().get(0)).getValue(), y = ((TagDouble) getValue().get(1)).getValue(), z = ((TagDouble) getValue().get(2)).getValue();
+		Coordinates coords = new Coordinates(x, y, z, true);
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put(CGConstants.PANELID_COORDS, coords);
 		((CoordSelectionPanel) panel).setupFrom(data);
 
 		if (showPanel()) return;
 		if (((CoordSelectionPanel) panel).generateCoord() == null) return;
-		
+
 		setValue(((CoordSelectionPanel) panel).generateCoord().toTagPos());
 	}
-
 }

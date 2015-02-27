@@ -2,7 +2,7 @@ package commandGenerator.gui.options;
 
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Item;
-import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
@@ -51,8 +51,8 @@ public class FillOptionsPanel extends OptionsPanel implements IBox
 		panelCoordStart = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:fill.start", true, false);
 		panelCoordEnd = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:fill.end", true, false);
 
-		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:fill.block", Registerer.getList(CGConstants.LIST_BLOCKS), true);
-		panelBlockReplace = new BlockSelectionPanel(CGConstants.PANELID_ITEM, "GUI:fill.block.replace", Registerer.getList(CGConstants.LIST_BLOCKS), false);
+		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:fill.block", Registry.getList(CGConstants.LIST_BLOCKS), true);
+		panelBlockReplace = new BlockSelectionPanel(CGConstants.PANELID_ITEM, "GUI:fill.block.replace", Registry.getList(CGConstants.LIST_BLOCKS), false);
 		panelBlockReplace.setEnabledContent(false);
 	}
 

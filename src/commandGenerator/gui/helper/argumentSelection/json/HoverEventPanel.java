@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 
 import commandGenerator.arguments.objects.Achievement;
 import commandGenerator.arguments.objects.ItemStack;
-import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
@@ -51,7 +51,7 @@ public class HoverEventPanel extends HelperPanel
 
 		panelJson = new JsonSelectionPanel("GUI:json.text", false);
 		panelJson.setVisible(false);
-		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:json.item", Registerer.getList(CGConstants.LIST_ITEMS), true, false);
+		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:json.item", Registry.getList(CGConstants.LIST_ITEMS), true, false);
 		panelItem.setVisible(false);
 		panelStat = new AchievementSelectionPanel();
 		panelStat.setVisible(false);
@@ -154,7 +154,7 @@ public class HoverEventPanel extends HelperPanel
 		{
 			comboboxAction.setSelectedIndex(3);
 			Map<String, Object> data = new HashMap<String, Object>();
-			data.put(CGConstants.PANELID_ACHIEVEMENT, ((Achievement) Registerer.getObjectFromId(value)));
+			data.put(CGConstants.PANELID_ACHIEVEMENT, ((Achievement) Registry.getObjectFromId(value)));
 			panelStat.setupFrom(data);
 		}
 

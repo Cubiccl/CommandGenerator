@@ -3,7 +3,7 @@ package commandGenerator.gui.options;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
 import commandGenerator.gui.helper.commandSpecific.ReplaceitemEntityPanel;
@@ -44,7 +44,7 @@ public class ReplaceitemOptionsPanel extends OptionsPanel
 		panelBlock = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:block.coords", true, false);
 		panelEntity = new ReplaceitemEntityPanel();
 		panelEntity.setVisible(false);
-		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:replaceitem.item", Registerer.getList(CGConstants.LIST_ITEMS), true, true);
+		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:replaceitem.item", Registry.getList(CGConstants.LIST_ITEMS), true, true);
 	}
 
 	@Override

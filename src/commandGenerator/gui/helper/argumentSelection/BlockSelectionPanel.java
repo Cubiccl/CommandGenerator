@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.dataTag.NBTTagPanel;
@@ -92,7 +92,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 
 	public Item generateBlock()
 	{
-		return (Item) Registerer.getObjectFromId(comboboxId.getValue());
+		return (Item) Registry.getObjectFromId(comboboxId.getValue());
 	}
 
 	public Item[] getBlockList()
@@ -155,7 +155,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 	{
 		Item item = generateBlock();
 		spinnerDamage.setValues(0, item.getMaxDamage());
-		if (data) panelData.updateCombobox((Item) Registerer.getObjectFromId(comboboxId.getValue()));
+		if (data) panelData.updateCombobox((Item) Registry.getObjectFromId(comboboxId.getValue()));
 		labelImage.setIcon(item.getTexture(getDamage()));
 		labelName.setText(item.getName(getDamage()));
 	}

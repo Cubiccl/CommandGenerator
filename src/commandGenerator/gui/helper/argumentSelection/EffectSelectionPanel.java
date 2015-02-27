@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 
 import commandGenerator.arguments.objects.Effect;
 import commandGenerator.arguments.objects.EffectType;
-import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.CEntry;
@@ -51,7 +51,7 @@ public class EffectSelectionPanel extends HelperPanel implements IBox
 		labelImage = new JLabel();
 		try
 		{
-			labelImage.setIcon(Registerer.getObjectFromId("speed").getTexture());
+			labelImage.setIcon(Registry.getObjectFromId("speed").getTexture());
 		} catch (Exception e)
 		{
 			DisplayHelper.missingTexture("effects/speed.png");
@@ -61,7 +61,7 @@ public class EffectSelectionPanel extends HelperPanel implements IBox
 
 		spinnerAmplifier = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:effect.amplifier", 1, 256, null);
 
-		comboboxEffect = new CComboBox(CGConstants.DATAID_NONE, "GUI:effect.choose", Registerer.getObjectList(CGConstants.OBJECT_EFFECT), this);
+		comboboxEffect = new CComboBox(CGConstants.DATAID_NONE, "GUI:effect.choose", Registry.getObjectList(CGConstants.OBJECT_EFFECT), this);
 
 		checkboxHideParticles = new CCheckBox(CGConstants.DATAID_NONE, "GUI:effect.hide");
 	}

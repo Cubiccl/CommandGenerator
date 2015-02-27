@@ -28,7 +28,7 @@ public class CGMenubar extends JMenuBar
 {
 
 	private static JMenu menu;
-	private static JMenuItem reset, settings, changelog, link, folder, exit;
+	private static JMenuItem reset, settings, objects, changelog, link, folder, exit;
 
 	/** The program's menubar. */
 	public CGMenubar()
@@ -38,6 +38,7 @@ public class CGMenubar extends JMenuBar
 
 		reset = new JMenuItem(Lang.get("GUI:menu.reset"));
 		settings = new JMenuItem(Lang.get("GUI:menu.settings"));
+		objects = new JMenuItem(Lang.get("GUI:menu.objects"));
 		changelog = new JMenuItem(Lang.get("GUI:menu.changelog"));
 		link = new JMenuItem(Lang.get("GUI:menu.link"));
 		folder = new JMenuItem(Lang.get("GUI:menu.folder"));
@@ -45,6 +46,7 @@ public class CGMenubar extends JMenuBar
 
 		menu.add(reset);
 		menu.add(settings);
+		menu.add(objects);
 		menu.add(changelog);
 		menu.add(link);
 		menu.add(folder);
@@ -65,6 +67,13 @@ public class CGMenubar extends JMenuBar
 			public void actionPerformed(ActionEvent e)
 			{
 				CommandGenerator.opt.change();
+			}
+		});
+		objects.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				DisplayHelper.showMessage(new SavedObjectsPanel(), Lang.get("GUI:menu.objects"));
 			}
 		});
 		changelog.addActionListener(new ActionListener() {

@@ -67,7 +67,7 @@ public abstract class ObjectBase
 					if (tag.getId().equals("Amount")) amount = ((TagDouble) tag).getValue();
 					if (tag.getId().equals("Operation")) operation = ((TagInt) tag).getValue();
 				}
-				return new Attribute((AttributeType) Registerer.getObjectFromId(idA), amount, operation);
+				return new Attribute((AttributeType) Registry.getObjectFromId(idA), amount, operation);
 
 			case CGConstants.OBJECT_EFFECT:
 				int idEf = 1,
@@ -82,7 +82,7 @@ public abstract class ObjectBase
 					if (tag.getId().equals("Duration")) duration = ((TagInt) tag).getValue();
 					if (tag.getId().equals("HideParticles")) hide = ((TagBoolean) tag).getValue();
 				}
-				return new Effect((EffectType) Registerer.getObjectFromIdNum(CGConstants.OBJECT_EFFECT, idEf), levelEf, duration, !hide);
+				return new Effect((EffectType) Registry.getObjectFromIdNum(CGConstants.OBJECT_EFFECT, idEf), levelEf, duration, !hide);
 
 			case CGConstants.OBJECT_ENCHANT:
 				int idEn = 0,
@@ -93,7 +93,7 @@ public abstract class ObjectBase
 					if (tag.getId().equals("id")) idEn = ((TagInt) tag).getValue();
 					if (tag.getId().equals("lvl")) levelEn = ((TagInt) tag).getValue();
 				}
-				return new Enchantment((EnchantType) Registerer.getObjectFromIdNum(CGConstants.OBJECT_ENCHANT, idEn), levelEn);
+				return new Enchantment((EnchantType) Registry.getObjectFromIdNum(CGConstants.OBJECT_ENCHANT, idEn), levelEn);
 
 			case CGConstants.OBJECT_ENTITY:
 				return (TagCompound) nbt;
@@ -137,7 +137,7 @@ public abstract class ObjectBase
 	{
 		this.id = id;
 		this.type = type;
-		if (type != CGConstants.OBJECT_TAG) Registerer.registerObject(type, this);
+		if (type != CGConstants.OBJECT_TAG) Registry.registerObject(type, this);
 	}
 
 	/** Returns the Object's ID. */

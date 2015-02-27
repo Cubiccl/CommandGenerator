@@ -8,7 +8,7 @@ import java.awt.event.WindowStateListener;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
-import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
@@ -35,7 +35,7 @@ public class MainWindow extends JFrame
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		try
 		{
-			setIconImage(Registerer.getObjectFromId("command_block").getTexture().getImage());
+			setIconImage(Registry.getObjectFromId("command_block").getTexture().getImage());
 		} catch (Exception e)
 		{
 		}

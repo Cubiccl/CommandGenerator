@@ -83,7 +83,7 @@ public class Command
 	public Command(String id)
 	{
 		this.id = id;
-		Registerer.registerCommand(this);
+		Registry.registerCommand(this);
 	}
 
 	/** Generates the data used for the GUI from an already generated command

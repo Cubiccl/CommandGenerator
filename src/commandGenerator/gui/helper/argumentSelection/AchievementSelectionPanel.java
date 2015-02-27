@@ -5,7 +5,7 @@ import java.util.Map;
 import javax.swing.JLabel;
 
 import commandGenerator.arguments.objects.Achievement;
-import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.HelperPanel;
 import commandGenerator.gui.helper.components.IBox;
@@ -33,8 +33,8 @@ public class AchievementSelectionPanel extends HelperPanel implements IBox
 	@Override
 	protected void createComponents()
 	{
-		image = new JLabel(((Achievement) Registerer.getObjectFromId("openInventory")).getTexture());
-		achievementBox = new CComboBox(CGConstants.PANELID_ACHIEVEMENT, "GUI:achievement.select", Registerer.getObjectList(CGConstants.OBJECT_ACHIEVEMENT),
+		image = new JLabel(((Achievement) Registry.getObjectFromId("openInventory")).getTexture());
+		achievementBox = new CComboBox(CGConstants.PANELID_ACHIEVEMENT, "GUI:achievement.select", Registry.getObjectList(CGConstants.OBJECT_ACHIEVEMENT),
 				this);
 	}
 

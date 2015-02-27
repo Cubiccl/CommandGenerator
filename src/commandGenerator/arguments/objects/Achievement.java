@@ -16,7 +16,7 @@ public class Achievement extends ObjectBase
 	{
 		if (data.contains("achievement.")) data = data.substring("achievement.".length());
 
-		Achievement ach = (Achievement) Registerer.getObjectFromId(data);
+		Achievement ach = (Achievement) Registry.getObjectFromId(data);
 		if (ach != null) DisplayHelper.log("Created achievement " + ach.getId());
 		return ach;
 	}

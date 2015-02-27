@@ -9,7 +9,7 @@ import java.util.Map;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
-public class Registerer
+public class Registry
 {
 
 	/** Map containing registered commands. */

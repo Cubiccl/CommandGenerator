@@ -16,7 +16,7 @@ import javax.swing.SwingUtilities;
 
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Item;
-import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.PanelCommandSelection;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
@@ -68,7 +68,7 @@ public class ExecuteOptionsPanel extends OptionsPanel
 
 		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 
-		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:execute.block", Registerer.getList(CGConstants.LIST_BLOCKS), false);
+		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:execute.block", Registry.getList(CGConstants.LIST_BLOCKS), false);
 	}
 
 	@Override
@@ -110,8 +110,8 @@ public class ExecuteOptionsPanel extends OptionsPanel
 		panelCommand = new PanelCommandSelection(false);
 		panelCommand.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), Lang.get("GUI:execute.command")));
 		panelCommand.setPreferredSize(new Dimension(1100, 650));
-		panelCommand.setSelectedCommand(Registerer.getCommandFromId(storedCommand.split(" ")[0]));
-		panelCommand.panelOptions.setupFrom(Registerer.getCommandFromId(storedCommand.split(" ")[0]).generateSetup(storedCommand));
+		panelCommand.setSelectedCommand(Registry.getCommandFromId(storedCommand.split(" ")[0]));
+		panelCommand.panelOptions.setupFrom(Registry.getCommandFromId(storedCommand.split(" ")[0]).generateSetup(storedCommand));
 
 		// Setting the JDialog resizable
 		panelCommand.addHierarchyListener(new HierarchyListener() {

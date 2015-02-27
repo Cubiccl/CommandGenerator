@@ -92,7 +92,8 @@ public class InitObjects
 		initTags(convertedData.get("ENTITYTAGS"), 2);
 		initTags(convertedData.get("GENERATEDTAGS"), 3);
 
-		Registerer.end();
+		Registry.end();
+		SavedObjects.load();
 
 	}
 
@@ -101,7 +102,7 @@ public class InitObjects
 		for (String achievement : achs)
 		{
 			String[] achData = achievement.split(",");
-			new Achievement(achData[0], (Item) Registerer.getObjectFromId(achData[1]));
+			new Achievement(achData[0], (Item) Registry.getObjectFromId(achData[1]));
 		}
 	}
 
@@ -161,9 +162,9 @@ public class InitObjects
 		for (String list : lists)
 		{
 			String[] listData = list.split(":");
-			Registerer.registerList(listData[0], listData[1].split(","));
+			Registry.registerList(listData[0], listData[1].split(","));
 		}
-		Registerer.registerList("durability", Item.durabilityList.toArray(new String[0]));
+		Registry.registerList("durability", Item.durabilityList.toArray(new String[0]));
 	}
 
 	private static void initParticles(String[] particles)

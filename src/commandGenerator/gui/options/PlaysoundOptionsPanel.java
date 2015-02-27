@@ -71,7 +71,7 @@ public class PlaysoundOptionsPanel extends OptionsPanel
 		String[] options = panelSound.getSoundOptions();
 
 		if (checkboxCoords.isSelected()) coords = panelCoords.generateCoord();
-		else coords = new Coordinates(0, 0, 0, new boolean[] { true, true, true });
+		else coords = new Coordinates(0, 0, 0, new boolean[] { true, true, true }, false);
 
 		if (player == null || coords == null || options == null || sound == null) return null;
 

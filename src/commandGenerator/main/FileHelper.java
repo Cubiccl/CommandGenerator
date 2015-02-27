@@ -220,6 +220,15 @@ public class FileHelper
 			} catch (Exception e)
 			{}
 		}
+		if (!new File(folder + "savedObjects.txt").exists())
+		{
+			try
+			{
+				writer = new PrintWriter(folder + "savedObjects.txt");
+				writer.close();
+			} catch (Exception e)
+			{}
+		}
 	}
 
 	public static String getDefaultFolder()

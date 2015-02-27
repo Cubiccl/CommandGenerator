@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 import commandGenerator.arguments.objects.Entity;
 import commandGenerator.arguments.objects.Item;
-import commandGenerator.arguments.objects.Registerer;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
@@ -37,7 +37,7 @@ public class TagRiding extends TagCompound
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put(CGConstants.PANELID_NBT, getValue());
 		data.put(CGConstants.PANELID_ENTITY, DataTags.getObjectFromTags(getValue()));
-		if (data.get(CGConstants.PANELID_ENTITY) instanceof Item) data.put(CGConstants.PANELID_ENTITY, Registerer.getObjectFromId("ArmorStand"));
+		if (data.get(CGConstants.PANELID_ENTITY) instanceof Item) data.put(CGConstants.PANELID_ENTITY, Registry.getObjectFromId("ArmorStand"));
 		((EntitySelectionPanel) panelE).setupFrom(data);
 
 		if (showPanel()) return;
