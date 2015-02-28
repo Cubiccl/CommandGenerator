@@ -6,10 +6,10 @@ import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
-import commandGenerator.gui.helper.components.HelpButton;
-import commandGenerator.gui.helper.components.IBox;
-import commandGenerator.gui.helper.components.LangComboBox;
-import commandGenerator.gui.helper.components.OptionsPanel;
+import commandGenerator.gui.helper.components.button.HelpButton;
+import commandGenerator.gui.helper.components.combobox.LangComboBox;
+import commandGenerator.gui.helper.components.icomponent.IBox;
+import commandGenerator.gui.helper.components.panel.OptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 

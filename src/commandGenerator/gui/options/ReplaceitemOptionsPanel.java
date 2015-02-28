@@ -7,8 +7,8 @@ import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
 import commandGenerator.gui.helper.commandSpecific.ReplaceitemEntityPanel;
-import commandGenerator.gui.helper.components.LangComboBox;
-import commandGenerator.gui.helper.components.OptionsPanel;
+import commandGenerator.gui.helper.components.combobox.LangComboBox;
+import commandGenerator.gui.helper.components.panel.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")

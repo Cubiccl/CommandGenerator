@@ -4,7 +4,7 @@ import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.dataTag.ListSelectionPanel;
-import commandGenerator.gui.helper.components.OptionsPanel;
+import commandGenerator.gui.helper.components.panel.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")

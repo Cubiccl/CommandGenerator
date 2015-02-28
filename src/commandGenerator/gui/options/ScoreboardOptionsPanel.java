@@ -20,10 +20,10 @@ import commandGenerator.gui.helper.commandSpecific.scoreboard.TeamsJoinPanel;
 import commandGenerator.gui.helper.commandSpecific.scoreboard.TeamsLeavePanel;
 import commandGenerator.gui.helper.commandSpecific.scoreboard.TeamsOptionPanel;
 import commandGenerator.gui.helper.commandSpecific.scoreboard.TeamsRemovePanel;
-import commandGenerator.gui.helper.components.HelpButton;
-import commandGenerator.gui.helper.components.IBox;
-import commandGenerator.gui.helper.components.LangComboBox;
-import commandGenerator.gui.helper.components.OptionsPanel;
+import commandGenerator.gui.helper.components.button.HelpButton;
+import commandGenerator.gui.helper.components.combobox.LangComboBox;
+import commandGenerator.gui.helper.components.icomponent.IBox;
+import commandGenerator.gui.helper.components.panel.OptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 

@@ -12,10 +12,10 @@ import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
-import commandGenerator.gui.helper.components.CButton;
 import commandGenerator.gui.helper.components.CComponent;
-import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.gui.helper.components.TagDisplayer;
+import commandGenerator.gui.helper.components.button.CButton;
+import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.TagDisplayer;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")

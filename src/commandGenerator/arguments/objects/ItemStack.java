@@ -21,8 +21,10 @@ public class ItemStack
 	 *            - <i>ArrayList:Tag</i> - The NBT Tags as a list. */
 	public static ItemStack generateBlockFrom(String id, int damage, List<Tag> nbt)
 	{
-		return generateFrom(id, damage, -1, nbt, -1);
+		ItemStack stack = generateFrom(id, damage, -1, nbt, -1);
+		return new ItemStack((Item) Registry.getObjectFromId(id), stack.getDamage(), -1, stack.getTag(), -1);
 	}
+
 	/** Generates a new ItemStack from the following data :
 	 * 
 	 * @param id
@@ -48,6 +50,7 @@ public class ItemStack
 		DisplayHelper.log("Created Item : " + count + " " + ((Item) Registry.getObjectFromId(id)).getName(damage) + " in slot " + slot);
 		return new ItemStack(item, damage, count, tag, slot);
 	}
+
 	/** Generates an ItemStack from a TagCompound.
 	 * 
 	 * @param tag
@@ -72,6 +75,7 @@ public class ItemStack
 
 		return new ItemStack(item, damage, count, nbt, slot);
 	}
+
 	/** The number of Items in this Stack. */
 	private int count;
 	/** The Damage of the Item. */
@@ -149,7 +153,9 @@ public class ItemStack
 	/** Returns a String version of this ItemStack to be displayed to the user. */
 	public String display(int details, int lvls)
 	{
-		String display = Integer.toString(count) + " " + item.getName(damage);
+		String display = "";
+		if (count != -1) display += Integer.toString(count) + " ";
+		display += item.getName(damage);
 		if (slot != -1) display += ", slot : " + slot;
 		if (tag != null) display += ", NBT : " + tag.display(details - 1, lvls + 1);
 		return display;

@@ -13,7 +13,7 @@ import javax.swing.SpinnerNumberModel;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CLabel;
-import commandGenerator.gui.helper.components.HelperPanel;
+import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")

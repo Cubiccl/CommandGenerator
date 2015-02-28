@@ -7,7 +7,7 @@ import java.util.Map;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
-import commandGenerator.gui.helper.components.LangComboBox;
+import commandGenerator.gui.helper.components.combobox.LangComboBox;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Resources;

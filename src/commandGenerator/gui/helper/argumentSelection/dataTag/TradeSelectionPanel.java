@@ -15,14 +15,19 @@ import commandGenerator.arguments.tags.TagInt;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
-import commandGenerator.gui.helper.components.HelperPanel;
+import commandGenerator.gui.helper.components.button.CButton;
+import commandGenerator.gui.helper.components.button.LoadButton;
+import commandGenerator.gui.helper.components.button.SaveButton;
+import commandGenerator.gui.helper.components.icomponent.ISave;
+import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
-public class TradeSelectionPanel extends HelperPanel
+public class TradeSelectionPanel extends HelperPanel implements ISave
 {
 
+	private CButton buttonSave, buttonLoad;
 	private CCheckBox checkboxRewardExp, checkboxBuyB;
 	private CEntry entryMaxUses, entryUses;
 	private ItemSelectionPanel panelBuy, panelBuyB, panelSell;
@@ -42,11 +47,15 @@ public class TradeSelectionPanel extends HelperPanel
 		add(panelSell);
 		add(checkboxBuyB);
 		add(panelBuyB);
+		addLine(buttonSave, buttonLoad);
 	}
 
 	@Override
 	protected void createComponents()
 	{
+		buttonSave = new SaveButton(CGConstants.OBJECT_TAG_TRADE, this);
+		buttonLoad = new LoadButton(CGConstants.OBJECT_TAG_TRADE, this);
+
 		entryUses = new CEntry(CGConstants.DATAID_NAME, "GUI:trade.use", "0");
 		entryMaxUses = new CEntry(CGConstants.DATAID_NAME2, "GUI:trade.use_max", "10");
 
@@ -153,5 +162,19 @@ public class TradeSelectionPanel extends HelperPanel
 	@Override
 	public void updateLang()
 	{}
+
+	@Override
+	public void load(Object object)
+	{
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put(getPanelId(), object);
+		setupFrom(data);
+	}
+
+	@Override
+	public Object getObjectToSave()
+	{
+		return generateTrade();
+	}
 
 }

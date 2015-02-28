@@ -1,4 +1,4 @@
-package commandGenerator.gui;
+package commandGenerator.gui.helper.components.panel;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -15,9 +15,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import commandGenerator.CommandGenerator;
-import commandGenerator.gui.helper.components.CButton;
 import commandGenerator.gui.helper.components.CLabel;
-import commandGenerator.gui.helper.components.TextCombobox;
+import commandGenerator.gui.helper.components.button.CButton;
+import commandGenerator.gui.helper.components.combobox.TextCombobox;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.FileHelper;
 import commandGenerator.main.Lang;

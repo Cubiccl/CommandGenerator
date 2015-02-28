@@ -2,7 +2,7 @@ package commandGenerator.gui.helper.commandSpecific;
 
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
-import commandGenerator.gui.helper.components.HelperPanel;
+import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 

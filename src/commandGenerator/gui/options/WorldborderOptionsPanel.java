@@ -8,10 +8,10 @@ import commandGenerator.gui.helper.commandSpecific.worldborder.AddBorderPanel;
 import commandGenerator.gui.helper.commandSpecific.worldborder.CenterBorderPanel;
 import commandGenerator.gui.helper.commandSpecific.worldborder.DamageBorderPanel;
 import commandGenerator.gui.helper.commandSpecific.worldborder.WarningBorderPanel;
-import commandGenerator.gui.helper.components.HelpButton;
-import commandGenerator.gui.helper.components.IBox;
-import commandGenerator.gui.helper.components.LangComboBox;
-import commandGenerator.gui.helper.components.OptionsPanel;
+import commandGenerator.gui.helper.components.button.HelpButton;
+import commandGenerator.gui.helper.components.combobox.LangComboBox;
+import commandGenerator.gui.helper.components.icomponent.IBox;
+import commandGenerator.gui.helper.components.panel.OptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 

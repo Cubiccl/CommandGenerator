@@ -12,6 +12,8 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import commandGenerator.arguments.objects.SavedObjects;
+
 public class DisplayHelper
 {
 
@@ -155,6 +157,18 @@ public class DisplayHelper
 	{
 		log(Lang.get("WARNING:positive_integer"));
 		JOptionPane.showMessageDialog(null, Lang.get("WARNING:positive_integer"), Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
+	}
+
+	public static String askObjectName(byte type)
+	{
+		String name = "name";
+		do
+		{
+			if (name.equals("") || name.contains(" ")) showWarning("WARNING:name");
+			if (SavedObjects.getList(type).containsKey(name)) showWarning("WARNING:name_already");
+			name = JOptionPane.showInputDialog(null, Lang.get("GENERAL:name"));
+		} while (name.contains(" ") || name.equals("") || SavedObjects.getList(type).containsKey(name));
+		return name;
 	}
 
 }

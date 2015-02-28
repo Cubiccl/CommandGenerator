@@ -6,9 +6,9 @@ import java.util.Map;
 
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
-import commandGenerator.gui.helper.components.CComboBox;
-import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.gui.helper.components.LangComboBox;
+import commandGenerator.gui.helper.components.combobox.CComboBox;
+import commandGenerator.gui.helper.components.combobox.LangComboBox;
+import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Resources;
 

@@ -1,4 +1,4 @@
-package commandGenerator.gui.helper.components;
+package commandGenerator.gui.helper.components.panel;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
+import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")

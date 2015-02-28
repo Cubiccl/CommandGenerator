@@ -6,9 +6,9 @@ import javax.swing.JLabel;
 
 import commandGenerator.arguments.objects.Achievement;
 import commandGenerator.arguments.objects.Registry;
-import commandGenerator.gui.helper.components.CComboBox;
-import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.gui.helper.components.IBox;
+import commandGenerator.gui.helper.components.combobox.CComboBox;
+import commandGenerator.gui.helper.components.icomponent.IBox;
+import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 

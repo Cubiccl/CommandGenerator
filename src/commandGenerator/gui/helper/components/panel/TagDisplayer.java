@@ -1,4 +1,4 @@
-package commandGenerator.gui.helper.components;
+package commandGenerator.gui.helper.components.panel;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,6 +22,7 @@ import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.specific.TagBlockEntity;
 import commandGenerator.gui.helper.argumentSelection.dataTag.TagSelection;
+import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;

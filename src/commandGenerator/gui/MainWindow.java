@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
 import commandGenerator.arguments.objects.Registry;
+import commandGenerator.gui.helper.components.panel.PanelCommandSelection;
 import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 

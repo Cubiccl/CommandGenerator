@@ -1,5 +1,6 @@
 package commandGenerator.gui.helper.argumentSelection;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JLabel;
@@ -8,19 +9,24 @@ import commandGenerator.arguments.objects.Effect;
 import commandGenerator.arguments.objects.EffectType;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.components.CCheckBox;
-import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
-import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.gui.helper.components.IBox;
-import commandGenerator.gui.helper.components.NumberSpinner;
+import commandGenerator.gui.helper.components.button.CButton;
+import commandGenerator.gui.helper.components.button.LoadButton;
+import commandGenerator.gui.helper.components.button.SaveButton;
+import commandGenerator.gui.helper.components.combobox.CComboBox;
+import commandGenerator.gui.helper.components.icomponent.IBox;
+import commandGenerator.gui.helper.components.icomponent.ISave;
+import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.spinner.NumberSpinner;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
-public class EffectSelectionPanel extends HelperPanel implements IBox
+public class EffectSelectionPanel extends HelperPanel implements IBox, ISave
 {
 
+	private CButton buttonSave, buttonLoad;
 	private CLabel labelTicks;
 	private CCheckBox checkboxHideParticles;
 	private CComboBox comboboxEffect;
@@ -41,6 +47,7 @@ public class EffectSelectionPanel extends HelperPanel implements IBox
 		add(labelTicks);
 		add(spinnerAmplifier);
 		add(checkboxHideParticles);
+		addLine(buttonSave, buttonLoad);
 	}
 
 	@Override
@@ -56,6 +63,9 @@ public class EffectSelectionPanel extends HelperPanel implements IBox
 		{
 			DisplayHelper.missingTexture("effects/speed.png");
 		}
+
+		buttonSave = new SaveButton(CGConstants.OBJECT_EFFECT, this);
+		buttonLoad = new LoadButton(CGConstants.OBJECT_EFFECT, this);
 
 		entryDuration = new CEntry(CGConstants.DATAID_NONE, "GUI:effect.duration", "600");
 
@@ -124,6 +134,20 @@ public class EffectSelectionPanel extends HelperPanel implements IBox
 		entryDuration.updateLang();
 		checkboxHideParticles.updateLang();
 		comboboxEffect.updateLang();
+	}
+
+	@Override
+	public void load(Object object)
+	{
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put(getPanelId(), object);
+		setupFrom(data);
+	}
+
+	@Override
+	public Object getObjectToSave()
+	{
+		return generateEffect();
 	}
 
 }

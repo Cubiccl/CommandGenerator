@@ -3,10 +3,10 @@ package commandGenerator.gui.options;
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.components.CLabel;
-import commandGenerator.gui.helper.components.HelpButton;
-import commandGenerator.gui.helper.components.IBox;
-import commandGenerator.gui.helper.components.LangComboBox;
-import commandGenerator.gui.helper.components.OptionsPanel;
+import commandGenerator.gui.helper.components.button.HelpButton;
+import commandGenerator.gui.helper.components.combobox.LangComboBox;
+import commandGenerator.gui.helper.components.icomponent.IBox;
+import commandGenerator.gui.helper.components.panel.OptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 

@@ -1,5 +1,7 @@
 package commandGenerator.arguments.objects;
 
+import java.util.List;
+
 import javax.swing.ImageIcon;
 
 import commandGenerator.arguments.tags.Tag;
@@ -18,6 +20,7 @@ public abstract class ObjectBase
 	 * 
 	 * @param object
 	 *            - <i>Object</i> - The Object to display. */
+	@SuppressWarnings("unchecked")
 	public static String display(Object object)
 	{
 		if (object instanceof ItemStack) return ((ItemStack) object).display(CGConstants.DETAILS_ALL, 0);
@@ -26,6 +29,13 @@ public abstract class ObjectBase
 		if (object instanceof Attribute) return ((Attribute) object).display();
 		if (object instanceof TagCompound) return ((TagCompound) object).display(CGConstants.DETAILS_ALL, 0);
 		if (object instanceof TagString) return ((TagString) object).display(CGConstants.DETAILS_ALL, 0);
+		if (object instanceof Coordinates) return ((Coordinates) object).commandStructure();
+		if (object instanceof List) return new TagCompound() {
+			public void askValue()
+			{
+			}
+		}.setValue(((List<Tag>) object)).display(CGConstants.DETAILS_ALL, 0);
+		if (object instanceof Target) return ((Target) object).display();
 
 		return object.toString();
 	}

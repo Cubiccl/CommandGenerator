@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,18 +25,21 @@ import javax.swing.SpinnerNumberModel;
 import commandGenerator.arguments.objects.Entity;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.helper.components.CButton;
-import commandGenerator.gui.helper.components.CComboBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
-import commandGenerator.gui.helper.components.HelpButton;
-import commandGenerator.gui.helper.components.HelperPanel;
+import commandGenerator.gui.helper.components.button.CButton;
+import commandGenerator.gui.helper.components.button.HelpButton;
+import commandGenerator.gui.helper.components.button.LoadButton;
+import commandGenerator.gui.helper.components.button.SaveButton;
+import commandGenerator.gui.helper.components.combobox.CComboBox;
+import commandGenerator.gui.helper.components.icomponent.ISave;
+import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class TargetSelectionPanel extends HelperPanel
+public class TargetSelectionPanel extends HelperPanel implements ISave
 {
 
 	public static final String[] selectors = { "x", "y", "z", "dx", "dy", "dz", "r", "rm", "rx", "rxm", "ry", "rym", "m", "c", "l", "lm", "team", "name",
@@ -43,7 +47,7 @@ public class TargetSelectionPanel extends HelperPanel
 
 	private List<String[]> addedSelectors;
 	private JComboBox<String> boxEntities, boxSelectors;
-	private CButton buttonAdd, buttonRemove;
+	private CButton buttonAdd, buttonRemove, buttonSave, buttonLoad;
 	private HelpButton buttonHelpEntity, buttonHelpSelector;
 	private CEntry entryPlayer;
 	private GridBagConstraints gbc = new GridBagConstraints();
@@ -66,6 +70,7 @@ public class TargetSelectionPanel extends HelperPanel
 		addLine(labelSelector, boxSelectors, buttonHelpSelector);
 		addLine(buttonAdd, buttonRemove);
 		addLine(labelSelectors, scrollpane);
+		addLine(buttonSave, buttonLoad);
 	}
 
 	private void addSelector()
@@ -214,6 +219,8 @@ public class TargetSelectionPanel extends HelperPanel
 
 		buttonAdd = new CButton("GUI:selector.add");
 		buttonRemove = new CButton("GUI:selector.remove");
+		buttonSave = new SaveButton(CGConstants.OBJECT_TARGET, this);
+		buttonLoad = new LoadButton(CGConstants.OBJECT_TARGET, this);
 
 		boxEntities = new JComboBox<String>(targets);
 		boxEntities.setPreferredSize(new Dimension(100, 20));
@@ -425,5 +432,19 @@ public class TargetSelectionPanel extends HelperPanel
 		boxEntities.setSelectedIndex(index);
 
 		displaySelectors();
+	}
+
+	@Override
+	public Object getObjectToSave()
+	{
+		return generateEntity();
+	}
+
+	@Override
+	public void load(Object object)
+	{
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put(getPanelId(), object);
+		setupFrom(data);
 	}
 }

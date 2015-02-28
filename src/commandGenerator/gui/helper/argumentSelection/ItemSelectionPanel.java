@@ -3,6 +3,7 @@ package commandGenerator.gui.helper.argumentSelection;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JLabel;
@@ -19,17 +20,22 @@ import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagInt;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.argumentSelection.dataTag.NBTTagPanel;
-import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.gui.helper.components.IBox;
-import commandGenerator.gui.helper.components.ISpin;
-import commandGenerator.gui.helper.components.NumberSpinner;
-import commandGenerator.gui.helper.components.TextCombobox;
+import commandGenerator.gui.helper.components.button.CButton;
+import commandGenerator.gui.helper.components.button.LoadButton;
+import commandGenerator.gui.helper.components.button.SaveButton;
+import commandGenerator.gui.helper.components.combobox.TextCombobox;
+import commandGenerator.gui.helper.components.icomponent.IBox;
+import commandGenerator.gui.helper.components.icomponent.ISave;
+import commandGenerator.gui.helper.components.icomponent.ISpin;
+import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.spinner.NumberSpinner;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
-public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin
+public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISave
 {
 
+	private CButton buttonSave, buttonLoad;
 	private TextCombobox comboboxId;
 	private Item[] itemList;
 	private JLabel labelImage, labelName;
@@ -71,6 +77,8 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin
 			panelData.updateCombobox((Item) itemList[0]);
 		}
 
+		addLine(buttonSave, buttonLoad);
+
 		updateSpinner();
 	}
 
@@ -83,6 +91,9 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin
 		labelName = new JLabel("", JLabel.CENTER);
 		labelName.setPreferredSize(new Dimension(200, 20));
 		labelName.setMinimumSize(new Dimension(200, 20));
+
+		buttonSave = new SaveButton(CGConstants.OBJECT_ITEM, this);
+		buttonLoad = new LoadButton(CGConstants.OBJECT_ITEM, this);
 
 		String[] ids = new String[itemList.length];
 		for (int i = 0; i < ids.length; i++)
@@ -220,6 +231,20 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin
 		Item item = generateItem();
 		labelImage.setIcon(item.getTexture(spinnerDamage.getValue()));
 		labelName.setText(item.getName(spinnerDamage.getValue()));
+	}
+
+	@Override
+	public void load(Object object)
+	{
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put(getPanelId(), object);
+		setupFrom(data);
+	}
+
+	@Override
+	public Object getObjectToSave()
+	{
+		return getItemStack();
 	}
 
 }

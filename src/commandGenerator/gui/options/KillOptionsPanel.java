@@ -1,7 +1,7 @@
 package commandGenerator.gui.options;
 
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
-import commandGenerator.gui.helper.components.OptionsPanel;
+import commandGenerator.gui.helper.components.panel.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")

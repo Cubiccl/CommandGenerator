@@ -259,7 +259,7 @@ public class DataTags
 		if (id.equals("pages")) return new TagPages();
 		if (id.equals("Explosion")) return new TagExplosion();
 		if (id.equals("Fireworks")) return new TagFireworks();
-		if (id.equals("BlockEntityTags")) return new TagBlockEntity("BlockEntityTag", "LIST=tileentity");
+		if (id.equals("BlockEntityTag")) return new TagBlockEntity("BlockEntityTag", "LIST=tileentity");
 
 		if (id.equals("Pos") || id.equals("Motion")) return new TagPos(id, "LIST=allEntities");
 		if (id.equals("Rotation")) return new TagRotation();
@@ -336,6 +336,7 @@ public class DataTags
 
 	private static Tag initItem(String[] tagData)
 	{
+		if (tagData.length == 3) return new TagItem(tagData[0], new String[0], false, tagData[2]);
 		TagItem tag;
 		if (!tagData[3].startsWith("LIST=")) tag = new TagItem(tagData[0], tagData[3].split(":"), false, tagData[2]);
 		else

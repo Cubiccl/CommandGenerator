@@ -1,10 +1,11 @@
-package commandGenerator.gui.helper.components;
+package commandGenerator.gui.helper.components.button;
 
 import java.awt.Dimension;
 import java.util.Map;
 
 import javax.swing.JButton;
 
+import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")

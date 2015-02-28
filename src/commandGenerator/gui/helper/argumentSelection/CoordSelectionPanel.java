@@ -2,20 +2,26 @@ package commandGenerator.gui.helper.argumentSelection;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.util.Map;
 
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.tags.TagFloat;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
-import commandGenerator.gui.helper.components.HelperPanel;
+import commandGenerator.gui.helper.components.button.CButton;
+import commandGenerator.gui.helper.components.button.LoadButton;
+import commandGenerator.gui.helper.components.button.SaveButton;
+import commandGenerator.gui.helper.components.icomponent.ISave;
+import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
-public class CoordSelectionPanel extends HelperPanel
+public class CoordSelectionPanel extends HelperPanel implements ISave
 {
 
+	private CButton buttonSave, buttonLoad;
 	private CCheckBox checkboxRotation, checkboxRelativeAll, checkRelX, checkRelY, checkRelZ, checkboxFloat;
 	protected CEntry entryX, entryY, entryZ;
 	private RotationSelectionPanel panelRotation;
@@ -47,11 +53,16 @@ public class CoordSelectionPanel extends HelperPanel
 			add(checkboxRotation);
 			add(panelRotation);
 		}
+		
+		addLine(buttonSave, buttonLoad);
 	}
 
 	@Override
 	protected void createComponents()
 	{
+		buttonSave = new SaveButton(CGConstants.OBJECT_COORD, this);
+		buttonLoad = new LoadButton(CGConstants.OBJECT_COORD, this);
+		
 		entryX = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.x", "0");
 		entryY = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.y", "0");
 		entryZ = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.z", "0");
@@ -182,6 +193,20 @@ public class CoordSelectionPanel extends HelperPanel
 			checkboxRotation.setSelected(coords.getRotation());
 			panelRotation.setupFrom(data);
 		}
+	}
+
+	@Override
+	public Object getObjectToSave()
+	{
+		return generateCoord();
+	}
+
+	@Override
+	public void load(Object object)
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put(getPanelId(), (Coordinates) object);
+		setupFrom(map);
 	}
 
 }

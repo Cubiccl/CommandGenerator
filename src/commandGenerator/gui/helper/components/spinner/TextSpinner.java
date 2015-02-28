@@ -1,4 +1,4 @@
-package commandGenerator.gui.helper.components;
+package commandGenerator.gui.helper.components.spinner;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -10,6 +10,9 @@ import javax.swing.SpinnerListModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import commandGenerator.gui.helper.components.CComponent;
+import commandGenerator.gui.helper.components.CLabel;
+import commandGenerator.gui.helper.components.icomponent.ISpin;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")

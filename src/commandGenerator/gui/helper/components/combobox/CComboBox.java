@@ -1,4 +1,4 @@
-package commandGenerator.gui.helper.components;
+package commandGenerator.gui.helper.components.combobox;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -16,6 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import commandGenerator.arguments.objects.ObjectBase;
+import commandGenerator.gui.helper.components.CComponent;
+import commandGenerator.gui.helper.components.CLabel;
+import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")

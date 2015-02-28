@@ -1,4 +1,4 @@
-package commandGenerator.gui;
+package commandGenerator.gui.helper.components.panel;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -31,10 +31,9 @@ import commandGenerator.CommandGenerator;
 import commandGenerator.arguments.objects.Command;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.Registry;
-import commandGenerator.gui.helper.components.CButton;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CLabel;
-import commandGenerator.gui.helper.components.OptionsPanel;
+import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.options.AchievementOptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;

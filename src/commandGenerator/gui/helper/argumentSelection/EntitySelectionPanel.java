@@ -1,6 +1,7 @@
 package commandGenerator.gui.helper.argumentSelection;
 
 import java.awt.Dimension;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,15 +13,20 @@ import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.dataTag.NBTTagPanel;
-import commandGenerator.gui.helper.components.CComboBox;
-import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.gui.helper.components.IBox;
+import commandGenerator.gui.helper.components.button.CButton;
+import commandGenerator.gui.helper.components.button.LoadButton;
+import commandGenerator.gui.helper.components.button.SaveButton;
+import commandGenerator.gui.helper.components.combobox.CComboBox;
+import commandGenerator.gui.helper.components.icomponent.IBox;
+import commandGenerator.gui.helper.components.icomponent.ISave;
+import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
-public class EntitySelectionPanel extends HelperPanel implements IBox
+public class EntitySelectionPanel extends HelperPanel implements IBox, ISave
 {
 
+	private CButton buttonSave, buttonLoad;
 	private Entity[] entityList;
 	private CComboBox combobox;
 	private JLabel labelName, labelImage;
@@ -38,6 +44,7 @@ public class EntitySelectionPanel extends HelperPanel implements IBox
 		add(labelImage);
 		add(labelName);
 		add(panelData);
+		addLine(buttonSave, buttonLoad);
 		updateCombobox();
 	}
 
@@ -50,6 +57,9 @@ public class EntitySelectionPanel extends HelperPanel implements IBox
 		labelName = new JLabel("", JLabel.CENTER);
 		labelName.setPreferredSize(new Dimension(200, 20));
 		labelName.setMinimumSize(new Dimension(200, 20));
+
+		buttonSave = new SaveButton(CGConstants.OBJECT_ENTITY, this);
+		buttonLoad = new LoadButton(CGConstants.OBJECT_ENTITY, this);
 
 		combobox = new CComboBox(CGConstants.DATAID_NONE, "GUI:entity.select", entityList, this);
 
@@ -125,6 +135,22 @@ public class EntitySelectionPanel extends HelperPanel implements IBox
 	{
 		combobox.setSelected(entity);
 		updateCombobox();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void load(Object object)
+	{
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put(getPanelId(), DataTags.getObjectFromTags((List<Tag>) object));
+		data.put(CGConstants.PANELID_NBT, object);
+		setupFrom(data);
+	}
+
+	@Override
+	public Object getObjectToSave()
+	{
+		return panelData.getTagList();
 	}
 
 }

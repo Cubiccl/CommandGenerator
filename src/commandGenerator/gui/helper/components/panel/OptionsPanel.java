@@ -1,7 +1,8 @@
-package commandGenerator.gui.helper.components;
+package commandGenerator.gui.helper.components.panel;
 
 import java.awt.Dimension;
 
+import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")

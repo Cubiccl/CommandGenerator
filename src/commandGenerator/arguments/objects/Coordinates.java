@@ -207,4 +207,12 @@ public class Coordinates
 		return tag;
 	}
 
+	public String save()
+	{
+		String save = x + " " + y + " " + z + " ";
+		if (isRotation) save += xRotation + " " + yRotation + " ";
+		save += relativeness[0] + " " + relativeness[1] + " " + relativeness[2] + " " + isFloat;
+		return save;
+	}
+
 }

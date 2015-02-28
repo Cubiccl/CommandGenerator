@@ -1,6 +1,6 @@
 package commandGenerator.gui.helper.commandSpecific.scoreboard;
 
-import commandGenerator.gui.helper.components.HelperPanel;
+import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")

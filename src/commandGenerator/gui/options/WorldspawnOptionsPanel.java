@@ -2,7 +2,7 @@ package commandGenerator.gui.options;
 
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
-import commandGenerator.gui.helper.components.OptionsPanel;
+import commandGenerator.gui.helper.components.panel.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")

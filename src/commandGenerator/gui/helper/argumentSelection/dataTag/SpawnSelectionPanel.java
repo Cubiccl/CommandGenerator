@@ -13,8 +13,8 @@ import commandGenerator.arguments.tags.TagInt;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.components.CEntry;
-import commandGenerator.gui.helper.components.HelpButton;
-import commandGenerator.gui.helper.components.HelperPanel;
+import commandGenerator.gui.helper.components.button.HelpButton;
+import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 

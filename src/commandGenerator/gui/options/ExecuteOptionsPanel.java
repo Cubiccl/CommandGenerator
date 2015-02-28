@@ -18,13 +18,13 @@ import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.objects.Target;
-import commandGenerator.gui.PanelCommandSelection;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CLabel;
-import commandGenerator.gui.helper.components.OptionsPanel;
+import commandGenerator.gui.helper.components.panel.OptionsPanel;
+import commandGenerator.gui.helper.components.panel.PanelCommandSelection;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 

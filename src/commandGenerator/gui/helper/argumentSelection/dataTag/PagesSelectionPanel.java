@@ -23,7 +23,7 @@ import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.arguments.tags.TagString;
-import commandGenerator.gui.helper.components.CButton;
+import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;

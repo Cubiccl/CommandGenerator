@@ -2,7 +2,7 @@ package commandGenerator.gui.helper.argumentSelection.dataTag;
 
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CLabel;
-import commandGenerator.gui.helper.components.HelperPanel;
+import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")

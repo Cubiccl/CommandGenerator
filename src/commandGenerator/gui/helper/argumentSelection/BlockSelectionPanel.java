@@ -3,6 +3,7 @@ package commandGenerator.gui.helper.argumentSelection;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JLabel;
@@ -15,17 +16,22 @@ import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.dataTag.NBTTagPanel;
-import commandGenerator.gui.helper.components.HelperPanel;
-import commandGenerator.gui.helper.components.IBox;
-import commandGenerator.gui.helper.components.ISpin;
-import commandGenerator.gui.helper.components.NumberSpinner;
-import commandGenerator.gui.helper.components.TextCombobox;
+import commandGenerator.gui.helper.components.button.CButton;
+import commandGenerator.gui.helper.components.button.LoadButton;
+import commandGenerator.gui.helper.components.button.SaveButton;
+import commandGenerator.gui.helper.components.combobox.TextCombobox;
+import commandGenerator.gui.helper.components.icomponent.IBox;
+import commandGenerator.gui.helper.components.icomponent.ISave;
+import commandGenerator.gui.helper.components.icomponent.ISpin;
+import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.spinner.NumberSpinner;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
-public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
+public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISave
 {
 
+	private CButton buttonSave, buttonLoad;
 	private Item[] blockList;
 	private TextCombobox comboboxId;
 	private boolean data;
@@ -62,7 +68,9 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 			add(panelData);
 			panelData.updateCombobox((Item) blockList[0]);
 		}
-		
+
+		addLine(buttonSave, buttonLoad);
+
 		updateCombobox();
 	}
 
@@ -75,6 +83,9 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 		labelName = new JLabel("", JLabel.CENTER);
 		labelName.setPreferredSize(new Dimension(200, 20));
 		labelName.setMinimumSize(new Dimension(200, 20));
+
+		buttonSave = new SaveButton(CGConstants.OBJECT_BLOCK, this);
+		buttonLoad = new LoadButton(CGConstants.OBJECT_BLOCK, this);
 
 		spinnerDamage = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:block.damage", 0, 0, this);
 
@@ -102,7 +113,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 
 	public TagCompound getBlockTag()
 	{
-		return panelData.getNbtTags("BlockEntityTags");
+		return panelData.getNbtTags("BlockEntityTag");
 	}
 
 	public int getDamage()
@@ -123,9 +134,9 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 	@Override
 	protected void setupDetails(Object[] details)
 	{
-		ObjectBase[] list = (ObjectBase[]) details [0];
+		ObjectBase[] list = (ObjectBase[]) details[0];
 		this.data = (boolean) details[1];
-		
+
 		this.blockList = new Item[list.length];
 		for (int i = 0; i < list.length; i++)
 			this.blockList[i] = (Item) list[i];
@@ -172,6 +183,25 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin
 	{
 		labelImage.setIcon(generateBlock().getTexture(getDamage()));
 		labelName.setText(generateBlock().getName(getDamage()));
+	}
+
+	public Object getItemStack()
+	{
+		return new ItemStack(generateBlock(), getDamage(), -1, getBlockTag(), -1);
+	}
+
+	@Override
+	public void load(Object object)
+	{
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put(getPanelId(), object);
+		setupFrom(data);
+	}
+
+	@Override
+	public Object getObjectToSave()
+	{
+		return getItemStack();
 	}
 
 }

@@ -1,4 +1,4 @@
-package commandGenerator.gui.helper.components;
+package commandGenerator.gui.helper.components.combobox;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.swing.JComboBox;
 
+import commandGenerator.gui.helper.components.CComponent;
+import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 

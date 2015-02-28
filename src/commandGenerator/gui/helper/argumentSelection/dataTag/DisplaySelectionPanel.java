@@ -19,8 +19,8 @@ import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.argumentSelection.ColorSelectionPanel;
-import commandGenerator.gui.helper.components.CButton;
 import commandGenerator.gui.helper.components.CCheckBox;
+import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")

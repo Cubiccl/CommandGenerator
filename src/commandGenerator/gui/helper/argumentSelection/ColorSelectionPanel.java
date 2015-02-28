@@ -11,7 +11,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import commandGenerator.gui.helper.components.CLabel;
-import commandGenerator.gui.helper.components.HelperPanel;
+import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")

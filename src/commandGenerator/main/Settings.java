@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import commandGenerator.arguments.objects.Command;
-import commandGenerator.gui.SettingsPanel;
+import commandGenerator.gui.helper.components.panel.SettingsPanel;
 
 public class Settings
 {

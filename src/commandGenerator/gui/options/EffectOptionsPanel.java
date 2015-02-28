@@ -4,7 +4,7 @@ import commandGenerator.arguments.objects.Effect;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.EffectSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
-import commandGenerator.gui.helper.components.OptionsPanel;
+import commandGenerator.gui.helper.components.panel.OptionsPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
