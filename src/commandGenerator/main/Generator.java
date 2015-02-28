@@ -1048,4 +1048,23 @@ public class Generator
 		DisplayHelper.showWarning("WARNING:wrong_command");
 		return null;
 	}
+
+	public static Map<String, Object> genTrigger(String command)
+	{
+		Map<String, Object> data = new HashMap<String, Object>();
+		String[] elements = genElements(command);
+
+		try
+		{
+			data.put(CGConstants.DATAID_NAME, elements[1]);
+			data.put(CGConstants.DATAID_MODE, 0);
+			data.put(CGConstants.DATAID_VALUE, elements[3]);
+			if (elements[2].equals("add")) data.put(CGConstants.DATAID_MODE, 1);
+
+			return data;
+		} catch (Exception e)
+		{
+			return wrong();
+		}
+	}
 }

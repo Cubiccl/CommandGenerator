@@ -30,6 +30,7 @@ import commandGenerator.gui.options.TestforblocksOptionsPanel;
 import commandGenerator.gui.options.TimeOptionsPanel;
 import commandGenerator.gui.options.TitleOptionsPanel;
 import commandGenerator.gui.options.TpOptionsPanel;
+import commandGenerator.gui.options.TriggerOptionsPanel;
 import commandGenerator.gui.options.WeatherOptionsPanel;
 import commandGenerator.gui.options.WorldborderOptionsPanel;
 import commandGenerator.gui.options.WorldspawnOptionsPanel;
@@ -38,40 +39,41 @@ import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Generator;
 import commandGenerator.main.Lang;
 
-public class Command
+public enum Command
 {
 
-	public static Command achievement = new Command("achievement");
-	public static Command blockdata = new Command("blockdata");
-	public static Command clear = new Command("clear");
-	public static Command clone = new Command("clone");
-	public static Command effect = new Command("effect");
-	public static Command enchant = new Command("enchant");
-	public static Command entitydata = new Command("entitydata");
-	public static Command execute = new Command("execute");
-	public static Command fill = new Command("fill");
-	public static Command gamerule = new Command("gamerule");
-	public static Command give = new Command("give");
-	public static Command kill = new Command("kill");
-	public static Command particle = new Command("particle");
-	public static Command playsound = new Command("playsound");
-	public static Command replaceitem = new Command("replaceitem");
-	public static Command scoreboard = new Command("scoreboard");
-	public static Command setblock = new Command("setblock");
-	public static Command setworldspawn = new Command("setworldspawn");
-	public static Command spawnpoint = new Command("spawnpoint");
-	public static Command spreadplayers = new Command("spreadplayers");
-	public static Command summon = new Command("summon");
-	public static Command tellraw = new Command("tellraw");
-	public static Command testfor = new Command("testfor");
-	public static Command testforblock = new Command("testforblock");
-	public static Command testforblocks = new Command("testforblocks");
-	public static Command time = new Command("time");
-	public static Command title = new Command("title");
-	public static Command tp = new Command("tp");
-	public static Command weather = new Command("weather");
-	public static Command worldborder = new Command("worldborder");
-	public static Command xp = new Command("xp");
+	achievement("achievement"),
+	blockdata("blockdata"),
+	clear("clear"),
+	clone("clone"),
+	effect("effect"),
+	enchant("enchant"),
+	entitydata("entitydata"),
+	execute("execute"),
+	fill("fill"),
+	gamerule("gamerule"),
+	give("give"),
+	kill("kill"),
+	particle("particle"),
+	playsound("playsound"),
+	replaceitem("replaceitem"),
+	scoreboard("scoreboard"),
+	setblock("setblock"),
+	setworldspawn("setworldspawn"),
+	spawnpoint("spawnpoint"),
+	spreadplayers("spreadplayers"),
+	summon("summon"),
+	tellraw("tellraw"),
+	testfor("testfor"),
+	testforblock("testforblock"),
+	testforblocks("testforblocks"),
+	time("time"),
+	title("title"),
+	tp("tp"),
+	trigger("trigger"),
+	weather("weather"),
+	worldborder("worldborder"),
+	xp("xp");
 
 	/** The Command's ID. */
 	private String id;
@@ -80,7 +82,7 @@ public class Command
 	 * 
 	 * @param id
 	 *            - <i>String</i> - The Command's ID */
-	public Command(String id)
+	private Command(String id)
 	{
 		this.id = id;
 		Registry.registerCommand(this);
@@ -120,6 +122,7 @@ public class Command
 		if (id.equals("time")) return Generator.genTime(command);
 		if (id.equals("title")) return Generator.genTitle(command);
 		if (id.equals("tp")) return Generator.genTp(command);
+		if (id.equals("trigger")) return Generator.genTrigger(command);
 		if (id.equals("weather")) return Generator.genWeather(command);
 		if (id.equals("worldborder")) return Generator.genWorldborder(command);
 		if (id.equals("xp")) return Generator.genXp(command);
@@ -170,6 +173,7 @@ public class Command
 		if (id.equals("time")) return new TimeOptionsPanel();
 		if (id.equals("title")) return new TitleOptionsPanel();
 		if (id.equals("tp")) return new TpOptionsPanel();
+		if (id.equals("trigger")) return new TriggerOptionsPanel();
 		if (id.equals("weather")) return new WeatherOptionsPanel();
 		if (id.equals("worldborder")) return new WorldborderOptionsPanel();
 		if (id.equals("xp")) return new XpOptionsPanel();

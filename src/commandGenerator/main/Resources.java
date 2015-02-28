@@ -35,8 +35,8 @@ public class Resources
 			"/summon <EntityName> <x> <y> <z> [dataTag]", "/tellraw <player> <raw json message>", "/testfor <player> [dataTag]",
 			"/testforblock <x> <y> <z> <TileName> [dataValue] [dataTag]", "/testforblocks <x1> <y1> <z1> <x2> <y2> <z2> <x> <y> <z> [mode]",
 			"/time <set|add> <value>", "/title <player> <title|subtitle> <raw json title>\n/title <player> times <fadeIn> <stay> <fadeOut>",
-			"/tp <target> <destinationEntity>\n/tp <target> <x> <y> <z> [x-rotation] [y-rotation]", "/weather <clear|rain|thunder> <duration>",
-			"/worldborder <add|center|damage|set|warning> <options ...>", "/xp <amount>[L] <player>" };
+			"/tp <target> <destinationEntity>\n/tp <target> <x> <y> <z> [x-rotation] [y-rotation]", "/trigger <objective> <set|add> <value>",
+			"/weather <clear|rain|thunder> <duration>", "/worldborder <add|center|damage|set|warning> <options ...>", "/xp <amount>[L] <player>" };
 
 	/** The Minecraft version this program is for. */
 	public static String versionMinecraft;
