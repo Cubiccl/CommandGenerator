@@ -24,14 +24,31 @@ public class TagAttributes extends TagList
 	{
 		super(id, applicable);
 		this.forMob = forMob;
+		if (forMob)
+		{
+			TagList list = new TagList("Modifiers") {
+				public void askValue()
+				{}
+			}.setValue(new ArrayList<Tag>());
+
+			List<Tag> tag = new ArrayList<Tag>();
+			tag.add(list);
+			tag.add(new TagString("Name").setValue("Name"));
+			tag.add(new TagDouble("Base").setValue(1.0d));
+
+			setValue(tag);
+		}
 	}
 
 	@Override
 	public void askValue()
 	{
 		panel = new ListSelectionPanel("TAGS:" + getId(), CGConstants.OBJECT_ATTRIBUTE);
-		((ListSelectionPanel) panel).setList(getValue());
+		if (!forMob) ((ListSelectionPanel) panel).setList(getValue());
+		else ((ListSelectionPanel) panel).setList(getAttributes(getValue()));
+
 		if (showPanel()) return;
+
 		if (!forMob)
 		{
 			setValue(((ListSelectionPanel) panel).getList());
@@ -50,6 +67,12 @@ public class TagAttributes extends TagList
 		tag.add(new TagDouble("Base").setValue(1.0d));
 
 		setValue(tag);
+	}
+
+	private List<Tag> getAttributes(List<Tag> value)
+	{
+		for (int i = 0; i < value.size(); i++) if (value.get(i).getId().equals("Modifiers")) return ((TagList) value.get(i)).getValue();
+		return new ArrayList<Tag>();
 	}
 
 	@Override

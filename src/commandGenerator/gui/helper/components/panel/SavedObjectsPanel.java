@@ -227,7 +227,7 @@ public class SavedObjectsPanel extends JPanel
 				if (editing)
 				{
 					data.put(CGConstants.PANELID_NBT, displayed.get(listObjects.getSelectedValue()));
-					data.put(CGConstants.PANELID_ENTITY, DataTags.getObjectFromTags((List<Tag>) data.get(CGConstants.PANELID_NBT)));// TODO check this out
+					data.put(CGConstants.PANELID_ENTITY, DataTags.getObjectFromTags((List<Tag>) data.get(CGConstants.PANELID_NBT)));
 					panelEnt.setupFrom(data);
 				}
 
@@ -247,7 +247,7 @@ public class SavedObjectsPanel extends JPanel
 				if (DisplayHelper.showQuestion(panelTr, title)) return;
 				object = panelTr.generateTrade();
 				break;
-				
+
 			case CGConstants.OBJECT_TARGET:
 				TargetSelectionPanel panelTa = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target", CGConstants.ENTITIES_ALL);
 

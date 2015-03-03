@@ -863,11 +863,27 @@ public class Generator
 
 		try
 		{
-			if (elements[1].equals("set")) data.put(CGConstants.DATAID_MODE, 0);
-			if (elements[1].equals("add")) data.put(CGConstants.DATAID_MODE, 1);
-			data.put(CGConstants.DATAID_VALUE, elements[2]);
+			data.put(CGConstants.DATAID_MODE, 0);
+			data.put(CGConstants.DATAID_MODE2, 0);
+			if (elements[1].equals("add"))
+			{
+				data.put(CGConstants.DATAID_MODE, 1);
+				data.put(CGConstants.DATAID_VALUE, elements[2]);
+			}
+			if (elements[1].equals("query")) data.put(CGConstants.DATAID_MODE, 2);
 
-			if (data.get(CGConstants.DATAID_MODE) == null || Integer.parseInt((String) data.get(CGConstants.DATAID_VALUE)) < 0) return wrong();
+			if (elements[2].equals("gametime")) data.put(CGConstants.DATAID_MODE2, 1);
+			if (elements[1].equals("set"))
+			{
+				if (elements[2].equals("day"))
+				;
+				else if (elements[2].equals("night")) data.put(CGConstants.DATAID_MODE2, 1);
+				else
+				{
+					data.put(CGConstants.DATAID_VALUE, elements[2]);
+					data.put(CGConstants.DATAID_MODE2, 2);
+				}
+			}
 
 			return data;
 		} catch (Exception e)
@@ -1060,6 +1076,48 @@ public class Generator
 			data.put(CGConstants.DATAID_MODE, 0);
 			data.put(CGConstants.DATAID_VALUE, elements[3]);
 			if (elements[2].equals("add")) data.put(CGConstants.DATAID_MODE, 1);
+
+			return data;
+		} catch (Exception e)
+		{
+			return wrong();
+		}
+	}
+
+	public static Map<String, Object> genStats(String command)
+	{
+		Map<String, Object> data = new HashMap<String, Object>();
+		String[] elements = genElements(command);
+
+		try
+		{
+			data.put(CGConstants.DATAID_MODE, 0);
+			data.put(CGConstants.DATAID_MODE2, 0);
+			data.put(CGConstants.DATAID_NAME, "");
+			data.put(CGConstants.DATAID_NAME2, 0);
+			data.put(CGConstants.PANELID_COORDS, new Coordinates(0, 0, 0, false));
+			data.put(CGConstants.PANELID_TARGET, new Target(Target.ALL, new ArrayList<String[]>()));
+			data.put(CGConstants.PANELID_TARGET2, new Target(Target.ALL, new ArrayList<String[]>()));
+			int index = 5;
+
+			if (elements[1].equals("entity"))
+			{
+				index = 3;
+				data.put(CGConstants.DATAID_MODE, 1);
+				data.put(CGConstants.PANELID_TARGET2, Target.generateFrom(elements[2]));
+			} else data.put(CGConstants.PANELID_COORDS, Coordinates.generateFrom(elements[2], elements[3], elements[4]));
+
+			if (elements[index + 1].equals("AffectedEntities")) data.put(CGConstants.DATAID_NAME2, 1);
+			if (elements[index + 1].equals("AffectedItems")) data.put(CGConstants.DATAID_NAME2, 2);
+			if (elements[index + 1].equals("QueryResult")) data.put(CGConstants.DATAID_NAME2, 3);
+			if (elements[index + 1].equals("SuccessCount")) data.put(CGConstants.DATAID_NAME2, 4);
+
+			if (elements[index].equals("set"))
+			{
+				data.put(CGConstants.DATAID_MODE2, 1);
+				data.put(CGConstants.PANELID_TARGET, Target.generateFrom(elements[index + 2]));
+				data.put(CGConstants.DATAID_NAME, elements[index + 3]);
+			}
 
 			return data;
 		} catch (Exception e)

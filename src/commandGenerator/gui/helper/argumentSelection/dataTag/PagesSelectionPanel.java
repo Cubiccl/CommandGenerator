@@ -30,7 +30,7 @@ import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
 public class PagesSelectionPanel extends JPanel
-{//TODO Turn into HelperPanel
+{
 
 	private CButton buttonAddText, buttonAddJson, buttonEdit, buttonRemove;
 	private JEditorPane editorpane;

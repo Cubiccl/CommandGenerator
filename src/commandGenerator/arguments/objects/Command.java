@@ -23,6 +23,7 @@ import commandGenerator.gui.options.ScoreboardOptionsPanel;
 import commandGenerator.gui.options.SetblockOptionsPanel;
 import commandGenerator.gui.options.SpawnpointOptionsPanel;
 import commandGenerator.gui.options.SpreadOptionsPanel;
+import commandGenerator.gui.options.StatsOptionsPanel;
 import commandGenerator.gui.options.SummonOptionsPanel;
 import commandGenerator.gui.options.TellrawOptionsPanel;
 import commandGenerator.gui.options.TestforblockOptionsPanel;
@@ -62,6 +63,7 @@ public enum Command
 	setworldspawn("setworldspawn"),
 	spawnpoint("spawnpoint"),
 	spreadplayers("spreadplayers"),
+	stats("stats"),
 	summon("summon"),
 	tellraw("tellraw"),
 	testfor("testfor"),
@@ -114,6 +116,7 @@ public enum Command
 		if (id.equals("setworldspawn")) return Generator.genSetworldspawn(command);
 		if (id.equals("spawnpoint")) return Generator.genSpawnpoint(command);
 		if (id.equals("spreadplayers")) return Generator.genSpreadplayers(command);
+		if (id.equals("stats")) return Generator.genStats(command);
 		if (id.equals("summon")) return Generator.genSummon(command);
 		if (id.equals("tellraw")) return Generator.genTellraw(command);
 		if (id.equals("testfor")) return Generator.genEntityData(command);
@@ -166,6 +169,7 @@ public enum Command
 		if (id.equals("setworldspawn")) return new WorldspawnOptionsPanel();
 		if (id.equals("spawnpoint")) return new SpawnpointOptionsPanel();
 		if (id.equals("spreadplayers")) return new SpreadOptionsPanel();
+		if (id.equals("stats")) return new StatsOptionsPanel();
 		if (id.equals("summon")) return new SummonOptionsPanel();
 		if (id.equals("tellraw")) return new TellrawOptionsPanel();
 		if (id.equals("testforblock")) return new TestforblockOptionsPanel();

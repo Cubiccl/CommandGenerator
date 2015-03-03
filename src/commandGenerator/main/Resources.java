@@ -32,6 +32,7 @@ public class Resources
 			"/replaceitem block [x] [y] [z] <slot> <item> [amount] [data] [dataTag]\n/replaceitem entity <selector> <slot> <item> [amount] [data] [dataTag]",
 			"/scoreboard <objectives|players|teams> <options ...>", "/setblock <x> <y> <z> <TileName> [dataValue] [oldBlockHandling] [dataTag]",
 			"/setworldspawn <x> <y> <z>", "/spawnpoint <player> [x] [y] [z]", "/spreadplayers <x> <z> <spreadDistance> <maxRange> <respectTeams> <player ...>",
+			"/stats block <x> <y> <z> <clear|set> <stat> [selector] [objective]\n/stats entity <entity> <clear|set> [selector] [objective]",
 			"/summon <EntityName> <x> <y> <z> [dataTag]", "/tellraw <player> <raw json message>", "/testfor <player> [dataTag]",
 			"/testforblock <x> <y> <z> <TileName> [dataValue] [dataTag]", "/testforblocks <x1> <y1> <z1> <x2> <y2> <z2> <x> <y> <z> [mode]",
 			"/time <set|add> <value>", "/title <player> <title|subtitle> <raw json title>\n/title <player> times <fadeIn> <stay> <fadeOut>",
