@@ -54,4 +54,13 @@ public class Particle extends ObjectBase
 	{
 		return null;
 	}
+
+	public static Particle getParticleFrom(String id)
+	{
+		Particle part = (Particle) Registry.getObjectFromId(id);
+		if (part != null) return part;
+
+		if (id.startsWith("blockcrack")) return (Particle) Registry.getObjectFromId("blockcrack");
+		return (Particle) Registry.getObjectFromId("iconcrack");
+	}
 }

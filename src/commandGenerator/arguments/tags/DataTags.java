@@ -27,6 +27,7 @@ import commandGenerator.arguments.tags.specific.TagPos;
 import commandGenerator.arguments.tags.specific.TagPose;
 import commandGenerator.arguments.tags.specific.TagRiding;
 import commandGenerator.arguments.tags.specific.TagRotation;
+import commandGenerator.arguments.tags.specific.TagSignText;
 import commandGenerator.arguments.tags.specific.TagSpawnData;
 import commandGenerator.arguments.tags.specific.TagSpawnPotentials;
 import commandGenerator.main.DisplayHelper;
@@ -161,7 +162,7 @@ public class DataTags
 					break;
 
 				case Tag.STRING:
-					((TagString) tag).setValue(value.replaceAll("\"", ""));
+					((TagString) tag).setValue(value.substring(1, value.length() - 1));
 					break;
 
 				case Tag.INT:
@@ -244,6 +245,7 @@ public class DataTags
 	private static Tag initCustom(String[] tagData)
 	{
 		String id = tagData[0];
+		if (id.equals("Text1") || id.equals("Text2") || id.equals("Text3") || id.equals("Text4")) return new TagSignText(id, tagData[2]);
 		if (id.equals("SpawnPotentials")) return new TagSpawnPotentials();
 		if (id.equals("SpawnData")) return new TagSpawnData();
 		if (id.equals("Patterns")) return new TagPatterns();
@@ -256,7 +258,7 @@ public class DataTags
 		if (id.equals("CanDestroy")) return new TagCanDestroy();
 		if (id.equals("CanPlaceOn")) return new TagCanPlace();
 		if (id.equals("CustomPotionEffects")) return new TagEffects(id, "potion");
-		if (id.equals("pages")) return new TagPages();
+		if (id.equals("pages")) return new TagPages(id, tagData[2]);
 		if (id.equals("Explosion")) return new TagExplosion();
 		if (id.equals("Fireworks")) return new TagFireworks();
 		if (id.equals("BlockEntityTag")) return new TagBlockEntity("BlockEntityTag", "LIST=tileentity");

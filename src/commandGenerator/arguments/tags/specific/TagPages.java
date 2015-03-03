@@ -9,9 +9,9 @@ import commandGenerator.gui.helper.argumentSelection.dataTag.PagesSelectionPanel
 public class TagPages extends TagList
 {
 
-	public TagPages()
+	public TagPages(String id, String... applicable)
 	{
-		super("item.pages", "written_book");
+		super(id, applicable);
 		setValue(new ArrayList<Tag>());
 	}
 

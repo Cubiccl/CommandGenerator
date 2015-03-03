@@ -110,7 +110,7 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 
 	public int getDamage()
 	{
-		if (comboboxParticle.getValue().getType() == Particle.BLOCK) return panelBlock.getDamage();
+		if (((Particle) comboboxParticle.getValue()).getParticleType() == Particle.BLOCK) return panelBlock.getDamage();
 		else return panelItem.getDamage();
 	}
 
@@ -121,14 +121,15 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 
 	public Item getItem()
 	{
-		if (comboboxParticle.getValue().getType() == Particle.BLOCK) return panelBlock.generateBlock();
+		if (((Particle) comboboxParticle.getValue()).getParticleType() == Particle.BLOCK) return panelBlock.generateBlock();
 		else return panelItem.generateItem();
 	}
 
 	public String getItemProperties(boolean isItem)
 	{
 		if (isItem) return getItem().getCommandId() + "_" + getDamage();
-		return Integer.toString(getItem().getIdNum() | (getDamage() << 12));
+		int value = getItem().getIdNum() | (getDamage() << 12);
+		return Integer.toString(value);
 	}
 
 	public int getSpeed()

@@ -12,6 +12,7 @@ import commandGenerator.arguments.objects.EffectType;
 import commandGenerator.arguments.objects.EnchantType;
 import commandGenerator.arguments.objects.Enchantment;
 import commandGenerator.arguments.objects.ItemStack;
+import commandGenerator.arguments.objects.Particle;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.DataTags;
@@ -451,7 +452,7 @@ public class Generator
 
 		try
 		{
-			data.put(CGConstants.PANELID_PARTICLE, Registry.getObjectFromId(elements[1]));
+			data.put(CGConstants.PANELID_PARTICLE, Particle.getParticleFrom(elements[1]));
 			data.put(CGConstants.PANELID_COORDS_START, Coordinates.generateFrom(elements[2], elements[3], elements[4]));
 			data.put(CGConstants.PANELID_COORDS_END, Coordinates.generateFrom(elements[5], elements[6], elements[7]));
 			data.put(CGConstants.DATAID_VALUE, new int[] { Integer.parseInt(elements[8]), -1 });

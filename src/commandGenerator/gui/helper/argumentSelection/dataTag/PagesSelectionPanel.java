@@ -1,8 +1,6 @@
 package commandGenerator.gui.helper.argumentSelection.dataTag;
 
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -13,7 +11,6 @@ import java.util.regex.Matcher;
 
 import javax.swing.JEditorPane;
 import javax.swing.JList;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.event.ListSelectionEvent;
@@ -24,92 +21,24 @@ import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.components.button.CButton;
+import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class PagesSelectionPanel extends JPanel
+public class PagesSelectionPanel extends HelperPanel
 {
 
 	private CButton buttonAddText, buttonAddJson, buttonEdit, buttonRemove;
 	private JEditorPane editorpane;
-	private GridBagConstraints gbc = new GridBagConstraints();
 	private JList<String> list;
 	private List<String> pages = new ArrayList<String>();
 	private JScrollPane scrollpane, scrolllist;
 
 	public PagesSelectionPanel()
 	{
-		super(new GridBagLayout());
-
-		buttonAddText = new CButton("GUI:page.add.text");
-		buttonAddJson = new CButton("GUI:page.add.json");
-		buttonEdit = new CButton("GENERAL:edit_only");
-		buttonRemove = new CButton("GENERAL:remove");
-
-		buttonAddText.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				addText();
-			}
-		});
-		buttonAddJson.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				addJson();
-			}
-		});
-		buttonEdit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				edit();
-			}
-		});
-		buttonRemove.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				remove();
-			}
-		});
-
-		list = new JList<String>(new String[0]);
-		list.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e)
-			{
-				display();
-			}
-		});
-		scrolllist = new JScrollPane(list);
-		scrolllist.setPreferredSize(new Dimension(100, 120));
-		scrolllist.setMinimumSize(new Dimension(100, 120));
-
-		editorpane = new JEditorPane("text/html", "");
-		scrollpane = new JScrollPane(editorpane);
-		scrollpane.setPreferredSize(new Dimension(300, 120));
-		scrollpane.setMinimumSize(new Dimension(300, 120));
-
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		add(buttonAddText);
-		gbc.gridx++;
-		add(buttonAddJson);
-
-		gbc.gridx = 0;
-		gbc.gridy++;
-		gbc.gridwidth = 2;
-		add(buttonEdit);
-		gbc.gridy++;
-		add(buttonRemove);
-
-		gbc.gridx = 2;
-		gbc.gridy = 0;
-		gbc.gridwidth = 1;
-		gbc.gridheight = 3;
-		add(scrolllist);
-		gbc.gridx++;
-		add(scrollpane);
-
+		super(CGConstants.DATAID_NONE, "TAGS:pages");
 	}
 
 	private void addJson()
@@ -209,6 +138,70 @@ public class PagesSelectionPanel extends JPanel
 			names[i] = Lang.get("GENERAL:text") + " " + (i + 1);
 		list.setListData(names);
 		display();
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		addLine(buttonAddJson, buttonAddText);
+		addLine(buttonEdit, buttonRemove);
+		addLine(scrolllist, scrollpane);
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		buttonAddText = new CButton("GUI:page.add.text");
+		buttonAddJson = new CButton("GUI:page.add.json");
+		buttonEdit = new CButton("GENERAL:edit_only");
+		buttonRemove = new CButton("GENERAL:remove");
+
+		list = new JList<String>(new String[0]);
+		scrolllist = new JScrollPane(list);
+		scrolllist.setPreferredSize(new Dimension(100, 120));
+		scrolllist.setMinimumSize(new Dimension(100, 120));
+
+		editorpane = new JEditorPane("text/html", "");
+		scrollpane = new JScrollPane(editorpane);
+		scrollpane.setPreferredSize(new Dimension(300, 120));
+		scrollpane.setMinimumSize(new Dimension(300, 120));
+	}
+
+	@Override
+	protected void createListeners()
+	{
+
+		buttonAddText.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				addText();
+			}
+		});
+		buttonAddJson.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				addJson();
+			}
+		});
+		buttonEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				edit();
+			}
+		});
+		buttonRemove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				remove();
+			}
+		});
+
+		list.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e)
+			{
+				display();
+			}
+		});
 	}
 
 }

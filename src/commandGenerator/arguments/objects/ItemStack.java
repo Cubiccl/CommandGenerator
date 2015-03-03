@@ -41,6 +41,7 @@ public class ItemStack
 	{
 		Item item = (Item) Registry.getObjectFromId(id);
 		if (item.isBlock()) item = (Item) Registry.getObjectFromId(id + "_item");
+		if (item == null) item = (Item) Registry.getObjectFromId(id);
 		TagCompound tag = new TagCompound("tag") {
 			public void askValue()
 			{}
