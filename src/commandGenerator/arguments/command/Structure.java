@@ -1,32 +1,35 @@
 package commandGenerator.arguments.command;
 
 import java.awt.Component;
+import java.awt.Font;
 
 import javax.swing.BorderFactory;
 
-import commandGenerator.arguments.command.arguments.AchievementArgument;
 import commandGenerator.arguments.command.arguments.BlockArgument;
 import commandGenerator.arguments.command.arguments.BooleanArgument;
 import commandGenerator.arguments.command.arguments.ChoiceArgument;
-import commandGenerator.arguments.command.arguments.CommandArgument;
 import commandGenerator.arguments.command.arguments.CoordinatesArgument;
-import commandGenerator.arguments.command.arguments.EffectArgument;
-import commandGenerator.arguments.command.arguments.EnchantmentArgument;
 import commandGenerator.arguments.command.arguments.EntityArgument;
 import commandGenerator.arguments.command.arguments.FloatArgument;
 import commandGenerator.arguments.command.arguments.INBTArgument;
 import commandGenerator.arguments.command.arguments.IntArgument;
 import commandGenerator.arguments.command.arguments.ItemArgument;
-import commandGenerator.arguments.command.arguments.JsonArgument;
 import commandGenerator.arguments.command.arguments.NBTArgument;
-import commandGenerator.arguments.command.arguments.ObjectiveArgument;
-import commandGenerator.arguments.command.arguments.ParticleArgument;
-import commandGenerator.arguments.command.arguments.SlotArgument;
-import commandGenerator.arguments.command.arguments.SoundArgument;
 import commandGenerator.arguments.command.arguments.StaticArgument;
 import commandGenerator.arguments.command.arguments.StringArgument;
 import commandGenerator.arguments.command.arguments.TargetArgument;
-import commandGenerator.arguments.command.arguments.TeamOptionArgument;
+import commandGenerator.arguments.command.arguments.misc.AchievementArgument;
+import commandGenerator.arguments.command.arguments.misc.BlockSlotArgument;
+import commandGenerator.arguments.command.arguments.misc.CommandArgument;
+import commandGenerator.arguments.command.arguments.misc.EffectArgument;
+import commandGenerator.arguments.command.arguments.misc.EnchantmentArgument;
+import commandGenerator.arguments.command.arguments.misc.JsonArgument;
+import commandGenerator.arguments.command.arguments.misc.ObjectiveArgument;
+import commandGenerator.arguments.command.arguments.misc.ParticleArgument;
+import commandGenerator.arguments.command.arguments.misc.SlotArgument;
+import commandGenerator.arguments.command.arguments.misc.SoundArgument;
+import commandGenerator.arguments.command.arguments.misc.TeamOptionArgument;
+import commandGenerator.arguments.command.arguments.misc.XpArgument;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
@@ -80,9 +83,8 @@ public enum Structure
 			new CoordinatesArgument("playsound.coords", false, true, false), new FloatArgument("playsound.volume", false).addHelpButton()
 					.setBounds(1.0F, Float.MAX_VALUE).setDefaultValue(1.0F), new FloatArgument("playsound.pitch", false).addHelpButton().setBounds(0.0F, 2.0F),
 			new FloatArgument("playsound.volume_min", false).addHelpButton().setBounds(0.0F, 1.0F)),
-	replaceitemBlock("replaceitem.block", new StaticArgument("block"), new CoordinatesArgument("block.coords", true, true, false), new StaticArgument(
-			"container.slot.").setHasNoSpace(), new IntArgument("replaceitem.slot", true).setBounds(0, 27), new ItemArgument("replaceitem.item", true)
-			.setDisplay(true, true, true, true)),
+	replaceitemBlock("replaceitem.block", new StaticArgument("block"), new CoordinatesArgument("block.coords", true, true, false), new BlockSlotArgument(
+			"replaceitem.slot", true).setBounds(0, 27), new ItemArgument("replaceitem.item", true).setDisplay(true, true, true, true)),
 	replaceitemEntity("replaceitem.entity", new StaticArgument("entity"), new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new SlotArgument(),
 			new ItemArgument("replaceitem.item", true).setDisplay(true, true, true, true)),
 	scoreObjectiveAdd("scoreboard.objectives.add", new StaticArgument("add"), new StringArgument("objective", true), new ObjectiveArgument(),
@@ -152,8 +154,7 @@ public enum Structure
 			new FloatArgument("value", true).setBounds(0.0F, Float.MAX_VALUE).setDefaultValue(0.2F)),
 	worldborderWarning("worldborder.warning", new StaticArgument("warning"), new ChoiceArgument("worldborder.mode", true, "distance", "time").addHelpButton(),
 			new IntArgument("value", true).setBounds(0, Integer.MAX_VALUE)),
-	xp("xp", new IntArgument("xp.xp", true).setHasNoSpace(), new BooleanArgument("xp.levels", true).setValues("", "L"), new TargetArgument("target", true,
-			CGConstants.ENTITIES_PLAYERS));
+	xp("xp", new XpArgument(), new TargetArgument("target", true, CGConstants.ENTITIES_PLAYERS));
 
 	private String name;
 	private Argument[] arguments;
@@ -178,6 +179,7 @@ public enum Structure
 			{
 				CLabel label = new CLabel("HELP:structure." + name, true);
 				label.setBorder(BorderFactory.createBevelBorder(0));
+				label.setFont(new Font(label.getFont().getName(), Font.BOLD, 13));
 				add(label);
 				for (Argument arg : arguments)
 				{
@@ -230,11 +232,11 @@ public enum Structure
 							if (tag == null) return null;
 							command += tag.commandStructure().substring(tag.getId().length() + 1);
 						}
-				} else command += subCommand;
-				if (this.arguments[i].hasSpace()) command += " ";
+				} else command += subCommand + " ";
 			}
 		}
 
 		return command;
 	}
+
 }

@@ -1,4 +1,4 @@
-package commandGenerator.arguments.command.arguments;
+package commandGenerator.arguments.command.arguments.misc;
 
 import java.awt.Component;
 import java.awt.GridBagConstraints;

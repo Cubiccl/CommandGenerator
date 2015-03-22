@@ -16,7 +16,7 @@ public abstract class Argument
 
 	/** Whether this argument is compulsery. */
 	private final boolean isCompulsery;
-	private boolean isGuiInit, hasSpace;
+	private boolean isGuiInit;
 
 	/** The number of elements this Argument needs. */
 	private int length, maxLength;
@@ -28,7 +28,6 @@ public abstract class Argument
 		this.isCompulsery = isCompulsery;
 		this.length = length;
 		this.isGuiInit = false;
-		this.hasSpace = true;
 		this.maxLength = -1;
 	}
 
@@ -67,12 +66,6 @@ public abstract class Argument
 		return generateComponent();
 	}
 
-	public Argument setHasNoSpace()
-	{
-		this.hasSpace = false;
-		return this;
-	}
-
 	public abstract Component generateComponent();
 
 	public abstract void initGui();
@@ -80,9 +73,4 @@ public abstract class Argument
 	public abstract String generateCommand();
 
 	public abstract boolean isUsed();
-
-	public boolean hasSpace()
-	{
-		return this.hasSpace;
-	}
 }
