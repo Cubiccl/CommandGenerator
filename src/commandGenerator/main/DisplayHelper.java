@@ -129,11 +129,11 @@ public class DisplayHelper
 	}
 
 	/** Displays an error warning the user that he should use an integer between min and max. */
-	public static void warningInteger(int min, int max)
+	public static void warningBounds(double min, double max)
 	{
-		log(Lang.get("WARNING:integer_bound").replaceAll("<min>", Integer.toString(min)).replaceAll("<max>", Integer.toString(max)));
+		log(Lang.get("WARNING:number_bound").replaceAll("<min>", String.valueOf(min)).replaceAll("<max>", String.valueOf(max)));
 		JOptionPane.showMessageDialog(null,
-				Lang.get("WARNING:integer_bound").replaceAll("<min>", Integer.toString(min)).replaceAll("<max>", Integer.toString(max)),
+				Lang.get("WARNING:number_bound").replaceAll("<min>", String.valueOf(min)).replaceAll("<max>", String.valueOf(max)),
 				Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
 
 	}
@@ -167,6 +167,7 @@ public class DisplayHelper
 			if (name.equals("") || name.contains(" ")) showWarning("WARNING:name");
 			if (SavedObjects.getList(type).containsKey(name)) showWarning("WARNING:name_already");
 			name = JOptionPane.showInputDialog(null, Lang.get("GENERAL:name"));
+			if (name == null) return null;
 		} while (name.contains(" ") || name.equals("") || SavedObjects.getList(type).containsKey(name));
 		return name;
 	}

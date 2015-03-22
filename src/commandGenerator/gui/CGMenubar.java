@@ -60,7 +60,7 @@ public class CGMenubar extends JMenuBar
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				CommandGenerator.gui.panelGeneral.panelOptions.reset();
+				CommandGenerator.gui.panelGeneral.tabOptions.reset();
 			}
 		});
 		settings.addActionListener(new ActionListener() {

@@ -42,7 +42,7 @@ public class ExecuteOptionsPanel extends OptionsPanel
 
 	public ExecuteOptionsPanel()
 	{
-		super(-1);
+		//super(-1);
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class ExecuteOptionsPanel extends OptionsPanel
 		panelCommand.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), Lang.get("GUI:execute.command")));
 		panelCommand.setPreferredSize(new Dimension(1100, 650));
 		panelCommand.setSelectedCommand(Registry.getCommandFromId(storedCommand.split(" ")[0]));
-		panelCommand.panelOptions.setupFrom(Registry.getCommandFromId(storedCommand.split(" ")[0]).generateSetup(storedCommand));
+		panelCommand.tabOptions.setupFrom(Registry.getCommandFromId(storedCommand.split(" ")[0]).generateSetup(storedCommand));
 
 		// Setting the JDialog resizable
 		panelCommand.addHierarchyListener(new HierarchyListener() {

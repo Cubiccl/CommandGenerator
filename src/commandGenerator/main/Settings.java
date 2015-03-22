@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import commandGenerator.arguments.objects.Command;
+import commandGenerator.arguments.command.Command;
 import commandGenerator.gui.helper.components.panel.SettingsPanel;
 
 public class Settings

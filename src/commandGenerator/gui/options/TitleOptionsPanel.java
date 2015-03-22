@@ -85,8 +85,7 @@ public class TitleOptionsPanel extends OptionsPanel
 			TagList list = new TagList() {
 				public void askValue()
 				{}
-			};
-			list.setValue(panelJson.getList());
+			}.setValue(panelJson.getList());
 			return "title " + player.commandStructure() + " " + modes[comboboxMode.getSelectedIndex()] + " " + list.commandStructure();
 		}
 	}

@@ -5,10 +5,8 @@ import java.awt.event.ActionListener;
 import java.util.Map;
 
 import commandGenerator.arguments.objects.Coordinates;
-import commandGenerator.arguments.objects.Sound;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
-import commandGenerator.gui.helper.argumentSelection.SoundSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.panel.OptionsPanel;
@@ -21,7 +19,8 @@ public class PlaysoundOptionsPanel extends OptionsPanel
 	private CCheckBox checkboxCoords;
 	private CoordSelectionPanel panelCoords;
 	private TargetSelectionPanel panelPlayer;
-	private SoundSelectionPanel panelSound;
+
+	// private SoundSelectionPanel panelSound;
 
 	public PlaysoundOptionsPanel()
 	{
@@ -32,7 +31,7 @@ public class PlaysoundOptionsPanel extends OptionsPanel
 	protected void addComponents()
 	{
 		add(panelPlayer);
-		add(panelSound);
+		// add(panelSound);
 		add(panelCoords);
 		add(checkboxCoords);
 	}
@@ -46,7 +45,7 @@ public class PlaysoundOptionsPanel extends OptionsPanel
 		panelCoords = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GUI:playsound.coords", true, false);
 		panelCoords.setEnabled(false);
 		panelCoords.setEnabledContent(false);
-		panelSound = new SoundSelectionPanel("GENERAL:options");
+		// panelSound = new SoundSelectionPanel("GENERAL:options");
 	}
 
 	@Override
@@ -67,19 +66,19 @@ public class PlaysoundOptionsPanel extends OptionsPanel
 	{
 		Target player = panelPlayer.generateEntity();
 		Coordinates coords;
-		Sound sound = panelSound.getSelectedSound();
-		String[] options = panelSound.getSoundOptions();
+		// Sound sound = panelSound.getSelectedSound();
+		// String[] options = panelSound.getSoundOptions();
 
 		if (checkboxCoords.isSelected()) coords = panelCoords.generateCoord();
 		else coords = new Coordinates(0, 0, 0, new boolean[] { true, true, true }, false);
 
-		if (player == null || coords == null || options == null || sound == null) return null;
+		// if (player == null || coords == null || options == null || sound == null) return null;
 
 		String command = "playsound";
-		command += " " + sound.getId();
+		// command += " " + sound.getId();
 		command += " " + player.commandStructure();
 		command += " " + coords.commandStructure();
-		if (!(options[0] == null && options[1] == null && options[2] == null)) command += " " + options[0] + " " + options[1] + " " + options[2];
+		// if (!(options[0] == null && options[1] == null && options[2] == null)) command += " " + options[0] + " " + options[1] + " " + options[2];
 
 		return command;
 	}

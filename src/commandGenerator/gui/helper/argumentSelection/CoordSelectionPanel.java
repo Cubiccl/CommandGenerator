@@ -46,6 +46,7 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 			add(entryX);
 			add(entryY);
 			add(entryZ);
+			add(checkboxFloat);
 		}
 
 		if (rotation)
@@ -53,7 +54,7 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 			add(checkboxRotation);
 			add(panelRotation);
 		}
-		
+
 		addLine(buttonSave, buttonLoad);
 	}
 
@@ -62,11 +63,11 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 	{
 		buttonSave = new SaveButton(CGConstants.OBJECT_COORD, this);
 		buttonLoad = new LoadButton(CGConstants.OBJECT_COORD, this);
-		
+
 		entryX = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.x", "0");
 		entryY = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.y", "0");
 		entryZ = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.z", "0");
-		
+
 		checkboxFloat = new CCheckBox(CGConstants.DATAID_NONE, "GUI:coord.float");
 
 		if (rotation)
@@ -98,14 +99,18 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 	@Override
 	protected void createListeners()
 	{
-		if (relative) checkboxRelativeAll.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				checkRelX.setEnabled(!checkboxRelativeAll.isSelected());
-				checkRelY.setEnabled(!checkboxRelativeAll.isSelected());
-				checkRelZ.setEnabled(!checkboxRelativeAll.isSelected());
-			}
-		});
+		if (relative)
+		{
+			checkboxRelativeAll.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e)
+				{
+					checkRelX.setEnabled(!checkboxRelativeAll.isSelected());
+					checkRelY.setEnabled(!checkboxRelativeAll.isSelected());
+					checkRelZ.setEnabled(!checkboxRelativeAll.isSelected());
+				}
+			});
+			checkboxRelativeAll.setSelected(true);
+		}
 	}
 
 	public Coordinates generateCoord()
@@ -142,11 +147,7 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 	public void setEnabledContent(boolean enable)
 	{
 
-		setEnabled(enable);
-		entryX.setEnabledContent(enable);
-		entryY.setEnabledContent(enable);
-		entryZ.setEnabledContent(enable);
-		checkboxRelativeAll.setEnabled(enable);
+		super.setEnabledContent(enable);
 
 		if (rotation && enable && checkboxRotation.isSelected())
 		{

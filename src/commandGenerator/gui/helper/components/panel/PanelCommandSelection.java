@@ -23,22 +23,20 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import commandGenerator.CommandGenerator;
-import commandGenerator.arguments.objects.Command;
+import commandGenerator.arguments.command.Command;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CLabel;
+import commandGenerator.gui.helper.components.OptionsTab;
 import commandGenerator.gui.helper.components.button.CButton;
-import commandGenerator.gui.options.AchievementOptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
-import commandGenerator.main.Resources;
 
 @SuppressWarnings("serial")
 public class PanelCommandSelection extends JPanel
@@ -51,8 +49,7 @@ public class PanelCommandSelection extends JPanel
 	private JComboBox<String> comboboxCommand;
 	private GridBagConstraints gbc = new GridBagConstraints();
 	private CLabel labelChooseCommand, labelWarning;
-	public OptionsPanel panelOptions;
-	private JScrollPane scrollpane;
+	public OptionsTab tabOptions;
 	private JTextArea textareaStructure;
 	private JTextField textfieldSearchbar, textfieldCommand;
 
@@ -90,7 +87,7 @@ public class PanelCommandSelection extends JPanel
 					DisplayHelper.log("Generating /" + CommandGenerator.opt.selectedCommand.getId()
 							+ "  -----------------------------------------------------------");
 
-					String command = panelOptions.generateCommand();
+					String command = CommandGenerator.opt.selectedCommand.generate(tabOptions);
 					if (command != null)
 					{
 						textfieldCommand.setText("/" + command);
@@ -188,7 +185,7 @@ public class PanelCommandSelection extends JPanel
 			{}
 		});
 
-		textareaStructure = new JTextArea(Resources.structureList[0]);
+		textareaStructure = new JTextArea(Command.achievement.getStructure());
 		textareaStructure.setEditable(false);
 
 		Command[] commands = Registry.getCommandArray();
@@ -215,18 +212,14 @@ public class PanelCommandSelection extends JPanel
 				comboboxCommand.setModel(new JComboBox<String>(names).getModel());
 				comboboxCommand.setSelectedItem(CommandGenerator.opt.selectedCommand.getId());
 				textfieldSearchbar.setText("");
-				textareaStructure.setText(Resources.structureList[comboboxCommand.getSelectedIndex()]);
+				textareaStructure.setText(CommandGenerator.opt.selectedCommand.getStructure());
 				DisplayHelper.log("Setting up /" + CommandGenerator.opt.selectedCommand.getId());
-				setOptionsPanel(CommandGenerator.opt.selectedCommand.getOptionsPanel());
+				setOptionsPanel(CommandGenerator.opt.selectedCommand.generateOptionsTab());
 			}
 		});
 
-		panelOptions = new AchievementOptionsPanel();
-		scrollpane = new JScrollPane(panelOptions);
-		scrollpane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GREEN), Lang.get("GENERAL:options")));
-		scrollpane.setPreferredSize(new Dimension(getSize().width - 50, getSize().height - 180));
-		scrollpane.getVerticalScrollBar().setUnitIncrement(20);
-		scrollpane.getHorizontalScrollBar().setUnitIncrement(20);
+		tabOptions = CommandGenerator.opt.selectedCommand.generateOptionsTab();
+		tabOptions.setPreferredSize(new Dimension(getSize().width - 50, getSize().height - 180));
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -266,7 +259,7 @@ public class PanelCommandSelection extends JPanel
 		gbc.gridx = 0;
 		gbc.gridy++;
 		gbc.gridwidth = 4;
-		add(scrollpane, gbc);
+		add(tabOptions, gbc);
 		gbc.gridwidth = 1;
 
 		addComponentListener(new ComponentListener() {
@@ -275,7 +268,7 @@ public class PanelCommandSelection extends JPanel
 			}
 			public void componentResized(ComponentEvent arg0)
 			{
-				scrollpane.setPreferredSize(new Dimension(getSize().width - 50, getSize().height - 180));
+				tabOptions.setPreferredSize(new Dimension(getSize().width - 50, getSize().height - 190));
 			}
 			public void componentMoved(ComponentEvent arg0)
 			{
@@ -288,7 +281,7 @@ public class PanelCommandSelection extends JPanel
 
 	public String generateCommand()
 	{
-		return panelOptions.generateCommand();
+		return CommandGenerator.opt.selectedCommand.generate(tabOptions);
 	}
 
 	private void generator()
@@ -314,7 +307,7 @@ public class PanelCommandSelection extends JPanel
 		CommandGenerator.opt.selectedCommand = selected;
 		comboboxCommand.setSelectedItem(CommandGenerator.opt.selectedCommand.getId());
 
-		OptionsPanel panelNew = selected.getOptionsPanel();
+		OptionsTab panelNew = selected.generateOptionsTab();
 		Map<String, Object> data = selected.generateSetup(field.getText());
 		if (data != null)
 		{
@@ -324,21 +317,17 @@ public class PanelCommandSelection extends JPanel
 	}
 
 	/** Changes the command panel. */
-	public void setOptionsPanel(OptionsPanel panel)
+	public void setOptionsPanel(OptionsTab panel)
 	{
-		remove(scrollpane);
-		panelOptions = panel;
-
-		scrollpane = new JScrollPane(panelOptions);
-		scrollpane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GREEN), Lang.get("GENERAL:options")));
-		scrollpane.setPreferredSize(new Dimension(getSize().width - 50, getSize().height - 180));
-		scrollpane.getVerticalScrollBar().setUnitIncrement(20);
-		scrollpane.getHorizontalScrollBar().setUnitIncrement(20);
+		tabOptions.setVisible(false);
+		remove(tabOptions);
+		tabOptions = panel;
+		tabOptions.setPreferredSize(new Dimension(getSize().width - 50, getSize().height - 180));
 
 		gbc.gridx = 0;
 		gbc.gridy = 7;
 		gbc.gridwidth = 4;
-		add(scrollpane, gbc);
+		add(tabOptions, gbc);
 		gbc.gridwidth = 1;
 
 		CommandGenerator.gui.setVisible(true);
@@ -348,18 +337,17 @@ public class PanelCommandSelection extends JPanel
 	public void setSelectedCommand(Command command)
 	{
 		comboboxCommand.setSelectedItem(command.getId());
-		setOptionsPanel(command.getOptionsPanel());
+		setOptionsPanel(command.generateOptionsTab());
 	}
 
 	public void updateLang()
 	{
 		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), Lang.get("GUI:command")));
-		scrollpane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GREEN), Lang.get("GENERAL:options")));
 		labelChooseCommand.updateLang();
 		labelWarning.updateLang();
 		buttonCopy.updateLang();
 		buttonGenerate.updateLang();
-		panelOptions.updateLang();
+		tabOptions.updateLang();
 	}
 
 }

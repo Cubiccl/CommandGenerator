@@ -43,7 +43,7 @@ public class ParticleOptionsPanel extends OptionsPanel
 	{
 		checkBoxEntity = new CCheckBox(CGConstants.DATAID_CHECK, "GUI:particle.target");
 
-		panelParticle = new ParticleSelectionPanel("GUI:particle");
+		panelParticle = new ParticleSelectionPanel();
 		panelCoord1 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_START, "GUI:particle.start", true, false);
 		panelCoord2 = new CoordSelectionPanel(CGConstants.PANELID_COORDS_END, "GUI:particle.end", false, false);
 		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
@@ -70,7 +70,7 @@ public class ParticleOptionsPanel extends OptionsPanel
 		Particle particle = panelParticle.generateParticle();
 		Coordinates coord1 = panelCoord1.generateCoord();
 		Coordinates coord2 = panelCoord2.generateCoord();
-		int speed = panelParticle.getSpeed();
+		int speed = 0;
 
 		if (particle == null || coord1 == null || coord2 == null || speed < 0) return null;
 
@@ -80,9 +80,9 @@ public class ParticleOptionsPanel extends OptionsPanel
 
 		command += " " + coord1.commandStructure() + " " + coord2.commandStructure() + " " + Integer.toString(speed);
 
-		if (panelParticle.getIsCount() || checkBoxEntity.isSelected())
+		if (checkBoxEntity.isSelected())
 		{
-			int count = panelParticle.getCount();
+			int count = 0;
 			if (count < 0) return null;
 			command += " " + Integer.toString(count);
 		}

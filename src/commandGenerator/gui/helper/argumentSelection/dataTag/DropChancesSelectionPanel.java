@@ -75,12 +75,12 @@ public class DropChancesSelectionPanel extends HelperPanel
 			if (testHa < 0.0f || testHe < 0.0f || testC < 0.0f || testL < 0.0f || testF < 0.0f || testHa > 1.0f || testHe > 1.0f || testC > 1.0f
 					|| testL > 1.0f || testF > 1.0f)
 			{
-				DisplayHelper.warningInteger(0, 1);
+				DisplayHelper.warningBounds(0, 1);
 				return null;
 			}
 		} catch (Exception ex)
 		{
-			DisplayHelper.warningInteger(0, 1);
+			DisplayHelper.warningBounds(0, 1);
 			return null;
 		}
 

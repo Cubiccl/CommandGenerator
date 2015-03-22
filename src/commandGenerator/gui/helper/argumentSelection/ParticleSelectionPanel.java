@@ -1,17 +1,11 @@
 package commandGenerator.gui.helper.argumentSelection;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Map;
-
-import javax.swing.JTextField;
 
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Particle;
 import commandGenerator.arguments.objects.Registry;
-import commandGenerator.gui.helper.components.CCheckBox;
-import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.button.HelpButton;
 import commandGenerator.gui.helper.components.combobox.CComboBox;
 import commandGenerator.gui.helper.components.icomponent.IBox;
@@ -24,25 +18,20 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 {
 
 	private HelpButton buttonHelp;
-	private CCheckBox checkboxCount;
 	private CComboBox comboboxParticle;
-	private CEntry entrySpeed;
 	private BlockSelectionPanel panelBlock;
 	private ItemSelectionPanel panelItem;
-	private JTextField textfieldCount;
 
-	public ParticleSelectionPanel(String title)
+	public ParticleSelectionPanel()
 	{
-		super(CGConstants.PANELID_PARTICLE, title);
+		super(CGConstants.PANELID_PARTICLE, "GENERAL:particle");
 	}
 
 	@Override
 	protected void addComponents()
 	{
 		addLine(comboboxParticle, buttonHelp);
-		add(entrySpeed);
-		addLine(checkboxCount, textfieldCount);
-		addLine(panelBlock, panelItem);
+		addLine(false, panelBlock, panelItem);
 	}
 
 	@Override
@@ -51,14 +40,7 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 		ObjectBase[] list = Registry.getObjectList(CGConstants.OBJECT_PARTICLE);
 		buttonHelp = new HelpButton(((Particle) list[0]).getDescription(), list[0].getName());
 
-		textfieldCount = new JTextField(15);
-		textfieldCount.setEnabled(false);
-
-		entrySpeed = new CEntry(CGConstants.DATAID_NONE, "GUI:particle.speed", "1");
-
-		checkboxCount = new CCheckBox(CGConstants.DATAID_NONE, "GUI:particle.count");
-
-		comboboxParticle = new CComboBox(CGConstants.PANELID_PARTICLE, "GUI:particle", list, this);
+		comboboxParticle = new CComboBox(this.getPanelId(), "GENERAL:particle", Registry.getObjectList(CGConstants.OBJECT_PARTICLE), this);
 
 		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:particle.block", Registry.getList(CGConstants.LIST_BLOCKS), false);
 		panelBlock.setVisible(false);
@@ -68,15 +50,7 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 
 	@Override
 	protected void createListeners()
-	{
-		checkboxCount.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				textfieldCount.setEnabled(checkboxCount.isSelected());
-			}
-		});
-	}
+	{}
 
 	public Particle generateParticle()
 	{
@@ -84,39 +58,10 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 		return (Particle) comboboxParticle.getValue();
 	}
 
-	public int getCount()
-	{
-
-		if (!checkboxCount.isSelected()) return 0;
-
-		String count = textfieldCount.getText();
-
-		try
-		{
-			int flag = Integer.parseInt(count);
-			if (flag <= 0)
-			{
-				DisplayHelper.warningPositiveInteger();
-				return 0;
-			}
-		} catch (Exception ex)
-		{
-			DisplayHelper.warningPositiveInteger();
-			return 0;
-		}
-
-		return Integer.parseInt(count);
-	}
-
 	public int getDamage()
 	{
 		if (((Particle) comboboxParticle.getValue()).getParticleType() == Particle.BLOCK) return panelBlock.getDamage();
 		else return panelItem.getDamage();
-	}
-
-	public boolean getIsCount()
-	{
-		return checkboxCount.isSelected();
 	}
 
 	public Item getItem()
@@ -132,36 +77,10 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 		return Integer.toString(value);
 	}
 
-	public int getSpeed()
-	{
-		String speed = entrySpeed.getText();
-
-		try
-		{
-			int flag = Integer.parseInt(speed);
-			if (flag < 0)
-			{
-				DisplayHelper.warningPositiveInteger();
-				return -1;
-			}
-		} catch (Exception ex)
-		{
-			DisplayHelper.warningPositiveInteger();
-			return -1;
-		}
-
-		return Integer.parseInt(speed);
-	}
-
 	@Override
 	public void setupFrom(Map<String, Object> data)
 	{
 		super.setupFrom(data);
-		int[] opt = (int[]) data.get(CGConstants.DATAID_VALUE);
-		entrySpeed.setTextField(Integer.toString(opt[0]));
-		checkboxCount.setSelected(opt[1] != -1);
-		textfieldCount.setEnabled(opt[1] != -1);
-		if (opt[1] != -1) textfieldCount.setText(Integer.toString(opt[1]));
 	}
 
 	@Override
@@ -172,4 +91,12 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 		buttonHelp.setData(((Particle) comboboxParticle.getValue()).getDescription(), comboboxParticle.getValue().getName());
 	}
 
+	public String generateParticleId()
+	{
+		Particle particle = (Particle) comboboxParticle.getValue();
+		if (particle == null) return null;
+		if (particle.getParticleType() == Particle.BLOCK || particle.getParticleType() == Particle.ITEM) return particle.getId() + "_"
+				+ this.getItemProperties(particle.getParticleType() == Particle.ITEM);
+		return particle.getId();
+	}
 }

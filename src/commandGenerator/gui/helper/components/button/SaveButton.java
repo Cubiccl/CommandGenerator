@@ -35,6 +35,7 @@ public class SaveButton extends CButton
 	{
 		Object object = parent.getObjectToSave();
 		String name = DisplayHelper.askObjectName(type);
+		if (name == null) return;
 		SavedObjects.add(name, type, object);
 		DisplayHelper.showMessage(new JLabel(Lang.get("GENERAL:save_success").replaceAll("<item>", name)), Lang.get("GENERAL:save"));
 	}

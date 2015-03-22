@@ -113,6 +113,10 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 
 	public TagCompound getBlockTag()
 	{
+		if (!data) return new TagCompound("BlockEntityTag") {
+			public void askValue()
+			{}
+		};
 		return panelData.getNbtTags("BlockEntityTag");
 	}
 
@@ -202,6 +206,17 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 	public Object getObjectToSave()
 	{
 		return getItemStack();
+	}
+
+	public ItemStack getBlockAsItemStack()
+	{
+		Item block = generateBlock();
+		int damage = getDamage();
+		TagCompound tag = getBlockTag();
+
+		if (block == null) return null;
+
+		return new ItemStack(block, damage, -1, tag, -1);
 	}
 
 }

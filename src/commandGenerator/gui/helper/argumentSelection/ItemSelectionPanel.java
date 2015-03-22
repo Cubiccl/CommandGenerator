@@ -152,11 +152,16 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 
 	public TagCompound getItemTag()
 	{
+		if (!this.withData) return new TagCompound("tag") {
+			public void askValue()
+			{}
+		};
 		return panelData.getNbtTags("tag");
 	}
 
 	public int getSlot()
 	{
+		if (!this.slot) return -1;
 		return (int) spinnerSlot.getValue();
 	}
 

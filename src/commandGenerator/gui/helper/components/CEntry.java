@@ -23,7 +23,8 @@ public class CEntry extends JPanel implements CComponent
 		this.defaultValue = defaultValue;
 
 		label = new CLabel(title);
-		text = new JTextField(defaultValue);
+		text = new JTextField(13);
+		text.setText(defaultValue);
 
 		add(label);
 		add(text);
@@ -65,6 +66,11 @@ public class CEntry extends JPanel implements CComponent
 	public void updateLang()
 	{
 		label.updateLang();
+	}
+
+	public void setDefaultValue(String defaultValue)
+	{
+		this.defaultValue = defaultValue;
 	}
 
 }

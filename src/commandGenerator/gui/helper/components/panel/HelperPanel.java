@@ -80,9 +80,12 @@ public abstract class HelperPanel extends JPanel implements CComponent
 
 	/** Adds a line of Components to the Panel.
 	 * 
+	 * @param split
+	 *            - <i>boolean</i> - Whether to sperate them or not.
+	 * 
 	 * @param components
 	 *            - <i>Components...</i> - The Components to add. */
-	public void addLine(Component... components)
+	public void addLine(boolean split, Component... components)
 	{
 		JPanel panel = new JPanel(new GridBagLayout());
 		GridBagConstraints gbc2 = new GridBagConstraints();
@@ -94,7 +97,7 @@ public abstract class HelperPanel extends JPanel implements CComponent
 		{
 			panel.add(component, gbc2);
 			if (component instanceof CComponent) this.components.add((CComponent) component);
-			gbc2.gridx++;
+			if (split) gbc2.gridx++;
 			if (component.getPreferredSize().height > height) height = component.getPreferredSize().height + MIN;
 			width += component.getPreferredSize().width;
 		}
@@ -102,6 +105,15 @@ public abstract class HelperPanel extends JPanel implements CComponent
 		panel.setPreferredSize(new Dimension(width, height));
 		panel.setMinimumSize(new Dimension(width, height));
 		add(panel);
+	}
+
+	/** Adds a line of Components to the Panel.
+	 * 
+	 * @param components
+	 *            - <i>Components...</i> - The Components to add. */
+	public void addLine(Component... components)
+	{
+		addLine(true, components);
 	}
 
 	/** Adds a stack of Components, they will overlap each other.
@@ -144,18 +156,16 @@ public abstract class HelperPanel extends JPanel implements CComponent
 	public void reset()
 	{
 		for (int i = 0; i < components.size(); i++)
-		{
 			components.get(i).reset();
-		}
+
 	}
 
 	public void setEnabledContent(boolean enable)
 	{
 		setEnabled(enable);
 		for (int i = 0; i < components.size(); i++)
-		{
 			components.get(i).setEnabledContent(enable);
-		}
+
 	}
 
 	/** Setups details needed to create the GUI. */
@@ -179,9 +189,12 @@ public abstract class HelperPanel extends JPanel implements CComponent
 
 		for (Component component : getComponents())
 		{
-			if (component.getPreferredSize().width >= width - MIN) width = component.getPreferredSize().width + MIN;
-			if (component.getMinimumSize().width >= width - MIN) width = component.getMinimumSize().width + MIN;
-			height += component.getPreferredSize().height;
+			if (component.isVisible())
+			{
+				if (component.getPreferredSize().width >= width - MIN) width = component.getPreferredSize().width + MIN;
+				if (component.getMinimumSize().width >= width - MIN) width = component.getMinimumSize().width + MIN;
+				height += component.getPreferredSize().height;
+			}
 		}
 
 		setPreferredSize(new Dimension(width, height));
@@ -193,9 +206,7 @@ public abstract class HelperPanel extends JPanel implements CComponent
 	{
 		updateTitle();
 		for (int i = 0; i < components.size(); i++)
-		{
 			components.get(i).updateLang();
-		}
 	}
 
 	/** Updates the title when changing language. */

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import commandGenerator.arguments.command.Command;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
@@ -120,7 +121,7 @@ public class Registry
 		if (object == null) object = objects.get(CGConstants.OBJECT_PARTICLE).get(id);
 		if (object == null) object = objects.get(CGConstants.OBJECT_SOUND).get(id);
 
-		//if (object == null) DisplayHelper.log(id + " isn't the ID of any object.");
+		// if (object == null) DisplayHelper.log(id + " isn't the ID of any object.");
 		return object;
 	}
 

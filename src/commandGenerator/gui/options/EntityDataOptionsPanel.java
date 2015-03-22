@@ -20,7 +20,7 @@ public class EntityDataOptionsPanel extends OptionsPanel
 
 	public EntityDataOptionsPanel(String command)
 	{
-		super(command);
+		//super(command);
 	}
 
 	@Override

@@ -14,13 +14,11 @@ import commandGenerator.gui.helper.components.panel.OptionsPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
+import commandGenerator.main.Resources;
 
 @SuppressWarnings("serial")
 public class GameruleOptionsPanel extends OptionsPanel
 {
-
-	public static final String[] gamerules = { "commandBlockOutput", "doDaylightCycle", "doFireTick", "doMobLoot", "doMobSpawning", "doTileDrops",
-			"keepInventory", "mobGriefing", "naturalRegeneration", "logAdminCommands", "randomTickSpeed", "sendCommandFeedback", "showDeathMessages" };
 
 	private HelpButton buttonHelp;
 	private JComboBox<String> comboboxGamerule, comboboxTrueFalse;
@@ -49,7 +47,7 @@ public class GameruleOptionsPanel extends OptionsPanel
 
 		buttonHelp = new HelpButton(Lang.get("HELP:gamerule.commandBlockOutput"), "commandBlockOutput");
 
-		comboboxGamerule = new JComboBox<String>(gamerules);
+		comboboxGamerule = new JComboBox<String>(Resources.gamerules);
 		comboboxGamerule.setPreferredSize(new Dimension(200, 20));
 		comboboxGamerule.setMinimumSize(new Dimension(200, 20));
 		comboboxTrueFalse = new JComboBox<String>(new String[] { Lang.get("GENERAL:true"), Lang.get("GENERAL:false") });
@@ -102,9 +100,9 @@ public class GameruleOptionsPanel extends OptionsPanel
 	@Override
 	public void setupFrom(Map<String, Object> data)
 	{
-		for (int i = 0; i < gamerules.length; i++)
+		for (int i = 0; i < Resources.gamerules.length; i++)
 		{
-			if (gamerules[i].equals(data.get(CGConstants.DATAID_MODE))) comboboxGamerule.setSelectedIndex(i);
+			if (Resources.gamerules[i].equals(data.get(CGConstants.DATAID_MODE))) comboboxGamerule.setSelectedIndex(i);
 		}
 		if (data.get(CGConstants.DATAID_MODE).equals("randomTickSpeed")) textfieldTickSpeed.setText((String) data.get(CGConstants.DATAID_VALUE));
 		else if (data.get(CGConstants.DATAID_VALUE).equals("true")) comboboxTrueFalse.setSelectedIndex(0);
