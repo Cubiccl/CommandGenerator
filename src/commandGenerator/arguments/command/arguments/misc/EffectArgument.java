@@ -1,10 +1,13 @@
 package commandGenerator.arguments.command.arguments.misc;
 
 import java.awt.Component;
+import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.objects.Effect;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.argumentSelection.EffectSelectionPanel;
+import commandGenerator.main.CGConstants;
 
 public class EffectArgument extends Argument
 {

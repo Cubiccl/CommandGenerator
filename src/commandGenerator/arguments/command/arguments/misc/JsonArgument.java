@@ -1,6 +1,7 @@
 package commandGenerator.arguments.command.arguments.misc;
 
 import java.awt.Component;
+import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.tags.TagList;
@@ -42,6 +43,12 @@ public class JsonArgument extends Argument
 	public boolean isUsed()
 	{
 		return true;
+	}
+
+	@Override
+	public boolean matches(List<String> data)
+	{
+		return data.get(0).startsWith("{") && data.get(0).endsWith("}");
 	}
 
 }

@@ -42,8 +42,7 @@ public class CommandArgument extends Argument
 		final PanelCommandSelection panelCommand = new PanelCommandSelection(false);
 		panelCommand.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), Lang.get("GUI:execute.command")));
 		panelCommand.setPreferredSize(new Dimension(1100, 650));
-		// panelCommand.setSelectedCommand(Registry.getCommandFromId(storedCommand.split(" ")[0]));
-		// panelCommand.tabOptions.setupFrom(Registry.getCommandFromId(storedCommand.split(" ")[0]).generateSetup(storedCommand));
+		// TODO Generate From
 
 		// Setting the JDialog resizable
 		panelCommand.addHierarchyListener(new HierarchyListener() {
@@ -61,7 +60,7 @@ public class CommandArgument extends Argument
 			}
 		});
 		JOptionPane.showMessageDialog(null, panelCommand, Lang.get("GUI:execute.select"), JOptionPane.QUESTION_MESSAGE);
-		return panelCommand.generateCommand();
+		return panelCommand.generate();
 	}
 
 	@Override

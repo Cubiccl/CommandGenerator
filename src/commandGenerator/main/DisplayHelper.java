@@ -132,8 +132,7 @@ public class DisplayHelper
 	public static void warningBounds(double min, double max)
 	{
 		log(Lang.get("WARNING:number_bound").replaceAll("<min>", String.valueOf(min)).replaceAll("<max>", String.valueOf(max)));
-		JOptionPane.showMessageDialog(null,
-				Lang.get("WARNING:number_bound").replaceAll("<min>", String.valueOf(min)).replaceAll("<max>", String.valueOf(max)),
+		JOptionPane.showMessageDialog(null, Lang.get("WARNING:number_bound").replaceAll("<min>", String.valueOf(min)).replaceAll("<max>", String.valueOf(max)),
 				Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
 
 	}
@@ -170,6 +169,32 @@ public class DisplayHelper
 			if (name == null) return null;
 		} while (name.contains(" ") || name.equals("") || SavedObjects.getList(type).containsKey(name));
 		return name;
+	}
+
+	public static String[] splitCommand(String command)
+	{
+		List<String> elements = new ArrayList<String>();
+		String[] base = command.split(" ");
+
+		int realIndex = 0;
+		boolean inString = false;
+		for (int i = 0; i < base.length; i++)
+		{
+			for (int j = 0; j < base[i].length(); j++)
+			{
+
+				if (base[i].charAt(j) == '"')
+				{
+					if (j == 0) inString = !inString;
+					else if (base[i].charAt(j - 1) != '\\') inString = !inString;
+				}
+			}
+			if (elements.size() <= realIndex) elements.add(base[i]);
+			else elements.set(realIndex, elements.get(realIndex) + " " + base[i]);
+			if (!inString) realIndex++;
+		}
+
+		return elements.toArray(new String[0]);
 	}
 
 }

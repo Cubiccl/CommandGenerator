@@ -1,9 +1,11 @@
 package commandGenerator.arguments.command.arguments;
 
 import java.awt.Component;
+import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
+import commandGenerator.main.DisplayHelper;
 
 public class ChoiceArgument extends Argument
 {
@@ -53,6 +55,14 @@ public class ChoiceArgument extends Argument
 	{
 		this.translate = false;
 		return this;
+	}
+
+	@Override
+	public boolean matches(List<String> data)
+	{
+		for (String choice : this.choices) if (data.get(0).equals(choice)) return true;
+		DisplayHelper.log(data.get(0) + " is not a valid argument.");
+		return false;
 	}
 
 }

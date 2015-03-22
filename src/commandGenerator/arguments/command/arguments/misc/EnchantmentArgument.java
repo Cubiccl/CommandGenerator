@@ -1,10 +1,13 @@
 package commandGenerator.arguments.command.arguments.misc;
 
 import java.awt.Component;
+import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.objects.Enchantment;
+import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.argumentSelection.EnchantSelectionPanel;
+import commandGenerator.main.CGConstants;
 
 public class EnchantmentArgument extends Argument
 {
@@ -40,6 +43,19 @@ public class EnchantmentArgument extends Argument
 	public boolean isUsed()
 	{
 		return true;
+	}
+
+	@Override
+	public boolean matches(List<String> data)
+	{
+		try
+		{
+			Integer.parseInt(data.get(1));
+		} catch (Exception e)
+		{
+			return false;
+		}
+		return Registry.exists(data.get(0), CGConstants.OBJECT_ENCHANT);
 	}
 
 }

@@ -1,6 +1,7 @@
 package commandGenerator.arguments.command;
 
 import java.awt.Component;
+import java.util.List;
 
 public abstract class Argument
 {
@@ -28,7 +29,7 @@ public abstract class Argument
 		this.isCompulsery = isCompulsery;
 		this.length = length;
 		this.isGuiInit = false;
-		this.maxLength = -1;
+		this.maxLength = length;
 	}
 
 	public String getId()
@@ -73,4 +74,11 @@ public abstract class Argument
 	public abstract String generateCommand();
 
 	public abstract boolean isUsed();
+
+	public int getMaximumLength()
+	{
+		return this.maxLength;
+	}
+
+	public abstract boolean matches(List<String> data);
 }

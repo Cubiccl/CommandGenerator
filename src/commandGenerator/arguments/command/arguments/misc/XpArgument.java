@@ -1,6 +1,7 @@
 package commandGenerator.arguments.command.arguments.misc;
 
 import java.awt.Component;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -40,6 +41,14 @@ public class XpArgument extends IntArgument
 		if (value == null) return null;
 		if (this.box.isSelected()) return value + "L";
 		return value;
+	}
+
+	@Override
+	public boolean matches(List<String> data)
+	{
+		String value = data.get(0);
+		if (value.endsWith("L")) data.set(0, value.substring(0, value.length() - 1));
+		return super.matches(data);
 	}
 
 }

@@ -1,6 +1,7 @@
 package commandGenerator.arguments.command.arguments;
 
 import java.awt.Component;
+import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
@@ -38,6 +39,12 @@ public class TargetArgument extends Argument
 
 	@Override
 	public boolean isUsed()
+	{
+		return true;
+	}
+
+	@Override
+	public boolean matches(List<String> data)
 	{
 		return true;
 	}

@@ -1,6 +1,7 @@
 package commandGenerator.arguments.command.arguments;
 
 import java.awt.Component;
+import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.objects.Entity;
@@ -70,6 +71,14 @@ public class EntityArgument extends Argument implements INBTArgument
 	public TagCompound getNBT()
 	{
 		return this.panel.getEntityTag();
+	}
+
+	@Override
+	public boolean matches(List<String> data)
+	{
+		boolean ok = true;
+		if (this.display[0]) ok = Registry.exists(data.get(0), CGConstants.OBJECT_ENTITY);
+		return ok;
 	}
 
 }

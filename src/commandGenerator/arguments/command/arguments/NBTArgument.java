@@ -1,6 +1,7 @@
 package commandGenerator.arguments.command.arguments;
 
 import java.awt.Component;
+import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
 
@@ -43,6 +44,12 @@ public class NBTArgument extends Argument
 	public String getTarget()
 	{
 		return this.argId;
+	}
+
+	@Override
+	public boolean matches(List<String> data)
+	{
+		return data.get(0).startsWith("{") && data.get(0).endsWith("}");
 	}
 
 }

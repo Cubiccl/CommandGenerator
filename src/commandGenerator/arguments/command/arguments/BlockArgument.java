@@ -1,12 +1,14 @@
 package commandGenerator.arguments.command.arguments;
 
 import java.awt.Component;
+import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
+import commandGenerator.main.CGConstants;
 
 public class BlockArgument extends Argument implements INBTArgument
 {
@@ -27,7 +29,7 @@ public class BlockArgument extends Argument implements INBTArgument
 
 	@Override
 	public Component generateComponent()
-	{	
+	{
 		return this.panel;
 	}
 
@@ -74,6 +76,30 @@ public class BlockArgument extends Argument implements INBTArgument
 	public boolean isUsed()
 	{
 		return true;
+	}
+
+	@Override
+	public boolean matches(List<String> data)
+	{
+		boolean ok = true;
+		int index = 0;
+		if (this.display[0])
+		{
+			ok = Registry.exists(data.get(index), CGConstants.OBJECT_ITEM);
+			index++;
+		}
+		if (this.display[1])
+		{
+			try
+			{
+				Integer.parseInt(data.get(index));
+			} catch (Exception e)
+			{
+				ok = false;
+			}
+			index++;
+		}
+		return ok;
 	}
 
 }

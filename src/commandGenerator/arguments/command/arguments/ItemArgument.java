@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -101,6 +102,41 @@ public class ItemArgument extends Argument implements INBTArgument
 	public TagCompound getNBT()
 	{
 		return this.panel.getItemTag();
+	}
+
+	@Override
+	public boolean matches(List<String> data)
+	{
+		boolean ok = true;
+		int index = 0;
+		if (this.display[0])
+		{
+			ok = Registry.exists(data.get(index), CGConstants.OBJECT_ITEM) || Registry.exists("item_" + data.get(index), CGConstants.OBJECT_ITEM);
+			index++;
+		}
+		if (this.display[1])
+		{
+			try
+			{
+				Integer.parseInt(data.get(index));
+			} catch (Exception e)
+			{
+				ok = false;
+			}
+			index++;
+		}
+		if (this.display[2])
+		{
+			try
+			{
+				Integer.parseInt(data.get(index));
+			} catch (Exception e)
+			{
+				ok = false;
+			}
+			index++;
+		}
+		return ok;
 	}
 
 }

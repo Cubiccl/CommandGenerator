@@ -1,8 +1,10 @@
 package commandGenerator.arguments.command.arguments;
 
 import java.awt.Component;
+import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
+import commandGenerator.main.DisplayHelper;
 
 public class StaticArgument extends Argument
 {
@@ -34,6 +36,16 @@ public class StaticArgument extends Argument
 	public boolean isUsed()
 	{
 		return true;
+	}
+
+	@Override
+	public boolean matches(List<String> data)
+	{
+		if (!data.get(0).equals(this.value))
+		{
+			DisplayHelper.log(data.get(0) + " isn't a valid argument.");
+		}
+		return data.get(0).equals(this.value);
 	}
 
 }

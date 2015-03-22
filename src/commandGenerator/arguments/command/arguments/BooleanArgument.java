@@ -1,6 +1,7 @@
 package commandGenerator.arguments.command.arguments;
 
 import java.awt.Component;
+import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.gui.helper.components.CCheckBox;
@@ -48,6 +49,12 @@ public class BooleanArgument extends Argument
 		this.falseValue = falseValue;
 		this.trueValue = trueValue;
 		return this;
+	}
+
+	@Override
+	public boolean matches(List<String> data)
+	{
+		return data.get(0).equals(this.falseValue) || data.get(0).equals(this.trueValue);
 	}
 
 }

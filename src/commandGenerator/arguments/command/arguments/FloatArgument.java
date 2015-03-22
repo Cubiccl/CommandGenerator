@@ -3,6 +3,7 @@ package commandGenerator.arguments.command.arguments;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
@@ -102,6 +103,20 @@ public class FloatArgument extends Argument
 	public boolean isUsed()
 	{
 		return this.isCompulsery() || this.box.isSelected();
+	}
+
+	@Override
+	public boolean matches(List<String> data)
+	{
+		try
+		{
+			Integer.parseInt(data.get(0));
+		} catch (Exception e)
+		{
+			DisplayHelper.log(data.get(0) + " is not a valid number.");
+			return false;
+		}
+		return true;
 	}
 
 }

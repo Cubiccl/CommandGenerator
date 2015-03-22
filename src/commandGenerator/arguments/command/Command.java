@@ -1,12 +1,8 @@
 package commandGenerator.arguments.command;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.components.OptionsTab;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Generator;
 import commandGenerator.main.Lang;
 
 public enum Command
@@ -62,8 +58,8 @@ public enum Command
 
 	/** The Command's ID. */
 	private String id, structure;
-
 	private Structure[] structures;
+	private OptionsTab tab;
 
 	/** Creates a new Command
 	 * 
@@ -81,44 +77,21 @@ public enum Command
 	 * 
 	 * @param command
 	 *            - <i>String</i> - The command to use to generate all data */
-	public Map<String, Object> generateSetup(String command)
+	public void generateFrom(String command)
 	{
-		if (id.equals("achievement")) return Generator.genAchievement(command);
-		if (id.equals("blockdata")) return Generator.genBlockData(command);
-		if (id.equals("clear")) return Generator.genClear(command);
-		if (id.equals("clone")) return Generator.genClone(command);
-		if (id.equals("effect")) return Generator.genEffect(command);
-		if (id.equals("enchant")) return Generator.genEnchant(command);
-		if (id.equals("entitydata")) return Generator.genEntityData(command);
-		if (id.equals("execute")) return Generator.genExecute(command);
-		if (id.equals("fill")) return Generator.genFill(command);
-		if (id.equals("gamerule")) return Generator.genGamerule(command);
-		if (id.equals("give")) return Generator.genGive(command);
-		if (id.equals("kill")) return Generator.genKill(command);
-		if (id.equals("particle")) return Generator.genParticle(command);
-		if (id.equals("playsound")) return Generator.genPlaysound(command);
-		if (id.equals("replaceitem")) return Generator.genReplaceitem(command);
-		if (id.equals("scoreboard")) return Generator.genScoreboard(command);
-		if (id.equals("setblock")) return Generator.genSetblock(command);
-		if (id.equals("setworldspawn")) return Generator.genSetworldspawn(command);
-		if (id.equals("spawnpoint")) return Generator.genSpawnpoint(command);
-		if (id.equals("spreadplayers")) return Generator.genSpreadplayers(command);
-		if (id.equals("stats")) return Generator.genStats(command);
-		if (id.equals("summon")) return Generator.genSummon(command);
-		if (id.equals("tellraw")) return Generator.genTellraw(command);
-		if (id.equals("testfor")) return Generator.genEntityData(command);
-		if (id.equals("testforblock")) return Generator.genTestforblock(command);
-		if (id.equals("testforblocks")) return Generator.genTestforblocks(command);
-		if (id.equals("time")) return Generator.genTime(command);
-		if (id.equals("title")) return Generator.genTitle(command);
-		if (id.equals("tp")) return Generator.genTp(command);
-		if (id.equals("trigger")) return Generator.genTrigger(command);
-		if (id.equals("weather")) return Generator.genWeather(command);
-		if (id.equals("worldborder")) return Generator.genWorldborder(command);
-		if (id.equals("xp")) return Generator.genXp(command);
+		String[] arguments = DisplayHelper.splitCommand(command.substring(this.getId().length() + 1));
+		int matchingStructure = this.findMatchingStructure(arguments);
+		if (matchingStructure == -1) return;
+		this.tab.setSelectedIndex(matchingStructure);
+		this.structures[matchingStructure].generateFrom(arguments);
+	}
 
-		DisplayHelper.log("No generation setup was found for command /" + id);
-		return new HashMap<String, Object>();
+	private int findMatchingStructure(String[] arguments)
+	{
+		for (int i = 0; i < this.structures.length; i++)
+			if (this.structures[i].matches(arguments)) return i;
+		DisplayHelper.showWarning("WARNING:command.structure");
+		return -1;
 	}
 
 	/** Returns the Command's description */
@@ -130,25 +103,44 @@ public enum Command
 	/** Returns the Command's ID */
 	public String getId()
 	{
-		return id;
+		return this.id;
 	}
 
 	/** Returns the Panel to use to display the Command's options. */
-	public OptionsTab generateOptionsTab()
+	public OptionsTab getOptionsTab()
 	{
-		return new OptionsTab(structures);
+		return this.tab;
 	}
 
-	public String generate(OptionsTab tabOptions)
+	public String generate()
 	{
-		String command = this.structures[tabOptions.getSelectedIndex()].generateCommand(tabOptions.getPanel());
+		String command = this.getSelectedStructure().generateCommand();
 		if (command == null) return null;
-		return this.getId() + command;
+		return this.getId() + " " + command;
+	}
+
+	private Structure getSelectedStructure()
+	{
+		return this.structures[this.tab.getSelectedIndex()];
 	}
 
 	public String getStructure()
 	{
 		return this.structure;
+	}
+
+	public static Command identify(String command)
+	{
+		for (Command c : Registry.getCommands())
+			if (command.startsWith(c.getId())) return c;
+		DisplayHelper.showWarning("WARNING:command.wrong_id");
+		return null;
+	}
+
+	public static void initGui()
+	{
+		for (Command c : Registry.getCommands())
+			c.tab = new OptionsTab(c.structures);
 	}
 
 }

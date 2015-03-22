@@ -2,6 +2,7 @@ package commandGenerator;
 
 import java.awt.Frame;
 
+import commandGenerator.arguments.command.Command;
 import commandGenerator.arguments.objects.InitObjects;
 import commandGenerator.gui.MainWindow;
 import commandGenerator.main.DisplayHelper;
@@ -28,6 +29,7 @@ public class CommandGenerator
 		opt = new Settings();
 		Lang.initLang();
 		InitObjects.init();
+		Command.initGui();
 
 		// Creating the GUI
 		gui = new MainWindow();

@@ -2,6 +2,8 @@ package commandGenerator.arguments.command;
 
 import java.awt.Component;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 
@@ -197,9 +199,9 @@ public enum Structure
 		return Lang.get("RESOURCES:structure." + this.name);
 	}
 
-	public String generateCommand(HelperPanel selectedComponent)
+	public String generateCommand()
 	{
-		String command = " ";
+		String command = "";
 		boolean[] used = new boolean[this.arguments.length];
 		boolean found = false;
 		for (int i = used.length - 1; i >= 0; i--)
@@ -237,6 +239,52 @@ public enum Structure
 		}
 
 		return command;
+	}
+
+	public boolean matches(String[] testArguments)
+	{
+		if (this.getMinimumLength() > testArguments.length || this.getMaximumLength() < testArguments.length) return false;
+
+		int argIndex = 0;
+		for (int argument = 0; argument < this.arguments.length; argument++)
+		{
+			List<String> data = new ArrayList<String>();
+			for (int i = 0; i < this.arguments[i].getLength(); i++)
+			{
+				data.add(testArguments[argIndex]);
+				argIndex++;
+			}
+			if (argument == this.arguments.length - 1) while (argIndex < testArguments.length)
+			{
+				data.add(testArguments[argIndex]);
+				argIndex++;
+			}
+			if (!this.arguments[argument].matches(data)) return false;
+		}
+
+		return true;
+	}
+
+	private int getMinimumLength()
+	{
+		int length = 0;
+		for (Argument argument : this.arguments)
+			length += argument.getLength();
+		return length;
+	}
+
+	private int getMaximumLength()
+	{
+		int length = 0;
+		for (Argument argument : this.arguments)
+			length += argument.getMaximumLength();
+		return length;
+	}
+
+	public void generateFrom(String[] newArguments)
+	{
+		// TODO Auto-generated method stub
+
 	}
 
 }

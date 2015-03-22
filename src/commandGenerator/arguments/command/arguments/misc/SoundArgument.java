@@ -2,6 +2,7 @@ package commandGenerator.arguments.command.arguments.misc;
 
 import java.awt.Component;
 import java.awt.GridBagConstraints;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -63,6 +64,12 @@ public class SoundArgument extends Argument implements IBox
 	public boolean isUsed()
 	{
 		return true;
+	}
+
+	@Override
+	public boolean matches(List<String> data)
+	{
+		return Registry.exists(data.get(0), CGConstants.OBJECT_SOUND);
 	}
 
 }

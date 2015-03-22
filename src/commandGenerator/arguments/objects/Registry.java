@@ -61,7 +61,7 @@ public class Registry
 	}
 
 	/** Returns an array containing all registered commands. */
-	public static Command[] getCommandArray()
+	public static Command[] getCommands()
 	{
 		Command[] commandArray = commands.values().toArray(new Command[0]);
 		List<Command> commandList = new ArrayList<Command>();
@@ -238,6 +238,11 @@ public class Registry
 				return diff;
 			}
 		});
+	}
+
+	public static boolean exists(String id, byte objectType)
+	{
+		return objects.get(objectType).containsKey(id);
 	}
 
 }
