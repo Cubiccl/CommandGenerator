@@ -1,4 +1,4 @@
-package commandGenerator.gui.helper.commandSpecific.scoreboard;
+package commandGenerator.gui.helper.argumentSelection;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

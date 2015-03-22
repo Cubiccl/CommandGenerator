@@ -17,8 +17,7 @@ import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
-import commandGenerator.gui.helper.commandSpecific.scoreboard.PlayersOperationPanel;
-import commandGenerator.gui.helper.commandSpecific.scoreboard.TeamsOptionPanel;
+import commandGenerator.gui.helper.argumentSelection.TeamsOptionPanel;
 
 public class Generator
 {
@@ -589,8 +588,8 @@ public class Generator
 				data.put(CGConstants.PANELID_TARGET2, Target.generateFrom(elements[6]));
 				data.put(CGConstants.DATAID_NAME2, elements[7]);
 				data.put(CGConstants.DATAID_VALUE, 0);
-				for (int i = 0; i < PlayersOperationPanel.operationList.length; i++)
-					if (PlayersOperationPanel.operationList[i].equals(elements[5])) data.put(CGConstants.DATAID_VALUE, i);
+				for (int i = 0; i < Resources.operations.length; i++)
+					if (Resources.operations[i].equals(elements[5])) data.put(CGConstants.DATAID_VALUE, i);
 
 			}
 		}

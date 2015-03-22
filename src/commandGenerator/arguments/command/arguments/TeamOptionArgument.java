@@ -3,7 +3,7 @@ package commandGenerator.arguments.command.arguments;
 import java.awt.Component;
 
 import commandGenerator.arguments.command.Argument;
-import commandGenerator.gui.helper.commandSpecific.scoreboard.TeamsOptionPanel;
+import commandGenerator.gui.helper.argumentSelection.TeamsOptionPanel;
 
 public class TeamOptionArgument extends Argument
 {

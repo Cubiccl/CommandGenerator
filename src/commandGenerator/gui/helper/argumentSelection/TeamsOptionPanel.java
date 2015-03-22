@@ -1,4 +1,4 @@
-package commandGenerator.gui.helper.commandSpecific.scoreboard;
+package commandGenerator.gui.helper.argumentSelection;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,13 +8,14 @@ import javax.swing.JComboBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.combobox.LangComboBox;
+import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
 @SuppressWarnings("serial")
-public class TeamsOptionPanel extends ScoreboardPanel
+public class TeamsOptionPanel extends HelperPanel
 {
 	public static final String[] scoreboardTeamsOptionList = { "color", "friendlyfire", "seeFriendlyInvisibles", "nametagVisibility", "deathMessageVisibility" },
 			visibilityList = { "never", "hideForOtherTeams", "hideForOwnTeam", "always" };
@@ -25,7 +26,7 @@ public class TeamsOptionPanel extends ScoreboardPanel
 
 	public TeamsOptionPanel()
 	{
-		super();
+		super(CGConstants.PANELID_OPTIONS, "GENERAL:options");
 	}
 
 	@Override
@@ -63,7 +64,6 @@ public class TeamsOptionPanel extends ScoreboardPanel
 		});
 	}
 
-	@Override
 	public String generateText()
 	{
 
