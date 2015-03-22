@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import commandGenerator.arguments.command.Command;
 import commandGenerator.gui.helper.components.panel.SettingsPanel;
 
 public class Settings
@@ -19,13 +18,10 @@ public class Settings
 	private String language;
 	/** The previous version the program was launched with. */
 	public String previousVersion;
-	/** The selected command. */
-	public Command selectedCommand;
 
 	/** Creates new Settings. */
 	public Settings()
 	{
-		selectedCommand = Command.achievement;
 		language = FileHelper.getOption("lang");
 		previousVersion = FileHelper.getOption("version");
 		firstLaunch = !previousVersion.equals(Resources.versions[Resources.versions.length - 1]);

@@ -18,33 +18,38 @@ import commandGenerator.main.Lang;
 public class ChoiceComboBox extends JPanel implements CComponent
 {
 
+	private boolean translate, hasHelp;
 	private String name;
 	private String[] choices;
 	private JComboBox<String> box;
 	private HelpButton button;
 
-	public ChoiceComboBox(final String name, final String[] choices, boolean hasHelp)
+	public ChoiceComboBox(final String name, final String[] choices, boolean hasHelp, boolean translate)
 	{
 		super(new GridBagLayout());
 		this.name = name;
 		this.choices = choices;
+		this.hasHelp = hasHelp;
+		this.translate = translate;
 
-		if (hasHelp) this.button = new HelpButton(Lang.get("HELP:" + name + "." + choices[0]), Lang.get("RESOURCES:" + name + "." + choices[0]));
+		if (this.hasHelp)
+		{
+			this.button = new HelpButton(Lang.get("HELP:" + name + "." + choices[0]), choices[0]);
+		}
 
 		this.box = new JComboBox<String>(choices);
 		if (hasHelp) this.box.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				button.setData(Lang.get("HELP:" + name + "." + choices[box.getSelectedIndex()]),
-						Lang.get("RESOURCES:" + name + "." + choices[box.getSelectedIndex()]));
+				button.setData(Lang.get("HELP:" + name + "." + choices[box.getSelectedIndex()]), (String) box.getSelectedItem());
 			}
 		});
 		this.box.setMinimumSize(new Dimension(200, 20));
 		this.box.setPreferredSize(new Dimension(200, 20));
 
 		this.updateLang();
-		
+
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -79,9 +84,13 @@ public class ChoiceComboBox extends JPanel implements CComponent
 	{
 		String[] names = new String[this.choices.length];
 		for (int i = 0; i < names.length; i++)
-			names[i] = Lang.get("RESOURCES:" + this.name + "." + this.choices[i]);
+		{
+			if (this.translate) names[i] = Lang.get("RESOURCES:" + this.name + "." + this.choices[i]);
+			else names[i] = this.choices[i];
+		}
 
 		this.box.setModel(new JComboBox<String>(names).getModel());
+		if (this.hasHelp) button.setData(Lang.get("HELP:" + name + "." + choices[this.box.getSelectedIndex()]), (String) this.box.getSelectedItem());
 	}
 
 	public int getSelectedIndex()

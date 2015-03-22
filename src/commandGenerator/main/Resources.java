@@ -2,6 +2,8 @@ package commandGenerator.main;
 
 public class Resources
 {
+	public static final String[] operations = { "+=", "-=", "*=", "/=", "%=", "=", "<", ">", "><" };
+
 	public static final String[] stats = { "AffectedBlocks", "AffectedEntities", "AffectedItems", "QueryResult", "SuccessCount" };
 
 	public static final String[] gamerules = { "commandBlockOutput", "doDaylightCycle", "doFireTick", "doMobLoot", "doMobSpawning", "doTileDrops",

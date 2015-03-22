@@ -2,6 +2,8 @@ package commandGenerator.arguments.command;
 
 import java.awt.Component;
 
+import javax.swing.BorderFactory;
+
 import commandGenerator.arguments.command.arguments.AchievementArgument;
 import commandGenerator.arguments.command.arguments.BlockArgument;
 import commandGenerator.arguments.command.arguments.BooleanArgument;
@@ -26,6 +28,7 @@ import commandGenerator.arguments.command.arguments.StringArgument;
 import commandGenerator.arguments.command.arguments.TargetArgument;
 import commandGenerator.arguments.command.arguments.TeamOptionArgument;
 import commandGenerator.arguments.tags.TagCompound;
+import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
@@ -89,8 +92,12 @@ public enum Structure
 	scoreObjectiveRemove("scoreboard.objectives.remove", new StaticArgument("remove"), new StringArgument("objective", true)),
 	scorePlayerEnable("scoreboard.players.enable", new StaticArgument("enable"), new TargetArgument("target", true, CGConstants.ENTITIES_ALL),
 			new StringArgument("objective", true)),
-	scorePlayerOperation("scoreboard.players.operation", new StaticArgument("operation")), // TODO scoreboard players operation
-	scorePlayerReset("scoreboard.players.reset", new StaticArgument("reset"), new TargetArgument("target", true, CGConstants.ENTITIES_ALL)), // TODO Verify scoreboard players reset
+	scorePlayerOperation("scoreboard.players.operation", new StaticArgument("operation"), new TargetArgument("scoreboard.player1", true,
+			CGConstants.ENTITIES_ALL), new StringArgument("scoreboard.operation.player1", true), new ChoiceArgument("scoreboard.operation", true,
+			Resources.operations).setNoTranslation().addHelpButton(), new TargetArgument("scoreboard.player2", true, CGConstants.ENTITIES_ALL),
+			new StringArgument("scoreboard.operation.player2", true)),
+	scorePlayerReset("scoreboard.players.reset", new StaticArgument("reset"), new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new StringArgument(
+			"scoreboard.players.clear.objective", false)),
 	scorePlayerSet("scoreboard.players.set", new ChoiceArgument("mode", true, "add", "set", "remove"), new TargetArgument("target", true,
 			CGConstants.ENTITIES_ALL), new StringArgument("objective", true), new IntArgument("value", true)),
 	scorePlayerTest("scoreboard.players.test", new StaticArgument("test"), new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new StringArgument(
@@ -99,7 +106,7 @@ public enum Structure
 			new StringArgument("scoreboard.display", false)),
 	scoreTeamDelete("scoreboard.teams.delete", new ChoiceArgument("mode", true, "remove", "empty"), new StringArgument("scoreboard.team", true)),
 	scoreTeamManage("scoreboard.teams.manage", new ChoiceArgument("scoreboard.teams.mode", true, "join", "leave"), new StringArgument("scoreboard.team", true),
-			new TargetArgument("target", true, CGConstants.ENTITIES_ALL)), // TODO Verify order team join
+			new TargetArgument("target", true, CGConstants.ENTITIES_ALL)),
 	scoreTeamOption("scoreboard.teams.option", new StaticArgument("option"), new TeamOptionArgument()),
 	setblock("setblock", new CoordinatesArgument("block.coords", true, true, false), new BlockArgument("block.set", true, CGConstants.LIST_BLOCKS, true)
 			.setDisplay(true, true, false), new ChoiceArgument("setblock.mode", false, "destroy", "keep", "replace").addHelpButton(), new NBTArgument("nbt",
@@ -169,6 +176,9 @@ public enum Structure
 
 			protected void addComponents()
 			{
+				CLabel label = new CLabel("HELP:structure." + name, true);
+				label.setBorder(BorderFactory.createBevelBorder(0));
+				add(label);
 				for (Argument arg : arguments)
 				{
 					Component c = arg.getComponent();

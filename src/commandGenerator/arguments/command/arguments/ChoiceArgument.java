@@ -9,13 +9,14 @@ public class ChoiceArgument extends Argument
 {
 	private String[] choices;
 	private ChoiceComboBox box;
-	private boolean hasHelp;
+	private boolean hasHelp, translate;
 
 	public ChoiceArgument(String id, boolean isCompulsery, String... choices)
 	{
 		super(id, Argument.CHOICE, isCompulsery, 1);
 		this.choices = choices;
 		this.hasHelp = false;
+		this.translate = true;
 	}
 
 	@Override
@@ -33,9 +34,8 @@ public class ChoiceArgument extends Argument
 	@Override
 	public void initGui()
 	{
-		this.box = new ChoiceComboBox(this.getId(), this.choices, this.hasHelp);
+		this.box = new ChoiceComboBox(this.getId(), this.choices, this.hasHelp, this.translate);
 	}
-
 
 	public ChoiceArgument addHelpButton()
 	{
@@ -47,6 +47,12 @@ public class ChoiceArgument extends Argument
 	public boolean isUsed()
 	{
 		return true;
+	}
+
+	public ChoiceArgument setNoTranslation()
+	{
+		this.translate = false;
+		return this;
 	}
 
 }

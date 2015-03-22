@@ -31,8 +31,8 @@ public class TargetArgument extends Argument
 	@Override
 	public void initGui()
 	{
-		String title = "GENERAL:" + this.getId();
-		if (this.getId().startsWith("tp.")) title = "GUI:" + this.getId();
+		String title = "GUI:" + this.getId();
+		if (this.getId().startsWith("target")) title = "GENERAL:" + this.getId();
 		this.panel = new TargetSelectionPanel(this.getId(), title, this.mode);
 	}
 
