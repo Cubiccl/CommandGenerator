@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JLabel;
@@ -250,6 +251,26 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 	public Object getObjectToSave()
 	{
 		return getItemStack();
+	}
+
+	public void setItem(Item item)
+	{
+		this.comboboxId.setSelected(item.getId());
+	}
+
+	public void setDamage(int damage)
+	{
+		this.spinnerDamage.setSelected(damage);
+	}
+
+	public void setAmount(int parseInt)
+	{
+		this.spinnerCount.setSelected(parseInt);
+	}
+
+	public void setDataTags(List<Tag> list)
+	{
+		this.panelData.setupFrom(list);
 	}
 
 }

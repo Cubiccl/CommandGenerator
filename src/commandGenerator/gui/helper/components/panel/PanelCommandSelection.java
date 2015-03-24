@@ -327,4 +327,15 @@ public class PanelCommandSelection extends JPanel
 		tabOptions.updateLang();
 	}
 
+	public void setupFrom(String command)
+	{
+		if (command.startsWith("/")) command = command.substring(1);
+		Command newCommand = Command.identify(command);
+		if (newCommand == null) return;
+		
+		this.setSelectedCommand(newCommand);
+		newCommand.generateFrom(command);
+		this.setOptionsPanel(newCommand.getOptionsTab());
+	}
+
 }

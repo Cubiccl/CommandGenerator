@@ -48,4 +48,8 @@ public class StaticArgument extends Argument
 		return data.get(0).equals(this.value);
 	}
 
+	@Override
+	public void setupFrom(List<String> data)
+	{}
+
 }

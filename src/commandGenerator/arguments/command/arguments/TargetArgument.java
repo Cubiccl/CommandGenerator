@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 
 public class TargetArgument extends Argument
@@ -47,6 +48,12 @@ public class TargetArgument extends Argument
 	public boolean matches(List<String> data)
 	{
 		return true;
+	}
+
+	@Override
+	public void setupFrom(List<String> data)
+	{
+		this.panel.setupFrom(Target.generateFrom(data.get(0)));
 	}
 
 }

@@ -99,4 +99,9 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 				+ this.getItemProperties(particle.getParticleType() == Particle.ITEM);
 		return particle.getId();
 	}
+
+	public void setSelected(Particle particle)
+	{
+		this.comboboxParticle.setSelected(particle);
+	}
 }

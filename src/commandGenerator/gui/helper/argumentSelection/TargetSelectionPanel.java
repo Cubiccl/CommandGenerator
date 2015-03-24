@@ -380,28 +380,25 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 		}
 	}
 
-	@Override
-	public void setupFrom(Map<String, Object> data)
+	public void setupFrom(Target target)
 	{
-		super.setupFrom(data);
-		Target entity = (Target) data.get(getPanelId());
-		if (entity == null)
+		if (target == null)
 		{
 			reset();
 			return;
 		}
 
-		addedSelectors = entity.getSelectors();
+		addedSelectors = target.getSelectors();
 		if (addedSelectors == null) addedSelectors = new ArrayList<String[]>();
 		displaySelectors();
 
-		if (entity.getType() == Target.PLAYER)
+		if (target.getType() == Target.PLAYER)
 		{
 			boxEntities.setSelectedItem(Lang.get("GUI:selector.player"));
-			entryPlayer.setTextField(entity.display());
+			entryPlayer.setTextField(target.display());
 		}
 
-		else boxEntities.setSelectedItem(Target.selectorsTypes[entity.getType()]);
+		else boxEntities.setSelectedItem(Target.selectorsTypes[target.getType()]);
 	}
 
 	@Override

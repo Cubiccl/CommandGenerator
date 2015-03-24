@@ -66,4 +66,9 @@ public class AchievementSelectionPanel extends HelperPanel implements IBox
 		image.setIcon(((Achievement) achievementBox.getValue()).getTexture());
 	}
 
+	public void setSelected(Achievement achievement)
+	{
+		this.achievementBox.setSelected(achievement);
+	}
+
 }

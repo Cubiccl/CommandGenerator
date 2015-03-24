@@ -72,4 +72,10 @@ public class SoundArgument extends Argument implements IBox
 		return Registry.exists(data.get(0), CGConstants.OBJECT_SOUND);
 	}
 
+	@Override
+	public void setupFrom(List<String> data)
+	{
+		this.box.setSelected(Registry.getObjectFromId(data.get(0)));
+	}
+
 }

@@ -10,8 +10,10 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import commandGenerator.arguments.command.Argument;
+import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.Registry;
+import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
@@ -109,12 +111,12 @@ public class ItemArgument extends Argument implements INBTArgument
 	{
 		boolean ok = true;
 		int index = 0;
-		if (this.display[0])
+		if (this.display[0] && data.size() > index)
 		{
 			ok = Registry.exists(data.get(index), CGConstants.OBJECT_ITEM) || Registry.exists("item_" + data.get(index), CGConstants.OBJECT_ITEM);
 			index++;
 		}
-		if (this.display[1])
+		if (this.display[1] && data.size() > index)
 		{
 			try
 			{
@@ -125,7 +127,7 @@ public class ItemArgument extends Argument implements INBTArgument
 			}
 			index++;
 		}
-		if (this.display[2])
+		if (this.display[2] && data.size() > index)
 		{
 			try
 			{
@@ -137,6 +139,28 @@ public class ItemArgument extends Argument implements INBTArgument
 			index++;
 		}
 		return ok;
+	}
+
+	@Override
+	public void setupFrom(List<String> data)
+	{
+		int index = 0;
+		if (this.display[0] && data.size() > index)
+		{
+			this.panel.setItem((Item) Registry.getObjectFromId(data.get(index)));
+			index++;
+		}
+		if (this.display[1] && data.size() > index)
+		{
+			this.panel.setDamage(Integer.parseInt(data.get(index)));
+			index++;
+		}
+		if (this.display[2] && data.size() > index)
+		{
+			this.panel.setAmount(Integer.parseInt(data.get(index)));
+			index++;
+		}
+		if (this.display[3] && data.size() > index) this.panel.setDataTags(DataTags.generateListFrom(data.get(index)));
 	}
 
 }

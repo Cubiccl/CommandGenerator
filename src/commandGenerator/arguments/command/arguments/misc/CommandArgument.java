@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.HierarchyEvent;
 import java.awt.event.HierarchyListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
@@ -18,11 +19,13 @@ import commandGenerator.main.Lang;
 
 public class CommandArgument extends Argument
 {
+	private String storedCommand;
 
 	public CommandArgument()
 	{
 		super("execute.command", Argument.MISC, true, 1);
 		this.setMaximumLength(100000);
+		this.storedCommand = "/achievement give * @p";
 	}
 
 	@Override
@@ -42,7 +45,7 @@ public class CommandArgument extends Argument
 		final PanelCommandSelection panelCommand = new PanelCommandSelection(false);
 		panelCommand.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), Lang.get("GUI:execute.command")));
 		panelCommand.setPreferredSize(new Dimension(1100, 650));
-		// TODO Generate From
+		panelCommand.setupFrom(this.storedCommand);
 
 		// Setting the JDialog resizable
 		panelCommand.addHierarchyListener(new HierarchyListener() {
@@ -67,6 +70,23 @@ public class CommandArgument extends Argument
 	public boolean isUsed()
 	{
 		return true;
+	}
+
+	@Override
+	public boolean matches(List<String> data)
+	{
+		return data.size() > 0;
+	}
+
+	@Override
+	public void setupFrom(List<String> data)
+	{
+		this.storedCommand = "";
+		for (int i = 0; i < data.size(); i++)
+		{
+			if (i != 0) this.storedCommand += " ";
+			this.storedCommand += data.get(i);
+		}
 	}
 
 }

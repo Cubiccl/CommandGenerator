@@ -168,10 +168,8 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 		rotation = (boolean) details[1];
 	}
 
-	@Override
-	public void setupFrom(Map<String, Object> data)
+	public void setupFrom(Coordinates coords)
 	{
-		Coordinates coords = (Coordinates) data.get(getPanelId());
 		if (coords == null)
 		{
 			reset();
@@ -192,7 +190,7 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 		if (rotation)
 		{
 			checkboxRotation.setSelected(coords.getRotation());
-			panelRotation.setupFrom(data);
+			panelRotation.setupFrom(coords);
 		}
 	}
 

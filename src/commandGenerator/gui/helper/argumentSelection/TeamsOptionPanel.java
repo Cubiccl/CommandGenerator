@@ -83,4 +83,21 @@ public class TeamsOptionPanel extends HelperPanel
 		return entryTeam.getText() + " " + scoreboardTeamsOptionList[comboboxMode.getSelectedIndex()] + " " + value;
 	}
 
+	public void setupFrom(String mode, String value)
+	{
+		if (mode.equals("color"))
+		{
+			this.comboboxMode.setSelectedIndex(0);
+			for (int i = 0; i < Resources.colors.length; i++)
+				if (value.equals(Resources.colors[i])) this.comboboxValue.setSelectedIndex(i);
+		} else if (mode.equals("friendlyfire") || mode.equals("seeFriendlyInvisibles"))
+		{
+			this.comboboxMode.setSelectedIndex(1);
+			if (value.equals("false")) this.comboboxValue.setSelectedIndex(1);
+		} else {
+			this.comboboxMode.setSelectedIndex(2);
+			for (int i = 0; i < visibilityList.length; i++) if (value.equals(visibilityList[i])) this.comboboxValue.setSelectedIndex(i);
+		}
+	}
+
 }

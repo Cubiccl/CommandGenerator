@@ -99,4 +99,12 @@ public class CoordinatesArgument extends Argument
 		return true;
 	}
 
+	@Override
+	public void setupFrom(List<String> data)
+	{
+		Coordinates coords = Coordinates.generateFrom(data.get(0), data.get(1), data.get(2));
+		if (data.size() >= 5) coords = Coordinates.generateFromWithRot(data.get(0), data.get(1), data.get(2), Float.parseFloat(data.get(3)), Float.parseFloat(data.get(4)));
+		this.panelCoord.setupFrom(coords);
+	}
+
 }

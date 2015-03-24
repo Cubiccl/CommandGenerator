@@ -130,4 +130,9 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 		updateCombobox(object);
 	}
 
+	public void setupFrom(List<Tag> list)
+	{
+		this.displayer.setupFrom(list);
+	}
+
 }

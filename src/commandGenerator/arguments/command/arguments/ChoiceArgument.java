@@ -65,4 +65,10 @@ public class ChoiceArgument extends Argument
 		return false;
 	}
 
+	@Override
+	public void setupFrom(List<String> data)
+	{
+		this.box.setSelected(data.get(0));
+	}
+
 }

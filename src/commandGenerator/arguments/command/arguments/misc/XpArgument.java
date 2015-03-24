@@ -51,4 +51,14 @@ public class XpArgument extends IntArgument
 		return super.matches(data);
 	}
 
+	@Override
+	public void setupFrom(List<String> data)
+	{
+		String value = data.get(0);
+		this.box.setSelected(value.endsWith("L"));
+		if (value.endsWith("L")) value = value.substring(0, value.length() - 1);
+		data.set(0, value);
+		super.setupFrom(data);
+	}
+
 }

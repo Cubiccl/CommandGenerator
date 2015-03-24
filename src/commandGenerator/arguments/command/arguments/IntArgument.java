@@ -119,4 +119,11 @@ public class IntArgument extends Argument
 		return true;
 	}
 
+	@Override
+	public void setupFrom(List<String> data)
+	{
+		this.entry.setTextField(data.get(0));
+		this.box.setSelected(true);
+	}
+
 }

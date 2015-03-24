@@ -4,8 +4,10 @@ import java.awt.Component;
 import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
+import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.Registry;
+import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
 import commandGenerator.main.CGConstants;
@@ -83,12 +85,12 @@ public class BlockArgument extends Argument implements INBTArgument
 	{
 		boolean ok = true;
 		int index = 0;
-		if (this.display[0])
+		if (this.display[0] && data.size() > index)
 		{
 			ok = Registry.exists(data.get(index), CGConstants.OBJECT_ITEM);
 			index++;
 		}
-		if (this.display[1])
+		if (this.display[1] && data.size() > index)
 		{
 			try
 			{
@@ -100,6 +102,23 @@ public class BlockArgument extends Argument implements INBTArgument
 			index++;
 		}
 		return ok;
+	}
+
+	@Override
+	public void setupFrom(List<String> data)
+	{
+		int index = 0;
+		if (this.display[0] && data.size() > index)
+		{
+			this.panel.setBlock((Item) Registry.getObjectFromId(data.get(index)));
+			index++;
+		}
+		if (this.display[1] && data.size() > index)
+		{
+			this.panel.setDamage(Integer.parseInt(data.get(index)));
+			index++;
+		}
+		if (this.display[2] && data.size() > index) this.panel.setDataTags(DataTags.generateListFrom(data.get(index)));
 	}
 
 }

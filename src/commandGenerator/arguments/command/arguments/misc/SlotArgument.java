@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -121,6 +122,56 @@ public class SlotArgument extends Argument
 	public boolean isUsed()
 	{
 		return true;
+	}
+
+	@Override
+	public boolean matches(List<String> data)
+	{
+		return true;
+	}
+
+	@Override
+	public void setupFrom(List<String> data)
+	{
+		String slot = data.get(0);
+		boolean visible = true;
+		int index = 0, spin = 0;
+		String type = slot.split("\\.")[1];
+
+		if (type.equals("armor")) this.setupPanel(index, slot.split("\\.")[2], visible);
+
+		if (type.equals("enderchest") || (type.equals("horse") && slot.split("\\.")[2].equals("chest")) || type.equals("hotbar") || type.equals("inventory")
+				|| type.equals("villager"))
+		{
+			if (!type.equals("horse")) spin = Integer.parseInt(slot.split("\\.")[2]);
+			else spin = Integer.parseInt(slot.split("\\.")[3]);
+
+			if (type.equals("enderchest")) index = 1;
+			if (type.equals("horse")) index = 3;
+			if (type.equals("hotbar")) index = 5;
+			if (type.equals("inventory")) index = 6;
+			if (type.equals("villager")) index = 7;
+		}
+
+		if (type.equals("weapon") || (type.equals("horse") && !slot.split("\\.")[2].equals("chest")))
+		{
+			if (type.equals("weapon")) index = 8;
+			else
+			{
+				if (slot.split("\\.")[2].equals("armor")) index = 2;
+				if (slot.split("\\.")[2].equals("saddle")) index = 4;
+			}
+			visible = false;
+		}
+
+		this.setupPanel(index, spin, visible);
+	}
+
+	private void setupPanel(int index, Object spinnerValue, boolean spinnerVisible)
+	{
+		this.comboboxSlot.setSelectedIndex(index);
+		this.spinnerSlot.setValue(spinnerValue);
+		this.spinnerSlot.setVisible(spinnerVisible);
 	}
 
 }

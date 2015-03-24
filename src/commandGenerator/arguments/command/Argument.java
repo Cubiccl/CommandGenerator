@@ -81,4 +81,6 @@ public abstract class Argument
 	}
 
 	public abstract boolean matches(List<String> data);
+
+	public abstract void setupFrom(List<String> data);
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.objects.Entity;
 import commandGenerator.arguments.objects.Registry;
+import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.main.CGConstants;
@@ -79,6 +80,18 @@ public class EntityArgument extends Argument implements INBTArgument
 		boolean ok = true;
 		if (this.display[0]) ok = Registry.exists(data.get(0), CGConstants.OBJECT_ENTITY);
 		return ok;
+	}
+
+	@Override
+	public void setupFrom(List<String> data)
+	{
+		int index = 0;
+		if (this.display[0])
+		{
+			this.panel.setEntity((Entity) Registry.getObjectFromId(data.get(index)));
+			index++;
+		}
+		if (this.display[1]) this.panel.setDataTags(DataTags.generateListFrom(data.get(index)));
 	}
 
 }

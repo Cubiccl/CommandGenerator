@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JLabel;
@@ -14,6 +15,7 @@ import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.DataTags;
+import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.dataTag.NBTTagPanel;
 import commandGenerator.gui.helper.components.button.CButton;
@@ -217,6 +219,22 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 		if (block == null) return null;
 
 		return new ItemStack(block, damage, -1, tag, -1);
+	}
+
+	public void setDamage(int damage)
+	{
+		this.spinnerDamage.setSelected(damage);
+	}
+
+	public void setBlock(Item block)
+	{
+		this.comboboxId.setSelected(block.getId());
+	}
+
+	public void setDataTags(List<Tag> list)
+	{
+		if (list == null) return;
+		this.panelData.setupFrom(list);
 	}
 
 }

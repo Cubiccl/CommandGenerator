@@ -168,11 +168,9 @@ public class TagDisplayer extends JPanel implements CComponent
 		updateList(object);
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void setupFrom(Map<String, Object> data)
+	public void setupFrom(List<Tag> list)
 	{
-		if (data.get(id) != null) values = (List<Tag>) data.get(id);
+		this.values = list;
 		display();
 	}
 
@@ -216,4 +214,8 @@ public class TagDisplayer extends JPanel implements CComponent
 			if (tags[i] instanceof TagBlockEntity) ((TagBlockEntity) tags[i]).setItem((Item) object);
 
 	}
+
+	@Override
+	public void setupFrom(Map<String, Object> data)
+	{}
 }

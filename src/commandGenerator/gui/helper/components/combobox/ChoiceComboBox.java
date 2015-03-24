@@ -98,4 +98,9 @@ public class ChoiceComboBox extends JPanel implements CComponent
 		return this.box.getSelectedIndex();
 	}
 
+	public void setSelected(String selection)
+	{
+		for (int i = 0; i < choices.length; i++) if (choices[i].equals(selection)) this.box.setSelectedIndex(i);
+	}
+
 }

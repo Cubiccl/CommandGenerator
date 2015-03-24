@@ -26,4 +26,11 @@ public class BlockSlotArgument extends IntArgument
 		data.set(0, data.get(0).substring("container.slot.".length()));
 		return super.matches(data);
 	}
+
+	@Override
+	public void setupFrom(List<String> data)
+	{
+		data.set(0, data.get(0).substring("container.slot.".length()));
+		super.setupFrom(data);
+	}
 }

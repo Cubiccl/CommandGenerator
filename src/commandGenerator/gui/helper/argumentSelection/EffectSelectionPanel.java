@@ -103,11 +103,8 @@ public class EffectSelectionPanel extends HelperPanel implements IBox, ISave
 		return new Effect((EffectType) comboboxEffect.getValue(), amplifier - 1, Integer.parseInt(duration), !checkboxHideParticles.isSelected());
 	}
 
-	@Override
-	public void setupFrom(Map<String, Object> data)
+	public void setupFrom(Effect effect)
 	{
-		Effect effect = (Effect) data.get(getPanelId());
-
 		entryDuration.setTextField(Integer.toString(effect.getDuration()));
 		spinnerAmplifier.setSelected(effect.getAmplifier());
 		comboboxEffect.setSelected(effect.getType());

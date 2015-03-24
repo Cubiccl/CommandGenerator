@@ -52,4 +52,10 @@ public class NBTArgument extends Argument
 		return data.get(0).startsWith("{") && data.get(0).endsWith("}");
 	}
 
+	@Override
+	public void setupFrom(List<String> data)
+	{
+		// TODO NBT Setup
+	}
+
 }

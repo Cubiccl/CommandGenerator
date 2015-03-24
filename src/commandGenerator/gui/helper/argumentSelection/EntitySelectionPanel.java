@@ -153,4 +153,14 @@ public class EntitySelectionPanel extends HelperPanel implements IBox, ISave
 		return panelData.getTagList();
 	}
 
+	public void setEntity(Entity entity)
+	{
+		this.combobox.setSelected(entity);
+	}
+
+	public void setDataTags(List<Tag> list)
+	{
+		this.panelData.setupFrom(list);
+	}
+
 }

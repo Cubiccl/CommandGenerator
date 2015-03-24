@@ -76,4 +76,11 @@ public class StringArgument extends Argument
 		return true;
 	}
 
+	@Override
+	public void setupFrom(List<String> data)
+	{
+		this.box.setSelected(true);
+		this.entry.setTextField(data.get(0));
+	}
+
 }

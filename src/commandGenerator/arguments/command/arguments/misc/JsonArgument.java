@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
+import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.gui.helper.argumentSelection.dataTag.ListSelectionPanel;
 import commandGenerator.main.CGConstants;
@@ -49,6 +50,12 @@ public class JsonArgument extends Argument
 	public boolean matches(List<String> data)
 	{
 		return data.get(0).startsWith("{") && data.get(0).endsWith("}");
+	}
+
+	@Override
+	public void setupFrom(List<String> data)
+	{
+		this.panel.setList(DataTags.generateListFrom(data.get(0)));
 	}
 
 }

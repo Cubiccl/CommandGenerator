@@ -283,8 +283,22 @@ public enum Structure
 
 	public void generateFrom(String[] newArguments)
 	{
-		// TODO Auto-generated method stub
-
+		int argIndex = 0;
+		for (int argument = 0; argument < this.arguments.length; argument++)
+		{
+			List<String> data = new ArrayList<String>();
+			for (int i = 0; i < this.arguments[i].getLength(); i++)
+			{
+				data.add(newArguments[argIndex]);
+				argIndex++;
+			}
+			if (argument == this.arguments.length - 1) while (argIndex < newArguments.length)
+			{
+				data.add(newArguments[argIndex]);
+				argIndex++;
+			}
+			this.arguments[argument].setupFrom(data);
+		}
 	}
 
 }

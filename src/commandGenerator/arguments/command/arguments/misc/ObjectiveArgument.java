@@ -1,6 +1,7 @@
 package commandGenerator.arguments.command.arguments.misc;
 
 import java.awt.Component;
+import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.gui.helper.argumentSelection.ObjectiveSelectionPanel;
@@ -37,6 +38,18 @@ public class ObjectiveArgument extends Argument
 	public boolean isUsed()
 	{
 		return true;
+	}
+
+	@Override
+	public boolean matches(List<String> data)
+	{
+		return true;
+	}
+
+	@Override
+	public void setupFrom(List<String> data)
+	{
+		this.panel.setSelected(data.get(0));
 	}
 
 }

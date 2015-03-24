@@ -2,7 +2,6 @@ package commandGenerator.gui.helper.argumentSelection;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Map;
 
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
@@ -98,10 +97,8 @@ public class ObjectiveSelectionPanel extends HelperPanel
 		}
 	}
 
-	@Override
-	public void setupFrom(Map<String, Object> data)
+	public void setSelected(String criteria)
 	{
-		String criteria = (String) data.get(CGConstants.DATAID_VALUE);
 		for (int i = 0; i < criteriaList.length; i++)
 		{
 			if (criteria.startsWith(criteriaList[i]))

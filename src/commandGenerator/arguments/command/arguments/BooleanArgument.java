@@ -57,4 +57,10 @@ public class BooleanArgument extends Argument
 		return data.get(0).equals(this.falseValue) || data.get(0).equals(this.trueValue);
 	}
 
+	@Override
+	public void setupFrom(List<String> data)
+	{
+		this.box.setSelected(data.get(0).equals(trueValue));
+	}
+
 }

@@ -126,4 +126,15 @@ public class EnchantSelectionPanel extends HelperPanel implements IBox, ISave
 		return generateEnchantment();
 	}
 
+	public void setEnchantment(EnchantType enchant)
+	{
+		this.comboboxEnchant.setSelected(enchant);
+	}
+
+	public void setLevel(int level)
+	{
+		this.entryLevel.setTextField(String.valueOf(level));
+		this.spinnerLevel.setSelected(level);
+	}
+
 }

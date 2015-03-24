@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
+import commandGenerator.arguments.objects.EnchantType;
 import commandGenerator.arguments.objects.Enchantment;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.argumentSelection.EnchantSelectionPanel;
@@ -56,6 +57,13 @@ public class EnchantmentArgument extends Argument
 			return false;
 		}
 		return Registry.exists(data.get(0), CGConstants.OBJECT_ENCHANT);
+	}
+
+	@Override
+	public void setupFrom(List<String> data)
+	{
+		this.panel.setEnchantment((EnchantType) Registry.getObjectFromId(data.get(0)));
+		this.panel.setLevel(Integer.parseInt(data.get(1)));
 	}
 
 }

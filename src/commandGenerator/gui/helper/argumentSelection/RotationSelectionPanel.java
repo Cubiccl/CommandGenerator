@@ -2,7 +2,6 @@ package commandGenerator.gui.helper.argumentSelection;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
@@ -64,11 +63,9 @@ public class RotationSelectionPanel extends HelperPanel
 		spinnerY.setEnabled(enable);
 	}
 
-	@Override
-	public void setupFrom(Map<String, Object> data)
+	public void setupFrom(Coordinates coords)
 	{
-		Coordinates coord = (Coordinates) data.get(getPanelId());
-		float x = coord.getRot(Coordinates.X), y = coord.getRot(Coordinates.Y);
+		float x = coords.getRot(Coordinates.X), y = coords.getRot(Coordinates.Y);
 		spinnerX.setValue((int) x);
 		spinnerY.setValue((int) y);
 	}
