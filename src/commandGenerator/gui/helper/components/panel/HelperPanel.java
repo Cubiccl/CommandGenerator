@@ -6,7 +6,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -19,16 +18,14 @@ import commandGenerator.main.Lang;
 public abstract class HelperPanel extends JPanel implements CComponent
 {
 
+	private static final int MIN = 20;
 	/** List containing all of this Panel's elements. */
 	private List<CComponent> components;
 	/** Object to place the elements in the panel. */
 	private GridBagConstraints gbc;
-	/** The data ID of this Panel. */
-	private String id;
+
 	/** The language ID of this Panel's title. */
 	protected String title;
-
-	private static final int MIN = 20;
 
 	/** A basic JPanel.
 	 * 
@@ -40,10 +37,9 @@ public abstract class HelperPanel extends JPanel implements CComponent
 	 *            - The panel width.
 	 * @param height
 	 *            - The panel height. */
-	public HelperPanel(String id, String title, Object... details)
+	public HelperPanel(String title, Object... details)
 	{
 		super(new GridBagLayout());
-		this.id = id;
 		this.title = title;
 		if (!title.equals("GENERAL:options")) setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
 				Lang.get(title)));
@@ -65,6 +61,7 @@ public abstract class HelperPanel extends JPanel implements CComponent
 	 * 
 	 * @param component
 	 *            - <i>Component</i> - The component to add. */
+	@Override
 	public Component add(Component component)
 	{
 		super.add(component, gbc);
@@ -147,12 +144,7 @@ public abstract class HelperPanel extends JPanel implements CComponent
 	/** Creates all of this Panel's components' Listeners. */
 	protected abstract void createListeners();
 
-	/** Gets this Panel's data ID. */
-	public String getPanelId()
-	{
-		return id;
-	}
-
+	@Override
 	public void reset()
 	{
 		for (int i = 0; i < components.size(); i++)
@@ -160,6 +152,7 @@ public abstract class HelperPanel extends JPanel implements CComponent
 
 	}
 
+	@Override
 	public void setEnabledContent(boolean enable)
 	{
 		setEnabled(enable);
@@ -171,15 +164,7 @@ public abstract class HelperPanel extends JPanel implements CComponent
 	/** Setups details needed to create the GUI. */
 	protected void setupDetails(Object[] details)
 	{
-		System.out.println("This needs to be overriden! " + getPanelId());
-	}
-
-	public void setupFrom(Map<String, Object> data)
-	{
-		if (!isEnabled() || !isVisible()) return;
-		for (int i = 0; i < components.size(); i++)
-			components.get(i).setupFrom(data);
-
+		System.out.println("This needs to be overriden! ");
 	}
 
 	/** Sets this Panel's size according to its components. */
@@ -202,6 +187,7 @@ public abstract class HelperPanel extends JPanel implements CComponent
 
 	}
 
+	@Override
 	public void updateLang()
 	{
 		updateTitle();

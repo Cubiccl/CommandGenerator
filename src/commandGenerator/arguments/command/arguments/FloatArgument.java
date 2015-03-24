@@ -17,11 +17,11 @@ import commandGenerator.main.Lang;
 public class FloatArgument extends Argument
 {
 
-	private float min, max, defaultValue;
-	private boolean hasHelp;
-	private CEntry entry;
 	private JCheckBox box;
 	private HelpButton button;
+	private CEntry entry;
+	private boolean hasHelp;
+	private float min, max, defaultValue;
 
 	public FloatArgument(String id, boolean isCompulsery)
 	{
@@ -32,32 +32,10 @@ public class FloatArgument extends Argument
 		this.defaultValue = 0.0F;
 	}
 
-	@Override
-	public Component generateComponent()
+	public FloatArgument addHelpButton()
 	{
-		JPanel panel = new JPanel();
-		if (!this.isCompulsery()) panel.add(this.box);
-		panel.add(this.entry);
-		if (this.hasHelp) panel.add(this.button);
-		return panel;
-	}
-
-	@Override
-	public void initGui()
-	{
-		this.entry = new CEntry(this.getId(), "GUI:" + this.getId(), String.valueOf(defaultValue));
-		this.box = new JCheckBox();
-		if (this.hasHelp) this.button = new HelpButton(Lang.get("HELP:" + this.getId()), "");
-		if (!this.isCompulsery())
-		{
-			this.box.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0)
-				{
-					entry.setEnabledContent(box.isSelected());
-				}
-			});
-			entry.setEnabledContent(false);
-		}
+		this.hasHelp = true;
+		return this;
 	}
 
 	@Override
@@ -80,23 +58,33 @@ public class FloatArgument extends Argument
 		return value;
 	}
 
-	public FloatArgument addHelpButton()
+	@Override
+	public Component generateComponent()
 	{
-		this.hasHelp = true;
-		return this;
+		JPanel panel = new JPanel();
+		if (!this.isCompulsery()) panel.add(this.box);
+		panel.add(this.entry);
+		if (this.hasHelp) panel.add(this.button);
+		return panel;
 	}
 
-	public FloatArgument setBounds(float minValue, float maxValue)
+	@Override
+	public void initGui()
 	{
-		this.min = minValue;
-		this.max = maxValue;
-		return this;
-	}
-
-	public FloatArgument setDefaultValue(float defaultValue)
-	{
-		this.defaultValue = defaultValue;
-		return this;
+		this.entry = new CEntry("GUI:" + this.getId(), String.valueOf(defaultValue));
+		this.box = new JCheckBox();
+		if (this.hasHelp) this.button = new HelpButton(Lang.get("HELP:" + this.getId()), "");
+		if (!this.isCompulsery())
+		{
+			this.box.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0)
+				{
+					entry.setEnabledContent(box.isSelected());
+				}
+			});
+			entry.setEnabledContent(false);
+		}
 	}
 
 	@Override
@@ -117,6 +105,19 @@ public class FloatArgument extends Argument
 			return false;
 		}
 		return true;
+	}
+
+	public FloatArgument setBounds(float minValue, float maxValue)
+	{
+		this.min = minValue;
+		this.max = maxValue;
+		return this;
+	}
+
+	public FloatArgument setDefaultValue(float defaultValue)
+	{
+		this.defaultValue = defaultValue;
+		return this;
 	}
 
 	@Override

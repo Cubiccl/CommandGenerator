@@ -14,33 +14,14 @@ import commandGenerator.main.CGConstants;
 public class EntityArgument extends Argument implements INBTArgument
 {
 
-	private EntitySelectionPanel panel;
 	private boolean[] display;
+	private EntitySelectionPanel panel;
 
 	public EntityArgument(String id, boolean isCompulsery)
 	{
 		super(id, Argument.ENTITY, isCompulsery, 1);
 		this.display = new boolean[] { false, false };
 		this.setMaximumLength(2);
-	}
-
-	public EntityArgument setDisplay(boolean displayEntity, boolean displayNBT)
-	{
-		this.display[0] = displayEntity;
-		this.display[1] = displayNBT;
-		return this;
-	}
-
-	@Override
-	public Component generateComponent()
-	{
-		return this.panel;
-	}
-
-	@Override
-	public void initGui()
-	{
-		this.panel = new EntitySelectionPanel(this.getId(), "GUI:" + this.getId(), Registry.getObjectList(CGConstants.OBJECT_ENTITY));
 	}
 
 	@Override
@@ -63,9 +44,9 @@ public class EntityArgument extends Argument implements INBTArgument
 	}
 
 	@Override
-	public boolean isUsed()
+	public Component generateComponent()
 	{
-		return true;
+		return this.panel;
 	}
 
 	@Override
@@ -75,11 +56,30 @@ public class EntityArgument extends Argument implements INBTArgument
 	}
 
 	@Override
+	public void initGui()
+	{
+		this.panel = new EntitySelectionPanel("GUI:" + this.getId(), Registry.getObjectList(CGConstants.OBJECT_ENTITY));
+	}
+
+	@Override
+	public boolean isUsed()
+	{
+		return true;
+	}
+
+	@Override
 	public boolean matches(List<String> data)
 	{
 		boolean ok = true;
 		if (this.display[0]) ok = Registry.exists(data.get(0), CGConstants.OBJECT_ENTITY);
 		return ok;
+	}
+
+	public EntityArgument setDisplay(boolean displayEntity, boolean displayNBT)
+	{
+		this.display[0] = displayEntity;
+		this.display[1] = displayNBT;
+		return this;
 	}
 
 	@Override

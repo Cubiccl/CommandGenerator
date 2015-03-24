@@ -6,7 +6,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JEditorPane;
@@ -33,23 +32,22 @@ public class TagDisplayer extends JPanel implements CComponent
 
 	private JEditorPane editorPane;
 	private GridBagConstraints gbc = new GridBagConstraints();
-	private String id;
 	private JList<String> list;
 	private ObjectBase object;
 	private JScrollPane scrollPane, scrollList;
 	private Tag[] tags;
 	private List<Tag> values;
 
-	public TagDisplayer(String id, Tag[] tags)
+	public TagDisplayer(Tag[] tags)
 	{
 		super(new GridBagLayout());
 		this.tags = tags;
-		this.id = id;
 		values = new ArrayList<Tag>();
 
 		list = new JList<String>(new String[0]);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.addListSelectionListener(new ListSelectionListener() {
+			@Override
 			public void valueChanged(ListSelectionEvent arg0)
 			{
 				display();
@@ -214,8 +212,4 @@ public class TagDisplayer extends JPanel implements CComponent
 			if (tags[i] instanceof TagBlockEntity) ((TagBlockEntity) tags[i]).setItem((Item) object);
 
 	}
-
-	@Override
-	public void setupFrom(Map<String, Object> data)
-	{}
 }

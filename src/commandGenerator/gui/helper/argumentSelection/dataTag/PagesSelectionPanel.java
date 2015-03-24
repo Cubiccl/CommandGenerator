@@ -4,9 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 
 import javax.swing.JEditorPane;
@@ -38,7 +36,15 @@ public class PagesSelectionPanel extends HelperPanel
 
 	public PagesSelectionPanel()
 	{
-		super(CGConstants.DATAID_NONE, "TAGS:pages");
+		super("TAGS:pages");
+	}
+
+	@Override
+	protected void addComponents()
+	{
+		addLine(buttonAddJson, buttonAddText);
+		addLine(buttonEdit, buttonRemove);
+		addLine(scrolllist, scrollpane);
 	}
 
 	private void addJson()
@@ -47,6 +53,7 @@ public class PagesSelectionPanel extends HelperPanel
 		if (DisplayHelper.showQuestion(panel, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
 
 		TagList tag = new TagList() {
+			@Override
 			public void askValue()
 			{}
 		};
@@ -63,6 +70,67 @@ public class PagesSelectionPanel extends HelperPanel
 		if (DisplayHelper.showQuestion(area, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
 		pages.add(area.getText());
 		setupList();
+	}
+
+	@Override
+	protected void createComponents()
+	{
+		buttonAddText = new CButton("GUI:page.add.text");
+		buttonAddJson = new CButton("GUI:page.add.json");
+		buttonEdit = new CButton("GENERAL:edit_only");
+		buttonRemove = new CButton("GENERAL:remove");
+
+		list = new JList<String>(new String[0]);
+		scrolllist = new JScrollPane(list);
+		scrolllist.setPreferredSize(new Dimension(100, 120));
+		scrolllist.setMinimumSize(new Dimension(100, 120));
+
+		editorpane = new JEditorPane("text/html", "");
+		scrollpane = new JScrollPane(editorpane);
+		scrollpane.setPreferredSize(new Dimension(300, 120));
+		scrollpane.setMinimumSize(new Dimension(300, 120));
+	}
+
+	@Override
+	protected void createListeners()
+	{
+
+		buttonAddText.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				addText();
+			}
+		});
+		buttonAddJson.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				addJson();
+			}
+		});
+		buttonEdit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				edit();
+			}
+		});
+		buttonRemove.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				remove();
+			}
+		});
+
+		list.addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e)
+			{
+				display();
+			}
+		});
 	}
 
 	private void display()
@@ -91,13 +159,12 @@ public class PagesSelectionPanel extends HelperPanel
 
 	private void editJson(String text)
 	{
-		Map<String, Object> data = new HashMap<String, Object>();
-		data.put(CGConstants.PANELID_JSON, DataTags.generateListFrom(text));
 		ListSelectionPanel panel = new ListSelectionPanel("GENERAL:text", CGConstants.OBJECT_JSON);
-		panel.setupFrom(data);
+		panel.setList(DataTags.generateListFrom(text));
 		if (DisplayHelper.showQuestion(panel, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
 
 		TagList tag = new TagList() {
+			@Override
 			public void askValue()
 			{}
 		};
@@ -138,70 +205,6 @@ public class PagesSelectionPanel extends HelperPanel
 			names[i] = Lang.get("GENERAL:text") + " " + (i + 1);
 		list.setListData(names);
 		display();
-	}
-
-	@Override
-	protected void addComponents()
-	{
-		addLine(buttonAddJson, buttonAddText);
-		addLine(buttonEdit, buttonRemove);
-		addLine(scrolllist, scrollpane);
-	}
-
-	@Override
-	protected void createComponents()
-	{
-		buttonAddText = new CButton("GUI:page.add.text");
-		buttonAddJson = new CButton("GUI:page.add.json");
-		buttonEdit = new CButton("GENERAL:edit_only");
-		buttonRemove = new CButton("GENERAL:remove");
-
-		list = new JList<String>(new String[0]);
-		scrolllist = new JScrollPane(list);
-		scrolllist.setPreferredSize(new Dimension(100, 120));
-		scrolllist.setMinimumSize(new Dimension(100, 120));
-
-		editorpane = new JEditorPane("text/html", "");
-		scrollpane = new JScrollPane(editorpane);
-		scrollpane.setPreferredSize(new Dimension(300, 120));
-		scrollpane.setMinimumSize(new Dimension(300, 120));
-	}
-
-	@Override
-	protected void createListeners()
-	{
-
-		buttonAddText.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				addText();
-			}
-		});
-		buttonAddJson.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				addJson();
-			}
-		});
-		buttonEdit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				edit();
-			}
-		});
-		buttonRemove.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				remove();
-			}
-		});
-
-		list.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e)
-			{
-				display();
-			}
-		});
 	}
 
 }

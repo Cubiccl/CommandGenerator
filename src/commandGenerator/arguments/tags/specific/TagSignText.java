@@ -38,6 +38,7 @@ public class TagSignText extends TagString
 		if (showPanel()) return;
 
 		TagList list = new TagList() {
+			@Override
 			public void askValue()
 			{}
 		}.setValue(((ListSelectionPanel) panel).getList());

@@ -13,8 +13,8 @@ import commandGenerator.main.Lang;
 public class LoadButton extends CButton
 {
 
-	private byte type;
 	private ISave parent;
+	private byte type;
 
 	public LoadButton(byte type, ISave parent)
 	{
@@ -23,6 +23,7 @@ public class LoadButton extends CButton
 		this.parent = parent;
 
 		addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				load();

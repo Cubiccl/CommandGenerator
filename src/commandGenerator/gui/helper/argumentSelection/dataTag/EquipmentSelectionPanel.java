@@ -34,7 +34,7 @@ public class EquipmentSelectionPanel extends HelperPanel
 
 	public EquipmentSelectionPanel(String title)
 	{
-		super(CGConstants.DATAID_NONE, title);
+		super(title);
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class EquipmentSelectionPanel extends HelperPanel
 
 	private void addItem(int slot)
 	{
-		ItemSelectionPanel panel = new ItemSelectionPanel(CGConstants.DATAID_NONE, "GUI:item", Registry.getList(CGConstants.LIST_ITEMS), true, false);
+		ItemSelectionPanel panel = new ItemSelectionPanel("GUI:item", Registry.getList(CGConstants.LIST_ITEMS), true, false);
 		if (DisplayHelper.showQuestion(panel, Lang.get("GUI:item.add"))) return;
 		equipment[slot] = new ItemStack(panel.generateItem(), panel.getDamage(), panel.getCount(), panel.getItemTag());
 		displayItems();
@@ -60,7 +60,7 @@ public class EquipmentSelectionPanel extends HelperPanel
 	protected void createComponents()
 	{
 		equipment = new ItemStack[] { null, null, null, null, null };
-		
+
 		buttonAddHand = new CButton("GUI:equipment.add.hand");
 		buttonAddFeet = new CButton("GUI:equipment.add.feet");
 		buttonAddLegs = new CButton("GUI:equipment.add.legs");
@@ -179,6 +179,7 @@ public class EquipmentSelectionPanel extends HelperPanel
 		for (int i = 0; i < equipment.length; i++)
 		{
 			if (equipment[i] == null) tags.add(new TagCompound() {
+				@Override
 				public void askValue()
 				{}
 			});

@@ -23,56 +23,13 @@ public class ItemArgument extends Argument implements INBTArgument
 {
 
 	private CCheckBox box;
-	private ItemSelectionPanel panel;
 	private boolean[] display;
+	private ItemSelectionPanel panel;
 
 	public ItemArgument(String id, boolean isCompulsery)
 	{
 		super(id, Argument.ITEM, isCompulsery, 1);
 		this.display = new boolean[] { false, false, false, false };
-	}
-
-	public ItemArgument setDisplay(boolean displayId, boolean displayAmount, boolean displayDamage, boolean displayNBT)
-	{
-		this.display[0] = displayId;
-		this.display[1] = displayAmount;
-		this.display[2] = displayDamage;
-		this.display[3] = displayNBT;
-		return this;
-	}
-
-	@Override
-	public Component generateComponent()
-	{
-		JPanel panelGeneral = new JPanel(new GridBagLayout());
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		if (!this.isCompulsery())
-		{
-			panelGeneral.add(box, gbc);
-			gbc.gridy++;
-		}
-		panelGeneral.add(this.panel, gbc);
-		return panelGeneral;
-	}
-
-	@Override
-	public void initGui()
-	{
-		this.panel = new ItemSelectionPanel(this.getId(), "GUI:" + this.getId(), Registry.getList(CGConstants.LIST_ITEMS), true, false);
-		if (!this.isCompulsery())
-		{
-			this.box = new CCheckBox(this.getId(), "GUI:" + this.getId() + ".use");
-			this.box.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0)
-				{
-					panel.setEnabledContent(box.isSelected());
-				}
-			});
-			this.panel.setEnabledContent(false);
-		}
-
 	}
 
 	@Override
@@ -95,15 +52,50 @@ public class ItemArgument extends Argument implements INBTArgument
 	}
 
 	@Override
-	public boolean isUsed()
+	public Component generateComponent()
 	{
-		return this.isCompulsery() || this.box.isSelected();
+		JPanel panelGeneral = new JPanel(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		if (!this.isCompulsery())
+		{
+			panelGeneral.add(box, gbc);
+			gbc.gridy++;
+		}
+		panelGeneral.add(this.panel, gbc);
+		return panelGeneral;
 	}
 
 	@Override
 	public TagCompound getNBT()
 	{
 		return this.panel.getItemTag();
+	}
+
+	@Override
+	public void initGui()
+	{
+		this.panel = new ItemSelectionPanel("GUI:" + this.getId(), Registry.getList(CGConstants.LIST_ITEMS), true, false);
+		if (!this.isCompulsery())
+		{
+			this.box = new CCheckBox("GUI:" + this.getId() + ".use");
+			this.box.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0)
+				{
+					panel.setEnabledContent(box.isSelected());
+				}
+			});
+			this.panel.setEnabledContent(false);
+		}
+
+	}
+
+	@Override
+	public boolean isUsed()
+	{
+		return this.isCompulsery() || this.box.isSelected();
 	}
 
 	@Override
@@ -139,6 +131,15 @@ public class ItemArgument extends Argument implements INBTArgument
 			index++;
 		}
 		return ok;
+	}
+
+	public ItemArgument setDisplay(boolean displayId, boolean displayAmount, boolean displayDamage, boolean displayNBT)
+	{
+		this.display[0] = displayId;
+		this.display[1] = displayAmount;
+		this.display[2] = displayDamage;
+		this.display[3] = displayNBT;
+		return this;
 	}
 
 	@Override

@@ -19,9 +19,9 @@ public class RotationSelectionPanel extends HelperPanel
 	private CLabel labelX, labelY;
 	private JSpinner spinnerX, spinnerY;
 
-	public RotationSelectionPanel(String id, String title)
+	public RotationSelectionPanel(String title)
 	{
-		super(id, title);
+		super(title);
 	}
 
 	@Override
@@ -54,6 +54,7 @@ public class RotationSelectionPanel extends HelperPanel
 		return rot;
 	}
 
+	@Override
 	public void setEnabledContent(boolean enable)
 	{
 		this.setEnabled(enable);

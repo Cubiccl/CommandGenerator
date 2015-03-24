@@ -16,12 +16,24 @@ import commandGenerator.main.DisplayHelper;
 
 public class StringArgument extends Argument
 {
-	private CEntry entry;
 	private JCheckBox box;
+	private CEntry entry;
 
 	public StringArgument(String id, boolean isCompulsery)
 	{
 		super(id, Argument.STRING, isCompulsery, 1);
+	}
+
+	@Override
+	public String generateCommand()
+	{
+		String name = this.entry.getText();
+		if (name.equals("") || name.contains(" "))
+		{
+			DisplayHelper.warningName();
+			return null;
+		}
+		return name;
 	}
 
 	@Override
@@ -40,9 +52,10 @@ public class StringArgument extends Argument
 	@Override
 	public void initGui()
 	{
-		this.entry = new CEntry(this.getId(), "GUI:" + this.getId(), "");
+		this.entry = new CEntry("GUI:" + this.getId(), "");
 		this.box = new JCheckBox();
 		this.box.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
 				entry.setEnabledContent(box.isSelected());
@@ -50,18 +63,6 @@ public class StringArgument extends Argument
 		});
 		this.entry.setEnabledContent(this.isCompulsery());
 		this.box.setVisible(!this.isCompulsery());
-	}
-
-	@Override
-	public String generateCommand()
-	{
-		String name = this.entry.getText();
-		if (name.equals("") || name.contains(" "))
-		{
-			DisplayHelper.warningName();
-			return null;
-		}
-		return name;
 	}
 
 	@Override

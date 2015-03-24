@@ -56,9 +56,23 @@ public enum Command
 			Structure.worldborderCenter, Structure.worldborderDamage, Structure.worldborderWarning),
 	xp("xp", "xp <amount>[L] [player]", Structure.xp);
 
+	public static Command identify(String command)
+	{
+		for (Command c : Registry.getCommands())
+			if (command.startsWith(c.getId())) return c;
+		DisplayHelper.showWarning("WARNING:command.wrong_id");
+		return null;
+	}
+	public static void initGui()
+	{
+		for (Command c : Registry.getCommands())
+			c.tab = new OptionsTab(c.structures);
+	}
 	/** The Command's ID. */
 	private String id, structure;
+
 	private Structure[] structures;
+
 	private OptionsTab tab;
 
 	/** Creates a new Command
@@ -73,6 +87,21 @@ public enum Command
 		Registry.registerCommand(this);
 	}
 
+	private int findMatchingStructure(String[] arguments)
+	{
+		for (int i = 0; i < this.structures.length; i++)
+			if (this.structures[i].matches(arguments)) return i;
+		DisplayHelper.showWarning("WARNING:command.structure");
+		return -1;
+	}
+
+	public String generate()
+	{
+		String command = this.getSelectedStructure().generateCommand();
+		if (command == null) return null;
+		return this.getId() + " " + command;
+	}
+
 	/** Generates the data used for the GUI from an already generated command
 	 * 
 	 * @param command
@@ -84,14 +113,6 @@ public enum Command
 		if (matchingStructure == -1) return;
 		this.tab.setSelectedIndex(matchingStructure);
 		this.structures[matchingStructure].generateFrom(arguments);
-	}
-
-	private int findMatchingStructure(String[] arguments)
-	{
-		for (int i = 0; i < this.structures.length; i++)
-			if (this.structures[i].matches(arguments)) return i;
-		DisplayHelper.showWarning("WARNING:command.structure");
-		return -1;
 	}
 
 	/** Returns the Command's description */
@@ -112,13 +133,6 @@ public enum Command
 		return this.tab;
 	}
 
-	public String generate()
-	{
-		String command = this.getSelectedStructure().generateCommand();
-		if (command == null) return null;
-		return this.getId() + " " + command;
-	}
-
 	private Structure getSelectedStructure()
 	{
 		return this.structures[this.tab.getSelectedIndex()];
@@ -127,20 +141,6 @@ public enum Command
 	public String getStructure()
 	{
 		return this.structure;
-	}
-
-	public static Command identify(String command)
-	{
-		for (Command c : Registry.getCommands())
-			if (command.startsWith(c.getId())) return c;
-		DisplayHelper.showWarning("WARNING:command.wrong_id");
-		return null;
-	}
-
-	public static void initGui()
-	{
-		for (Command c : Registry.getCommands())
-			c.tab = new OptionsTab(c.structures);
 	}
 
 }

@@ -2,13 +2,6 @@ package commandGenerator.main;
 
 public class Resources
 {
-	public static final String[] operations = { "+=", "-=", "*=", "/=", "%=", "=", "<", ">", "><" };
-
-	public static final String[] stats = { "AffectedBlocks", "AffectedEntities", "AffectedItems", "QueryResult", "SuccessCount" };
-
-	public static final String[] gamerules = { "commandBlockOutput", "doDaylightCycle", "doFireTick", "doMobLoot", "doMobSpawning", "doTileDrops",
-			"keepInventory", "mobGriefing", "naturalRegeneration", "logAdminCommands", "sendCommandFeedback", "showDeathMessages" };
-
 	/** List of the colors used for displays. */
 	public static String[] colors = { "black", "dark_blue", "dark_green", "dark_aqua", "dark_red", "dark_purple", "gold", "gray", "ark_gray", "blue", "green",
 			"aqua", "red", "light_purple", "yellow", "white", "reset" };
@@ -21,6 +14,13 @@ public class Resources
 
 	/** The URL to the Command Generator resource folder. */
 	public static String folder;
+
+	public static final String[] gamerules = { "commandBlockOutput", "doDaylightCycle", "doFireTick", "doMobLoot", "doMobSpawning", "doTileDrops",
+			"keepInventory", "mobGriefing", "naturalRegeneration", "logAdminCommands", "sendCommandFeedback", "showDeathMessages" };
+
+	public static final String[] operations = { "+=", "-=", "*=", "/=", "%=", "=", "<", ">", "><" };
+
+	public static final String[] stats = { "AffectedBlocks", "AffectedEntities", "AffectedItems", "QueryResult", "SuccessCount" };
 
 	/** The Minecraft version this program is for. */
 	public static String versionMinecraft;

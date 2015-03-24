@@ -20,6 +20,12 @@ public class ParticleArgument extends Argument
 	}
 
 	@Override
+	public String generateCommand()
+	{
+		return this.panel.generateParticleId();
+	}
+
+	@Override
 	public Component generateComponent()
 	{
 		return this.panel;
@@ -29,12 +35,6 @@ public class ParticleArgument extends Argument
 	public void initGui()
 	{
 		this.panel = new ParticleSelectionPanel();
-	}
-
-	@Override
-	public String generateCommand()
-	{
-		return this.panel.generateParticleId();
 	}
 
 	@Override

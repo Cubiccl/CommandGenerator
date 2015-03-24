@@ -14,8 +14,8 @@ import commandGenerator.main.Lang;
 public class SaveButton extends CButton
 {
 
-	private byte type;
 	private ISave parent;
+	private byte type;
 
 	public SaveButton(byte type, ISave parent)
 	{
@@ -24,6 +24,7 @@ public class SaveButton extends CButton
 		this.parent = parent;
 
 		addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				save();

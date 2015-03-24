@@ -3,12 +3,11 @@ package commandGenerator.gui.helper.argumentSelection;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemData;
@@ -44,9 +43,9 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 	private NumberSpinner spinnerDamage, spinnerCount, spinnerSlot;
 	protected boolean withData, slot;
 
-	public ItemSelectionPanel(String id, String title, ObjectBase[] itemList, boolean withData, boolean slot)
+	public ItemSelectionPanel(String title, ObjectBase[] itemList, boolean withData, boolean slot)
 	{
-		super(id, title, itemList, withData, slot);
+		super(title, itemList, withData, slot);
 	}
 
 	@Override
@@ -75,7 +74,7 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 		if (withData)
 		{
 			add(panelData);
-			panelData.updateCombobox((Item) itemList[0]);
+			panelData.updateCombobox(itemList[0]);
 		}
 
 		addLine(buttonSave, buttonLoad);
@@ -89,7 +88,7 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 		labelImage = new JLabel();
 		labelImage.setPreferredSize(new Dimension(40, 40));
 		labelImage.setMinimumSize(new Dimension(40, 40));
-		labelName = new JLabel("", JLabel.CENTER);
+		labelName = new JLabel("", SwingConstants.CENTER);
 		labelName.setPreferredSize(new Dimension(200, 20));
 		labelName.setMinimumSize(new Dimension(200, 20));
 
@@ -100,12 +99,12 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 		for (int i = 0; i < ids.length; i++)
 			ids[i] = itemList[i].getId();
 
-		comboboxId = new TextCombobox(CGConstants.DATAID_NONE, "GUI:item.id", ids, this);
-		spinnerDamage = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:item.damage", 0, itemList[0].getMaxDamage(), this);
+		comboboxId = new TextCombobox("GUI:item.id", ids, this);
+		spinnerDamage = new NumberSpinner("GUI:item.damage", 0, itemList[0].getMaxDamage(), this);
 		if (itemList[0] instanceof ItemData) spinnerDamage.setData(((ItemData) itemList[0]).getDamageList());
 		else if (itemList[0].getDurability() > 0) spinnerDamage.setValues(0, itemList[0].getDurability());
-		spinnerCount = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:item.count", 1, 64, null);
-		if (slot) spinnerSlot = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:item.slot", 0, 27, null);
+		spinnerCount = new NumberSpinner("GUI:item.count", 1, 64, null);
+		if (slot) spinnerSlot = new NumberSpinner("GUI:item.slot", 0, 27, null);
 
 		if (withData) panelData = new NBTTagPanel("GUI:item.nbt", itemList[0], DataTags.items);
 
@@ -133,6 +132,7 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 	public Tag getItemAsNBT()
 	{
 		TagCompound tag = new TagCompound() {
+			@Override
 			public void askValue()
 			{}
 		};
@@ -154,18 +154,47 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 	public TagCompound getItemTag()
 	{
 		if (!this.withData) return new TagCompound("tag") {
+			@Override
 			public void askValue()
 			{}
 		};
 		return panelData.getNbtTags("tag");
 	}
 
+	@Override
+	public Object getObjectToSave()
+	{
+		return getItemStack();
+	}
+
 	public int getSlot()
 	{
 		if (!this.slot) return -1;
-		return (int) spinnerSlot.getValue();
+		return spinnerSlot.getValue();
 	}
 
+	@Override
+	public void load(Object object)
+	{
+		setupFrom((ItemStack) object);
+	}
+
+	public void setAmount(int parseInt)
+	{
+		this.spinnerCount.setSelected(parseInt);
+	}
+
+	public void setDamage(int damage)
+	{
+		this.spinnerDamage.setSelected(damage);
+	}
+
+	public void setDataTags(List<Tag> list)
+	{
+		this.panelData.setupFrom(list);
+	}
+
+	@Override
 	public void setEnabledContent(boolean enable)
 	{
 		setEnabled(enable);
@@ -176,6 +205,11 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 		spinnerCount.setEnabledContent(enable);
 		if (slot) spinnerSlot.setEnabledContent(enable);
 		if (withData) panelData.setEnabledContent(enable);
+	}
+
+	public void setItem(Item item)
+	{
+		this.comboboxId.setSelected(item.getId());
 	}
 
 	@Override
@@ -190,9 +224,8 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 			this.itemList[i] = (Item) list[i];
 	}
 
-	public void setupFrom(Map<String, Object> data)
+	public void setupFrom(ItemStack item)
 	{
-		ItemStack item = (ItemStack) data.get(getPanelId());
 		if (item == null)
 		{
 			reset();
@@ -203,8 +236,7 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 		spinnerDamage.setSelected(item.getDamage());
 		spinnerCount.setSelected(item.getCount());
 		if (slot) spinnerSlot.setSelected(item.getSlot());
-		if (item.getTag() != null) data.put(CGConstants.PANELID_NBT, item.getTag().getValue());
-		super.setupFrom(data);
+		if (item.getTag() != null && this.withData) this.panelData.setupFrom(item.getTag().getValue());
 	}
 
 	@Override
@@ -237,40 +269,6 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 		Item item = generateItem();
 		labelImage.setIcon(item.getTexture(spinnerDamage.getValue()));
 		labelName.setText(item.getName(spinnerDamage.getValue()));
-	}
-
-	@Override
-	public void load(Object object)
-	{
-		Map<String, Object> data = new HashMap<String, Object>();
-		data.put(getPanelId(), object);
-		setupFrom(data);
-	}
-
-	@Override
-	public Object getObjectToSave()
-	{
-		return getItemStack();
-	}
-
-	public void setItem(Item item)
-	{
-		this.comboboxId.setSelected(item.getId());
-	}
-
-	public void setDamage(int damage)
-	{
-		this.spinnerDamage.setSelected(damage);
-	}
-
-	public void setAmount(int parseInt)
-	{
-		this.spinnerCount.setSelected(parseInt);
-	}
-
-	public void setDataTags(List<Tag> list)
-	{
-		this.panelData.setupFrom(list);
 	}
 
 }

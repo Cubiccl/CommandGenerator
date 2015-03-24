@@ -19,13 +19,21 @@ import commandGenerator.gui.helper.components.CLabel;
 public class SlotArgument extends Argument
 {
 
+	private JComboBox<String> comboboxSlot;
 	private CLabel labelSlot;
 	private JSpinner spinnerSlot;
-	private JComboBox<String> comboboxSlot;
 
 	public SlotArgument()
 	{
 		super("replaceitem.slot", Argument.MISC, true, 1);
+	}
+
+	@Override
+	public String generateCommand()
+	{
+		String slotType = (String) comboboxSlot.getSelectedItem();
+		if (slotType.equals("slot.weapon") || slotType.equals("slot.horse.saddle") || slotType.equals("slot.horse.armor")) return slotType;
+		return slotType + spinnerSlot.getValue();
 	}
 
 	@Override
@@ -108,14 +116,6 @@ public class SlotArgument extends Argument
 				}
 			}
 		});
-	}
-
-	@Override
-	public String generateCommand()
-	{
-		String slotType = (String) comboboxSlot.getSelectedItem();
-		if (slotType.equals("slot.weapon") || slotType.equals("slot.horse.saddle") || slotType.equals("slot.horse.armor")) return slotType;
-		return slotType + spinnerSlot.getValue();
 	}
 
 	@Override

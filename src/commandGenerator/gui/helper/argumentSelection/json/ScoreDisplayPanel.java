@@ -1,8 +1,5 @@
 package commandGenerator.gui.helper.argumentSelection.json;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
@@ -22,7 +19,7 @@ public class ScoreDisplayPanel extends HelperPanel
 
 	public ScoreDisplayPanel(String title)
 	{
-		super(CGConstants.DATAID_NONE, title);
+		super(title);
 	}
 
 	@Override
@@ -35,9 +32,9 @@ public class ScoreDisplayPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		entryObjective = new CEntry(CGConstants.DATAID_NONE, "GUI:scoreboard.objective", "");
+		entryObjective = new CEntry("GUI:scoreboard.objective", "");
 
-		panelEntity = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target.entity", CGConstants.ENTITIES_ALL);
+		panelEntity = new TargetSelectionPanel("GENERAL:target.entity", CGConstants.ENTITIES_ALL);
 	}
 
 	@Override
@@ -58,6 +55,7 @@ public class ScoreDisplayPanel extends HelperPanel
 		if (entity == null) return null;
 
 		TagCompound tag = new TagCompound("score") {
+			@Override
 			public void askValue()
 			{}
 		};
@@ -73,12 +71,7 @@ public class ScoreDisplayPanel extends HelperPanel
 		{
 			Tag tag = nbt.get(i);
 			if (tag.getId().equals("objective")) entryObjective.setTextField(((TagString) tag).getValue());
-			if (tag.getId().equals("name"))
-			{
-				Map<String, Object> data = new HashMap<String, Object>();
-				data.put(CGConstants.PANELID_TARGET, Target.generateFrom(((TagString) tag).getValue()));
-				panelEntity.setupFrom(data);
-			}
+			if (tag.getId().equals("name")) panelEntity.setupFrom(Target.generateFrom(((TagString) tag).getValue()));
 		}
 	}
 

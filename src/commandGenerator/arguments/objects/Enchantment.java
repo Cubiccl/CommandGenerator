@@ -83,6 +83,7 @@ public class Enchantment
 	public Tag toNBT()
 	{
 		TagCompound tag = new TagCompound() {
+			@Override
 			public void askValue()
 			{}
 		};

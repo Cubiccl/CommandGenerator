@@ -6,7 +6,6 @@ import javax.swing.JTabbedPane;
 
 import commandGenerator.arguments.command.Structure;
 import commandGenerator.gui.helper.components.CComponent;
-import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class OptionsPanel extends HelperPanel implements CComponent
@@ -20,7 +19,7 @@ public class OptionsPanel extends HelperPanel implements CComponent
 	/** Creates a new Options Panel. */
 	public OptionsPanel(Structure... structures)
 	{
-		super(CGConstants.PANELID_NONE, "GENERAL:options");
+		super("GENERAL:options");
 		tabbedpane = new JTabbedPane();
 
 		for (Structure structure : structures)
@@ -30,19 +29,6 @@ public class OptionsPanel extends HelperPanel implements CComponent
 		tabbedpane.setPreferredSize(new Dimension(WIDTH, 400));
 		tabbedpane.setMinimumSize(new Dimension(WIDTH, 400));
 
-	}
-
-	/** Generates the command corresponding to the arguments selected by the user. */
-	public String generateCommand()
-	{
-		return null;
-	}
-
-	@Override
-	protected void setupSize()
-	{
-		super.setupSize();
-		setPreferredSize(new Dimension(WIDTH, getPreferredSize().height));
 	}
 
 	@Override
@@ -56,4 +42,17 @@ public class OptionsPanel extends HelperPanel implements CComponent
 	@Override
 	protected void createListeners()
 	{}
+
+	/** Generates the command corresponding to the arguments selected by the user. */
+	public String generateCommand()
+	{
+		return null;
+	}
+
+	@Override
+	protected void setupSize()
+	{
+		super.setupSize();
+		setPreferredSize(new Dimension(WIDTH, getPreferredSize().height));
+	}
 }

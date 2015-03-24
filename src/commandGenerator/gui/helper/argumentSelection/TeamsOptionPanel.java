@@ -9,7 +9,6 @@ import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.combobox.LangComboBox;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
-import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
@@ -26,7 +25,7 @@ public class TeamsOptionPanel extends HelperPanel
 
 	public TeamsOptionPanel()
 	{
-		super(CGConstants.PANELID_OPTIONS, "GENERAL:options");
+		super("GENERAL:options");
 	}
 
 	@Override
@@ -43,10 +42,10 @@ public class TeamsOptionPanel extends HelperPanel
 		labelMode = new CLabel("GUI:scoreboard.teams.option.option");
 		labelValue = new CLabel("GUI:scoreboard.teams.option.value");
 
-		entryTeam = new CEntry(CGConstants.DATAID_NAME, "GUI:scoreboard.team", "");
+		entryTeam = new CEntry("GUI:scoreboard.team", "");
 
-		comboboxMode = new LangComboBox(CGConstants.DATAID_CHECK, "RESOURCES:scoreboard.teams.option", 5);
-		comboboxValue = new LangComboBox(CGConstants.DATAID_VALUE, "RESOURCES:color", 17);
+		comboboxMode = new LangComboBox("RESOURCES:scoreboard.teams.option", 5);
+		comboboxValue = new LangComboBox("RESOURCES:color", 17);
 	}
 
 	@Override

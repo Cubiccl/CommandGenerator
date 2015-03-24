@@ -9,7 +9,6 @@ import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.combobox.LangComboBox;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
-import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class ClickEventPanel extends HelperPanel
@@ -21,7 +20,7 @@ public class ClickEventPanel extends HelperPanel
 
 	public ClickEventPanel()
 	{
-		super(CGConstants.DATAID_NONE, "GUI:json.click");
+		super("GUI:json.click");
 	}
 
 	@Override
@@ -34,9 +33,9 @@ public class ClickEventPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		entryText = new CEntry(CGConstants.DATAID_NONE, "GUI:json.click.url", "");
+		entryText = new CEntry("GUI:json.click.url", "");
 
-		comboboxAction = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:json.click", 3);
+		comboboxAction = new LangComboBox("RESOURCES:json.click", 3);
 	}
 
 	@Override
@@ -59,6 +58,7 @@ public class ClickEventPanel extends HelperPanel
 		String text = entryText.getText();
 
 		TagCompound tag = new TagCompound("clickEvent") {
+			@Override
 			public void askValue()
 			{}
 		};

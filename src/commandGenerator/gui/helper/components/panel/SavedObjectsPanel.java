@@ -8,7 +8,6 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,11 +20,19 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import commandGenerator.arguments.objects.Attribute;
+import commandGenerator.arguments.objects.Coordinates;
+import commandGenerator.arguments.objects.Effect;
+import commandGenerator.arguments.objects.Enchantment;
+import commandGenerator.arguments.objects.Entity;
+import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.objects.SavedObjects;
+import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
+import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.EffectSelectionPanel;
@@ -45,11 +52,11 @@ public class SavedObjectsPanel extends JPanel
 {
 
 	private CButton buttonAdd, buttonEdit, buttonRemove;
+	private Map<String, Object> displayed;
+	private GridBagConstraints gbc = new GridBagConstraints();
 	private JList<String> listTypes, listObjects;
 	private JEditorPane pane;
 	private JScrollPane scrollbarText, scrollbarObjects;
-	private GridBagConstraints gbc = new GridBagConstraints();
-	private Map<String, Object> displayed;
 
 	public SavedObjectsPanel()
 	{
@@ -59,6 +66,7 @@ public class SavedObjectsPanel extends JPanel
 
 		buttonAdd = new CButton("GENERAL:add_only");
 		buttonAdd.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				create(false);
@@ -66,6 +74,7 @@ public class SavedObjectsPanel extends JPanel
 		});
 		buttonEdit = new CButton("GENERAL:edit_only");
 		buttonEdit.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				create(true);
@@ -73,6 +82,7 @@ public class SavedObjectsPanel extends JPanel
 		});
 		buttonRemove = new CButton("GENERAL:remove");
 		buttonRemove.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
 				if (displayed.size() > 0) SavedObjects.remove(SavedObjects.types[listTypes.getSelectedIndex()], listObjects.getSelectedValue());
@@ -85,6 +95,7 @@ public class SavedObjectsPanel extends JPanel
 		listTypes.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 		listTypes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listTypes.addListSelectionListener(new ListSelectionListener() {
+			@Override
 			public void valueChanged(ListSelectionEvent arg0)
 			{
 				displayed = SavedObjects.getList(SavedObjects.types[listTypes.getSelectedIndex()]);
@@ -97,6 +108,7 @@ public class SavedObjectsPanel extends JPanel
 		listObjects.setBorder(BorderFactory.createLineBorder(Color.blue));
 		listObjects.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listObjects.addListSelectionListener(new ListSelectionListener() {
+			@Override
 			public void valueChanged(ListSelectionEvent e)
 			{
 				display();
@@ -136,101 +148,71 @@ public class SavedObjectsPanel extends JPanel
 		if (editing && listObjects.getSelectedValue() == null) return;
 		String title = Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:" + SavedObjects.typeNames[listTypes.getSelectedIndex()]));
 		Object object = null;
-		Map<String, Object> data = new HashMap<String, Object>();
 
 		switch (types[listTypes.getSelectedIndex()])
 		{
 			case CGConstants.OBJECT_ATTRIBUTE:
 				AttributeSelectionPanel panelA = new AttributeSelectionPanel();
 
-				if (editing)
-				{
-					data.put(CGConstants.PANELID_OPTIONS, displayed.get(listObjects.getSelectedValue()));
-					panelA.setupFrom(data);
-				}
+				if (editing) panelA.setupFrom((Attribute) displayed.get(listObjects.getSelectedValue()));
 
 				if (DisplayHelper.showQuestion(panelA, title)) return;
 				object = panelA.getAttribute();
 				break;
 
 			case CGConstants.OBJECT_EFFECT:
-				EffectSelectionPanel panelEf = new EffectSelectionPanel(CGConstants.PANELID_EFFECT, "GENERAL:effect");
+				EffectSelectionPanel panelEf = new EffectSelectionPanel("GENERAL:effect");
 
-				if (editing)
-				{
-					data.put(CGConstants.PANELID_EFFECT, displayed.get(listObjects.getSelectedValue()));
-					panelEf.setupFrom(data);
-				}
+				if (editing) panelEf.setupFrom((Effect) displayed.get(listObjects.getSelectedValue()));
 
 				if (DisplayHelper.showQuestion(panelEf, title)) return;
 				object = panelEf.generateEffect();
 				break;
 
 			case CGConstants.OBJECT_ENCHANT:
-				EnchantSelectionPanel panelEn = new EnchantSelectionPanel(CGConstants.PANELID_ENCHANT, "GENERAL:enchant", false);
+				EnchantSelectionPanel panelEn = new EnchantSelectionPanel("GENERAL:enchant", false);
 
-				if (editing)
-				{
-					data.put(CGConstants.PANELID_ENCHANT, displayed.get(listObjects.getSelectedValue()));
-					panelEn.setupFrom(data);
-				}
+				if (editing) panelEn.setupFrom((Enchantment) displayed.get(listObjects.getSelectedValue()));
 
 				if (DisplayHelper.showQuestion(panelEn, title)) return;
 				object = panelEn.generateEnchantment();
 				break;
 
 			case CGConstants.OBJECT_ITEM:
-				ItemSelectionPanel panelI = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GENERAL:item", Registry.getList(CGConstants.LIST_ITEMS), true,
-						true);
+				ItemSelectionPanel panelI = new ItemSelectionPanel("GENERAL:item", Registry.getList(CGConstants.LIST_ITEMS), true, true);
 
-				if (editing)
-				{
-					data.put(CGConstants.PANELID_ITEM, displayed.get(listObjects.getSelectedValue()));
-					panelI.setupFrom(data);
-				}
+				if (editing) panelI.setupFrom((ItemStack) displayed.get(listObjects.getSelectedValue()));
 
 				if (DisplayHelper.showQuestion(panelI, title)) return;
 				object = panelI.getItemStack();
 				break;
 
 			case CGConstants.OBJECT_BLOCK:
-				BlockSelectionPanel panelB = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GENERAL:block", Registry.getList(CGConstants.LIST_BLOCKS),
-						true);
+				BlockSelectionPanel panelB = new BlockSelectionPanel("GENERAL:block", Registry.getList(CGConstants.LIST_BLOCKS), true);
 
-				if (editing)
-				{
-					data.put(CGConstants.PANELID_BLOCK, displayed.get(listObjects.getSelectedValue()));
-					panelB.setupFrom(data);
-				}
+				if (editing) panelB.setupFrom((ItemStack) displayed.get(listObjects.getSelectedValue()));
 
 				if (DisplayHelper.showQuestion(panelB, title)) return;
 				object = panelB.getItemStack();
 				break;
 
 			case CGConstants.OBJECT_COORD:
-				CoordSelectionPanel panelC = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "GENERAL:coordinate", true, true);
+				CoordSelectionPanel panelC = new CoordSelectionPanel("GENERAL:coordinate", true, true);
 
-				if (editing)
-				{
-					data.put(CGConstants.PANELID_BLOCK, displayed.get(listObjects.getSelectedValue()));
-					panelC.setupFrom(data);
-				}
+				if (editing) panelC.setupFrom((Coordinates) displayed.get(listObjects.getSelectedValue()));
 
 				if (DisplayHelper.showQuestion(panelC, title)) return;
 				object = panelC.generateCoord();
 				break;
 
 			case CGConstants.OBJECT_ENTITY:
-				EntitySelectionPanel panelEnt = new EntitySelectionPanel(CGConstants.PANELID_ENTITY, "GENERAL:entity",
-						Registry.getObjectList(CGConstants.OBJECT_ENTITY));
+				EntitySelectionPanel panelEnt = new EntitySelectionPanel("GENERAL:entity", Registry.getObjectList(CGConstants.OBJECT_ENTITY));
 
 				if (editing)
 				{
-					data.put(CGConstants.PANELID_NBT, displayed.get(listObjects.getSelectedValue()));
-					data.put(CGConstants.PANELID_ENTITY, DataTags.getObjectFromTags((List<Tag>) data.get(CGConstants.PANELID_NBT)));
-					panelEnt.setupFrom(data);
+					panelEnt.setDataTags((List<Tag>) displayed.get(listObjects.getSelectedValue()));
+					panelEnt.setupFrom((Entity) DataTags.getObjectFromTags((List<Tag>) displayed.get(listObjects.getSelectedValue())));
 				}
-
 				if (DisplayHelper.showQuestion(panelEnt, title)) return;
 				object = panelEnt.getTagList();
 				break;
@@ -238,24 +220,20 @@ public class SavedObjectsPanel extends JPanel
 			case CGConstants.OBJECT_TAG_TRADE:
 				TradeSelectionPanel panelTr = new TradeSelectionPanel("GENERAL:trade");
 
-				if (editing)
-				{
-					data.put(CGConstants.PANELID_OPTIONS, displayed.get(listObjects.getSelectedValue()));
-					panelTr.setupFrom(data);
-				}
+				if (editing) panelTr.setupFrom(new TagCompound() {
+					@Override
+					public void askValue()
+					{}
+				}.setValue((List<Tag>) displayed.get(listObjects.getSelectedValue())));
 
 				if (DisplayHelper.showQuestion(panelTr, title)) return;
 				object = panelTr.generateTrade();
 				break;
 
 			case CGConstants.OBJECT_TARGET:
-				TargetSelectionPanel panelTa = new TargetSelectionPanel(CGConstants.PANELID_TARGET, "GENERAL:target", CGConstants.ENTITIES_ALL);
+				TargetSelectionPanel panelTa = new TargetSelectionPanel("GENERAL:target", CGConstants.ENTITIES_ALL);
 
-				if (editing)
-				{
-					data.put(CGConstants.PANELID_TARGET, displayed.get(listObjects.getSelectedValue()));
-					panelTa.setupFrom(data);
-				}
+				if (editing) panelTa.setupFrom((Target) displayed.get(listObjects.getSelectedValue()));
 
 				if (DisplayHelper.showQuestion(panelTa, title)) return;
 				object = panelTa.generateEntity();

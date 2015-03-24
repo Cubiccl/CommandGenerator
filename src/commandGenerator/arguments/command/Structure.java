@@ -62,11 +62,11 @@ public enum Structure
 	effectGive("effect.give", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new EffectArgument("effect", true)),
 	enchant("enchant", new TargetArgument("target", true, CGConstants.ENTITIES_PLAYERS), new EnchantmentArgument("enchant", true)),
 	entitydata("entitydata", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new EntityArgument("entity.tags", true).setDisplay(false, true)),
-	executeNormal("execute.normal", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new CoordinatesArgument("execute.coords", true, true, false),
-			new CommandArgument()),
 	executeDetect("execute.detect", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new CoordinatesArgument("execute.coords", true, true, false),
 			new StaticArgument("detect"), new CoordinatesArgument("execute.block_coords", true, true, false), new BlockArgument("execute.block", true,
 					CGConstants.LIST_BLOCKS, false).setDisplay(true, true, false), new CommandArgument()),
+	executeNormal("execute.normal", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new CoordinatesArgument("execute.coords", true, true, false),
+			new CommandArgument()),
 	fillNormal("fill.normal", new CoordinatesArgument("fill.start", true, true, false), new CoordinatesArgument("fill.end", true, true, false),
 			new BlockArgument("fill.block", true, CGConstants.LIST_BLOCKS, true).setDisplay(true, true, false), new ChoiceArgument("fill.mode", false,
 					"destroy", "hollow", "keep", "outline").addHelpButton(), new NBTArgument("nbt", false, "fill.block")),
@@ -139,8 +139,8 @@ public enum Structure
 	testforblocks("testforblocks", new CoordinatesArgument("testforblocks.start", true, true, false), new CoordinatesArgument("testforblocks.end", true, true,
 			false), new CoordinatesArgument("testforblocks.destination", true, true, false), new ChoiceArgument("testforblocks.mode", true, "all", "masked")
 			.addHelpButton()),
-	timeSet("time.set", new ChoiceArgument("time.mode", true, "add", "set"), new IntArgument("time.time", true)),
 	timeQuery("time.query", new StaticArgument("query"), new ChoiceArgument("time.query", true, "daytime", "gametime").addHelpButton()),
+	timeSet("time.set", new ChoiceArgument("time.mode", true, "add", "set"), new IntArgument("time.time", true)),
 	titleDisplay("title.display", new ChoiceArgument("title.mode", true, "title", "subtitle").addHelpButton(), new JsonArgument("json", true)),
 	titleOptions("title.options", new StaticArgument("times"), new IntArgument("title.fade_in", true).setDefaultValue(20), new IntArgument("title.stay", true)
 			.setDefaultValue(60), new IntArgument("title.fade_out", true).setDefaultValue(20)),
@@ -150,53 +150,21 @@ public enum Structure
 			CGConstants.ENTITIES_ALL)),
 	trigger("trigger", new StringArgument("objective", true), new ChoiceArgument("trigger.mode", true, "add", "set"), new IntArgument("value", true)),
 	weather("weather", new ChoiceArgument("weather.mode", true, "clear", "rain", "thunder"), new IntArgument("weather.duration", false)),
-	worldborderSet("worldborder.set", new ChoiceArgument("worldborder.mode", true, "add", "set"), new IntArgument("value", true)),
 	worldborderCenter("worldborder.center", new StaticArgument("center"), new IntArgument("coord.x", true), new IntArgument("coord.z", true)),
 	worldborderDamage("worldborder.damage", new StaticArgument("damage"), new ChoiceArgument("worldborder.mode", true, "amount", "buffer").addHelpButton(),
 			new FloatArgument("value", true).setBounds(0.0F, Float.MAX_VALUE).setDefaultValue(0.2F)),
+	worldborderSet("worldborder.set", new ChoiceArgument("worldborder.mode", true, "add", "set"), new IntArgument("value", true)),
 	worldborderWarning("worldborder.warning", new StaticArgument("warning"), new ChoiceArgument("worldborder.mode", true, "distance", "time").addHelpButton(),
 			new IntArgument("value", true).setBounds(0, Integer.MAX_VALUE)),
 	xp("xp", new XpArgument(), new TargetArgument("target", true, CGConstants.ENTITIES_PLAYERS));
 
-	private String name;
 	private Argument[] arguments;
+	private String name;
 
 	private Structure(String name, Argument... arguments)
 	{
 		this.name = name;
 		this.arguments = arguments;
-	}
-
-	public HelperPanel generatePanel()
-	{
-		@SuppressWarnings("serial")
-		HelperPanel panel = new HelperPanel(CGConstants.DATAID_NONE, "GENERAL:options") {
-			protected void createListeners()
-			{}
-
-			protected void createComponents()
-			{}
-
-			protected void addComponents()
-			{
-				CLabel label = new CLabel("HELP:structure." + name, true);
-				label.setBorder(BorderFactory.createBevelBorder(0));
-				label.setFont(new Font(label.getFont().getName(), Font.BOLD, 13));
-				add(label);
-				for (Argument arg : arguments)
-				{
-					Component c = arg.getComponent();
-					if (c != null) add(c);
-				}
-			}
-		};
-
-		return panel;
-	}
-
-	public String getName()
-	{
-		return Lang.get("RESOURCES:structure." + this.name);
 	}
 
 	public String generateCommand()
@@ -241,6 +209,77 @@ public enum Structure
 		return command;
 	}
 
+	public void generateFrom(String[] newArguments)
+	{
+		int argIndex = 0;
+		for (int argument = 0; argument < this.arguments.length; argument++)
+		{
+			List<String> data = new ArrayList<String>();
+			for (int i = 0; i < this.arguments[i].getLength(); i++)
+			{
+				data.add(newArguments[argIndex]);
+				argIndex++;
+			}
+			if (argument == this.arguments.length - 1) while (argIndex < newArguments.length)
+			{
+				data.add(newArguments[argIndex]);
+				argIndex++;
+			}
+			this.arguments[argument].setupFrom(data);
+		}
+	}
+
+	public HelperPanel generatePanel()
+	{
+		@SuppressWarnings("serial")
+		HelperPanel panel = new HelperPanel("GENERAL:options") {
+			@Override
+			protected void addComponents()
+			{
+				CLabel label = new CLabel("HELP:structure." + name, true);
+				label.setBorder(BorderFactory.createBevelBorder(0));
+				label.setFont(new Font(label.getFont().getName(), Font.BOLD, 13));
+				add(label);
+				for (Argument arg : arguments)
+				{
+					Component c = arg.getComponent();
+					if (c != null) add(c);
+				}
+			}
+
+			@Override
+			protected void createComponents()
+			{}
+
+			@Override
+			protected void createListeners()
+			{}
+		};
+
+		return panel;
+	}
+
+	private int getMaximumLength()
+	{
+		int length = 0;
+		for (Argument argument : this.arguments)
+			length += argument.getMaximumLength();
+		return length;
+	}
+
+	private int getMinimumLength()
+	{
+		int length = 0;
+		for (Argument argument : this.arguments)
+			length += argument.getLength();
+		return length;
+	}
+
+	public String getName()
+	{
+		return Lang.get("RESOURCES:structure." + this.name);
+	}
+
 	public boolean matches(String[] testArguments)
 	{
 		if (this.getMinimumLength() > testArguments.length || this.getMaximumLength() < testArguments.length) return false;
@@ -263,42 +302,6 @@ public enum Structure
 		}
 
 		return true;
-	}
-
-	private int getMinimumLength()
-	{
-		int length = 0;
-		for (Argument argument : this.arguments)
-			length += argument.getLength();
-		return length;
-	}
-
-	private int getMaximumLength()
-	{
-		int length = 0;
-		for (Argument argument : this.arguments)
-			length += argument.getMaximumLength();
-		return length;
-	}
-
-	public void generateFrom(String[] newArguments)
-	{
-		int argIndex = 0;
-		for (int argument = 0; argument < this.arguments.length; argument++)
-		{
-			List<String> data = new ArrayList<String>();
-			for (int i = 0; i < this.arguments[i].getLength(); i++)
-			{
-				data.add(newArguments[argIndex]);
-				argIndex++;
-			}
-			if (argument == this.arguments.length - 1) while (argIndex < newArguments.length)
-			{
-				data.add(newArguments[argIndex]);
-				argIndex++;
-			}
-			this.arguments[argument].setupFrom(data);
-		}
 	}
 
 }

@@ -17,16 +17,6 @@ public class NBTArgument extends Argument
 	}
 
 	@Override
-	public Component generateComponent()
-	{
-		return null;
-	}
-
-	@Override
-	public void initGui()
-	{}
-
-	@Override
 	/**
 	 * For a NBT Argument, it will return the ID of the Argument which the NBT Tags come from.
 	 */
@@ -36,14 +26,24 @@ public class NBTArgument extends Argument
 	}
 
 	@Override
-	public boolean isUsed()
+	public Component generateComponent()
 	{
-		return true;
+		return null;
 	}
 
 	public String getTarget()
 	{
 		return this.argId;
+	}
+
+	@Override
+	public void initGui()
+	{}
+
+	@Override
+	public boolean isUsed()
+	{
+		return true;
 	}
 
 	@Override

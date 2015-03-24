@@ -7,9 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
@@ -57,9 +55,9 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 	private String[] targets;
 	private JEditorPane textarea;
 
-	public TargetSelectionPanel(String id, String title, int mode)
+	public TargetSelectionPanel(String title, int mode)
 	{
-		super(id, title, mode);
+		super(title, mode);
 	}
 
 	@Override
@@ -140,7 +138,7 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 		} else if (selector.equals("type"))
 		{
 
-			CComboBox box = new CComboBox(CGConstants.DATAID_NONE, "GUI:selector.type", Registry.getObjectList(CGConstants.OBJECT_ENTITY), null);
+			CComboBox box = new CComboBox("GUI:selector.type", Registry.getObjectList(CGConstants.OBJECT_ENTITY), null);
 			boolean cancel = DisplayHelper.showQuestion(box, title);
 			if (cancel) return;
 			value = box.getValue().getId();
@@ -211,7 +209,7 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 		labelSelector = new CLabel("GUI:selector.choose");
 		labelSelectors = new CLabel("GUI:selector.list");
 
-		entryPlayer = new CEntry(CGConstants.DATAID_NONE, "GUI:player.name", "");
+		entryPlayer = new CEntry("GUI:player.name", "");
 		entryPlayer.setEnabledContent(false);
 
 		buttonHelpEntity = new HelpButton(Lang.get("HELP:selector." + targets[0]), targets[0]);
@@ -242,18 +240,21 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 	protected void createListeners()
 	{
 		buttonAdd.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
 				addSelector();
 			}
 		});
 		buttonRemove.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
 				removeSelector();
 			}
 		});
 		boxEntities.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
 				boolean player = boxEntities.getSelectedItem().equals(Lang.get("GUI:selector.player"));
@@ -274,6 +275,7 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 			}
 		});
 		boxSelectors.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				buttonHelpSelector.setData(Lang.get("HELP:selector." + boxSelectors.getSelectedItem()), (String) boxSelectors.getSelectedItem());
@@ -322,6 +324,18 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 			if (addedSelectors.get(i)[0].equals("type")) entity = (Entity) Registry.getObjectFromId(addedSelectors.get(i)[1]);
 		}
 		return entity;
+	}
+
+	@Override
+	public Object getObjectToSave()
+	{
+		return generateEntity();
+	}
+
+	@Override
+	public void load(Object object)
+	{
+		this.setupFrom((Target) object);
 	}
 
 	private void removeSelector()
@@ -429,19 +443,5 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 		boxEntities.setSelectedIndex(index);
 
 		displaySelectors();
-	}
-
-	@Override
-	public Object getObjectToSave()
-	{
-		return generateEntity();
-	}
-
-	@Override
-	public void load(Object object)
-	{
-		Map<String, Object> data = new HashMap<String, Object>();
-		data.put(getPanelId(), object);
-		setupFrom(data);
 	}
 }

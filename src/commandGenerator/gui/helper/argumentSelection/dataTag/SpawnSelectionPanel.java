@@ -1,8 +1,5 @@
 package commandGenerator.gui.helper.argumentSelection.dataTag;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.swing.JOptionPane;
 
 import commandGenerator.arguments.objects.Entity;
@@ -15,7 +12,6 @@ import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.button.HelpButton;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
-import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
@@ -28,7 +24,7 @@ public class SpawnSelectionPanel extends HelperPanel
 
 	public SpawnSelectionPanel()
 	{
-		super(CGConstants.PANELID_NONE, "GUI:spawn.entity");
+		super("GUI:spawn.entity");
 	}
 
 	@Override
@@ -42,11 +38,11 @@ public class SpawnSelectionPanel extends HelperPanel
 	protected void createComponents()
 	{
 		buttonHelp = new HelpButton(Lang.get("HELP:weight"), Lang.get("TAGS:Weight"));
-		
-		entryWeight = new CEntry(CGConstants.DATAID_NONE, "GUI:spawn.weight", "1");
+
+		entryWeight = new CEntry("GUI:spawn.weight", "1");
 		entryWeight.setTextField("1");
 
-		panelEntity = new EntitySelectionPanel(CGConstants.PANELID_ENTITY, "GUI:entity.select", Entity.getListNoPlayer());
+		panelEntity = new EntitySelectionPanel("GUI:entity.select", Entity.getListNoPlayer());
 	}
 
 	@Override
@@ -72,6 +68,7 @@ public class SpawnSelectionPanel extends HelperPanel
 		}
 
 		TagCompound tag = new TagCompound() {
+			@Override
 			public void askValue()
 			{}
 		};
@@ -95,11 +92,8 @@ public class SpawnSelectionPanel extends HelperPanel
 			if (tag.getId().equals("Weight")) entryWeight.setTextField(Integer.toString(((TagInt) tag).getValue()));
 			if (tag.getId().equals("Properties"))
 			{
-				System.out.println(sel.getName());
-				Map<String, Object> data = new HashMap<String, Object>();
-				data.put(CGConstants.PANELID_ENTITY, sel);
-				data.put(CGConstants.PANELID_NBT, ((TagCompound) tag).getValue());
-				panelEntity.setupFrom(data);
+				panelEntity.setupFrom(sel);
+				panelEntity.setDataTags(((TagCompound) tag).getValue());
 			}
 		}
 	}

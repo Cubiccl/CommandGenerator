@@ -15,19 +15,19 @@ public class AchievementArgument extends Argument
 
 	public AchievementArgument(boolean isCompulsery)
 	{
-		super(CGConstants.PANELID_ACHIEVEMENT, Argument.ACHIEVEMENT, isCompulsery, 1);
-	}
-
-	@Override
-	public Component generateComponent()
-	{
-		return this.panel;
+		super("achievement", Argument.ACHIEVEMENT, isCompulsery, 1);
 	}
 
 	@Override
 	public String generateCommand()
 	{
 		return this.panel.getSelectedAchievement().commandStructure();
+	}
+
+	@Override
+	public Component generateComponent()
+	{
+		return this.panel;
 	}
 
 	@Override

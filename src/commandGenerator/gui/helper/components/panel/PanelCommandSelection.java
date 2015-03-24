@@ -32,7 +32,6 @@ import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.OptionsTab;
 import commandGenerator.gui.helper.components.button.CButton;
-import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
@@ -40,16 +39,16 @@ import commandGenerator.main.Lang;
 public class PanelCommandSelection extends JPanel
 {
 
-	private boolean main;
 	private CButton buttonGenerate, buttonCopy, buttonGenerator;
 	private CCheckBox checkboxEdit;
 	private JComboBox<String> comboboxCommand;
 	private GridBagConstraints gbc = new GridBagConstraints();
 	private CLabel labelChooseCommand, labelWarning;
+	private boolean main;
+	private Command selectedCommand;
 	public OptionsTab tabOptions;
 	private JTextArea textareaStructure;
 	private JTextField textfieldSearchbar, textfieldCommand;
-	private Command selectedCommand;
 
 	/** The panel used to select the Command. */
 	public PanelCommandSelection(boolean main)
@@ -105,8 +104,9 @@ public class PanelCommandSelection extends JPanel
 			textfieldCommand.setPreferredSize(new Dimension(600, 20));
 			textfieldCommand.setMinimumSize(new Dimension(600, 20));
 
-			checkboxEdit = new CCheckBox(CGConstants.DATAID_NONE, "GUI:command.edit");
+			checkboxEdit = new CCheckBox("GUI:command.edit");
 			checkboxEdit.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
 					textfieldCommand.setEditable(checkboxEdit.isSelected());
@@ -241,18 +241,22 @@ public class PanelCommandSelection extends JPanel
 		gbc.gridwidth = 1;
 
 		addComponentListener(new ComponentListener() {
-			public void componentShown(ComponentEvent arg0)
+			@Override
+			public void componentHidden(ComponentEvent arg0)
 			{}
 
+			@Override
+			public void componentMoved(ComponentEvent arg0)
+			{}
+
+			@Override
 			public void componentResized(ComponentEvent arg0)
 			{
 				tabOptions.setPreferredSize(new Dimension(getSize().width - 50, getSize().height - 190));
 			}
 
-			public void componentMoved(ComponentEvent arg0)
-			{}
-
-			public void componentHidden(ComponentEvent arg0)
+			@Override
+			public void componentShown(ComponentEvent arg0)
 			{}
 		});
 	}
@@ -286,7 +290,7 @@ public class PanelCommandSelection extends JPanel
 		if (command.startsWith("/")) command = command.substring(1);
 		Command newCommand = Command.identify(command);
 		if (newCommand == null) return;
-		
+
 		setSelectedCommand(newCommand);
 		newCommand.generateFrom(command);
 		setOptionsPanel(newCommand.getOptionsTab());
@@ -317,6 +321,17 @@ public class PanelCommandSelection extends JPanel
 		setOptionsPanel(command.getOptionsTab());
 	}
 
+	public void setupFrom(String command)
+	{
+		if (command.startsWith("/")) command = command.substring(1);
+		Command newCommand = Command.identify(command);
+		if (newCommand == null) return;
+
+		this.setSelectedCommand(newCommand);
+		newCommand.generateFrom(command);
+		this.setOptionsPanel(newCommand.getOptionsTab());
+	}
+
 	public void updateLang()
 	{
 		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), Lang.get("GUI:command")));
@@ -325,17 +340,6 @@ public class PanelCommandSelection extends JPanel
 		buttonCopy.updateLang();
 		buttonGenerate.updateLang();
 		tabOptions.updateLang();
-	}
-
-	public void setupFrom(String command)
-	{
-		if (command.startsWith("/")) command = command.substring(1);
-		Command newCommand = Command.identify(command);
-		if (newCommand == null) return;
-		
-		this.setSelectedCommand(newCommand);
-		newCommand.generateFrom(command);
-		this.setOptionsPanel(newCommand.getOptionsTab());
 	}
 
 }

@@ -21,7 +21,6 @@ import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.combobox.LangComboBox;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
-import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
@@ -38,7 +37,7 @@ public class ExplosionSelectionPanel extends HelperPanel
 
 	public ExplosionSelectionPanel()
 	{
-		super(CGConstants.DATAID_NONE, "TAGS:Explosion");
+		super("TAGS:Explosion");
 	}
 
 	@Override
@@ -61,10 +60,10 @@ public class ExplosionSelectionPanel extends HelperPanel
 		buttonFadeColors = new CButton("GUI:color.add_fade");
 		buttonRemoveColor = new CButton("GUI:color.remove");
 
-		checkboxFlicker = new CCheckBox(CGConstants.DATAID_NONE, "GUI:fireworks.twinkle");
-		checkboxTrail = new CCheckBox(CGConstants.DATAID_NONE, "GUI:fireworks.trail");
+		checkboxFlicker = new CCheckBox("GUI:fireworks.twinkle");
+		checkboxTrail = new CCheckBox("GUI:fireworks.trail");
 
-		comboboxType = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:fireworks", 5);
+		comboboxType = new LangComboBox("RESOURCES:fireworks", 5);
 
 		editorpane = new JEditorPane("text/html", "");
 		editorpane.setEditable(false);
@@ -99,6 +98,7 @@ public class ExplosionSelectionPanel extends HelperPanel
 			}
 		});
 		buttonRemoveColor.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				remove();
@@ -132,6 +132,7 @@ public class ExplosionSelectionPanel extends HelperPanel
 			tags.add(new TagInt().setValue(colors.get(i)));
 		}
 		TagList tag = new TagList("Colors") {
+			@Override
 			public void askValue()
 			{}
 		};
@@ -148,6 +149,7 @@ public class ExplosionSelectionPanel extends HelperPanel
 			tags.add(new TagInt().setValue(colorsFade.get(i)));
 		}
 		TagList tag = new TagList("FadeColors") {
+			@Override
 			public void askValue()
 			{}
 		};

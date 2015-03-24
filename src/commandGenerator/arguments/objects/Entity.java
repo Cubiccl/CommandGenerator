@@ -36,12 +36,14 @@ public class Entity extends ObjectBase
 	}
 
 	/** Returns this Entity's name. */
+	@Override
 	public String getName()
 	{
 		return Lang.get("ENTITIES:" + getId());
 	}
 
 	/** Returns this Entity's texture. */
+	@Override
 	public ImageIcon getTexture()
 	{
 

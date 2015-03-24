@@ -15,6 +15,7 @@ public class TagDisplay extends TagCompound
 	{
 		super("item.display", "LIST=items");
 		addTag(new TagList("Lore") {
+			@Override
 			public void askValue()
 			{}
 		});

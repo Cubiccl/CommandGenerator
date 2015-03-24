@@ -232,10 +232,12 @@ public class DataTags
 		if (tag[1].equals("item_list")) return initItemList(tag);
 		if (tag[1].equals("custom")) return initCustom(tag);
 		if (tag[1].equals("list")) return new TagList(tag[0]) {
+			@Override
 			public void askValue()
 			{}
 		};
 		if (tag[1].equals("compound")) return new TagCompound() {
+			@Override
 			public void askValue()
 			{}
 		};

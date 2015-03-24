@@ -26,9 +26,11 @@ public class TagExplosion extends TagCompound
 
 		panel = new ExplosionSelectionPanel();
 		TagList color = new TagList("Colors") {
+			@Override
 			public void askValue()
 			{}
 		}, fade = new TagList("FadeColors") {
+			@Override
 			public void askValue()
 			{}
 		};

@@ -27,6 +27,14 @@ public class SoundArgument extends Argument implements IBox
 	}
 
 	@Override
+	public String generateCommand()
+	{
+		Sound sound = (Sound) this.box.getValue();
+		if (sound == null) return null;
+		return sound.getId();
+	}
+
+	@Override
 	public Component generateComponent()
 	{
 		JPanel panel = new JPanel();
@@ -42,22 +50,8 @@ public class SoundArgument extends Argument implements IBox
 	@Override
 	public void initGui()
 	{
-		this.box = new CComboBox(this.getId(), "GUI:" + this.getId(), Registry.getObjectList(CGConstants.OBJECT_SOUND), this);
+		this.box = new CComboBox("GUI:" + this.getId(), Registry.getObjectList(CGConstants.OBJECT_SOUND), this);
 		this.button = new HelpButton(Lang.get("HELP:sound." + this.box.getValue().getId()), this.box.getValue().getId());
-	}
-
-	@Override
-	public String generateCommand()
-	{
-		Sound sound = (Sound) this.box.getValue();
-		if (sound == null) return null;
-		return sound.getId();
-	}
-
-	@Override
-	public void updateCombobox()
-	{
-		this.button.setData(Lang.get("HELP:sound." + this.box.getValue().getId()), this.box.getValue().getId());
 	}
 
 	@Override
@@ -76,6 +70,12 @@ public class SoundArgument extends Argument implements IBox
 	public void setupFrom(List<String> data)
 	{
 		this.box.setSelected(Registry.getObjectFromId(data.get(0)));
+	}
+
+	@Override
+	public void updateCombobox()
+	{
+		this.button.setData(Lang.get("HELP:sound." + this.box.getValue().getId()), this.box.getValue().getId());
 	}
 
 }

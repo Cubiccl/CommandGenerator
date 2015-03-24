@@ -20,6 +20,13 @@ public class BooleanArgument extends Argument
 	}
 
 	@Override
+	public String generateCommand()
+	{
+		if (box.isSelected()) return trueValue;
+		return falseValue;
+	}
+
+	@Override
 	public Component generateComponent()
 	{
 		return this.box;
@@ -28,27 +35,13 @@ public class BooleanArgument extends Argument
 	@Override
 	public void initGui()
 	{
-		this.box = new CCheckBox(this.getId(), "GUI:" + this.getId());
-	}
-
-	@Override
-	public String generateCommand()
-	{
-		if (box.isSelected()) return trueValue;
-		return falseValue;
+		this.box = new CCheckBox("GUI:" + this.getId());
 	}
 
 	@Override
 	public boolean isUsed()
 	{
 		return isCompulsery() || box.isSelected();
-	}
-
-	public BooleanArgument setValues(String falseValue, String trueValue)
-	{
-		this.falseValue = falseValue;
-		this.trueValue = trueValue;
-		return this;
 	}
 
 	@Override
@@ -61,6 +54,13 @@ public class BooleanArgument extends Argument
 	public void setupFrom(List<String> data)
 	{
 		this.box.setSelected(data.get(0).equals(trueValue));
+	}
+
+	public BooleanArgument setValues(String falseValue, String trueValue)
+	{
+		this.falseValue = falseValue;
+		this.trueValue = trueValue;
+		return this;
 	}
 
 }

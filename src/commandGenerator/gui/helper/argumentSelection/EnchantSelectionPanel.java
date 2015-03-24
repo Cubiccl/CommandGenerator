@@ -1,8 +1,5 @@
 package commandGenerator.gui.helper.argumentSelection;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.swing.JOptionPane;
 
 import commandGenerator.arguments.objects.EnchantType;
@@ -31,9 +28,9 @@ public class EnchantSelectionPanel extends HelperPanel implements IBox, ISave
 	private boolean limited;
 	private NumberSpinner spinnerLevel;
 
-	public EnchantSelectionPanel(String id, String title, boolean limited)
+	public EnchantSelectionPanel(String title, boolean limited)
 	{
-		super(id, title, limited);
+		super(title, limited);
 	}
 
 	@Override
@@ -51,13 +48,13 @@ public class EnchantSelectionPanel extends HelperPanel implements IBox, ISave
 		buttonSave = new SaveButton(CGConstants.OBJECT_ENCHANT, this);
 		buttonLoad = new LoadButton(CGConstants.OBJECT_ENCHANT, this);
 
-		entryLevel = new CEntry(CGConstants.DATAID_NONE, "GUI:enchant.level", "1");
+		entryLevel = new CEntry("GUI:enchant.level", "1");
 		entryLevel.setVisible(!limited);
 
-		spinnerLevel = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:enchant.level", 1, 5, null);
+		spinnerLevel = new NumberSpinner("GUI:enchant.level", 1, 5, null);
 		spinnerLevel.setVisible(limited);
 
-		comboboxEnchant = new CComboBox(CGConstants.DATAID_NONE, "GUI:enchant.choose", Registry.getObjectList(CGConstants.OBJECT_ENCHANT), this);
+		comboboxEnchant = new CComboBox("GUI:enchant.choose", Registry.getObjectList(CGConstants.OBJECT_ENCHANT), this);
 	}
 
 	@Override
@@ -92,38 +89,15 @@ public class EnchantSelectionPanel extends HelperPanel implements IBox, ISave
 	}
 
 	@Override
-	protected void setupDetails(Object[] details)
+	public Object getObjectToSave()
 	{
-		limited = (boolean) details[0];
-	}
-
-	@Override
-	public void setupFrom(Map<String, Object> data)
-	{
-		Enchantment enchant = (Enchantment) data.get(getPanelId());
-		comboboxEnchant.setSelected(enchant.getType());
-		spinnerLevel.setSelected(enchant.getLevel());
-		entryLevel.setTextField(Integer.toString(enchant.getLevel()));
-	}
-
-	@Override
-	public void updateCombobox()
-	{
-		spinnerLevel.setValues(1, ((EnchantType) comboboxEnchant.getValue()).getMax());
+		return generateEnchantment();
 	}
 
 	@Override
 	public void load(Object object)
 	{
-		Map<String, Object> data = new HashMap<String, Object>();
-		data.put(getPanelId(), object);
-		setupFrom(data);
-	}
-
-	@Override
-	public Object getObjectToSave()
-	{
-		return generateEnchantment();
+		setupFrom((Enchantment) object);
 	}
 
 	public void setEnchantment(EnchantType enchant)
@@ -135,6 +109,25 @@ public class EnchantSelectionPanel extends HelperPanel implements IBox, ISave
 	{
 		this.entryLevel.setTextField(String.valueOf(level));
 		this.spinnerLevel.setSelected(level);
+	}
+
+	@Override
+	protected void setupDetails(Object[] details)
+	{
+		limited = (boolean) details[0];
+	}
+
+	public void setupFrom(Enchantment enchant)
+	{
+		comboboxEnchant.setSelected(enchant.getType());
+		spinnerLevel.setSelected(enchant.getLevel());
+		entryLevel.setTextField(Integer.toString(enchant.getLevel()));
+	}
+
+	@Override
+	public void updateCombobox()
+	{
+		spinnerLevel.setValues(1, ((EnchantType) comboboxEnchant.getValue()).getMax());
 	}
 
 }

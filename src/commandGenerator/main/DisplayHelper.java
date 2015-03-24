@@ -17,6 +17,19 @@ import commandGenerator.arguments.objects.SavedObjects;
 public class DisplayHelper
 {
 
+	public static String askObjectName(byte type)
+	{
+		String name = "name";
+		do
+		{
+			if (name.equals("") || name.contains(" ")) showWarning("WARNING:name");
+			if (SavedObjects.getList(type).containsKey(name)) showWarning("WARNING:name_already");
+			name = JOptionPane.showInputDialog(null, Lang.get("GENERAL:name"));
+			if (name == null) return null;
+		} while (name.contains(" ") || name.equals("") || SavedObjects.getList(type).containsKey(name));
+		return name;
+	}
+
 	/** Returns a String version of the selector to be displayed to the user.
 	 * 
 	 * @param selector
@@ -121,56 +134,6 @@ public class DisplayHelper
 		JOptionPane.showMessageDialog(null, Lang.get(textId), Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
 	}
 
-	/** Displays an error warning the user that he should use an integer. */
-	public static void warningInteger()
-	{
-		log(Lang.get("WARNING:integer"));
-		JOptionPane.showMessageDialog(null, Lang.get("WARNING:integer"), Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
-	}
-
-	/** Displays an error warning the user that he should use an integer between min and max. */
-	public static void warningBounds(double min, double max)
-	{
-		log(Lang.get("WARNING:number_bound").replaceAll("<min>", String.valueOf(min)).replaceAll("<max>", String.valueOf(max)));
-		JOptionPane.showMessageDialog(null, Lang.get("WARNING:number_bound").replaceAll("<min>", String.valueOf(min)).replaceAll("<max>", String.valueOf(max)),
-				Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
-
-	}
-
-	/** Displays an error warning the user that he should use a name without space. */
-	public static void warningName()
-	{
-		log(Lang.get("WARNING:name"));
-		JOptionPane.showMessageDialog(null, Lang.get("WARNING:name"), Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
-	}
-
-	/** Displays an error warning the user that he should use a number. */
-	public static void warningNumber()
-	{
-		log(Lang.get("WARNING:number"));
-		JOptionPane.showMessageDialog(null, Lang.get("WARNING:number"), Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
-	}
-
-	/** Displays an error warning the user that he should use a positive integer. */
-	public static void warningPositiveInteger()
-	{
-		log(Lang.get("WARNING:positive_integer"));
-		JOptionPane.showMessageDialog(null, Lang.get("WARNING:positive_integer"), Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
-	}
-
-	public static String askObjectName(byte type)
-	{
-		String name = "name";
-		do
-		{
-			if (name.equals("") || name.contains(" ")) showWarning("WARNING:name");
-			if (SavedObjects.getList(type).containsKey(name)) showWarning("WARNING:name_already");
-			name = JOptionPane.showInputDialog(null, Lang.get("GENERAL:name"));
-			if (name == null) return null;
-		} while (name.contains(" ") || name.equals("") || SavedObjects.getList(type).containsKey(name));
-		return name;
-	}
-
 	public static String[] splitCommand(String command)
 	{
 		List<String> elements = new ArrayList<String>();
@@ -195,6 +158,43 @@ public class DisplayHelper
 		}
 
 		return elements.toArray(new String[0]);
+	}
+
+	/** Displays an error warning the user that he should use an integer between min and max. */
+	public static void warningBounds(double min, double max)
+	{
+		log(Lang.get("WARNING:number_bound").replaceAll("<min>", String.valueOf(min)).replaceAll("<max>", String.valueOf(max)));
+		JOptionPane.showMessageDialog(null, Lang.get("WARNING:number_bound").replaceAll("<min>", String.valueOf(min)).replaceAll("<max>", String.valueOf(max)),
+				Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
+
+	}
+
+	/** Displays an error warning the user that he should use an integer. */
+	public static void warningInteger()
+	{
+		log(Lang.get("WARNING:integer"));
+		JOptionPane.showMessageDialog(null, Lang.get("WARNING:integer"), Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
+	}
+
+	/** Displays an error warning the user that he should use a name without space. */
+	public static void warningName()
+	{
+		log(Lang.get("WARNING:name"));
+		JOptionPane.showMessageDialog(null, Lang.get("WARNING:name"), Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
+	}
+
+	/** Displays an error warning the user that he should use a number. */
+	public static void warningNumber()
+	{
+		log(Lang.get("WARNING:number"));
+		JOptionPane.showMessageDialog(null, Lang.get("WARNING:number"), Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
+	}
+
+	/** Displays an error warning the user that he should use a positive integer. */
+	public static void warningPositiveInteger()
+	{
+		log(Lang.get("WARNING:positive_integer"));
+		JOptionPane.showMessageDialog(null, Lang.get("WARNING:positive_integer"), Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
 	}
 
 }

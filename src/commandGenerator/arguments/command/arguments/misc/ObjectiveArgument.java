@@ -17,6 +17,12 @@ public class ObjectiveArgument extends Argument
 	}
 
 	@Override
+	public String generateCommand()
+	{
+		return this.panel.generateObjective();
+	}
+
+	@Override
 	public Component generateComponent()
 	{
 		return this.panel;
@@ -26,12 +32,6 @@ public class ObjectiveArgument extends Argument
 	public void initGui()
 	{
 		this.panel = new ObjectiveSelectionPanel("GUI:" + this.getId());
-	}
-
-	@Override
-	public String generateCommand()
-	{
-		return this.panel.generateObjective();
 	}
 
 	@Override

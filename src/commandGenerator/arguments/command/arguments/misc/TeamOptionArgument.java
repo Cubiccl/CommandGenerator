@@ -16,6 +16,12 @@ public class TeamOptionArgument extends Argument
 	}
 
 	@Override
+	public String generateCommand()
+	{
+		return this.panel.generateText();
+	}
+
+	@Override
 	public Component generateComponent()
 	{
 		return this.panel;
@@ -25,12 +31,6 @@ public class TeamOptionArgument extends Argument
 	public void initGui()
 	{
 		this.panel = new TeamsOptionPanel();
-	}
-
-	@Override
-	public String generateCommand()
-	{
-		return this.panel.generateText();
 	}
 
 	@Override

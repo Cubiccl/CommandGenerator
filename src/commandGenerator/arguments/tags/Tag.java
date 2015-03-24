@@ -91,6 +91,7 @@ public abstract class Tag extends ObjectBase
 		return Lang.get("TAGS:" + getId() + ".description");
 	}
 
+	@Override
 	public String getId()
 	{
 		String id = super.getId();
@@ -100,6 +101,7 @@ public abstract class Tag extends ObjectBase
 		return id;
 	}
 
+	@Override
 	public String getName()
 	{
 		if (getId().equals("")) return "";
@@ -111,6 +113,7 @@ public abstract class Tag extends ObjectBase
 		return type;
 	}
 
+	@Override
 	public ImageIcon getTexture()
 	{
 		return null;
@@ -128,6 +131,7 @@ public abstract class Tag extends ObjectBase
 		isEmpty = true;
 
 		panel.addHierarchyListener(new HierarchyListener() {
+			@Override
 			public void hierarchyChanged(HierarchyEvent e)
 			{
 				Window window = SwingUtilities.getWindowAncestor(panel);
@@ -146,6 +150,7 @@ public abstract class Tag extends ObjectBase
 		return cancel;
 	}
 
+	@Override
 	public String toString()
 	{
 		return display(true);

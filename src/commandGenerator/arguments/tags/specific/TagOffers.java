@@ -12,6 +12,7 @@ public class TagOffers extends TagCompound
 	{
 		super("entity.Offers", "Villager");
 		addTag(new TagList("Recipes") {
+			@Override
 			public void askValue()
 			{}
 		});
@@ -27,6 +28,7 @@ public class TagOffers extends TagCompound
 
 		clear();
 		TagList value = new TagList("Recipes") {
+			@Override
 			public void askValue()
 			{}
 		};

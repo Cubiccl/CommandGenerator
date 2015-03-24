@@ -17,7 +17,7 @@ public class FireworksSelectionPanel extends HelperPanel
 
 	public FireworksSelectionPanel(String title)
 	{
-		super(CGConstants.DATAID_NONE, title);
+		super(title);
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class FireworksSelectionPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		spinnerFlight = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:fireworks.flight", -128, 127, null);
+		spinnerFlight = new NumberSpinner("GUI:fireworks.flight", -128, 127, null);
 		spinnerFlight.setSelected(0);
 
 		explosionsPanel = new ListSelectionPanel("TAGS:Explosions", CGConstants.OBJECT_TAG_EXPLOSION);
@@ -44,6 +44,7 @@ public class FireworksSelectionPanel extends HelperPanel
 	{
 
 		TagList tags = new TagList("Explosions") {
+			@Override
 			public void askValue()
 			{}
 		};
@@ -53,7 +54,7 @@ public class FireworksSelectionPanel extends HelperPanel
 
 	public int getFlight()
 	{
-		return (int) spinnerFlight.getValue();
+		return spinnerFlight.getValue();
 	}
 
 	public void setup(int flight, List<Tag> list)

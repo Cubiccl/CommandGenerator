@@ -1,11 +1,10 @@
 package commandGenerator.gui.helper.argumentSelection;
 
 import java.awt.Dimension;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import commandGenerator.arguments.objects.Entity;
 import commandGenerator.arguments.objects.ObjectBase;
@@ -27,14 +26,14 @@ public class EntitySelectionPanel extends HelperPanel implements IBox, ISave
 {
 
 	private CButton buttonSave, buttonLoad;
-	private Entity[] entityList;
 	private CComboBox combobox;
+	private Entity[] entityList;
 	private JLabel labelName, labelImage;
 	private NBTTagPanel panelData;
 
-	public EntitySelectionPanel(String id, String title, ObjectBase[] entityList)
+	public EntitySelectionPanel(String title, ObjectBase[] entityList)
 	{
-		super(id, title, entityList, null);
+		super(title, entityList, null);
 	}
 
 	@Override
@@ -54,14 +53,14 @@ public class EntitySelectionPanel extends HelperPanel implements IBox, ISave
 		labelImage = new JLabel();
 		labelImage.setPreferredSize(new Dimension(200, 200));
 		labelImage.setMinimumSize(new Dimension(200, 200));
-		labelName = new JLabel("", JLabel.CENTER);
+		labelName = new JLabel("", SwingConstants.CENTER);
 		labelName.setPreferredSize(new Dimension(200, 20));
 		labelName.setMinimumSize(new Dimension(200, 20));
 
 		buttonSave = new SaveButton(CGConstants.OBJECT_ENTITY, this);
 		buttonLoad = new LoadButton(CGConstants.OBJECT_ENTITY, this);
 
-		combobox = new CComboBox(CGConstants.DATAID_NONE, "GUI:entity.select", entityList, this);
+		combobox = new CComboBox("GUI:entity.select", entityList, this);
 
 		panelData = new NBTTagPanel("GUI:entity.tags", entityList[0], DataTags.entities);
 	}
@@ -80,16 +79,47 @@ public class EntitySelectionPanel extends HelperPanel implements IBox, ISave
 		return panelData.getNbtTags("Properties");
 	}
 
+	@Override
+	public Object getObjectToSave()
+	{
+		return panelData.getTagList();
+	}
+
 	public List<Tag> getTagList()
 	{
 		return panelData.getTagList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public void load(Object object)
+	{
+		this.setupFrom((Entity) DataTags.getObjectFromTags((List<Tag>) object));
+		this.panelData.setupFrom((List<Tag>) object);
+	}
+
+	public void setDataTags(List<Tag> list)
+	{
+		this.panelData.setupFrom(list);
+	}
+
+	@Override
 	public void setEnabledContent(boolean enable)
 	{
 		super.setEnabledContent(enable);
 		labelImage.setEnabled(enable);
 		labelName.setEnabled(enable);
+	}
+
+	public void setEntity(Entity entity)
+	{
+		this.combobox.setSelected(entity);
+	}
+
+	public void setSelected(Entity entity)
+	{
+		combobox.setSelected(entity);
+		updateCombobox();
 	}
 
 	@Override
@@ -102,11 +132,8 @@ public class EntitySelectionPanel extends HelperPanel implements IBox, ISave
 			this.entityList[i] = (Entity) list[i];
 	}
 
-	@Override
-	public void setupFrom(Map<String, Object> data)
+	public void setupFrom(Entity entity)
 	{
-		super.setupFrom(data);
-		Entity entity = (Entity) data.get(getPanelId());
 		if (entity == null)
 		{
 			reset();
@@ -119,7 +146,7 @@ public class EntitySelectionPanel extends HelperPanel implements IBox, ISave
 	@Override
 	public void updateCombobox()
 	{
-		panelData.updateCombobox((Entity) combobox.getValue());
+		panelData.updateCombobox(combobox.getValue());
 		labelImage.setIcon(getEntity().getTexture());
 		labelName.setText(getEntity().getName());
 	}
@@ -129,38 +156,6 @@ public class EntitySelectionPanel extends HelperPanel implements IBox, ISave
 	{
 		super.updateLang();
 		updateCombobox();
-	}
-
-	public void setSelected(Entity entity)
-	{
-		combobox.setSelected(entity);
-		updateCombobox();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public void load(Object object)
-	{
-		Map<String, Object> data = new HashMap<String, Object>();
-		data.put(getPanelId(), DataTags.getObjectFromTags((List<Tag>) object));
-		data.put(CGConstants.PANELID_NBT, object);
-		setupFrom(data);
-	}
-
-	@Override
-	public Object getObjectToSave()
-	{
-		return panelData.getTagList();
-	}
-
-	public void setEntity(Entity entity)
-	{
-		this.combobox.setSelected(entity);
-	}
-
-	public void setDataTags(List<Tag> list)
-	{
-		this.panelData.setupFrom(list);
 	}
 
 }

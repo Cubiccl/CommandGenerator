@@ -2,7 +2,6 @@ package commandGenerator.gui.helper.components.spinner;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.util.Map;
 
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -13,21 +12,18 @@ import javax.swing.event.ChangeListener;
 import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.icomponent.ISpin;
-import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class TextSpinner extends JPanel implements CComponent
 {
 
 	private String[] choices;
-	private String id;
 	private CLabel label;
 	private JSpinner spinner;
 
-	public TextSpinner(String id, String title, String[] choices, final ISpin parent)
+	public TextSpinner(String title, String[] choices, final ISpin parent)
 	{
 		super(new GridLayout(1, 2));
-		this.id = id;
 		this.choices = choices;
 
 		label = new CLabel(title);
@@ -35,6 +31,7 @@ public class TextSpinner extends JPanel implements CComponent
 		spinner.setPreferredSize(new Dimension(200, 20));
 		spinner.setMinimumSize(new Dimension(200, 20));
 		spinner.addChangeListener(new ChangeListener() {
+			@Override
 			public void stateChanged(ChangeEvent arg0)
 			{
 				if (parent != null) parent.updateSpinner();
@@ -50,27 +47,25 @@ public class TextSpinner extends JPanel implements CComponent
 		return (String) spinner.getValue();
 	}
 
+	@Override
 	public void reset()
 	{
 		spinner.setValue(choices[0]);
 	}
 
+	@Override
 	public void setEnabledContent(boolean enable)
 	{
 		label.setEnabledContent(enable);
 		spinner.setEnabled(enable);
 	}
 
-	public void setText(String id)
+	public void setTitle(String title)
 	{
-		label.setTitle(id);
+		label.setTitle(title);
 	}
 
-	public void setupFrom(Map<String, Object> data)
-	{
-		if (!id.equals(CGConstants.DATAID_NONE)) spinner.setValue(data.get(id));
-	}
-
+	@Override
 	public void updateLang()
 	{
 		label.updateLang();

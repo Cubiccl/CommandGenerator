@@ -67,10 +67,16 @@ public class Attribute
 		return type;
 	}
 
+	public String save()
+	{
+		return type.getId() + " " + amount + " " + operation;
+	}
+
 	/** @return TagCompound - A Tag version of the Attribute */
 	public TagCompound toNBT()
 	{
 		TagCompound tag = new TagCompound() {
+			@Override
 			public void askValue()
 			{}
 		};
@@ -83,11 +89,6 @@ public class Attribute
 		tag.addTag(new TagInt("UUIDLeast").setValue(100000));
 
 		return tag;
-	}
-
-	public String save()
-	{
-		return type.getId() + " " + amount + " " + operation;
 	}
 
 }

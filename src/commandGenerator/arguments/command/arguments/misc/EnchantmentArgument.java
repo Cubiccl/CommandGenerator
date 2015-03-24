@@ -21,6 +21,14 @@ public class EnchantmentArgument extends Argument
 	}
 
 	@Override
+	public String generateCommand()
+	{
+		Enchantment enchant = this.panel.generateEnchantment();
+		if (enchant == null) return null;
+		return enchant.getType().getId() + " " + enchant.getLevel();
+	}
+
+	@Override
 	public Component generateComponent()
 	{
 		return this.panel;
@@ -29,15 +37,7 @@ public class EnchantmentArgument extends Argument
 	@Override
 	public void initGui()
 	{
-		this.panel = new EnchantSelectionPanel(this.getId(), "GENERAL:enchant", true);
-	}
-
-	@Override
-	public String generateCommand()
-	{
-		Enchantment enchant = this.panel.generateEnchantment();
-		if (enchant == null) return null;
-		return enchant.getType().getId() + " " + enchant.getLevel();
+		this.panel = new EnchantSelectionPanel("GENERAL:enchant", true);
 	}
 
 	@Override

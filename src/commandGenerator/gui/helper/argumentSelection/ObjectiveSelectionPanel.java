@@ -25,7 +25,7 @@ public class ObjectiveSelectionPanel extends HelperPanel
 
 	public ObjectiveSelectionPanel(String title)
 	{
-		super(CGConstants.PANELID_OPTIONS, title);
+		super(title);
 	}
 
 	@Override
@@ -39,9 +39,9 @@ public class ObjectiveSelectionPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		comboboxMain = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:criteria", criteriaList.length);
-		comboboxPrecise = new CComboBox(CGConstants.DATAID_NONE, "", new ObjectBase[0], null);
-		comboboxPrecise2 = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:color", 16);
+		comboboxMain = new LangComboBox("RESOURCES:criteria", criteriaList.length);
+		comboboxPrecise = new CComboBox("", new ObjectBase[0], null);
+		comboboxPrecise2 = new LangComboBox("RESOURCES:color", 16);
 		comboboxPrecise2.setVisible(false);
 	}
 
@@ -61,10 +61,35 @@ public class ObjectiveSelectionPanel extends HelperPanel
 	{
 		int index = comboboxMain.getSelectedIndex();
 		if (index < 6) return criteriaList[index];
-		if (index >= 7 && index <= 10) return criteriaList[index] + ".minecraft." + ((String) comboboxPrecise.getValue().getId());
-		if (index == 6 || index == 11 || index == 12) return criteriaList[index] + "." + ((String) comboboxPrecise.getValue().getId());
+		if (index >= 7 && index <= 10) return criteriaList[index] + ".minecraft." + (comboboxPrecise.getValue().getId());
+		if (index == 6 || index == 11 || index == 12) return criteriaList[index] + "." + (comboboxPrecise.getValue().getId());
 		if (index == 13) return criteriaList[index] + "." + statList[comboboxPrecise2.getSelectedIndex()];
 		return criteriaList[index] + "." + Resources.colors[comboboxPrecise2.getSelectedIndex()];
+	}
+
+	public void setSelected(String criteria)
+	{
+		for (int i = 0; i < criteriaList.length; i++)
+		{
+			if (criteria.startsWith(criteriaList[i]))
+			{
+				comboboxMain.setSelectedIndex(i);
+				criteria = criteria.substring(criteriaList[i].length());
+				break;
+			}
+		}
+		setupChoices();
+		int index = comboboxMain.getSelectedIndex();
+
+		if (index >= 6 && index <= 12) comboboxPrecise.setSelected(Registry.getObjectFromId(criteria.substring(1)));
+		if (index == 13)
+		{
+			for (int i = 0; i < statList.length; i++)
+				if (criteria.substring(1).equals(statList[i])) comboboxPrecise2.setSelectedIndex(i);
+		}
+		if (index >= 14) for (int i = 0; i < Resources.colors.length; i++)
+			if (criteria.substring(1).equals(Resources.colors[i])) comboboxPrecise2.setSelectedIndex(i);
+
 	}
 
 	private void setupChoices()
@@ -95,31 +120,6 @@ public class ObjectiveSelectionPanel extends HelperPanel
 
 			comboboxPrecise.setData(itemList);
 		}
-	}
-
-	public void setSelected(String criteria)
-	{
-		for (int i = 0; i < criteriaList.length; i++)
-		{
-			if (criteria.startsWith(criteriaList[i]))
-			{
-				comboboxMain.setSelectedIndex(i);
-				criteria = criteria.substring(criteriaList[i].length());
-				break;
-			}
-		}
-		setupChoices();
-		int index = comboboxMain.getSelectedIndex();
-
-		if (index >= 6 && index <= 12) comboboxPrecise.setSelected(Registry.getObjectFromId(criteria.substring(1)));
-		if (index == 13)
-		{
-			for (int i = 0; i < statList.length; i++)
-				if (criteria.substring(1).equals(statList[i])) comboboxPrecise2.setSelectedIndex(i);
-		}
-		if (index >= 14) for (int i = 0; i < Resources.colors.length; i++)
-			if (criteria.substring(1).equals(Resources.colors[i])) comboboxPrecise2.setSelectedIndex(i);
-
 	}
 
 }

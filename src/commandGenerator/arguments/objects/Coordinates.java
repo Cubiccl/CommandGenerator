@@ -11,8 +11,6 @@ public class Coordinates
 {
 
 	public static final int X = 0, Y = 1, Z = 2;
-	private boolean isFloat;
-
 	/** Generates Coordinates from command structure. */
 	public static Coordinates generateFrom(String x, String y, String z)
 	{
@@ -77,13 +75,15 @@ public class Coordinates
 
 	}
 
+	private boolean isFloat;
+
 	/** Details about this Coordinates. */
 	private boolean isRotation;
 
+	private boolean[] relativeness;
+
 	/** The Coordinates' positions. */
 	private double x, y, z;
-
-	private boolean[] relativeness;
 
 	/** The Coordinates rotations. */
 	private float xRotation, yRotation;
@@ -171,13 +171,6 @@ public class Coordinates
 		}
 	}
 
-	/** Returns true if this Coordinates are relative. */
-	public boolean isRelative(int coord)
-	{
-		if (coord > 2 || coord < 0) return false;
-		return relativeness[coord];
-	}
-
 	public float getRot(int rot)
 	{
 		switch (rot)
@@ -197,14 +190,11 @@ public class Coordinates
 		return isRotation;
 	}
 
-	/** Turns the Coordinates into a TagList. */
-	public List<Tag> toTagPos()
+	/** Returns true if this Coordinates are relative. */
+	public boolean isRelative(int coord)
 	{
-		List<Tag> tag = new ArrayList<Tag>();
-		tag.add(new TagDouble().setValue(x));
-		tag.add(new TagDouble().setValue(y));
-		tag.add(new TagDouble().setValue(z));
-		return tag;
+		if (coord > 2 || coord < 0) return false;
+		return relativeness[coord];
 	}
 
 	public String save()
@@ -213,6 +203,16 @@ public class Coordinates
 		if (isRotation) save += xRotation + " " + yRotation + " ";
 		save += relativeness[0] + " " + relativeness[1] + " " + relativeness[2] + " " + isFloat;
 		return save;
+	}
+
+	/** Turns the Coordinates into a TagList. */
+	public List<Tag> toTagPos()
+	{
+		List<Tag> tag = new ArrayList<Tag>();
+		tag.add(new TagDouble().setValue(x));
+		tag.add(new TagDouble().setValue(y));
+		tag.add(new TagDouble().setValue(z));
+		return tag;
 	}
 
 }

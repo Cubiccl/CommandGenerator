@@ -19,15 +19,15 @@ public class TargetArgument extends Argument
 	}
 
 	@Override
-	public Component generateComponent()
-	{
-		return this.panel;
-	}
-
-	@Override
 	public String generateCommand()
 	{
 		return this.panel.generateEntity().commandStructure();
+	}
+
+	@Override
+	public Component generateComponent()
+	{
+		return this.panel;
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class TargetArgument extends Argument
 	{
 		String title = "GUI:" + this.getId();
 		if (this.getId().startsWith("target")) title = "GENERAL:" + this.getId();
-		this.panel = new TargetSelectionPanel(this.getId(), title, this.mode);
+		this.panel = new TargetSelectionPanel(title, this.mode);
 	}
 
 	@Override

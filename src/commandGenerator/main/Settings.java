@@ -12,10 +12,16 @@ public class Settings
 
 	public static List<String[]> languages;
 
+	private static String getLangFromName(String langName)
+	{
+		for (int i = 0; i < languages.size(); i++) if (languages.get(i)[0].equalsIgnoreCase(langName)) return languages.get(i)[1];
+		return null;
+	}
 	/** Is it the first launch? */
 	public boolean firstLaunch;
 	/** The language selected by the user. */
 	private String language;
+
 	/** The previous version the program was launched with. */
 	public String previousVersion;
 
@@ -26,21 +32,6 @@ public class Settings
 		previousVersion = FileHelper.getOption("version");
 		firstLaunch = !previousVersion.equals(Resources.versions[Resources.versions.length - 1]);
 		createLangs();
-	}
-
-	private void createLangs()
-	{
-		languages = new ArrayList<String[]>();
-		try
-		{
-			Scanner sc = new Scanner(new File(Resources.folder + "downloads/langs.txt"));
-			while (sc.hasNextLine())
-				languages.add(sc.nextLine().split(","));
-			sc.close();
-
-		} catch (Exception e)
-		{}
-		if (!languages.contains(language) && languages.size() > 0) language = languages.get(0)[1];
 	}
 
 	/** Returns true if the version has already been updated.
@@ -58,6 +49,40 @@ public class Settings
 		return indexPrev >= indexVersion;
 	}
 
+	public void change()
+	{
+		SettingsPanel panel = new SettingsPanel();
+		DisplayHelper.showMessage(panel, Lang.get("GUI:menu.settings"));
+		
+		String newLang = getLangFromName(panel.getLang());
+		if (!language.equalsIgnoreCase(newLang)) setLanguage(newLang);
+		FileHelper.setOption("lang", newLang);
+		FileHelper.changePath(panel.getFolder());
+	}
+
+	private void createLangs()
+	{
+		languages = new ArrayList<String[]>();
+		try
+		{
+			Scanner sc = new Scanner(new File(Resources.folder + "downloads/langs.txt"));
+			while (sc.hasNextLine())
+				languages.add(sc.nextLine().split(","));
+			sc.close();
+
+		} catch (Exception e)
+		{}
+		if (!languages.contains(language) && languages.size() > 0) language = languages.get(0)[1];
+	}
+
+	public String[] getLangs()
+	{
+		String[] langs = new String[languages.size()];
+		for (int i = 0; i < langs.length; i++)
+			langs[i] = languages.get(i)[0];
+		return langs;
+	}
+
 	/** Returns the selected language. */
 	public String getLanguage()
 	{
@@ -73,31 +98,6 @@ public class Settings
 		this.language = language;
 		FileHelper.setOption("lang", language);
 		Lang.updateLang();
-	}
-
-	public void change()
-	{
-		SettingsPanel panel = new SettingsPanel();
-		DisplayHelper.showMessage(panel, Lang.get("GUI:menu.settings"));
-		
-		String newLang = getLangFromName(panel.getLang());
-		if (!language.equalsIgnoreCase(newLang)) setLanguage(newLang);
-		FileHelper.setOption("lang", newLang);
-		FileHelper.changePath(panel.getFolder());
-	}
-
-	private static String getLangFromName(String langName)
-	{
-		for (int i = 0; i < languages.size(); i++) if (languages.get(i)[0].equalsIgnoreCase(langName)) return languages.get(i)[1];
-		return null;
-	}
-
-	public String[] getLangs()
-	{
-		String[] langs = new String[languages.size()];
-		for (int i = 0; i < langs.length; i++)
-			langs[i] = languages.get(i)[0];
-		return langs;
 	}
 
 }

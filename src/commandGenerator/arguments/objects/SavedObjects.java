@@ -22,35 +22,21 @@ public class SavedObjects
 {
 	/** Map containing saved Objects. */
 	private static Map<Byte, Map<String, Object>> savedObjects = new HashMap<Byte, Map<String, Object>>();
+	public static final String[] typeNames = { "attribute", "effect", "enchant", "item", "block", "entity", "coordinate", "trade", "target" };
 	public static final byte[] types = { CGConstants.OBJECT_ATTRIBUTE, CGConstants.OBJECT_EFFECT, CGConstants.OBJECT_ENCHANT, CGConstants.OBJECT_ITEM,
 			CGConstants.OBJECT_BLOCK, CGConstants.OBJECT_ENTITY, CGConstants.OBJECT_COORD, CGConstants.OBJECT_TAG_TRADE, CGConstants.OBJECT_TARGET };
-	public static final String[] typeNames = { "attribute", "effect", "enchant", "item", "block", "entity", "coordinate", "trade", "target" };
 
-	public static void load()
+	public static void add(String name, byte type, Object object)
 	{
-		for (byte type : types)
-			savedObjects.put(type, new HashMap<String, Object>());
-
-		try
-		{
-			Scanner sc = new Scanner(new File(Resources.folder + "savedObjects.txt"));
-			while (sc.hasNextLine())
-			{
-				String line = sc.nextLine();
-				if (line != null && !line.equals("")) register(readData(line));
-			}
-
-			sc.close();
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		savedObjects.get(type).put(name, object);
+		save();
 	}
 
-	private static void register(String[] data)
+	public static Object askObjectToLoad(byte type)
 	{
-		byte type = Byte.parseByte(data[1]);
-		savedObjects.get(type).put(data[0], createObject(type, data[2]));
+		LoadPanel panel = new LoadPanel(type);
+		if (DisplayHelper.showQuestion(panel, Lang.get("GENERAL:load"))) return null;
+		return panel.getSelection();
 	}
 
 	private static Object createObject(byte type, String textData)
@@ -111,6 +97,7 @@ public class SavedObjects
 
 				case CGConstants.OBJECT_TAG_TRADE:
 					return new TagCompound() {
+						@Override
 						public void askValue()
 						{}
 					}.setValue(DataTags.generateListFrom(textData));
@@ -127,26 +114,6 @@ public class SavedObjects
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	private static String[] readData(String line)
-	{
-		String[] elements = line.split(" ; ");
-		List<String> data = new ArrayList<String>();
-
-		for (int i = 0; i < elements.length; i++)
-		{
-			if (i > 2) data.set(2, data.get(2) + " ; " + elements[i]);
-			else data.add(elements[i]);
-		}
-
-		return data.toArray(new String[0]);
-	}
-
-	public static void add(String name, byte type, Object object)
-	{
-		savedObjects.get(type).put(name, object);
-		save();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -169,6 +136,7 @@ public class SavedObjects
 
 			case CGConstants.OBJECT_ENTITY:
 				save = new TagCompound() {
+					@Override
 					public void askValue()
 					{}
 				}.setValue((List<Tag>) object).commandStructure();
@@ -209,6 +177,47 @@ public class SavedObjects
 		return savedObjects.get(type);
 	}
 
+	public static void load()
+	{
+		for (byte type : types)
+			savedObjects.put(type, new HashMap<String, Object>());
+
+		try
+		{
+			Scanner sc = new Scanner(new File(Resources.folder + "savedObjects.txt"));
+			while (sc.hasNextLine())
+			{
+				String line = sc.nextLine();
+				if (line != null && !line.equals("")) register(readData(line));
+			}
+
+			sc.close();
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	private static String[] readData(String line)
+	{
+		String[] elements = line.split(" ; ");
+		List<String> data = new ArrayList<String>();
+
+		for (int i = 0; i < elements.length; i++)
+		{
+			if (i > 2) data.set(2, data.get(2) + " ; " + elements[i]);
+			else data.add(elements[i]);
+		}
+
+		return data.toArray(new String[0]);
+	}
+
+	private static void register(String[] data)
+	{
+		byte type = Byte.parseByte(data[1]);
+		savedObjects.get(type).put(data[0], createObject(type, data[2]));
+	}
+
 	public static void remove(byte type, String name)
 	{
 		savedObjects.get(type).remove(name);
@@ -237,13 +246,6 @@ public class SavedObjects
 		{
 			e.printStackTrace();
 		}
-	}
-
-	public static Object askObjectToLoad(byte type)
-	{
-		LoadPanel panel = new LoadPanel(type);
-		if (DisplayHelper.showQuestion(panel, Lang.get("GENERAL:load"))) return null;
-		return panel.getSelection();
 	}
 
 }

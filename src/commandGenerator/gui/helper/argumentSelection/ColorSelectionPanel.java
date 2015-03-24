@@ -12,7 +12,6 @@ import javax.swing.event.ChangeListener;
 
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
-import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class ColorSelectionPanel extends HelperPanel
@@ -24,7 +23,7 @@ public class ColorSelectionPanel extends HelperPanel
 
 	public ColorSelectionPanel(String title)
 	{
-		super(CGConstants.NBTID_COLOR, title);
+		super(title);
 	}
 
 	@Override
@@ -91,6 +90,7 @@ public class ColorSelectionPanel extends HelperPanel
 		return (sliderRed.getValue() << 16) + (sliderGreen.getValue() << 8) + (sliderBlue.getValue());
 	}
 
+	@Override
 	public void setEnabledContent(boolean enable)
 	{
 		setEnabled(enable);

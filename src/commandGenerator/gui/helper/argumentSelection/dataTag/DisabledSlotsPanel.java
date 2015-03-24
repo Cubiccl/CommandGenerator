@@ -3,7 +3,6 @@ package commandGenerator.gui.helper.argumentSelection.dataTag;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
-import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class DisabledSlotsPanel extends HelperPanel
@@ -14,7 +13,7 @@ public class DisabledSlotsPanel extends HelperPanel
 
 	public DisabledSlotsPanel()
 	{
-		super(CGConstants.DATAID_NONE, "GUI:disabledslot.title");
+		super("GUI:disabledslot.title");
 	}
 
 	@Override
@@ -33,11 +32,11 @@ public class DisabledSlotsPanel extends HelperPanel
 	{
 		label = new CLabel("GUI:disabledslot.label");
 
-		hand = new CCheckBox(CGConstants.DATAID_NONE, "GUI:slot.hand");
-		feet = new CCheckBox(CGConstants.DATAID_NONE, "GUI:slot.feet");
-		legs = new CCheckBox(CGConstants.DATAID_NONE, "GUI:slot.legs");
-		chest = new CCheckBox(CGConstants.DATAID_NONE, "GUI:slot.chest");
-		head = new CCheckBox(CGConstants.DATAID_NONE, "GUI:slot.head");
+		hand = new CCheckBox("GUI:slot.hand");
+		feet = new CCheckBox("GUI:slot.feet");
+		legs = new CCheckBox("GUI:slot.legs");
+		chest = new CCheckBox("GUI:slot.chest");
+		head = new CCheckBox("GUI:slot.head");
 	}
 
 	@Override

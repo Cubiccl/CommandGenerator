@@ -20,6 +20,16 @@ public class JsonArgument extends Argument
 	}
 
 	@Override
+	public String generateCommand()
+	{
+		return new TagList() {
+			@Override
+			public void askValue()
+			{}
+		}.setValue(this.panel.getList()).commandStructure();
+	}
+
+	@Override
 	public Component generateComponent()
 	{
 		return this.panel;
@@ -29,15 +39,6 @@ public class JsonArgument extends Argument
 	public void initGui()
 	{
 		this.panel = new ListSelectionPanel("GUI:" + this.getId(), CGConstants.OBJECT_JSON);
-	}
-
-	@Override
-	public String generateCommand()
-	{
-		return new TagList() {
-			public void askValue()
-			{}
-		}.setValue(this.panel.getList()).commandStructure();
 	}
 
 	@Override

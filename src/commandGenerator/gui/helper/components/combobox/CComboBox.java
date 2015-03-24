@@ -9,7 +9,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -19,7 +18,6 @@ import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.icomponent.IBox;
-import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class CComboBox extends JPanel implements CComponent
@@ -27,13 +25,12 @@ public class CComboBox extends JPanel implements CComponent
 
 	private JComboBox<String> box;
 	private List<ObjectBase> displayed = new ArrayList<ObjectBase>();
-	private String id;
 	private CLabel label;
 	private ObjectBase[] objects;
 	private IBox parent;
 	private JTextField text;
 
-	public CComboBox(String id, String title, ObjectBase[] objects, IBox parent)
+	public CComboBox(String title, ObjectBase[] objects, IBox parent)
 	{
 		super(new GridBagLayout());
 
@@ -46,14 +43,17 @@ public class CComboBox extends JPanel implements CComponent
 
 		text = new JTextField(18);
 		text.addKeyListener(new KeyListener() {
+			@Override
 			public void keyPressed(KeyEvent arg0)
 			{}
 
+			@Override
 			public void keyReleased(KeyEvent e)
 			{
 				search(e);
 			}
 
+			@Override
 			public void keyTyped(KeyEvent arg0)
 			{}
 		});
@@ -64,6 +64,7 @@ public class CComboBox extends JPanel implements CComponent
 
 		box = new JComboBox<String>(names);
 		box.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
 				boxSelect();
@@ -74,7 +75,6 @@ public class CComboBox extends JPanel implements CComponent
 
 		this.objects = objects;
 		this.parent = parent;
-		this.id = id;
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
@@ -171,6 +171,7 @@ public class CComboBox extends JPanel implements CComponent
 		box.setPreferredSize(new Dimension(200, 20));
 	}
 
+	@Override
 	public void setEnabledContent(boolean enable)
 	{
 		label.setEnabled(enable);
@@ -184,11 +185,7 @@ public class CComboBox extends JPanel implements CComponent
 		box.setSelectedItem(object.getName());
 	}
 
-	public void setupFrom(Map<String, Object> data)
-	{
-		if (!id.equals(CGConstants.DATAID_NONE)) setSelected((ObjectBase) data.get(id));
-	}
-
+	@Override
 	public void updateLang()
 	{
 		label.updateLang();

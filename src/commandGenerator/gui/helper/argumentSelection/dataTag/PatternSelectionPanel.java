@@ -13,7 +13,6 @@ import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.combobox.LangComboBox;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
-import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Resources;
 
@@ -21,17 +20,17 @@ import commandGenerator.main.Resources;
 public class PatternSelectionPanel extends HelperPanel
 {
 
+	private static final String[] patternIds = { "bs", "ts", "ls", "rs", "ms", "cs", "ss", "drs", "dls", "cr", "sc", "ld", "rd", "hh", "vh", "bl", "br", "tl",
+			"tr", "bt", "tt", "bts", "tts", "mc", "mr", "bo", "cbo", "bri", "cre", "sku", "flo", "moj", "gra" };
+
 	private LangComboBox comboboxColor, comboboxPattern;
 
 	private CLabel labelColor, labelPattern;
-
 	private JLabel labelImage;
-	private static final String[] patternIds = { "bs", "ts", "ls", "rs", "ms", "cs", "ss", "drs", "dls", "cr", "sc", "ld", "rd", "hh", "vh", "bl", "br", "tl", "tr", "bt",
-			"tt", "bts", "tts", "mc", "mr", "bo", "cbo", "bri", "cre", "sku", "flo", "moj", "gra" };
 
 	public PatternSelectionPanel()
 	{
-		super(CGConstants.DATAID_NONE, "TAG:pattern");
+		super("TAG:pattern");
 	}
 
 	@Override
@@ -56,8 +55,8 @@ public class PatternSelectionPanel extends HelperPanel
 			DisplayHelper.missingTexture("textures/banners/bs.png");
 		}
 
-		comboboxColor = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:color_wool", 16);
-		comboboxPattern = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:pattern", patternIds.length);
+		comboboxColor = new LangComboBox("RESOURCES:color_wool", 16);
+		comboboxPattern = new LangComboBox("RESOURCES:pattern", patternIds.length);
 	}
 
 	@Override
@@ -81,6 +80,7 @@ public class PatternSelectionPanel extends HelperPanel
 	public TagCompound getPattern()
 	{
 		TagCompound tag = new TagCompound() {
+			@Override
 			public void askValue()
 			{}
 		};

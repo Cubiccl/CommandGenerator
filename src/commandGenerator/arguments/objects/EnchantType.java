@@ -56,6 +56,7 @@ public class EnchantType extends ObjectBase
 	}
 
 	/** Returns this Enchantment's name. */
+	@Override
 	public String getName()
 	{
 		return Lang.get("ENCHANTS:" + getId());

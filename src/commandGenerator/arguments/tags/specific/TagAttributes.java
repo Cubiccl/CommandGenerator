@@ -27,6 +27,7 @@ public class TagAttributes extends TagList
 		if (forMob)
 		{
 			TagList list = new TagList("Modifiers") {
+				@Override
 				public void askValue()
 				{}
 			}.setValue(new ArrayList<Tag>());
@@ -56,6 +57,7 @@ public class TagAttributes extends TagList
 		}
 
 		TagList list = new TagList("Modifiers") {
+			@Override
 			public void askValue()
 			{}
 		};
@@ -67,12 +69,6 @@ public class TagAttributes extends TagList
 		tag.add(new TagDouble("Base").setValue(1.0d));
 
 		setValue(tag);
-	}
-
-	private List<Tag> getAttributes(List<Tag> value)
-	{
-		for (int i = 0; i < value.size(); i++) if (value.get(i).getId().equals("Modifiers")) return ((TagList) value.get(i)).getValue();
-		return new ArrayList<Tag>();
 	}
 
 	@Override
@@ -124,6 +120,12 @@ public class TagAttributes extends TagList
 		}
 
 		return text;
+	}
+
+	private List<Tag> getAttributes(List<Tag> value)
+	{
+		for (int i = 0; i < value.size(); i++) if (value.get(i).getId().equals("Modifiers")) return ((TagList) value.get(i)).getValue();
+		return new ArrayList<Tag>();
 	}
 
 }

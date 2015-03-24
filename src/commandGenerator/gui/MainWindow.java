@@ -51,6 +51,7 @@ public class MainWindow extends JFrame
 		setJMenuBar(menubar);
 
 		addWindowStateListener(new WindowStateListener() {
+			@Override
 			public void windowStateChanged(WindowEvent arg0)
 			{
 				panelGeneral.setSize(new Dimension(getSize().width - 10, getSize().height - 10));

@@ -12,15 +12,15 @@ public abstract class Argument
 	/** The Argument ID. */
 	private final String id;
 
-	/** The Argument type. */
-	private final byte type;
-
 	/** Whether this argument is compulsery. */
 	private final boolean isCompulsery;
-	private boolean isGuiInit;
 
+	private boolean isGuiInit;
 	/** The number of elements this Argument needs. */
 	private int length, maxLength;
+
+	/** The Argument type. */
+	private final byte type;
 
 	public Argument(String id, byte type, boolean isCompulsery, int length)
 	{
@@ -32,30 +32,9 @@ public abstract class Argument
 		this.maxLength = length;
 	}
 
-	public String getId()
-	{
-		return this.id;
-	}
+	public abstract String generateCommand();
 
-	public boolean isCompulsery()
-	{
-		return this.isCompulsery;
-	}
-
-	public byte getType()
-	{
-		return this.type;
-	}
-
-	public int getLength()
-	{
-		return this.length;
-	}
-
-	public void setMaximumLength(int maxLength)
-	{
-		this.maxLength = maxLength;
-	}
+	public abstract Component generateComponent();
 
 	public Component getComponent()
 	{
@@ -67,20 +46,41 @@ public abstract class Argument
 		return generateComponent();
 	}
 
-	public abstract Component generateComponent();
+	public String getId()
+	{
+		return this.id;
+	}
 
-	public abstract void initGui();
-
-	public abstract String generateCommand();
-
-	public abstract boolean isUsed();
+	public int getLength()
+	{
+		return this.length;
+	}
 
 	public int getMaximumLength()
 	{
 		return this.maxLength;
 	}
 
+	public byte getType()
+	{
+		return this.type;
+	}
+
+	public abstract void initGui();
+
+	public boolean isCompulsery()
+	{
+		return this.isCompulsery;
+	}
+
+	public abstract boolean isUsed();
+
 	public abstract boolean matches(List<String> data);
+
+	public void setMaximumLength(int maxLength)
+	{
+		this.maxLength = maxLength;
+	}
 
 	public abstract void setupFrom(List<String> data);
 }

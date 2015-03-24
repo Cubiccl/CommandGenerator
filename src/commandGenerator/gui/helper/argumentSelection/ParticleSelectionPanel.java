@@ -1,7 +1,5 @@
 package commandGenerator.gui.helper.argumentSelection;
 
-import java.util.Map;
-
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Particle;
@@ -24,7 +22,7 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 
 	public ParticleSelectionPanel()
 	{
-		super(CGConstants.PANELID_PARTICLE, "GENERAL:particle");
+		super("GENERAL:particle");
 	}
 
 	@Override
@@ -40,11 +38,11 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 		ObjectBase[] list = Registry.getObjectList(CGConstants.OBJECT_PARTICLE);
 		buttonHelp = new HelpButton(((Particle) list[0]).getDescription(), list[0].getName());
 
-		comboboxParticle = new CComboBox(this.getPanelId(), "GENERAL:particle", Registry.getObjectList(CGConstants.OBJECT_PARTICLE), this);
+		comboboxParticle = new CComboBox("GENERAL:particle", Registry.getObjectList(CGConstants.OBJECT_PARTICLE), this);
 
-		panelBlock = new BlockSelectionPanel(CGConstants.PANELID_BLOCK, "GUI:particle.block", Registry.getList(CGConstants.LIST_BLOCKS), false);
+		panelBlock = new BlockSelectionPanel("GUI:particle.block", Registry.getList(CGConstants.LIST_BLOCKS), false);
 		panelBlock.setVisible(false);
-		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:particle.item", Registry.getList(CGConstants.LIST_ICONS), false, false);
+		panelItem = new ItemSelectionPanel("GUI:particle.item", Registry.getList(CGConstants.LIST_ICONS), false, false);
 		panelItem.setVisible(false);
 	}
 
@@ -56,6 +54,15 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 	{
 		DisplayHelper.log("Generating particle");
 		return (Particle) comboboxParticle.getValue();
+	}
+
+	public String generateParticleId()
+	{
+		Particle particle = (Particle) comboboxParticle.getValue();
+		if (particle == null) return null;
+		if (particle.getParticleType() == Particle.BLOCK || particle.getParticleType() == Particle.ITEM) return particle.getId() + "_"
+				+ this.getItemProperties(particle.getParticleType() == Particle.ITEM);
+		return particle.getId();
 	}
 
 	public int getDamage()
@@ -77,10 +84,9 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 		return Integer.toString(value);
 	}
 
-	@Override
-	public void setupFrom(Map<String, Object> data)
+	public void setSelected(Particle particle)
 	{
-		super.setupFrom(data);
+		this.comboboxParticle.setSelected(particle);
 	}
 
 	@Override
@@ -89,19 +95,5 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 		panelBlock.setVisible(((Particle) comboboxParticle.getValue()).getParticleType() == Particle.BLOCK);
 		panelItem.setVisible(((Particle) comboboxParticle.getValue()).getParticleType() == Particle.ITEM);
 		buttonHelp.setData(((Particle) comboboxParticle.getValue()).getDescription(), comboboxParticle.getValue().getName());
-	}
-
-	public String generateParticleId()
-	{
-		Particle particle = (Particle) comboboxParticle.getValue();
-		if (particle == null) return null;
-		if (particle.getParticleType() == Particle.BLOCK || particle.getParticleType() == Particle.ITEM) return particle.getId() + "_"
-				+ this.getItemProperties(particle.getParticleType() == Particle.ITEM);
-		return particle.getId();
-	}
-
-	public void setSelected(Particle particle)
-	{
-		this.comboboxParticle.setSelected(particle);
 	}
 }

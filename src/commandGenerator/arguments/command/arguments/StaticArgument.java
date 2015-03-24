@@ -17,6 +17,12 @@ public class StaticArgument extends Argument
 	}
 
 	@Override
+	public String generateCommand()
+	{
+		return this.value;
+	}
+
+	@Override
 	public Component generateComponent()
 	{
 		return null;
@@ -25,12 +31,6 @@ public class StaticArgument extends Argument
 	@Override
 	public void initGui()
 	{}
-
-	@Override
-	public String generateCommand()
-	{
-		return this.value;
-	}
 
 	@Override
 	public boolean isUsed()

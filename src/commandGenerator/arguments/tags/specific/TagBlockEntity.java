@@ -1,13 +1,9 @@
 package commandGenerator.arguments.tags.specific;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.dataTag.NBTTagPanel;
-import commandGenerator.main.CGConstants;
 
 public class TagBlockEntity extends TagCompound
 {
@@ -24,9 +20,7 @@ public class TagBlockEntity extends TagCompound
 	{
 		panel = new NBTTagPanel("TAG:" + getId(), item, DataTags.blocks);
 		((NBTTagPanel) panel).updateCombobox(item);
-		Map<String, Object> data = new HashMap<String, Object>();
-		data.put(CGConstants.PANELID_NBT, getValue());
-		((NBTTagPanel) panel).setupFrom(data);
+		((NBTTagPanel) panel).setupFrom(this.getValue());
 		if (showPanel()) return;
 		setValue(((NBTTagPanel) panel).getTagList());
 	}

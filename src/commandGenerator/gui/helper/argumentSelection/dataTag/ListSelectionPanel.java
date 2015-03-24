@@ -5,9 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
@@ -19,6 +17,9 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import commandGenerator.arguments.objects.Attribute;
+import commandGenerator.arguments.objects.Effect;
+import commandGenerator.arguments.objects.Enchantment;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
@@ -49,9 +50,9 @@ public class ListSelectionPanel extends HelperPanel
 	private JScrollPane scrollpane, scrolllist;
 	private int type;
 
-	public ListSelectionPanel(String id, int type, Object... list)
+	public ListSelectionPanel(String title, int type, Object... list)
 	{
-		super(CGConstants.DATAID_NONE, id, type, list);
+		super(title, type, list);
 	}
 
 	private void add()
@@ -66,13 +67,13 @@ public class ListSelectionPanel extends HelperPanel
 				break;
 
 			case CGConstants.OBJECT_EFFECT:
-				EffectSelectionPanel panelEf = new EffectSelectionPanel(CGConstants.DATAID_NONE, "GENERAL:effect");
+				EffectSelectionPanel panelEf = new EffectSelectionPanel("GENERAL:effect");
 				if (DisplayHelper.showQuestion(panelEf, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:effect")))) return;
 				objects.add(panelEf.generateEffect());
 				break;
 
 			case CGConstants.OBJECT_ENCHANT:
-				EnchantSelectionPanel panelEn = new EnchantSelectionPanel(CGConstants.DATAID_NONE, "GENERAL:enchant", false);
+				EnchantSelectionPanel panelEn = new EnchantSelectionPanel("GENERAL:enchant", false);
 				if (DisplayHelper.showQuestion(panelEn, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:enchant")))) return;
 				if (panelEn.generateEnchantment() == null) return;
 				objects.add(panelEn.generateEnchantment());
@@ -89,7 +90,7 @@ public class ListSelectionPanel extends HelperPanel
 				Item[] items = new Item[list.length];
 				for (int i = 0; i < items.length; i++)
 					items[i] = (Item) list[i];
-				ItemSelectionPanel panelI = new ItemSelectionPanel(CGConstants.DATAID_NONE, "GENERAL:item", items, true, true);
+				ItemSelectionPanel panelI = new ItemSelectionPanel("GENERAL:item", items, true, true);
 				if (DisplayHelper.showQuestion(panelI, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:item")))) return;
 				objects.add(panelI.getItemStack());
 				break;
@@ -186,24 +187,28 @@ public class ListSelectionPanel extends HelperPanel
 	protected void createListeners()
 	{
 		buttonAdd.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				add();
 			}
 		});
 		buttonEdit.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				edit();
 			}
 		});
 		buttonRemove.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
 				remove();
 			}
 		});
 		jlist.addListSelectionListener(new ListSelectionListener() {
+			@Override
 			public void valueChanged(ListSelectionEvent e)
 			{
 				display();
@@ -220,13 +225,11 @@ public class ListSelectionPanel extends HelperPanel
 	{
 		int nbr = jlist.getSelectedIndex();
 		if (nbr == -1) return;
-		Map<String, Object> map = new HashMap<String, Object>();
 		switch (type)
 		{
 			case CGConstants.OBJECT_ATTRIBUTE:
 				AttributeSelectionPanel panelA = new AttributeSelectionPanel();
-				map.put(CGConstants.PANELID_OPTIONS, objects.get(nbr));
-				panelA.setupFrom(map);
+				panelA.setupFrom((Attribute) objects.get(nbr));
 
 				if (DisplayHelper.showQuestion(panelA, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:attribute")))) return;
 				if (panelA.getAttribute() == null) return;
@@ -234,18 +237,16 @@ public class ListSelectionPanel extends HelperPanel
 				break;
 
 			case CGConstants.OBJECT_EFFECT:
-				EffectSelectionPanel panelEf = new EffectSelectionPanel(CGConstants.PANELID_EFFECT, "GENERAL:effect");
-				map.put(CGConstants.PANELID_EFFECT, objects.get(nbr));
-				panelEf.setupFrom(map);
+				EffectSelectionPanel panelEf = new EffectSelectionPanel("GENERAL:effect");
+				panelEf.setupFrom((Effect) objects.get(nbr));
 
 				if (DisplayHelper.showQuestion(panelEf, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:effect")))) return;
 				objects.set(nbr, panelEf.generateEffect());
 				break;
 
 			case CGConstants.OBJECT_ENCHANT:
-				EnchantSelectionPanel panelEn = new EnchantSelectionPanel(CGConstants.PANELID_ENCHANT, "GENERAL:enchant", false);
-				map.put(CGConstants.PANELID_ENCHANT, objects.get(nbr));
-				panelEn.setupFrom(map);
+				EnchantSelectionPanel panelEn = new EnchantSelectionPanel("GENERAL:enchant", false);
+				panelEn.setupFrom((Enchantment) objects.get(nbr));
 
 				if (DisplayHelper.showQuestion(panelEn, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:enchant")))) return;
 				if (panelEn.generateEnchantment() == null) return;
@@ -265,11 +266,8 @@ public class ListSelectionPanel extends HelperPanel
 				Item[] items = new Item[list.length];
 				for (int i = 0; i < items.length; i++)
 					items[i] = (Item) list[i];
-				ItemSelectionPanel panelI = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GENERAL:item", items, true, true);
-				ItemStack stack = (ItemStack) objects.get(nbr);
-				map.put(CGConstants.PANELID_ITEM,
-						ItemStack.generateFrom(stack.getItem().getId(), stack.getDamage(), stack.getCount(), stack.getTag().getValue(), stack.getSlot()));
-				panelI.setupFrom(map);
+				ItemSelectionPanel panelI = new ItemSelectionPanel("GENERAL:item", items, true, true);
+				panelI.setupFrom((ItemStack) objects.get(nbr));
 
 				if (DisplayHelper.showQuestion(panelI, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:item")))) return;
 				objects.set(nbr, panelI.getItemStack());
@@ -281,8 +279,7 @@ public class ListSelectionPanel extends HelperPanel
 
 			case CGConstants.OBJECT_TAG_TRADE:
 				TradeSelectionPanel panelT = new TradeSelectionPanel("GENERAL:trade");
-				map.put(CGConstants.PANELID_OPTIONS, objects.get(nbr));
-				panelT.setupFrom(map);
+				panelT.setupFrom((TagCompound) objects.get(nbr));
 
 				JScrollPane scrollpaneT = new JScrollPane(panelT);
 				scrollpaneT.getVerticalScrollBar().setUnitIncrement(20);

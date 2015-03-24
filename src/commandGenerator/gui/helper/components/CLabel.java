@@ -1,7 +1,5 @@
 package commandGenerator.gui.helper.components;
 
-import java.util.Map;
-
 import javax.swing.JLabel;
 
 import commandGenerator.main.Lang;
@@ -11,13 +9,13 @@ public class CLabel extends JLabel implements CComponent
 {
 
 	private boolean html;
-	private String id;
+	private String title;
 
-	public CLabel(String id)
+	public CLabel(String title)
 	{
-		super(id);
-		this.id = id;
-		setText(Lang.get(id));
+		super(title);
+		this.title = title;
+		setText(Lang.get(title));
 		this.html = false;
 	}
 
@@ -32,6 +30,7 @@ public class CLabel extends JLabel implements CComponent
 	public void reset()
 	{}
 
+	@Override
 	public void setEnabledContent(boolean enable)
 	{
 		setEnabled(enable);
@@ -39,17 +38,15 @@ public class CLabel extends JLabel implements CComponent
 
 	public void setTitle(String id)
 	{
-		this.id = id;
+		this.title = id;
 		updateLang();
 	}
 
-	public void setupFrom(Map<String, Object> data)
-	{}
-
+	@Override
 	public void updateLang()
 	{
-		if (html) setText("<html>" + Lang.get(id).replaceAll("\n", "<br />") + "</html>");
-		else setText(Lang.get(id));
+		if (html) setText("<html>" + Lang.get(title).replaceAll("\n", "<br />") + "</html>");
+		else setText(Lang.get(title));
 	}
 
 }

@@ -18,6 +18,7 @@ public class AttributeType extends ObjectBase
 	}
 
 	/** Returns this Attribute's name. */
+	@Override
 	public String getName()
 	{
 		return Lang.get("ATTRIBUTES:" + getId());

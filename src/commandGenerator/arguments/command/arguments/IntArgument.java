@@ -17,10 +17,10 @@ import commandGenerator.main.Lang;
 public class IntArgument extends Argument
 {
 
-	private boolean hasHelp;
-	private CEntry entry;
 	private JCheckBox box;
 	private HelpButton button;
+	private CEntry entry;
+	private boolean hasHelp;
 	private int min, max, defaultValue;
 
 	public IntArgument(String id, boolean isCompulsery)
@@ -32,32 +32,10 @@ public class IntArgument extends Argument
 		this.defaultValue = 0;
 	}
 
-	@Override
-	public Component generateComponent()
+	public IntArgument addHelpButton()
 	{
-		JPanel panel = new JPanel();
-		if (!this.isCompulsery()) panel.add(this.box);
-		if (this.hasHelp) panel.add(this.button);
-		panel.add(this.entry);
-		return panel;
-	}
-
-	@Override
-	public void initGui()
-	{
-		this.entry = new CEntry(this.getId(), "GUI:" + this.getId(), String.valueOf(defaultValue));
-		this.box = new JCheckBox();
-		if (this.hasHelp) this.button = new HelpButton(Lang.get("HELP:" + this.getId()), "");
-		if (!this.isCompulsery())
-		{
-			this.box.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0)
-				{
-					entry.setEnabledContent(box.isSelected());
-				}
-			});
-			entry.setEnabledContent(false);
-		}
+		this.hasHelp = true;
+		return this;
 	}
 
 	@Override
@@ -80,29 +58,39 @@ public class IntArgument extends Argument
 		return value;
 	}
 
-	public IntArgument addHelpButton()
+	@Override
+	public Component generateComponent()
 	{
-		this.hasHelp = true;
-		return this;
+		JPanel panel = new JPanel();
+		if (!this.isCompulsery()) panel.add(this.box);
+		if (this.hasHelp) panel.add(this.button);
+		panel.add(this.entry);
+		return panel;
+	}
+
+	@Override
+	public void initGui()
+	{
+		this.entry = new CEntry("GUI:" + this.getId(), String.valueOf(defaultValue));
+		this.box = new JCheckBox();
+		if (this.hasHelp) this.button = new HelpButton(Lang.get("HELP:" + this.getId()), "");
+		if (!this.isCompulsery())
+		{
+			this.box.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0)
+				{
+					entry.setEnabledContent(box.isSelected());
+				}
+			});
+			entry.setEnabledContent(false);
+		}
 	}
 
 	@Override
 	public boolean isUsed()
 	{
 		return this.isCompulsery() || this.box.isSelected();
-	}
-
-	public IntArgument setBounds(int minValue, int maxValue)
-	{
-		this.min = minValue;
-		this.max = maxValue;
-		return this;
-	}
-
-	public IntArgument setDefaultValue(int defaultValue)
-	{
-		this.defaultValue = defaultValue;
-		return this;
 	}
 
 	@Override
@@ -117,6 +105,19 @@ public class IntArgument extends Argument
 			return false;
 		}
 		return true;
+	}
+
+	public IntArgument setBounds(int minValue, int maxValue)
+	{
+		this.min = minValue;
+		this.max = maxValue;
+		return this;
+	}
+
+	public IntArgument setDefaultValue(int defaultValue)
+	{
+		this.defaultValue = defaultValue;
+		return this;
 	}
 
 	@Override

@@ -1,16 +1,13 @@
 package commandGenerator.arguments.tags.specific;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagDouble;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
-import commandGenerator.main.CGConstants;
 
 public class TagPos extends TagList
 {
@@ -28,13 +25,10 @@ public class TagPos extends TagList
 	@Override
 	public void askValue()
 	{
-		panel = new CoordSelectionPanel(CGConstants.PANELID_COORDS, "TAGS:" + getId(), false, false);
+		panel = new CoordSelectionPanel("TAGS:" + getId(), false, false);
 
 		double x = ((TagDouble) getValue().get(0)).getValue(), y = ((TagDouble) getValue().get(1)).getValue(), z = ((TagDouble) getValue().get(2)).getValue();
-		Coordinates coords = new Coordinates(x, y, z, true);
-		Map<String, Object> data = new HashMap<String, Object>();
-		data.put(CGConstants.PANELID_COORDS, coords);
-		((CoordSelectionPanel) panel).setupFrom(data);
+		((CoordSelectionPanel) panel).setupFrom(new Coordinates(x, y, z, true));
 
 		if (showPanel()) return;
 		if (((CoordSelectionPanel) panel).generateCoord() == null) return;

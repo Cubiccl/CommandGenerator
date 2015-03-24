@@ -60,6 +60,20 @@ public class Registry
 
 	}
 
+	public static boolean exists(String id, byte objectType)
+	{
+		return objects.get(objectType).containsKey(id);
+	}
+
+	/** Returns a Command from its ID.
+	 * 
+	 * @param id
+	 *            - <i>String</i> - The Command's ID. */
+	public static Command getCommandFromId(String id)
+	{
+		return commands.get(id);
+	}
+
 	/** Returns an array containing all registered commands. */
 	public static Command[] getCommands()
 	{
@@ -69,6 +83,7 @@ public class Registry
 			commandList.add(commandArray[i]);
 
 		commandList.sort(new Comparator<Command>() {
+			@Override
 			public int compare(Command c1, Command c2)
 			{
 				int diff = c1.getId().compareTo(c2.getId());
@@ -79,15 +94,6 @@ public class Registry
 		});
 
 		return commandList.toArray(new Command[0]);
-	}
-
-	/** Returns a Command from its ID.
-	 * 
-	 * @param id
-	 *            - <i>String</i> - The Command's ID. */
-	public static Command getCommandFromId(String id)
-	{
-		return commands.get(id);
 	}
 
 	/** Returns the Object list from its name.
@@ -210,6 +216,7 @@ public class Registry
 	private static void sortIds(List<ObjectBase> list)
 	{
 		list.sort(new Comparator<ObjectBase>() {
+			@Override
 			public int compare(ObjectBase o1, ObjectBase o2)
 			{
 				int diff = o1.getId().compareTo(o2.getId());
@@ -227,6 +234,7 @@ public class Registry
 	private static void sortIdsNum(List<ObjectBase> list)
 	{
 		list.sort(new Comparator<ObjectBase>() {
+			@Override
 			public int compare(ObjectBase o1, ObjectBase o2)
 			{
 				int diff = 0;
@@ -238,11 +246,6 @@ public class Registry
 				return diff;
 			}
 		});
-	}
-
-	public static boolean exists(String id, byte objectType)
-	{
-		return objects.get(objectType).containsKey(id);
 	}
 
 }

@@ -9,8 +9,8 @@ import commandGenerator.main.DisplayHelper;
 
 public class ChoiceArgument extends Argument
 {
-	private String[] choices;
 	private ChoiceComboBox box;
+	private String[] choices;
 	private boolean hasHelp, translate;
 
 	public ChoiceArgument(String id, boolean isCompulsery, String... choices)
@@ -21,10 +21,10 @@ public class ChoiceArgument extends Argument
 		this.translate = true;
 	}
 
-	@Override
-	public Component generateComponent()
+	public ChoiceArgument addHelpButton()
 	{
-		return this.box;
+		this.hasHelp = true;
+		return this;
 	}
 
 	@Override
@@ -34,15 +34,15 @@ public class ChoiceArgument extends Argument
 	}
 
 	@Override
+	public Component generateComponent()
+	{
+		return this.box;
+	}
+
+	@Override
 	public void initGui()
 	{
 		this.box = new ChoiceComboBox(this.getId(), this.choices, this.hasHelp, this.translate);
-	}
-
-	public ChoiceArgument addHelpButton()
-	{
-		this.hasHelp = true;
-		return this;
 	}
 
 	@Override
@@ -51,18 +51,18 @@ public class ChoiceArgument extends Argument
 		return true;
 	}
 
-	public ChoiceArgument setNoTranslation()
-	{
-		this.translate = false;
-		return this;
-	}
-
 	@Override
 	public boolean matches(List<String> data)
 	{
 		for (String choice : this.choices) if (data.get(0).equals(choice)) return true;
 		DisplayHelper.log(data.get(0) + " is not a valid argument.");
 		return false;
+	}
+
+	public ChoiceArgument setNoTranslation()
+	{
+		this.translate = false;
+		return this;
 	}
 
 	@Override

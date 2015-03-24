@@ -13,6 +13,7 @@ public class TagFireworks extends TagCompound
 		super("item.Fireworks", "fireworks");
 		addTag(new TagInt("Flight").setValue(0));
 		addTag(new TagList("Explosions") {
+			@Override
 			public void askValue()
 			{}
 		});

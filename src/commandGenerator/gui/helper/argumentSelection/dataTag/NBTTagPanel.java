@@ -16,7 +16,6 @@ import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.gui.helper.components.panel.TagDisplayer;
-import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class NBTTagPanel extends HelperPanel implements CComponent
@@ -30,7 +29,7 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 
 	public NBTTagPanel(String title, ObjectBase object, String[][] nbtTags)
 	{
-		super(CGConstants.PANELID_NBT, title, object, nbtTags);
+		super(title, object, nbtTags);
 	}
 
 	@Override
@@ -50,7 +49,7 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 		buttonHelp.setPreferredSize(new Dimension(40, 20));
 		buttonHelp.setMinimumSize(new Dimension(40, 20));
 
-		displayer = new TagDisplayer(getPanelId(), nbtTags);
+		displayer = new TagDisplayer(nbtTags);
 	}
 
 	@Override
@@ -82,6 +81,7 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 	public TagCompound getNbtTags(String id)
 	{
 		TagCompound tag = new TagCompound(id) {
+			@Override
 			public void askValue()
 			{}
 		};
@@ -97,6 +97,7 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 		return displayer.getTagList();
 	}
 
+	@Override
 	public void setEnabledContent(boolean enable)
 	{
 		setEnabled(enable);
@@ -117,6 +118,11 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 			this.nbtTags[i] = DataTags.init(list[i]);
 	}
 
+	public void setupFrom(List<Tag> list)
+	{
+		this.displayer.setupFrom(list);
+	}
+
 	public void updateCombobox(ObjectBase object)
 	{
 		this.object = object;
@@ -128,11 +134,6 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 	{
 		super.updateLang();
 		updateCombobox(object);
-	}
-
-	public void setupFrom(List<Tag> list)
-	{
-		this.displayer.setupFrom(list);
 	}
 
 }

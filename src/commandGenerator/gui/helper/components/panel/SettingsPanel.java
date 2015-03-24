@@ -18,7 +18,6 @@ import commandGenerator.CommandGenerator;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.combobox.TextCombobox;
-import commandGenerator.main.CGConstants;
 import commandGenerator.main.FileHelper;
 import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
@@ -27,13 +26,13 @@ import commandGenerator.main.Resources;
 public class SettingsPanel extends JPanel
 {
 
-	private JTextField fieldCustom;
-	private CLabel labelFolder;
+	private JRadioButton buttonDefault, buttonCustom;
 	private CButton buttonFolder;
 	private TextCombobox comboboxLang;
-	private JRadioButton buttonDefault, buttonCustom;
-	private ButtonGroup group;
+	private JTextField fieldCustom;
 	private GridBagConstraints gbc = new GridBagConstraints();
+	private ButtonGroup group;
+	private CLabel labelFolder;
 
 	public SettingsPanel()
 	{
@@ -47,16 +46,18 @@ public class SettingsPanel extends JPanel
 
 		buttonFolder = new CButton("GUI:settings.folder.select");
 		buttonFolder.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
 				askFolder();
 			}
 		});
 
-		comboboxLang = new TextCombobox(CGConstants.DATAID_NONE, "GUI:settings.lang", CommandGenerator.opt.getLangs(), null);
+		comboboxLang = new TextCombobox("GUI:settings.lang", CommandGenerator.opt.getLangs(), null);
 
 		buttonDefault = new JRadioButton(Lang.get("GUI:settings.folder.default"));
 		buttonDefault.addChangeListener(new ChangeListener() {
+			@Override
 			public void stateChanged(ChangeEvent e)
 			{
 				fieldCustom.setText(FileHelper.getDefaultFolder());
@@ -64,6 +65,7 @@ public class SettingsPanel extends JPanel
 		});
 		buttonCustom = new JRadioButton(Lang.get("GUI:settings.folder.custom"));
 		buttonCustom.addChangeListener(new ChangeListener() {
+			@Override
 			public void stateChanged(ChangeEvent e)
 			{
 				fieldCustom.setEnabled(buttonCustom.isSelected());
@@ -109,14 +111,14 @@ public class SettingsPanel extends JPanel
 		fieldCustom.setText(chooser.getSelectedFile().getPath());
 	}
 
-	public String getLang()
-	{
-		return comboboxLang.getValue();
-	}
-
 	public String getFolder()
 	{
 		return fieldCustom.getText();
+	}
+
+	public String getLang()
+	{
+		return comboboxLang.getValue();
 	}
 
 }

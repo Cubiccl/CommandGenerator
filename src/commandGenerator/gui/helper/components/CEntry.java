@@ -1,25 +1,21 @@
 package commandGenerator.gui.helper.components;
 
 import java.awt.GridLayout;
-import java.util.Map;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class CEntry extends JPanel implements CComponent
 {
 
-	private String id, defaultValue;
+	private String defaultValue;
 	private CLabel label;
 	private JTextField text;
 
-	public CEntry(String id, String title, String defaultValue)
+	public CEntry(String title, String defaultValue)
 	{
 		super(new GridLayout(1, 2));
-		this.id = id;
 		this.defaultValue = defaultValue;
 
 		label = new CLabel(title);
@@ -41,6 +37,12 @@ public class CEntry extends JPanel implements CComponent
 		setTextField(defaultValue);
 	}
 
+	public void setDefaultValue(String defaultValue)
+	{
+		this.defaultValue = defaultValue;
+	}
+
+	@Override
 	public void setEnabledContent(boolean enabled)
 	{
 		text.setEnabled(enabled);
@@ -58,19 +60,9 @@ public class CEntry extends JPanel implements CComponent
 	}
 
 	@Override
-	public void setupFrom(Map<String, Object> data)
-	{
-		if (!id.equals(CGConstants.DATAID_NONE) && data.get(id) != null) setTextField((String) data.get(id));
-	}
-
 	public void updateLang()
 	{
 		label.updateLang();
-	}
-
-	public void setDefaultValue(String defaultValue)
-	{
-		this.defaultValue = defaultValue;
 	}
 
 }

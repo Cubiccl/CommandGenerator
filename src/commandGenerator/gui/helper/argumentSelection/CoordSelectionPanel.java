@@ -2,8 +2,6 @@ package commandGenerator.gui.helper.argumentSelection;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
 
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.tags.TagFloat;
@@ -27,9 +25,9 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 	private RotationSelectionPanel panelRotation;
 	private boolean rotation, relative;
 
-	public CoordSelectionPanel(String id, String title, boolean relative, boolean rotation)
+	public CoordSelectionPanel(String title, boolean relative, boolean rotation)
 	{
-		super(id, title, relative, rotation);
+		super(title, relative, rotation);
 	}
 
 	@Override
@@ -64,16 +62,17 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 		buttonSave = new SaveButton(CGConstants.OBJECT_COORD, this);
 		buttonLoad = new LoadButton(CGConstants.OBJECT_COORD, this);
 
-		entryX = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.x", "0");
-		entryY = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.y", "0");
-		entryZ = new CEntry(CGConstants.DATAID_NONE, "GUI:coord.z", "0");
+		entryX = new CEntry("GUI:coord.x", "0");
+		entryY = new CEntry("GUI:coord.y", "0");
+		entryZ = new CEntry("GUI:coord.z", "0");
 
-		checkboxFloat = new CCheckBox(CGConstants.DATAID_NONE, "GUI:coord.float");
+		checkboxFloat = new CCheckBox("GUI:coord.float");
 
 		if (rotation)
 		{
-			checkboxRotation = new CCheckBox(CGConstants.DATAID_NONE, "GUI:coord.rotations");
+			checkboxRotation = new CCheckBox("GUI:coord.rotations");
 			checkboxRotation.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent arg0)
 				{
 					panelRotation.setEnabledContent(checkboxRotation.isSelected());
@@ -83,15 +82,15 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 
 		if (relative)
 		{
-			checkboxRelativeAll = new CCheckBox(CGConstants.DATAID_NONE, "GUI:coord.relatives");
-			checkRelX = new CCheckBox(CGConstants.DATAID_NONE, "GUI:coord.relative");
-			checkRelY = new CCheckBox(CGConstants.DATAID_NONE, "GUI:coord.relative");
-			checkRelZ = new CCheckBox(CGConstants.DATAID_NONE, "GUI:coord.relative");
+			checkboxRelativeAll = new CCheckBox("GUI:coord.relatives");
+			checkRelX = new CCheckBox("GUI:coord.relative");
+			checkRelY = new CCheckBox("GUI:coord.relative");
+			checkRelZ = new CCheckBox("GUI:coord.relative");
 		}
 
 		if (rotation)
 		{
-			panelRotation = new RotationSelectionPanel(getPanelId(), "GUI:coord.rotation");
+			panelRotation = new RotationSelectionPanel("GUI:coord.rotation");
 			panelRotation.setEnabledContent(false);
 		}
 	}
@@ -102,6 +101,7 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 		if (relative)
 		{
 			checkboxRelativeAll.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e)
 				{
 					checkRelX.setEnabled(!checkboxRelativeAll.isSelected());
@@ -144,6 +144,19 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 		else return new Coordinates(x, y, z, relativeness, checkboxFloat.isSelected());
 	}
 
+	@Override
+	public Object getObjectToSave()
+	{
+		return generateCoord();
+	}
+
+	@Override
+	public void load(Object object)
+	{
+		setupFrom((Coordinates) object);
+	}
+
+	@Override
 	public void setEnabledContent(boolean enable)
 	{
 
@@ -192,20 +205,6 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 			checkboxRotation.setSelected(coords.getRotation());
 			panelRotation.setupFrom(coords);
 		}
-	}
-
-	@Override
-	public Object getObjectToSave()
-	{
-		return generateCoord();
-	}
-
-	@Override
-	public void load(Object object)
-	{
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put(getPanelId(), (Coordinates) object);
-		setupFrom(map);
 	}
 
 }

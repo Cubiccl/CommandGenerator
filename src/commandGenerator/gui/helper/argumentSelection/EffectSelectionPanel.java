@@ -1,8 +1,5 @@
 package commandGenerator.gui.helper.argumentSelection;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.swing.JLabel;
 
 import commandGenerator.arguments.objects.Effect;
@@ -27,16 +24,16 @@ public class EffectSelectionPanel extends HelperPanel implements IBox, ISave
 {
 
 	private CButton buttonSave, buttonLoad;
-	private CLabel labelTicks;
 	private CCheckBox checkboxHideParticles;
 	private CComboBox comboboxEffect;
 	private CEntry entryDuration;
 	private JLabel labelImage;
+	private CLabel labelTicks;
 	private NumberSpinner spinnerAmplifier;
 
-	public EffectSelectionPanel(String id, String title)
+	public EffectSelectionPanel(String title)
 	{
-		super(id, title);
+		super(title);
 	}
 
 	@Override
@@ -54,7 +51,7 @@ public class EffectSelectionPanel extends HelperPanel implements IBox, ISave
 	protected void createComponents()
 	{
 		labelTicks = new CLabel("GUI:effect.ticks");
-		
+
 		labelImage = new JLabel();
 		try
 		{
@@ -67,13 +64,13 @@ public class EffectSelectionPanel extends HelperPanel implements IBox, ISave
 		buttonSave = new SaveButton(CGConstants.OBJECT_EFFECT, this);
 		buttonLoad = new LoadButton(CGConstants.OBJECT_EFFECT, this);
 
-		entryDuration = new CEntry(CGConstants.DATAID_NONE, "GUI:effect.duration", "600");
+		entryDuration = new CEntry("GUI:effect.duration", "600");
 
-		spinnerAmplifier = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:effect.amplifier", 1, 256, null);
+		spinnerAmplifier = new NumberSpinner("GUI:effect.amplifier", 1, 256, null);
 
-		comboboxEffect = new CComboBox(CGConstants.DATAID_NONE, "GUI:effect.choose", Registry.getObjectList(CGConstants.OBJECT_EFFECT), this);
+		comboboxEffect = new CComboBox("GUI:effect.choose", Registry.getObjectList(CGConstants.OBJECT_EFFECT), this);
 
-		checkboxHideParticles = new CCheckBox(CGConstants.DATAID_NONE, "GUI:effect.hide");
+		checkboxHideParticles = new CCheckBox("GUI:effect.hide");
 	}
 
 	@Override
@@ -101,6 +98,18 @@ public class EffectSelectionPanel extends HelperPanel implements IBox, ISave
 		}
 
 		return new Effect((EffectType) comboboxEffect.getValue(), amplifier - 1, Integer.parseInt(duration), !checkboxHideParticles.isSelected());
+	}
+
+	@Override
+	public Object getObjectToSave()
+	{
+		return generateEffect();
+	}
+
+	@Override
+	public void load(Object object)
+	{
+		setupFrom((Effect) object);
 	}
 
 	public void setupFrom(Effect effect)
@@ -131,20 +140,6 @@ public class EffectSelectionPanel extends HelperPanel implements IBox, ISave
 		entryDuration.updateLang();
 		checkboxHideParticles.updateLang();
 		comboboxEffect.updateLang();
-	}
-
-	@Override
-	public void load(Object object)
-	{
-		Map<String, Object> data = new HashMap<String, Object>();
-		data.put(getPanelId(), object);
-		setupFrom(data);
-	}
-
-	@Override
-	public Object getObjectToSave()
-	{
-		return generateEffect();
 	}
 
 }

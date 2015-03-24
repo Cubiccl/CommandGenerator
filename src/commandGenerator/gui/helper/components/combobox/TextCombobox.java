@@ -9,7 +9,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -18,32 +17,33 @@ import javax.swing.JTextField;
 import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.icomponent.IBox;
-import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class TextCombobox extends JPanel implements CComponent
 {
 
 	private JComboBox<String> box;
-	private String id;
 	private CLabel label;
 	private String[] names;
 	private IBox parent;
 	private JTextField text;
 
-	public TextCombobox(String id, String title, String[] names, final IBox parent)
+	public TextCombobox(String title, String[] names, final IBox parent)
 	{
 		super(new GridBagLayout());
 		text = new JTextField(18);
 		text.addKeyListener(new KeyListener() {
+			@Override
 			public void keyPressed(KeyEvent arg0)
 			{}
 
+			@Override
 			public void keyReleased(KeyEvent e)
 			{
 				search(e);
 			}
 
+			@Override
 			public void keyTyped(KeyEvent arg0)
 			{}
 		});
@@ -51,6 +51,7 @@ public class TextCombobox extends JPanel implements CComponent
 		label = new CLabel(title);
 		box = new JComboBox<String>(names);
 		box.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
 				boxSelect();
@@ -60,7 +61,6 @@ public class TextCombobox extends JPanel implements CComponent
 		box.setMinimumSize(new Dimension(200, 20));
 		this.names = names;
 		this.parent = parent;
-		this.id = id;
 
 		setPreferredSize(new Dimension(300, 60));
 		setMinimumSize(new Dimension(300, 60));
@@ -139,6 +139,7 @@ public class TextCombobox extends JPanel implements CComponent
 		search(null);
 	}
 
+	@Override
 	public void setEnabledContent(boolean enable)
 	{
 		text.setEnabled(enable);
@@ -152,11 +153,6 @@ public class TextCombobox extends JPanel implements CComponent
 	}
 
 	@Override
-	public void setupFrom(Map<String, Object> data)
-	{
-		if (!id.equals(CGConstants.DATAID_NONE)) box.setSelectedIndex((int) data.get(id));
-	}
-
 	public void updateLang()
 	{
 		label.updateLang();

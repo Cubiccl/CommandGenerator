@@ -1,7 +1,5 @@
 package commandGenerator.gui.helper.components;
 
-import java.util.Map;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
@@ -12,8 +10,8 @@ import commandGenerator.gui.helper.components.panel.HelperPanel;
 public class OptionsTab extends JTabbedPane implements CComponent
 {
 
-	private final Structure[] structures;
 	private HelperPanel[] panels;
+	private final Structure[] structures;
 
 	public OptionsTab(Structure... structures)
 	{
@@ -28,6 +26,11 @@ public class OptionsTab extends JTabbedPane implements CComponent
 
 			add(this.structures[i].getName(), pane);
 		}
+	}
+
+	public HelperPanel getPanel()
+	{
+		return this.panels[this.getSelectedIndex()];
 	}
 
 	@Override
@@ -45,13 +48,6 @@ public class OptionsTab extends JTabbedPane implements CComponent
 	}
 
 	@Override
-	public void setupFrom(Map<String, Object> data)
-	{
-		if (!isEnabled() || !isVisible()) return;
-		for (HelperPanel p : this.panels) p.setupFrom(data);
-	}
-
-	@Override
 	public void updateLang()
 	{
 		for (int i = 0; i < this.getTabCount(); i++)
@@ -59,11 +55,6 @@ public class OptionsTab extends JTabbedPane implements CComponent
 			this.panels[i].updateLang();
 			setTitleAt(i, this.structures[i].getName());
 		}
-	}
-
-	public HelperPanel getPanel()
-	{
-		return this.panels[this.getSelectedIndex()];
 	}
 
 }

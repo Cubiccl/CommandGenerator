@@ -19,6 +19,21 @@ public class FileHelper
 	/** Writer used to edit files. */
 	private static PrintWriter writer;
 
+	public static void changePath(String folder)
+	{
+		String folderPath = getDefaultFolder();
+		try
+		{
+			new File(folderPath + "path.txt").delete();
+			writer = new PrintWriter(new File(folderPath + "path.txt"));
+			writer.write(folder);
+			writer.close();
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
 	/** Creates the settings file. */
 	private static void createOptions()
 	{
@@ -32,6 +47,21 @@ public class FileHelper
 		{
 			DisplayHelper.log("Couldn't create the Options.");
 		}
+	}
+
+	public static String getDefaultFolder()
+	{
+
+		String directory;
+		String os = (System.getProperty("os.name")).toUpperCase();
+
+		if (os.contains("WIN")) directory = System.getenv("AppData");// Windows
+		else
+		{
+			directory = System.getProperty("user.home");// Mac or Linux
+			directory += "/Library/Application Support";// Mac
+		}
+		return directory + "/commandGenerator/";
 	}
 
 	/** Returns the option in the settings file.
@@ -228,36 +258,6 @@ public class FileHelper
 				writer.close();
 			} catch (Exception e)
 			{}
-		}
-	}
-
-	public static String getDefaultFolder()
-	{
-
-		String directory;
-		String os = (System.getProperty("os.name")).toUpperCase();
-
-		if (os.contains("WIN")) directory = System.getenv("AppData");// Windows
-		else
-		{
-			directory = System.getProperty("user.home");// Mac or Linux
-			directory += "/Library/Application Support";// Mac
-		}
-		return directory + "/commandGenerator/";
-	}
-
-	public static void changePath(String folder)
-	{
-		String folderPath = getDefaultFolder();
-		try
-		{
-			new File(folderPath + "path.txt").delete();
-			writer = new PrintWriter(new File(folderPath + "path.txt"));
-			writer.write(folder);
-			writer.close();
-		} catch (Exception e)
-		{
-			e.printStackTrace();
 		}
 	}
 

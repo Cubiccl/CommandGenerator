@@ -21,6 +21,14 @@ public class EffectArgument extends Argument
 	}
 
 	@Override
+	public String generateCommand()
+	{
+		Effect effect = this.panel.generateEffect();
+		if (effect == null) return null;
+		else return effect.commandStructure();
+	}
+
+	@Override
 	public Component generateComponent()
 	{
 		return this.panel;
@@ -29,15 +37,7 @@ public class EffectArgument extends Argument
 	@Override
 	public void initGui()
 	{
-		this.panel = new EffectSelectionPanel(this.getId(), "GENERAL:effect");
-	}
-
-	@Override
-	public String generateCommand()
-	{
-		Effect effect = this.panel.generateEffect();
-		if (effect == null) return null;
-		else return effect.commandStructure();
+		this.panel = new EffectSelectionPanel("GENERAL:effect");
 	}
 
 	@Override

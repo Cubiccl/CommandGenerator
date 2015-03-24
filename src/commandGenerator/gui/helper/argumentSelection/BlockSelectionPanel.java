@@ -3,12 +3,11 @@ package commandGenerator.gui.helper.argumentSelection;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
@@ -33,17 +32,17 @@ import commandGenerator.main.CGConstants;
 public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISave
 {
 
-	private CButton buttonSave, buttonLoad;
 	private Item[] blockList;
+	private CButton buttonSave, buttonLoad;
 	private TextCombobox comboboxId;
 	private boolean data;
 	private JLabel labelName, labelImage;
 	private NBTTagPanel panelData;
 	private NumberSpinner spinnerDamage;
 
-	public BlockSelectionPanel(String id, String title, ObjectBase[] blockList, boolean data)
+	public BlockSelectionPanel(String title, ObjectBase[] blockList, boolean data)
 	{
-		super(id, title, blockList, data);
+		super(title, blockList, data);
 	}
 
 	@Override
@@ -68,7 +67,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 		if (data)
 		{
 			add(panelData);
-			panelData.updateCombobox((Item) blockList[0]);
+			panelData.updateCombobox(blockList[0]);
 		}
 
 		addLine(buttonSave, buttonLoad);
@@ -82,19 +81,19 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 		labelImage = new JLabel();
 		labelImage.setPreferredSize(new Dimension(40, 40));
 		labelImage.setMinimumSize(new Dimension(40, 40));
-		labelName = new JLabel("", JLabel.CENTER);
+		labelName = new JLabel("", SwingConstants.CENTER);
 		labelName.setPreferredSize(new Dimension(200, 20));
 		labelName.setMinimumSize(new Dimension(200, 20));
 
 		buttonSave = new SaveButton(CGConstants.OBJECT_BLOCK, this);
 		buttonLoad = new LoadButton(CGConstants.OBJECT_BLOCK, this);
 
-		spinnerDamage = new NumberSpinner(CGConstants.DATAID_NONE, "GUI:block.damage", 0, 0, this);
+		spinnerDamage = new NumberSpinner("GUI:block.damage", 0, 0, this);
 
 		String[] ids = new String[blockList.length];
 		for (int i = 0; i < ids.length; i++)
 			ids[i] = blockList[i].getId();
-		comboboxId = new TextCombobox(CGConstants.DATAID_NONE, "GUI:block.id", ids, this);
+		comboboxId = new TextCombobox("GUI:block.id", ids, this);
 
 		if (data) panelData = new NBTTagPanel("GUI:tag.block", blockList[0], DataTags.blocks);
 	}
@@ -108,6 +107,17 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 		return (Item) Registry.getObjectFromId(comboboxId.getValue());
 	}
 
+	public ItemStack getBlockAsItemStack()
+	{
+		Item block = generateBlock();
+		int damage = getDamage();
+		TagCompound tag = getBlockTag();
+
+		if (block == null) return null;
+
+		return new ItemStack(block, damage, -1, tag, -1);
+	}
+
 	public Item[] getBlockList()
 	{
 		return blockList;
@@ -116,6 +126,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 	public TagCompound getBlockTag()
 	{
 		if (!data) return new TagCompound("BlockEntityTag") {
+			@Override
 			public void askValue()
 			{}
 		};
@@ -127,6 +138,40 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 		return spinnerDamage.getValue();
 	}
 
+	public Object getItemStack()
+	{
+		return new ItemStack(generateBlock(), getDamage(), -1, getBlockTag(), -1);
+	}
+
+	@Override
+	public Object getObjectToSave()
+	{
+		return getItemStack();
+	}
+
+	@Override
+	public void load(Object object)
+	{
+		setupFrom((ItemStack) object);
+	}
+
+	public void setBlock(Item block)
+	{
+		this.comboboxId.setSelected(block.getId());
+	}
+
+	public void setDamage(int damage)
+	{
+		this.spinnerDamage.setSelected(damage);
+	}
+
+	public void setDataTags(List<Tag> list)
+	{
+		if (list == null) return;
+		this.panelData.setupFrom(list);
+	}
+
+	@Override
 	public void setEnabledContent(boolean enable)
 	{
 		super.setEnabledContent(enable);
@@ -148,10 +193,8 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 			this.blockList[i] = (Item) list[i];
 	}
 
-	@Override
-	public void setupFrom(Map<String, Object> data)
+	public void setupFrom(ItemStack block)
 	{
-		ItemStack block = (ItemStack) data.get(getPanelId());
 		if (block == null)
 		{
 			reset();
@@ -162,8 +205,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 		spinnerDamage.setSelected(block.getDamage());
 		if (this.data)
 		{
-			if (block.getTag() != null) data.put(CGConstants.PANELID_NBT, block.getTag().getValue());
-			panelData.setupFrom(data);
+			this.panelData.setupFrom(block.getTag().getValue());
 		}
 	}
 
@@ -172,7 +214,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 	{
 		Item item = generateBlock();
 		spinnerDamage.setValues(0, item.getMaxDamage());
-		if (data) panelData.updateCombobox((Item) Registry.getObjectFromId(comboboxId.getValue()));
+		if (data) panelData.updateCombobox(Registry.getObjectFromId(comboboxId.getValue()));
 		labelImage.setIcon(item.getTexture(getDamage()));
 		labelName.setText(item.getName(getDamage()));
 	}
@@ -189,52 +231,6 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 	{
 		labelImage.setIcon(generateBlock().getTexture(getDamage()));
 		labelName.setText(generateBlock().getName(getDamage()));
-	}
-
-	public Object getItemStack()
-	{
-		return new ItemStack(generateBlock(), getDamage(), -1, getBlockTag(), -1);
-	}
-
-	@Override
-	public void load(Object object)
-	{
-		Map<String, Object> data = new HashMap<String, Object>();
-		data.put(getPanelId(), object);
-		setupFrom(data);
-	}
-
-	@Override
-	public Object getObjectToSave()
-	{
-		return getItemStack();
-	}
-
-	public ItemStack getBlockAsItemStack()
-	{
-		Item block = generateBlock();
-		int damage = getDamage();
-		TagCompound tag = getBlockTag();
-
-		if (block == null) return null;
-
-		return new ItemStack(block, damage, -1, tag, -1);
-	}
-
-	public void setDamage(int damage)
-	{
-		this.spinnerDamage.setSelected(damage);
-	}
-
-	public void setBlock(Item block)
-	{
-		this.comboboxId.setSelected(block.getId());
-	}
-
-	public void setDataTags(List<Tag> list)
-	{
-		if (list == null) return;
-		this.panelData.setupFrom(list);
 	}
 
 }

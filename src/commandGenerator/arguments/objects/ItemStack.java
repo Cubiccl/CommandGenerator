@@ -43,6 +43,7 @@ public class ItemStack
 		if (item.isBlock()) item = (Item) Registry.getObjectFromId(id + "_item");
 		if (item == null) item = (Item) Registry.getObjectFromId(id);
 		TagCompound tag = new TagCompound("tag") {
+			@Override
 			public void askValue()
 			{}
 		};
@@ -61,6 +62,7 @@ public class ItemStack
 		Item item = (Item) Registry.getObjectFromId("stone");
 		int damage = 0, count = 1, slot = -1;
 		TagCompound nbt = new TagCompound() {
+			@Override
 			public void askValue()
 			{}
 		};
@@ -196,6 +198,7 @@ public class ItemStack
 	public TagCompound toNBT(String id)
 	{
 		TagCompound item = new TagCompound(id) {
+			@Override
 			public void askValue()
 			{}
 		};

@@ -45,6 +45,7 @@ public class EffectType extends ObjectBase
 	}
 
 	/** Returns this Effect's name. */
+	@Override
 	public String getName()
 	{
 		return Lang.get("EFFECTS:" + getId());

@@ -20,10 +20,10 @@ import commandGenerator.arguments.objects.SavedObjects;
 @SuppressWarnings("serial")
 public class LoadPanel extends JPanel
 {
+	private Map<String, Object> displayed;
 	private JList<String> list;
 	private JEditorPane pane;
 	private JScrollPane scrollPane, scrollList;
-	private Map<String, Object> displayed;
 
 	public LoadPanel(byte type)
 	{
@@ -38,6 +38,7 @@ public class LoadPanel extends JPanel
 		list.setBorder(BorderFactory.createLineBorder(Color.blue));
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.addListSelectionListener(new ListSelectionListener() {
+			@Override
 			public void valueChanged(ListSelectionEvent e)
 			{
 				display();

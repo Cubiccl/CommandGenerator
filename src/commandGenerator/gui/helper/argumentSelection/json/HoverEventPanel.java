@@ -2,8 +2,6 @@ package commandGenerator.gui.helper.argumentSelection.json;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.swing.JTextField;
 
@@ -32,7 +30,7 @@ public class HoverEventPanel extends HelperPanel
 
 	public HoverEventPanel()
 	{
-		super(CGConstants.DATAID_NONE, "GUI:json.hover");
+		super("GUI:json.hover");
 	}
 
 	@Override
@@ -45,13 +43,13 @@ public class HoverEventPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		comboboxAction = new LangComboBox(CGConstants.DATAID_NONE, "RESOURCES:json.hover", 4);
+		comboboxAction = new LangComboBox("RESOURCES:json.hover", 4);
 
 		textfieldText = new JTextField(20);
 
 		panelJson = new JsonSelectionPanel("GUI:json.text", false);
 		panelJson.setVisible(false);
-		panelItem = new ItemSelectionPanel(CGConstants.PANELID_ITEM, "GUI:json.item", Registry.getList(CGConstants.LIST_ITEMS), true, false);
+		panelItem = new ItemSelectionPanel("GUI:json.item", Registry.getList(CGConstants.LIST_ITEMS), true, false);
 		panelItem.setVisible(false);
 		panelStat = new AchievementSelectionPanel();
 		panelStat.setVisible(false);
@@ -76,6 +74,7 @@ public class HoverEventPanel extends HelperPanel
 	{
 
 		TagCompound tag = new TagCompound("hoverEvent") {
+			@Override
 			public void askValue()
 			{}
 		};
@@ -126,6 +125,7 @@ public class HoverEventPanel extends HelperPanel
 			{
 				comboboxAction.setSelectedIndex(1);
 				TagCompound tag = new TagCompound() {
+					@Override
 					public void askValue()
 					{}
 				};
@@ -141,21 +141,18 @@ public class HoverEventPanel extends HelperPanel
 		{
 			comboboxAction.setSelectedIndex(2);
 			TagCompound tag = new TagCompound() {
+				@Override
 				public void askValue()
 				{}
 			};
 			tag.setValue(DataTags.generateListFrom(value));
 
-			Map<String, Object> data = new HashMap<String, Object>();
-			data.put(CGConstants.PANELID_ITEM, ItemStack.generateFrom(tag));
-			panelItem.setupFrom(data);
+			panelItem.setupFrom(ItemStack.generateFrom(tag));
 		}
 		if (action.equals("show_achievement"))
 		{
 			comboboxAction.setSelectedIndex(3);
-			Map<String, Object> data = new HashMap<String, Object>();
-			data.put(CGConstants.PANELID_ACHIEVEMENT, ((Achievement) Registry.getObjectFromId(value)));
-			panelStat.setupFrom(data);
+			panelStat.setupFrom(((Achievement) Registry.getObjectFromId(value)));
 		}
 
 		textfieldText.setVisible(comboboxAction.getSelectedIndex() == 0);

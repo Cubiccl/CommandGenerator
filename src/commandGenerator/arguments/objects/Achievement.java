@@ -43,12 +43,14 @@ public class Achievement extends ObjectBase
 	}
 
 	/** Returns this Achievement's name. */
+	@Override
 	public String getName()
 	{
 		return Lang.get("ACHIEVEMENTS:" + getId());
 	}
 
 	/** Returns this Achievement's texture */
+	@Override
 	public ImageIcon getTexture()
 	{
 		return itemTexture.getTexture(0);

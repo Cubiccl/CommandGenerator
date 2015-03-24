@@ -95,6 +95,7 @@ public class Effect
 	{
 
 		TagCompound tag = new TagCompound() {
+			@Override
 			public void askValue()
 			{}
 		};

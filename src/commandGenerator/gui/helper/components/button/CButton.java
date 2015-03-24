@@ -1,7 +1,6 @@
 package commandGenerator.gui.helper.components.button;
 
 import java.awt.Dimension;
-import java.util.Map;
 
 import javax.swing.JButton;
 
@@ -12,18 +11,18 @@ import commandGenerator.main.Lang;
 public class CButton extends JButton implements CComponent
 {
 
-	private String id;
 	private boolean lang;
+	private String title;
 
-	public CButton(String id)
+	public CButton(String title)
 	{
-		this(id, true);
+		this(title, true);
 	}
 
-	public CButton(String id, boolean lang)
+	public CButton(String title, boolean lang)
 	{
-		super(id);
-		this.id = id;
+		super(title);
+		this.title = title;
 		this.lang = lang;
 		setPreferredSize(new Dimension(200, 20));
 		setMinimumSize(new Dimension(140, 20));
@@ -40,19 +39,17 @@ public class CButton extends JButton implements CComponent
 		setEnabled(enable);
 	}
 
-	public void setTitle(String id)
+	public void setTitle(String title)
 	{
-		this.id = id;
+		this.title = title;
 		updateLang();
 	}
 
-	public void setupFrom(Map<String, Object> data)
-	{}
-
+	@Override
 	public void updateLang()
 	{
-		if (lang) setText(Lang.get(id));
-		else setText(id);
+		if (lang) setText(Lang.get(title));
+		else setText(title);
 	}
 
 }

@@ -18,8 +18,8 @@ public class CoordinatesArgument extends Argument
 {
 
 	private boolean canBeRelative, canHaveRotation;
-	private CoordSelectionPanel panelCoord;
 	private CCheckBox checkbox;
+	private CoordSelectionPanel panelCoord;
 
 	public CoordinatesArgument(String id, boolean isCompulsery, boolean canBeRelative, boolean canHaveRotation)
 	{
@@ -28,6 +28,14 @@ public class CoordinatesArgument extends Argument
 		this.canHaveRotation = canHaveRotation;
 
 		if (this.canHaveRotation) setMaximumLength(5);
+	}
+
+	@Override
+	public String generateCommand()
+	{
+		Coordinates coords = this.panelCoord.generateCoord();
+		if (coords == null) return null;
+		return coords.commandStructure();
 	}
 
 	@Override
@@ -46,11 +54,12 @@ public class CoordinatesArgument extends Argument
 	@Override
 	public void initGui()
 	{
-		this.panelCoord = new CoordSelectionPanel(getId(), "GUI:" + getId(), canBeRelative, canHaveRotation);
+		this.panelCoord = new CoordSelectionPanel("GUI:" + getId(), canBeRelative, canHaveRotation);
 		if (!this.isCompulsery())
 		{
-			this.checkbox = new CCheckBox(this.getId(), "GUI:" + this.getId() + ".use");
+			this.checkbox = new CCheckBox("GUI:" + this.getId() + ".use");
 			this.checkbox.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e)
 				{
 					panelCoord.setEnabledContent(checkbox.isSelected());
@@ -58,14 +67,6 @@ public class CoordinatesArgument extends Argument
 			});
 			this.panelCoord.setEnabledContent(false);
 		}
-	}
-
-	@Override
-	public String generateCommand()
-	{
-		Coordinates coords = this.panelCoord.generateCoord();
-		if (coords == null) return null;
-		return coords.commandStructure();
 	}
 
 	@Override
@@ -103,7 +104,8 @@ public class CoordinatesArgument extends Argument
 	public void setupFrom(List<String> data)
 	{
 		Coordinates coords = Coordinates.generateFrom(data.get(0), data.get(1), data.get(2));
-		if (data.size() >= 5) coords = Coordinates.generateFromWithRot(data.get(0), data.get(1), data.get(2), Float.parseFloat(data.get(3)), Float.parseFloat(data.get(4)));
+		if (data.size() >= 5) coords = Coordinates.generateFromWithRot(data.get(0), data.get(1), data.get(2), Float.parseFloat(data.get(3)),
+				Float.parseFloat(data.get(4)));
 		this.panelCoord.setupFrom(coords);
 	}
 

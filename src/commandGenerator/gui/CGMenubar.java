@@ -55,12 +55,10 @@ public class CGMenubar extends JMenuBar
 		add(menu);
 
 		reset.addActionListener(new ActionListener() {
-
-			@SuppressWarnings("static-access")
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				CommandGenerator.gui.panelGeneral.tabOptions.reset();
+				MainWindow.panelGeneral.tabOptions.reset();
 			}
 		});
 		settings.addActionListener(new ActionListener() {
@@ -87,6 +85,7 @@ public class CGMenubar extends JMenuBar
 
 				final JList<String> list = new JList<String>(Resources.versions);
 				list.addListSelectionListener(new ListSelectionListener() {
+					@Override
 					public void valueChanged(ListSelectionEvent arg0)
 					{
 						pane.setText(Resources.changelog(list.getSelectedValue()));

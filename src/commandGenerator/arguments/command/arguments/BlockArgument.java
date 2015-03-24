@@ -15,10 +15,10 @@ import commandGenerator.main.CGConstants;
 public class BlockArgument extends Argument implements INBTArgument
 {
 
-	private String listId;
 	private boolean canHaveNBT;
-	private BlockSelectionPanel panel;
 	private boolean[] display;
+	private String listId;
+	private BlockSelectionPanel panel;
 
 	public BlockArgument(String id, boolean isCompulsery, String listId, boolean canHaveNBT)
 	{
@@ -27,18 +27,6 @@ public class BlockArgument extends Argument implements INBTArgument
 		this.canHaveNBT = canHaveNBT;
 		this.display = new boolean[] { false, false, false };
 		this.setMaximumLength(3);
-	}
-
-	@Override
-	public Component generateComponent()
-	{
-		return this.panel;
-	}
-
-	@Override
-	public void initGui()
-	{
-		this.panel = new BlockSelectionPanel(this.getId(), "GUI:" + this.getId(), Registry.getList(this.listId), this.canHaveNBT);
 	}
 
 	@Override
@@ -61,17 +49,21 @@ public class BlockArgument extends Argument implements INBTArgument
 	}
 
 	@Override
+	public Component generateComponent()
+	{
+		return this.panel;
+	}
+
+	@Override
 	public TagCompound getNBT()
 	{
 		return this.panel.getBlockTag();
 	}
 
-	public BlockArgument setDisplay(boolean displayId, boolean displayDamage, boolean displayNBT)
+	@Override
+	public void initGui()
 	{
-		this.display[0] = displayId;
-		this.display[1] = displayDamage;
-		this.display[2] = displayNBT;
-		return this;
+		this.panel = new BlockSelectionPanel("GUI:" + this.getId(), Registry.getList(this.listId), this.canHaveNBT);
 	}
 
 	@Override
@@ -102,6 +94,14 @@ public class BlockArgument extends Argument implements INBTArgument
 			index++;
 		}
 		return ok;
+	}
+
+	public BlockArgument setDisplay(boolean displayId, boolean displayDamage, boolean displayNBT)
+	{
+		this.display[0] = displayId;
+		this.display[1] = displayDamage;
+		this.display[2] = displayNBT;
+		return this;
 	}
 
 	@Override

@@ -29,16 +29,6 @@ public class CommandArgument extends Argument
 	}
 
 	@Override
-	public Component generateComponent()
-	{
-		return null;
-	}
-
-	@Override
-	public void initGui()
-	{}
-
-	@Override
 	public String generateCommand()
 	{
 
@@ -49,6 +39,7 @@ public class CommandArgument extends Argument
 
 		// Setting the JDialog resizable
 		panelCommand.addHierarchyListener(new HierarchyListener() {
+			@Override
 			public void hierarchyChanged(HierarchyEvent e)
 			{
 				Window window = SwingUtilities.getWindowAncestor(panelCommand);
@@ -65,6 +56,16 @@ public class CommandArgument extends Argument
 		JOptionPane.showMessageDialog(null, panelCommand, Lang.get("GUI:execute.select"), JOptionPane.QUESTION_MESSAGE);
 		return panelCommand.generate();
 	}
+
+	@Override
+	public Component generateComponent()
+	{
+		return null;
+	}
+
+	@Override
+	public void initGui()
+	{}
 
 	@Override
 	public boolean isUsed()

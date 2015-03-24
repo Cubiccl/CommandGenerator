@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Map;
 
 import javax.swing.JButton;
 
@@ -23,6 +22,7 @@ public class HelpButton extends JButton implements CComponent
 		this.message = messageArg;
 		this.title = titleArg;
 		addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
 				DisplayHelper.showHelp(message, title);
@@ -37,6 +37,12 @@ public class HelpButton extends JButton implements CComponent
 	public void reset()
 	{}
 
+	public void setData(String newMessage, String newTitle)
+	{
+		this.message = newMessage;
+		this.title = newTitle;
+	}
+
 	@Override
 	public void setEnabledContent(boolean enable)
 	{
@@ -44,17 +50,7 @@ public class HelpButton extends JButton implements CComponent
 	}
 
 	@Override
-	public void setupFrom(Map<String, Object> data)
-	{}
-
-	@Override
 	public void updateLang()
 	{}
-
-	public void setData(String newMessage, String newTitle)
-	{
-		this.message = newMessage;
-		this.title = newTitle;
-	}
 
 }

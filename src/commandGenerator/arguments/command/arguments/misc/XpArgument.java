@@ -18,6 +18,15 @@ public class XpArgument extends IntArgument
 	}
 
 	@Override
+	public String generateCommand()
+	{
+		String value = super.generateCommand();
+		if (value == null) return null;
+		if (this.box.isSelected()) return value + "L";
+		return value;
+	}
+
+	@Override
 	public Component generateComponent()
 	{
 		Component entry = super.generateComponent();
@@ -31,16 +40,7 @@ public class XpArgument extends IntArgument
 	public void initGui()
 	{
 		super.initGui();
-		this.box = new CCheckBox("xp.levels", "GUI:xp.levels");
-	}
-
-	@Override
-	public String generateCommand()
-	{
-		String value = super.generateCommand();
-		if (value == null) return null;
-		if (this.box.isSelected()) return value + "L";
-		return value;
+		this.box = new CCheckBox("GUI:xp.levels");
 	}
 
 	@Override

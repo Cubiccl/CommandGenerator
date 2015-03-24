@@ -31,6 +31,7 @@ public abstract class ObjectBase
 		if (object instanceof TagString) return ((TagString) object).display(CGConstants.DETAILS_ALL, 0);
 		if (object instanceof Coordinates) return ((Coordinates) object).commandStructure();
 		if (object instanceof List) return new TagCompound() {
+			@Override
 			public void askValue()
 			{
 			}
@@ -106,28 +107,28 @@ public abstract class ObjectBase
 				return new Enchantment((EnchantType) Registry.getObjectFromIdNum(CGConstants.OBJECT_ENCHANT, idEn), levelEn);
 
 			case CGConstants.OBJECT_ENTITY:
-				return (TagCompound) nbt;
+				return nbt;
 
 			case CGConstants.OBJECT_ITEM:
 				return ItemStack.generateFrom((TagCompound) nbt);
 
 			case CGConstants.OBJECT_JSON:
-				return (TagCompound) nbt;
+				return nbt;
 
 			case CGConstants.OBJECT_STRING:
-				return ((TagString) nbt);
+				return (nbt);
 
 			case CGConstants.OBJECT_TAG_EXPLOSION:
-				return (TagExplosion) nbt;
+				return nbt;
 
 			case CGConstants.OBJECT_TAG_TRADE:
-				return (TagCompound) nbt;
+				return nbt;
 
 			case CGConstants.OBJECT_TAG_PATTERN:
-				return (TagCompound) nbt;
+				return nbt;
 
 			default:
-				return ((TagString) nbt);
+				return (nbt);
 		}
 	}
 
@@ -168,6 +169,7 @@ public abstract class ObjectBase
 		return type;
 	}
 
+	@Override
 	public String toString()
 	{
 		return getName();

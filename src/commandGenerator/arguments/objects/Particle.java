@@ -16,6 +16,15 @@ public class Particle extends ObjectBase
 	 * </ul> */
 	public static final int NORMAL = 0, BLOCK = 1, ITEM = 2;
 
+	public static Particle getParticleFrom(String id)
+	{
+		Particle part = (Particle) Registry.getObjectFromId(id);
+		if (part != null) return part;
+
+		if (id.startsWith("blockcrack")) return (Particle) Registry.getObjectFromId("blockcrack");
+		return (Particle) Registry.getObjectFromId("iconcrack");
+	}
+
 	/** The type of the Particle. */
 	private int type;
 
@@ -53,14 +62,5 @@ public class Particle extends ObjectBase
 	public ImageIcon getTexture()
 	{
 		return null;
-	}
-
-	public static Particle getParticleFrom(String id)
-	{
-		Particle part = (Particle) Registry.getObjectFromId(id);
-		if (part != null) return part;
-
-		if (id.startsWith("blockcrack")) return (Particle) Registry.getObjectFromId("blockcrack");
-		return (Particle) Registry.getObjectFromId("iconcrack");
 	}
 }
