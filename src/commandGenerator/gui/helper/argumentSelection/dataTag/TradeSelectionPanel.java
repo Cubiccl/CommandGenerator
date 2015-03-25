@@ -7,6 +7,8 @@ import java.util.Map;
 
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
+import commandGenerator.arguments.objects.ObjectBase;
+import commandGenerator.arguments.objects.ObjectCreator;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagBoolean;
@@ -53,8 +55,8 @@ public class TradeSelectionPanel extends HelperPanel implements ISave
 	@Override
 	protected void createComponents()
 	{
-		buttonSave = new SaveButton(CGConstants.OBJECT_TAG_TRADE, this);
-		buttonLoad = new LoadButton(CGConstants.OBJECT_TAG_TRADE, this);
+		buttonSave = new SaveButton(ObjectBase.TAG_TRADE, this);
+		buttonLoad = new LoadButton(ObjectBase.TAG_TRADE, this);
 
 		entryUses = new CEntry("GUI:trade.use", "0");
 		entryMaxUses = new CEntry("GUI:trade.use_max", "10");
@@ -148,11 +150,11 @@ public class TradeSelectionPanel extends HelperPanel implements ISave
 			if (tag.getId().equals("maxUses")) maxUses = ((TagInt) tag).getValue();
 			if (tag.getId().equals("uses")) uses = ((TagInt) tag).getValue();
 			if (tag.getId().equals("rewardExp")) reward = ((TagBoolean) tag).getValue();
-			if (tag.getId().equals("buy")) buy = ItemStack.generateFrom((TagCompound) tag);
-			if (tag.getId().equals("sell")) sell = ItemStack.generateFrom((TagCompound) tag);
+			if (tag.getId().equals("buy")) buy = ObjectCreator.generateItemStack((TagCompound) tag);
+			if (tag.getId().equals("sell")) sell = ObjectCreator.generateItemStack((TagCompound) tag);
 			if (tag.getId().equals("buyB"))
 			{
-				buyB = ItemStack.generateFrom((TagCompound) tag);
+				buyB = ObjectCreator.generateItemStack((TagCompound) tag);
 				buyb = true;
 			}
 		}

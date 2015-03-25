@@ -26,7 +26,6 @@ import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.icomponent.ISpin;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.gui.helper.components.spinner.NumberSpinner;
-import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISave
@@ -85,8 +84,8 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 		labelName.setPreferredSize(new Dimension(200, 20));
 		labelName.setMinimumSize(new Dimension(200, 20));
 
-		buttonSave = new SaveButton(CGConstants.OBJECT_BLOCK, this);
-		buttonLoad = new LoadButton(CGConstants.OBJECT_BLOCK, this);
+		buttonSave = new SaveButton(ObjectBase.BLOCK, this);
+		buttonLoad = new LoadButton(ObjectBase.BLOCK, this);
 
 		spinnerDamage = new NumberSpinner("GUI:block.damage", 0, 0, this);
 

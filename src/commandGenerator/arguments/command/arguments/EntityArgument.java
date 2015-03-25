@@ -5,11 +5,11 @@ import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.objects.Entity;
+import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
-import commandGenerator.main.CGConstants;
 
 public class EntityArgument extends Argument implements INBTArgument
 {
@@ -19,7 +19,7 @@ public class EntityArgument extends Argument implements INBTArgument
 
 	public EntityArgument(String id, boolean isCompulsery)
 	{
-		super(id, Argument.ENTITY, isCompulsery, 1);
+		super(id, isCompulsery);
 		this.display = new boolean[] { false, false };
 		this.setMaximumLength(2);
 	}
@@ -58,7 +58,7 @@ public class EntityArgument extends Argument implements INBTArgument
 	@Override
 	public void initGui()
 	{
-		this.panel = new EntitySelectionPanel("GUI:" + this.getId(), Registry.getObjectList(CGConstants.OBJECT_ENTITY));
+		this.panel = new EntitySelectionPanel("GUI:" + this.getId(), Registry.getObjectList(ObjectBase.ENTITY));
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class EntityArgument extends Argument implements INBTArgument
 	public boolean matches(List<String> data)
 	{
 		boolean ok = true;
-		if (this.display[0]) ok = Registry.exists(data.get(0), CGConstants.OBJECT_ENTITY);
+		if (this.display[0]) ok = Registry.exists(data.get(0), ObjectBase.ENTITY);
 		return ok;
 	}
 

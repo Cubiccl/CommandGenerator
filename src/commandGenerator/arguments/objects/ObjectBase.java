@@ -16,6 +16,32 @@ import commandGenerator.main.CGConstants;
 public abstract class ObjectBase
 {
 
+	/** The Objects used by the Command Generator.
+	 * <ul>
+	 * <li><strong>ITEM</strong> = 0</li>
+	 * <li><strong>ENTITY</strong> = 1</li>
+	 * <li><strong>EFFECT</strong> = 2</li>
+	 * <li><strong>ENCHANTMENT</strong> = 3</li>
+	 * <li><strong>ACHIEVEMENT</strong> = 4</li>
+	 * <li><strong>ATTRIBUTE</strong> = 5</li>
+	 * <li><strong>PARTICLE</strong> = 6</li>
+	 * <li><strong>TAG</strong>(NBT Tags) = 7</li>
+	 * <li><strong>SOUND</strong> = 8</li>
+	 * </ul>
+	 * The following are used by the List Selection Panel :
+	 * <ul>
+	 * <li><strong>STRING</strong> = 9</li>
+	 * <li><strong>TAG_EXPLOSION</strong> = 10</li>
+	 * <li><strong>TAG_TRADE</strong> = 11</li>
+	 * <li><strong>JSON</strong> = 12</li>
+	 * <li><strong>TAG_PATTERN</strong> = 13</li>
+	 * <li><strong>BLOCK</strong> = 14</li>
+	 * <li><strong>COORD</strong> = 15</li>
+	 * <li><strong>TARGET</strong> = 16</li>
+	 * </ul> */
+	public static final byte ITEM = 0, ENTITY = 1, EFFECT = 2, ENCHANTMENT = 3, ACHIEVEMENT = 4, ATTRIBUTE = 5, PARTICLE = 6, TAG = 7, SOUND = 8, STRING = 9,
+			TAG_EXPLOSION = 10, TAG_TRADE = 11, JSON = 12, TAG_PATTERN = 13, BLOCK = 14, COORD = 15, TARGET = 16;
+
 	/** Returns a String version of the Object to be displayed to the user.
 	 * 
 	 * @param object
@@ -33,13 +59,13 @@ public abstract class ObjectBase
 		if (object instanceof List) return new TagCompound() {
 			@Override
 			public void askValue()
-			{
-			}
+			{}
 		}.setValue(((List<Tag>) object)).display(CGConstants.DETAILS_ALL, 0);
 		if (object instanceof Target) return ((Target) object).display();
 
 		return object.toString();
 	}
+
 	/** Returns a Tag version of the Object.
 	 * 
 	 * @param object
@@ -67,7 +93,7 @@ public abstract class ObjectBase
 	{
 		switch (type)
 		{
-			case CGConstants.OBJECT_ATTRIBUTE:
+			case ATTRIBUTE:
 				String idA = "generic.maxHealth";
 				double amount = 1.0D;
 				int operation = 0;
@@ -80,7 +106,7 @@ public abstract class ObjectBase
 				}
 				return new Attribute((AttributeType) Registry.getObjectFromId(idA), amount, operation);
 
-			case CGConstants.OBJECT_EFFECT:
+			case EFFECT:
 				int idEf = 1,
 				levelEf = 0,
 				duration = 1;
@@ -93,9 +119,9 @@ public abstract class ObjectBase
 					if (tag.getId().equals("Duration")) duration = ((TagInt) tag).getValue();
 					if (tag.getId().equals("HideParticles")) hide = ((TagBoolean) tag).getValue();
 				}
-				return new Effect((EffectType) Registry.getObjectFromIdNum(CGConstants.OBJECT_EFFECT, idEf), levelEf, duration, !hide);
+				return new Effect((EffectType) Registry.getObjectFromIdNum(EFFECT, idEf), levelEf, duration, !hide);
 
-			case CGConstants.OBJECT_ENCHANT:
+			case ENCHANTMENT:
 				int idEn = 0,
 				levelEn = 0;
 				for (int i = 0; i < ((TagCompound) nbt).size(); i++)
@@ -104,27 +130,27 @@ public abstract class ObjectBase
 					if (tag.getId().equals("id")) idEn = ((TagInt) tag).getValue();
 					if (tag.getId().equals("lvl")) levelEn = ((TagInt) tag).getValue();
 				}
-				return new Enchantment((EnchantType) Registry.getObjectFromIdNum(CGConstants.OBJECT_ENCHANT, idEn), levelEn);
+				return new Enchantment((EnchantType) Registry.getObjectFromIdNum(ENCHANTMENT, idEn), levelEn);
 
-			case CGConstants.OBJECT_ENTITY:
+			case ENTITY:
 				return nbt;
 
-			case CGConstants.OBJECT_ITEM:
-				return ItemStack.generateFrom((TagCompound) nbt);
+			case ITEM:
+				return ObjectCreator.generateItemStack((TagCompound) nbt);
 
-			case CGConstants.OBJECT_JSON:
+			case JSON:
 				return nbt;
 
-			case CGConstants.OBJECT_STRING:
+			case STRING:
 				return (nbt);
 
-			case CGConstants.OBJECT_TAG_EXPLOSION:
+			case TAG_EXPLOSION:
 				return nbt;
 
-			case CGConstants.OBJECT_TAG_TRADE:
+			case TAG_TRADE:
 				return nbt;
 
-			case CGConstants.OBJECT_TAG_PATTERN:
+			case TAG_PATTERN:
 				return nbt;
 
 			default:
@@ -138,7 +164,7 @@ public abstract class ObjectBase
 	/** The Object's type. */
 	private final byte type;
 
-	/** Creates a new ObjectBase.
+	/** Creates a new
 	 * 
 	 * @param id
 	 *            - <i>String</i> - This Object's ID.
@@ -148,7 +174,7 @@ public abstract class ObjectBase
 	{
 		this.id = id;
 		this.type = type;
-		if (type != CGConstants.OBJECT_TAG) Registry.registerObject(type, this);
+		if (type != TAG) Registry.registerObject(type, this);
 	}
 
 	/** Returns the Object's ID. */

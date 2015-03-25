@@ -26,7 +26,7 @@ public class TagSpawnData extends TagCompound
 	public void askValue()
 	{
 		panel = new JPanel();
-		EntitySelectionPanel panelE = new EntitySelectionPanel("GUI:entity.title", Entity.getListNoPlayer());
+		EntitySelectionPanel panelE = new EntitySelectionPanel("GUI:entity.title", Registry.getListNoPlayer());
 
 		panel.add(panelE);
 

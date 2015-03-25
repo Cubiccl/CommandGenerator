@@ -12,7 +12,7 @@ public class TeamOptionArgument extends Argument
 
 	public TeamOptionArgument()
 	{
-		super("scoreboard.teams.option", Argument.MISC, true, 2);
+		super("scoreboard.teams.option", Argument.NORMAL, true, 2);
 	}
 
 	@Override

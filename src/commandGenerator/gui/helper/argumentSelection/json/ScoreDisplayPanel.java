@@ -1,5 +1,6 @@
 package commandGenerator.gui.helper.argumentSelection.json;
 
+import commandGenerator.arguments.objects.ObjectCreator;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
@@ -71,7 +72,7 @@ public class ScoreDisplayPanel extends HelperPanel
 		{
 			Tag tag = nbt.get(i);
 			if (tag.getId().equals("objective")) entryObjective.setTextField(((TagString) tag).getValue());
-			if (tag.getId().equals("name")) panelEntity.setupFrom(Target.generateFrom(((TagString) tag).getValue()));
+			if (tag.getId().equals("name")) panelEntity.setupFrom(ObjectCreator.generateTarget(((TagString) tag).getValue()));
 		}
 	}
 

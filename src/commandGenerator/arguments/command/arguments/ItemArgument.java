@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
+import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
@@ -28,7 +29,7 @@ public class ItemArgument extends Argument implements INBTArgument
 
 	public ItemArgument(String id, boolean isCompulsery)
 	{
-		super(id, Argument.ITEM, isCompulsery, 1);
+		super(id, isCompulsery);
 		this.display = new boolean[] { false, false, false, false };
 	}
 
@@ -105,7 +106,7 @@ public class ItemArgument extends Argument implements INBTArgument
 		int index = 0;
 		if (this.display[0] && data.size() > index)
 		{
-			ok = Registry.exists(data.get(index), CGConstants.OBJECT_ITEM) || Registry.exists("item_" + data.get(index), CGConstants.OBJECT_ITEM);
+			ok = Registry.exists(data.get(index), ObjectBase.ITEM) || Registry.exists("item_" + data.get(index), ObjectBase.ITEM);
 			index++;
 		}
 		if (this.display[1] && data.size() > index)

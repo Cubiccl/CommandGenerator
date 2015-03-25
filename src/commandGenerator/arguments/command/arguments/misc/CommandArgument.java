@@ -23,7 +23,7 @@ public class CommandArgument extends Argument
 
 	public CommandArgument()
 	{
-		super("execute.command", Argument.MISC, true, 1);
+		super("execute.command", true);
 		this.setMaximumLength(100000);
 		this.storedCommand = "/achievement give * @p";
 	}

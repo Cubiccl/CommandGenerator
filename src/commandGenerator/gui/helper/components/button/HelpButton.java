@@ -21,16 +21,16 @@ public class HelpButton extends JButton implements CComponent
 		super("?");
 		this.message = messageArg;
 		this.title = titleArg;
-		addActionListener(new ActionListener() {
+		this.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
 				DisplayHelper.showHelp(message, title);
 			}
 		});
-		setFont(new Font(getName(), Font.PLAIN, 11));
-		setPreferredSize(new Dimension(40, 20));
-		setMinimumSize(new Dimension(40, 20));
+		this.setFont(new Font(this.getName(), Font.PLAIN, 11));
+		this.setPreferredSize(new Dimension(40, 20));
+		this.setMinimumSize(new Dimension(40, 20));
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class HelpButton extends JButton implements CComponent
 	@Override
 	public void setEnabledContent(boolean enable)
 	{
-		setEnabled(enable);
+		this.setEnabled(enable);
 	}
 
 	@Override

@@ -46,34 +46,34 @@ public class Enchantment
 	/** Returns a String version of this Enchantment to be displayed to the user. */
 	public String display()
 	{
-		return Lang.get("GUI:enchant.display").replaceAll("<type>", Lang.get("ENCHANTS:" + type.getId())).replaceAll("<lvl>", Integer.toString(level));
+		return Lang.get("GUI:enchant.display").replaceAll("<type>", Lang.get("ENCHANTS:" + this.type.getId())).replaceAll("<lvl>", Integer.toString(this.level));
 	}
 
 	/** Returns this Enchantment's level. */
 	public int getLevel()
 	{
-		return level;
+		return this.level;
 	}
 
 	/** Returns this Enchantment's name. */
 	public String getName()
 	{
 
-		return type.getName();
+		return this.type.getName();
 	}
 
 	/** Returns this Enchantment's type. */
-	public EnchantType getType()
+	public EnchantType getEnchantType()
 	{
-		return type;
+		return this.type;
 	}
 
 	/** Checks if the Enchantment is valid. */
 	public boolean isCorrect()
 	{
-		if (checkMax && (level > type.getMax() || level < 1))
+		if (this.checkMax && (this.level > this.type.getMaxLevel() || this.level < 1))
 		{
-			JOptionPane.showMessageDialog(null, Lang.get("WARNING:enchant.wrong_level").replaceAll("<max>", Integer.toString(type.getMax())),
+			JOptionPane.showMessageDialog(null, Lang.get("WARNING:enchant.wrong_level").replaceAll("<max>", Integer.toString(this.type.getMaxLevel())),
 					Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
 			return false;
 		} else return true;
@@ -87,8 +87,8 @@ public class Enchantment
 			public void askValue()
 			{}
 		};
-		tag.addTag(new TagInt("id").setValue(type.getIdNum()));
-		tag.addTag(new TagInt("lvl").setValue(level));
+		tag.addTag(new TagInt("id").setValue(this.type.getIdNum()));
+		tag.addTag(new TagInt("lvl").setValue(this.level));
 		return tag;
 	}
 

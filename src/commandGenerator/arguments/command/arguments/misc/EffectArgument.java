@@ -6,9 +6,9 @@ import java.util.List;
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.objects.Effect;
 import commandGenerator.arguments.objects.EffectType;
+import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.argumentSelection.EffectSelectionPanel;
-import commandGenerator.main.CGConstants;
 
 public class EffectArgument extends Argument
 {
@@ -16,7 +16,7 @@ public class EffectArgument extends Argument
 
 	public EffectArgument(String id, boolean isCompulsery)
 	{
-		super(id, Argument.EFFECT, isCompulsery, 1);
+		super(id, isCompulsery);
 		this.setMaximumLength(4);
 	}
 
@@ -50,7 +50,7 @@ public class EffectArgument extends Argument
 	public boolean matches(List<String> data)
 	{
 		boolean ok = true;
-		if (data.size() > 0) ok = Registry.exists(data.get(0), CGConstants.OBJECT_EFFECT);
+		if (data.size() > 0) ok = Registry.exists(data.get(0), ObjectBase.EFFECT);
 		if (data.size() > 1)
 		{
 			try

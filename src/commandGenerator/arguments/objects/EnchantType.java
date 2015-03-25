@@ -1,26 +1,11 @@
 package commandGenerator.arguments.objects;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.swing.ImageIcon;
 
-import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 
 public class EnchantType extends ObjectBase
 {
-
-	private static Map<Integer, EnchantType> enchants = new HashMap<Integer, EnchantType>();
-
-	/** Returns the Enchantment type for the specified ID.
-	 * 
-	 * @param id
-	 *            - <i>int</i> - The Enchantment's ID. */
-	public static ObjectBase getEnchantFromIdNum(int id)
-	{
-		return enchants.get(id);
-	}
 	/** This Enchantment's numercial ID. */
 	private int idNum;
 
@@ -37,29 +22,29 @@ public class EnchantType extends ObjectBase
 	 *            - <i>int</i> - The Enchantment's max level. */
 	public EnchantType(int idNum, String idString, int max)
 	{
-		super(idString, CGConstants.OBJECT_ENCHANT);
+		super(idString, ObjectBase.ENCHANTMENT);
 		this.idNum = idNum;
 		this.max = max;
-		enchants.put(idNum, this);
+		Registry.registerEnchant(this);
 	}
 
 	/** Returns this Enchantment's numerical ID. */
 	public int getIdNum()
 	{
-		return idNum;
+		return this.idNum;
 	}
 
 	/** Returns this Enchantment's maximum level. */
-	public int getMax()
+	public int getMaxLevel()
 	{
-		return max;
+		return this.max;
 	}
 
 	/** Returns this Enchantment's name. */
 	@Override
 	public String getName()
 	{
-		return Lang.get("ENCHANTS:" + getId());
+		return Lang.get("ENCHANTS:" + this.getId());
 	}
 
 	@Override

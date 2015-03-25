@@ -25,7 +25,7 @@ public class SlotArgument extends Argument
 
 	public SlotArgument()
 	{
-		super("replaceitem.slot", Argument.MISC, true, 1);
+		super("replaceitem.slot");
 	}
 
 	@Override

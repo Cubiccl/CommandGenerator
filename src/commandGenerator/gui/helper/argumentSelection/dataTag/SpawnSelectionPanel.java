@@ -42,7 +42,7 @@ public class SpawnSelectionPanel extends HelperPanel
 		entryWeight = new CEntry("GUI:spawn.weight", "1");
 		entryWeight.setTextField("1");
 
-		panelEntity = new EntitySelectionPanel("GUI:entity.select", Entity.getListNoPlayer());
+		panelEntity = new EntitySelectionPanel("GUI:entity.select", Registry.getListNoPlayer());
 	}
 
 	@Override

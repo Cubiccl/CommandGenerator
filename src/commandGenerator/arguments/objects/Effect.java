@@ -10,10 +10,13 @@ public class Effect
 
 	/** This Effect's level. */
 	private int amplifier;
+
 	/** This Effect's duration. */
 	private int duration;
+
 	/** True if this Effect's particles should be shown. */
 	private boolean showParticles;
+
 	/** This Effect's type. */
 	private EffectType type;
 
@@ -51,17 +54,17 @@ public class Effect
 	/** Generates the command structure for the /effect command. */
 	public String commandStructure()
 	{
-		return type.getId() + " " + Integer.toString(duration) + " " + Integer.toString(amplifier) + " " + Boolean.toString(!showParticles);
+		return this.type.getId() + " " + Integer.toString(this.duration) + " " + Integer.toString(this.amplifier) + " " + Boolean.toString(!this.showParticles);
 	}
 
 	/** Returns a String version of this Effect to be displayed to the user. */
 	public String display()
 	{
 		String display = Lang.get("GUI:effect.display");
-		display = display.replaceAll("<effect>", type.getName());
-		display = display.replaceAll("<amplifier>", Integer.toString(amplifier + 1));
-		display = display.replaceAll("<duration>", Integer.toString(duration));
-		if (showParticles) display = display.replaceAll("<particles>", "");
+		display = display.replaceAll("<effect>", this.type.getName());
+		display = display.replaceAll("<amplifier>", Integer.toString(this.amplifier + 1));
+		display = display.replaceAll("<duration>", Integer.toString(this.duration));
+		if (this.showParticles) display = display.replaceAll("<particles>", "");
 		else display = display.replaceAll("<particles>", Lang.get("GUI:effect.particles"));
 		return display;
 	}
@@ -69,25 +72,25 @@ public class Effect
 	/** Returns this Effect's amplifier. */
 	public int getAmplifier()
 	{
-		return amplifier;
+		return this.amplifier;
 	}
 
 	/** Returns this Effect's duration. */
 	public int getDuration()
 	{
-		return duration;
+		return this.duration;
 	}
 
 	/** Returns this Effect's type. */
 	public EffectType getType()
 	{
-		return type;
+		return this.type;
 	}
 
 	/** Returns whether this Effect's particles should be shown. */
 	public boolean showParticles()
 	{
-		return showParticles;
+		return this.showParticles;
 	}
 
 	/** Turns the Effect into a TagCompound. */
@@ -99,10 +102,10 @@ public class Effect
 			public void askValue()
 			{}
 		};
-		tag.addTag(new TagInt("Id").setValue(type.getIdNum()));
-		tag.addTag(new TagInt("Amplifier").setValue(amplifier));
-		tag.addTag(new TagInt("Duration").setValue(duration));
-		tag.addTag(new TagBoolean("ShowParticles").setValue(showParticles));
+		tag.addTag(new TagInt("Id").setValue(this.type.getIdNum()));
+		tag.addTag(new TagInt("Amplifier").setValue(this.amplifier));
+		tag.addTag(new TagInt("Duration").setValue(this.duration));
+		tag.addTag(new TagBoolean("ShowParticles").setValue(this.showParticles));
 		tag.addTag(new TagBoolean("Ambient").setValue(false));
 		return tag;
 

@@ -1,8 +1,8 @@
 package commandGenerator.arguments.tags.specific;
 
+import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.gui.helper.argumentSelection.dataTag.ListSelectionPanel;
-import commandGenerator.main.CGConstants;
 
 public class TagEffects extends TagList
 {
@@ -15,7 +15,7 @@ public class TagEffects extends TagList
 	@Override
 	public void askValue()
 	{
-		panel = new ListSelectionPanel("TAGS:" + getId(), CGConstants.OBJECT_EFFECT);
+		panel = new ListSelectionPanel("TAGS:" + getId(), ObjectBase.EFFECT);
 		((ListSelectionPanel) panel).setList(getValue());
 		if (showPanel()) return;
 		setValue(((ListSelectionPanel) panel).getList());

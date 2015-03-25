@@ -4,17 +4,19 @@ import java.awt.Component;
 import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
-import commandGenerator.arguments.objects.Target;
+import commandGenerator.arguments.objects.ObjectCreator;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 
 public class TargetArgument extends Argument
 {
-	private int mode;
+	/** What kind of Target can be selected. */
+	private final int mode;
+	/** This Argument's panel. */
 	private TargetSelectionPanel panel;
 
 	public TargetArgument(String id, boolean isCompulsery, int mode)
 	{
-		super(id, Argument.TARGET, isCompulsery, 1);
+		super(id, isCompulsery);
 		this.mode = mode;
 	}
 
@@ -53,7 +55,7 @@ public class TargetArgument extends Argument
 	@Override
 	public void setupFrom(List<String> data)
 	{
-		this.panel.setupFrom(Target.generateFrom(data.get(0)));
+		this.panel.setupFrom(ObjectCreator.generateTarget(data.get(0)));
 	}
 
 }

@@ -31,13 +31,13 @@ public class ItemData extends Item
 	/** Returns the different damage list. */
 	public int[] getDamageList()
 	{
-		return damageList;
+		return this.damageList;
 	}
 
 	@Override
 	public String getName(int damage)
 	{
-		return Lang.get("ITEMS:" + getId() + "_" + damage);
+		return Lang.get("ITEMS:" + this.getId() + "_" + damage);
 	}
 
 	@Override
@@ -46,10 +46,10 @@ public class ItemData extends Item
 
 		String path = Resources.folder + "textures/";
 
-		if (isBlock()) path += "blocks/";
+		if (this.isBlock()) path += "blocks/";
 		else path += "items/";
 
-		path += getCommandId() + "/" + Integer.toString(damage) + ".png";
+		path += this.getCommandId() + "/" + Integer.toString(damage) + ".png";
 
 		try
 		{

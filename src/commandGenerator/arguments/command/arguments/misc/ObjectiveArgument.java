@@ -13,7 +13,7 @@ public class ObjectiveArgument extends Argument
 
 	public ObjectiveArgument()
 	{
-		super("scoreboard.objective.type", Argument.MISC, true, 1);
+		super("scoreboard.objective.type");
 	}
 
 	@Override

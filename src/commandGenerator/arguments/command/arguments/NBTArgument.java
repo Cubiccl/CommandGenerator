@@ -8,7 +8,7 @@ import commandGenerator.arguments.command.Argument;
 public class NBTArgument extends Argument
 {
 
-	private String argId;
+	private final String argId;
 
 	public NBTArgument(String id, boolean isCompulsery, String argId)
 	{

@@ -22,7 +22,7 @@ public class LoadButton extends CButton
 		this.type = type;
 		this.parent = parent;
 
-		addActionListener(new ActionListener() {
+		this.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
@@ -33,14 +33,14 @@ public class LoadButton extends CButton
 
 	private void load()
 	{
-		if (SavedObjects.getList(type).size() == 0)
+		if (SavedObjects.getList(this.type).size() == 0)
 		{
 			DisplayHelper.showMessage(new CLabel("GENERAL:load_none"), Lang.get("GENERAL:load"));
 			return;
 		}
-		Object object = SavedObjects.askObjectToLoad(type);
+		Object object = SavedObjects.askObjectToLoad(this.type);
 		if (object == null) return;
-		parent.load(object);
+		this.parent.load(object);
 	}
 
 }

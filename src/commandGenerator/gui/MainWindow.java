@@ -38,8 +38,7 @@ public class MainWindow extends JFrame
 		{
 			setIconImage(Registry.getObjectFromId("command_block").getTexture().getImage());
 		} catch (Exception e)
-		{
-		}
+		{}
 
 		panelGeneral = new PanelCommandSelection(true);
 		panelGeneral.setSize(new Dimension(getSize().width - 10, getSize().height - 10));

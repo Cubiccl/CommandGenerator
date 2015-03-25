@@ -35,10 +35,10 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 	@Override
 	protected void createComponents()
 	{
-		ObjectBase[] list = Registry.getObjectList(CGConstants.OBJECT_PARTICLE);
+		ObjectBase[] list = Registry.getObjectList(ObjectBase.PARTICLE);
 		buttonHelp = new HelpButton(((Particle) list[0]).getDescription(), list[0].getName());
 
-		comboboxParticle = new CComboBox("GENERAL:particle", Registry.getObjectList(CGConstants.OBJECT_PARTICLE), this);
+		comboboxParticle = new CComboBox("GENERAL:particle", Registry.getObjectList(ObjectBase.PARTICLE), this);
 
 		panelBlock = new BlockSelectionPanel("GUI:particle.block", Registry.getList(CGConstants.LIST_BLOCKS), false);
 		panelBlock.setVisible(false);

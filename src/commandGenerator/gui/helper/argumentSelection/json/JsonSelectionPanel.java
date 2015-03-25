@@ -3,7 +3,7 @@ package commandGenerator.gui.helper.argumentSelection.json;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import commandGenerator.arguments.objects.Target;
+import commandGenerator.arguments.objects.ObjectCreator;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagString;
@@ -11,7 +11,7 @@ import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.button.HelpButton;
-import commandGenerator.gui.helper.components.combobox.LangComboBox;
+import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
@@ -20,10 +20,12 @@ import commandGenerator.main.Resources;
 @SuppressWarnings("serial")
 public class JsonSelectionPanel extends HelperPanel
 {
+	public static final String[] colors = { "black", "dark_blue", "dark_green", "dark_aqua", "dark_red", "dark_purple", "gold", "gray", "dark_gray", "blue",
+			"green", "aqua", "red", "light_purple", "yellow", "white" };
 
 	private HelpButton buttonHelpInsertion, buttonHelpHover, buttonHelpClick;
 	private CCheckBox checkboxBold, checkboxUnderlined, checkboxItalic, checkboxStrikethrough, checkboxObfuscated, checkboxHover, checkboxClick;
-	private LangComboBox comboboxMode, comboboxColor;
+	private ChoiceComboBox comboboxMode, comboboxColor;
 	private CEntry entryText, entryInsertion;
 	private boolean events;
 	private ClickEventPanel panelClick;
@@ -78,9 +80,9 @@ public class JsonSelectionPanel extends HelperPanel
 			checkboxClick = new CCheckBox("GUI:json.click.use");
 		}
 
-		comboboxMode = new LangComboBox("RESOURCES:json.mode", 3);
-		comboboxColor = new LangComboBox("RESOURCES:color", 16);
-		comboboxColor.setSelectedIndex(15);
+		comboboxMode = new ChoiceComboBox("json.mode", new String[] { "text", "score", "entity" }, false);
+		comboboxColor = new ChoiceComboBox("color", colors, false);
+		comboboxColor.setSelected("white");
 
 		panelEntity = new TargetSelectionPanel("GUI:json.display.entity", CGConstants.ENTITIES_PLAYERS);
 		panelEntity.setVisible(false);
@@ -179,24 +181,18 @@ public class JsonSelectionPanel extends HelperPanel
 			if (tag.getId().equals("insertion")) entryInsertion.setTextField(((TagString) tag).getValue());
 			if (tag.getId().equals("clickEvent")) panelClick.setup((TagCompound) tag);
 			if (tag.getId().equals("hoverEvent")) panelHover.setup((TagCompound) tag);
-			if (tag.getId().equals("color"))
-			{
-				String color = ((TagString) tag).getValue();
-				for (int j = 0; j < Resources.colors.length; j++)
-					if (Resources.colors[j].equals(color)) comboboxColor.setSelectedIndex(j);
-
-			}
+			if (tag.getId().equals("color")) this.comboboxColor.setSelected(((TagString) tag).getValue());
 
 			if (tag.getId().equals("text")) entryText.setTextField(((TagString) tag).getValue());
 			if (tag.getId().equals("score"))
 			{
-				comboboxMode.setSelectedIndex(1);
+				comboboxMode.setSelected("score");
 				panelScore.setup((TagCompound) tag);
 			}
 			if (tag.getId().equals("selector"))
 			{
-				comboboxMode.setSelectedIndex(2);
-				panelEntity.setupFrom(Target.generateFrom(((TagString) tag).getValue()));
+				comboboxMode.setSelected("entity");
+				panelEntity.setupFrom(ObjectCreator.generateTarget(((TagString) tag).getValue()));
 			}
 		}
 

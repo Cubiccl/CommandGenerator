@@ -5,75 +5,12 @@ import java.util.List;
 
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagDouble;
-import commandGenerator.main.DisplayHelper;
 
 public class Coordinates
 {
 
+	/** Used to get parts of Coordinates. */
 	public static final int X = 0, Y = 1, Z = 2;
-	/** Generates Coordinates from command structure. */
-	public static Coordinates generateFrom(String x, String y, String z)
-	{
-		double cx, cy, cz;
-		boolean[] relative = { x.startsWith("~"), y.startsWith("~"), z.startsWith("~") };
-
-		try
-		{
-
-			if (relative[0]) x = x.substring(1);
-			if (relative[1]) y = y.substring(1);
-			if (relative[2]) z = z.substring(1);
-
-			if (!x.equals("")) cx = Double.parseDouble(x);
-			else cx = 0;
-			if (!y.equals("")) cy = Double.parseDouble(y);
-			else cy = 0;
-			if (!z.equals("")) cz = Double.parseDouble(z);
-			else cz = 0;
-
-			Coordinates coords = new Coordinates(cx, cy, cz, relative, true);
-			DisplayHelper.log("Created coordinates : " + coords.commandStructure());
-			return coords;
-
-		} catch (Exception e)
-		{
-			DisplayHelper.log("There was an error while creating coordinates : " + x + " " + y + " " + z);
-			return null;
-		}
-
-	}
-
-	/** Generates Coordinates from command structure. */
-	public static Coordinates generateFromWithRot(String x, String y, String z, float rotX, float rotY)
-	{
-		double cx, cy, cz;
-		boolean[] relative = { x.startsWith("~"), y.startsWith("~"), z.startsWith("~") };
-
-		try
-		{
-
-			if (relative[0]) x = x.substring(1);
-			if (relative[1]) y = y.substring(1);
-			if (relative[2]) z = z.substring(1);
-
-			if (!x.equals("")) cx = Double.parseDouble(x);
-			else cx = 0;
-			if (!y.equals("")) cy = Double.parseDouble(y);
-			else cy = 0;
-			if (!z.equals("")) cz = Double.parseDouble(z);
-			else cz = 0;
-
-			Coordinates coords = new Coordinates(cx, cy, cz, rotX, rotY, relative, true);
-			DisplayHelper.log("Created coordinates : " + coords.commandStructure());
-			return coords;
-
-		} catch (Exception e)
-		{
-			DisplayHelper.log("There was an error while creating coordinates : " + x + " " + y + " " + z);
-			return null;
-		}
-
-	}
 
 	private boolean isFloat;
 
@@ -127,30 +64,30 @@ public class Coordinates
 	{
 
 		String display = "";
-		if (relativeness[0]) display += "~";
-		if (x != 0d || !relativeness[0])
+		if (this.relativeness[0]) display += "~";
+		if (this.x != 0d || !this.relativeness[0])
 		{
-			if (isFloat) display += Double.toString(x);
-			else display += Integer.toString((int) Math.floor(x));
+			if (this.isFloat) display += Double.toString(this.x);
+			else display += Integer.toString((int) Math.floor(this.x));
 		}
 		display += " ";
 
-		if (relativeness[1]) display += "~";
-		if (y != 0d || !relativeness[1])
+		if (this.relativeness[1]) display += "~";
+		if (this.y != 0d || !this.relativeness[1])
 		{
-			if (isFloat) display += Double.toString(y);
-			else display += Integer.toString((int) Math.floor(y));
+			if (this.isFloat) display += Double.toString(this.y);
+			else display += Integer.toString((int) Math.floor(this.y));
 		}
 		display += " ";
 
-		if (relativeness[2] && relativeness[2]) display += "~";
-		if (z != 0d || !relativeness[1])
+		if (this.relativeness[2] && this.relativeness[2]) display += "~";
+		if (this.z != 0d || !this.relativeness[1])
 		{
-			if (isFloat) display += Double.toString(z);
+			if (this.isFloat) display += Double.toString(z);
 			else display += Integer.toString((int) Math.floor(z));
 		}
 
-		if (this.isRotation) display += " " + Float.toString(xRotation) + " " + Float.toString(yRotation);
+		if (this.isRotation) display += " " + Float.toString(this.xRotation) + " " + Float.toString(this.yRotation);
 
 		return display;
 	}
@@ -161,11 +98,11 @@ public class Coordinates
 		switch (coord)
 		{
 			case X:
-				return x;
+				return this.x;
 			case Y:
-				return y;
+				return this.y;
 			case Z:
-				return z;
+				return this.z;
 			default:
 				return 0;
 		}
@@ -176,9 +113,9 @@ public class Coordinates
 		switch (rot)
 		{
 			case X:
-				return xRotation;
+				return this.xRotation;
 			case Y:
-				return yRotation;
+				return this.yRotation;
 			default:
 				return 0F;
 		}
@@ -187,21 +124,21 @@ public class Coordinates
 	/** Returns true if this Coordinates has rotations. */
 	public boolean getRotation()
 	{
-		return isRotation;
+		return this.isRotation;
 	}
 
 	/** Returns true if this Coordinates are relative. */
 	public boolean isRelative(int coord)
 	{
 		if (coord > 2 || coord < 0) return false;
-		return relativeness[coord];
+		return this.relativeness[coord];
 	}
 
 	public String save()
 	{
-		String save = x + " " + y + " " + z + " ";
-		if (isRotation) save += xRotation + " " + yRotation + " ";
-		save += relativeness[0] + " " + relativeness[1] + " " + relativeness[2] + " " + isFloat;
+		String save = this.x + " " + this.y + " " + this.z + " ";
+		if (this.isRotation) save += this.xRotation + " " + this.yRotation + " ";
+		save += this.relativeness[0] + " " + this.relativeness[1] + " " + this.relativeness[2] + " " + this.isFloat;
 		return save;
 	}
 
@@ -209,9 +146,9 @@ public class Coordinates
 	public List<Tag> toTagPos()
 	{
 		List<Tag> tag = new ArrayList<Tag>();
-		tag.add(new TagDouble().setValue(x));
-		tag.add(new TagDouble().setValue(y));
-		tag.add(new TagDouble().setValue(z));
+		tag.add(new TagDouble().setValue(this.x));
+		tag.add(new TagDouble().setValue(this.y));
+		tag.add(new TagDouble().setValue(this.z));
 		return tag;
 	}
 

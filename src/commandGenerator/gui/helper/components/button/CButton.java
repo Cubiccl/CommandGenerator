@@ -24,9 +24,9 @@ public class CButton extends JButton implements CComponent
 		super(title);
 		this.title = title;
 		this.lang = lang;
-		setPreferredSize(new Dimension(200, 20));
-		setMinimumSize(new Dimension(140, 20));
-		updateLang();
+		this.setPreferredSize(new Dimension(200, 20));
+		this.setMinimumSize(new Dimension(140, 20));
+		this.updateLang();
 	}
 
 	@Override
@@ -36,20 +36,20 @@ public class CButton extends JButton implements CComponent
 	@Override
 	public void setEnabledContent(boolean enable)
 	{
-		setEnabled(enable);
+		this.setEnabled(enable);
 	}
 
 	public void setTitle(String title)
 	{
 		this.title = title;
-		updateLang();
+		this.updateLang();
 	}
 
 	@Override
 	public void updateLang()
 	{
-		if (lang) setText(Lang.get(title));
-		else setText(title);
+		if (this.lang) this.setText(Lang.get(this.title));
+		else this.setText(this.title);
 	}
 
 }

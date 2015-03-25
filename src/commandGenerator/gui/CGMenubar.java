@@ -35,6 +35,7 @@ public class CGMenubar extends JMenuBar
 	public CGMenubar()
 	{
 
+		// Initializing
 		menu = new JMenu(Lang.get("GUI:menu"));
 
 		reset = new JMenuItem(Lang.get("GUI:menu.reset"));
@@ -45,6 +46,7 @@ public class CGMenubar extends JMenuBar
 		folder = new JMenuItem(Lang.get("GUI:menu.folder"));
 		exit = new JMenuItem(Lang.get("GUI:menu.exit"));
 
+		// Adding to the menu
 		menu.add(reset);
 		menu.add(settings);
 		menu.add(objects);
@@ -54,6 +56,7 @@ public class CGMenubar extends JMenuBar
 		menu.add(exit);
 		add(menu);
 
+		// Creating Action Listeners
 		reset.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e)

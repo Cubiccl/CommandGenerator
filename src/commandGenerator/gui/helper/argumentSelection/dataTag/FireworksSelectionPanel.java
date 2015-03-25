@@ -2,11 +2,11 @@ package commandGenerator.gui.helper.argumentSelection.dataTag;
 
 import java.util.List;
 
+import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.gui.helper.components.spinner.NumberSpinner;
-import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class FireworksSelectionPanel extends HelperPanel
@@ -33,7 +33,7 @@ public class FireworksSelectionPanel extends HelperPanel
 		spinnerFlight = new NumberSpinner("GUI:fireworks.flight", -128, 127, null);
 		spinnerFlight.setSelected(0);
 
-		explosionsPanel = new ListSelectionPanel("TAGS:Explosions", CGConstants.OBJECT_TAG_EXPLOSION);
+		explosionsPanel = new ListSelectionPanel("TAGS:Explosions", ObjectBase.TAG_EXPLOSION);
 	}
 
 	@Override

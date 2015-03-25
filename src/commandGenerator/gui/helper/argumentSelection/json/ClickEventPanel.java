@@ -7,7 +7,7 @@ import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.components.CEntry;
-import commandGenerator.gui.helper.components.combobox.LangComboBox;
+import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
 
 @SuppressWarnings("serial")
@@ -15,7 +15,7 @@ public class ClickEventPanel extends HelperPanel
 {
 	private static final String[] clickEvents = { "open_url", "run_command", "suggest_command" };
 
-	private LangComboBox comboboxAction;
+	private ChoiceComboBox comboboxAction;
 	private CEntry entryText;
 
 	public ClickEventPanel()
@@ -35,7 +35,7 @@ public class ClickEventPanel extends HelperPanel
 	{
 		entryText = new CEntry("GUI:json.click.url", "");
 
-		comboboxAction = new LangComboBox("RESOURCES:json.click", 3);
+		comboboxAction = new ChoiceComboBox("json.click", clickEvents, false);
 	}
 
 	@Override
@@ -79,10 +79,7 @@ public class ClickEventPanel extends HelperPanel
 			if (tag.getId().equals("value")) value = ((TagString) tag).getValue();
 		}
 
-		if (action.equals("open_url")) comboboxAction.setSelectedIndex(0);
-		if (action.equals("run_command")) comboboxAction.setSelectedIndex(1);
-		if (action.equals("suggest_command")) comboboxAction.setSelectedIndex(2);
-
+		this.comboboxAction.setSelected(action);
 		entryText.setTextField(value);
 	}
 

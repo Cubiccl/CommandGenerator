@@ -6,9 +6,9 @@ import java.util.List;
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.objects.EnchantType;
 import commandGenerator.arguments.objects.Enchantment;
+import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.argumentSelection.EnchantSelectionPanel;
-import commandGenerator.main.CGConstants;
 
 public class EnchantmentArgument extends Argument
 {
@@ -17,7 +17,7 @@ public class EnchantmentArgument extends Argument
 
 	public EnchantmentArgument(String id, boolean isCompulsery)
 	{
-		super(id, Argument.ENCHANTMENT, isCompulsery, 2);
+		super(id, Argument.NORMAL, isCompulsery, 2);
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class EnchantmentArgument extends Argument
 	{
 		Enchantment enchant = this.panel.generateEnchantment();
 		if (enchant == null) return null;
-		return enchant.getType().getId() + " " + enchant.getLevel();
+		return enchant.getEnchantType().getId() + " " + enchant.getLevel();
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class EnchantmentArgument extends Argument
 		{
 			return false;
 		}
-		return Registry.exists(data.get(0), CGConstants.OBJECT_ENCHANT);
+		return Registry.exists(data.get(0), ObjectBase.ENCHANTMENT);
 	}
 
 	@Override

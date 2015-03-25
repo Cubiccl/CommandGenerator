@@ -4,10 +4,10 @@ import java.awt.Component;
 import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
+import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.gui.helper.argumentSelection.dataTag.ListSelectionPanel;
-import commandGenerator.main.CGConstants;
 
 public class JsonArgument extends Argument
 {
@@ -16,7 +16,7 @@ public class JsonArgument extends Argument
 
 	public JsonArgument(String id, boolean isCompulsery)
 	{
-		super(id, Argument.JSON, isCompulsery, 1);
+		super(id, isCompulsery);
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class JsonArgument extends Argument
 	@Override
 	public void initGui()
 	{
-		this.panel = new ListSelectionPanel("GUI:" + this.getId(), CGConstants.OBJECT_JSON);
+		this.panel = new ListSelectionPanel("GUI:" + this.getId(), ObjectBase.JSON);
 	}
 
 	@Override

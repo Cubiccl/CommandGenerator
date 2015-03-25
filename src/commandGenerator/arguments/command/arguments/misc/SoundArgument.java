@@ -7,12 +7,12 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import commandGenerator.arguments.command.Argument;
+import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.objects.Sound;
 import commandGenerator.gui.helper.components.button.HelpButton;
 import commandGenerator.gui.helper.components.combobox.CComboBox;
 import commandGenerator.gui.helper.components.icomponent.IBox;
-import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 
 public class SoundArgument extends Argument implements IBox
@@ -23,7 +23,7 @@ public class SoundArgument extends Argument implements IBox
 
 	public SoundArgument(String id, boolean isCompulsery)
 	{
-		super(id, Argument.SOUND, isCompulsery, 1);
+		super(id, isCompulsery);
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class SoundArgument extends Argument implements IBox
 	@Override
 	public void initGui()
 	{
-		this.box = new CComboBox("GUI:" + this.getId(), Registry.getObjectList(CGConstants.OBJECT_SOUND), this);
+		this.box = new CComboBox("GUI:" + this.getId(), Registry.getObjectList(ObjectBase.SOUND), this);
 		this.button = new HelpButton(Lang.get("HELP:sound." + this.box.getValue().getId()), this.box.getValue().getId());
 	}
 
@@ -63,7 +63,7 @@ public class SoundArgument extends Argument implements IBox
 	@Override
 	public boolean matches(List<String> data)
 	{
-		return Registry.exists(data.get(0), CGConstants.OBJECT_SOUND);
+		return Registry.exists(data.get(0), ObjectBase.SOUND);
 	}
 
 	@Override

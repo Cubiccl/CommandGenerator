@@ -150,8 +150,8 @@ public class InitObjects
 					String[] data = itemData[i].split("=");
 					if (data[0].equals("damage_custom")) create = new ItemData(Boolean.parseBoolean(itemData[0]), Integer.parseInt(itemData[1]), itemData[2],
 							convertMeta(data[1]));
-					else if (data[0].equals("damage")) create.setMaxDamage(data[1]);
-					else if (data[0].equals("durability")) create.setDurability(data[1]);
+					else if (data[0].equals("damage")) create.setMaxDamage(Integer.parseInt(data[1]));
+					else if (data[0].equals("durability")) create.setDurability(Integer.parseInt(data[1]));
 				}
 			}
 		}
@@ -164,7 +164,7 @@ public class InitObjects
 			String[] listData = list.split(":");
 			Registry.registerList(listData[0], listData[1].split(","));
 		}
-		Registry.registerList("durability", Item.durabilityList.toArray(new String[0]));
+		Registry.registerList("durability", Registry.durabilityList.toArray(new String[0]));
 	}
 
 	private static void initParticles(String[] particles)

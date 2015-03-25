@@ -14,7 +14,7 @@ public class BooleanArgument extends Argument
 
 	public BooleanArgument(String id, boolean isCompulsery)
 	{
-		super(id, Argument.BOOLEAN, isCompulsery, 1);
+		super(id, isCompulsery);
 		this.falseValue = "false";
 		this.trueValue = "true";
 	}

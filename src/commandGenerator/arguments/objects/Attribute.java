@@ -8,10 +8,14 @@ import commandGenerator.arguments.tags.TagString;
 public class Attribute
 {
 
+	public static final String[] operations = { "add_value", "add_percent", "set_percent" };
+
 	/** The amount given by the Attribute */
 	private double amount;
+
 	/** The operation used by the Attribute */
 	private int operation;
+
 	/** The type of the Attribute */
 	private AttributeType type;
 
@@ -35,10 +39,10 @@ public class Attribute
 	{
 		String display = "";
 
-		if (operation < 2 && amount >= 0) display += "+";
+		if (this.operation < 2 && this.amount >= 0) display += "+";
 
-		if (operation > 0) display += Double.toString(amount) + "% " + type.getName();
-		else display += Double.toString(amount) + " " + type.getName();
+		if (this.operation > 0) display += Double.toString(this.amount) + "% " + this.type.getName();
+		else display += Double.toString(this.amount) + " " + this.type.getName();
 
 		return display;
 	}
@@ -46,30 +50,30 @@ public class Attribute
 	/** @return double - The amount given by the Attribute */
 	public double getAmount()
 	{
-		return amount;
+		return this.amount;
 	}
 
 	/** @return String - The name of the Attribute */
 	public String getName()
 	{
-		return type.getName();
+		return this.type.getName();
 	}
 
 	/** @return int - The operation used by the Attribute */
 	public int getOperation()
 	{
-		return operation;
+		return this.operation;
 	}
 
 	/** Returns this Attribute's type. */
-	public AttributeType getType()
+	public AttributeType getAttributeType()
 	{
-		return type;
+		return this.type;
 	}
 
 	public String save()
 	{
-		return type.getId() + " " + amount + " " + operation;
+		return this.type.getId() + " " + this.amount + " " + this.operation;
 	}
 
 	/** @return TagCompound - A Tag version of the Attribute */
@@ -81,9 +85,9 @@ public class Attribute
 			{}
 		};
 
-		tag.addTag(new TagString("AttributeName").setValue(type.getId()));
-		tag.addTag(new TagDouble("Amount").setValue(amount));
-		tag.addTag(new TagInt("Operation").setValue(operation));
+		tag.addTag(new TagString("AttributeName").setValue(this.type.getId()));
+		tag.addTag(new TagDouble("Amount").setValue(this.amount));
+		tag.addTag(new TagInt("Operation").setValue(this.operation));
 		tag.addTag(new TagString("Name").setValue(getName()));
 		tag.addTag(new TagInt("UUIDMost").setValue(10000));
 		tag.addTag(new TagInt("UUIDLeast").setValue(100000));

@@ -23,6 +23,16 @@ public class ChoiceComboBox extends JPanel implements CComponent
 	private String title;
 	private boolean translate, hasHelp;
 
+	public ChoiceComboBox(String title, String[] choices)
+	{
+		this(title, choices, true, true);
+	}
+
+	public ChoiceComboBox(String title, String[] choices, boolean hasHelp)
+	{
+		this(title, choices, hasHelp, true);
+	}
+
 	public ChoiceComboBox(final String title, final String[] choices, boolean hasHelp, boolean translate)
 	{
 		super(new GridBagLayout());
@@ -33,7 +43,7 @@ public class ChoiceComboBox extends JPanel implements CComponent
 
 		if (this.hasHelp)
 		{
-			this.button = new HelpButton(Lang.get("HELP:" + title + "." + choices[0]), choices[0]);
+			this.button = new HelpButton(Lang.get("HELP:" + title + "." + this.choices[0]), this.choices[0]);
 		}
 
 		this.box = new JComboBox<String>(choices);
@@ -54,12 +64,7 @@ public class ChoiceComboBox extends JPanel implements CComponent
 		gbc.gridy = 0;
 		this.add(box, gbc);
 		gbc.gridx++;
-		if (hasHelp) this.add(button, gbc);
-	}
-
-	public int getSelectedIndex()
-	{
-		return this.box.getSelectedIndex();
+		if (hasHelp) this.add(this.button, gbc);
 	}
 
 	@Override
@@ -76,9 +81,15 @@ public class ChoiceComboBox extends JPanel implements CComponent
 		this.button.setEnabled(enable);
 	}
 
+	public String getSelectedValue()
+	{
+		return (String) this.box.getSelectedItem();
+	}
+
 	public void setSelected(String selection)
 	{
-		for (int i = 0; i < choices.length; i++) if (choices[i].equals(selection)) this.box.setSelectedIndex(i);
+		for (int i = 0; i < this.choices.length; i++)
+			if (this.choices[i].equals(selection)) this.box.setSelectedIndex(i);
 	}
 
 	@Override
@@ -93,6 +104,23 @@ public class ChoiceComboBox extends JPanel implements CComponent
 
 		this.box.setModel(new JComboBox<String>(names).getModel());
 		if (this.hasHelp) button.setData(Lang.get("HELP:" + title + "." + choices[this.box.getSelectedIndex()]), (String) this.box.getSelectedItem());
+	}
+
+	public void addActionListener(ActionListener actionListener)
+	{
+		this.box.addActionListener(actionListener);
+	}
+
+	public void setData(String title, String[] choices)
+	{
+		this.title = title;
+		this.choices = choices;
+		this.updateLang();
+	}
+
+	public int getSelectedIndex()
+	{
+		return this.box.getSelectedIndex();
 	}
 
 }

@@ -10,12 +10,12 @@ import commandGenerator.main.DisplayHelper;
 public class ChoiceArgument extends Argument
 {
 	private ChoiceComboBox box;
-	private String[] choices;
+	private final String[] choices;
 	private boolean hasHelp, translate;
 
 	public ChoiceArgument(String id, boolean isCompulsery, String... choices)
 	{
-		super(id, Argument.CHOICE, isCompulsery, 1);
+		super(id, isCompulsery);
 		this.choices = choices;
 		this.hasHelp = false;
 		this.translate = true;
@@ -54,7 +54,8 @@ public class ChoiceArgument extends Argument
 	@Override
 	public boolean matches(List<String> data)
 	{
-		for (String choice : this.choices) if (data.get(0).equals(choice)) return true;
+		for (String choice : this.choices)
+			if (data.get(0).equals(choice)) return true;
 		DisplayHelper.log(data.get(0) + " is not a valid argument.");
 		return false;
 	}

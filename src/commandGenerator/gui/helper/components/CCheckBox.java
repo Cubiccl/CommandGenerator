@@ -19,25 +19,25 @@ public class CCheckBox extends JCheckBox implements CComponent
 	@Override
 	public void reset()
 	{
-		setSelected(false);
+		this.setSelected(false);
 	}
 
 	@Override
 	public void setEnabledContent(boolean enable)
 	{
-		setEnabled(enable);
+		this.setEnabled(enable);
 	}
 
 	public void setTitle(String title)
 	{
 		this.title = title;
-		updateLang();
+		this.updateLang();
 	}
 
 	@Override
 	public void updateLang()
 	{
-		setText(Lang.get(title));
+		this.setText(Lang.get(this.title));
 	}
 
 }

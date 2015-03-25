@@ -151,7 +151,7 @@ public class SavedObjectsPanel extends JPanel
 
 		switch (types[listTypes.getSelectedIndex()])
 		{
-			case CGConstants.OBJECT_ATTRIBUTE:
+			case ObjectBase.ATTRIBUTE:
 				AttributeSelectionPanel panelA = new AttributeSelectionPanel();
 
 				if (editing) panelA.setupFrom((Attribute) displayed.get(listObjects.getSelectedValue()));
@@ -160,7 +160,7 @@ public class SavedObjectsPanel extends JPanel
 				object = panelA.getAttribute();
 				break;
 
-			case CGConstants.OBJECT_EFFECT:
+			case ObjectBase.EFFECT:
 				EffectSelectionPanel panelEf = new EffectSelectionPanel("GENERAL:effect");
 
 				if (editing) panelEf.setupFrom((Effect) displayed.get(listObjects.getSelectedValue()));
@@ -169,7 +169,7 @@ public class SavedObjectsPanel extends JPanel
 				object = panelEf.generateEffect();
 				break;
 
-			case CGConstants.OBJECT_ENCHANT:
+			case ObjectBase.ENCHANTMENT:
 				EnchantSelectionPanel panelEn = new EnchantSelectionPanel("GENERAL:enchant", false);
 
 				if (editing) panelEn.setupFrom((Enchantment) displayed.get(listObjects.getSelectedValue()));
@@ -178,7 +178,7 @@ public class SavedObjectsPanel extends JPanel
 				object = panelEn.generateEnchantment();
 				break;
 
-			case CGConstants.OBJECT_ITEM:
+			case ObjectBase.ITEM:
 				ItemSelectionPanel panelI = new ItemSelectionPanel("GENERAL:item", Registry.getList(CGConstants.LIST_ITEMS), true, true);
 
 				if (editing) panelI.setupFrom((ItemStack) displayed.get(listObjects.getSelectedValue()));
@@ -187,7 +187,7 @@ public class SavedObjectsPanel extends JPanel
 				object = panelI.getItemStack();
 				break;
 
-			case CGConstants.OBJECT_BLOCK:
+			case ObjectBase.BLOCK:
 				BlockSelectionPanel panelB = new BlockSelectionPanel("GENERAL:block", Registry.getList(CGConstants.LIST_BLOCKS), true);
 
 				if (editing) panelB.setupFrom((ItemStack) displayed.get(listObjects.getSelectedValue()));
@@ -196,7 +196,7 @@ public class SavedObjectsPanel extends JPanel
 				object = panelB.getItemStack();
 				break;
 
-			case CGConstants.OBJECT_COORD:
+			case ObjectBase.COORD:
 				CoordSelectionPanel panelC = new CoordSelectionPanel("GENERAL:coordinate", true, true);
 
 				if (editing) panelC.setupFrom((Coordinates) displayed.get(listObjects.getSelectedValue()));
@@ -205,8 +205,8 @@ public class SavedObjectsPanel extends JPanel
 				object = panelC.generateCoord();
 				break;
 
-			case CGConstants.OBJECT_ENTITY:
-				EntitySelectionPanel panelEnt = new EntitySelectionPanel("GENERAL:entity", Registry.getObjectList(CGConstants.OBJECT_ENTITY));
+			case ObjectBase.ENTITY:
+				EntitySelectionPanel panelEnt = new EntitySelectionPanel("GENERAL:entity", Registry.getObjectList(ObjectBase.ENTITY));
 
 				if (editing)
 				{
@@ -217,7 +217,7 @@ public class SavedObjectsPanel extends JPanel
 				object = panelEnt.getTagList();
 				break;
 
-			case CGConstants.OBJECT_TAG_TRADE:
+			case ObjectBase.TAG_TRADE:
 				TradeSelectionPanel panelTr = new TradeSelectionPanel("GENERAL:trade");
 
 				if (editing) panelTr.setupFrom(new TagCompound() {
@@ -230,7 +230,7 @@ public class SavedObjectsPanel extends JPanel
 				object = panelTr.generateTrade();
 				break;
 
-			case CGConstants.OBJECT_TARGET:
+			case ObjectBase.TARGET:
 				TargetSelectionPanel panelTa = new TargetSelectionPanel("GENERAL:target", CGConstants.ENTITIES_ALL);
 
 				if (editing) panelTa.setupFrom((Target) displayed.get(listObjects.getSelectedValue()));

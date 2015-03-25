@@ -17,24 +17,23 @@ public class CEntry extends JPanel implements CComponent
 	{
 		super(new GridLayout(1, 2));
 		this.defaultValue = defaultValue;
+		this.label = new CLabel(title);
+		this.text = new JTextField(13);
+		this.text.setText(this.defaultValue);
 
-		label = new CLabel(title);
-		text = new JTextField(13);
-		text.setText(defaultValue);
-
-		add(label);
-		add(text);
+		this.add(label);
+		this.add(text);
 	}
 
 	public String getText()
 	{
-		return text.getText();
+		return this.text.getText();
 	}
 
 	@Override
 	public void reset()
 	{
-		setTextField(defaultValue);
+		this.setTextField(this.defaultValue);
 	}
 
 	public void setDefaultValue(String defaultValue)
@@ -45,13 +44,13 @@ public class CEntry extends JPanel implements CComponent
 	@Override
 	public void setEnabledContent(boolean enabled)
 	{
-		text.setEnabled(enabled);
-		label.setEnabled(enabled);
+		this.text.setEnabled(enabled);
+		this.label.setEnabledContent(enabled);
 	}
 
 	public void setText(String title)
 	{
-		label.setTitle(title);
+		this.label.setTitle(title);
 	}
 
 	public void setTextField(String text)
@@ -62,7 +61,7 @@ public class CEntry extends JPanel implements CComponent
 	@Override
 	public void updateLang()
 	{
-		label.updateLang();
+		this.label.updateLang();
 	}
 
 }

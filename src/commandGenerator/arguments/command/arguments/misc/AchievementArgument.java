@@ -5,9 +5,9 @@ import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.objects.Achievement;
+import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.argumentSelection.AchievementSelectionPanel;
-import commandGenerator.main.CGConstants;
 
 public class AchievementArgument extends Argument
 {
@@ -15,7 +15,7 @@ public class AchievementArgument extends Argument
 
 	public AchievementArgument(boolean isCompulsery)
 	{
-		super("achievement", Argument.ACHIEVEMENT, isCompulsery, 1);
+		super("achievement", isCompulsery);
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class AchievementArgument extends Argument
 	@Override
 	public boolean matches(List<String> data)
 	{
-		return Registry.exists(data.get(0), CGConstants.OBJECT_ACHIEVEMENT);
+		return Registry.exists(data.get(0), ObjectBase.ACHIEVEMENT);
 	}
 
 	@Override

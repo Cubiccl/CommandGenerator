@@ -6,23 +6,23 @@ import java.util.List;
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
+import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
-import commandGenerator.main.CGConstants;
 
 public class BlockArgument extends Argument implements INBTArgument
 {
 
-	private boolean canHaveNBT;
+	private final boolean canHaveNBT;
 	private boolean[] display;
-	private String listId;
+	private final String listId;
 	private BlockSelectionPanel panel;
 
 	public BlockArgument(String id, boolean isCompulsery, String listId, boolean canHaveNBT)
 	{
-		super(id, Argument.BLOCK, isCompulsery, 1);
+		super(id, isCompulsery);
 		this.listId = listId;
 		this.canHaveNBT = canHaveNBT;
 		this.display = new boolean[] { false, false, false };
@@ -79,7 +79,7 @@ public class BlockArgument extends Argument implements INBTArgument
 		int index = 0;
 		if (this.display[0] && data.size() > index)
 		{
-			ok = Registry.exists(data.get(index), CGConstants.OBJECT_ITEM);
+			ok = Registry.exists(data.get(index), ObjectBase.ITEM);
 			index++;
 		}
 		if (this.display[1] && data.size() > index)

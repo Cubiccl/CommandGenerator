@@ -4,6 +4,7 @@ import javax.swing.JLabel;
 
 import commandGenerator.arguments.objects.Effect;
 import commandGenerator.arguments.objects.EffectType;
+import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
@@ -16,7 +17,6 @@ import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.gui.helper.components.spinner.NumberSpinner;
-import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -61,14 +61,14 @@ public class EffectSelectionPanel extends HelperPanel implements IBox, ISave
 			DisplayHelper.missingTexture("effects/speed.png");
 		}
 
-		buttonSave = new SaveButton(CGConstants.OBJECT_EFFECT, this);
-		buttonLoad = new LoadButton(CGConstants.OBJECT_EFFECT, this);
+		buttonSave = new SaveButton(ObjectBase.EFFECT, this);
+		buttonLoad = new LoadButton(ObjectBase.EFFECT, this);
 
 		entryDuration = new CEntry("GUI:effect.duration", "600");
 
 		spinnerAmplifier = new NumberSpinner("GUI:effect.amplifier", 1, 256, null);
 
-		comboboxEffect = new CComboBox("GUI:effect.choose", Registry.getObjectList(CGConstants.OBJECT_EFFECT), this);
+		comboboxEffect = new CComboBox("GUI:effect.choose", Registry.getObjectList(ObjectBase.EFFECT), this);
 
 		checkboxHideParticles = new CCheckBox("GUI:effect.hide");
 	}

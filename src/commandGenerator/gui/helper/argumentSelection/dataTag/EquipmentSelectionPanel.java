@@ -12,6 +12,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
 
 import commandGenerator.arguments.objects.ItemStack;
+import commandGenerator.arguments.objects.ObjectCreator;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
@@ -200,7 +201,7 @@ public class EquipmentSelectionPanel extends HelperPanel
 		if (value.size() < 5) DisplayHelper.log("Error : Missing Equipment.");
 
 		for (int i = 0; i < value.size() && i < 5; i++)
-			equipment[i] = ItemStack.generateFrom((TagCompound) value.get(i));
+			equipment[i] = ObjectCreator.generateItemStack((TagCompound) value.get(i));
 		displayItems();
 	}
 

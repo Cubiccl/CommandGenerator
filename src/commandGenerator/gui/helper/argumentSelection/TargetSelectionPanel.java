@@ -21,6 +21,8 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 import commandGenerator.arguments.objects.Entity;
+import commandGenerator.arguments.objects.ObjectBase;
+import commandGenerator.arguments.objects.ObjectCreator;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.components.CEntry;
@@ -138,7 +140,7 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 		} else if (selector.equals("type"))
 		{
 
-			CComboBox box = new CComboBox("GUI:selector.type", Registry.getObjectList(CGConstants.OBJECT_ENTITY), null);
+			CComboBox box = new CComboBox("GUI:selector.type", Registry.getObjectList(ObjectBase.ENTITY), null);
 			boolean cancel = DisplayHelper.showQuestion(box, title);
 			if (cancel) return;
 			value = box.getValue().getId();
@@ -217,8 +219,8 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 
 		buttonAdd = new CButton("GUI:selector.add");
 		buttonRemove = new CButton("GUI:selector.remove");
-		buttonSave = new SaveButton(CGConstants.OBJECT_TARGET, this);
-		buttonLoad = new LoadButton(CGConstants.OBJECT_TARGET, this);
+		buttonSave = new SaveButton(ObjectBase.TARGET, this);
+		buttonLoad = new LoadButton(ObjectBase.TARGET, this);
 
 		boxEntities = new JComboBox<String>(targets);
 		boxEntities.setPreferredSize(new Dimension(100, 20));
@@ -311,7 +313,7 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 			return new Target(entryPlayer.getText());
 		}
 
-		Target sel = new Target(Target.getTypeFromString((String) boxEntities.getSelectedItem()), addedSelectors);
+		Target sel = new Target(ObjectCreator.getTargetType((String) boxEntities.getSelectedItem()), addedSelectors);
 		DisplayHelper.log("Generated entity selector : " + sel.display());
 		return sel;
 	}

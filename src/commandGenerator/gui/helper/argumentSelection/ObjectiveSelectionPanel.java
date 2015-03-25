@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.components.combobox.CComboBox;
-import commandGenerator.gui.helper.components.combobox.LangComboBox;
+import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Resources;
@@ -15,12 +15,12 @@ import commandGenerator.main.Resources;
 public class ObjectiveSelectionPanel extends HelperPanel
 {
 	private static final String[] criteriaList = { "dummy", "trigger", "deathCount", "playerKillCount", "totalKillCount", "health", "achievement",
-			"stat.craftItem", "stat.useItem", "stat.breakItem", "stat.mineBlock", "stat.killEntity", "stat.entityKilledBy", "stat", "teamkill", "killedByTeam" };
+			"stat.craftItem", "stat.useItem", "stat.breakItem", "stat.mineBlock", "stat.killEntity", "stat.entityKilledBy", "stat", "teamKill", "killedByTeam" };
 	private static final String[] statList = { "animalsBred", "boatOneCm", "climbOneCm", "crouchOneCm", "damageDealt", "damageTaken", "deaths", "diveOneCm",
 			"drop", "fallOneCm", "fishCaught", "flyOneCm", "horseOneCm", "jump", "junkFished", "leaveGame", "minecartOneCm", "mobKills", "pigOneCm",
 			"playerKills", "playOneMinute", "sprintOneCm", "swimOneCm", "timeSinceDeath", "treasureFished", "walkOneCm" };
 
-	private LangComboBox comboboxMain, comboboxPrecise2;
+	private ChoiceComboBox comboboxMain, comboboxPrecise2;
 	private CComboBox comboboxPrecise;
 
 	public ObjectiveSelectionPanel(String title)
@@ -39,9 +39,9 @@ public class ObjectiveSelectionPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		comboboxMain = new LangComboBox("RESOURCES:criteria", criteriaList.length);
+		comboboxMain = new ChoiceComboBox("criteria", criteriaList, false);
 		comboboxPrecise = new CComboBox("", new ObjectBase[0], null);
-		comboboxPrecise2 = new LangComboBox("RESOURCES:color", 16);
+		comboboxPrecise2 = new ChoiceComboBox("color", Resources.colors, false);
 		comboboxPrecise2.setVisible(false);
 	}
 
@@ -73,7 +73,7 @@ public class ObjectiveSelectionPanel extends HelperPanel
 		{
 			if (criteria.startsWith(criteriaList[i]))
 			{
-				comboboxMain.setSelectedIndex(i);
+				comboboxMain.setSelected(criteriaList[i]);
 				criteria = criteria.substring(criteriaList[i].length());
 				break;
 			}
@@ -85,10 +85,10 @@ public class ObjectiveSelectionPanel extends HelperPanel
 		if (index == 13)
 		{
 			for (int i = 0; i < statList.length; i++)
-				if (criteria.substring(1).equals(statList[i])) comboboxPrecise2.setSelectedIndex(i);
+				if (criteria.substring(1).equals(statList[i])) comboboxPrecise2.setSelected(statList[i]);
 		}
 		if (index >= 14) for (int i = 0; i < Resources.colors.length; i++)
-			if (criteria.substring(1).equals(Resources.colors[i])) comboboxPrecise2.setSelectedIndex(i);
+			if (criteria.substring(1).equals(Resources.colors[i])) comboboxPrecise2.setSelected(Resources.colors[i]);
 
 	}
 
@@ -101,13 +101,13 @@ public class ObjectiveSelectionPanel extends HelperPanel
 
 		if (index < 6) comboboxPrecise.setData(new ObjectBase[0]);
 
-		else if (index == 6) comboboxPrecise.setData(Registry.getObjectList(CGConstants.OBJECT_ACHIEVEMENT));
+		else if (index == 6) comboboxPrecise.setData(Registry.getObjectList(ObjectBase.ACHIEVEMENT));
 
-		else if (index == 13) comboboxPrecise2.setText("RESOURCES:stat", statList.length);
+		else if (index == 13) comboboxPrecise2.setData("stat", statList);
 
 		else if (index == 11 || index == 12) comboboxPrecise.setData(Registry.getList(CGConstants.LIST_MOBS));
 
-		else if (index >= 14) comboboxPrecise2.setText("RESOURCES:color", 16);
+		else if (index >= 14) comboboxPrecise2.setData("color", Resources.colors);
 
 		else
 		{

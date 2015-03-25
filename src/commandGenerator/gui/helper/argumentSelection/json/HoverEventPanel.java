@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 
 import commandGenerator.arguments.objects.Achievement;
 import commandGenerator.arguments.objects.ItemStack;
+import commandGenerator.arguments.objects.ObjectCreator;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
@@ -14,7 +15,7 @@ import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.argumentSelection.AchievementSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
-import commandGenerator.gui.helper.components.combobox.LangComboBox;
+import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
 
@@ -22,7 +23,7 @@ import commandGenerator.main.CGConstants;
 public class HoverEventPanel extends HelperPanel
 {
 
-	private LangComboBox comboboxAction;
+	private ChoiceComboBox comboboxAction;
 	private ItemSelectionPanel panelItem;
 	private JsonSelectionPanel panelJson;
 	private AchievementSelectionPanel panelStat;
@@ -43,7 +44,7 @@ public class HoverEventPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		comboboxAction = new LangComboBox("RESOURCES:json.hover", 4);
+		comboboxAction = new ChoiceComboBox("json.hover", new String[] { "show_text", "json", "show_item", "show_achievement" }, false);
 
 		textfieldText = new JTextField(20);
 
@@ -123,7 +124,7 @@ public class HoverEventPanel extends HelperPanel
 		{
 			if (value.startsWith("{") && value.endsWith("}"))
 			{
-				comboboxAction.setSelectedIndex(1);
+				comboboxAction.setSelected("show_text");
 				TagCompound tag = new TagCompound() {
 					@Override
 					public void askValue()
@@ -139,7 +140,7 @@ public class HoverEventPanel extends HelperPanel
 		}
 		if (action.equals("show_item"))
 		{
-			comboboxAction.setSelectedIndex(2);
+			comboboxAction.setSelected("show_item");
 			TagCompound tag = new TagCompound() {
 				@Override
 				public void askValue()
@@ -147,11 +148,11 @@ public class HoverEventPanel extends HelperPanel
 			};
 			tag.setValue(DataTags.generateListFrom(value));
 
-			panelItem.setupFrom(ItemStack.generateFrom(tag));
+			panelItem.setupFrom(ObjectCreator.generateItemStack(tag));
 		}
 		if (action.equals("show_achievement"))
 		{
-			comboboxAction.setSelectedIndex(3);
+			comboboxAction.setSelected("show_achievement");
 			panelStat.setupFrom(((Achievement) Registry.getObjectFromId(value)));
 		}
 

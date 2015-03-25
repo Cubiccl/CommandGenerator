@@ -11,7 +11,7 @@ import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagInt;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.components.CLabel;
-import commandGenerator.gui.helper.components.combobox.LangComboBox;
+import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Resources;
@@ -23,7 +23,7 @@ public class PatternSelectionPanel extends HelperPanel
 	private static final String[] patternIds = { "bs", "ts", "ls", "rs", "ms", "cs", "ss", "drs", "dls", "cr", "sc", "ld", "rd", "hh", "vh", "bl", "br", "tl",
 			"tr", "bt", "tt", "bts", "tts", "mc", "mr", "bo", "cbo", "bri", "cre", "sku", "flo", "moj", "gra" };
 
-	private LangComboBox comboboxColor, comboboxPattern;
+	private ChoiceComboBox comboboxColor, comboboxPattern;
 
 	private CLabel labelColor, labelPattern;
 	private JLabel labelImage;
@@ -55,8 +55,8 @@ public class PatternSelectionPanel extends HelperPanel
 			DisplayHelper.missingTexture("textures/banners/bs.png");
 		}
 
-		comboboxColor = new LangComboBox("RESOURCES:color_wool", 16);
-		comboboxPattern = new LangComboBox("RESOURCES:pattern", patternIds.length);
+		comboboxColor = new ChoiceComboBox("color", Resources.colorsDye, false);
+		comboboxPattern = new ChoiceComboBox("pattern", patternIds, false);
 	}
 
 	@Override
@@ -68,10 +68,10 @@ public class PatternSelectionPanel extends HelperPanel
 			{
 				try
 				{
-					labelImage.setIcon(new ImageIcon(Resources.folder + "textures/banners/" + patternIds[comboboxPattern.getSelectedIndex()] + ".png"));
+					labelImage.setIcon(new ImageIcon(Resources.folder + "textures/banners/" + comboboxPattern.getSelectedValue() + ".png"));
 				} catch (Exception e)
 				{
-					DisplayHelper.missingTexture("textures/banners/" + patternIds[comboboxPattern.getSelectedIndex()] + ".png");
+					DisplayHelper.missingTexture("textures/banners/" + comboboxPattern.getSelectedValue() + ".png");
 				}
 			}
 		});
@@ -85,7 +85,7 @@ public class PatternSelectionPanel extends HelperPanel
 			{}
 		};
 		tag.addTag(new TagInt("Color").setValue(comboboxColor.getSelectedIndex()));
-		tag.addTag(new TagString("Pattern").setValue(patternIds[comboboxPattern.getSelectedIndex()]));
+		tag.addTag(new TagString("Pattern").setValue(this.comboboxPattern.getSelectedValue()));
 		return tag;
 	}
 
@@ -94,12 +94,8 @@ public class PatternSelectionPanel extends HelperPanel
 		for (int i = 0; i < nbt.size(); i++)
 		{
 			Tag tag = nbt.get(i);
-			if (tag.getId().equals("Color")) comboboxColor.setSelectedIndex(((TagInt) tag).getValue());
-			if (tag.getId().equals("Pattern"))
-			{
-				for (int j = 0; j < patternIds.length; j++)
-					if (patternIds[j].equals(((TagString) tag).getValue())) comboboxPattern.setSelectedIndex(j);
-			}
+			if (tag.getId().equals("Color")) comboboxColor.setSelected(Resources.colorsDye[((TagInt) tag).getValue()]);
+			if (tag.getId().equals("Pattern")) comboboxPattern.setSelected(((TagString) tag).getValue());
 		}
 	}
 

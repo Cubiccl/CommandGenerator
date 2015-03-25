@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import commandGenerator.arguments.objects.Coordinates;
+import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.TagFloat;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
@@ -12,7 +13,6 @@ import commandGenerator.gui.helper.components.button.LoadButton;
 import commandGenerator.gui.helper.components.button.SaveButton;
 import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
-import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -59,8 +59,8 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 	@Override
 	protected void createComponents()
 	{
-		buttonSave = new SaveButton(CGConstants.OBJECT_COORD, this);
-		buttonLoad = new LoadButton(CGConstants.OBJECT_COORD, this);
+		buttonSave = new SaveButton(ObjectBase.COORD, this);
+		buttonLoad = new LoadButton(ObjectBase.COORD, this);
 
 		entryX = new CEntry("GUI:coord.x", "0");
 		entryY = new CEntry("GUI:coord.y", "0");

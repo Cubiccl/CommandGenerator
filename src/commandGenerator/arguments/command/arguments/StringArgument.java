@@ -21,7 +21,7 @@ public class StringArgument extends Argument
 
 	public StringArgument(String id, boolean isCompulsery)
 	{
-		super(id, Argument.STRING, isCompulsery, 1);
+		super(id, isCompulsery);
 	}
 
 	@Override

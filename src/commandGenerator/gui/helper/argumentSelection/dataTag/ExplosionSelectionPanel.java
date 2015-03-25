@@ -19,7 +19,7 @@ import commandGenerator.arguments.tags.TagList;
 import commandGenerator.gui.helper.argumentSelection.ColorSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.button.CButton;
-import commandGenerator.gui.helper.components.combobox.LangComboBox;
+import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
@@ -27,11 +27,12 @@ import commandGenerator.main.Lang;
 @SuppressWarnings("serial")
 public class ExplosionSelectionPanel extends HelperPanel
 {
+	private static final String[] fireworksTypes = { "small", "large", "star", "creeper", "burst" };
 
 	private CButton buttonColors, buttonFadeColors, buttonRemoveColor;
 	private CCheckBox checkboxFlicker, checkboxTrail;
 	private List<Integer> colors, colorsFade;
-	private LangComboBox comboboxType;
+	private ChoiceComboBox comboboxType;
 	private JEditorPane editorpane;
 	private JScrollPane scrollpane;
 
@@ -63,7 +64,7 @@ public class ExplosionSelectionPanel extends HelperPanel
 		checkboxFlicker = new CCheckBox("GUI:fireworks.twinkle");
 		checkboxTrail = new CCheckBox("GUI:fireworks.trail");
 
-		comboboxType = new LangComboBox("RESOURCES:fireworks", 5);
+		comboboxType = new ChoiceComboBox("fireworks", fireworksTypes, false);
 
 		editorpane = new JEditorPane("text/html", "");
 		editorpane.setEditable(false);
@@ -196,7 +197,7 @@ public class ExplosionSelectionPanel extends HelperPanel
 	{
 		checkboxFlicker.setSelected(flicker);
 		checkboxTrail.setSelected(trail);
-		comboboxType.setSelectedIndex(type);
+		comboboxType.setSelected(fireworksTypes[type]);
 		colors.clear();
 		colorsFade.clear();
 		if (color != null)

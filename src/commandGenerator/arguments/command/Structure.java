@@ -158,15 +158,25 @@ public enum Structure
 			new IntArgument("value", true).setBounds(0, Integer.MAX_VALUE)),
 	xp("xp", new XpArgument(), new TargetArgument("target", true, CGConstants.ENTITIES_PLAYERS));
 
+	/** The list of Arguments this Structure needs. */
 	private Argument[] arguments;
-	private String name;
 
-	private Structure(String name, Argument... arguments)
+	/** The name of this Structure. */
+	private String id;
+
+	/** Creates a new Structure.
+	 * 
+	 * @param id
+	 *            - <i>String</i> - The id of this Structure.
+	 * @param arguments
+	 *            - <i>Argument...</i> - The list of Arguments this Structure needs. */
+	private Structure(String id, Argument... arguments)
 	{
-		this.name = name;
+		this.id = id;
 		this.arguments = arguments;
 	}
 
+	/** Generates the command created by this Structure. */
 	public String generateCommand()
 	{
 		String command = "";
@@ -209,7 +219,11 @@ public enum Structure
 		return command;
 	}
 
-	public void generateFrom(String[] newArguments)
+	/** Sets each Argument's GUI to match the new Arguments.
+	 * 
+	 * @param newArguments
+	 *            - <i>String[]</i> - The Arguments to match. */
+	public void setupFrom(String[] newArguments)
 	{
 		int argIndex = 0;
 		for (int argument = 0; argument < this.arguments.length; argument++)
@@ -229,6 +243,7 @@ public enum Structure
 		}
 	}
 
+	/** Generates the Panel to display to the user. */
 	public HelperPanel generatePanel()
 	{
 		@SuppressWarnings("serial")
@@ -236,7 +251,7 @@ public enum Structure
 			@Override
 			protected void addComponents()
 			{
-				CLabel label = new CLabel("HELP:structure." + name, true);
+				CLabel label = new CLabel("HELP:structure." + id, true);
 				label.setBorder(BorderFactory.createBevelBorder(0));
 				label.setFont(new Font(label.getFont().getName(), Font.BOLD, 13));
 				add(label);
@@ -259,6 +274,7 @@ public enum Structure
 		return panel;
 	}
 
+	/** Returns this Structure's maximum length. */
 	private int getMaximumLength()
 	{
 		int length = 0;
@@ -267,6 +283,7 @@ public enum Structure
 		return length;
 	}
 
+	/** Returns this Structure's minimum length. */
 	private int getMinimumLength()
 	{
 		int length = 0;
@@ -275,11 +292,16 @@ public enum Structure
 		return length;
 	}
 
+	/** Returns this Structure's name. */
 	public String getName()
 	{
-		return Lang.get("RESOURCES:structure." + this.name);
+		return Lang.get("RESOURCES:structure." + this.id);
 	}
 
+	/** True if this Structure matches the given Arguments.
+	 * 
+	 * @param testArguments
+	 *            - <i>String[]</i> - The Arguments to match. */
 	public boolean matches(String[] testArguments)
 	{
 		if (this.getMinimumLength() > testArguments.length || this.getMaximumLength() < testArguments.length) return false;

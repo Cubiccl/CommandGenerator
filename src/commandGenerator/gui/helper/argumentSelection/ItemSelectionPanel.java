@@ -29,7 +29,6 @@ import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.icomponent.ISpin;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.gui.helper.components.spinner.NumberSpinner;
-import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISave
@@ -92,8 +91,8 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 		labelName.setPreferredSize(new Dimension(200, 20));
 		labelName.setMinimumSize(new Dimension(200, 20));
 
-		buttonSave = new SaveButton(CGConstants.OBJECT_ITEM, this);
-		buttonLoad = new LoadButton(CGConstants.OBJECT_ITEM, this);
+		buttonSave = new SaveButton(ObjectBase.ITEM, this);
+		buttonLoad = new LoadButton(ObjectBase.ITEM, this);
 
 		String[] ids = new String[itemList.length];
 		for (int i = 0; i < ids.length; i++)

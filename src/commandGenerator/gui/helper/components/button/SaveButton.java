@@ -23,7 +23,7 @@ public class SaveButton extends CButton
 		this.type = type;
 		this.parent = parent;
 
-		addActionListener(new ActionListener() {
+		this.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
@@ -34,10 +34,10 @@ public class SaveButton extends CButton
 
 	private void save()
 	{
-		Object object = parent.getObjectToSave();
-		String name = DisplayHelper.askObjectName(type);
+		Object object = this.parent.getObjectToSave();
+		String name = DisplayHelper.askObjectName(this.type);
 		if (name == null) return;
-		SavedObjects.add(name, type, object);
+		SavedObjects.add(name, this.type, object);
 		DisplayHelper.showMessage(new JLabel(Lang.get("GENERAL:save_success").replaceAll("<item>", name)), Lang.get("GENERAL:save"));
 	}
 

@@ -1,11 +1,7 @@
 package commandGenerator.arguments.objects;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.ImageIcon;
 
-import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
@@ -13,14 +9,15 @@ import commandGenerator.main.Resources;
 public class Item extends ObjectBase
 {
 
-	/** List containing all items which have durability */
-	public static List<String> durabilityList = new ArrayList<String>();
 	/** This Item's durability. */
 	private int durability;
+
 	/** This Item's numerical ID. */
 	private int idNum;
+
 	/** True if this Item is a Block. */
 	private boolean isBlock;
+
 	/** This Item's maximum damage. */
 	private int maxDamage;
 
@@ -34,7 +31,7 @@ public class Item extends ObjectBase
 	 *            - <i>String</i> - The Item's text ID. */
 	public Item(boolean isBlock, int idNum, String idString)
 	{
-		super(idString, CGConstants.OBJECT_ITEM);
+		super(idString, ObjectBase.ITEM);
 		this.isBlock = isBlock;
 		this.idNum = idNum;
 		this.maxDamage = 0;
@@ -43,7 +40,7 @@ public class Item extends ObjectBase
 
 	public String getCommandId()
 	{
-		String id = getId();
+		String id = this.getId();
 		if (id.endsWith("_item")) return id.substring(0, id.length() - "_item".length());
 		else return id;
 	}
@@ -51,13 +48,13 @@ public class Item extends ObjectBase
 	/** Returns this Item's durability. */
 	public int getDurability()
 	{
-		return durability;
+		return this.durability;
 	}
 
 	/** Returns this Item's numerical ID. */
 	public int getIdNum()
 	{
-		return idNum;
+		return this.idNum;
 	}
 
 	/** Returns this Item's maximum damage. */
@@ -70,21 +67,21 @@ public class Item extends ObjectBase
 	@Override
 	public String getName()
 	{
-		return getName(0);
+		return this.getName(0);
 	}
 
 	/** Returns this Item's name. */
 	public String getName(int damage)
 	{
-		if (getMaxDamage() == 0) return Lang.get("ITEMS:" + getId());
-		return Lang.get("ITEMS:" + getId() + "_" + damage);
+		if (this.getMaxDamage() == 0) return Lang.get("ITEMS:" + this.getId());
+		return Lang.get("ITEMS:" + this.getId() + "_" + damage);
 	}
 
 	/** Returns this Item's texture. */
 	@Override
 	public ImageIcon getTexture()
 	{
-		return getTexture(0);
+		return this.getTexture(0);
 	}
 
 	/** Returns this Item's texture according to the specified damage.
@@ -97,16 +94,16 @@ public class Item extends ObjectBase
 		String path = Resources.folder + "textures/";
 		int damageToUse = 0;
 
-		if (isBlock) path += "blocks/";
+		if (this.isBlock) path += "blocks/";
 		else path += "items/";
 
-		if (damage <= maxDamage) damageToUse = damage;
+		if (damage <= this.maxDamage) damageToUse = damage;
 
-		if (maxDamage > 0) path += getCommandId() + "/" + Integer.toString(damageToUse) + ".png";
+		if (this.maxDamage > 0) path += this.getCommandId() + "/" + Integer.toString(damageToUse) + ".png";
 		else
 		{
-			if (isBlock) path += "other_blocks/" + getCommandId() + ".png";
-			else path += "other_items/" + getCommandId() + ".png";
+			if (this.isBlock) path += "other_blocks/" + this.getCommandId() + ".png";
+			else path += "other_items/" + this.getCommandId() + ".png";
 		}
 
 		try
@@ -122,19 +119,19 @@ public class Item extends ObjectBase
 	/** Returns true if this Item is a Block. */
 	public boolean isBlock()
 	{
-		return isBlock;
+		return this.isBlock;
 	}
 
 	/** Sets this Item's durability. */
-	public void setDurability(String durability)
+	public void setDurability(int durability)
 	{
-		this.durability = Integer.parseInt(durability);
-		durabilityList.add(this.getId());
+		this.durability = durability;
+		Registry.registerDurableItem(this);
 	}
 
 	/** Sets this Item's maximum damage. */
-	public void setMaxDamage(String damage)
+	public void setMaxDamage(int maxDamage)
 	{
-		this.maxDamage = Integer.parseInt(damage);
+		this.maxDamage = maxDamage;
 	}
 }

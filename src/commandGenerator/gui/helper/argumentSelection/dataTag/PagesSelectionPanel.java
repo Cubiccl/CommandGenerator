@@ -14,13 +14,13 @@ import javax.swing.JTextArea;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
-import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
@@ -49,7 +49,7 @@ public class PagesSelectionPanel extends HelperPanel
 
 	private void addJson()
 	{
-		ListSelectionPanel panel = new ListSelectionPanel("GENERAL:text", CGConstants.OBJECT_JSON);
+		ListSelectionPanel panel = new ListSelectionPanel("GENERAL:text", ObjectBase.JSON);
 		if (DisplayHelper.showQuestion(panel, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
 
 		TagList tag = new TagList() {
@@ -159,7 +159,7 @@ public class PagesSelectionPanel extends HelperPanel
 
 	private void editJson(String text)
 	{
-		ListSelectionPanel panel = new ListSelectionPanel("GENERAL:text", CGConstants.OBJECT_JSON);
+		ListSelectionPanel panel = new ListSelectionPanel("GENERAL:text", ObjectBase.JSON);
 		panel.setList(DataTags.generateListFrom(text));
 		if (DisplayHelper.showQuestion(panel, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
 

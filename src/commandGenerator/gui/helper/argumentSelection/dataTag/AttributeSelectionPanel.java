@@ -2,16 +2,16 @@ package commandGenerator.gui.helper.argumentSelection.dataTag;
 
 import commandGenerator.arguments.objects.Attribute;
 import commandGenerator.arguments.objects.AttributeType;
+import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.button.LoadButton;
 import commandGenerator.gui.helper.components.button.SaveButton;
 import commandGenerator.gui.helper.components.combobox.CComboBox;
-import commandGenerator.gui.helper.components.combobox.LangComboBox;
+import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
 import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
-import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
@@ -20,7 +20,7 @@ public class AttributeSelectionPanel extends HelperPanel implements ISave
 
 	private CButton buttonSave, buttonLoad;
 	private CComboBox comboboxAttribute;
-	private LangComboBox comboboxOperation;
+	private ChoiceComboBox comboboxOperation;
 	private CEntry entryAmount;
 
 	public AttributeSelectionPanel()
@@ -40,14 +40,14 @@ public class AttributeSelectionPanel extends HelperPanel implements ISave
 	@Override
 	protected void createComponents()
 	{
-		buttonSave = new SaveButton(CGConstants.OBJECT_ATTRIBUTE, this);
-		buttonLoad = new LoadButton(CGConstants.OBJECT_ATTRIBUTE, this);
+		buttonSave = new SaveButton(ObjectBase.ATTRIBUTE, this);
+		buttonLoad = new LoadButton(ObjectBase.ATTRIBUTE, this);
 
 		entryAmount = new CEntry("GUI:attribute.amount", "1");
 		entryAmount.setTextField("1");
 
-		comboboxAttribute = new CComboBox("GUI:attribute.select", Registry.getObjectList(CGConstants.OBJECT_ATTRIBUTE), null);
-		comboboxOperation = new LangComboBox("RESOURCES:attribute.operation", 3);
+		comboboxAttribute = new CComboBox("GUI:attribute.select", Registry.getObjectList(ObjectBase.ATTRIBUTE), null);
+		comboboxOperation = new ChoiceComboBox("attribute.operation", Attribute.operations, false);
 	}
 
 	@Override
@@ -83,9 +83,9 @@ public class AttributeSelectionPanel extends HelperPanel implements ISave
 
 	public void setupFrom(Attribute attribute)
 	{
-		comboboxOperation.setSelectedIndex(attribute.getOperation());
+		comboboxOperation.setSelected(Attribute.operations[attribute.getOperation()]);
 		entryAmount.setTextField(Double.toString(attribute.getAmount()));
-		comboboxAttribute.setSelected(attribute.getType());
+		comboboxAttribute.setSelected(attribute.getAttributeType());
 	}
 
 	@Override

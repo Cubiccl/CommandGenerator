@@ -13,17 +13,17 @@ public class CLabel extends JLabel implements CComponent
 
 	public CLabel(String title)
 	{
-		super(title);
-		this.title = title;
-		setText(Lang.get(title));
-		this.html = false;
+		this(title, true);
 	}
 
-	public CLabel(String id, boolean html)
+	public CLabel(String title, boolean html)
 	{
-		this(id);
+		super(title);
+		this.title = title;
 		this.html = html;
-		setText("<html>" + Lang.get(id).replaceAll("\n", "<br />") + "</html>");
+
+		if (this.html) this.setText("<html>" + Lang.get(this.title).replaceAll("\n", "<br />") + "</html>");
+		else this.setText(Lang.get(this.title));
 	}
 
 	@Override
@@ -33,20 +33,20 @@ public class CLabel extends JLabel implements CComponent
 	@Override
 	public void setEnabledContent(boolean enable)
 	{
-		setEnabled(enable);
+		this.setEnabled(enable);
 	}
 
 	public void setTitle(String id)
 	{
 		this.title = id;
-		updateLang();
+		this.updateLang();
 	}
 
 	@Override
 	public void updateLang()
 	{
-		if (html) setText("<html>" + Lang.get(title).replaceAll("\n", "<br />") + "</html>");
-		else setText(Lang.get(title));
+		if (this.html) this.setText("<html>" + Lang.get(this.title).replaceAll("\n", "<br />") + "</html>");
+		else this.setText(Lang.get(this.title));
 	}
 
 }

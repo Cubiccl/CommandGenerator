@@ -25,7 +25,7 @@ public class IntArgument extends Argument
 
 	public IntArgument(String id, boolean isCompulsery)
 	{
-		super(id, Argument.INT, isCompulsery, 1);
+		super(id, isCompulsery);
 		this.hasHelp = false;
 		this.min = Integer.MIN_VALUE;
 		this.max = Integer.MAX_VALUE;

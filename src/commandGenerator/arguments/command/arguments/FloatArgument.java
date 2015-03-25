@@ -25,7 +25,7 @@ public class FloatArgument extends Argument
 
 	public FloatArgument(String id, boolean isCompulsery)
 	{
-		super(id, Argument.FLOAT, isCompulsery, 1);
+		super(id, isCompulsery);
 		this.hasHelp = false;
 		this.min = Float.MIN_VALUE;
 		this.max = Float.MAX_VALUE;

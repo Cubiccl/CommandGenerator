@@ -56,6 +56,10 @@ public enum Command
 			Structure.worldborderCenter, Structure.worldborderDamage, Structure.worldborderWarning),
 	xp("xp", "xp <amount>[L] [player]", Structure.xp);
 
+	/** Returns the command structure that matches the given command.
+	 * 
+	 * @param command
+	 *            - <i>String</i> - The command to match. */
 	public static Command identify(String command)
 	{
 		for (Command c : Registry.getCommands())
@@ -63,22 +67,34 @@ public enum Command
 		DisplayHelper.showWarning("WARNING:command.wrong_id");
 		return null;
 	}
+
+	/** Initializes the GUI to be displayed. */
 	public static void initGui()
 	{
 		for (Command c : Registry.getCommands())
 			c.tab = new OptionsTab(c.structures);
 	}
-	/** The Command's ID. */
-	private String id, structure;
 
+	/** The Command's ID. */
+	private String id;
+
+	/** The Command's structure to display. */
+	private String structure;
+
+	/** The list of structures this command has. */
 	private Structure[] structures;
 
+	/** The Options Tab for this command. */
 	private OptionsTab tab;
 
 	/** Creates a new Command
 	 * 
 	 * @param id
-	 *            - <i>String</i> - The Command's ID */
+	 *            - <i>String</i> - The Command's ID.
+	 * @param structure
+	 *            - <i>String</i> - The Command's structure to display.
+	 * @param structures
+	 *            - <i>Structure[]</i> - The list of structures this command has. */
 	private Command(String id, String structure, Structure... structures)
 	{
 		this.id = id;
@@ -87,6 +103,10 @@ public enum Command
 		Registry.registerCommand(this);
 	}
 
+	/** Returns the index of the Structure matching the given arguments. Returns -1 if no Structure was found.
+	 * 
+	 * @param arguments
+	 *            - <i>String[]</i> - The arguments to match. */
 	private int findMatchingStructure(String[] arguments)
 	{
 		for (int i = 0; i < this.structures.length; i++)
@@ -95,6 +115,7 @@ public enum Command
 		return -1;
 	}
 
+	/** Generates the command. */
 	public String generate()
 	{
 		String command = this.getSelectedStructure().generateCommand();
@@ -102,26 +123,26 @@ public enum Command
 		return this.getId() + " " + command;
 	}
 
-	/** Generates the data used for the GUI from an already generated command
+	/** Generates the data used for the GUI from an already generated command.
 	 * 
 	 * @param command
-	 *            - <i>String</i> - The command to use to generate all data */
+	 *            - <i>String</i> - The command to use to generate all data. */
 	public void generateFrom(String command)
 	{
 		String[] arguments = DisplayHelper.splitCommand(command.substring(this.getId().length() + 1));
 		int matchingStructure = this.findMatchingStructure(arguments);
 		if (matchingStructure == -1) return;
 		this.tab.setSelectedIndex(matchingStructure);
-		this.structures[matchingStructure].generateFrom(arguments);
+		this.getSelectedStructure().setupFrom(arguments);
 	}
 
-	/** Returns the Command's description */
+	/** Returns the Command's description. */
 	public String getDescription()
 	{
 		return Lang.get("HELP:command." + id);
 	}
 
-	/** Returns the Command's ID */
+	/** Returns the Command's ID. */
 	public String getId()
 	{
 		return this.id;
@@ -133,11 +154,13 @@ public enum Command
 		return this.tab;
 	}
 
+	/** Returns the selected Structure. */
 	private Structure getSelectedStructure()
 	{
 		return this.structures[this.tab.getSelectedIndex()];
 	}
 
+	/** Returns the structure to display to the user. */
 	public String getStructure()
 	{
 		return this.structure;

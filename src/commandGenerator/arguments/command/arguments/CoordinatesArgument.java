@@ -11,19 +11,20 @@ import javax.swing.JPanel;
 
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.objects.Coordinates;
+import commandGenerator.arguments.objects.ObjectCreator;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 
 public class CoordinatesArgument extends Argument
 {
 
-	private boolean canBeRelative, canHaveRotation;
+	private final boolean canBeRelative, canHaveRotation;
 	private CCheckBox checkbox;
 	private CoordSelectionPanel panelCoord;
 
 	public CoordinatesArgument(String id, boolean isCompulsery, boolean canBeRelative, boolean canHaveRotation)
 	{
-		super(id, Argument.COORD, isCompulsery, 3);
+		super(id, Argument.NORMAL, isCompulsery, 3);
 		this.canBeRelative = canBeRelative;
 		this.canHaveRotation = canHaveRotation;
 
@@ -103,8 +104,8 @@ public class CoordinatesArgument extends Argument
 	@Override
 	public void setupFrom(List<String> data)
 	{
-		Coordinates coords = Coordinates.generateFrom(data.get(0), data.get(1), data.get(2));
-		if (data.size() >= 5) coords = Coordinates.generateFromWithRot(data.get(0), data.get(1), data.get(2), Float.parseFloat(data.get(3)),
+		Coordinates coords = ObjectCreator.generateCoordinates(data.get(0), data.get(1), data.get(2));
+		if (data.size() >= 5) coords = ObjectCreator.generateCoordinatesWithRotations(data.get(0), data.get(1), data.get(2), Float.parseFloat(data.get(3)),
 				Float.parseFloat(data.get(4)));
 		this.panelCoord.setupFrom(coords);
 	}

@@ -4,10 +4,10 @@ import java.awt.Component;
 import java.util.List;
 
 import commandGenerator.arguments.command.Argument;
+import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Particle;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.argumentSelection.ParticleSelectionPanel;
-import commandGenerator.main.CGConstants;
 
 public class ParticleArgument extends Argument
 {
@@ -16,7 +16,7 @@ public class ParticleArgument extends Argument
 
 	public ParticleArgument()
 	{
-		super("particle", Argument.PARTICLE, true, 1);
+		super("particle");
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class ParticleArgument extends Argument
 	@Override
 	public boolean matches(List<String> data)
 	{
-		return Registry.exists(data.get(0), CGConstants.OBJECT_PARTICLE);
+		return Registry.exists(data.get(0), ObjectBase.PARTICLE);
 	}
 
 	@Override

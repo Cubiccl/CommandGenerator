@@ -19,7 +19,6 @@ import commandGenerator.gui.helper.components.combobox.CComboBox;
 import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
-import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class EntitySelectionPanel extends HelperPanel implements IBox, ISave
@@ -57,8 +56,8 @@ public class EntitySelectionPanel extends HelperPanel implements IBox, ISave
 		labelName.setPreferredSize(new Dimension(200, 20));
 		labelName.setMinimumSize(new Dimension(200, 20));
 
-		buttonSave = new SaveButton(CGConstants.OBJECT_ENTITY, this);
-		buttonLoad = new LoadButton(CGConstants.OBJECT_ENTITY, this);
+		buttonSave = new SaveButton(ObjectBase.ENTITY, this);
+		buttonLoad = new LoadButton(ObjectBase.ENTITY, this);
 
 		combobox = new CComboBox("GUI:entity.select", entityList, this);
 

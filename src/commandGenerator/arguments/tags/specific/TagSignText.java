@@ -4,11 +4,11 @@ import java.util.regex.Matcher;
 
 import javax.swing.JOptionPane;
 
+import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.argumentSelection.dataTag.ListSelectionPanel;
-import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 
 public class TagSignText extends TagString
@@ -31,7 +31,7 @@ public class TagSignText extends TagString
 			return;
 		}
 
-		panel = new ListSelectionPanel("GUI:json", CGConstants.OBJECT_JSON);
+		panel = new ListSelectionPanel("GUI:json", ObjectBase.JSON);
 		if (getValue() != null && getValue().startsWith("[{") && getValue().endsWith("}]")) ((ListSelectionPanel) panel).setList(DataTags
 				.generateListFrom(getValue().replaceAll(Matcher.quoteReplacement("\\n"), "\n").replaceAll(Matcher.quoteReplacement("\\\""), "\"")));
 

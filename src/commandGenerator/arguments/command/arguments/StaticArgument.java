@@ -8,11 +8,11 @@ import commandGenerator.main.DisplayHelper;
 
 public class StaticArgument extends Argument
 {
-	private String value;
+	private final String value;
 
 	public StaticArgument(String value)
 	{
-		super(null, Argument.STATIC, true, 1);
+		super("static");
 		this.value = value;
 	}
 

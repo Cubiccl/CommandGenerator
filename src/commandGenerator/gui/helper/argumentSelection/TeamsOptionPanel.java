@@ -3,23 +3,20 @@ package commandGenerator.gui.helper.argumentSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JComboBox;
-
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
-import commandGenerator.gui.helper.components.combobox.LangComboBox;
+import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
-import commandGenerator.main.Resources;
 
 @SuppressWarnings("serial")
 public class TeamsOptionPanel extends HelperPanel
 {
 	public static final String[] scoreboardTeamsOptionList = { "color", "friendlyfire", "seeFriendlyInvisibles", "nametagVisibility", "deathMessageVisibility" },
-			visibilityList = { "never", "hideForOtherTeams", "hideForOwnTeam", "always" };
+			visibilityList = { "never", "hideForOtherTeams", "hideForOwnTeam", "always" }, colors = { "black", "dark_blue", "dark_green", "dark_aqua",
+					"dark_red", "dark_purple", "gold", "gray", "ark_gray", "blue", "green", "aqua", "red", "light_purple", "yellow", "white", "reset" };;
 
-	private LangComboBox comboboxMode, comboboxValue;
+	private ChoiceComboBox comboboxMode, comboboxValue;
 	private CEntry entryTeam;
 	private CLabel labelMode, labelValue;
 
@@ -44,8 +41,8 @@ public class TeamsOptionPanel extends HelperPanel
 
 		entryTeam = new CEntry("GUI:scoreboard.team", "");
 
-		comboboxMode = new LangComboBox("RESOURCES:scoreboard.teams.option", 5);
-		comboboxValue = new LangComboBox("RESOURCES:color", 17);
+		comboboxMode = new ChoiceComboBox("scoreboard.teams.option", scoreboardTeamsOptionList, false);
+		comboboxValue = new ChoiceComboBox("scoreboard.visibility", visibilityList, false);
 	}
 
 	@Override
@@ -55,10 +52,10 @@ public class TeamsOptionPanel extends HelperPanel
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				if (comboboxMode.getSelectedIndex() == 0) comboboxValue.setText("RESOURCES:color", 17);
-				if (comboboxMode.getSelectedIndex() == 1 || comboboxMode.getSelectedIndex() == 2) comboboxValue.setModel(new JComboBox<String>(new String[] {
-						Lang.get("GENERAL:true"), Lang.get("GENERAL:false") }).getModel());
-				if (comboboxMode.getSelectedIndex() >= 3) comboboxValue.setText("RESOURCES:scoreboard.teams.visibility", 4);
+				String mode = comboboxMode.getSelectedValue();
+				if (mode.equals("color")) comboboxValue.setData("color", colors);
+				else if (mode.equals("friendlyfire") || mode.equals("seeFriendlyInvisibles")) comboboxValue.setData("value", new String[] { "true", "false" });
+				else comboboxValue.setData("scoreboard.teams.visibility", visibilityList);
 			}
 		});
 	}
@@ -72,31 +69,13 @@ public class TeamsOptionPanel extends HelperPanel
 			return null;
 		}
 
-		String value = "";
-
-		if (scoreboardTeamsOptionList[comboboxMode.getSelectedIndex()].equals("color")) value = Resources.colors[comboboxValue.getSelectedIndex()];
-		else if (scoreboardTeamsOptionList[comboboxMode.getSelectedIndex()].equals("friendlyfire")) value = Boolean
-				.toString(comboboxValue.getSelectedIndex() == 0);
-		else value = visibilityList[comboboxValue.getSelectedIndex()];
-
-		return entryTeam.getText() + " " + scoreboardTeamsOptionList[comboboxMode.getSelectedIndex()] + " " + value;
+		return entryTeam.getText() + " " + this.comboboxMode.getSelectedValue() + " " + this.comboboxValue.getSelectedValue();
 	}
 
 	public void setupFrom(String mode, String value)
 	{
-		if (mode.equals("color"))
-		{
-			this.comboboxMode.setSelectedIndex(0);
-			for (int i = 0; i < Resources.colors.length; i++)
-				if (value.equals(Resources.colors[i])) this.comboboxValue.setSelectedIndex(i);
-		} else if (mode.equals("friendlyfire") || mode.equals("seeFriendlyInvisibles"))
-		{
-			this.comboboxMode.setSelectedIndex(1);
-			if (value.equals("false")) this.comboboxValue.setSelectedIndex(1);
-		} else {
-			this.comboboxMode.setSelectedIndex(2);
-			for (int i = 0; i < visibilityList.length; i++) if (value.equals(visibilityList[i])) this.comboboxValue.setSelectedIndex(i);
-		}
+		this.comboboxMode.setSelected(mode);
+		this.comboboxValue.setSelected(value);
 	}
 
 }

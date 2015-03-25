@@ -16,7 +16,6 @@ import javax.swing.SwingUtilities;
 
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
-import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 
 public abstract class Tag extends ObjectBase
@@ -41,7 +40,7 @@ public abstract class Tag extends ObjectBase
 	 *            - <i>String[]</i> - The list of Object IDs this Tag can be applied to. */
 	public Tag(String id, byte type, String... ids)
 	{
-		super(id, CGConstants.OBJECT_TAG);
+		super(id, ObjectBase.TAG);
 		List<ObjectBase> objects = new ArrayList<ObjectBase>();
 		if (ids.length == 1)
 		{

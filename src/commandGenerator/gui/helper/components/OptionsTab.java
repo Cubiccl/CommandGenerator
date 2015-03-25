@@ -10,7 +10,7 @@ import commandGenerator.gui.helper.components.panel.HelperPanel;
 public class OptionsTab extends JTabbedPane implements CComponent
 {
 
-	private HelperPanel[] panels;
+	private final HelperPanel[] panels;
 	private final Structure[] structures;
 
 	public OptionsTab(Structure... structures)
@@ -24,13 +24,8 @@ public class OptionsTab extends JTabbedPane implements CComponent
 			pane.getHorizontalScrollBar().setUnitIncrement(20);
 			pane.getVerticalScrollBar().setUnitIncrement(20);
 
-			add(this.structures[i].getName(), pane);
+			this.add(this.structures[i].getName(), pane);
 		}
-	}
-
-	public HelperPanel getPanel()
-	{
-		return this.panels[this.getSelectedIndex()];
 	}
 
 	@Override
@@ -42,7 +37,7 @@ public class OptionsTab extends JTabbedPane implements CComponent
 	@Override
 	public void setEnabledContent(boolean enable)
 	{
-		setEnabled(enable);
+		this.setEnabled(enable);
 		for (HelperPanel p : this.panels) p.setEnabledContent(enable);
 
 	}
@@ -53,7 +48,7 @@ public class OptionsTab extends JTabbedPane implements CComponent
 		for (int i = 0; i < this.getTabCount(); i++)
 		{
 			this.panels[i].updateLang();
-			setTitleAt(i, this.structures[i].getName());
+			this.setTitleAt(i, this.structures[i].getName());
 		}
 	}
 

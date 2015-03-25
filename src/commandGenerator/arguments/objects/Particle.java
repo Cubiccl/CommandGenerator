@@ -2,7 +2,6 @@ package commandGenerator.arguments.objects;
 
 import javax.swing.ImageIcon;
 
-import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 
 public class Particle extends ObjectBase
@@ -16,15 +15,6 @@ public class Particle extends ObjectBase
 	 * </ul> */
 	public static final int NORMAL = 0, BLOCK = 1, ITEM = 2;
 
-	public static Particle getParticleFrom(String id)
-	{
-		Particle part = (Particle) Registry.getObjectFromId(id);
-		if (part != null) return part;
-
-		if (id.startsWith("blockcrack")) return (Particle) Registry.getObjectFromId("blockcrack");
-		return (Particle) Registry.getObjectFromId("iconcrack");
-	}
-
 	/** The type of the Particle. */
 	private int type;
 
@@ -36,26 +26,26 @@ public class Particle extends ObjectBase
 	 *            - <i>int</i> - The Partcile's type. */
 	public Particle(String id, int type)
 	{
-		super(id, CGConstants.OBJECT_PARTICLE);
+		super(id, ObjectBase.PARTICLE);
 		this.type = type;
 	}
 
 	/** Returns a description of this Particle. */
 	public String getDescription()
 	{
-		return Lang.get("PARTICLES:" + getId());
+		return Lang.get("PARTICLES:" + this.getId());
 	}
 
 	@Override
 	public String getName()
 	{
-		return getId();
+		return this.getId();
 	}
 
 	/** Returns the type of this Particle. */
 	public int getParticleType()
 	{
-		return type;
+		return this.type;
 	}
 
 	@Override

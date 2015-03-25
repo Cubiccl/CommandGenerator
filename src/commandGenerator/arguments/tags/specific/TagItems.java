@@ -1,5 +1,6 @@
 package commandGenerator.arguments.tags.specific;
 
+import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.gui.helper.argumentSelection.dataTag.ListSelectionPanel;
@@ -17,7 +18,7 @@ public class TagItems extends TagList
 	public void askValue()
 	{
 		Object[] list = Registry.getList(CGConstants.LIST_ITEMS);
-		panel = new ListSelectionPanel("TAGS:" + getId(), CGConstants.OBJECT_ITEM, list);
+		panel = new ListSelectionPanel("TAGS:" + getId(), ObjectBase.ITEM, list);
 		if (showPanel()) return;
 		setValue(((ListSelectionPanel) panel).getList());
 	}

@@ -15,10 +15,21 @@ public class Registry
 
 	/** Map containing registered commands. */
 	private static Map<String, Command> commands = new HashMap<String, Command>();
+
 	/** Map containing registered lists. */
 	private static Map<String, ObjectBase[]> list = new HashMap<String, ObjectBase[]>();
+
 	/** Map containing registered Objects. */
 	private static Map<Byte, Map<String, ObjectBase>> objects = new HashMap<Byte, Map<String, ObjectBase>>();
+
+	/** Map containing registered Effect Types. */
+	private static Map<Integer, EffectType> effects = new HashMap<Integer, EffectType>();
+
+	/** Map containing registered Enchantment Types. */
+	private static Map<Integer, EnchantType> enchants = new HashMap<Integer, EnchantType>();
+
+	/** List containing all items which have durability */
+	public static List<String> durabilityList = new ArrayList<String>();
 
 	/** Displays the list of all registered objects of the specified type.
 	 * 
@@ -48,15 +59,15 @@ public class Registry
 	/** Finalizes the registration. */
 	public static void end()
 	{
-		registerList("allEntities", objects.get(CGConstants.OBJECT_ENTITY).keySet().toArray(new String[0]));
-		displayList(CGConstants.OBJECT_ITEM);
-		displayList(CGConstants.OBJECT_ENTITY);
-		displayList(CGConstants.OBJECT_ENCHANT);
-		displayList(CGConstants.OBJECT_EFFECT);
-		displayList(CGConstants.OBJECT_ACHIEVEMENT);
-		displayList(CGConstants.OBJECT_ATTRIBUTE);
-		displayList(CGConstants.OBJECT_SOUND);
-		displayList(CGConstants.OBJECT_PARTICLE);
+		registerList("allEntities", objects.get(ObjectBase.ENTITY).keySet().toArray(new String[0]));
+		displayList(ObjectBase.ITEM);
+		displayList(ObjectBase.ENTITY);
+		displayList(ObjectBase.ENCHANTMENT);
+		displayList(ObjectBase.EFFECT);
+		displayList(ObjectBase.ACHIEVEMENT);
+		displayList(ObjectBase.ATTRIBUTE);
+		displayList(ObjectBase.SOUND);
+		displayList(ObjectBase.PARTICLE);
 
 	}
 
@@ -118,14 +129,14 @@ public class Registry
 	{
 		if (id.startsWith("minecraft:") || id.startsWith("minecraft.")) id = id.substring("minecraft:".length());
 
-		ObjectBase object = objects.get(CGConstants.OBJECT_ITEM).get(id);
-		if (object == null) object = objects.get(CGConstants.OBJECT_ACHIEVEMENT).get(id);
-		if (object == null) object = objects.get(CGConstants.OBJECT_ATTRIBUTE).get(id);
-		if (object == null) object = objects.get(CGConstants.OBJECT_EFFECT).get(id);
-		if (object == null) object = objects.get(CGConstants.OBJECT_ENCHANT).get(id);
-		if (object == null) object = objects.get(CGConstants.OBJECT_ENTITY).get(id);
-		if (object == null) object = objects.get(CGConstants.OBJECT_PARTICLE).get(id);
-		if (object == null) object = objects.get(CGConstants.OBJECT_SOUND).get(id);
+		ObjectBase object = objects.get(ObjectBase.ITEM).get(id);
+		if (object == null) object = objects.get(ObjectBase.ACHIEVEMENT).get(id);
+		if (object == null) object = objects.get(ObjectBase.ATTRIBUTE).get(id);
+		if (object == null) object = objects.get(ObjectBase.EFFECT).get(id);
+		if (object == null) object = objects.get(ObjectBase.ENCHANTMENT).get(id);
+		if (object == null) object = objects.get(ObjectBase.ENTITY).get(id);
+		if (object == null) object = objects.get(ObjectBase.PARTICLE).get(id);
+		if (object == null) object = objects.get(ObjectBase.SOUND).get(id);
 
 		// if (object == null) DisplayHelper.log(id + " isn't the ID of any object.");
 		return object;
@@ -141,11 +152,11 @@ public class Registry
 	{
 		switch (type)
 		{
-			case CGConstants.OBJECT_EFFECT:
-				return EffectType.getEffectFromIdNum(id);
+			case ObjectBase.EFFECT:
+				return effects.get(id);
 
-			case CGConstants.OBJECT_ENCHANT:
-				return EnchantType.getEnchantFromIdNum(id);
+			case ObjectBase.ENCHANTMENT:
+				return enchants.get(id);
 
 			default:
 				DisplayHelper.log(id + " isn't the ID of any object.");
@@ -165,7 +176,7 @@ public class Registry
 		for (int i = 0; i < objectArray.length; i++)
 			objectList.add(objectArray[i]);
 
-		if (type == CGConstants.OBJECT_ITEM || type == CGConstants.OBJECT_ENCHANT || type == CGConstants.OBJECT_EFFECT) sortIdsNum(objectList);
+		if (type == ObjectBase.ITEM || type == ObjectBase.ENCHANTMENT || type == ObjectBase.EFFECT) sortIdsNum(objectList);
 		else sortIds(objectList);
 		return objectList.toArray(new ObjectBase[0]);
 	}
@@ -238,14 +249,49 @@ public class Registry
 			public int compare(ObjectBase o1, ObjectBase o2)
 			{
 				int diff = 0;
-				if (o1.getType() == CGConstants.OBJECT_ITEM) diff = ((Item) o1).getIdNum() - ((Item) o2).getIdNum();
-				if (o1.getType() == CGConstants.OBJECT_ENCHANT) diff = ((EnchantType) o1).getIdNum() - ((EnchantType) o2).getIdNum();
-				if (o1.getType() == CGConstants.OBJECT_EFFECT) diff = ((EffectType) o1).getIdNum() - ((EffectType) o2).getIdNum();
+				if (o1.getType() == ObjectBase.ITEM) diff = ((Item) o1).getIdNum() - ((Item) o2).getIdNum();
+				if (o1.getType() == ObjectBase.ENCHANTMENT) diff = ((EnchantType) o1).getIdNum() - ((EnchantType) o2).getIdNum();
+				if (o1.getType() == ObjectBase.EFFECT) diff = ((EffectType) o1).getIdNum() - ((EffectType) o2).getIdNum();
 				if (diff < 0) diff = -1;
 				if (diff > 0) diff = 1;
 				return diff;
 			}
 		});
+	}
+
+	public static void registerEffect(EffectType effectType)
+	{
+		effects.put(effectType.getIdNum(), effectType);
+	}
+
+	public static void registerEnchant(EnchantType enchantType)
+	{
+		enchants.put(enchantType.getIdNum(), enchantType);
+	}
+
+	/** Returns an array containing all registered Entities, except Player. */
+	public static Entity[] getListNoPlayer()
+	{
+		List<Entity> entityList = new ArrayList<Entity>();
+		ObjectBase[] list = getObjectList(ObjectBase.ENTITY);
+		for (int i = 0; i < list.length; i++)
+			if (!list[i].getId().equals("Player")) entityList.add((Entity) list[i]);
+
+		return entityList.toArray(new Entity[0]);
+	}
+
+	public static void registerDurableItem(Item item)
+	{
+		durabilityList.add(item.getId());
+	}
+
+	public static Particle getParticleFrom(String id)
+	{
+		Particle part = (Particle) getObjectFromId(id);
+		if (part != null) return part;
+
+		if (id.startsWith("blockcrack")) return (Particle) getObjectFromId("blockcrack");
+		return (Particle) getObjectFromId("iconcrack");
 	}
 
 }
