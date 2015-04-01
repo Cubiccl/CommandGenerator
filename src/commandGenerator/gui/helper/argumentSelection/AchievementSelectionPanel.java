@@ -45,13 +45,6 @@ public class AchievementSelectionPanel extends HelperPanel implements IBox
 		return (Achievement) achievementBox.getValue();
 	}
 
-	@Override
-	public void setEnabledContent(boolean enabled)
-	{
-		image.setEnabled(enabled);
-		super.setEnabledContent(enabled);
-	}
-
 	public void setSelected(Achievement achievement)
 	{
 		this.achievementBox.setSelected(achievement);

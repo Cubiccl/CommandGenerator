@@ -107,16 +107,4 @@ public class DropChancesSelectionPanel extends HelperPanel
 		entryHead.setTextField(Float.toString(chances[4]));
 	}
 
-	@Override
-	public void updateLang()
-	{
-		updateTitle();
-		label.updateLang();
-		entryChest.updateLang();
-		entryFeet.updateLang();
-		entryHand.updateLang();
-		entryHead.updateLang();
-		entryLegs.updateLang();
-	}
-
 }

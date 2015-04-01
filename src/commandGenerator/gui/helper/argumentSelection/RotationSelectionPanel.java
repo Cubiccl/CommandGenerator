@@ -54,16 +54,6 @@ public class RotationSelectionPanel extends HelperPanel
 		return rot;
 	}
 
-	@Override
-	public void setEnabledContent(boolean enable)
-	{
-		this.setEnabled(enable);
-		labelX.setEnabled(enable);
-		labelY.setEnabled(enable);
-		spinnerX.setEnabled(enable);
-		spinnerY.setEnabled(enable);
-	}
-
 	public void setupFrom(Coordinates coords)
 	{
 		float x = coords.getRot(Coordinates.X), y = coords.getRot(Coordinates.Y);

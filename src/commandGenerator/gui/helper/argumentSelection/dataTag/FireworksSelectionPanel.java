@@ -63,12 +63,4 @@ public class FireworksSelectionPanel extends HelperPanel
 		if (list != null) explosionsPanel.setList(list);
 	}
 
-	@Override
-	public void updateLang()
-	{
-		updateTitle();
-		spinnerFlight.updateLang();
-		explosionsPanel.updateLang();
-	}
-
 }

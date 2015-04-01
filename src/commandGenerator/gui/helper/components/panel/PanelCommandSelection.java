@@ -304,6 +304,7 @@ public class PanelCommandSelection extends JPanel
 		remove(tabOptions);
 		tabOptions = panel;
 		tabOptions.setPreferredSize(new Dimension(getSize().width - 50, getSize().height - 180));
+		tabOptions.setVisible(true);
 
 		gbc.gridx = 0;
 		gbc.gridy = 7;

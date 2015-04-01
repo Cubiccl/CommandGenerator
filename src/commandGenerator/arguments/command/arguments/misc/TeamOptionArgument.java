@@ -51,4 +51,12 @@ public class TeamOptionArgument extends Argument
 		this.panel.setupFrom(data.get(0), data.get(1));
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof TeamOptionArgument)) return;
+		String[] data = ((TeamOptionArgument) toMatch).panel.generateText().split(" ");
+		this.panel.setupFrom(data[0], data[1]);
+	}
+
 }

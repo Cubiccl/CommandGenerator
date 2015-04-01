@@ -137,7 +137,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 		return spinnerDamage.getValue();
 	}
 
-	public Object getItemStack()
+	public ItemStack getItemStack()
 	{
 		return new ItemStack(generateBlock(), getDamage(), -1, getBlockTag(), -1);
 	}
@@ -168,17 +168,6 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 	{
 		if (list == null) return;
 		this.panelData.setupFrom(list);
-	}
-
-	@Override
-	public void setEnabledContent(boolean enable)
-	{
-		super.setEnabledContent(enable);
-		labelImage.setEnabled(enable);
-		labelName.setEnabled(enable);
-		comboboxId.setEnabledContent(enable);
-		spinnerDamage.setEnabledContent(enable);
-		if (data) panelData.setEnabledContent(enable);
 	}
 
 	@Override

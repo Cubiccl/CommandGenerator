@@ -58,4 +58,11 @@ public class TargetArgument extends Argument
 		this.panel.setupFrom(ObjectCreator.generateTarget(data.get(0)));
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof TargetArgument)) return;
+		this.panel.setupFrom(((TargetArgument) toMatch).panel.generateEntity());
+	}
+
 }

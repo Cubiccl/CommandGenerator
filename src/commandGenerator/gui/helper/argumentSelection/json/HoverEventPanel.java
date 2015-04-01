@@ -161,11 +161,4 @@ public class HoverEventPanel extends HelperPanel
 		panelItem.setVisible(comboboxAction.getSelectedIndex() == 2);
 		panelStat.setVisible(comboboxAction.getSelectedIndex() == 3);
 	}
-
-	@Override
-	public void updateLang()
-	{
-		updateTitle();
-		comboboxAction.updateLang();
-	}
 }

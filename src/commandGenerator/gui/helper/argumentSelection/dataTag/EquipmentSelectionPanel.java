@@ -211,20 +211,4 @@ public class EquipmentSelectionPanel extends HelperPanel
 		equipment = new ItemStack[] { null, null, null, null, null };
 	}
 
-	@Override
-	public void updateLang()
-	{
-		buttonAddChest.updateLang();
-		buttonAddFeet.updateLang();
-		buttonAddHand.updateLang();
-		buttonAddHead.updateLang();
-		buttonAddLegs.updateLang();
-		buttonRemoveChest.updateLang();
-		buttonRemoveFeet.updateLang();
-		buttonRemoveHand.updateLang();
-		buttonRemoveHead.updateLang();
-		buttonRemoveLegs.updateLang();
-		displayItems();
-	}
-
 }

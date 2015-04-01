@@ -86,6 +86,9 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 			checkRelX = new CCheckBox("GUI:coord.relative");
 			checkRelY = new CCheckBox("GUI:coord.relative");
 			checkRelZ = new CCheckBox("GUI:coord.relative");
+			checkRelX.setEnabled(false);
+			checkRelY.setEnabled(false);
+			checkRelZ.setEnabled(false);
 		}
 
 		if (rotation)
@@ -115,7 +118,6 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 
 	public Coordinates generateCoord()
 	{
-		DisplayHelper.log("Generating coordinates");
 		double x, y, z;
 		boolean isRotation = false;
 		boolean[] relativeness = { false, false, false };
@@ -157,24 +159,6 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 	}
 
 	@Override
-	public void setEnabledContent(boolean enable)
-	{
-
-		super.setEnabledContent(enable);
-
-		if (rotation && enable && checkboxRotation.isSelected())
-		{
-			checkboxRotation.setEnabled(enable);
-			panelRotation.setEnabledContent(true);
-		} else if (rotation)
-		{
-			checkboxRotation.setEnabled(enable);
-			panelRotation.setEnabledContent(false);
-		}
-
-	}
-
-	@Override
 	protected void setupDetails(Object[] details)
 	{
 		relative = (boolean) details[0];
@@ -195,10 +179,14 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 
 		if (relative)
 		{
+			boolean all = coords.isRelative(Coordinates.X) && coords.isRelative(Coordinates.Y) && coords.isRelative(Coordinates.Z);
 			checkRelX.setSelected(coords.isRelative(Coordinates.X));
 			checkRelY.setSelected(coords.isRelative(Coordinates.Y));
 			checkRelZ.setSelected(coords.isRelative(Coordinates.Z));
-			checkboxRelativeAll.setSelected(checkRelX.isSelected() && checkRelY.isSelected() && checkRelZ.isSelected());
+			checkboxRelativeAll.setSelected(all);
+			checkRelX.setEnabledContent(!all);
+			checkRelY.setEnabledContent(!all);
+			checkRelZ.setEnabledContent(!all);
 		}
 		if (rotation)
 		{

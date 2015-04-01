@@ -132,14 +132,4 @@ public class EffectSelectionPanel extends HelperPanel implements IBox, ISave
 		}
 	}
 
-	@Override
-	public void updateLang()
-	{
-		updateTitle();
-		spinnerAmplifier.updateLang();
-		entryDuration.updateLang();
-		checkboxHideParticles.updateLang();
-		comboboxEffect.updateLang();
-	}
-
 }

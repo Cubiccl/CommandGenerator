@@ -206,21 +206,4 @@ public class JsonSelectionPanel extends HelperPanel
 	{
 		events = (boolean) details[0];
 	}
-
-	@Override
-	public void updateLang()
-	{
-		updateTitle();
-		entryText.updateLang();
-		entryInsertion.updateLang();
-		checkboxBold.updateLang();
-		checkboxClick.updateLang();
-		checkboxHover.updateLang();
-		checkboxItalic.updateLang();
-		checkboxObfuscated.updateLang();
-		checkboxStrikethrough.updateLang();
-		checkboxUnderlined.updateLang();
-		comboboxColor.updateLang();
-		comboboxMode.updateLang();
-	}
 }

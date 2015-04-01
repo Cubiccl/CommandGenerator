@@ -213,15 +213,4 @@ public class ExplosionSelectionPanel extends HelperPanel
 		displayColors();
 	}
 
-	@Override
-	public void updateLang()
-	{
-		updateTitle();
-		buttonColors.updateLang();
-		buttonFadeColors.updateLang();
-		checkboxFlicker.updateLang();
-		checkboxTrail.updateLang();
-		comboboxType.updateLang();
-	}
-
 }

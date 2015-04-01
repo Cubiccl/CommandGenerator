@@ -96,4 +96,11 @@ public class EffectArgument extends Argument
 		this.panel.setupFrom(new Effect((EffectType) Registry.getObjectFromId(id), level, duration, !particles));
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof EffectArgument)) return;
+		this.panel.setupFrom(((EffectArgument) toMatch).panel.generateEffect());
+	}
+
 }

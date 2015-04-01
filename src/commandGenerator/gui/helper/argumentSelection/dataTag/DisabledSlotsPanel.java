@@ -89,8 +89,4 @@ public class DisabledSlotsPanel extends HelperPanel
 		head.setSelected(!checked[4]);
 	}
 
-	@Override
-	public void updateLang()
-	{}
-
 }

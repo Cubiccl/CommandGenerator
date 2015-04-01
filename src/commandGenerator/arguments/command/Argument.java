@@ -138,4 +138,6 @@ public abstract class Argument
 	 * @param data
 	 *            - <i>List : String</i> - The data this Argument should match. */
 	public abstract void setupFrom(List<String> data);
+
+	public abstract void synchronize(Argument toMatch);
 }

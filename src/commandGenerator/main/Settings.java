@@ -9,14 +9,17 @@ import commandGenerator.gui.helper.components.panel.SettingsPanel;
 
 public class Settings
 {
+	public static final String IDS = "id", NAMES = "name";
 
 	public static List<String[]> languages;
 
 	private static String getLangFromName(String langName)
 	{
-		for (int i = 0; i < languages.size(); i++) if (languages.get(i)[0].equalsIgnoreCase(langName)) return languages.get(i)[1];
+		for (int i = 0; i < languages.size(); i++)
+			if (languages.get(i)[0].equalsIgnoreCase(langName)) return languages.get(i)[1];
 		return null;
 	}
+
 	/** Is it the first launch? */
 	public boolean firstLaunch;
 	/** The language selected by the user. */
@@ -25,11 +28,16 @@ public class Settings
 	/** The previous version the program was launched with. */
 	public String previousVersion;
 
+	/** How the Objects should be sorted */
+	public String sortType;
+
 	/** Creates new Settings. */
 	public Settings()
 	{
 		language = FileHelper.getOption("lang");
 		previousVersion = FileHelper.getOption("version");
+		sortType = FileHelper.getOption("sortType");
+
 		firstLaunch = !previousVersion.equals(Resources.versions[Resources.versions.length - 1]);
 		createLangs();
 	}
@@ -51,13 +59,17 @@ public class Settings
 
 	public void change()
 	{
-		SettingsPanel panel = new SettingsPanel();
+		SettingsPanel panel = new SettingsPanel(this);
 		DisplayHelper.showMessage(panel, Lang.get("GUI:menu.settings"));
-		
+
 		String newLang = getLangFromName(panel.getLang());
 		if (!language.equalsIgnoreCase(newLang)) setLanguage(newLang);
 		FileHelper.setOption("lang", newLang);
 		FileHelper.changePath(panel.getFolder());
+		String newSort = panel.getSortType();
+		if (!this.sortType.equals(newSort)) this.sortType = newSort;
+		FileHelper.setOption("sortType", newSort);
+		Lang.updateLang();
 	}
 
 	private void createLangs()
@@ -98,6 +110,19 @@ public class Settings
 		this.language = language;
 		FileHelper.setOption("lang", language);
 		Lang.updateLang();
+	}
+
+	public static String getDefaultOption(String id)
+	{
+		if (id.equals("lang")) return "en_us";
+		if (id.equals("version")) return Resources.versions[Resources.versions.length - 1];
+		if (id.equals("sortType")) return "id";
+		return null;
+	}
+
+	public String getSortType()
+	{
+		return this.sortType;
 	}
 
 }

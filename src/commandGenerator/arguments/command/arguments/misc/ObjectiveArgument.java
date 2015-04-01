@@ -52,4 +52,11 @@ public class ObjectiveArgument extends Argument
 		this.panel.setSelected(data.get(0));
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof ObjectiveArgument)) return;
+		this.panel.setSelected(((ObjectiveArgument) toMatch).panel.generateObjective());
+	}
+
 }

@@ -76,8 +76,4 @@ public class PoseSelectionPanel extends HelperPanel
 		}
 	}
 
-	@Override
-	public void updateLang()
-	{}
-
 }

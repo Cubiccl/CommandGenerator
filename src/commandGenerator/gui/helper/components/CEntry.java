@@ -1,5 +1,6 @@
 package commandGenerator.gui.helper.components;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
@@ -23,6 +24,7 @@ public class CEntry extends JPanel implements CComponent
 
 		this.add(label);
 		this.add(text);
+		this.text.setMinimumSize(new Dimension(this.label.getText().length() * 5, 20));
 	}
 
 	public String getText()

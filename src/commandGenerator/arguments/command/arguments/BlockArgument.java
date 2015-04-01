@@ -121,4 +121,11 @@ public class BlockArgument extends Argument implements INBTArgument
 		if (this.display[2] && data.size() > index) this.panel.setDataTags(DataTags.generateListFrom(data.get(index)));
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof BlockArgument)) return;
+		this.panel.setupFrom(((BlockArgument) toMatch).panel.getItemStack());
+	}
+
 }

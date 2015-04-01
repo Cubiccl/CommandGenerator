@@ -99,8 +99,4 @@ public class PatternSelectionPanel extends HelperPanel
 		}
 	}
 
-	@Override
-	public void updateLang()
-	{}
-
 }

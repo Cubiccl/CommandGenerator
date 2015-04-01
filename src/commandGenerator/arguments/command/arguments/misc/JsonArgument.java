@@ -59,4 +59,11 @@ public class JsonArgument extends Argument
 		this.panel.setList(DataTags.generateListFrom(data.get(0)));
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof JsonArgument)) return;
+		this.panel.setList(((JsonArgument) toMatch).panel.getList());
+	}
+
 }

@@ -77,12 +77,4 @@ public class PoseRotPanel extends HelperPanel
 		id = (String) details[0];
 	}
 
-	@Override
-	public void updateLang()
-	{
-		spinnerX.updateLang();
-		spinnerY.updateLang();
-		spinnerZ.updateLang();
-	}
-
 }

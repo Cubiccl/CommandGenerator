@@ -94,4 +94,12 @@ public class EntityArgument extends Argument implements INBTArgument
 		if (this.display[1]) this.panel.setDataTags(DataTags.generateListFrom(data.get(index)));
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof EntityArgument)) return;
+		this.panel.setupFrom(((EntityArgument) toMatch).panel.getEntity());
+		this.panel.setDataTags(((EntityArgument) toMatch).panel.getTagList());
+	}
+
 }

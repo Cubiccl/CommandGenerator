@@ -90,19 +90,6 @@ public class ColorSelectionPanel extends HelperPanel
 		return (sliderRed.getValue() << 16) + (sliderGreen.getValue() << 8) + (sliderBlue.getValue());
 	}
 
-	@Override
-	public void setEnabledContent(boolean enable)
-	{
-		setEnabled(enable);
-		panelColor.setEnabled(enable);
-		labelRed.setEnabled(enable);
-		labelGreen.setEnabled(enable);
-		labelBlue.setEnabled(enable);
-		sliderRed.setEnabled(enable);
-		sliderGreen.setEnabled(enable);
-		sliderBlue.setEnabled(enable);
-	}
-
 	public void setLabelColor()
 	{
 		panelColor.setBackground(new Color(sliderRed.getValue(), sliderGreen.getValue(), sliderBlue.getValue()));

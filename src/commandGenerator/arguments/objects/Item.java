@@ -67,6 +67,7 @@ public class Item extends ObjectBase
 	@Override
 	public String getName()
 	{
+		if (this instanceof ItemData) return ((ItemData) this).getDefaultName();
 		return this.getName(0);
 	}
 

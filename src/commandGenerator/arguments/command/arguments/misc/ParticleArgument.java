@@ -55,4 +55,11 @@ public class ParticleArgument extends Argument
 		this.panel.setSelected((Particle) Registry.getObjectFromId(data.get(0)));
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof ParticleArgument)) return;
+		this.panel.setSelected(((ParticleArgument) toMatch).panel.generateParticle());
+	}
+
 }

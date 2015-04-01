@@ -193,19 +193,6 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 		this.panelData.setupFrom(list);
 	}
 
-	@Override
-	public void setEnabledContent(boolean enable)
-	{
-		setEnabled(enable);
-		labelName.setEnabled(enable);
-		labelImage.setEnabled(enable);
-		comboboxId.setEnabledContent(enable);
-		spinnerDamage.setEnabledContent(enable);
-		spinnerCount.setEnabledContent(enable);
-		if (slot) spinnerSlot.setEnabledContent(enable);
-		if (withData) panelData.setEnabledContent(enable);
-	}
-
 	public void setItem(Item item)
 	{
 		this.comboboxId.setSelected(item.getId());
@@ -253,13 +240,8 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 	@Override
 	public void updateLang()
 	{
-		updateTitle();
 		updateSpinner();
-		spinnerDamage.updateLang();
-		spinnerCount.updateLang();
-		comboboxId.updateLang();
-		if (slot) spinnerSlot.updateLang();
-		if (withData) panelData.updateLang();
+		super.updateLang();
 	}
 
 	@Override

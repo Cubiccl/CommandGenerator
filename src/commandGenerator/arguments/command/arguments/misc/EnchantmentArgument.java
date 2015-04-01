@@ -66,4 +66,11 @@ public class EnchantmentArgument extends Argument
 		this.panel.setLevel(Integer.parseInt(data.get(1)));
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof EnchantmentArgument)) return;
+		this.panel.setupFrom(((EnchantmentArgument) toMatch).panel.generateEnchantment());
+	}
+
 }

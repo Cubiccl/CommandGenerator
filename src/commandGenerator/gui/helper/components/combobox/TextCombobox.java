@@ -47,7 +47,7 @@ public class TextCombobox extends JPanel implements CComponent
 			public void keyTyped(KeyEvent arg0)
 			{}
 		});
-
+		
 		label = new CLabel(title);
 		box = new JComboBox<String>(names);
 		box.addActionListener(new ActionListener() {

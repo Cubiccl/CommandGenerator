@@ -110,4 +110,12 @@ public class CoordinatesArgument extends Argument
 		this.panelCoord.setupFrom(coords);
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof CoordinatesArgument)) return;
+		if (!this.isCompulsery()) this.checkbox.setSelected(toMatch.isUsed());
+		this.panelCoord.setupFrom(((CoordinatesArgument) toMatch).panelCoord.generateCoord());
+	}
+
 }

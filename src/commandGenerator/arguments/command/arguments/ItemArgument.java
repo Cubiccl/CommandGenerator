@@ -165,4 +165,12 @@ public class ItemArgument extends Argument implements INBTArgument
 		if (this.display[3] && data.size() > index) this.panel.setDataTags(DataTags.generateListFrom(data.get(index)));
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof ItemArgument)) return;
+		if (!this.isCompulsery()) this.box.setSelected(toMatch.isUsed());
+		this.panel.setupFrom(((ItemArgument) toMatch).panel.getItemStack());
+	}
+
 }

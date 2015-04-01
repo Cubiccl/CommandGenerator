@@ -98,16 +98,6 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 	}
 
 	@Override
-	public void setEnabledContent(boolean enable)
-	{
-		setEnabled(enable);
-		buttonAdd.setEnabled(enable);
-		buttonRemove.setEnabled(enable);
-		buttonHelp.setEnabled(enable);
-		displayer.setEnabledContent(enable);
-	}
-
-	@Override
 	protected void setupDetails(Object[] details)
 	{
 		this.object = (ObjectBase) details[0];

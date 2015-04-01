@@ -42,6 +42,7 @@ public class FileHelper
 			writer = new PrintWriter(folder + "options.txt", "UTF-8");
 			writer.println("lang = en_uk");
 			writer.println("version = 5.0");
+			writer.println("sortType = name");
 			writer.close();
 		} catch (Exception e)
 		{
@@ -75,7 +76,7 @@ public class FileHelper
 
 		if (openFile("options.txt")) return null;
 
-		String option = id;
+		String option = null;
 
 		while (scanner.hasNextLine())
 		{
@@ -83,8 +84,42 @@ public class FileHelper
 			else scanner.nextLine();
 		}
 
+		if (option == null) addOption(id);
+
 		scanner.close();
 		return option;
+	}
+
+	private static void addOption(String id)
+	{
+		try
+		{
+			scanner = new Scanner(new File(folder + "options.txt"));
+		} catch (Exception e)
+		{
+			DisplayHelper.log("Couldn't open the Options file.");
+			return;
+		}
+		List<String> options = new ArrayList<String>();
+		while (scanner.hasNextLine())
+		{
+			options.add(scanner.nextLine());
+		}
+		scanner.close();
+
+		try
+		{
+			writer = new PrintWriter(folder + "options.txt", "UTF-8");
+			for (int i = 0; i < options.size(); i++)
+			{
+				writer.println(options.get(i));
+			}
+			writer.write(id + " = " + Settings.getDefaultOption(id));
+			writer.close();
+		} catch (Exception e)
+		{
+
+		}
 	}
 
 	/** Opens a file. Returns true if it couldn't.

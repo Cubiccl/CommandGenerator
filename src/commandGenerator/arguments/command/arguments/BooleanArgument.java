@@ -63,4 +63,10 @@ public class BooleanArgument extends Argument
 		return this;
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof BooleanArgument)) return;
+		this.box.setSelected(((BooleanArgument) toMatch).box.isSelected());
+	}
 }

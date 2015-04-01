@@ -52,4 +52,8 @@ public class StaticArgument extends Argument
 	public void setupFrom(List<String> data)
 	{}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{}
+
 }

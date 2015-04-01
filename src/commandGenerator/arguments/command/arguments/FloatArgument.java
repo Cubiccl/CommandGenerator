@@ -127,4 +127,21 @@ public class FloatArgument extends Argument
 		this.box.setSelected(true);
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof FloatArgument)) return;
+		if (!this.isCompulsery()) this.box.setSelected(toMatch.isUsed());
+		String value = ((FloatArgument) toMatch).entry.getText();
+		try
+		{
+			float numeric = Float.parseFloat(value);
+			if (numeric > this.max || numeric < this.min) this.entry.setText(String.valueOf(this.defaultValue));
+			else this.entry.setText(value);
+		} catch (Exception e)
+		{
+			this.entry.setText(String.valueOf(this.defaultValue));
+		}
+	}
+
 }

@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -172,6 +173,15 @@ public class SlotArgument extends Argument
 		this.comboboxSlot.setSelectedIndex(index);
 		this.spinnerSlot.setValue(spinnerValue);
 		this.spinnerSlot.setVisible(spinnerVisible);
+	}
+
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof SlotArgument)) return;
+		List<String> data = new ArrayList<String>();
+		data.add(((SlotArgument) toMatch).generateCommand());
+		this.setupFrom(data);
 	}
 
 }

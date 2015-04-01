@@ -83,12 +83,4 @@ public class ClickEventPanel extends HelperPanel
 		entryText.setTextField(value);
 	}
 
-	@Override
-	public void updateLang()
-	{
-		updateTitle();
-		entryText.updateLang();
-		comboboxAction.updateLang();
-	}
-
 }

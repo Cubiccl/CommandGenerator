@@ -54,4 +54,11 @@ public class AchievementArgument extends Argument
 		this.panel.setSelected((Achievement) Registry.getObjectFromId(data.get(0)));
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof AchievementArgument)) return;
+		this.panel.setupFrom(((AchievementArgument) toMatch).panel.getSelectedAchievement());
+	}
+
 }

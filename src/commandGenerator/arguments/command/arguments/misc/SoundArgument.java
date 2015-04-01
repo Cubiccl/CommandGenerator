@@ -78,4 +78,11 @@ public class SoundArgument extends Argument implements IBox
 		this.button.setData(Lang.get("HELP:sound." + this.box.getValue().getId()), this.box.getValue().getId());
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof SoundArgument)) return;
+		this.box.setSelected(((SoundArgument) toMatch).box.getValue());
+	}
+
 }

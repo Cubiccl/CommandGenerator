@@ -56,7 +56,7 @@ public enum Structure
 			new ChoiceArgument("clone.mode.dest", false, "force", "move", "normal").addHelpButton()),
 	cloneFiltered("clone.filtered", new CoordinatesArgument("clone.start", true, true, false), new CoordinatesArgument("clone.end", true, true, false),
 			new CoordinatesArgument("clone.destination", true, true, false), new StaticArgument("filtered"), new ChoiceArgument("clone.mode.dest", false,
-					"force", "move", "normal").addHelpButton(), new BlockArgument("block.set", true, CGConstants.LIST_BLOCKS, false).setDisplay(true, false,
+					"force", "move", "normal").addHelpButton(), new BlockArgument("clone.block", true, CGConstants.LIST_BLOCKS, false).setDisplay(true, false,
 					false)),
 	effectClear("effect.clear", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new StaticArgument("clear")),
 	effectGive("effect.give", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new EffectArgument("effect", true)),
@@ -324,6 +324,22 @@ public enum Structure
 		}
 
 		return true;
+	}
+
+	public void synchronize(Structure toMatch)
+	{
+		for (Argument aSelf : arguments)
+		{
+			for (Argument aMatch : toMatch.getArguments())
+			{
+				if (aSelf.getId().equals(aMatch.getId())) aSelf.synchronize(aMatch);
+			}
+		}
+	}
+
+	private Argument[] getArguments()
+	{
+		return this.arguments;
 	}
 
 }

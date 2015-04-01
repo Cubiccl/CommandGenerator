@@ -127,4 +127,21 @@ public class IntArgument extends Argument
 		this.box.setSelected(true);
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof IntArgument)) return;
+		if (!this.isCompulsery()) this.box.setSelected(toMatch.isUsed());
+		String value = ((IntArgument) toMatch).entry.getText();
+		try
+		{
+			int numeric = Integer.parseInt(value);
+			if (numeric > this.max || numeric < this.min) this.entry.setTextField(String.valueOf(this.defaultValue));
+			else this.entry.setTextField(value);
+		} catch (Exception e)
+		{
+			this.entry.setText(String.valueOf(this.defaultValue));
+		}
+	}
+
 }

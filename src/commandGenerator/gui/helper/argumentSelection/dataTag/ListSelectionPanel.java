@@ -418,8 +418,7 @@ public class ListSelectionPanel extends HelperPanel
 	@Override
 	public void updateLang()
 	{
-		buttonAdd.updateLang();
-		buttonRemove.updateLang();
+		super.updateLang();
 		setupList();
 	}
 

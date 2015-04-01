@@ -6,9 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import commandGenerator.CommandGenerator;
 import commandGenerator.arguments.command.Command;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
+import commandGenerator.main.Settings;
 
 public class Registry
 {
@@ -113,12 +115,24 @@ public class Registry
 	 *            - <i>String</i> - The List name. */
 	public static ObjectBase[] getList(String listName)
 	{
-		if (list.get(listName) == null)
+		if (list.get(listName) == null || list.get(listName).length == 0)
 		{
 			DisplayHelper.log(listName + " isn't the ID of any list.");
 			return new ObjectBase[0];
 		}
-		return list.get(listName);
+
+		ObjectBase[] found = list.get(listName);
+		List<ObjectBase> toSort = new ArrayList<ObjectBase>();
+		for (ObjectBase o : found)
+			toSort.add(o);
+
+		if (CommandGenerator.opt.getSortType().equals(Settings.IDS))
+		{
+			if (found[0].getType() == ObjectBase.ITEM || found[0].getType() == ObjectBase.ENCHANTMENT || found[0].getType() == ObjectBase.EFFECT) sortIdsNum(toSort);
+			else sortIds(toSort);
+		} else sortNames(toSort);
+
+		return toSort.toArray(new ObjectBase[0]);
 	}
 
 	/** Returns the Object corresponding to this ID.
@@ -176,8 +190,11 @@ public class Registry
 		for (int i = 0; i < objectArray.length; i++)
 			objectList.add(objectArray[i]);
 
-		if (type == ObjectBase.ITEM || type == ObjectBase.ENCHANTMENT || type == ObjectBase.EFFECT) sortIdsNum(objectList);
-		else sortIds(objectList);
+		if (CommandGenerator.opt.getSortType().equals(Settings.IDS))
+		{
+			if (type == ObjectBase.ITEM || type == ObjectBase.ENCHANTMENT || type == ObjectBase.EFFECT) sortIdsNum(objectList);
+			else sortIds(objectList);
+		} else sortNames(objectList);
 		return objectList.toArray(new ObjectBase[0]);
 	}
 
@@ -231,6 +248,25 @@ public class Registry
 			public int compare(ObjectBase o1, ObjectBase o2)
 			{
 				int diff = o1.getId().compareTo(o2.getId());
+				if (diff < 0) diff = -1;
+				if (diff > 0) diff = 1;
+				return diff;
+			}
+		});
+	}
+
+	/** Sorts the Object list according to these Objects' names.
+	 * 
+	 * @param objectType
+	 *            - <i>List:ObjectBase</i> - The list of Objects to sort. */
+	private static void sortNames(List<ObjectBase> list)
+	{
+		list.sort(new Comparator<ObjectBase>() {
+			@Override
+			public int compare(ObjectBase o1, ObjectBase o2)
+			{
+				int diff = o1.getName().compareTo(o2.getName());
+				if (o1 instanceof Item) diff = o1.getId().compareTo(o2.getId());
 				if (diff < 0) diff = -1;
 				if (diff > 0) diff = 1;
 				return diff;

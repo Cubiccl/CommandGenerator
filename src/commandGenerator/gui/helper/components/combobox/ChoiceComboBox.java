@@ -78,12 +78,12 @@ public class ChoiceComboBox extends JPanel implements CComponent
 	{
 		this.setEnabled(enable);
 		this.box.setEnabled(enable);
-		this.button.setEnabled(enable);
+		if (this.hasHelp) this.button.setEnabled(enable);
 	}
 
 	public String getSelectedValue()
 	{
-		return (String) this.box.getSelectedItem();
+		return this.choices[this.box.getSelectedIndex()];
 	}
 
 	public void setSelected(String selection)

@@ -35,6 +35,7 @@ public class NumberSpinner extends JPanel implements CComponent
 		super(new GridBagLayout());
 
 		label = new CLabel(title);
+		
 		spinner = new JSpinner(new SpinnerNumberModel(min, min, max, 1));
 		spinner.setPreferredSize(new Dimension(200, 20));
 		spinner.setMinimumSize(new Dimension(200, 20));

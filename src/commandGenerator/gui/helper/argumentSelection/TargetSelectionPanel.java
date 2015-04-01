@@ -367,16 +367,6 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 	}
 
 	@Override
-	public void setEnabledContent(boolean enable)
-	{
-		super.setEnabledContent(enable);
-		boxEntities.setEnabled(enable);
-		boxSelectors.setEnabled(enable);
-		if (enable) scrollpane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
-		else scrollpane.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-	}
-
-	@Override
 	protected void setupDetails(Object[] details)
 	{
 		this.mode = (int) details[0];
@@ -444,6 +434,16 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 		boxEntities.setModel(new JComboBox<String>(targets).getModel());
 		boxEntities.setSelectedIndex(index);
 
+		displaySelectors();
+	}
+
+	@Override
+	public void reset()
+	{
+		super.reset();
+		this.addedSelectors.clear();
+		this.boxEntities.setSelectedIndex(0);
+		this.boxSelectors.setSelectedIndex(0);
 		displaySelectors();
 	}
 }

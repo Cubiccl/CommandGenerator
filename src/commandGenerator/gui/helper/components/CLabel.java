@@ -1,5 +1,7 @@
 package commandGenerator.gui.helper.components;
 
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 
 import commandGenerator.main.Lang;
@@ -13,7 +15,7 @@ public class CLabel extends JLabel implements CComponent
 
 	public CLabel(String title)
 	{
-		this(title, true);
+		this(title, false);
 	}
 
 	public CLabel(String title, boolean html)
@@ -24,6 +26,9 @@ public class CLabel extends JLabel implements CComponent
 
 		if (this.html) this.setText("<html>" + Lang.get(this.title).replaceAll("\n", "<br />") + "</html>");
 		else this.setText(Lang.get(this.title));
+
+		if (!this.html) this.setPreferredSize(new Dimension(this.getText().length() * 7, 20));
+		if (!this.html) this.setMinimumSize(new Dimension(this.getText().length() * 7, 20));
 	}
 
 	@Override

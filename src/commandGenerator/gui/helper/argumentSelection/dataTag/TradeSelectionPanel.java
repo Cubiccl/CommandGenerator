@@ -172,8 +172,4 @@ public class TradeSelectionPanel extends HelperPanel implements ISave
 		// TODO super.setupFrom(clean);
 	}
 
-	@Override
-	public void updateLang()
-	{}
-
 }

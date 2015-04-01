@@ -61,4 +61,9 @@ public class ItemData extends Item
 		}
 	}
 
+	public String getDefaultName()
+	{
+		return Lang.get("ITEMS:" + this.getId() + "_" + this.damageList[0]);
+	}
+
 }

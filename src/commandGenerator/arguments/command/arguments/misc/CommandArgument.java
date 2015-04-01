@@ -90,4 +90,10 @@ public class CommandArgument extends Argument
 		}
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof CommandArgument)) return;
+		this.storedCommand = ((CommandArgument) toMatch).storedCommand;
+	}
 }

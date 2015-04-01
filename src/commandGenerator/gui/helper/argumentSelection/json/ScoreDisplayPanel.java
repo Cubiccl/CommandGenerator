@@ -75,12 +75,4 @@ public class ScoreDisplayPanel extends HelperPanel
 			if (tag.getId().equals("name")) panelEntity.setupFrom(ObjectCreator.generateTarget(((TagString) tag).getValue()));
 		}
 	}
-
-	@Override
-	public void updateLang()
-	{
-		updateTitle();
-		entryObjective.updateLang();
-		panelEntity.updateLang();
-	}
 }

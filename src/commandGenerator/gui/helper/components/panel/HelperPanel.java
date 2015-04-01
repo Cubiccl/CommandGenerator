@@ -4,8 +4,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -19,8 +17,6 @@ public abstract class HelperPanel extends JPanel implements CComponent
 {
 
 	private static final int MIN = 20;
-	/** List containing all of this Panel's elements. */
-	private List<CComponent> components;
 	/** Object to place the elements in the panel. */
 	private GridBagConstraints gbc;
 
@@ -44,7 +40,6 @@ public abstract class HelperPanel extends JPanel implements CComponent
 		if (!title.equals("GENERAL:options")) setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
 				Lang.get(title)));
 		setPreferredSize(new Dimension(MIN, MIN));
-		components = new ArrayList<CComponent>();
 
 		gbc = new GridBagConstraints();
 		gbc.gridx = 0;
@@ -67,7 +62,6 @@ public abstract class HelperPanel extends JPanel implements CComponent
 		super.add(component, gbc);
 
 		gbc.gridy++;
-		if (component instanceof CComponent) components.add((CComponent) component);
 
 		return this;
 	}
@@ -93,7 +87,6 @@ public abstract class HelperPanel extends JPanel implements CComponent
 		for (Component component : components)
 		{
 			panel.add(component, gbc2);
-			if (component instanceof CComponent) this.components.add((CComponent) component);
 			if (split) gbc2.gridx++;
 			if (component.getPreferredSize().height > height) height = component.getPreferredSize().height + MIN;
 			width += component.getPreferredSize().width;
@@ -128,7 +121,6 @@ public abstract class HelperPanel extends JPanel implements CComponent
 		for (Component component : components)
 		{
 			panel.add(component, gbc2);
-			if (component instanceof CComponent) this.components.add((CComponent) component);
 			if (component.getPreferredSize().height > height) height = component.getPreferredSize().height + MIN;
 			if (component.getPreferredSize().width > width) width = component.getPreferredSize().width + MIN;
 		}
@@ -147,18 +139,36 @@ public abstract class HelperPanel extends JPanel implements CComponent
 	@Override
 	public void reset()
 	{
-		for (int i = 0; i < components.size(); i++)
-			components.get(i).reset();
+		reset(this);
+	}
 
+	private void reset(JPanel panel)
+	{
+		for (Component component : panel.getComponents())
+		{
+			if (component instanceof CComponent) ((CComponent) component).reset();
+			else if (component instanceof JPanel) reset((JPanel) component);
+		}
 	}
 
 	@Override
 	public void setEnabledContent(boolean enable)
 	{
-		setEnabled(enable);
-		for (int i = 0; i < components.size(); i++)
-			components.get(i).setEnabledContent(enable);
+		this.setEnabled(enable);
+		enableContent(this, enable);
+	}
 
+	private void enableContent(JPanel component, boolean enable)
+	{
+		for (Component c : component.getComponents())
+		{
+			if (c instanceof CComponent) ((CComponent) c).setEnabledContent(enable);
+			else
+			{
+				c.setEnabled(enable);
+				if (c instanceof JPanel) enableContent((JPanel) c, enable);
+			}
+		}
 	}
 
 	/** Setups details needed to create the GUI. */
@@ -191,8 +201,16 @@ public abstract class HelperPanel extends JPanel implements CComponent
 	public void updateLang()
 	{
 		updateTitle();
-		for (int i = 0; i < components.size(); i++)
-			components.get(i).updateLang();
+		updateLang(this);
+	}
+
+	private void updateLang(JPanel panel)
+	{
+		for (Component component : panel.getComponents())
+		{
+			if (component instanceof CComponent) ((CComponent) component).updateLang();
+			else if (component instanceof JPanel) updateLang((JPanel) component);
+		}
 	}
 
 	/** Updates the title when changing language. */

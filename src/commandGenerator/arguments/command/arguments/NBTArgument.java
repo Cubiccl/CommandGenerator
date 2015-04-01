@@ -58,4 +58,8 @@ public class NBTArgument extends Argument
 		// TODO NBT Setup
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{}
+
 }

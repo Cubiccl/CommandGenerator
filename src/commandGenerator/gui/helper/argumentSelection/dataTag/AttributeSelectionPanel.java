@@ -88,8 +88,4 @@ public class AttributeSelectionPanel extends HelperPanel implements ISave
 		comboboxAttribute.setSelected(attribute.getAttributeType());
 	}
 
-	@Override
-	public void updateLang()
-	{}
-
 }

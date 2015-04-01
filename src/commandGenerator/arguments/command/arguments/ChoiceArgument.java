@@ -72,4 +72,11 @@ public class ChoiceArgument extends Argument
 		this.box.setSelected(data.get(0));
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof ChoiceArgument)) return;
+		this.box.setSelected(((ChoiceArgument) toMatch).box.getSelectedValue());
+	}
+
 }

@@ -84,4 +84,12 @@ public class StringArgument extends Argument
 		this.entry.setTextField(data.get(0));
 	}
 
+	@Override
+	public void synchronize(Argument toMatch)
+	{
+		if (!(toMatch instanceof StringArgument)) return;
+		if (!this.isCompulsery()) this.box.setSelected(toMatch.isUsed());
+		this.entry.setTextField(((StringArgument) toMatch).entry.getText());
+	}
+
 }

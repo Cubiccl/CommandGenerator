@@ -102,14 +102,6 @@ public class EntitySelectionPanel extends HelperPanel implements IBox, ISave
 		this.panelData.setupFrom(list);
 	}
 
-	@Override
-	public void setEnabledContent(boolean enable)
-	{
-		super.setEnabledContent(enable);
-		labelImage.setEnabled(enable);
-		labelName.setEnabled(enable);
-	}
-
 	public void setEntity(Entity entity)
 	{
 		this.combobox.setSelected(entity);
