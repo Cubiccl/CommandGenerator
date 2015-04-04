@@ -41,7 +41,7 @@ public class Attribute
 
 		if (this.operation < 2 && this.amount >= 0) display += "+";
 
-		if (this.operation > 0) display += Double.toString(this.amount) + "% " + this.type.getName();
+		if (this.operation > 0) display += Double.toString(this.amount * 100) + "% " + this.type.getName();
 		else display += Double.toString(this.amount) + " " + this.type.getName();
 
 		return display;

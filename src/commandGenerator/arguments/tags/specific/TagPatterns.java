@@ -9,13 +9,13 @@ public class TagPatterns extends TagList
 
 	public TagPatterns()
 	{
-		super("block.Patterns", "standing_banner", "wall_banner", "banner");
+		super("block.Patterns", "standing_banner:wall_banner:banner");
 	}
 
 	@Override
 	public void askValue()
 	{
-		panel = new ListSelectionPanel("GENERAL:pattern", ObjectBase.TAG_PATTERN);
+		panel = new ListSelectionPanel("TAGS:Patterns", ObjectBase.TAG_PATTERN);
 		((ListSelectionPanel) panel).setList(getValue());
 
 		if (showPanel()) return;

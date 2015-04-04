@@ -18,7 +18,7 @@ public class TagBlockEntity extends TagCompound
 	@Override
 	public void askValue()
 	{
-		panel = new NBTTagPanel("TAG:" + getId(), item, DataTags.blocks);
+		panel = new NBTTagPanel("TAGS:" + getId(), item, DataTags.blocks);
 		((NBTTagPanel) panel).updateCombobox(item);
 		((NBTTagPanel) panel).setupFrom(this.getValue());
 		if (showPanel()) return;

@@ -1,5 +1,6 @@
 package commandGenerator.gui.helper.argumentSelection.dataTag;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +52,12 @@ public class DropChancesSelectionPanel extends HelperPanel
 		entryChest.setTextField("0");
 		entryLegs.setTextField("0");
 		entryFeet.setTextField("0");
+
+		entryHand.setMinimumSize(new Dimension(200, 20));
+		entryHead.setMinimumSize(new Dimension(200, 20));
+		entryChest.setMinimumSize(new Dimension(200, 20));
+		entryLegs.setMinimumSize(new Dimension(200, 20));
+		entryFeet.setMinimumSize(new Dimension(200, 20));
 	}
 
 	@Override

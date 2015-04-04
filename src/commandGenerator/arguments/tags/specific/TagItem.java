@@ -29,7 +29,7 @@ public class TagItem extends TagCompound
 		ObjectBase[] items = new ObjectBase[ids.length];
 		for (int i = 0; i < ids.length; i++)
 			items[i] = Registry.getObjectFromId(ids[i]);
-		panel = new ItemSelectionPanel("GUI:item", items, true, slot);
+		panel = new ItemSelectionPanel("GENERAL:item", items, true, slot);
 		showPanel();
 
 		if (this.slot)

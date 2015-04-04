@@ -188,7 +188,6 @@ public class TagDisplayer extends JPanel implements CComponent
 
 	public void updateList(ObjectBase object)
 	{
-
 		Tag[] allowedTags = TagSelection.getAllowedTags(tags, object);
 		this.object = object;
 

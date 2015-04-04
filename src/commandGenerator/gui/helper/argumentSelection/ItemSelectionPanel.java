@@ -96,8 +96,8 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 		labelImage.setPreferredSize(new Dimension(40, 40));
 		labelImage.setMinimumSize(new Dimension(40, 40));
 		labelName = new JLabel("", SwingConstants.CENTER);
-		labelName.setPreferredSize(new Dimension(200, 20));
-		labelName.setMinimumSize(new Dimension(200, 20));
+		labelName.setPreferredSize(new Dimension(200, 40));
+		labelName.setMinimumSize(new Dimension(200, 40));
 
 		buttonSave = new SaveButton(ObjectBase.ITEM, this);
 		buttonLoad = new LoadButton(ObjectBase.ITEM, this);
@@ -230,7 +230,7 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 		if (item.getDurability() > 0) spinnerDamage.setValues(0, item.getDurability());
 		if (withData) panelData.updateCombobox(item);
 		labelImage.setIcon(item.getTexture(spinnerDamage.getValue()));
-		labelName.setText(item.getName(spinnerDamage.getValue()));
+		labelName.setText("<html><center>" + item.getName(getDamage()) + "</center></html>");
 	}
 
 	@Override

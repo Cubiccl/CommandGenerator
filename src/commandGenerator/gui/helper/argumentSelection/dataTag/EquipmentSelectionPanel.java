@@ -54,7 +54,7 @@ public class EquipmentSelectionPanel extends HelperPanel
 
 	private void addItem(int slot)
 	{
-		ItemSelectionPanel panel = new ItemSelectionPanel("GUI:item", Registry.getList(CGConstants.LIST_ITEMS), true, false);
+		ItemSelectionPanel panel = new ItemSelectionPanel("GENERAL:item", Registry.getList(CGConstants.LIST_ITEMS), true, false);
 		if (DisplayHelper.showQuestion(panel, Lang.get("GUI:item.add"))) return;
 		equipment[slot] = new ItemStack(panel.generateItem(), panel.getDamage(), panel.getCount(), panel.getItemTag());
 		displayItems();

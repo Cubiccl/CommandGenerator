@@ -30,7 +30,7 @@ public class PatternSelectionPanel extends HelperPanel
 
 	public PatternSelectionPanel()
 	{
-		super("TAG:pattern");
+		super("GENERAL:pattern");
 		
 		this.initGui();
 	}

@@ -25,8 +25,8 @@ public class AttributeSelectionPanel extends HelperPanel implements ISave
 
 	public AttributeSelectionPanel()
 	{
-		super("GUI:add.attribute");
-		
+		super("GENERAL:attribute");
+
 		this.initGui();
 	}
 
@@ -68,7 +68,9 @@ public class AttributeSelectionPanel extends HelperPanel implements ISave
 			DisplayHelper.showWarning("WARNING:number");
 			return null;
 		}
-		return new Attribute((AttributeType) comboboxAttribute.getValue(), Double.parseDouble(amount), comboboxOperation.getSelectedIndex());
+		if (comboboxOperation.getSelectedIndex() == 0) return new Attribute((AttributeType) comboboxAttribute.getValue(), Double.parseDouble(amount),
+				comboboxOperation.getSelectedIndex());
+		return new Attribute((AttributeType) comboboxAttribute.getValue(), Double.parseDouble(amount) / 100, comboboxOperation.getSelectedIndex());
 	}
 
 	@Override

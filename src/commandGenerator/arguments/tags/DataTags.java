@@ -329,9 +329,13 @@ public class DataTags
 				{
 					data = data.substring("labeled=".length());
 					String[] options = data.split(":");
-					tag.setMin(Integer.parseInt(options[0]));
-					tag.setMax(Integer.parseInt(options[1]));
-					tag.setChoices(options[2]);
+					tag.setChoicesId(options[0]);
+					tag.setChoices(options[1].split(";"));
+				}
+				if (data.startsWith("values"))
+				{
+					data = data.substring("values=".length());
+					tag.setValues(data.split(";"));
 				}
 			}
 		}

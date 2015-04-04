@@ -127,7 +127,7 @@ public enum Structure
 			new ChoiceArgument("stats", true, Resources.stats).addHelpButton(), new TargetArgument("target.stats", true, CGConstants.ENTITIES_ALL),
 			new StringArgument("objective", true)),
 	summon("summon", new EntityArgument("spawn.entity", true).setDisplay(true, false), new CoordinatesArgument("spawn.coords", false, true, false),
-			new NBTArgument("nbt", false, "entity")),
+			new NBTArgument("nbt", false, "spawn.entity")),
 	tellraw("tellraw", new TargetArgument("target", true, CGConstants.ENTITIES_PLAYERS), new JsonArgument("json", true)),
 	testfor("testfor", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new EntityArgument("entity.tags", true).setDisplay(false, true)),
 	testforblock("testforblock", new CoordinatesArgument("block.coords", true, true, false),

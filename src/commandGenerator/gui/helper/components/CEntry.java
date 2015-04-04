@@ -24,7 +24,7 @@ public class CEntry extends JPanel implements CComponent
 
 		this.add(label);
 		this.add(text);
-		this.text.setMinimumSize(new Dimension(this.label.getText().length() * 5, 20));
+		this.text.setMinimumSize(new Dimension(this.label.getText().length() * 10, 20));
 	}
 
 	public String getText()

@@ -13,6 +13,7 @@ import commandGenerator.main.Lang;
 public class TagInt extends Tag
 {
 
+	private String[] choices;
 	private String choicesId;
 	private JLabel label;
 	protected JTextField textfield;
@@ -29,6 +30,7 @@ public class TagInt extends Tag
 		super(id, Tag.INT, applicable);
 		value = 0;
 		choicesId = null;
+		choices = new String[0];
 
 		panel = new JPanel(new GridBagLayout());
 		gbc.gridy++;
@@ -55,11 +57,14 @@ public class TagInt extends Tag
 			value = Integer.parseInt(textfield.getText());
 		} else
 		{
-			String[] names = new String[max - min];
+			String[] names = new String[choices.length];
 			for (int i = 0; i < names.length; i++)
-				names[i] = Lang.get("RESOURCES:" + choicesId + "_" + i);
+				names[i] = Lang.get("RESOURCES:" + choicesId + "." + choices[i]);
 
 			JComboBox<String> combobox = new JComboBox<String>(names);
+			if (value > 0 && value < combobox.getItemCount()) combobox.setSelectedIndex(value);
+			if (this.values != null) for (int i = 0; i < this.values.length; i++)
+				if (this.values[i] == this.value) combobox.setSelectedIndex(i);
 			gbc.gridy++;
 			panel.add(combobox, gbc);
 
@@ -115,10 +120,9 @@ public class TagInt extends Tag
 		return !flag;
 	}
 
-	public TagInt setChoices(String id)
+	public void setChoicesId(String id)
 	{
 		this.choicesId = id;
-		return this;
 	}
 
 	public void setMax(int max)
@@ -139,6 +143,27 @@ public class TagInt extends Tag
 	{
 		this.value = value;
 		return this;
+	}
+
+	public void setChoices(String[] choices)
+	{
+		this.choices = choices;
+	}
+
+	public void setValues(String[] values)
+	{
+		this.values = new int[values.length];
+		for (int i = 0; i < values.length; i++)
+		{
+			try
+			{
+				this.values[i] = Integer.parseInt(values[i]);
+			} catch (Exception e)
+			{
+				this.values[i] = -1;
+				System.out.println("Error creating values for tag : " + this.getId());
+			}
+		}
 	}
 
 }

@@ -46,7 +46,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 		this.blockList = new Item[blockList.length];
 		for (int i = 0; i < blockList.length; i++)
 			this.blockList[i] = (Item) blockList[i];
-		
+
 		this.initGui();
 	}
 
@@ -87,8 +87,8 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 		labelImage.setPreferredSize(new Dimension(40, 40));
 		labelImage.setMinimumSize(new Dimension(40, 40));
 		labelName = new JLabel("", SwingConstants.CENTER);
-		labelName.setPreferredSize(new Dimension(200, 20));
-		labelName.setMinimumSize(new Dimension(200, 20));
+		labelName.setPreferredSize(new Dimension(200, 40));
+		labelName.setMinimumSize(new Dimension(200, 40));
 
 		buttonSave = new SaveButton(ObjectBase.BLOCK, this);
 		buttonLoad = new LoadButton(ObjectBase.BLOCK, this);
@@ -199,7 +199,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 		spinnerDamage.setValues(0, item.getMaxDamage());
 		if (data) panelData.updateCombobox(Registry.getObjectFromId(comboboxId.getValue()));
 		labelImage.setIcon(item.getTexture(getDamage()));
-		labelName.setText(item.getName(getDamage()));
+		labelName.setText("<html><center>" + item.getName(getDamage()) + "</center></html>");
 	}
 
 	@Override
