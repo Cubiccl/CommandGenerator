@@ -1,11 +1,7 @@
 package commandGenerator.arguments.command;
 
-import java.awt.Component;
-import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.BorderFactory;
 
 import commandGenerator.arguments.command.arguments.BlockArgument;
 import commandGenerator.arguments.command.arguments.BooleanArgument;
@@ -33,8 +29,8 @@ import commandGenerator.arguments.command.arguments.misc.SoundArgument;
 import commandGenerator.arguments.command.arguments.misc.TeamOptionArgument;
 import commandGenerator.arguments.command.arguments.misc.XpArgument;
 import commandGenerator.arguments.tags.TagCompound;
-import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.StructurePanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
@@ -246,32 +242,7 @@ public enum Structure
 	/** Generates the Panel to display to the user. */
 	public HelperPanel generatePanel()
 	{
-		@SuppressWarnings("serial")
-		HelperPanel panel = new HelperPanel("GENERAL:options") {
-			@Override
-			protected void addComponents()
-			{
-				CLabel label = new CLabel("HELP:structure." + id, true);
-				label.setBorder(BorderFactory.createBevelBorder(0));
-				label.setFont(new Font(label.getFont().getName(), Font.BOLD, 13));
-				add(label);
-				for (Argument arg : arguments)
-				{
-					Component c = arg.getComponent();
-					if (c != null) add(c);
-				}
-			}
-
-			@Override
-			protected void createComponents()
-			{}
-
-			@Override
-			protected void createListeners()
-			{}
-		};
-
-		return panel;
+		return new StructurePanel(this);
 	}
 
 	/** Returns this Structure's maximum length. */
@@ -337,9 +308,14 @@ public enum Structure
 		}
 	}
 
-	private Argument[] getArguments()
+	public Argument[] getArguments()
 	{
 		return this.arguments;
+	}
+
+	public String getId()
+	{
+		return this.id;
 	}
 
 }

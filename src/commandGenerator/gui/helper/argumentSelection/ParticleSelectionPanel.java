@@ -23,6 +23,8 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 	public ParticleSelectionPanel()
 	{
 		super("GENERAL:particle");
+		
+		this.initGui();
 	}
 
 	@Override

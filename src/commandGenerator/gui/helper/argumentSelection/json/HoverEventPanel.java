@@ -32,6 +32,8 @@ public class HoverEventPanel extends HelperPanel
 	public HoverEventPanel()
 	{
 		super("GUI:json.hover");
+		
+		this.initGui();
 	}
 
 	@Override

@@ -18,6 +18,8 @@ public class FireworksSelectionPanel extends HelperPanel
 	public FireworksSelectionPanel(String title)
 	{
 		super(title);
+		
+		this.initGui();
 	}
 
 	@Override

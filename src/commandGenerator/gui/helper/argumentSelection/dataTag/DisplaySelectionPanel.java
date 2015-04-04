@@ -24,7 +24,7 @@ import commandGenerator.gui.helper.components.button.CButton;
 
 @SuppressWarnings("serial")
 public class DisplaySelectionPanel extends JPanel
-{// Turn into Helper Panel
+{
 
 	private CButton buttonAdd, buttonRemove;
 	private CCheckBox checkboxName, checkboxColor;

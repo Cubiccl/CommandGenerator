@@ -36,6 +36,9 @@ public class EquipmentSelectionPanel extends HelperPanel
 	public EquipmentSelectionPanel(String title)
 	{
 		super(title);
+		equipment = new ItemStack[] { null, null, null, null, null };
+		
+		this.initGui();
 	}
 
 	@Override
@@ -203,12 +206,6 @@ public class EquipmentSelectionPanel extends HelperPanel
 		for (int i = 0; i < value.size() && i < 5; i++)
 			equipment[i] = ObjectCreator.generateItemStack((TagCompound) value.get(i));
 		displayItems();
-	}
-
-	@Override
-	protected void setupDetails(Object[] details)
-	{
-		equipment = new ItemStack[] { null, null, null, null, null };
 	}
 
 }

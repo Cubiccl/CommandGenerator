@@ -35,7 +35,10 @@ public class JsonSelectionPanel extends HelperPanel
 
 	public JsonSelectionPanel(String title, boolean events)
 	{
-		super(title, events);
+		super(title);
+		this.events = events;
+		
+		this.initGui();
 	}
 
 	@Override
@@ -199,11 +202,5 @@ public class JsonSelectionPanel extends HelperPanel
 		entryText.setVisible(comboboxMode.getSelectedIndex() == 0);
 		panelScore.setVisible(comboboxMode.getSelectedIndex() == 1);
 		panelEntity.setVisible(comboboxMode.getSelectedIndex() == 2);
-	}
-
-	@Override
-	protected void setupDetails(Object[] details)
-	{
-		events = (boolean) details[0];
 	}
 }

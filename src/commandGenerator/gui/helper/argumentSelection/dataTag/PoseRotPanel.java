@@ -18,7 +18,10 @@ public class PoseRotPanel extends HelperPanel
 
 	public PoseRotPanel(String name, String id)
 	{
-		super(name, id);
+		super(name);
+		this.id = id;
+		
+		this.initGui();
 	}
 
 	@Override
@@ -69,12 +72,6 @@ public class PoseRotPanel extends HelperPanel
 		spinnerX.setSelected(x);
 		spinnerY.setSelected(y);
 		spinnerZ.setSelected(z);
-	}
-
-	@Override
-	protected void setupDetails(Object[] details)
-	{
-		id = (String) details[0];
 	}
 
 }

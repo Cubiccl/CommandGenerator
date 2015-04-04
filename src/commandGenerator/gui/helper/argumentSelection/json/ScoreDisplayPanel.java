@@ -21,6 +21,8 @@ public class ScoreDisplayPanel extends HelperPanel
 	public ScoreDisplayPanel(String title)
 	{
 		super(title);
+		
+		this.initGui();
 	}
 
 	@Override

@@ -51,7 +51,12 @@ public class ListSelectionPanel extends HelperPanel
 
 	public ListSelectionPanel(String title, int type, Object... list)
 	{
-		super(title, type, list);
+		super(title);
+		this.type = type;
+		this.list = list;
+		objects = new ArrayList<Object>();
+		
+		this.initGui();
 	}
 
 	private void add()
@@ -360,14 +365,6 @@ public class ListSelectionPanel extends HelperPanel
 			objects.add(ObjectBase.toObject(list.get(i), type));
 
 		setupList();
-	}
-
-	@Override
-	protected void setupDetails(Object[] details)
-	{
-		type = (int) details[0];
-		list = (Object[]) details[1];
-		objects = new ArrayList<Object>();
 	}
 
 	private void setupList()

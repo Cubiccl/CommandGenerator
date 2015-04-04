@@ -50,7 +50,7 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 	private CButton buttonAdd, buttonRemove, buttonSave, buttonLoad;
 	private HelpButton buttonHelpEntity, buttonHelpSelector;
 	private CEntry entryPlayer;
-	private GridBagConstraints gbc = new GridBagConstraints();
+	private GridBagConstraints gbc;
 	private CLabel labelSelectors, labelEntity, labelSelector;
 	private int mode;
 	private JScrollPane scrollpane;
@@ -59,7 +59,24 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 
 	public TargetSelectionPanel(String title, int mode)
 	{
-		super(title, mode);
+		super(title);
+		this.mode = mode;
+		addedSelectors = new ArrayList<String[]>();
+		switch (mode)
+		{
+			case CGConstants.ENTITIES_PLAYERS:
+				targets = new String[] { "@a", "@p", "@r", Lang.get("GUI:selector.player") };
+				break;
+			case CGConstants.ENTITIES_NPCS:
+				targets = new String[] { "@e" };
+				break;
+
+			default:
+				targets = new String[] { "@a", "@p", "@r", "@e", Lang.get("GUI:selector.player") };
+				break;
+		}
+
+		this.initGui();
 	}
 
 	@Override
@@ -214,7 +231,7 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 		entryPlayer = new CEntry("GUI:player.name", "");
 		entryPlayer.setEnabledContent(false);
 
-		buttonHelpEntity = new HelpButton(Lang.get("HELP:selector." + targets[0]), targets[0]);
+		buttonHelpEntity = new HelpButton(Lang.get("HELP:selector." + this.targets[0]), this.targets[0]);
 		buttonHelpSelector = new HelpButton(Lang.get("HELP:selector.x"), "x");
 
 		buttonAdd = new CButton("GUI:selector.add");
@@ -222,7 +239,7 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 		buttonSave = new SaveButton(ObjectBase.TARGET, this);
 		buttonLoad = new LoadButton(ObjectBase.TARGET, this);
 
-		boxEntities = new JComboBox<String>(targets);
+		boxEntities = new JComboBox<String>(this.targets);
 		boxEntities.setPreferredSize(new Dimension(100, 20));
 		boxEntities.setMinimumSize(new Dimension(100, 20));
 		boxSelectors = new JComboBox<String>(selectors);
@@ -364,26 +381,6 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 		}
 
 		displaySelectors();
-	}
-
-	@Override
-	protected void setupDetails(Object[] details)
-	{
-		this.mode = (int) details[0];
-		addedSelectors = new ArrayList<String[]>();
-		switch (mode)
-		{
-			case CGConstants.ENTITIES_PLAYERS:
-				targets = new String[] { "@a", "@p", "@r", Lang.get("GUI:selector.player") };
-				break;
-			case CGConstants.ENTITIES_NPCS:
-				targets = new String[] { "@e" };
-				break;
-
-			default:
-				targets = new String[] { "@a", "@p", "@r", "@e", Lang.get("GUI:selector.player") };
-				break;
-		}
 	}
 
 	public void setupFrom(Target target)

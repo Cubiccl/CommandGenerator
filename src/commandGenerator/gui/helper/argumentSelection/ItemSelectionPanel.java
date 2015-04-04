@@ -44,7 +44,15 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 
 	public ItemSelectionPanel(String title, ObjectBase[] itemList, boolean withData, boolean slot)
 	{
-		super(title, itemList, withData, slot);
+		super(title);
+		this.itemList = new Item[itemList.length];
+		this.withData = withData;
+		this.slot = slot;
+
+		for (int i = 0; i < itemList.length; i++)
+			this.itemList[i] = (Item) itemList[i];
+		
+		this.initGui();
 	}
 
 	@Override
@@ -196,18 +204,6 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 	public void setItem(Item item)
 	{
 		this.comboboxId.setSelected(item.getId());
-	}
-
-	@Override
-	protected void setupDetails(Object[] details)
-	{
-		ObjectBase[] list = (ObjectBase[]) details[0];
-		this.itemList = new Item[list.length];
-		this.withData = (boolean) details[1];
-		this.slot = (boolean) details[2];
-
-		for (int i = 0; i < list.length; i++)
-			this.itemList[i] = (Item) list[i];
 	}
 
 	public void setupFrom(ItemStack item)

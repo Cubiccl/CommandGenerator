@@ -29,7 +29,13 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 
 	public NBTTagPanel(String title, ObjectBase object, String[][] nbtTags)
 	{
-		super(title, object, nbtTags);
+		super(title);
+		this.object = object;
+		this.nbtTags = new Tag[nbtTags.length];
+		for (int i = 0; i < nbtTags.length; i++)
+			this.nbtTags[i] = DataTags.init(nbtTags[i]);
+		
+		this.initGui();
 	}
 
 	@Override
@@ -95,17 +101,6 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 	public List<Tag> getTagList()
 	{
 		return displayer.getTagList();
-	}
-
-	@Override
-	protected void setupDetails(Object[] details)
-	{
-		this.object = (ObjectBase) details[0];
-		String[][] list = (String[][]) details[1];
-
-		this.nbtTags = new Tag[list.length];
-		for (int i = 0; i < list.length; i++)
-			this.nbtTags[i] = DataTags.init(list[i]);
 	}
 
 	public void setupFrom(List<Tag> list)

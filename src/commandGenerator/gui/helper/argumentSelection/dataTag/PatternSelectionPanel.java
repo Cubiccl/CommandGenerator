@@ -31,6 +31,8 @@ public class PatternSelectionPanel extends HelperPanel
 	public PatternSelectionPanel()
 	{
 		super("TAG:pattern");
+		
+		this.initGui();
 	}
 
 	@Override

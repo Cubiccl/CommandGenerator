@@ -20,6 +20,8 @@ public class AchievementSelectionPanel extends HelperPanel implements IBox
 	public AchievementSelectionPanel()
 	{
 		super("GUI:achievement.title");
+		
+		this.initGui();
 	}
 
 	@Override

@@ -27,7 +27,11 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 
 	public CoordSelectionPanel(String title, boolean relative, boolean rotation)
 	{
-		super(title, relative, rotation);
+		super(title);
+		this.relative = relative;
+		this.rotation = rotation;
+		
+		this.initGui();
 	}
 
 	@Override
@@ -156,13 +160,6 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 	public void load(Object object)
 	{
 		setupFrom((Coordinates) object);
-	}
-
-	@Override
-	protected void setupDetails(Object[] details)
-	{
-		relative = (boolean) details[0];
-		rotation = (boolean) details[1];
 	}
 
 	public void setupFrom(Coordinates coords)

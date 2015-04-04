@@ -37,6 +37,8 @@ public class TradeSelectionPanel extends HelperPanel implements ISave
 	public TradeSelectionPanel(String title)
 	{
 		super(title);
+		
+		this.initGui();
 	}
 
 	@Override

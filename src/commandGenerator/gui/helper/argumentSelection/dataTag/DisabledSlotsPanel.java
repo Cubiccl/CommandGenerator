@@ -14,6 +14,8 @@ public class DisabledSlotsPanel extends HelperPanel
 	public DisabledSlotsPanel()
 	{
 		super("GUI:disabledslot.title");
+		
+		this.initGui();
 	}
 
 	@Override

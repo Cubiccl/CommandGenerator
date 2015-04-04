@@ -41,7 +41,13 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 
 	public BlockSelectionPanel(String title, ObjectBase[] blockList, boolean data)
 	{
-		super(title, blockList, data);
+		super(title);
+		this.data = data;
+		this.blockList = new Item[blockList.length];
+		for (int i = 0; i < blockList.length; i++)
+			this.blockList[i] = (Item) blockList[i];
+		
+		this.initGui();
 	}
 
 	@Override
@@ -168,17 +174,6 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 	{
 		if (list == null) return;
 		this.panelData.setupFrom(list);
-	}
-
-	@Override
-	protected void setupDetails(Object[] details)
-	{
-		ObjectBase[] list = (ObjectBase[]) details[0];
-		this.data = (boolean) details[1];
-
-		this.blockList = new Item[list.length];
-		for (int i = 0; i < list.length; i++)
-			this.blockList[i] = (Item) list[i];
 	}
 
 	public void setupFrom(ItemStack block)

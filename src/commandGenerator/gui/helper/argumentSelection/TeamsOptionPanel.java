@@ -23,6 +23,8 @@ public class TeamsOptionPanel extends HelperPanel
 	public TeamsOptionPanel()
 	{
 		super("GENERAL:options");
+		
+		this.initGui();
 	}
 
 	@Override

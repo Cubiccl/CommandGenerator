@@ -24,6 +24,8 @@ public class ColorSelectionPanel extends HelperPanel
 	public ColorSelectionPanel(String title)
 	{
 		super(title);
+		
+		this.initGui();
 	}
 
 	@Override

@@ -21,6 +21,8 @@ public class ClickEventPanel extends HelperPanel
 	public ClickEventPanel()
 	{
 		super("GUI:json.click");
+		
+		this.initGui();
 	}
 
 	@Override

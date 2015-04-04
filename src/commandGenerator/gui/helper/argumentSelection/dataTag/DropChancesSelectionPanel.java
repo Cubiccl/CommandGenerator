@@ -20,6 +20,8 @@ public class DropChancesSelectionPanel extends HelperPanel
 	public DropChancesSelectionPanel(String title)
 	{
 		super(title);
+		
+		this.initGui();
 	}
 
 	@Override

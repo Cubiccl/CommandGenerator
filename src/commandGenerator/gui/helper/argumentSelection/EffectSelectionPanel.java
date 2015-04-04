@@ -34,6 +34,8 @@ public class EffectSelectionPanel extends HelperPanel implements IBox, ISave
 	public EffectSelectionPanel(String title)
 	{
 		super(title);
+		
+		this.initGui();
 	}
 
 	@Override

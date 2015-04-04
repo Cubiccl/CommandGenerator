@@ -39,6 +39,8 @@ public class ExplosionSelectionPanel extends HelperPanel
 	public ExplosionSelectionPanel()
 	{
 		super("TAGS:Explosion");
+		
+		this.initGui();
 	}
 
 	@Override

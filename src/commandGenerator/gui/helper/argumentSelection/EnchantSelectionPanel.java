@@ -30,7 +30,10 @@ public class EnchantSelectionPanel extends HelperPanel implements IBox, ISave
 
 	public EnchantSelectionPanel(String title, boolean limited)
 	{
-		super(title, limited);
+		super(title);
+		this.limited = limited;
+		
+		this.initGui();
 	}
 
 	@Override
@@ -109,12 +112,6 @@ public class EnchantSelectionPanel extends HelperPanel implements IBox, ISave
 	{
 		this.entryLevel.setTextField(String.valueOf(level));
 		this.spinnerLevel.setSelected(level);
-	}
-
-	@Override
-	protected void setupDetails(Object[] details)
-	{
-		limited = (boolean) details[0];
 	}
 
 	public void setupFrom(Enchantment enchant)

@@ -26,6 +26,8 @@ public class AttributeSelectionPanel extends HelperPanel implements ISave
 	public AttributeSelectionPanel()
 	{
 		super("GUI:add.attribute");
+		
+		this.initGui();
 	}
 
 	@Override

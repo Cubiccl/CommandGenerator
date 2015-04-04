@@ -14,6 +14,8 @@ public class FlagSelectionPanel extends HelperPanel
 	public FlagSelectionPanel()
 	{
 		super("GUI:flag.title");
+		
+		this.initGui();
 	}
 
 	@Override

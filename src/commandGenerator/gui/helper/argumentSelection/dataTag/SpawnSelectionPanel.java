@@ -25,6 +25,8 @@ public class SpawnSelectionPanel extends HelperPanel
 	public SpawnSelectionPanel()
 	{
 		super("GUI:spawn.entity");
+		
+		this.initGui();
 	}
 
 	@Override

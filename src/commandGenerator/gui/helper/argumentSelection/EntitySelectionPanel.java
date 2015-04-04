@@ -32,7 +32,12 @@ public class EntitySelectionPanel extends HelperPanel implements IBox, ISave
 
 	public EntitySelectionPanel(String title, ObjectBase[] entityList)
 	{
-		super(title, entityList, null);
+		super(title);
+		this.entityList = new Entity[entityList.length];
+		for (int i = 0; i < entityList.length; i++)
+			this.entityList[i] = (Entity) entityList[i];
+		
+		this.initGui();
 	}
 
 	@Override
@@ -111,16 +116,6 @@ public class EntitySelectionPanel extends HelperPanel implements IBox, ISave
 	{
 		combobox.setSelected(entity);
 		updateCombobox();
-	}
-
-	@Override
-	protected void setupDetails(Object[] details)
-	{
-		ObjectBase[] list = (ObjectBase[]) details[0];
-
-		this.entityList = new Entity[list.length];
-		for (int i = 0; i < list.length; i++)
-			this.entityList[i] = (Entity) list[i];
 	}
 
 	public void setupFrom(Entity entity)

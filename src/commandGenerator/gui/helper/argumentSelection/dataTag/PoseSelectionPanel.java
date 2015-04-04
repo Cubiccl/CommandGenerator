@@ -16,6 +16,8 @@ public class PoseSelectionPanel extends HelperPanel
 	public PoseSelectionPanel()
 	{
 		super("TAGS:Pose");
+		
+		this.initGui();
 	}
 
 	@Override

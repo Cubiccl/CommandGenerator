@@ -22,6 +22,8 @@ public class RotationSelectionPanel extends HelperPanel
 	public RotationSelectionPanel(String title)
 	{
 		super(title);
+		
+		this.initGui();
 	}
 
 	@Override

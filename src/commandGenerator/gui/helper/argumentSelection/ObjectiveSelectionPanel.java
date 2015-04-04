@@ -26,6 +26,8 @@ public class ObjectiveSelectionPanel extends HelperPanel
 	public ObjectiveSelectionPanel(String title)
 	{
 		super(title);
+		
+		this.initGui();
 	}
 
 	@Override

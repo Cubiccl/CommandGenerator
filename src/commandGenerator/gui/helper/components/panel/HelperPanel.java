@@ -33,7 +33,7 @@ public abstract class HelperPanel extends JPanel implements CComponent
 	 *            - The panel width.
 	 * @param height
 	 *            - The panel height. */
-	public HelperPanel(String title, Object... details)
+	public HelperPanel(String title)
 	{
 		super(new GridBagLayout());
 		this.title = title;
@@ -44,8 +44,10 @@ public abstract class HelperPanel extends JPanel implements CComponent
 		gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
+	}
 
-		if (details.length > 0) setupDetails(details);
+	public void initGui()
+	{
 		createComponents();
 		addComponents();
 		createListeners();
@@ -169,12 +171,6 @@ public abstract class HelperPanel extends JPanel implements CComponent
 				if (c instanceof JPanel) enableContent((JPanel) c, enable);
 			}
 		}
-	}
-
-	/** Setups details needed to create the GUI. */
-	protected void setupDetails(Object[] details)
-	{
-		System.out.println("This needs to be overriden! ");
 	}
 
 	/** Sets this Panel's size according to its components. */

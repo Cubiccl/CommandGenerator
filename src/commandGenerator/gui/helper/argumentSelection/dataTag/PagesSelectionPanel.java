@@ -37,6 +37,8 @@ public class PagesSelectionPanel extends HelperPanel
 	public PagesSelectionPanel()
 	{
 		super("TAGS:pages");
+		
+		this.initGui();
 	}
 
 	@Override
