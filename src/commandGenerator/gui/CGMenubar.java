@@ -152,9 +152,9 @@ public class CGMenubar extends JMenuBar
 	public void updateLang()
 	{
 		menu.setText(Lang.get("GUI:menu"));
-		reset.setText(Lang.get("GUI:reset"));
-		settings.setText(Lang.get("GUI:settings"));
-		changelog.setText(Lang.get(Lang.get("GUI:changelog")));
+		reset.setText(Lang.get("GUI:menu.reset"));
+		settings.setText(Lang.get("GUI:menu.settings"));
+		changelog.setText(Lang.get(Lang.get("GUI:menu.changelog")));
 		link.setText(Lang.get("GUI:menu.link"));
 		folder.setText(Lang.get("GUI:menu.folder"));
 		exit.setText(Lang.get("GUI:menu.exit"));

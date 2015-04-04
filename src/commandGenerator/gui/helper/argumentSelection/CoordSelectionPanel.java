@@ -187,7 +187,8 @@ public class CoordSelectionPanel extends HelperPanel implements ISave
 		}
 		if (rotation)
 		{
-			checkboxRotation.setSelected(coords.getRotation());
+			checkboxRotation.setSelected(coords.hasRotation());
+			panelRotation.setEnabledContent(coords.hasRotation());
 			panelRotation.setupFrom(coords);
 		}
 	}

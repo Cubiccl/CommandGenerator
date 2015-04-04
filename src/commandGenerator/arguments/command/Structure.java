@@ -225,7 +225,7 @@ public enum Structure
 		for (int argument = 0; argument < this.arguments.length; argument++)
 		{
 			List<String> data = new ArrayList<String>();
-			for (int i = 0; i < this.arguments[i].getLength(); i++)
+			for (int i = 0; i < this.arguments[argument].getLength(); i++)
 			{
 				data.add(newArguments[argIndex]);
 				argIndex++;
@@ -281,7 +281,7 @@ public enum Structure
 		for (int argument = 0; argument < this.arguments.length; argument++)
 		{
 			List<String> data = new ArrayList<String>();
-			for (int i = 0; i < this.arguments[i].getLength(); i++)
+			for (int i = 0; i < this.arguments[argument].getLength(); i++)
 			{
 				data.add(testArguments[argIndex]);
 				argIndex++;

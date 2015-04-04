@@ -15,7 +15,7 @@ public class Coordinates
 	private boolean isFloat;
 
 	/** Details about this Coordinates. */
-	private boolean isRotation;
+	private boolean hasRotation;
 
 	private boolean[] relativeness;
 
@@ -41,7 +41,7 @@ public class Coordinates
 		this.relativeness = relative;
 		this.isFloat = isFloat;
 
-		this.isRotation = false;
+		this.hasRotation = false;
 	}
 
 	/** Creates new Coordinates. */
@@ -54,7 +54,7 @@ public class Coordinates
 		this.xRotation = xRotation;
 		this.yRotation = yRotation;
 		this.relativeness = relative;
-		this.isRotation = true;
+		this.hasRotation = true;
 		this.isFloat = isFloat;
 
 	}
@@ -87,7 +87,7 @@ public class Coordinates
 			else display += Integer.toString((int) Math.floor(z));
 		}
 
-		if (this.isRotation) display += " " + Float.toString(this.xRotation) + " " + Float.toString(this.yRotation);
+		if (this.hasRotation) display += " " + Float.toString(this.xRotation) + " " + Float.toString(this.yRotation);
 
 		return display;
 	}
@@ -122,9 +122,9 @@ public class Coordinates
 	}
 
 	/** Returns true if this Coordinates has rotations. */
-	public boolean getRotation()
+	public boolean hasRotation()
 	{
-		return this.isRotation;
+		return this.hasRotation;
 	}
 
 	/** Returns true if this Coordinates are relative. */
@@ -137,7 +137,7 @@ public class Coordinates
 	public String save()
 	{
 		String save = this.x + " " + this.y + " " + this.z + " ";
-		if (this.isRotation) save += this.xRotation + " " + this.yRotation + " ";
+		if (this.hasRotation) save += this.xRotation + " " + this.yRotation + " ";
 		save += this.relativeness[0] + " " + this.relativeness[1] + " " + this.relativeness[2] + " " + this.isFloat;
 		return save;
 	}
