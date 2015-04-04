@@ -28,10 +28,12 @@ import commandGenerator.arguments.command.arguments.misc.SlotArgument;
 import commandGenerator.arguments.command.arguments.misc.SoundArgument;
 import commandGenerator.arguments.command.arguments.misc.TeamOptionArgument;
 import commandGenerator.arguments.command.arguments.misc.XpArgument;
+import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.gui.helper.components.panel.StructurePanel;
 import commandGenerator.main.CGConstants;
+import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
@@ -236,7 +238,14 @@ public enum Structure
 				argIndex++;
 			}
 			this.arguments[argument].setupFrom(data);
+			if (this.arguments[argument].getType() == Argument.NBT) setupNBT(data, ((NBTArgument) this.arguments[argument]).getTarget());
 		}
+	}
+
+	private void setupNBT(List<String> data, String target)
+	{
+		for (Argument argument : this.arguments)
+			if (argument.getId().equals(target)) ((INBTArgument) argument).setupNBT(DataTags.generateListFrom(data.get(0)));
 	}
 
 	/** Generates the Panel to display to the user. */
@@ -291,7 +300,11 @@ public enum Structure
 				data.add(testArguments[argIndex]);
 				argIndex++;
 			}
-			if (!this.arguments[argument].matches(data)) return false;
+			if (!this.arguments[argument].matches(data))
+			{
+				DisplayHelper.log(this.getId() + " : " + this.arguments[argument].getId() + " didn't match.");
+				return false;
+			}
 		}
 
 		return true;

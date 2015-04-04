@@ -79,26 +79,21 @@ public class CoordinatesArgument extends Argument
 	@Override
 	public boolean matches(List<String> data)
 	{
-		String x = data.get(0), y = data.get(1), z = data.get(2);
-		if (x.startsWith("~")) x = x.substring(1);
-		if (y.startsWith("~")) y = y.substring(1);
-		if (z.startsWith("~")) z = z.substring(1);
+		boolean rotation = false;
+		if (this.canHaveRotation)
+		{
+			if (data.size() == 4) return false;
+			if (data.size() >= 5) rotation = true;
+		}
 		try
 		{
-			Float.parseFloat(x);
-			Float.parseFloat(y);
-			Float.parseFloat(z);
-
-			if (this.canHaveRotation)
-			{
-				Float.parseFloat(data.get(3));
-				Float.parseFloat(data.get(4));
-			}
+			if (rotation) return ObjectCreator.generateCoordinatesWithRotations(data.get(0), data.get(1), data.get(2), Float.parseFloat(data.get(3)),
+					Float.parseFloat(data.get(4))) != null;
 		} catch (Exception e)
 		{
 			return false;
 		}
-		return true;
+		return ObjectCreator.generateCoordinates(data.get(0), data.get(1), data.get(2)) != null;
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import commandGenerator.arguments.objects.Entity;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.DataTags;
+import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 
@@ -100,6 +101,12 @@ public class EntityArgument extends Argument implements INBTArgument
 		if (!(toMatch instanceof EntityArgument)) return;
 		this.panel.setupFrom(((EntityArgument) toMatch).panel.getEntity());
 		this.panel.setDataTags(((EntityArgument) toMatch).panel.getTagList());
+	}
+
+	@Override
+	public void setupNBT(List<Tag> data)
+	{
+		this.panel.setDataTags(data);
 	}
 
 }

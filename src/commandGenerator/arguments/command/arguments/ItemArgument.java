@@ -15,6 +15,7 @@ import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.DataTags;
+import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
@@ -171,6 +172,12 @@ public class ItemArgument extends Argument implements INBTArgument
 		if (!(toMatch instanceof ItemArgument)) return;
 		if (!this.isCompulsery()) this.box.setSelected(toMatch.isUsed());
 		this.panel.setupFrom(((ItemArgument) toMatch).panel.getItemStack());
+	}
+
+	@Override
+	public void setupNBT(List<Tag> data)
+	{
+		this.panel.setDataTags(data);
 	}
 
 }

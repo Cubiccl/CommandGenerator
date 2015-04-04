@@ -9,6 +9,7 @@ import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.DataTags;
+import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
 
@@ -126,6 +127,12 @@ public class BlockArgument extends Argument implements INBTArgument
 	{
 		if (!(toMatch instanceof BlockArgument)) return;
 		this.panel.setupFrom(((BlockArgument) toMatch).panel.getItemStack());
+	}
+
+	@Override
+	public void setupNBT(List<Tag> data)
+	{
+		this.panel.setDataTags(data);
 	}
 
 }

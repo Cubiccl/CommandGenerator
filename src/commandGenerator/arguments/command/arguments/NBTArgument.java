@@ -54,9 +54,7 @@ public class NBTArgument extends Argument
 
 	@Override
 	public void setupFrom(List<String> data)
-	{
-		// TODO NBT Setup
-	}
+	{}
 
 	@Override
 	public void synchronize(Argument toMatch)
