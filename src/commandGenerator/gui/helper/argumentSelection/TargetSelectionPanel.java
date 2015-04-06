@@ -163,7 +163,8 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 			panelScore.add(textfieldScore);
 			panelScore.add(new JLabel(Lang.get("GUI:scoreboard.score")));
 			panelScore.add(textfieldValue);
-			if (DisplayHelper.showQuestion(panelScore, title)) return;
+			panel.add(panelScore);
+			if (DisplayHelper.showQuestion(panel, title)) return;
 			boolean valid = true;
 			if (textfieldScore.getText().contains(" "))
 			{
@@ -185,7 +186,7 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 			if (!valid) return;
 			value = "score_" + textfieldScore.getText();
 			if (selector.equals("score_min")) value += "_min";
-			addedSelectors.add(new String[] { value, textfieldValue.getText() });
+			addedSelectors.add(new String[] { value, textfieldValue.getText(), String.valueOf(box.isSelected()) });
 		}
 
 		if (!(selector.equals("score") || selector.equals("score_min")))
