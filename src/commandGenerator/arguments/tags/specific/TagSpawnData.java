@@ -17,9 +17,9 @@ import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 public class TagSpawnData extends TagCompound
 {
 
-	public TagSpawnData()
+	public TagSpawnData(String id, String... applicable)
 	{
-		super("block.SpawnData", "mob_spawner");
+		super(id, applicable);
 	}
 
 	@Override

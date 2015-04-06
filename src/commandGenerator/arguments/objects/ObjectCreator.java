@@ -194,7 +194,17 @@ public class ObjectCreator
 			{
 				String[] selectorsText = text.substring(3, text.length() - 1).split(",");
 				for (String data : selectorsText)
-					selectorList.add(new String[] { data.split("=")[0], data.split("=")[1] });
+				{
+					String id = data.split("=")[0];
+					String value = data.split("=")[1];
+					String not = "false";
+					if (value.startsWith("!"))
+					{
+						not = "true";
+						value = value.substring(1);
+					}
+					selectorList.add(new String[] { id, value, not });
+				}
 			}
 
 			Target sel = new Target(type, selectorList);

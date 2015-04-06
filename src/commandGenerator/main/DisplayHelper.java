@@ -36,7 +36,10 @@ public class DisplayHelper
 	 *            - <i>String[]</i> - The Selector to display. */
 	public static String displaySelector(String[] selector)
 	{
-		return selector[0] + " = " + selector[1];
+		String display = selector[0] + " =";
+		if (Boolean.parseBoolean(selector[2])) display += "!";
+		display += " " + selector[1];
+		return display;
 	}
 
 	/** Returns the current time as a String. */

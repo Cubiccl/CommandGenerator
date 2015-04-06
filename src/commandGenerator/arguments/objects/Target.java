@@ -58,7 +58,9 @@ public class Target
 			{
 
 				if (i != 0) display += ",";
-				display += this.selectors.get(i)[0] + "=" + this.selectors.get(i)[1];
+				display += this.selectors.get(i)[0] + "=";
+				if (Boolean.parseBoolean(this.selectors.get(i)[2])) display += "!";
+				display += this.selectors.get(i)[1];
 
 			}
 			display += "]";

@@ -7,9 +7,9 @@ import commandGenerator.gui.helper.argumentSelection.dataTag.ListSelectionPanel;
 public class TagSpawnPotentials extends TagList
 {
 
-	public TagSpawnPotentials()
+	public TagSpawnPotentials(String id, String... applicable)
 	{
-		super("block.SpawnPotentials", "mob_spawner");
+		super(id, applicable);
 	}
 
 	@Override

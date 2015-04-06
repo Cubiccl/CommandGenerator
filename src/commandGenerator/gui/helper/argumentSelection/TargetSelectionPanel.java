@@ -2,8 +2,7 @@ package commandGenerator.gui.helper.argumentSelection;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -25,6 +24,7 @@ import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.ObjectCreator;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.objects.Target;
+import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.button.CButton;
@@ -32,6 +32,7 @@ import commandGenerator.gui.helper.components.button.HelpButton;
 import commandGenerator.gui.helper.components.button.LoadButton;
 import commandGenerator.gui.helper.components.button.SaveButton;
 import commandGenerator.gui.helper.components.combobox.CComboBox;
+import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
 import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
@@ -43,14 +44,14 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 {
 
 	public static final String[] selectors = { "x", "y", "z", "dx", "dy", "dz", "r", "rm", "rx", "rxm", "ry", "rym", "m", "c", "l", "lm", "team", "name",
-			"type" };
+			"type", "score", "score_min" };
 
 	private List<String[]> addedSelectors;
-	private JComboBox<String> boxEntities, boxSelectors;
+	private JComboBox<String> boxEntities;
+	private ChoiceComboBox boxSelectors;
 	private CButton buttonAdd, buttonRemove, buttonSave, buttonLoad;
-	private HelpButton buttonHelpEntity, buttonHelpSelector;
+	private HelpButton buttonHelpEntity;
 	private CEntry entryPlayer;
-	private GridBagConstraints gbc;
 	private CLabel labelSelectors, labelEntity, labelSelector;
 	private int mode;
 	private JScrollPane scrollpane;
@@ -84,7 +85,7 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 	{
 		addLine(labelEntity, boxEntities, buttonHelpEntity);
 		add(entryPlayer);
-		addLine(labelSelector, boxSelectors, buttonHelpSelector);
+		addLine(labelSelector, boxSelectors);
 		addLine(buttonAdd, buttonRemove);
 		addLine(labelSelectors, scrollpane);
 		addLine(buttonSave, buttonLoad);
@@ -92,16 +93,24 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 
 	private void addSelector()
 	{
-		String selector = (String) boxSelectors.getSelectedItem();
+		String selector = (String) boxSelectors.getSelectedValue();
 		String value;
-		String title = Lang.get("GUI:selector.add") + " : " + boxSelectors.getSelectedItem();
-		String text = Lang.get("HELP:selector." + boxSelectors.getSelectedItem());
+		String title = Lang.get("GUI:selector.add") + " : " + boxSelectors.getSelectedValue();
+		String text = Lang.get("HELP:selector." + boxSelectors.getSelectedValue());
+		JPanel panel = new JPanel(new GridLayout(3, 1));
+		JLabel label = new JLabel(text);
+		CCheckBox box = new CCheckBox("GUI:selector.not");
+		panel.add(label);
+		panel.add(box);
 
 		if (selector.equals("x") || selector.equals("y") || selector.equals("z") || selector.equals("dx") || selector.equals("dy") || selector.equals("dz")
 				|| selector.equals("r") || selector.equals("rm") || selector.equals("c") || selector.equals("l") || selector.equals("lm")
 				|| selector.equals("team") || selector.equals("name"))
 		{
-			value = (String) JOptionPane.showInputDialog(null, text, title, JOptionPane.OK_CANCEL_OPTION, null, null, "");
+			JTextField field = new JTextField(20);
+			panel.add(field);
+			if (DisplayHelper.showQuestion(panel, title)) return;
+			value = field.getText();
 			if (value == null) return;
 			if (!(selector.equals("team") || selector.equals("name")))
 			{
@@ -129,64 +138,32 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 		{
 			JSpinner spinner = new JSpinner(new SpinnerNumberModel(0, -180, 180, 1));
 			spinner.setPreferredSize(new Dimension(100, 20));
-			JLabel label = new JLabel(text);
-			JPanel panel = new JPanel(new GridBagLayout());
-			gbc.gridx = 0;
-			gbc.gridy = 0;
-			panel.add(label);
-			gbc.gridy++;
 			panel.add(spinner);
-			boolean cancel = DisplayHelper.showQuestion(panel, title);
-			if (cancel) return;
+			if (DisplayHelper.showQuestion(panel, title)) return;
 			value = Integer.toString((int) spinner.getValue());
 		} else if (selector.equals("m"))
 		{
-			JSpinner spinner = new JSpinner(new SpinnerNumberModel(0, 0, 3, 1));
-			spinner.setPreferredSize(new Dimension(100, 20));
-			JLabel label = new JLabel(text);
-			JPanel panel = new JPanel(new GridBagLayout());
-			gbc.gridx = 0;
-			gbc.gridy = 0;
-			panel.add(label);
-			gbc.gridy++;
-			panel.add(spinner);
-			boolean cancel = DisplayHelper.showQuestion(panel, title);
-			if (cancel) return;
-			value = Integer.toString((int) spinner.getValue());
+			ChoiceComboBox choicebox = new ChoiceComboBox("gamemode", new String[] { "survival", "creative", "adventure", "spectator" }, false);
+			panel.add(choicebox);
+			if (DisplayHelper.showQuestion(panel, title)) return;
+			value = Integer.toString(choicebox.getSelectedIndex());
 
 		} else if (selector.equals("type"))
 		{
-
-			CComboBox box = new CComboBox("GUI:selector.type", Registry.getObjectList(ObjectBase.ENTITY), null);
-			boolean cancel = DisplayHelper.showQuestion(box, title);
-			if (cancel) return;
-			value = box.getValue().getId();
+			CComboBox combobox = new CComboBox("GUI:selector.type", Registry.getObjectList(ObjectBase.ENTITY), null);
+			panel.add(combobox);
+			if (DisplayHelper.showQuestion(panel, title)) return;
+			value = combobox.getValue().getId();
 
 		} else
 		{
-			JLabel labelScore = new JLabel(Lang.get("GUI:scoreboard.objective"));
-			JLabel labelValue = new JLabel(Lang.get("GUI:scoreboard.score"));
-			JLabel label = new JLabel(text);
 			JTextField textfieldScore = new JTextField(10), textfieldValue = new JTextField(10);
-			JPanel panel = new JPanel(new GridBagLayout());
-			gbc.gridwidth = 2;
-			gbc.gridheight = 1;
-			gbc.gridx = 0;
-			gbc.gridy = 0;
-			panel.add(label);
-			gbc.gridy++;
-			gbc.gridwidth = 1;
-			panel.add(labelScore);
-			gbc.gridy++;
-			panel.add(labelValue);
-			gbc.gridx++;
-			gbc.gridy--;
-			panel.add(textfieldScore);
-			gbc.gridy++;
-			panel.add(textfieldValue);
-			panel.setPreferredSize(new Dimension(400, 100));
-			boolean cancel = DisplayHelper.showQuestion(panel, title);
-			if (cancel) return;
+			JPanel panelScore = new JPanel(new GridLayout(2, 2));
+			panelScore.add(new JLabel(Lang.get("GUI:objective")));
+			panelScore.add(textfieldScore);
+			panelScore.add(new JLabel(Lang.get("GUI:scoreboard.score")));
+			panelScore.add(textfieldValue);
+			if (DisplayHelper.showQuestion(panelScore, title)) return;
 			boolean valid = true;
 			if (textfieldScore.getText().contains(" "))
 			{
@@ -216,7 +193,7 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 			if (!selector.equals("team")) for (int i = 0; i < addedSelectors.size(); i++)
 				if (addedSelectors.get(i)[0].equals(selector)) addedSelectors.remove(i);
 
-			addedSelectors.add(new String[] { (String) boxSelectors.getSelectedItem(), value });
+			addedSelectors.add(new String[] { (String) boxSelectors.getSelectedValue(), value, String.valueOf(box.isSelected()) });
 		}
 		displaySelectors();
 	}
@@ -232,7 +209,6 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 		entryPlayer.setEnabledContent(false);
 
 		buttonHelpEntity = new HelpButton(Lang.get("HELP:selector." + this.targets[0]), this.targets[0]);
-		buttonHelpSelector = new HelpButton(Lang.get("HELP:selector.x"), "x");
 
 		buttonAdd = new CButton("GUI:selector.add");
 		buttonRemove = new CButton("GUI:selector.remove");
@@ -242,9 +218,7 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 		boxEntities = new JComboBox<String>(this.targets);
 		boxEntities.setPreferredSize(new Dimension(100, 20));
 		boxEntities.setMinimumSize(new Dimension(100, 20));
-		boxSelectors = new JComboBox<String>(selectors);
-		boxSelectors.setPreferredSize(new Dimension(100, 20));
-		boxSelectors.setMinimumSize(new Dimension(100, 20));
+		boxSelectors = new ChoiceComboBox("selector", selectors, true);
 
 		textarea = new JEditorPane("text/html", "");
 		textarea.setEditable(false);
@@ -281,7 +255,6 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 				buttonAdd.setEnabled(!player);
 				buttonRemove.setEnabled(!player);
 				boxSelectors.setEnabled(!player);
-				buttonHelpSelector.setEnabled(!player);
 				labelSelectors.setEnabled(!player);
 				textarea.setEnabled(!player);
 				if (player) scrollpane.setBorder(BorderFactory.createLineBorder(Color.GRAY));
@@ -291,13 +264,6 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 				if (!entity.equals("@e") && !entity.equals("@a") && !entity.equals("@p") && !entity.equals("@r")) buttonHelpEntity.setData(
 						Lang.get("HELP:selector.player"), (String) boxEntities.getSelectedItem());
 				else buttonHelpEntity.setData(Lang.get("HELP:selector." + boxEntities.getSelectedItem()), (String) boxEntities.getSelectedItem());
-			}
-		});
-		boxSelectors.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				buttonHelpSelector.setData(Lang.get("HELP:selector." + boxSelectors.getSelectedItem()), (String) boxSelectors.getSelectedItem());
 			}
 		});
 	}
@@ -440,7 +406,7 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 		super.reset();
 		this.addedSelectors.clear();
 		this.boxEntities.setSelectedIndex(0);
-		this.boxSelectors.setSelectedIndex(0);
+		this.boxSelectors.setSelected(selectors[0]);
 		displaySelectors();
 	}
 }

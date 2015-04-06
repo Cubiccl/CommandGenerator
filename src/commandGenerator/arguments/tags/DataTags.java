@@ -166,6 +166,7 @@ public class DataTags
 					break;
 
 				case Tag.INT:
+					if (value.endsWith("D") || value.endsWith("d")) value = value.substring(0, value.length() - 1);
 					((TagInt) tag).setValue(Integer.parseInt(value));
 					break;
 
@@ -248,8 +249,8 @@ public class DataTags
 	{
 		String id = tagData[0];
 		if (id.equals("Text1") || id.equals("Text2") || id.equals("Text3") || id.equals("Text4")) return new TagSignText(id, tagData[2]);
-		if (id.equals("SpawnPotentials")) return new TagSpawnPotentials();
-		if (id.equals("SpawnData")) return new TagSpawnData();
+		if (id.equals("SpawnPotentials")) return new TagSpawnPotentials(id, tagData[2]);
+		if (id.equals("SpawnData")) return new TagSpawnData(id, tagData[2]);
 		if (id.equals("Patterns")) return new TagPatterns();
 
 		if (id.equals("display")) return new TagDisplay();
