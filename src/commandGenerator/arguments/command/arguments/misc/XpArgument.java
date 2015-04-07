@@ -61,4 +61,10 @@ public class XpArgument extends IntArgument
 		super.setupFrom(data);
 	}
 
+	public void reset()
+	{
+		super.reset();
+		this.box.setSelected(false);
+	}
+
 }

@@ -59,4 +59,10 @@ public class ObjectiveArgument extends Argument
 		this.panel.setSelected(((ObjectiveArgument) toMatch).panel.generateObjective());
 	}
 
+	@Override
+	public void reset()
+	{
+		this.panel.reset();
+	}
+
 }

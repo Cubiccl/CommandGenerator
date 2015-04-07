@@ -61,4 +61,10 @@ public class AchievementArgument extends Argument
 		this.panel.setupFrom(((AchievementArgument) toMatch).panel.getSelectedAchievement());
 	}
 
+	@Override
+	public void reset()
+	{
+		this.panel.reset();
+	}
+
 }

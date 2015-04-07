@@ -9,7 +9,6 @@ public class TagDisabledSlots extends TagInt
 	public TagDisabledSlots()
 	{
 		super("entity.DisabledSlots", "ArmorStand");
-		setValue(31);
 	}
 
 	@Override

@@ -66,4 +66,10 @@ public class JsonArgument extends Argument
 		this.panel.setList(((JsonArgument) toMatch).panel.getList());
 	}
 
+	@Override
+	public void reset()
+	{
+		this.panel.reset();
+	}
+
 }

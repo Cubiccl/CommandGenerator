@@ -65,4 +65,10 @@ public class TargetArgument extends Argument
 		this.panel.setupFrom(((TargetArgument) toMatch).panel.generateEntity());
 	}
 
+	@Override
+	public void reset()
+	{
+		this.panel.reset();
+	}
+
 }

@@ -79,4 +79,10 @@ public class ChoiceArgument extends Argument
 		this.box.setSelected(((ChoiceArgument) toMatch).box.getSelectedValue());
 	}
 
+	@Override
+	public void reset()
+	{
+		this.box.reset();
+	}
+
 }

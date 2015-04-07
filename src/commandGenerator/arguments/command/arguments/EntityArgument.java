@@ -80,12 +80,18 @@ public class EntityArgument extends Argument implements INBTArgument
 	{
 		this.display[0] = displayEntity;
 		this.display[1] = displayNBT;
+		
+		int max = 0;
+		for (boolean flag : this.display) if (flag) max++;
+		this.setMaximumLength(max);
+		
 		return this;
 	}
 
 	@Override
 	public void setupFrom(List<String> data)
 	{
+		this.panel.reset();
 		int index = 0;
 		if (this.display[0])
 		{
@@ -107,6 +113,12 @@ public class EntityArgument extends Argument implements INBTArgument
 	public void setupNBT(List<Tag> data)
 	{
 		this.panel.setDataTags(data);
+	}
+
+	@Override
+	public void reset()
+	{
+		this.panel.reset();
 	}
 
 }

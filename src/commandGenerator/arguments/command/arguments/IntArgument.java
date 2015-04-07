@@ -123,6 +123,13 @@ public class IntArgument extends Argument
 	@Override
 	public void setupFrom(List<String> data)
 	{
+		this.entry.setEnabledContent(true);
+		this.box.setSelected(true);
+		if (data.size() == 0)
+		{
+			this.entry.reset();
+			return;
+		}
 		this.entry.setTextField(data.get(0));
 		this.box.setSelected(true);
 	}
@@ -141,6 +148,17 @@ public class IntArgument extends Argument
 		} catch (Exception e)
 		{
 			this.entry.setText(String.valueOf(this.defaultValue));
+		}
+	}
+
+	@Override
+	public void reset()
+	{
+		this.entry.reset();
+		if (!this.isCompulsery())
+		{
+			this.box.setSelected(false);
+			this.entry.setEnabledContent(false);
 		}
 	}
 

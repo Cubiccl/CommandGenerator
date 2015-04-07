@@ -343,4 +343,9 @@ public class PanelCommandSelection extends JPanel
 		tabOptions.updateLang();
 	}
 
+	public void reset()
+	{
+		this.selectedCommand.reset();
+	}
+
 }

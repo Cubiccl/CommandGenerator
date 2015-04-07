@@ -50,10 +50,7 @@ public class OptionsTab extends JTabbedPane implements CComponent
 
 	@Override
 	public void reset()
-	{
-		for (HelperPanel p : this.panels)
-			p.reset();
-	}
+	{}
 
 	@Override
 	public void setEnabledContent(boolean enable)

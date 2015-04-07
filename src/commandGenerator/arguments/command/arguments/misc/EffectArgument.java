@@ -103,4 +103,10 @@ public class EffectArgument extends Argument
 		this.panel.setupFrom(((EffectArgument) toMatch).panel.generateEffect());
 	}
 
+	@Override
+	public void reset()
+	{
+		this.panel.reset();
+	}
+
 }

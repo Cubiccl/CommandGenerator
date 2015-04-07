@@ -140,4 +140,6 @@ public abstract class Argument
 	public abstract void setupFrom(List<String> data);
 
 	public abstract void synchronize(Argument toMatch);
+
+	public abstract void reset();
 }

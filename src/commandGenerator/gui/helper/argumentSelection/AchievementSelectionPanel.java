@@ -33,8 +33,9 @@ public class AchievementSelectionPanel extends HelperPanel implements IBox
 	@Override
 	protected void createComponents()
 	{
-		image = new JLabel(((Achievement) Registry.getObjectFromId("openInventory")).getTexture());
+		image = new JLabel();
 		achievementBox = new CComboBox("GUI:achievement.select", Registry.getObjectList(ObjectBase.ACHIEVEMENT), this);
+		updateCombobox();
 	}
 
 	@Override

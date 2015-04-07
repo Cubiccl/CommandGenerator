@@ -226,8 +226,14 @@ public enum Structure
 		int argIndex = 0;
 		for (int argument = 0; argument < this.arguments.length; argument++)
 		{
+			if (argIndex >= newArguments.length)
+			{
+				this.arguments[argument].reset();
+				continue;
+			}
+
 			List<String> data = new ArrayList<String>();
-			for (int i = 0; i < this.arguments[argument].getLength(); i++)
+			for (int i = 0; i < this.arguments[argument].getMaximumLength() && argIndex < newArguments.length; i++)
 			{
 				data.add(newArguments[argIndex]);
 				argIndex++;
@@ -268,7 +274,8 @@ public enum Structure
 	{
 		int length = 0;
 		for (Argument argument : this.arguments)
-			length += argument.getLength();
+			if (argument.isCompulsery()) length += argument.getLength();
+
 		return length;
 	}
 
@@ -287,10 +294,10 @@ public enum Structure
 		if (this.getMinimumLength() > testArguments.length || this.getMaximumLength() < testArguments.length) return false;
 
 		int argIndex = 0;
-		for (int argument = 0; argument < this.arguments.length; argument++)
+		for (int argument = 0; argument < this.arguments.length && argIndex < testArguments.length; argument++)
 		{
 			List<String> data = new ArrayList<String>();
-			for (int i = 0; i < this.arguments[argument].getLength(); i++)
+			for (int i = 0; i < this.arguments[argument].getMaximumLength() && argIndex < testArguments.length; i++)
 			{
 				data.add(testArguments[argIndex]);
 				argIndex++;
@@ -300,7 +307,7 @@ public enum Structure
 				data.add(testArguments[argIndex]);
 				argIndex++;
 			}
-			if (!this.arguments[argument].matches(data))
+			if (this.arguments[argument].isCompulsery() && !this.arguments[argument].matches(data))
 			{
 				DisplayHelper.log(this.getId() + " : " + this.arguments[argument].getId() + " didn't match.");
 				return false;
@@ -329,6 +336,11 @@ public enum Structure
 	public String getId()
 	{
 		return this.id;
+	}
+
+	public void reset()
+	{
+		for (Argument a : arguments) a.reset();
 	}
 
 }

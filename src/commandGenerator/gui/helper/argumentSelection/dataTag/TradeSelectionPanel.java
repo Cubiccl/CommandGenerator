@@ -2,10 +2,7 @@ package commandGenerator.gui.helper.argumentSelection.dataTag;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
 
-import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.ObjectCreator;
@@ -37,7 +34,7 @@ public class TradeSelectionPanel extends HelperPanel implements ISave
 	public TradeSelectionPanel(String title)
 	{
 		super(title);
-		
+
 		this.initGui();
 	}
 
@@ -141,37 +138,27 @@ public class TradeSelectionPanel extends HelperPanel implements ISave
 
 	public void setupFrom(TagCompound trade)
 	{
-		int maxUses = 10, uses = 0;
-		boolean reward = false, buyb = false;
-		ItemStack buy = new ItemStack((Item) Registry.getObjectFromId("stone"), 0), buyB = new ItemStack((Item) Registry.getObjectFromId("stone"), 0), sell = new ItemStack(
-				(Item) Registry.getObjectFromId("stone"), 0);
+		if (trade == null)
+		{
+			reset();
+			return;
+		}
 
 		for (int i = 0; i < trade.size(); i++)
 		{
 			Tag tag = trade.get(i);
-			if (tag.getId().equals("maxUses")) maxUses = ((TagInt) tag).getValue();
-			if (tag.getId().equals("uses")) uses = ((TagInt) tag).getValue();
-			if (tag.getId().equals("rewardExp")) reward = ((TagBoolean) tag).getValue();
-			if (tag.getId().equals("buy")) buy = ObjectCreator.generateItemStack((TagCompound) tag);
-			if (tag.getId().equals("sell")) sell = ObjectCreator.generateItemStack((TagCompound) tag);
+			if (tag.getId().equals("maxUses")) entryMaxUses.setTextField(String.valueOf(((TagInt) tag).getValue()));
+			if (tag.getId().equals("uses")) entryUses.setTextField(String.valueOf(((TagInt) tag).getValue()));
+			if (tag.getId().equals("rewardExp")) checkboxRewardExp.setSelected(((TagBoolean) tag).getValue());
+			if (tag.getId().equals("buy")) panelBuy.setupFrom(ObjectCreator.generateItemStack((TagCompound) tag));
+			if (tag.getId().equals("sell")) panelSell.setupFrom(ObjectCreator.generateItemStack((TagCompound) tag));
 			if (tag.getId().equals("buyB"))
 			{
-				buyB = ObjectCreator.generateItemStack((TagCompound) tag);
-				buyb = true;
+				panelBuyB.setupFrom(ObjectCreator.generateItemStack((TagCompound) tag));
+				panelBuyB.setEnabledContent(true);
+				checkboxBuyB.setSelected(true);
 			}
 		}
-
-		Map<String, Object> clean = new HashMap<String, Object>();
-		clean.put(null, Integer.toString(uses));
-		clean.put(null, Integer.toString(maxUses));
-		clean.put(null, reward);
-		clean.put(null, buyb);
-
-		clean.put(null, buy);
-		clean.put(null, buyB);
-		clean.put(null, sell);
-
-		// TODO super.setupFrom(clean);
 	}
 
 }

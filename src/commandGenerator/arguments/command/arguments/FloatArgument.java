@@ -144,4 +144,15 @@ public class FloatArgument extends Argument
 		}
 	}
 
+	@Override
+	public void reset()
+	{
+		this.entry.reset();
+		if (!this.isCompulsery())
+		{
+			this.box.setSelected(false);
+			this.entry.setEnabledContent(false);
+		}
+	}
+
 }

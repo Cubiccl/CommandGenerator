@@ -96,4 +96,10 @@ public class CommandArgument extends Argument
 		if (!(toMatch instanceof CommandArgument)) return;
 		this.storedCommand = ((CommandArgument) toMatch).storedCommand;
 	}
+
+	@Override
+	public void reset()
+	{
+		this.storedCommand = "/achievement give * @p";
+	}
 }

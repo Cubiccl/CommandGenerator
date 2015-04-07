@@ -85,4 +85,10 @@ public class SoundArgument extends Argument implements IBox
 		this.box.setSelected(((SoundArgument) toMatch).box.getValue());
 	}
 
+	@Override
+	public void reset()
+	{
+		this.box.reset();
+	}
+
 }

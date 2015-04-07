@@ -59,4 +59,10 @@ public class TeamOptionArgument extends Argument
 		this.panel.setupFrom(data[0], data[1]);
 	}
 
+	@Override
+	public void reset()
+	{
+		this.panel.reset();
+	}
+
 }

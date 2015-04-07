@@ -113,4 +113,15 @@ public class CoordinatesArgument extends Argument
 		this.panelCoord.setupFrom(((CoordinatesArgument) toMatch).panelCoord.generateCoord());
 	}
 
+	@Override
+	public void reset()
+	{
+		this.panelCoord.reset();
+		if (!this.isCompulsery())
+		{
+			this.checkbox.setSelected(false);
+			this.panelCoord.setEnabledContent(false);
+		}
+	}
+
 }

@@ -62,4 +62,10 @@ public class ParticleArgument extends Argument
 		this.panel.setSelected(((ParticleArgument) toMatch).panel.generateParticle());
 	}
 
+	@Override
+	public void reset()
+	{
+		this.panel.reset();
+	}
+
 }

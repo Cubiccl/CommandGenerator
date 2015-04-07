@@ -60,4 +60,8 @@ public class NBTArgument extends Argument
 	public void synchronize(Argument toMatch)
 	{}
 
+	@Override
+	public void reset()
+	{}
+
 }

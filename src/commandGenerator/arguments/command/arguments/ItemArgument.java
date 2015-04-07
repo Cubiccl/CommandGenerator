@@ -138,15 +138,24 @@ public class ItemArgument extends Argument implements INBTArgument
 	public ItemArgument setDisplay(boolean displayId, boolean displayAmount, boolean displayDamage, boolean displayNBT)
 	{
 		this.display[0] = displayId;
-		this.display[1] = displayAmount;
-		this.display[2] = displayDamage;
+		this.display[1] = displayDamage;
+		this.display[2] = displayAmount;
 		this.display[3] = displayNBT;
+
+		int max = 0;
+		for (boolean flag : this.display)
+			if (flag) max++;
+		this.setMaximumLength(max);
+
 		return this;
 	}
 
 	@Override
 	public void setupFrom(List<String> data)
 	{
+		this.panel.reset();
+		this.panel.setEnabledContent(true);
+		this.box.setSelected(true);
 		int index = 0;
 		if (this.display[0] && data.size() > index)
 		{
@@ -178,6 +187,17 @@ public class ItemArgument extends Argument implements INBTArgument
 	public void setupNBT(List<Tag> data)
 	{
 		this.panel.setDataTags(data);
+	}
+
+	@Override
+	public void reset()
+	{
+		this.panel.reset();
+		if (!this.isCompulsery())
+		{
+			this.box.setSelected(false);
+			this.panel.setEnabledContent(false);
+		}
 	}
 
 }

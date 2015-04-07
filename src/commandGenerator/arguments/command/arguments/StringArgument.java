@@ -92,4 +92,15 @@ public class StringArgument extends Argument
 		this.entry.setTextField(((StringArgument) toMatch).entry.getText());
 	}
 
+	@Override
+	public void reset()
+	{
+		this.entry.reset();
+		if (!this.isCompulsery())
+		{
+			this.box.setSelected(false);
+			this.entry.setEnabledContent(false);
+		}
+	}
+
 }

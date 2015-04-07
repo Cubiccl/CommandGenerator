@@ -111,6 +111,7 @@ public enum Command
 	{
 		for (int i = 0; i < this.structures.length; i++)
 			if (this.structures[i].matches(arguments)) return i;
+		
 		DisplayHelper.showWarning("WARNING:command.structure");
 		return -1;
 	}
@@ -164,6 +165,11 @@ public enum Command
 	public String getStructure()
 	{
 		return this.structure;
+	}
+
+	public void reset()
+	{
+		this.getSelectedStructure().reset();
 	}
 
 }

@@ -102,12 +102,18 @@ public class BlockArgument extends Argument implements INBTArgument
 		this.display[0] = displayId;
 		this.display[1] = displayDamage;
 		this.display[2] = displayNBT;
+		
+		int max = 0;
+		for (boolean flag : this.display) if (flag) max++;
+		this.setMaximumLength(max);
+		
 		return this;
 	}
 
 	@Override
 	public void setupFrom(List<String> data)
 	{
+		this.panel.reset();
 		int index = 0;
 		if (this.display[0] && data.size() > index)
 		{
@@ -133,6 +139,12 @@ public class BlockArgument extends Argument implements INBTArgument
 	public void setupNBT(List<Tag> data)
 	{
 		this.panel.setDataTags(data);
+	}
+
+	@Override
+	public void reset()
+	{
+		this.panel.reset();
 	}
 
 }

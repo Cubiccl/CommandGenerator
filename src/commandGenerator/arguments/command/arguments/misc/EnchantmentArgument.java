@@ -73,4 +73,10 @@ public class EnchantmentArgument extends Argument
 		this.panel.setupFrom(((EnchantmentArgument) toMatch).panel.generateEnchantment());
 	}
 
+	@Override
+	public void reset()
+	{
+		this.panel.reset();
+	}
+
 }

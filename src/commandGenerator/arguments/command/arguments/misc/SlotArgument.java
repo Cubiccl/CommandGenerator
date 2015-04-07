@@ -184,4 +184,10 @@ public class SlotArgument extends Argument
 		this.setupFrom(data);
 	}
 
+	@Override
+	public void reset()
+	{
+		this.comboboxSlot.setSelectedIndex(0);
+	}
+
 }

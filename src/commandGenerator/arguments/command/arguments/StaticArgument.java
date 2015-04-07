@@ -56,4 +56,8 @@ public class StaticArgument extends Argument
 	public void synchronize(Argument toMatch)
 	{}
 
+	@Override
+	public void reset()
+	{}
+
 }
