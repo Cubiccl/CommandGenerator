@@ -237,7 +237,7 @@ public class DataTags
 			public void askValue()
 			{}
 		};
-		if (tag[1].equals("compound")) return new TagCompound() {
+		if (tag[1].equals("compound")) return new TagCompound(tag[0]) {
 			@Override
 			public void askValue()
 			{}

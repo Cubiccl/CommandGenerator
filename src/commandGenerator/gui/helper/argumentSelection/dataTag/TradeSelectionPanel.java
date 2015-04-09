@@ -120,7 +120,7 @@ public class TradeSelectionPanel extends HelperPanel implements ISave
 			tag.addTag(buyB.toNBT("buyB"));
 		}
 		tag.addTag(sell.toNBT("sell"));
-
+		
 		return tag;
 	}
 
@@ -133,6 +133,7 @@ public class TradeSelectionPanel extends HelperPanel implements ISave
 	@Override
 	public void load(Object object)
 	{
+		System.out.println(((TagCompound) object).commandStructure());
 		setupFrom((TagCompound) object);
 	}
 

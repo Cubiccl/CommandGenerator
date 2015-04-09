@@ -3,6 +3,7 @@ package commandGenerator.gui.helper.components.panel;
 import static commandGenerator.arguments.objects.SavedObjects.types;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -219,6 +220,10 @@ public class SavedObjectsPanel extends JPanel
 
 			case ObjectBase.TAG_TRADE:
 				TradeSelectionPanel panelTr = new TradeSelectionPanel("GENERAL:trade");
+				JScrollPane scrollpane = new JScrollPane(panelTr);
+				scrollpane.getVerticalScrollBar().setUnitIncrement(20);
+				scrollpane.getHorizontalScrollBar().setUnitIncrement(20);
+				scrollpane.setPreferredSize(new Dimension(840, 600));
 
 				if (editing) panelTr.setupFrom(new TagCompound() {
 					@Override
@@ -226,7 +231,7 @@ public class SavedObjectsPanel extends JPanel
 					{}
 				}.setValue((List<Tag>) displayed.get(listObjects.getSelectedValue())));
 
-				if (DisplayHelper.showQuestion(panelTr, title)) return;
+				if (DisplayHelper.showQuestion(scrollpane, title)) return;
 				object = panelTr.generateTrade();
 				break;
 
