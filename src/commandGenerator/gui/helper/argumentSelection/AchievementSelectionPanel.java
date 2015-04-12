@@ -20,7 +20,7 @@ public class AchievementSelectionPanel extends HelperPanel implements IBox
 	public AchievementSelectionPanel()
 	{
 		super("GUI:achievement.title");
-		
+
 		this.initGui();
 	}
 
@@ -61,7 +61,8 @@ public class AchievementSelectionPanel extends HelperPanel implements IBox
 	@Override
 	public void updateCombobox()
 	{
-		image.setIcon(((Achievement) achievementBox.getValue()).getTexture());
+		Achievement achievement = (Achievement) achievementBox.getValue();
+		if (achievement != null) image.setIcon(achievement.getTexture());
 	}
 
 }

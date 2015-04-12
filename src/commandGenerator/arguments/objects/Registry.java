@@ -61,6 +61,8 @@ public class Registry
 	/** Finalizes the registration. */
 	public static void end()
 	{
+		registerNames();
+		registerTextures();
 		registerList("allEntities", objects.get(ObjectBase.ENTITY).keySet().toArray(new String[0]));
 		displayList(ObjectBase.ITEM);
 		displayList(ObjectBase.ENTITY);
@@ -70,7 +72,24 @@ public class Registry
 		displayList(ObjectBase.ATTRIBUTE);
 		displayList(ObjectBase.SOUND);
 		displayList(ObjectBase.PARTICLE);
+	}
 
+	public static void registerNames()
+	{
+		for (ObjectBase item : getObjectList(ObjectBase.ITEM)) item.registerLang();
+		for (ObjectBase item : getObjectList(ObjectBase.ENTITY)) item.registerLang();
+		for (ObjectBase item : getObjectList(ObjectBase.ENCHANTMENT)) item.registerLang();
+		for (ObjectBase item : getObjectList(ObjectBase.EFFECT)) item.registerLang();
+		for (ObjectBase item : getObjectList(ObjectBase.ACHIEVEMENT)) item.registerLang();
+		for (ObjectBase item : getObjectList(ObjectBase.ATTRIBUTE)) item.registerLang();
+		for (ObjectBase item : getObjectList(ObjectBase.PARTICLE)) item.registerLang();
+	}
+
+	private static void registerTextures()
+	{
+		for (ObjectBase item : getObjectList(ObjectBase.ITEM)) ((Item) item).registerTextures();
+		for (ObjectBase entity : getObjectList(ObjectBase.ENTITY)) ((Entity) entity).registerTexture();
+		for (ObjectBase effect : getObjectList(ObjectBase.EFFECT)) ((EffectType) effect).registerTexture();
 	}
 
 	public static boolean exists(String id, byte objectType)

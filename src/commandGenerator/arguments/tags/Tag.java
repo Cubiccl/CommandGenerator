@@ -154,4 +154,8 @@ public abstract class Tag extends ObjectBase
 	{
 		return display(true);
 	}
+
+	@Override
+	public void updateLang()
+	{}
 }

@@ -3,6 +3,7 @@ package commandGenerator.main;
 import java.util.Map;
 
 import commandGenerator.CommandGenerator;
+import commandGenerator.arguments.objects.Registry;
 
 public class Lang
 {
@@ -65,6 +66,7 @@ public class Lang
 	public static void updateLang()
 	{
 		initLang();
+		Registry.registerNames();
 		CommandGenerator.gui.updateLang();
 	}
 

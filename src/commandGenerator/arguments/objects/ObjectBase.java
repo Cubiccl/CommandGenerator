@@ -200,4 +200,11 @@ public abstract class ObjectBase
 	{
 		return getName();
 	}
+
+	public void registerLang()
+	{
+		updateLang();
+	}
+
+	public abstract void updateLang();
 }

@@ -27,7 +27,7 @@ public class Resources
 	public static final String[] stats = { "AffectedBlocks", "AffectedEntities", "AffectedItems", "QueryResult", "SuccessCount" };
 
 	/** The Minecraft version this program is for. */
-	public static String versionMinecraft;
+	public static String versionMinecraft, versionGenerator;
 
 	/** The list of all versions this program has had. */
 	public static String[] versions, changelog;
@@ -48,18 +48,22 @@ public class Resources
 	/** Creates all versions. */
 	public static void setupVersions()
 	{
-		String[] data = FileHelper.readFileArray("version.txt").toArray(new String[0]);
-		versionMinecraft = data[0].split(" ; ")[1];
+		String[] data = FileHelper.readFileArray("downloads/changelog.txt").toArray(new String[0]);
 
-		versions = new String[data.length - 4];
-		changelog = new String[data.length - 4];
+		versions = new String[data.length];
+		changelog = new String[data.length];
 
-		for (int i = 4; i < data.length; i++)
+		for (int i = 0; i < data.length; i++)
 		{
-			versions[i - 4] = data[i].split(" = ")[0];
-			changelog[i - 4] = data[i].split(" = ")[1];
+			versions[i] = data[i].split(" = ")[0];
+			changelog[i] = data[i].split(" = ")[1];
 		}
-		DisplayHelper.log("Command Generator v" + versions[versions.length - 1] + " loading...");
+
+		data = FileHelper.readFileArray("version.txt").toArray(new String[0])[0].split(" ; ");
+		versionGenerator = data[0];
+		versionMinecraft = data[1];
+
+		DisplayHelper.log("Command Generator v" + versionGenerator + " loading...");
 	}
 
 }

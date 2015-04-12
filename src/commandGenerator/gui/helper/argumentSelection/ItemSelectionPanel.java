@@ -51,7 +51,7 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 
 		for (int i = 0; i < itemList.length; i++)
 			this.itemList[i] = (Item) itemList[i];
-		
+
 		this.initGui();
 	}
 
@@ -245,7 +245,7 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 	{
 		Item item = generateItem();
 		labelImage.setIcon(item.getTexture(spinnerDamage.getValue()));
-		labelName.setText(item.getName(spinnerDamage.getValue()));
+		labelName.setText("<html><center>" + item.getName(getDamage()) + "</center></html>");
 	}
 
 }

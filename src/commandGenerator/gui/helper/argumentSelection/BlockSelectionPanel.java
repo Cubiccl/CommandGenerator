@@ -3,6 +3,7 @@ package commandGenerator.gui.helper.argumentSelection;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JLabel;
@@ -10,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import commandGenerator.arguments.objects.Item;
+import commandGenerator.arguments.objects.ItemData;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
@@ -43,9 +45,9 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 	{
 		super(title);
 		this.data = data;
-		this.blockList = new Item[blockList.length];
-		for (int i = 0; i < blockList.length; i++)
-			this.blockList[i] = (Item) blockList[i];
+		List<Item> blocks = new ArrayList<Item>();
+		for (int i = 0; i < blockList.length; i++) if (((Item) blockList[i]).isBlock()) blocks.add((Item) blockList[i]);
+		this.blockList = blocks.toArray(new Item[0]);
 
 		this.initGui();
 	}
@@ -196,7 +198,8 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 	public void updateCombobox()
 	{
 		Item item = generateBlock();
-		spinnerDamage.setValues(0, item.getMaxDamage());
+		if (item instanceof ItemData) spinnerDamage.setData(((ItemData) item).getDamageList());
+		else spinnerDamage.setValues(0, item.getMaxDamage());
 		if (data) panelData.updateCombobox(Registry.getObjectFromId(comboboxId.getValue()));
 		labelImage.setIcon(item.getTexture(getDamage()));
 		labelName.setText("<html><center>" + item.getName(getDamage()) + "</center></html>");
@@ -213,7 +216,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 	public void updateSpinner()
 	{
 		labelImage.setIcon(generateBlock().getTexture(getDamage()));
-		labelName.setText(generateBlock().getName(getDamage()));
+		labelName.setText("<html><center>" + generateBlock().getName(getDamage()) + "</center></html>");
 	}
 
 }

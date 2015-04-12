@@ -26,4 +26,8 @@ public class Sound extends ObjectBase
 		return null;
 	}
 
+	@Override
+	public void updateLang()
+	{}
+
 }

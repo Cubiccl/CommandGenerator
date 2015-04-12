@@ -6,6 +6,7 @@ import commandGenerator.main.Lang;
 
 public class AttributeType extends ObjectBase
 {
+	private String name;
 
 	/** New Attribute type
 	 * 
@@ -14,19 +15,26 @@ public class AttributeType extends ObjectBase
 	public AttributeType(String id)
 	{
 		super(id, ATTRIBUTE);
+		this.name = id;
 	}
 
 	/** Returns this Attribute's name. */
 	@Override
 	public String getName()
 	{
-		return Lang.get("ATTRIBUTES:" + this.getId());
+		return this.name;
 	}
 
 	@Override
 	public ImageIcon getTexture()
 	{
 		return null;
+	}
+
+	@Override
+	public void updateLang()
+	{
+		this.name = Lang.get("ATTRIBUTES:" + this.getId());
 	}
 
 }

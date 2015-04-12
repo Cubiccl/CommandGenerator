@@ -1,5 +1,7 @@
 package commandGenerator.arguments.objects;
 
+import java.io.File;
+
 import javax.swing.ImageIcon;
 
 import commandGenerator.main.DisplayHelper;
@@ -37,33 +39,73 @@ public class ItemData extends Item
 	@Override
 	public String getName(int damage)
 	{
-		return Lang.get("ITEMS:" + this.getId() + "_" + damage);
+		for (int i = 0; i < this.damageList.length; i++)
+			if (this.damageList[i] == damage) return this.names[i];
+		return this.names[0];
 	}
 
 	@Override
 	public ImageIcon getTexture(int damage)
 	{
+		if (this.isTextureUnique()) return this.textures[0];
 
+		int index = 0;
+		for (int i = 0; i < this.damageList.length; i++)
+			if (damage == this.damageList[i]) index = i;
+
+		return this.textures[index];
+	}
+
+	public String getDefaultName()
+	{
+		if (this.names == null) return this.getCommandId();
+		return this.names[0];
+	}
+
+	public void registerTextures()
+	{
 		String path = Resources.folder + "textures/";
 
 		if (this.isBlock()) path += "blocks/";
 		else path += "items/";
 
-		path += this.getCommandId() + "/" + Integer.toString(damage) + ".png";
+		if (!this.isTextureUnique())
+		{
+			this.textures = new ImageIcon[this.damageList.length];
+			path += this.getCommandId() + "/";
 
-		try
+			for (int damage = 0; damage < this.damageList.length; damage++)
+			{
+				String finalPath = path + this.damageList[damage] % this.getTextureType() + ".png";
+				if (this.getTextureType() == 1) finalPath = path + this.damageList[damage] + ".png";
+				this.textures[damage] = new ImageIcon(finalPath);
+				if (!new File(finalPath).exists()) DisplayHelper.missingTexture(finalPath);
+			}
+
+		} else
 		{
-			return new ImageIcon(path);
-		} catch (Exception ex)
-		{
-			DisplayHelper.missingTexture(path);
-			return null;
+			this.textures = new ImageIcon[1];
+
+			if (this.isBlock()) path += "other_blocks/" + this.getCommandId() + ".png";
+			else path += "other_items/" + this.getCommandId() + ".png";
+
+			this.textures[0] = new ImageIcon(path);
+			if (!new File(path).exists()) DisplayHelper.missingTexture(path);
 		}
 	}
 
-	public String getDefaultName()
+	@Override
+	public void updateLang()
 	{
-		return Lang.get("ITEMS:" + this.getId() + "_" + this.damageList[0]);
+		this.names = new String[this.damageList.length];
+		for (int damage = 0; damage < this.damageList.length; damage++)
+		{
+			if (this.langType.equals("normal")) this.names[damage] = Lang.get("ITEMS:" + this.getId() + "_" + this.damageList[damage]);
+			else if (this.langType.startsWith("half_"))
+			{
+				if (this.damageList[damage] < 8) this.names[damage] = Lang.get("ITEMS:" + this.getId() + "_" + damage);
+				else this.names[damage] = Lang.get("ITEMS:" + this.getId() + "_" + (this.damageList[damage] - 8)) + " " + Lang.get("ITEMS:" + this.langType);
+			} else this.names[damage] = Lang.get("ITEMS:" + this.getId()) + " " + Lang.get("ITEMS:" + this.langType + "_" + this.damageList[damage]);
+		}
 	}
-
 }

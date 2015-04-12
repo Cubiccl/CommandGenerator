@@ -1,5 +1,7 @@
 package commandGenerator.arguments.objects;
 
+import java.io.File;
+
 import javax.swing.ImageIcon;
 
 import commandGenerator.main.DisplayHelper;
@@ -11,6 +13,9 @@ public class Entity extends ObjectBase
 
 	public static final Entity player = new Entity("Player"), entity = new Entity("");
 
+	private ImageIcon texture;
+	private String name;
+
 	/** Creates a new Entity.
 	 * 
 	 * @param id
@@ -18,29 +23,33 @@ public class Entity extends ObjectBase
 	public Entity(String id)
 	{
 		super(id, ObjectBase.ENTITY);
+		this.name = id;
 	}
 
 	/** Returns this Entity's name. */
 	@Override
 	public String getName()
 	{
-		return Lang.get("ENTITIES:" + this.getId());
+		return this.name;
 	}
 
 	/** Returns this Entity's texture. */
 	@Override
 	public ImageIcon getTexture()
 	{
-
-		String path = Resources.folder + "textures/entities/" + this.getId() + ".png";
-		try
-		{
-			return new ImageIcon(path);
-		} catch (Exception ex)
-		{
-			DisplayHelper.missingTexture(path);
-			return null;
-		}
+		return this.texture;
 	}
 
+	public void registerTexture()
+	{
+		String path = Resources.folder + "textures/entities/" + this.getId() + ".png";
+		this.texture = new ImageIcon(path);
+		if (!new File(path).exists()) DisplayHelper.missingTexture(path);
+	}
+
+	@Override
+	public void updateLang()
+	{
+		this.name = Lang.get("ENTITIES:" + this.getId());
+	}
 }

@@ -11,6 +11,8 @@ public class EnchantType extends ObjectBase
 
 	/** This Enchantment's maximum level. */
 	private int max;
+	
+	private String name;
 
 	/** Creates a new Enchantment type.
 	 * 
@@ -25,6 +27,7 @@ public class EnchantType extends ObjectBase
 		super(idString, ObjectBase.ENCHANTMENT);
 		this.idNum = idNum;
 		this.max = max;
+		this.name = idString;
 		Registry.registerEnchant(this);
 	}
 
@@ -44,13 +47,19 @@ public class EnchantType extends ObjectBase
 	@Override
 	public String getName()
 	{
-		return Lang.get("ENCHANTS:" + this.getId());
+		return this.name;
 	}
 
 	@Override
 	public ImageIcon getTexture()
 	{
 		return null;
+	}
+
+	@Override
+	public void updateLang()
+	{
+		this.name = Lang.get("ENCHANTS:" + this.getId());
 	}
 
 }

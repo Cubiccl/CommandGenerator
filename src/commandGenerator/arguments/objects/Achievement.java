@@ -10,6 +10,8 @@ public class Achievement extends ObjectBase
 	/** The Item which texture should be used as this Achievement's texture. */
 	private Item itemTexture;
 
+	private String name;
+
 	/** Creates a new Achievement
 	 * 
 	 * @param id
@@ -19,6 +21,7 @@ public class Achievement extends ObjectBase
 	{
 		super(id, ACHIEVEMENT);
 		this.itemTexture = itemTexture;
+		this.name = id;
 	}
 
 	/** Generates the command structure for this Achievement. */
@@ -31,7 +34,7 @@ public class Achievement extends ObjectBase
 	@Override
 	public String getName()
 	{
-		return Lang.get("ACHIEVEMENTS:" + this.getId());
+		return this.name;
 	}
 
 	/** Returns this Achievement's texture */
@@ -39,6 +42,12 @@ public class Achievement extends ObjectBase
 	public ImageIcon getTexture()
 	{
 		return this.itemTexture.getTexture(0);
+	}
+
+	@Override
+	public void updateLang()
+	{
+		this.name = Lang.get("ACHIEVEMENTS:" + this.getId());
 	}
 
 }

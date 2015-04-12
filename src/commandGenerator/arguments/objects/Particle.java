@@ -17,6 +17,8 @@ public class Particle extends ObjectBase
 
 	/** The type of the Particle. */
 	private int type;
+	
+	private String description;
 
 	/** Creates a new Particle.
 	 * 
@@ -33,7 +35,7 @@ public class Particle extends ObjectBase
 	/** Returns a description of this Particle. */
 	public String getDescription()
 	{
-		return Lang.get("PARTICLES:" + this.getId());
+		return this.description;
 	}
 
 	@Override
@@ -52,5 +54,11 @@ public class Particle extends ObjectBase
 	public ImageIcon getTexture()
 	{
 		return null;
+	}
+
+	@Override
+	public void updateLang()
+	{
+		this.description = Lang.get("PARTICLES:" + this.getId());
 	}
 }

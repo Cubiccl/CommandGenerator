@@ -1,7 +1,10 @@
 package commandGenerator.arguments.objects;
 
+import java.io.File;
+
 import javax.swing.ImageIcon;
 
+import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
@@ -10,6 +13,9 @@ public class EffectType extends ObjectBase
 
 	/** This Effect's numerical ID. */
 	private int idNum;
+
+	private ImageIcon texture;
+	private String name;
 
 	/** New Effect type.
 	 * 
@@ -21,6 +27,7 @@ public class EffectType extends ObjectBase
 	{
 		super(idString, ObjectBase.EFFECT);
 		this.idNum = idNum;
+		this.name = idString;
 		Registry.registerEffect(this);
 	}
 
@@ -34,14 +41,27 @@ public class EffectType extends ObjectBase
 	@Override
 	public String getName()
 	{
-		return Lang.get("EFFECTS:" + this.getId());
+		return this.name;
 	}
 
 	/** Returns this Effect's texture. */
 	@Override
 	public ImageIcon getTexture()
 	{
-		return new ImageIcon(Resources.folder + "textures/effects/" + this.getId() + ".png");
+		return this.texture;
+	}
+
+	public void registerTexture()
+	{
+		String path = Resources.folder + "textures/effects/" + this.getIdNum() + ".png";
+		this.texture = new ImageIcon(path);
+		if (!new File(path).exists()) DisplayHelper.missingTexture(path);
+	}
+
+	@Override
+	public void updateLang()
+	{
+		this.name = Lang.get("EFFECTS:" + this.getId());
 	}
 
 }

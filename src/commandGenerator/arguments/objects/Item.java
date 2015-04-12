@@ -1,5 +1,7 @@
 package commandGenerator.arguments.objects;
 
+import java.io.File;
+
 import javax.swing.ImageIcon;
 
 import commandGenerator.main.DisplayHelper;
@@ -21,6 +23,18 @@ public class Item extends ObjectBase
 	/** This Item's maximum damage. */
 	private int maxDamage;
 
+	/** Contains all of this Item's textures. */
+	protected ImageIcon[] textures;
+
+	/** Contains all of this Item's names. */
+	protected String[] names;
+
+	/** The type of texture to use. */
+	private int textureType;
+
+	/** The type of the tranlation to use. */
+	protected String langType;
+
 	/** Creates a new Item.
 	 * 
 	 * @param isBlock
@@ -36,6 +50,8 @@ public class Item extends ObjectBase
 		this.idNum = idNum;
 		this.maxDamage = 0;
 		this.durability = 0;
+		this.textureType = 1;
+		this.langType = "normal";
 	}
 
 	public String getCommandId()
@@ -74,8 +90,9 @@ public class Item extends ObjectBase
 	/** Returns this Item's name. */
 	public String getName(int damage)
 	{
-		if (this.getMaxDamage() == 0) return Lang.get("ITEMS:" + this.getId());
-		return Lang.get("ITEMS:" + this.getId() + "_" + damage);
+		if (this.names == null) return this.getCommandId();
+		if (damage > this.names.length || damage < 0) return this.names[0];
+		return this.names[damage];
 	}
 
 	/** Returns this Item's texture. */
@@ -91,36 +108,21 @@ public class Item extends ObjectBase
 	 *            - <i>int</i> - The damage. */
 	public ImageIcon getTexture(int damage)
 	{
-
-		String path = Resources.folder + "textures/";
-		int damageToUse = 0;
-
-		if (this.isBlock) path += "blocks/";
-		else path += "items/";
-
-		if (damage <= this.maxDamage) damageToUse = damage;
-
-		if (this.maxDamage > 0) path += this.getCommandId() + "/" + Integer.toString(damageToUse) + ".png";
-		else
-		{
-			if (this.isBlock) path += "other_blocks/" + this.getCommandId() + ".png";
-			else path += "other_items/" + this.getCommandId() + ".png";
-		}
-
-		try
-		{
-			return new ImageIcon(path);
-		} catch (Exception ex)
-		{
-			DisplayHelper.missingTexture(path);
-			return null;
-		}
+		if (damage > this.textures.length || damage < 0) return this.textures[0];
+		else if (this.isTextureUnique()) return this.textures[0];
+		else return this.textures[damage];
 	}
 
 	/** Returns true if this Item is a Block. */
 	public boolean isBlock()
 	{
 		return this.isBlock;
+	}
+
+	/** Returns true if this Item has a unique Texture. */
+	public boolean isTextureUnique()
+	{
+		return this.textureType == 0;
 	}
 
 	/** Sets this Item's durability. */
@@ -134,5 +136,74 @@ public class Item extends ObjectBase
 	public void setMaxDamage(int maxDamage)
 	{
 		this.maxDamage = maxDamage;
+	}
+
+	public void registerTextures()
+	{
+
+		String path = Resources.folder + "textures/";
+
+		if (this.isBlock) path += "blocks/";
+		else path += "items/";
+
+		if (this.getMaxDamage() > 0 && !this.isTextureUnique())
+		{
+			this.textures = new ImageIcon[this.getMaxDamage() + 1];
+			path += this.getCommandId() + "/";
+
+			for (int damage = 0; damage <= this.getMaxDamage(); damage++)
+			{
+				String finalPath = path + (damage % this.textureType) + ".png";
+				this.textures[damage] = new ImageIcon(finalPath);
+				if (!new File(finalPath).exists()) DisplayHelper.missingTexture(finalPath);
+			}
+
+		} else
+		{
+			this.textures = new ImageIcon[1];
+
+			if (this.isBlock) path += "other_blocks/" + this.getCommandId() + ".png";
+			else path += "other_items/" + this.getCommandId() + ".png";
+
+			this.textures[0] = new ImageIcon(path);
+			if (!new File(path).exists()) DisplayHelper.missingTexture(path);
+		}
+	}
+
+	public void setTextureType(int textureType)
+	{
+		this.textureType = textureType;
+	}
+
+	public void setLangType(String langType)
+	{
+		this.langType = langType;
+	}
+
+	@Override
+	public void updateLang()
+	{
+		if (this.getMaxDamage() > 0)
+		{
+			this.names = new String[this.getMaxDamage() + 1];
+			for (int damage = 0; damage <= this.getMaxDamage(); damage++)
+			{
+				if (this.langType.equals("normal")) this.names[damage] = Lang.get("ITEMS:" + this.getId() + "_" + damage);
+				else if (this.langType.startsWith("half_"))
+				{
+					if (damage < 8) this.names[damage] = Lang.get("ITEMS:" + this.getId() + "_" + damage);
+					else this.names[damage] = Lang.get("ITEMS:" + this.getId() + "_" + (damage - 8)) + " " + Lang.get("ITEMS:" + this.langType);
+				} else this.names[damage] = Lang.get("ITEMS:" + this.getId()) + " " + Lang.get("ITEMS:" + this.langType + "_" + damage);
+			}
+		} else
+		{
+			this.names = new String[1];
+			this.names[0] = Lang.get("ITEMS:" + this.getId());
+		}
+	}
+
+	protected int getTextureType()
+	{
+		return this.textureType;
 	}
 }
