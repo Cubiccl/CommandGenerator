@@ -33,6 +33,8 @@ import commandGenerator.gui.helper.components.spinner.NumberSpinner;
 @SuppressWarnings("serial")
 public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISave
 {
+	private static final int[] SLOTS = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+			32, 33, 34, 35, 100, 101, 102, 103 };
 
 	private CButton buttonSave, buttonLoad;
 	private TextCombobox comboboxId;
@@ -111,7 +113,11 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 		if (itemList[0] instanceof ItemData) spinnerDamage.setData(((ItemData) itemList[0]).getDamageList());
 		else if (itemList[0].getDurability() > 0) spinnerDamage.setValues(0, itemList[0].getDurability());
 		spinnerCount = new NumberSpinner("GUI:item.count", 1, 64, null);
-		if (slot) spinnerSlot = new NumberSpinner("GUI:item.slot", 0, 27, null);
+		if (slot)
+		{
+			spinnerSlot = new NumberSpinner("GUI:item.slot", 0, 27, null);
+			this.spinnerSlot.setData(SLOTS);
+		}
 
 		if (withData) panelData = new NBTTagPanel("GUI:item.nbt", itemList[0], DataTags.items);
 
