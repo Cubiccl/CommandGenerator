@@ -1,5 +1,6 @@
 package commandGenerator.main;
 
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,10 +66,13 @@ public class Settings
 		String newLang = getLangFromName(panel.getLang());
 		if (!language.equalsIgnoreCase(newLang)) setLanguage(newLang);
 		FileHelper.setOption("lang", newLang);
+		
 		FileHelper.changePath(panel.getFolder());
+		
 		String newSort = panel.getSortType();
 		if (!this.sortType.equals(newSort)) this.sortType = newSort;
 		FileHelper.setOption("sortType", newSort);
+		
 		Lang.updateLang();
 	}
 
@@ -117,6 +121,8 @@ public class Settings
 		if (id.equals("lang")) return "en_us";
 		if (id.equals("version")) return Resources.versions[Resources.versions.length - 1];
 		if (id.equals("sortType")) return "id";
+		if (id.equals("key_gen")) return String.valueOf(KeyEvent.VK_F1);
+		if (id.equals("key_copy")) return String.valueOf(KeyEvent.VK_F2);
 		return null;
 	}
 

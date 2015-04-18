@@ -66,4 +66,9 @@ public class CEntry extends JPanel implements CComponent
 		this.label.updateLang();
 	}
 
+	public void setEditable(boolean editable)
+	{
+		this.text.setEditable(editable);
+	}
+
 }

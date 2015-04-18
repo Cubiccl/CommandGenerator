@@ -84,7 +84,11 @@ public class FileHelper
 			else scanner.nextLine();
 		}
 
-		if (option == null) addOption(id);
+		if (option == null)
+		{
+			addOption(id);
+			return getOption(id);
+		}
 
 		scanner.close();
 		return option;

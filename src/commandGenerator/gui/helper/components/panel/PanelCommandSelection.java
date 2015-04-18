@@ -82,9 +82,7 @@ public class PanelCommandSelection extends JPanel
 				@Override
 				public void actionPerformed(ActionEvent e)
 				{
-					StringSelection copy = new StringSelection(textfieldCommand.getText());
-					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-					clipboard.setContents(copy, null);
+					copy();
 				}
 			});
 
@@ -259,6 +257,13 @@ public class PanelCommandSelection extends JPanel
 			public void componentShown(ComponentEvent arg0)
 			{}
 		});
+	}
+
+	public void copy()
+	{
+		StringSelection copy = new StringSelection(textfieldCommand.getText());
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		clipboard.setContents(copy, null);
 	}
 
 	public String generate()
