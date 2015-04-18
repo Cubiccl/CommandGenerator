@@ -51,7 +51,7 @@ public enum Structure
 			new NBTArgument("nbt", false, "clear.item")),
 	clone("clone.normal", new CoordinatesArgument("clone.start", true, true, false), new CoordinatesArgument("clone.end", true, true, false),
 			new CoordinatesArgument("clone.destination", true, true, false), new ChoiceArgument("clone.mode.mask", false, "masked", "replace").addHelpButton(),
-			new ChoiceArgument("clone.mode.dest", false, "force", "move", "normal").addHelpButton()),
+			new ChoiceArgument("clone.mode.dest", false, "normal", "force", "move").addHelpButton()),
 	cloneFiltered("clone.filtered", new CoordinatesArgument("clone.start", true, true, false), new CoordinatesArgument("clone.end", true, true, false),
 			new CoordinatesArgument("clone.destination", true, true, false), new StaticArgument("filtered"), new ChoiceArgument("clone.mode.dest", false,
 					"force", "move", "normal").addHelpButton(), new BlockArgument("clone.block", true, CGConstants.LIST_BLOCKS, false).setDisplay(true, false,
@@ -67,7 +67,7 @@ public enum Structure
 			new CommandArgument()),
 	fillNormal("fill.normal", new CoordinatesArgument("fill.start", true, true, false), new CoordinatesArgument("fill.end", true, true, false),
 			new BlockArgument("fill.block", true, CGConstants.LIST_BLOCKS, true).setDisplay(true, true, false), new ChoiceArgument("fill.mode", false,
-					"destroy", "hollow", "keep", "outline").addHelpButton(), new NBTArgument("nbt", false, "fill.block")),
+					"replace", "destroy", "hollow", "keep", "outline").addHelpButton(), new NBTArgument("nbt", false, "fill.block")),
 	fillReplace("fill.replace", new CoordinatesArgument("fill.start", true, true, false), new CoordinatesArgument("fill.end", true, true, false),
 			new BlockArgument("fill.block", true, CGConstants.LIST_BLOCKS, false).setDisplay(true, true, false), new StaticArgument("replace"),
 			new BlockArgument("fill.block.replace", false, CGConstants.LIST_BLOCKS, false).setDisplay(true, true, false)),
@@ -77,7 +77,7 @@ public enum Structure
 	give("give", new TargetArgument("target", true, CGConstants.ENTITIES_PLAYERS), new ItemArgument("give.item", true).setDisplay(true, true, true, true)),
 	kill("kill", new TargetArgument("target", true, CGConstants.ENTITIES_ALL)),
 	particle("particle", new ParticleArgument(), new CoordinatesArgument("particle.start", true, true, false), new CoordinatesArgument("particle.end", true,
-			false, false), new IntArgument("particle.speed", true).setBounds(0, Integer.MAX_VALUE), new IntArgument("particle.count", false).setBounds(0,
+			false, false), new FloatArgument("particle.speed", true).setBounds(0, Integer.MAX_VALUE), new IntArgument("particle.count", false).setBounds(0,
 			Integer.MAX_VALUE), new BooleanArgument("particle.seen", false).setValues("", "force")),
 	playsound("playsound", new SoundArgument("playsound.choose", true), new TargetArgument("target", true, CGConstants.ENTITIES_PLAYERS),
 			new CoordinatesArgument("playsound.coords", false, true, false), new FloatArgument("playsound.volume", false).addHelpButton()
@@ -111,7 +111,7 @@ public enum Structure
 			new TargetArgument("target", true, CGConstants.ENTITIES_ALL)),
 	scoreTeamOption("scoreboard.teams.option", new StaticArgument("option"), new TeamOptionArgument()),
 	setblock("setblock", new CoordinatesArgument("block.coords", true, true, false), new BlockArgument("block.set", true, CGConstants.LIST_BLOCKS, true)
-			.setDisplay(true, true, false), new ChoiceArgument("setblock.mode", false, "destroy", "keep", "replace").addHelpButton(), new NBTArgument("nbt",
+			.setDisplay(true, true, false), new ChoiceArgument("setblock.mode", false, "replace", "destroy", "keep").addHelpButton(), new NBTArgument("nbt",
 			false, "block.set")),
 	setworldspawn("setworldspawn", new CoordinatesArgument("spawn.coords", true, true, false)),
 	spawnpoint("spawnpoint", new TargetArgument("target", true, CGConstants.ENTITIES_PLAYERS), new CoordinatesArgument("spawn.coords", true, true, false)),
@@ -139,10 +139,13 @@ public enum Structure
 			.addHelpButton()),
 	timeQuery("time.query", new StaticArgument("query"), new ChoiceArgument("time.query", true, "daytime", "gametime").addHelpButton()),
 	timeSet("time.set", new ChoiceArgument("time.mode", true, "add", "set"), new IntArgument("time.time", true)),
-	titleDisplay("title.display", new ChoiceArgument("title.mode", true, "title", "subtitle").addHelpButton(), new JsonArgument("json", true)),
-	titleOptions("title.options", new StaticArgument("times"), new IntArgument("title.fade_in", true).setDefaultValue(20), new IntArgument("title.stay", true)
-			.setDefaultValue(60), new IntArgument("title.fade_out", true).setDefaultValue(20)),
-	titleReset("title.reset", new ChoiceArgument("title.mode", true, "clear", "reset").addHelpButton()),
+	titleDisplay("title.display", new TargetArgument("target", true, CGConstants.ENTITIES_PLAYERS), new ChoiceArgument("title.mode", true, "title", "subtitle")
+			.addHelpButton(), new JsonArgument("json", true)),
+	titleOptions("title.options", new TargetArgument("target", true, CGConstants.ENTITIES_PLAYERS), new StaticArgument("times"), new IntArgument(
+			"title.fade_in", true).setDefaultValue(20), new IntArgument("title.stay", true).setDefaultValue(60), new IntArgument("title.fade_out", true)
+			.setDefaultValue(20)),
+	titleReset("title.reset", new TargetArgument("target", true, CGConstants.ENTITIES_PLAYERS), new ChoiceArgument("title.mode", true, "clear", "reset")
+			.addHelpButton()),
 	tpcoord("tp.coord", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new CoordinatesArgument("tp.destination.coords", true, true, true)),
 	tpentity("tp.entity", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new TargetArgument("tp.destination.entity", true,
 			CGConstants.ENTITIES_ALL)),
@@ -340,7 +343,8 @@ public enum Structure
 
 	public void reset()
 	{
-		for (Argument a : arguments) a.reset();
+		for (Argument a : arguments)
+			a.reset();
 	}
 
 }

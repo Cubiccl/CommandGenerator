@@ -14,7 +14,7 @@ public class TeamsOptionPanel extends HelperPanel
 {
 	public static final String[] scoreboardTeamsOptionList = { "color", "friendlyfire", "seeFriendlyInvisibles", "nametagVisibility", "deathMessageVisibility" },
 			visibilityList = { "never", "hideForOtherTeams", "hideForOwnTeam", "always" }, colors = { "black", "dark_blue", "dark_green", "dark_aqua",
-					"dark_red", "dark_purple", "gold", "gray", "ark_gray", "blue", "green", "aqua", "red", "light_purple", "yellow", "white", "reset" };;
+					"dark_red", "dark_purple", "gold", "gray", "dark_gray", "blue", "green", "aqua", "red", "light_purple", "yellow", "white", "reset" };;
 
 	private ChoiceComboBox comboboxMode, comboboxValue;
 	private CEntry entryTeam;
@@ -44,7 +44,7 @@ public class TeamsOptionPanel extends HelperPanel
 		entryTeam = new CEntry("GUI:scoreboard.team", "");
 
 		comboboxMode = new ChoiceComboBox("scoreboard.teams.option", scoreboardTeamsOptionList, false);
-		comboboxValue = new ChoiceComboBox("scoreboard.visibility", visibilityList, false);
+		comboboxValue = new ChoiceComboBox("color", colors, false);
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class TeamsOptionPanel extends HelperPanel
 				String mode = comboboxMode.getSelectedValue();
 				if (mode.equals("color")) comboboxValue.setData("color", colors);
 				else if (mode.equals("friendlyfire") || mode.equals("seeFriendlyInvisibles")) comboboxValue.setData("value", new String[] { "true", "false" });
-				else comboboxValue.setData("scoreboard.teams.visibility", visibilityList);
+				else comboboxValue.setData("scoreboard.visibility", visibilityList);
 			}
 		});
 	}
