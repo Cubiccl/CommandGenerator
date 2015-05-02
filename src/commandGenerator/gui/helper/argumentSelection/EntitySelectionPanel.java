@@ -15,7 +15,7 @@ import commandGenerator.gui.helper.argumentSelection.dataTag.NBTTagPanel;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.button.LoadButton;
 import commandGenerator.gui.helper.components.button.SaveButton;
-import commandGenerator.gui.helper.components.combobox.CComboBox;
+import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
@@ -25,7 +25,7 @@ public class EntitySelectionPanel extends HelperPanel implements IBox, ISave
 {
 
 	private CButton buttonSave, buttonLoad;
-	private CComboBox combobox;
+	private ObjectComboBox combobox;
 	private Entity[] entityList;
 	private JLabel labelName, labelImage;
 	private NBTTagPanel panelData;
@@ -64,7 +64,7 @@ public class EntitySelectionPanel extends HelperPanel implements IBox, ISave
 		buttonSave = new SaveButton(ObjectBase.ENTITY, this);
 		buttonLoad = new LoadButton(ObjectBase.ENTITY, this);
 
-		combobox = new CComboBox("GUI:entity.select", entityList, this);
+		combobox = new ObjectComboBox("GUI:entity.select", entityList, this);
 
 		panelData = new NBTTagPanel("GUI:entity.tags", entityList[0], DataTags.entities);
 	}

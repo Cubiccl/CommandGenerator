@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 import commandGenerator.arguments.objects.Achievement;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
-import commandGenerator.gui.helper.components.combobox.CComboBox;
+import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.DisplayHelper;
@@ -14,7 +14,7 @@ import commandGenerator.main.DisplayHelper;
 public class AchievementSelectionPanel extends HelperPanel implements IBox
 {
 
-	private CComboBox achievementBox;
+	private ObjectComboBox achievementBox;
 	private JLabel image;
 
 	public AchievementSelectionPanel()
@@ -34,7 +34,7 @@ public class AchievementSelectionPanel extends HelperPanel implements IBox
 	protected void createComponents()
 	{
 		image = new JLabel();
-		achievementBox = new CComboBox("GUI:achievement.select", Registry.getObjectList(ObjectBase.ACHIEVEMENT), this);
+		achievementBox = new ObjectComboBox("GUI:achievement.select", Registry.getObjectList(ObjectBase.ACHIEVEMENT), this);
 		updateCombobox();
 	}
 

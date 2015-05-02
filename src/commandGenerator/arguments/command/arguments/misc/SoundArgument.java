@@ -1,6 +1,7 @@
 package commandGenerator.arguments.command.arguments.misc;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.util.List;
 
@@ -11,14 +12,14 @@ import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.objects.Sound;
 import commandGenerator.gui.helper.components.button.HelpButton;
-import commandGenerator.gui.helper.components.combobox.CComboBox;
+import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.main.Lang;
 
 public class SoundArgument extends Argument implements IBox
 {
 
-	private CComboBox box;
+	private ObjectComboBox box;
 	private HelpButton button;
 
 	public SoundArgument(String id, boolean isCompulsery)
@@ -50,8 +51,10 @@ public class SoundArgument extends Argument implements IBox
 	@Override
 	public void initGui()
 	{
-		this.box = new CComboBox("GUI:" + this.getId(), Registry.getObjectList(ObjectBase.SOUND), this);
+		this.box = new ObjectComboBox("GUI:" + this.getId(), Registry.getObjectList(ObjectBase.SOUND), this);
 		this.button = new HelpButton(Lang.get("HELP:sound." + this.box.getValue().getId()), this.box.getValue().getId());
+		this.button.setMinimumSize(new Dimension(20, 40));
+		this.button.setPreferredSize(new Dimension(20, 40));
 	}
 
 	@Override

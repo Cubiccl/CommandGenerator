@@ -10,7 +10,7 @@ import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.button.LoadButton;
 import commandGenerator.gui.helper.components.button.SaveButton;
-import commandGenerator.gui.helper.components.combobox.CComboBox;
+import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
@@ -23,7 +23,7 @@ public class EnchantSelectionPanel extends HelperPanel implements IBox, ISave
 {
 
 	private CButton buttonSave, buttonLoad;
-	private CComboBox comboboxEnchant;
+	private ObjectComboBox comboboxEnchant;
 	private CEntry entryLevel;
 	private boolean limited;
 	private NumberSpinner spinnerLevel;
@@ -57,7 +57,7 @@ public class EnchantSelectionPanel extends HelperPanel implements IBox, ISave
 		spinnerLevel = new NumberSpinner("GUI:enchant.level", 1, 5, null);
 		spinnerLevel.setVisible(limited);
 
-		comboboxEnchant = new CComboBox("GUI:enchant.choose", Registry.getObjectList(ObjectBase.ENCHANTMENT), this);
+		comboboxEnchant = new ObjectComboBox("GUI:enchant.choose", Registry.getObjectList(ObjectBase.ENCHANTMENT), this);
 	}
 
 	@Override

@@ -5,13 +5,10 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-
-import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
-public class HelpButton extends JButton implements CComponent
+public class HelpButton extends CButton
 {
 
 	private String message, title;
@@ -29,13 +26,9 @@ public class HelpButton extends JButton implements CComponent
 			}
 		});
 		this.setFont(new Font(this.getName(), Font.PLAIN, 11));
-		this.setPreferredSize(new Dimension(40, 20));
-		this.setMinimumSize(new Dimension(40, 20));
+		this.setPreferredSize(new Dimension(20, 20));
+		this.setMinimumSize(new Dimension(20, 20));
 	}
-
-	@Override
-	public void reset()
-	{}
 
 	public void setData(String newMessage, String newTitle)
 	{
@@ -43,11 +36,8 @@ public class HelpButton extends JButton implements CComponent
 		this.title = newTitle;
 	}
 
-	@Override
-	public void setEnabledContent(boolean enable)
-	{
-		this.setEnabled(enable);
-	}
+	public void setTitle(String title)
+	{}
 
 	@Override
 	public void updateLang()

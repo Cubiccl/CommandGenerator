@@ -18,17 +18,19 @@ public class StringArgument extends Argument
 {
 	private JCheckBox box;
 	private CEntry entry;
+	private boolean spacesAllowed;
 
 	public StringArgument(String id, boolean isCompulsery)
 	{
 		super(id, isCompulsery);
+		this.spacesAllowed = false;
 	}
 
 	@Override
 	public String generateCommand()
 	{
 		String name = this.entry.getText();
-		if (name.equals("") || name.contains(" "))
+		if (!this.spacesAllowed && (name.equals("") || name.contains(" ")))
 		{
 			DisplayHelper.warningName();
 			return null;
@@ -81,7 +83,14 @@ public class StringArgument extends Argument
 	public void setupFrom(List<String> data)
 	{
 		this.box.setSelected(true);
-		this.entry.setTextField(data.get(0));
+		this.entry.setEnabledContent(true);
+		String text = "";
+		for (int i = 0; i < data.size(); i++)
+		{
+			if (i > 0) text += " ";
+			text += data.get(i);
+		}
+		this.entry.setTextField(text);
 	}
 
 	@Override
@@ -101,6 +110,13 @@ public class StringArgument extends Argument
 			this.box.setSelected(false);
 			this.entry.setEnabledContent(false);
 		}
+	}
+
+	public StringArgument setSpacesAllowed()
+	{
+		this.spacesAllowed = true;
+		this.setMaximumLength(100);
+		return this;
 	}
 
 }

@@ -12,7 +12,7 @@ import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.button.LoadButton;
 import commandGenerator.gui.helper.components.button.SaveButton;
-import commandGenerator.gui.helper.components.combobox.CComboBox;
+import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
@@ -25,7 +25,7 @@ public class EffectSelectionPanel extends HelperPanel implements IBox, ISave
 
 	private CButton buttonSave, buttonLoad;
 	private CCheckBox checkboxHideParticles;
-	private CComboBox comboboxEffect;
+	private ObjectComboBox comboboxEffect;
 	private CEntry entryDuration;
 	private JLabel labelImage;
 	private CLabel labelTicks;
@@ -70,7 +70,7 @@ public class EffectSelectionPanel extends HelperPanel implements IBox, ISave
 
 		spinnerAmplifier = new NumberSpinner("GUI:effect.amplifier", 1, 256, null);
 
-		comboboxEffect = new CComboBox("GUI:effect.choose", Registry.getObjectList(ObjectBase.EFFECT), this);
+		comboboxEffect = new ObjectComboBox("GUI:effect.choose", Registry.getObjectList(ObjectBase.EFFECT), this);
 
 		checkboxHideParticles = new CCheckBox("GUI:effect.hide");
 	}

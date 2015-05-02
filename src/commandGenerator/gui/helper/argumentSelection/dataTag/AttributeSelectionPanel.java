@@ -8,7 +8,7 @@ import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.button.LoadButton;
 import commandGenerator.gui.helper.components.button.SaveButton;
-import commandGenerator.gui.helper.components.combobox.CComboBox;
+import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
 import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
@@ -19,7 +19,7 @@ public class AttributeSelectionPanel extends HelperPanel implements ISave
 {
 
 	private CButton buttonSave, buttonLoad;
-	private CComboBox comboboxAttribute;
+	private ObjectComboBox comboboxAttribute;
 	private ChoiceComboBox comboboxOperation;
 	private CEntry entryAmount;
 
@@ -48,7 +48,7 @@ public class AttributeSelectionPanel extends HelperPanel implements ISave
 		entryAmount = new CEntry("GUI:attribute.amount", "1");
 		entryAmount.setTextField("1");
 
-		comboboxAttribute = new CComboBox("GUI:attribute.select", Registry.getObjectList(ObjectBase.ATTRIBUTE), null);
+		comboboxAttribute = new ObjectComboBox("GUI:attribute.select", Registry.getObjectList(ObjectBase.ATTRIBUTE), null);
 		comboboxOperation = new ChoiceComboBox("attribute.operation", Attribute.operations, false);
 	}
 

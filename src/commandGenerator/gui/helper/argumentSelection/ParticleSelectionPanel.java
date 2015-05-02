@@ -1,11 +1,13 @@
 package commandGenerator.gui.helper.argumentSelection;
 
+import java.awt.Dimension;
+
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Particle;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.components.button.HelpButton;
-import commandGenerator.gui.helper.components.combobox.CComboBox;
+import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
@@ -16,7 +18,7 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 {
 
 	private HelpButton buttonHelp;
-	private CComboBox comboboxParticle;
+	private ObjectComboBox comboboxParticle;
 	private BlockSelectionPanel panelBlock;
 	private ItemSelectionPanel panelItem;
 
@@ -39,8 +41,9 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 	{
 		ObjectBase[] list = Registry.getObjectList(ObjectBase.PARTICLE);
 		buttonHelp = new HelpButton(((Particle) list[0]).getDescription(), list[0].getName());
+		buttonHelp.setPreferredSize(new Dimension(20, 40));
 
-		comboboxParticle = new CComboBox("GENERAL:particle", Registry.getObjectList(ObjectBase.PARTICLE), this);
+		comboboxParticle = new ObjectComboBox("GENERAL:particle", Registry.getObjectList(ObjectBase.PARTICLE), this);
 
 		panelBlock = new BlockSelectionPanel("GUI:particle.block", Registry.getList(CGConstants.LIST_BLOCKS), false);
 		panelBlock.setVisible(false);

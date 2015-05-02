@@ -88,7 +88,7 @@ public enum Structure
 	replaceitemEntity("replaceitem.entity", new StaticArgument("entity"), new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new SlotArgument(),
 			new ItemArgument("replaceitem.item", true).setDisplay(true, true, true, true)),
 	scoreObjectiveAdd("scoreboard.objectives.add", new StaticArgument("add"), new StringArgument("objective", true), new ObjectiveArgument(),
-			new StringArgument("scoreboard.display", false)),
+			new StringArgument("scoreboard.display", false).setSpacesAllowed()),
 	scoreObjectiveDisplay("scoreboard.objectives.display", new StaticArgument("setdisplay"),
 			new ChoiceArgument("scoreboard.slot", true, Resources.displayList), new StringArgument("objective", true)),
 	scoreObjectiveRemove("scoreboard.objectives.remove", new StaticArgument("remove"), new StringArgument("objective", true)),
@@ -105,7 +105,7 @@ public enum Structure
 	scorePlayerTest("scoreboard.players.test", new StaticArgument("test"), new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new StringArgument(
 			"objective", true), new IntArgument("scoreboard.score.min", true), new IntArgument("scoreboard.score.max", false)),
 	scoreTeamAdd("scoreboard.teams.add", new StaticArgument("add"), new StringArgument("scoreboard.team", true),
-			new StringArgument("scoreboard.display", false)),
+			new StringArgument("scoreboard.display", false).setSpacesAllowed()),
 	scoreTeamDelete("scoreboard.teams.delete", new ChoiceArgument("mode", true, "remove", "empty"), new StringArgument("scoreboard.team", true)),
 	scoreTeamManage("scoreboard.teams.manage", new ChoiceArgument("scoreboard.teams.mode", true, "join", "leave"), new StringArgument("scoreboard.team", true),
 			new TargetArgument("target", true, CGConstants.ENTITIES_ALL)),

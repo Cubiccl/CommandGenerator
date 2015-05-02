@@ -31,8 +31,8 @@ import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.button.HelpButton;
 import commandGenerator.gui.helper.components.button.LoadButton;
 import commandGenerator.gui.helper.components.button.SaveButton;
-import commandGenerator.gui.helper.components.combobox.CComboBox;
 import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
+import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
@@ -150,7 +150,7 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 
 		} else if (selector.equals("type"))
 		{
-			CComboBox combobox = new CComboBox("GUI:selector.type", Registry.getObjectList(ObjectBase.ENTITY), null);
+			ObjectComboBox combobox = new ObjectComboBox("GUI:selector.type", Registry.getObjectList(ObjectBase.ENTITY), null);
 			panel.add(combobox);
 			if (DisplayHelper.showQuestion(panel, title)) return;
 			value = combobox.getValue().getId();

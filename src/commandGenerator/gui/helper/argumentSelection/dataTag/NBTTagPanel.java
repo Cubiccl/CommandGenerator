@@ -6,8 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.JButton;
-
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
@@ -21,8 +19,7 @@ import commandGenerator.gui.helper.components.panel.TagDisplayer;
 public class NBTTagPanel extends HelperPanel implements CComponent
 {
 
-	private CButton buttonAdd, buttonRemove;
-	private JButton buttonHelp;
+	private CButton buttonAdd, buttonRemove, buttonHelp;
 	private TagDisplayer displayer;
 	private Tag[] nbtTags;
 	private ObjectBase object;
@@ -50,10 +47,10 @@ public class NBTTagPanel extends HelperPanel implements CComponent
 	{
 		buttonAdd = new CButton("GUI:tag.add");
 		buttonRemove = new CButton("GUI:tag.remove");
-		buttonHelp = new JButton("?");
+		buttonHelp = new CButton("?", false);
 		buttonHelp.setFont(new Font(getName(), Font.PLAIN, 11));
-		buttonHelp.setPreferredSize(new Dimension(40, 20));
-		buttonHelp.setMinimumSize(new Dimension(40, 20));
+		buttonHelp.setPreferredSize(new Dimension(20, 20));
+		buttonHelp.setMinimumSize(new Dimension(20, 20));
 
 		displayer = new TagDisplayer(nbtTags);
 	}

@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
-import commandGenerator.gui.helper.components.combobox.CComboBox;
+import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
 import commandGenerator.gui.helper.components.panel.HelperPanel;
 import commandGenerator.main.CGConstants;
@@ -21,7 +21,7 @@ public class ObjectiveSelectionPanel extends HelperPanel
 			"playerKills", "playOneMinute", "sprintOneCm", "swimOneCm", "timeSinceDeath", "treasureFished", "walkOneCm" };
 
 	private ChoiceComboBox comboboxMain, comboboxPrecise2;
-	private CComboBox comboboxPrecise;
+	private ObjectComboBox comboboxPrecise;
 
 	public ObjectiveSelectionPanel(String title)
 	{
@@ -42,7 +42,7 @@ public class ObjectiveSelectionPanel extends HelperPanel
 	protected void createComponents()
 	{
 		comboboxMain = new ChoiceComboBox("criteria", criteriaList, false);
-		comboboxPrecise = new CComboBox("", new ObjectBase[0], null);
+		comboboxPrecise = new ObjectComboBox("", new ObjectBase[0], null);
 		comboboxPrecise2 = new ChoiceComboBox("color", Resources.colors, false);
 		comboboxPrecise2.setVisible(false);
 	}

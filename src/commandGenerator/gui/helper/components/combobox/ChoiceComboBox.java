@@ -17,7 +17,7 @@ import commandGenerator.main.Lang;
 public class ChoiceComboBox extends JPanel implements CComponent
 {
 
-	private JComboBox<String> box;
+	private CComboBox<String> box;
 	private HelpButton button;
 	private String[] choices;
 	private String title;
@@ -46,7 +46,7 @@ public class ChoiceComboBox extends JPanel implements CComponent
 			this.button = new HelpButton(Lang.get("HELP:" + title + "." + this.choices[0]), this.choices[0]);
 		}
 
-		this.box = new JComboBox<String>(choices);
+		this.box = new CComboBox<String>(choices);
 		if (hasHelp) this.box.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
