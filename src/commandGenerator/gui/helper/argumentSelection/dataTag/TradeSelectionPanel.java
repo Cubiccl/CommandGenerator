@@ -18,12 +18,12 @@ import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.button.LoadButton;
 import commandGenerator.gui.helper.components.button.SaveButton;
 import commandGenerator.gui.helper.components.icomponent.ISave;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
-public class TradeSelectionPanel extends HelperPanel implements ISave
+public class TradeSelectionPanel extends CPanel implements ISave
 {
 
 	private CButton buttonSave, buttonLoad;

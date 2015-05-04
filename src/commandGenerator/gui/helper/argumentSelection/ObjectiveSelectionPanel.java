@@ -5,14 +5,14 @@ import java.awt.event.ActionListener;
 
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
-import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Resources;
 
 @SuppressWarnings("serial")
-public class ObjectiveSelectionPanel extends HelperPanel
+public class ObjectiveSelectionPanel extends CPanel
 {
 	private static final String[] criteriaList = { "dummy", "trigger", "deathCount", "playerKillCount", "totalKillCount", "health", "achievement",
 			"stat.craftItem", "stat.useItem", "stat.breakItem", "stat.mineBlock", "stat.killEntity", "stat.entityKilledBy", "stat", "teamKill", "killedByTeam" };

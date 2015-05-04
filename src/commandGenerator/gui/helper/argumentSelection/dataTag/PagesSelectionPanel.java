@@ -20,12 +20,12 @@ import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.components.button.CButton;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class PagesSelectionPanel extends HelperPanel
+public class PagesSelectionPanel extends CPanel
 {
 
 	private CButton buttonAddText, buttonAddJson, buttonEdit, buttonRemove;

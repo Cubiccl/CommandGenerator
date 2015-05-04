@@ -11,11 +11,11 @@ import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.button.HelpButton;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class SpawnSelectionPanel extends HelperPanel
+public class SpawnSelectionPanel extends CPanel
 {
 
 	private HelpButton buttonHelp;
@@ -39,7 +39,8 @@ public class SpawnSelectionPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		buttonHelp = new HelpButton(Lang.get("HELP:weight"), Lang.get("TAGS:Weight"));
+		buttonHelp = new HelpButton();
+		buttonHelp.setData(Lang.get("HELP:weight"), Lang.get("TAGS:Weight"));
 
 		entryWeight = new CEntry("GUI:spawn.weight", "1");
 		entryWeight.setTextField("1");

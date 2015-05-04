@@ -23,21 +23,21 @@ import commandGenerator.gui.helper.argumentSelection.dataTag.NBTTagPanel;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.button.LoadButton;
 import commandGenerator.gui.helper.components.button.SaveButton;
-import commandGenerator.gui.helper.components.combobox.TextCombobox;
+import commandGenerator.gui.helper.components.combobox.LabeledSearchBox;
 import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.icomponent.ISpin;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.gui.helper.components.spinner.NumberSpinner;
 
 @SuppressWarnings("serial")
-public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISave
+public class ItemSelectionPanel extends CPanel implements IBox, ISpin, ISave
 {
 	private static final int[] SLOTS = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
 			32, 33, 34, 35, 100, 101, 102, 103 };
 
 	private CButton buttonSave, buttonLoad;
-	private TextCombobox comboboxId;
+	private LabeledSearchBox comboboxId;
 	private Item[] itemList;
 	private JLabel labelImage, labelName;
 	private NBTTagPanel panelData;
@@ -108,11 +108,14 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 		for (int i = 0; i < ids.length; i++)
 			ids[i] = itemList[i].getId();
 
-		comboboxId = new TextCombobox("GUI:item.id", ids, this);
+		comboboxId = new LabeledSearchBox("GUI:item.id", ids, this);
+		
 		spinnerDamage = new NumberSpinner("GUI:item.damage", 0, itemList[0].getMaxDamage(), this);
 		if (itemList[0] instanceof ItemData) spinnerDamage.setData(((ItemData) itemList[0]).getDamageList());
 		else if (itemList[0].getDurability() > 0) spinnerDamage.setValues(0, itemList[0].getDurability());
+		
 		spinnerCount = new NumberSpinner("GUI:item.count", 1, 64, null);
+		
 		if (slot)
 		{
 			spinnerSlot = new NumberSpinner("GUI:item.slot", 0, 27, null);
@@ -129,7 +132,7 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 
 	public Item generateItem()
 	{
-		return (Item) Registry.getObjectFromId(comboboxId.getValue());
+		return (Item) Registry.getObjectFromId((String) comboboxId.getSelectedItem());
 	}
 
 	public int getCount()
@@ -209,7 +212,7 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 
 	public void setItem(Item item)
 	{
-		this.comboboxId.setSelected(item.getId());
+		this.comboboxId.setSelectedItem(item.getId());
 	}
 
 	public void setupFrom(ItemStack item)
@@ -220,7 +223,7 @@ public class ItemSelectionPanel extends HelperPanel implements IBox, ISpin, ISav
 			return;
 		}
 
-		comboboxId.setSelected(item.getItem().getId());
+		comboboxId.setSelectedItem(item.getItem().getId());
 		spinnerDamage.setSelected(item.getDamage());
 		spinnerCount.setSelected(item.getCount());
 		if (slot) spinnerSlot.setSelected(item.getSlot());

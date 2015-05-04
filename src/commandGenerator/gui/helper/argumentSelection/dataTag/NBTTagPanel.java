@@ -12,11 +12,11 @@ import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.gui.helper.components.button.CButton;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.gui.helper.components.panel.TagDisplayer;
 
 @SuppressWarnings("serial")
-public class NBTTagPanel extends HelperPanel implements CComponent
+public class NBTTagPanel extends CPanel implements CComponent
 {
 
 	private CButton buttonAdd, buttonRemove, buttonHelp;

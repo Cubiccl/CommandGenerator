@@ -16,11 +16,11 @@ import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.argumentSelection.AchievementSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
 import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
-public class HoverEventPanel extends HelperPanel
+public class HoverEventPanel extends CPanel
 {
 
 	private ChoiceComboBox comboboxAction;

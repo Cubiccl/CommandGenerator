@@ -7,12 +7,12 @@ import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CEntry;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
-public class ScoreDisplayPanel extends HelperPanel
+public class ScoreDisplayPanel extends CPanel
 {
 
 	private CEntry entryObjective;

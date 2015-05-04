@@ -73,7 +73,11 @@ public class FloatArgument extends Argument
 	{
 		this.entry = new CEntry("GUI:" + this.getId(), String.valueOf(defaultValue));
 		this.box = new JCheckBox();
-		if (this.hasHelp) this.button = new HelpButton(Lang.get("HELP:" + this.getId()), "");
+		if (this.hasHelp)
+		{
+			this.button = new HelpButton();
+			this.button.setData(Lang.get("HELP:" + this.getId()), "");
+		}
 		if (!this.isCompulsery())
 		{
 			this.box.addActionListener(new ActionListener() {

@@ -12,13 +12,13 @@ import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.button.HelpButton;
 import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
 @SuppressWarnings("serial")
-public class JsonSelectionPanel extends HelperPanel
+public class JsonSelectionPanel extends CPanel
 {
 	public static final String[] colors = { "black", "dark_blue", "dark_green", "dark_aqua", "dark_red", "dark_purple", "gold", "gray", "dark_gray", "blue",
 			"green", "aqua", "red", "light_purple", "yellow", "white" };
@@ -65,9 +65,12 @@ public class JsonSelectionPanel extends HelperPanel
 	@Override
 	protected void createComponents()
 	{
-		buttonHelpInsertion = new HelpButton(Lang.get("HELP:json.insertion"), "GUI:json.insertion");
-		buttonHelpHover = new HelpButton(Lang.get("HELP:json.hover"), "GUI:json.hover");
-		buttonHelpClick = new HelpButton(Lang.get("HELP:json.click"), "GUI:json.click");
+		buttonHelpInsertion = new HelpButton();
+		buttonHelpInsertion.setData(Lang.get("HELP:json.insertion"), "GUI:json.insertion");
+		buttonHelpHover = new HelpButton();
+		buttonHelpInsertion.setData(Lang.get("HELP:json.hover"), "GUI:json.hover");
+		buttonHelpClick = new HelpButton();
+		buttonHelpInsertion.setData(Lang.get("HELP:json.click"), "GUI:json.click");
 
 		entryText = new CEntry("GUI:json.text", "");
 		entryInsertion = new CEntry("GUI:json.insertion", "");

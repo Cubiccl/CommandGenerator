@@ -18,13 +18,13 @@ import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
 import commandGenerator.gui.helper.components.button.CButton;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class EquipmentSelectionPanel extends HelperPanel
+public class EquipmentSelectionPanel extends CPanel
 {
 
 	private CButton buttonAddHand, buttonAddFeet, buttonAddLegs, buttonAddChest, buttonAddHead, buttonRemoveHand, buttonRemoveFeet, buttonRemoveLegs,

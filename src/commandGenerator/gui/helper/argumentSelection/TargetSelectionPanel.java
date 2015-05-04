@@ -34,13 +34,13 @@ import commandGenerator.gui.helper.components.button.SaveButton;
 import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
 import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.icomponent.ISave;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class TargetSelectionPanel extends HelperPanel implements ISave
+public class TargetSelectionPanel extends CPanel implements ISave
 {
 
 	public static final String[] selectors = { "x", "y", "z", "dx", "dy", "dz", "r", "rm", "rx", "rxm", "ry", "rym", "m", "c", "l", "lm", "team", "name",
@@ -209,7 +209,8 @@ public class TargetSelectionPanel extends HelperPanel implements ISave
 		entryPlayer = new CEntry("GUI:player.name", "");
 		entryPlayer.setEnabledContent(false);
 
-		buttonHelpEntity = new HelpButton(Lang.get("HELP:selector." + this.targets[0]), this.targets[0]);
+		buttonHelpEntity = new HelpButton();
+		buttonHelpEntity.setData(Lang.get("HELP:selector." + this.targets[0]), this.targets[0]);
 
 		buttonAdd = new CButton("GUI:selector.add");
 		buttonRemove = new CButton("GUI:selector.remove");

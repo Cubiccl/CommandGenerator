@@ -18,10 +18,10 @@ import commandGenerator.gui.helper.components.button.SaveButton;
 import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.gui.helper.components.icomponent.ISave;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 
 @SuppressWarnings("serial")
-public class EntitySelectionPanel extends HelperPanel implements IBox, ISave
+public class EntitySelectionPanel extends CPanel implements IBox, ISave
 {
 
 	private CButton buttonSave, buttonLoad;
@@ -36,7 +36,7 @@ public class EntitySelectionPanel extends HelperPanel implements IBox, ISave
 		this.entityList = new Entity[entityList.length];
 		for (int i = 0; i < entityList.length; i++)
 			this.entityList[i] = (Entity) entityList[i];
-		
+
 		this.initGui();
 	}
 
@@ -133,6 +133,7 @@ public class EntitySelectionPanel extends HelperPanel implements IBox, ISave
 	public void updateCombobox()
 	{
 		panelData.updateCombobox(combobox.getValue());
+		if (this.getEntity() == null) return;
 		labelImage.setIcon(getEntity().getTexture());
 		labelName.setText(getEntity().getName());
 	}

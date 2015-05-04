@@ -8,10 +8,10 @@ import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 
 @SuppressWarnings("serial")
-public class ClickEventPanel extends HelperPanel
+public class ClickEventPanel extends CPanel
 {
 	private static final String[] clickEvents = { "open_url", "run_command", "suggest_command" };
 

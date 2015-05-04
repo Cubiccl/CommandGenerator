@@ -5,11 +5,11 @@ import java.util.List;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagList;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.gui.helper.components.spinner.NumberSpinner;
 
 @SuppressWarnings("serial")
-public class FireworksSelectionPanel extends HelperPanel
+public class FireworksSelectionPanel extends CPanel
 {
 
 	private ListSelectionPanel explosionsPanel;

@@ -13,13 +13,13 @@ import commandGenerator.gui.helper.components.button.SaveButton;
 import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.gui.helper.components.icomponent.ISave;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.gui.helper.components.spinner.NumberSpinner;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class EnchantSelectionPanel extends HelperPanel implements IBox, ISave
+public class EnchantSelectionPanel extends CPanel implements IBox, ISave
 {
 
 	private CButton buttonSave, buttonLoad;

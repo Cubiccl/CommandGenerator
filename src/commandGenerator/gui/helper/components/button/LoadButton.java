@@ -1,16 +1,15 @@
 package commandGenerator.gui.helper.components.button;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import commandGenerator.arguments.objects.SavedObjects;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.icomponent.ISave;
+import commandGenerator.gui.helper.components.listeners.ClickListener;
+import commandGenerator.gui.helper.components.listeners.IClick;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class LoadButton extends CButton
+public class LoadButton extends CButton implements IClick
 {
 
 	private ISave parent;
@@ -21,17 +20,11 @@ public class LoadButton extends CButton
 		super("GENERAL:load");
 		this.type = type;
 		this.parent = parent;
-
-		this.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				load();
-			}
-		});
+		this.addActionListener(new ClickListener(this));
 	}
 
-	private void load()
+	@Override
+	public void click()
 	{
 		if (SavedObjects.getList(this.type).size() == 0)
 		{

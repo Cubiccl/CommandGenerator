@@ -6,11 +6,11 @@ import java.util.List;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagFloat;
 import commandGenerator.arguments.tags.TagList;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.gui.helper.components.spinner.NumberSpinner;
 
 @SuppressWarnings("serial")
-public class PoseRotPanel extends HelperPanel
+public class PoseRotPanel extends CPanel
 {
 
 	private String id;

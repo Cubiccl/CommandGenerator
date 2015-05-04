@@ -10,7 +10,7 @@ import commandGenerator.arguments.command.Structure;
 import commandGenerator.gui.helper.components.CLabel;
 
 @SuppressWarnings("serial")
-public class StructurePanel extends HelperPanel
+public class StructurePanel extends CPanel
 {
 	private Structure structure;
 	private CLabel label;

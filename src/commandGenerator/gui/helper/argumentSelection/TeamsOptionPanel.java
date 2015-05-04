@@ -6,11 +6,11 @@ import java.awt.event.ActionListener;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
-public class TeamsOptionPanel extends HelperPanel
+public class TeamsOptionPanel extends CPanel
 {
 	public static final String[] scoreboardTeamsOptionList = { "color", "friendlyfire", "seeFriendlyInvisibles", "nametagVisibility", "deathMessageVisibility" },
 			visibilityList = { "never", "hideForOtherTeams", "hideForOwnTeam", "always" }, colors = { "black", "dark_blue", "dark_green", "dark_aqua",

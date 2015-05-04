@@ -71,6 +71,7 @@ public class Enchantment
 	/** Checks if the Enchantment is valid. */
 	public boolean isCorrect()
 	{
+		if (this.type == null) return false;
 		if (this.checkMax && (this.level > this.type.getMaxLevel() || this.level < 1))
 		{
 			JOptionPane.showMessageDialog(null, Lang.get("WARNING:enchant.wrong_level").replaceAll("<max>", Integer.toString(this.type.getMaxLevel())),

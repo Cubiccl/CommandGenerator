@@ -12,12 +12,12 @@ import commandGenerator.arguments.tags.TagInt;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Resources;
 
 @SuppressWarnings("serial")
-public class PatternSelectionPanel extends HelperPanel
+public class PatternSelectionPanel extends CPanel
 {
 
 	private static final String[] patternIds = { "bs", "ts", "ls", "rs", "ms", "cs", "ss", "drs", "dls", "cr", "sc", "ld", "rd", "hh", "vh", "bl", "br", "tl",

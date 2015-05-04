@@ -6,21 +6,21 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import commandGenerator.arguments.command.Structure;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 
 @SuppressWarnings("serial")
 public class OptionsTab extends JTabbedPane implements CComponent
 {
 
 	private int selectedTab;
-	private final HelperPanel[] panels;
+	private final CPanel[] panels;
 	private final Structure[] structures;
 
 	public OptionsTab(Structure... structures)
 	{
 		this.structures = structures;
 		this.selectedTab = 0;
-		this.panels = new HelperPanel[structures.length];
+		this.panels = new CPanel[structures.length];
 		for (int i = 0; i < this.structures.length; i++)
 		{
 			this.panels[i] = this.structures[i].generatePanel();
@@ -56,7 +56,7 @@ public class OptionsTab extends JTabbedPane implements CComponent
 	public void setEnabledContent(boolean enable)
 	{
 		this.setEnabled(enable);
-		for (HelperPanel p : this.panels)
+		for (CPanel p : this.panels)
 			p.setEnabledContent(enable);
 
 	}

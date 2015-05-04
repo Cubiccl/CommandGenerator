@@ -8,35 +8,33 @@ import commandGenerator.main.Lang;
 public class CButton extends BaseButton
 {
 
-	private boolean lang;
-	private String title;
+	private boolean translates;
+	private String text;
 
-	public CButton(String title)
+	public CButton(String text)
 	{
-		this(title, true);
+		this(text, true);
 	}
 
-	public CButton(String title, boolean lang)
+	public CButton(String text, boolean translates)
 	{
-		super(title);
-		this.title = title;
-		this.lang = lang;
-		this.setPreferredSize(new Dimension(200, 20));
-		this.setMinimumSize(new Dimension(200, 20));
+		super(text);
+		this.text = text;
+		this.translates = translates;
+		this.setSize(new Dimension(200, 20));
 		this.updateLang();
 	}
 
-	public void setTitle(String title)
+	public void setTitle(String text)
 	{
-		this.title = title;
+		this.text = text;
 		this.updateLang();
 	}
 
 	@Override
 	public void updateLang()
 	{
-		if (this.lang) this.setText(Lang.get(this.title));
-		else this.setText(this.title);
+		if (this.translates) this.setText(Lang.get(this.text));
 	}
 
 }

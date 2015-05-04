@@ -21,7 +21,9 @@ public class AchievementArgument extends Argument
 	@Override
 	public String generateCommand()
 	{
-		return this.panel.getSelectedAchievement().commandStructure();
+		Achievement value = this.panel.getSelectedAchievement();
+		if (value == null) return null;
+		return value.commandStructure();
 	}
 
 	@Override

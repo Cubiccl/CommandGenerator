@@ -10,10 +10,10 @@ import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagFloat;
 import commandGenerator.gui.helper.components.CLabel;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 
 @SuppressWarnings("serial")
-public class RotationSelectionPanel extends HelperPanel
+public class RotationSelectionPanel extends CPanel
 {
 
 	private CLabel labelX, labelY;

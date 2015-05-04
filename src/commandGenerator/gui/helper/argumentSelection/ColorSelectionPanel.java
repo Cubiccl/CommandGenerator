@@ -11,10 +11,10 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import commandGenerator.gui.helper.components.CLabel;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 
 @SuppressWarnings("serial")
-public class ColorSelectionPanel extends HelperPanel
+public class ColorSelectionPanel extends CPanel
 {
 	private JLabel labelColor;
 	private CLabel labelRed, labelGreen, labelBlue;

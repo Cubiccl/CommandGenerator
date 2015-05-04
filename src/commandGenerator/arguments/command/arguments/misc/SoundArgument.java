@@ -1,7 +1,6 @@
 package commandGenerator.arguments.command.arguments.misc;
 
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.util.List;
 
@@ -52,9 +51,8 @@ public class SoundArgument extends Argument implements IBox
 	public void initGui()
 	{
 		this.box = new ObjectComboBox("GUI:" + this.getId(), Registry.getObjectList(ObjectBase.SOUND), this);
-		this.button = new HelpButton(Lang.get("HELP:sound." + this.box.getValue().getId()), this.box.getValue().getId());
-		this.button.setMinimumSize(new Dimension(20, 40));
-		this.button.setPreferredSize(new Dimension(20, 40));
+		this.button = new HelpButton();
+		if (this.box.getValue() != null) this.button.setData(Lang.get("HELP:sound." + this.box.getValue().getId()), this.box.getValue().getId());
 	}
 
 	@Override

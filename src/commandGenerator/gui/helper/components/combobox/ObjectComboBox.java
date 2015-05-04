@@ -1,202 +1,62 @@
 package commandGenerator.gui.helper.components.combobox;
 
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.gui.helper.components.CComponent;
-import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.icomponent.IBox;
 
 @SuppressWarnings("serial")
-public class ObjectComboBox extends JPanel implements CComponent
+public class ObjectComboBox extends LabeledSearchBox
 {
 
-	private CComboBox<String> box;
-	private List<ObjectBase> displayed = new ArrayList<ObjectBase>();
-	private CLabel label;
 	private ObjectBase[] objects;
-	private IBox parent;
-	private JTextField text;
 
 	public ObjectComboBox(String title, ObjectBase[] objects, IBox parent)
 	{
-		super(new GridBagLayout());
+		super(title, new String[0], parent);
 
 		String[] names = new String[objects.length];
 		for (int i = 0; i < names.length; i++)
-		{
 			names[i] = objects[i].getName();
-			displayed.add(objects[i]);
-		}
-
-		text = new JTextField(18);
-		text.addKeyListener(new KeyListener() {
-			@Override
-			public void keyPressed(KeyEvent arg0)
-			{}
-
-			@Override
-			public void keyReleased(KeyEvent e)
-			{
-				search(e);
-			}
-
-			@Override
-			public void keyTyped(KeyEvent arg0)
-			{}
-		});
-		text.setPreferredSize(new Dimension(200, 20));
-		text.setMinimumSize(new Dimension(200, 20));
-
-		label = new CLabel(title);
-
-		box = new CComboBox<String>(names);
-		box.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				boxSelect();
-			}
-		});
-		box.setPreferredSize(new Dimension(200, 20));
-		box.setMinimumSize(new Dimension(200, 20));
+		this.setValues(names);
 
 		this.objects = objects;
-		this.parent = parent;
-
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridheight = 2;
-		add(label, gbc);
-		gbc.gridx++;
-		gbc.gridheight = 1;
-		add(text, gbc);
-		gbc.gridy++;
-		add(box, gbc);
-
-		setPreferredSize(new Dimension(label.getPreferredSize().width + 202, 42));
-		setMinimumSize(new Dimension(label.getMinimumSize().width + 202, 42));
-	}
-
-	private void boxSelect()
-	{
-		if (parent != null) parent.updateCombobox();
-		ObjectBase selected = displayed.get(box.getSelectedIndex());
-		displayed.clear();
-		text.setText("");
-		String[] names = new String[objects.length];
-		for (int i = 0; i < objects.length; i++)
-		{
-			names[i] = objects[i].getName();
-			displayed.add(objects[i]);
-		}
-		box.setModel(new JComboBox<String>(names).getModel());
-		box.setSelectedItem(selected.getName());
-	}
-
-	/** Returns the selected index. */
-	public int getIndex()
-	{
-		return box.getSelectedIndex();
 	}
 
 	/** Returns the selected Object. */
 	public ObjectBase getValue()
 	{
-		if (box.getSelectedItem() == null) return null;
-		return displayed.get(box.getSelectedIndex());
-	}
+		String selection = (String) this.getSelectedItem();
+		if (selection == null) return null;
 
-	@Override
-	public void reset()
-	{
-		text.setText("");
-		box.setSelectedIndex(0);
-	}
-
-	protected void search(KeyEvent key)
-	{
-
-		if (text.getText() == null || text.getText() == "") return;
-
-		if (key != null && key.getKeyCode() == 10 && box.getSelectedItem() != null)
+		for (ObjectBase object : this.objects)
 		{
-			ObjectBase selected = displayed.get(box.getSelectedIndex());
-			displayed.clear();
-			text.setText("");
-			String[] names = new String[objects.length];
-			for (int i = 0; i < objects.length; i++)
-			{
-				names[i] = objects[i].getName();
-				displayed.add(objects[i]);
-			}
-			box.setModel(new JComboBox<String>(names).getModel());
-			box.setSelectedItem(selected.getName());
-			if (parent != null) parent.updateCombobox();
-			return;
+			if (object.getName().equals(selection)) return object;
 		}
 
-		List<String> names = new ArrayList<String>();
-		displayed.clear();
-		for (ObjectBase test : objects)
-		{
-			if (test.getName().toLowerCase().contains(text.getText().toLowerCase()))
-			{
-				names.add(test.getName());
-				displayed.add(test);
-			}
-		}
-		box.setModel(new JComboBox<String>(names.toArray(new String[0])).getModel());
-
+		return null;
 	}
 
 	public void setData(ObjectBase[] objects)
 	{
 		this.objects = objects;
-		text.setText("");
-		search(null);
-		box.setPreferredSize(new Dimension(200, 20));
-	}
-
-	@Override
-	public void setEnabledContent(boolean enable)
-	{
-		label.setEnabled(enable);
-		box.setEnabled(enable);
-		text.setEnabled(enable);
+		this.reset();
+		this.updateLang();
 	}
 
 	public void setSelected(ObjectBase object)
 	{
-		search(null);
-		box.setSelectedItem(object.getName());
+		this.reset();
+		this.setSelectedItem(object.getName());
 	}
 
 	@Override
 	public void updateLang()
 	{
-		label.updateLang();
-		displayed.clear();
-		String[] names = new String[objects.length];
+		super.updateLang();
+		
+		String[] names = new String[this.objects.length];
 		for (int i = 0; i < names.length; i++)
-		{
-			names[i] = objects[i].getName();
-			displayed.add(objects[i]);
-		}
-		box.setModel(new JComboBox<String>(names).getModel());
+			names[i] = this.objects[i].getName();
+		this.setValues(names);
 	}
 
 }

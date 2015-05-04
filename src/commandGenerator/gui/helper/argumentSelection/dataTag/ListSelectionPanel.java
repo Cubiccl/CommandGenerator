@@ -32,12 +32,12 @@ import commandGenerator.gui.helper.argumentSelection.EnchantSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.json.JsonSelectionPanel;
 import commandGenerator.gui.helper.components.button.CButton;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class ListSelectionPanel extends HelperPanel
+public class ListSelectionPanel extends CPanel
 {
 
 	private CButton buttonAdd, buttonEdit, buttonRemove;

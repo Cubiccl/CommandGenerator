@@ -22,20 +22,20 @@ import commandGenerator.gui.helper.argumentSelection.dataTag.NBTTagPanel;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.button.LoadButton;
 import commandGenerator.gui.helper.components.button.SaveButton;
-import commandGenerator.gui.helper.components.combobox.TextCombobox;
+import commandGenerator.gui.helper.components.combobox.LabeledSearchBox;
 import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.icomponent.ISpin;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.gui.helper.components.spinner.NumberSpinner;
 
 @SuppressWarnings("serial")
-public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISave
+public class BlockSelectionPanel extends CPanel implements IBox, ISpin, ISave
 {
 
 	private Item[] blockList;
 	private CButton buttonSave, buttonLoad;
-	private TextCombobox comboboxId;
+	private LabeledSearchBox comboboxId;
 	private boolean data;
 	private JLabel labelName, labelImage;
 	private NBTTagPanel panelData;
@@ -100,7 +100,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 		String[] ids = new String[blockList.length];
 		for (int i = 0; i < ids.length; i++)
 			ids[i] = blockList[i].getId();
-		comboboxId = new TextCombobox("GUI:block.id", ids, this);
+		comboboxId = new LabeledSearchBox("GUI:block.id", ids, this);
 
 		if (data) panelData = new NBTTagPanel("GUI:tag.block", blockList[0], DataTags.blocks);
 	}
@@ -111,7 +111,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 
 	public Item generateBlock()
 	{
-		return (Item) Registry.getObjectFromId(comboboxId.getValue());
+		return (Item) Registry.getObjectFromId((String) comboboxId.getSelectedItem());
 	}
 
 	public ItemStack getBlockAsItemStack()
@@ -164,7 +164,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 
 	public void setBlock(Item block)
 	{
-		this.comboboxId.setSelected(block.getId());
+		this.comboboxId.setSelectedItem(block.getId());
 	}
 
 	public void setDamage(int damage)
@@ -186,7 +186,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 			return;
 		}
 
-		comboboxId.setSelected(block.getItem().getId());
+		comboboxId.setSelectedItem(block.getItem().getId());
 		spinnerDamage.setSelected(block.getDamage());
 		if (this.data)
 		{
@@ -200,7 +200,7 @@ public class BlockSelectionPanel extends HelperPanel implements IBox, ISpin, ISa
 		Item item = generateBlock();
 		if (item instanceof ItemData) spinnerDamage.setData(((ItemData) item).getDamageList());
 		else spinnerDamage.setValues(0, item.getMaxDamage());
-		if (data) panelData.updateCombobox(Registry.getObjectFromId(comboboxId.getValue()));
+		if (data) panelData.updateCombobox(Registry.getObjectFromId((String) comboboxId.getSelectedItem()));
 		labelImage.setIcon(item.getTexture(getDamage()));
 		labelName.setText("<html><center>" + item.getName(getDamage()) + "</center></html>");
 	}

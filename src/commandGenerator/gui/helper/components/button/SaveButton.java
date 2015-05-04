@@ -1,17 +1,16 @@
 package commandGenerator.gui.helper.components.button;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JLabel;
 
 import commandGenerator.arguments.objects.SavedObjects;
 import commandGenerator.gui.helper.components.icomponent.ISave;
+import commandGenerator.gui.helper.components.listeners.ClickListener;
+import commandGenerator.gui.helper.components.listeners.IClick;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class SaveButton extends CButton
+public class SaveButton extends CButton implements IClick
 {
 
 	private ISave parent;
@@ -22,17 +21,11 @@ public class SaveButton extends CButton
 		super("GENERAL:save");
 		this.type = type;
 		this.parent = parent;
-
-		this.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				save();
-			}
-		});
+		this.addActionListener(new ClickListener(this));
 	}
 
-	private void save()
+	@Override
+	public void click()
 	{
 		Object object = this.parent.getObjectToSave();
 		String name = DisplayHelper.askObjectName(this.type);

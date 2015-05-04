@@ -5,10 +5,10 @@ import java.util.List;
 
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagList;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 
 @SuppressWarnings("serial")
-public class PoseSelectionPanel extends HelperPanel
+public class PoseSelectionPanel extends CPanel
 {
 
 	private PoseRotPanel body, lArm, rArm, head, lLeg, rLeg;

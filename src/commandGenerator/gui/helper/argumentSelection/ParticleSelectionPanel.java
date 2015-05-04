@@ -9,12 +9,12 @@ import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.components.button.HelpButton;
 import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.icomponent.IBox;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
-public class ParticleSelectionPanel extends HelperPanel implements IBox
+public class ParticleSelectionPanel extends CPanel implements IBox
 {
 
 	private HelpButton buttonHelp;
@@ -40,8 +40,9 @@ public class ParticleSelectionPanel extends HelperPanel implements IBox
 	protected void createComponents()
 	{
 		ObjectBase[] list = Registry.getObjectList(ObjectBase.PARTICLE);
-		buttonHelp = new HelpButton(((Particle) list[0]).getDescription(), list[0].getName());
+		buttonHelp = new HelpButton();
 		buttonHelp.setPreferredSize(new Dimension(20, 40));
+		buttonHelp.setData(((Particle) list[0]).getDescription(), list[0].getName());
 
 		comboboxParticle = new ObjectComboBox("GENERAL:particle", Registry.getObjectList(ObjectBase.PARTICLE), this);
 

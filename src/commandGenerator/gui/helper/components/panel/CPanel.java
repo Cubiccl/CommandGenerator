@@ -13,7 +13,7 @@ import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public abstract class HelperPanel extends JPanel implements CComponent
+public abstract class CPanel extends JPanel implements CComponent
 {
 
 	private static final int MIN = 20;
@@ -33,7 +33,7 @@ public abstract class HelperPanel extends JPanel implements CComponent
 	 *            - The panel width.
 	 * @param height
 	 *            - The panel height. */
-	public HelperPanel(String title)
+	public CPanel(String title)
 	{
 		super(new GridBagLayout());
 		this.title = title;

@@ -7,11 +7,11 @@ import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.icomponent.IBox;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
-public class AchievementSelectionPanel extends HelperPanel implements IBox
+public class AchievementSelectionPanel extends CPanel implements IBox
 {
 
 	private ObjectComboBox achievementBox;
@@ -44,6 +44,7 @@ public class AchievementSelectionPanel extends HelperPanel implements IBox
 
 	public Achievement getSelectedAchievement()
 	{
+		if (this.achievementBox.getValue() == null) return null;
 		DisplayHelper.log("Generated achievement " + achievementBox.getValue().getName());
 		return (Achievement) achievementBox.getValue();
 	}

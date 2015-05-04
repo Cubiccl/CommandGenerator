@@ -4,10 +4,10 @@ import java.awt.Dimension;
 
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CLabel;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 
 @SuppressWarnings("serial")
-public class DisabledSlotsPanel extends HelperPanel
+public class DisabledSlotsPanel extends CPanel
 {
 
 	private CLabel hand, feet, legs, chest, head, label;

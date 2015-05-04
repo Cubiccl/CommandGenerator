@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.components.combobox;
 
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -16,8 +15,7 @@ import commandGenerator.main.Lang;
 @SuppressWarnings("serial")
 public class ChoiceComboBox extends JPanel implements CComponent
 {
-
-	private CComboBox<String> box;
+	private JComboBox<String> box;
 	private HelpButton button;
 	private String[] choices;
 	private String title;
@@ -43,10 +41,11 @@ public class ChoiceComboBox extends JPanel implements CComponent
 
 		if (this.hasHelp)
 		{
-			this.button = new HelpButton(Lang.get("HELP:" + title + "." + this.choices[0]), this.choices[0]);
+			this.button = new HelpButton();
+			this.button.setData(Lang.get("HELP:" + title + "." + this.choices[0]), this.choices[0]);
 		}
 
-		this.box = new CComboBox<String>(choices);
+		this.box = new JComboBox<String>(choices);
 		if (hasHelp) this.box.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -54,15 +53,13 @@ public class ChoiceComboBox extends JPanel implements CComponent
 				button.setData(Lang.get("HELP:" + title + "." + choices[box.getSelectedIndex()]), (String) box.getSelectedItem());
 			}
 		});
-		this.box.setMinimumSize(new Dimension(200, 20));
-		this.box.setPreferredSize(new Dimension(200, 20));
 
 		this.updateLang();
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		this.add(box, gbc);
+		this.add(this.box, gbc);
 		gbc.gridx++;
 		if (hasHelp) this.add(this.button, gbc);
 	}

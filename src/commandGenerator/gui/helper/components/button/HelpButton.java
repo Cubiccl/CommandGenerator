@@ -2,32 +2,25 @@ package commandGenerator.gui.helper.components.button;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+import commandGenerator.gui.helper.components.listeners.ClickListener;
+import commandGenerator.gui.helper.components.listeners.IClick;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
-public class HelpButton extends CButton
+public class HelpButton extends BaseButton implements IClick
 {
 
 	private String message, title;
 
-	public HelpButton(String messageArg, String titleArg)
+	public HelpButton()
 	{
 		super("?");
-		this.message = messageArg;
-		this.title = titleArg;
-		this.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				DisplayHelper.showHelp(message, title);
-			}
-		});
+		this.message = "";
+		this.title = "";
+		this.addActionListener(new ClickListener(this));
 		this.setFont(new Font(this.getName(), Font.PLAIN, 11));
-		this.setPreferredSize(new Dimension(20, 20));
-		this.setMinimumSize(new Dimension(20, 20));
+		this.setSize(new Dimension(20, 20));
 	}
 
 	public void setData(String newMessage, String newTitle)
@@ -35,12 +28,11 @@ public class HelpButton extends CButton
 		this.message = newMessage;
 		this.title = newTitle;
 	}
-
-	public void setTitle(String title)
-	{}
-
+	
 	@Override
-	public void updateLang()
-	{}
+	public void click()
+	{
+		DisplayHelper.showHelp(this.message, this.title);
+	}
 
 }

@@ -54,6 +54,7 @@ public class Effect
 	/** Generates the command structure for the /effect command. */
 	public String commandStructure()
 	{
+		if (this.type == null) return null;
 		return this.type.getId() + " " + Integer.toString(this.duration) + " " + Integer.toString(this.amplifier) + " " + Boolean.toString(!this.showParticles);
 	}
 

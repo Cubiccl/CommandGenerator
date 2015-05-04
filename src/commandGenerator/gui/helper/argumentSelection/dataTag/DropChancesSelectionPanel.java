@@ -8,11 +8,11 @@ import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagFloat;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
-public class DropChancesSelectionPanel extends HelperPanel
+public class DropChancesSelectionPanel extends CPanel
 {
 
 	private CEntry entryHand, entryHead, entryChest, entryLegs, entryFeet;

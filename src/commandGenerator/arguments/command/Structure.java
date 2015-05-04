@@ -30,7 +30,7 @@ import commandGenerator.arguments.command.arguments.misc.TeamOptionArgument;
 import commandGenerator.arguments.command.arguments.misc.XpArgument;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.gui.helper.components.panel.StructurePanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
@@ -258,7 +258,7 @@ public enum Structure
 	}
 
 	/** Generates the Panel to display to the user. */
-	public HelperPanel generatePanel()
+	public CPanel generatePanel()
 	{
 		return new StructurePanel(this);
 	}

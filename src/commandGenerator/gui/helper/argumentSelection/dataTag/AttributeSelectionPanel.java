@@ -8,14 +8,14 @@ import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.button.LoadButton;
 import commandGenerator.gui.helper.components.button.SaveButton;
-import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
+import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.icomponent.ISave;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
-public class AttributeSelectionPanel extends HelperPanel implements ISave
+public class AttributeSelectionPanel extends CPanel implements ISave
 {
 
 	private CButton buttonSave, buttonLoad;

@@ -1,5 +1,7 @@
 package commandGenerator.gui.helper.components.button;
 
+import java.awt.Dimension;
+
 import javax.swing.JButton;
 
 import commandGenerator.gui.helper.components.CComponent;
@@ -25,5 +27,15 @@ public class BaseButton extends JButton implements CComponent
 
 	@Override
 	public void updateLang()
+	{}
+
+	@Override
+	public void setSize(Dimension size)
+	{
+		this.setPreferredSize(size);
+		this.setMinimumSize(size);
+	}
+
+	public void click()
 	{}
 }

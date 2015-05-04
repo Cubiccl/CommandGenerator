@@ -54,4 +54,11 @@ public class CLabel extends JLabel implements CComponent
 		else this.setText(Lang.get(this.title));
 	}
 
+	@Override
+	public void setSize(Dimension size)
+	{
+		this.setPreferredSize(size);
+		this.setMinimumSize(size);
+	}
+
 }

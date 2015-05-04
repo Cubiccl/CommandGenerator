@@ -2,10 +2,10 @@ package commandGenerator.gui.helper.argumentSelection.dataTag;
 
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CLabel;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 
 @SuppressWarnings("serial")
-public class FlagSelectionPanel extends HelperPanel
+public class FlagSelectionPanel extends CPanel
 {
 
 	private CCheckBox enchant, attribute, unbreak, destroy, place, other;

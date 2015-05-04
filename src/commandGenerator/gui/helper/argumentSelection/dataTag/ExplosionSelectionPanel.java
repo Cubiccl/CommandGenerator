@@ -20,12 +20,12 @@ import commandGenerator.gui.helper.argumentSelection.ColorSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
-import commandGenerator.gui.helper.components.panel.HelperPanel;
+import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
-public class ExplosionSelectionPanel extends HelperPanel
+public class ExplosionSelectionPanel extends CPanel
 {
 	private static final String[] fireworksTypes = { "small", "large", "star", "creeper", "burst" };
 
