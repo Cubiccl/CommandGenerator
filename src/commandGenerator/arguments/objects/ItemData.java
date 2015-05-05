@@ -31,6 +31,7 @@ public class ItemData extends Item
 	}
 
 	/** Returns the different damage list. */
+	@Override
 	public int[] getDamageList()
 	{
 		return this.damageList;

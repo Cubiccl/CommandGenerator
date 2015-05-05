@@ -36,7 +36,7 @@ public class SearchComboBox extends JPanel implements IClick
 
 		this.add(this.textfield);
 		this.add(this.combobox);
-		this.setSize(new Dimension(200, 20));
+		this.setSize(200, 20);
 	}
 
 	@Override
@@ -85,10 +85,10 @@ public class SearchComboBox extends JPanel implements IClick
 	}
 
 	@Override
-	public void setSize(Dimension size)
+	public void setSize(int width, int height)
 	{
-		this.setPreferredSize(size);
-		this.setMinimumSize(size);
+		this.setPreferredSize(new Dimension(width, height));
+		this.setMinimumSize(new Dimension(width, height));
 	}
 
 	public int getSelectedIndex()

@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import commandGenerator.arguments.objects.Item;
-import commandGenerator.arguments.objects.ItemData;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
@@ -27,7 +26,7 @@ import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.icomponent.ISpin;
 import commandGenerator.gui.helper.components.panel.CPanel;
-import commandGenerator.gui.helper.components.spinner.NumberSpinner;
+import commandGenerator.gui.helper.components.spinner.ListSpinner;
 
 @SuppressWarnings("serial")
 public class BlockSelectionPanel extends CPanel implements IBox, ISpin, ISave
@@ -39,7 +38,7 @@ public class BlockSelectionPanel extends CPanel implements IBox, ISpin, ISave
 	private boolean data;
 	private JLabel labelName, labelImage;
 	private NBTTagPanel panelData;
-	private NumberSpinner spinnerDamage;
+	private ListSpinner spinnerDamage;
 
 	public BlockSelectionPanel(String title, ObjectBase[] blockList, boolean data)
 	{
@@ -95,7 +94,7 @@ public class BlockSelectionPanel extends CPanel implements IBox, ISpin, ISave
 		buttonSave = new SaveButton(ObjectBase.BLOCK, this);
 		buttonLoad = new LoadButton(ObjectBase.BLOCK, this);
 
-		spinnerDamage = new NumberSpinner("GUI:block.damage", 0, 0, this);
+		spinnerDamage = new ListSpinner("GUI:block.damage", new int[0], this);
 
 		String[] ids = new String[blockList.length];
 		for (int i = 0; i < ids.length; i++)
@@ -103,6 +102,8 @@ public class BlockSelectionPanel extends CPanel implements IBox, ISpin, ISave
 		comboboxId = new LabeledSearchBox("GUI:block.id", ids, this);
 
 		if (data) panelData = new NBTTagPanel("GUI:tag.block", blockList[0], DataTags.blocks);
+		
+		this.updateCombobox();
 	}
 
 	@Override
@@ -198,8 +199,7 @@ public class BlockSelectionPanel extends CPanel implements IBox, ISpin, ISave
 	public void updateCombobox()
 	{
 		Item item = generateBlock();
-		if (item instanceof ItemData) spinnerDamage.setData(((ItemData) item).getDamageList());
-		else spinnerDamage.setValues(0, item.getMaxDamage());
+		if (item != null) this.spinnerDamage.setValues(item.getDamageList());
 		if (data) panelData.updateCombobox(Registry.getObjectFromId((String) comboboxId.getSelectedItem()));
 		labelImage.setIcon(item.getTexture(getDamage()));
 		labelName.setText("<html><center>" + item.getName(getDamage()) + "</center></html>");

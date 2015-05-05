@@ -30,10 +30,10 @@ public class BaseButton extends JButton implements CComponent
 	{}
 
 	@Override
-	public void setSize(Dimension size)
+	public void setSize(int width, int height)
 	{
-		this.setPreferredSize(size);
-		this.setMinimumSize(size);
+		this.setPreferredSize(new Dimension(width, height));
+		this.setMinimumSize(new Dimension(width, height));
 	}
 
 	public void click()

@@ -1,12 +1,18 @@
 package commandGenerator.gui.helper.components.spinner;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerListModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.gui.helper.components.CLabel;
@@ -14,20 +20,22 @@ import commandGenerator.gui.helper.components.button.BaseButton;
 import commandGenerator.gui.helper.components.icomponent.ISpin;
 
 @SuppressWarnings("serial")
-public class NumberSpinner extends JPanel implements CComponent
+public class ListSpinner extends JPanel implements CComponent
 {
 
 	private BaseButton buttonMax, buttonMin;
 	private CLabel label;
-	private CSpinner spinner;
+	private JSpinner spinner;
+	private int[] values;
+	private ISpin parent;
 
-	public NumberSpinner(String labelTextId, int min, int max, ISpin parent)
+	public ListSpinner(String labelTextId, int[] values, ISpin parent)
 	{
 		super(new GridBagLayout());
+		this.values = values;
+		this.parent = parent;
 
 		this.label = new CLabel(labelTextId);
-
-		this.spinner = new CSpinner(min, max, parent);
 
 		this.buttonMax = new BaseButton("++");
 		this.buttonMax.setSize(50, 20);
@@ -50,7 +58,22 @@ public class NumberSpinner extends JPanel implements CComponent
 				setMin();
 			}
 		});
-		
+
+		ArrayList<Integer> names = new ArrayList<Integer>();
+		for (int value : this.values)
+			names.add(value);
+		if (names.size() == 0) names.add(0);
+
+		this.spinner = new JSpinner(new SpinnerListModel(names));
+		this.spinner.setPreferredSize(new Dimension(200, 20));
+		this.spinner.setMinimumSize(new Dimension(200, 20));
+		this.spinner.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e)
+			{
+				select();
+			}
+		});
+
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -63,50 +86,63 @@ public class NumberSpinner extends JPanel implements CComponent
 		this.add(this.buttonMax);
 	}
 
-	public int getValue()
+	private void select()
 	{
-		return (int) this.spinner.getValue();
+		this.parent.updateSpinner();
+	}
+
+	private void setMin()
+	{
+		if (this.values.length > 0) this.spinner.setValue(this.values[0]);
+	}
+
+	private void setMax()
+	{
+		if (this.values.length > 0) this.spinner.setValue(this.values[this.values.length - 1]);
 	}
 
 	@Override
 	public void reset()
 	{
-		this.spinner.reset();
+		ArrayList<Integer> values = new ArrayList<Integer>();
+		for (int value : this.values)
+			values.add(value);
+		if (values.size() == 0) values.add(0);
+
+		this.spinner.setModel(new SpinnerListModel(values));
 	}
 
 	@Override
 	public void setEnabledContent(boolean enable)
 	{
 		this.setEnabled(enable);
+		this.spinner.setEnabled(enable);
 		this.label.setEnabledContent(enable);
-		this.spinner.setEnabledContent(enable);
 		this.buttonMax.setEnabledContent(enable);
 		this.buttonMin.setEnabledContent(enable);
-	}
-
-	private void setMax()
-	{
-		this.setSelected(this.spinner.getMax());
-	}
-
-	private void setMin()
-	{
-		this.setSelected(this.spinner.getMin());
-	}
-
-	public void setSelected(int value)
-	{
-		if (value >= this.spinner.getMin() && value <= this.spinner.getMax()) spinner.setValue(value);
-	}
-
-	public void setValues(int min, int max)
-	{
-		this.spinner.setValues(min, max);
 	}
 
 	@Override
 	public void updateLang()
 	{
-		label.updateLang();
+		this.label.updateLang();
 	}
+
+	public int getValue()
+	{
+		return (int) this.spinner.getValue();
+	}
+
+	public void setSelected(int value)
+	{
+		for (int i = 0; i < this.values.length; i++)
+			if (this.values[i] == value) this.spinner.setValue(value);
+	}
+
+	public void setValues(int[] values)
+	{
+		this.values = values;
+		this.reset();
+	}
+
 }

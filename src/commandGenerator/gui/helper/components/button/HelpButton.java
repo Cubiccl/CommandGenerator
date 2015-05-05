@@ -1,6 +1,5 @@
 package commandGenerator.gui.helper.components.button;
 
-import java.awt.Dimension;
 import java.awt.Font;
 
 import commandGenerator.gui.helper.components.listeners.ClickListener;
@@ -20,7 +19,7 @@ public class HelpButton extends BaseButton implements IClick
 		this.title = "";
 		this.addActionListener(new ClickListener(this));
 		this.setFont(new Font(this.getName(), Font.PLAIN, 11));
-		this.setSize(new Dimension(20, 20));
+		this.setSize(40, 20);
 	}
 
 	public void setData(String newMessage, String newTitle)
@@ -28,7 +27,7 @@ public class HelpButton extends BaseButton implements IClick
 		this.message = newMessage;
 		this.title = newTitle;
 	}
-	
+
 	@Override
 	public void click()
 	{

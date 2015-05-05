@@ -14,13 +14,13 @@ public class WriteListener implements KeyListener
 
 	@Override
 	public void keyPressed(KeyEvent e)
-	{
-		this.box.write(e.getKeyCode());
-	}
+	{}
 
 	@Override
 	public void keyReleased(KeyEvent e)
-	{}
+	{
+		this.box.write(e.getKeyCode());
+	}
 
 	@Override
 	public void keyTyped(KeyEvent e)

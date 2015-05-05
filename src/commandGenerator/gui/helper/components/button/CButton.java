@@ -1,7 +1,5 @@
 package commandGenerator.gui.helper.components.button;
 
-import java.awt.Dimension;
-
 import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
@@ -21,7 +19,7 @@ public class CButton extends BaseButton
 		super(text);
 		this.text = text;
 		this.translates = translates;
-		this.setSize(new Dimension(200, 20));
+		this.setSize(200, 20);
 		this.updateLang();
 	}
 

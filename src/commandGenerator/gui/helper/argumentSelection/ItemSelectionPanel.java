@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import commandGenerator.arguments.objects.Item;
-import commandGenerator.arguments.objects.ItemData;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Registry;
@@ -28,6 +27,7 @@ import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.icomponent.ISpin;
 import commandGenerator.gui.helper.components.panel.CPanel;
+import commandGenerator.gui.helper.components.spinner.ListSpinner;
 import commandGenerator.gui.helper.components.spinner.NumberSpinner;
 
 @SuppressWarnings("serial")
@@ -41,7 +41,8 @@ public class ItemSelectionPanel extends CPanel implements IBox, ISpin, ISave
 	private Item[] itemList;
 	private JLabel labelImage, labelName;
 	private NBTTagPanel panelData;
-	private NumberSpinner spinnerDamage, spinnerCount, spinnerSlot;
+	private NumberSpinner spinnerCount;
+	private ListSpinner spinnerDamage, spinnerSlot;
 	protected boolean withData, slot;
 
 	public ItemSelectionPanel(String title, ObjectBase[] itemList, boolean withData, boolean slot)
@@ -109,21 +110,16 @@ public class ItemSelectionPanel extends CPanel implements IBox, ISpin, ISave
 			ids[i] = itemList[i].getId();
 
 		comboboxId = new LabeledSearchBox("GUI:item.id", ids, this);
-		
-		spinnerDamage = new NumberSpinner("GUI:item.damage", 0, itemList[0].getMaxDamage(), this);
-		if (itemList[0] instanceof ItemData) spinnerDamage.setData(((ItemData) itemList[0]).getDamageList());
-		else if (itemList[0].getDurability() > 0) spinnerDamage.setValues(0, itemList[0].getDurability());
-		
+
+		spinnerDamage = new ListSpinner("GUI:item.damage", new int[0], this);
+
 		spinnerCount = new NumberSpinner("GUI:item.count", 1, 64, null);
-		
-		if (slot)
-		{
-			spinnerSlot = new NumberSpinner("GUI:item.slot", 0, 27, null);
-			this.spinnerSlot.setData(SLOTS);
-		}
+
+		if (slot) spinnerSlot = new ListSpinner("GUI:item.slot", SLOTS, null);
 
 		if (withData) panelData = new NBTTagPanel("GUI:item.nbt", itemList[0], DataTags.items);
-
+		
+		this.updateCombobox();
 	}
 
 	@Override
@@ -234,18 +230,16 @@ public class ItemSelectionPanel extends CPanel implements IBox, ISpin, ISave
 	public void updateCombobox()
 	{
 		Item item = generateItem();
-		if (item instanceof ItemData) spinnerDamage.setData(((ItemData) item).getDamageList());
-		else spinnerDamage.setValues(0, item.getMaxDamage());
-		if (item.getDurability() > 0) spinnerDamage.setValues(0, item.getDurability());
-		if (withData) panelData.updateCombobox(item);
-		labelImage.setIcon(item.getTexture(spinnerDamage.getValue()));
-		labelName.setText("<html><center>" + item.getName(getDamage()) + "</center></html>");
+		if (item != null) this.spinnerDamage.setValues(item.getDamageList());
+		if (this.withData) panelData.updateCombobox(item);
+		this.labelImage.setIcon(item.getTexture(this.spinnerDamage.getValue()));
+		this.labelName.setText("<html><center>" + item.getName(getDamage()) + "</center></html>");
 	}
 
 	@Override
 	public void updateLang()
 	{
-		updateSpinner();
+		this.updateSpinner();
 		super.updateLang();
 	}
 
@@ -253,8 +247,8 @@ public class ItemSelectionPanel extends CPanel implements IBox, ISpin, ISave
 	public void updateSpinner()
 	{
 		Item item = generateItem();
-		labelImage.setIcon(item.getTexture(spinnerDamage.getValue()));
-		labelName.setText("<html><center>" + item.getName(getDamage()) + "</center></html>");
+		this.labelImage.setIcon(item.getTexture(this.spinnerDamage.getValue()));
+		this.labelName.setText("<html><center>" + item.getName(getDamage()) + "</center></html>");
 	}
 
 }

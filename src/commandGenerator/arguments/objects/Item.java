@@ -50,7 +50,7 @@ public class Item extends ObjectBase
 		this.idNum = idNum;
 		this.maxDamage = 0;
 		this.durability = 0;
-		this.textureType = 1;
+		this.textureType = 100000;
 		this.langType = "normal";
 	}
 
@@ -205,5 +205,17 @@ public class Item extends ObjectBase
 	protected int getTextureType()
 	{
 		return this.textureType;
+	}
+
+	public int[] getDamageList()
+	{
+		int maxDamage = this.getMaxDamage();
+		if (this.getDurability() > 0) maxDamage = this.getDurability();
+
+		int[] damageList = new int[maxDamage];
+		for (int i = 0; i < damageList.length; i++)
+			damageList[i] = i;
+
+		return damageList;
 	}
 }
