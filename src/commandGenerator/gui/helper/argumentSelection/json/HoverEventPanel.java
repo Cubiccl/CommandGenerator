@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.Achievement;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectCreator;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
@@ -52,7 +52,7 @@ public class HoverEventPanel extends CPanel
 
 		panelJson = new JsonSelectionPanel("GUI:json.text", false);
 		panelJson.setVisible(false);
-		panelItem = new ItemSelectionPanel("GUI:json.item", Registry.getList(CGConstants.LIST_ITEMS), true, false);
+		panelItem = new ItemSelectionPanel("GUI:json.item", Generator.registry.getList(CGConstants.LIST_ITEMS), true, false);
 		panelItem.setVisible(false);
 		panelStat = new AchievementSelectionPanel();
 		panelStat.setVisible(false);
@@ -155,7 +155,7 @@ public class HoverEventPanel extends CPanel
 		if (action.equals("show_achievement"))
 		{
 			comboboxAction.setSelected("show_achievement");
-			panelStat.setupFrom(((Achievement) Registry.getObjectFromId(value)));
+			panelStat.setupFrom(((Achievement) Generator.registry.getObjectFromId(value)));
 		}
 
 		textfieldText.setVisible(comboboxAction.getSelectedIndex() == 0);

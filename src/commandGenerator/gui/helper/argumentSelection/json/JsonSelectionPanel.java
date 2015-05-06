@@ -3,6 +3,7 @@ package commandGenerator.gui.helper.argumentSelection.json;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.ObjectCreator;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
@@ -14,7 +15,6 @@ import commandGenerator.gui.helper.components.button.HelpButton;
 import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
 import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.CGConstants;
-import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
 @SuppressWarnings("serial")
@@ -66,11 +66,11 @@ public class JsonSelectionPanel extends CPanel
 	protected void createComponents()
 	{
 		buttonHelpInsertion = new HelpButton();
-		buttonHelpInsertion.setData(Lang.get("HELP:json.insertion"), "GUI:json.insertion");
+		buttonHelpInsertion.setData(Generator.translate("HELP:json.insertion"), "GUI:json.insertion");
 		buttonHelpHover = new HelpButton();
-		buttonHelpInsertion.setData(Lang.get("HELP:json.hover"), "GUI:json.hover");
+		buttonHelpInsertion.setData(Generator.translate("HELP:json.hover"), "GUI:json.hover");
 		buttonHelpClick = new HelpButton();
-		buttonHelpInsertion.setData(Lang.get("HELP:json.click"), "GUI:json.click");
+		buttonHelpInsertion.setData(Generator.translate("HELP:json.click"), "GUI:json.click");
 
 		entryText = new CEntry("GUI:json.text", "");
 		entryInsertion = new CEntry("GUI:json.insertion", "");

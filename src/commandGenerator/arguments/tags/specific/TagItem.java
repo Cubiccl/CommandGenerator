@@ -1,7 +1,7 @@
 package commandGenerator.arguments.tags.specific;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagInt;
@@ -28,7 +28,7 @@ public class TagItem extends TagCompound
 		clear();
 		ObjectBase[] items = new ObjectBase[ids.length];
 		for (int i = 0; i < ids.length; i++)
-			items[i] = Registry.getObjectFromId(ids[i]);
+			items[i] = Generator.registry.getObjectFromId(ids[i]);
 		panel = new ItemSelectionPanel("GENERAL:item", items, true, slot);
 		showPanel();
 

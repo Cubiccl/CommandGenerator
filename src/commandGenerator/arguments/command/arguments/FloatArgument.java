@@ -8,11 +8,11 @@ import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.button.HelpButton;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 
 public class FloatArgument extends Argument
 {
@@ -76,7 +76,7 @@ public class FloatArgument extends Argument
 		if (this.hasHelp)
 		{
 			this.button = new HelpButton();
-			this.button.setData(Lang.get("HELP:" + this.getId()), "");
+			this.button.setData(Generator.translate("HELP:" + this.getId()), "");
 		}
 		if (!this.isCompulsery())
 		{

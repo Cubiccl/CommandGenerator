@@ -1,9 +1,9 @@
 package commandGenerator.gui.helper.argumentSelection.dataTag;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.Attribute;
 import commandGenerator.arguments.objects.AttributeType;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.button.LoadButton;
@@ -48,7 +48,7 @@ public class AttributeSelectionPanel extends CPanel implements ISave
 		entryAmount = new CEntry("GUI:attribute.amount", "1");
 		entryAmount.setTextField("1");
 
-		comboboxAttribute = new ObjectComboBox("GUI:attribute.select", Registry.getObjectList(ObjectBase.ATTRIBUTE), null);
+		comboboxAttribute = new ObjectComboBox("GUI:attribute.select", Generator.registry.getObjectList(ObjectBase.ATTRIBUTE), null);
 		comboboxOperation = new ChoiceComboBox("attribute.operation", Attribute.operations, false);
 	}
 

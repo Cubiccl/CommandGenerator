@@ -14,9 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registry;
-import commandGenerator.main.Lang;
 
 public abstract class Tag extends ObjectBase
 {
@@ -46,11 +45,11 @@ public abstract class Tag extends ObjectBase
 		{
 			for (String objectId : ids[0].split(":"))
 			{
-				if (!objectId.startsWith("LIST=")) objects.add(Registry.getObjectFromId(objectId));
+				if (!objectId.startsWith("LIST=")) objects.add(Generator.registry.getObjectFromId(objectId));
 				else
 				{
 					objectId = objectId.substring("LIST=".length());
-					for (ObjectBase object : Registry.getList(objectId))
+					for (ObjectBase object : Generator.registry.getList(objectId))
 						objects.add(object);
 
 				}
@@ -87,7 +86,7 @@ public abstract class Tag extends ObjectBase
 	public String getDescription()
 	{
 		if (getId().equals("")) return "";
-		return Lang.get("TAGS:" + getId() + ".description");
+		return Generator.translate("TAGS:" + getId() + ".description");
 	}
 
 	@Override
@@ -104,7 +103,7 @@ public abstract class Tag extends ObjectBase
 	public String getName()
 	{
 		if (getId().equals("")) return "";
-		return Lang.get("TAGS:" + getId());
+		return Generator.translate("TAGS:" + getId());
 	}
 
 	public byte getTagType()
@@ -144,7 +143,7 @@ public abstract class Tag extends ObjectBase
 				}
 			}
 		});
-		boolean cancel = JOptionPane.showConfirmDialog(null, panel, Lang.get("GUI:tag.add") + " : " + getName(), JOptionPane.OK_CANCEL_OPTION) != JOptionPane.OK_OPTION;
+		boolean cancel = JOptionPane.showConfirmDialog(null, panel, Generator.translate("GUI:tag.add") + " : " + getName(), JOptionPane.OK_CANCEL_OPTION) != JOptionPane.OK_OPTION;
 		if (!cancel) isEmpty = false;
 		return cancel;
 	}

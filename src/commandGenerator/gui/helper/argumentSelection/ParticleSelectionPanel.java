@@ -2,10 +2,10 @@ package commandGenerator.gui.helper.argumentSelection;
 
 import java.awt.Dimension;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Particle;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.components.button.HelpButton;
 import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.icomponent.IBox;
@@ -39,16 +39,16 @@ public class ParticleSelectionPanel extends CPanel implements IBox
 	@Override
 	protected void createComponents()
 	{
-		ObjectBase[] list = Registry.getObjectList(ObjectBase.PARTICLE);
+		ObjectBase[] list = Generator.registry.getObjectList(ObjectBase.PARTICLE);
 		buttonHelp = new HelpButton();
 		buttonHelp.setPreferredSize(new Dimension(20, 40));
 		buttonHelp.setData(((Particle) list[0]).getDescription(), list[0].getName());
 
-		comboboxParticle = new ObjectComboBox("GENERAL:particle", Registry.getObjectList(ObjectBase.PARTICLE), this);
+		comboboxParticle = new ObjectComboBox("GENERAL:particle", Generator.registry.getObjectList(ObjectBase.PARTICLE), this);
 
-		panelBlock = new BlockSelectionPanel("GUI:particle.block", Registry.getList(CGConstants.LIST_BLOCKS), false);
+		panelBlock = new BlockSelectionPanel("GUI:particle.block", Generator.registry.getList(CGConstants.LIST_BLOCKS), false);
 		panelBlock.setVisible(false);
-		panelItem = new ItemSelectionPanel("GUI:particle.item", Registry.getList(CGConstants.LIST_ICONS), false, false);
+		panelItem = new ItemSelectionPanel("GUI:particle.item", Generator.registry.getList(CGConstants.LIST_ICONS), false, false);
 		panelItem.setVisible(false);
 	}
 

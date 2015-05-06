@@ -2,10 +2,10 @@ package commandGenerator.gui.helper.argumentSelection;
 
 import javax.swing.JOptionPane;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.EnchantType;
 import commandGenerator.arguments.objects.Enchantment;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.button.LoadButton;
@@ -16,7 +16,6 @@ import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.gui.helper.components.spinner.NumberSpinner;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
 public class EnchantSelectionPanel extends CPanel implements IBox, ISave
@@ -57,7 +56,7 @@ public class EnchantSelectionPanel extends CPanel implements IBox, ISave
 		spinnerLevel = new NumberSpinner("GUI:enchant.level", 1, 5, null);
 		spinnerLevel.setVisible(limited);
 
-		comboboxEnchant = new ObjectComboBox("GUI:enchant.choose", Registry.getObjectList(ObjectBase.ENCHANTMENT), this);
+		comboboxEnchant = new ObjectComboBox("GUI:enchant.choose", Generator.registry.getObjectList(ObjectBase.ENCHANTMENT), this);
 	}
 
 	@Override
@@ -76,13 +75,13 @@ public class EnchantSelectionPanel extends CPanel implements IBox, ISave
 				level = Integer.parseInt(entryLevel.getText());
 				if (level < 1)
 				{
-					JOptionPane.showMessageDialog(null, Lang.get("WARNING:min").replaceAll("<min>", "1"), Lang.get("WARNING:title"),
+					JOptionPane.showMessageDialog(null, Generator.translate("WARNING:min").replaceAll("<min>", "1"), Generator.translate("WARNING:title"),
 							JOptionPane.WARNING_MESSAGE);
 					return null;
 				}
 			} catch (Exception e)
 			{
-				JOptionPane.showMessageDialog(null, Lang.get("WARNING:min").replaceAll("<min>", "1"), Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, Generator.translate("WARNING:min").replaceAll("<min>", "1"), Generator.translate("WARNING:title"), JOptionPane.WARNING_MESSAGE);
 				return null;
 			}
 		}

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import commandGenerator.Generator;
 import commandGenerator.gui.helper.components.panel.SettingsPanel;
 
 public class Settings
@@ -61,7 +62,7 @@ public class Settings
 	public void change()
 	{
 		SettingsPanel panel = new SettingsPanel(this);
-		DisplayHelper.showMessage(panel, Lang.get("GUI:menu.settings"));
+		DisplayHelper.showMessage(panel, Generator.translate("GUI:menu.settings"));
 
 		String newLang = getLangFromName(panel.getLang());
 		if (!language.equalsIgnoreCase(newLang)) setLanguage(newLang);
@@ -73,7 +74,7 @@ public class Settings
 		if (!this.sortType.equals(newSort)) this.sortType = newSort;
 		FileHelper.setOption("sortType", newSort);
 		
-		Lang.updateLang();
+		Generator.lang.updateLang();
 	}
 
 	private void createLangs()
@@ -113,7 +114,7 @@ public class Settings
 	{
 		this.language = language;
 		FileHelper.setOption("lang", language);
-		Lang.updateLang();
+		Generator.lang.updateLang();
 	}
 
 	public static String getDefaultOption(String id)

@@ -9,8 +9,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
+import commandGenerator.Generator;
 import commandGenerator.gui.helper.components.CComponent;
-import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
 public abstract class CPanel extends JPanel implements CComponent
@@ -38,7 +38,7 @@ public abstract class CPanel extends JPanel implements CComponent
 		super(new GridBagLayout());
 		this.title = title;
 		if (!title.equals("GENERAL:options")) setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
-				Lang.get(title)));
+				Generator.translate(title)));
 		setPreferredSize(new Dimension(MIN, MIN));
 
 		gbc = new GridBagConstraints();
@@ -213,7 +213,7 @@ public abstract class CPanel extends JPanel implements CComponent
 	protected void updateTitle()
 	{
 		if (!title.equals("GENERAL:options")) setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
-				Lang.get(title)));
+				Generator.translate(title)));
 	}
 
 }

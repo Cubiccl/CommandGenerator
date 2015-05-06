@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagBoolean;
 import commandGenerator.arguments.tags.TagCompound;
@@ -104,7 +105,7 @@ public abstract class ObjectBase
 					if (tag.getId().equals("Amount")) amount = ((TagDouble) tag).getValue();
 					if (tag.getId().equals("Operation")) operation = ((TagInt) tag).getValue();
 				}
-				return new Attribute((AttributeType) Registry.getObjectFromId(idA), amount, operation);
+				return new Attribute((AttributeType) Generator.registry.getObjectFromId(idA), amount, operation);
 
 			case EFFECT:
 				int idEf = 1,
@@ -119,7 +120,7 @@ public abstract class ObjectBase
 					if (tag.getId().equals("Duration")) duration = ((TagInt) tag).getValue();
 					if (tag.getId().equals("HideParticles")) hide = ((TagBoolean) tag).getValue();
 				}
-				return new Effect((EffectType) Registry.getObjectFromIdNum(EFFECT, idEf), levelEf, duration, !hide);
+				return new Effect((EffectType) Generator.registry.getObjectFromIdNum(EFFECT, idEf), levelEf, duration, !hide);
 
 			case ENCHANTMENT:
 				int idEn = 0,
@@ -130,7 +131,7 @@ public abstract class ObjectBase
 					if (tag.getId().equals("id")) idEn = ((TagInt) tag).getValue();
 					if (tag.getId().equals("lvl")) levelEn = ((TagInt) tag).getValue();
 				}
-				return new Enchantment((EnchantType) Registry.getObjectFromIdNum(ENCHANTMENT, idEn), levelEn);
+				return new Enchantment((EnchantType) Generator.registry.getObjectFromIdNum(ENCHANTMENT, idEn), levelEn);
 
 			case ENTITY:
 				return nbt;
@@ -174,7 +175,7 @@ public abstract class ObjectBase
 	{
 		this.id = id;
 		this.type = type;
-		if (type != TAG) Registry.registerObject(type, this);
+		if (type != TAG) Generator.registry.registerObject(type, this);
 	}
 
 	/** Returns the Object's ID. */

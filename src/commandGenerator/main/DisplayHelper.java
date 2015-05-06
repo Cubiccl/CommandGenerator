@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.SavedObjects;
 
 public class DisplayHelper
@@ -24,7 +25,7 @@ public class DisplayHelper
 		{
 			if (name.equals("") || name.contains(" ")) showWarning("WARNING:name");
 			if (SavedObjects.getList(type).containsKey(name)) showWarning("WARNING:name_already");
-			name = JOptionPane.showInputDialog(null, Lang.get("GENERAL:name"));
+			name = JOptionPane.showInputDialog(null, Generator.translate("GENERAL:name"));
 			if (name == null) return null;
 		} while (name.contains(" ") || name.equals("") || SavedObjects.getList(type).containsKey(name));
 		return name;
@@ -91,7 +92,7 @@ public class DisplayHelper
 	public static void showChangelog()
 	{
 		JOptionPane.showMessageDialog(null, Resources.changelog(Resources.versions[Resources.versions.length - 1]).replaceAll("<br />", "\n"),
-				Lang.get("GENERAL:changelog"), JOptionPane.PLAIN_MESSAGE);
+				Generator.translate("GENERAL:changelog"), JOptionPane.PLAIN_MESSAGE);
 	}
 
 	/** Shows an Dialog Pane containing a Help message.
@@ -102,7 +103,7 @@ public class DisplayHelper
 	 *            - <i>String</i> - The title of the dialog. */
 	public static void showHelp(String text, String title)
 	{
-		JOptionPane.showMessageDialog(null, text, Lang.get("HELP:title") + " : " + title, JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, text, Generator.translate("HELP:title") + " : " + title, JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	/** Shows a message in an Option Panel.
@@ -133,8 +134,8 @@ public class DisplayHelper
 	 *            - <i>String</i> - The ID of the warning message to show. */
 	public static void showWarning(String textId)
 	{
-		log(Lang.get(textId));
-		JOptionPane.showMessageDialog(null, Lang.get(textId), Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
+		log(Generator.translate(textId));
+		JOptionPane.showMessageDialog(null, Generator.translate(textId), Generator.translate("WARNING:title"), JOptionPane.WARNING_MESSAGE);
 	}
 
 	public static String[] splitCommand(String command)
@@ -166,38 +167,38 @@ public class DisplayHelper
 	/** Displays an error warning the user that he should use an integer between min and max. */
 	public static void warningBounds(double min, double max)
 	{
-		log(Lang.get("WARNING:number_bound").replaceAll("<min>", String.valueOf(min)).replaceAll("<max>", String.valueOf(max)));
-		JOptionPane.showMessageDialog(null, Lang.get("WARNING:number_bound").replaceAll("<min>", String.valueOf(min)).replaceAll("<max>", String.valueOf(max)),
-				Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
+		log(Generator.translate("WARNING:number_bound").replaceAll("<min>", String.valueOf(min)).replaceAll("<max>", String.valueOf(max)));
+		JOptionPane.showMessageDialog(null, Generator.translate("WARNING:number_bound").replaceAll("<min>", String.valueOf(min)).replaceAll("<max>", String.valueOf(max)),
+				Generator.translate("WARNING:title"), JOptionPane.WARNING_MESSAGE);
 
 	}
 
 	/** Displays an error warning the user that he should use an integer. */
 	public static void warningInteger()
 	{
-		log(Lang.get("WARNING:integer"));
-		JOptionPane.showMessageDialog(null, Lang.get("WARNING:integer"), Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
+		log(Generator.translate("WARNING:integer"));
+		JOptionPane.showMessageDialog(null, Generator.translate("WARNING:integer"), Generator.translate("WARNING:title"), JOptionPane.WARNING_MESSAGE);
 	}
 
 	/** Displays an error warning the user that he should use a name without space. */
 	public static void warningName()
 	{
-		log(Lang.get("WARNING:name"));
-		JOptionPane.showMessageDialog(null, Lang.get("WARNING:name"), Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
+		log(Generator.translate("WARNING:name"));
+		JOptionPane.showMessageDialog(null, Generator.translate("WARNING:name"), Generator.translate("WARNING:title"), JOptionPane.WARNING_MESSAGE);
 	}
 
 	/** Displays an error warning the user that he should use a number. */
 	public static void warningNumber()
 	{
-		log(Lang.get("WARNING:number"));
-		JOptionPane.showMessageDialog(null, Lang.get("WARNING:number"), Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
+		log(Generator.translate("WARNING:number"));
+		JOptionPane.showMessageDialog(null, Generator.translate("WARNING:number"), Generator.translate("WARNING:title"), JOptionPane.WARNING_MESSAGE);
 	}
 
 	/** Displays an error warning the user that he should use a positive integer. */
 	public static void warningPositiveInteger()
 	{
-		log(Lang.get("WARNING:positive_integer"));
-		JOptionPane.showMessageDialog(null, Lang.get("WARNING:positive_integer"), Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
+		log(Generator.translate("WARNING:positive_integer"));
+		JOptionPane.showMessageDialog(null, Generator.translate("WARNING:positive_integer"), Generator.translate("WARNING:title"), JOptionPane.WARNING_MESSAGE);
 	}
 
 }

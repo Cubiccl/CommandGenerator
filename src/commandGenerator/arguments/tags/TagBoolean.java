@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import commandGenerator.main.Lang;
+import commandGenerator.Generator;
 
 public class TagBoolean extends Tag
 {
@@ -19,7 +19,7 @@ public class TagBoolean extends Tag
 		super(id, Tag.BOOLEAN, applicable);
 		value = false;
 
-		combobox = new JComboBox<String>(new String[] { Lang.get("GENERAL:true"), Lang.get("GENERAL:false") });
+		combobox = new JComboBox<String>(new String[] { Generator.translate("GENERAL:true"), Generator.translate("GENERAL:false") });
 		combobox.setMinimumSize(new Dimension(200, 20));
 		combobox.setPreferredSize(new Dimension(200, 20));
 		label = new JLabel();
@@ -52,8 +52,8 @@ public class TagBoolean extends Tag
 	@Override
 	public String display(int details, int lvls)
 	{
-		if (value) return getName() + " : " + Lang.get("GENERAL:yes");
-		else return getName() + " : " + Lang.get("GENERAL:no");
+		if (value) return getName() + " : " + Generator.translate("GENERAL:yes");
+		else return getName() + " : " + Generator.translate("GENERAL:no");
 	}
 
 	public boolean getValue()

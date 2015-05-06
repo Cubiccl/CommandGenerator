@@ -16,6 +16,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.Tag;
@@ -24,7 +25,6 @@ import commandGenerator.gui.helper.argumentSelection.dataTag.TagSelection;
 import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
 public class TagDisplayer extends JPanel implements CComponent
@@ -100,7 +100,7 @@ public class TagDisplayer extends JPanel implements CComponent
 		Tag sel = getSelected();
 		if (sel == null) return;
 
-		editorPane.setText(Lang.get("GUI:tag.empty"));
+		editorPane.setText(Generator.translate("GUI:tag.empty"));
 		for (int i = 0; i < values.size(); i++)
 			if (values.get(i).getId().equals(sel.getId())) editorPane.setText(values.get(i).display(CGConstants.DETAILS_ALL, 0));
 	}
@@ -181,7 +181,7 @@ public class TagDisplayer extends JPanel implements CComponent
 			names[i] = allowedTags[i].getName();
 		list.setListData(names);
 
-		if (TagSelection.getAllowedTags(tags, object).length == 0) editorPane.setText(Lang.get("GUI:tag.none"));
+		if (TagSelection.getAllowedTags(tags, object).length == 0) editorPane.setText(Generator.translate("GUI:tag.none"));
 		else list.setSelectedIndex(0);
 		display();
 	}

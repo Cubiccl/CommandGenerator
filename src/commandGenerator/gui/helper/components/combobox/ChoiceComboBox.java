@@ -8,9 +8,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
+import commandGenerator.Generator;
 import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.gui.helper.components.button.HelpButton;
-import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
 public class ChoiceComboBox extends JPanel implements CComponent
@@ -42,7 +42,7 @@ public class ChoiceComboBox extends JPanel implements CComponent
 		if (this.hasHelp)
 		{
 			this.button = new HelpButton();
-			this.button.setData(Lang.get("HELP:" + title + "." + this.choices[0]), this.choices[0]);
+			this.button.setData(Generator.translate("HELP:" + title + "." + this.choices[0]), this.choices[0]);
 		}
 
 		this.box = new JComboBox<String>(choices);
@@ -50,7 +50,7 @@ public class ChoiceComboBox extends JPanel implements CComponent
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				button.setData(Lang.get("HELP:" + title + "." + choices[box.getSelectedIndex()]), (String) box.getSelectedItem());
+				button.setData(Generator.translate("HELP:" + title + "." + choices[box.getSelectedIndex()]), (String) box.getSelectedItem());
 			}
 		});
 
@@ -95,12 +95,12 @@ public class ChoiceComboBox extends JPanel implements CComponent
 		String[] names = new String[this.choices.length];
 		for (int i = 0; i < names.length; i++)
 		{
-			if (this.translate) names[i] = Lang.get("RESOURCES:" + this.title + "." + this.choices[i]);
+			if (this.translate) names[i] = Generator.translate("RESOURCES:" + this.title + "." + this.choices[i]);
 			else names[i] = this.choices[i];
 		}
 
 		this.box.setModel(new JComboBox<String>(names).getModel());
-		if (this.hasHelp) button.setData(Lang.get("HELP:" + title + "." + choices[this.box.getSelectedIndex()]), (String) this.box.getSelectedItem());
+		if (this.hasHelp) button.setData(Generator.translate("HELP:" + title + "." + choices[this.box.getSelectedIndex()]), (String) this.box.getSelectedItem());
 	}
 
 	public void addActionListener(ActionListener actionListener)

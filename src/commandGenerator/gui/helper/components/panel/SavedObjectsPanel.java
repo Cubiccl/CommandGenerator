@@ -21,6 +21,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.Attribute;
 import commandGenerator.arguments.objects.Coordinates;
 import commandGenerator.arguments.objects.Effect;
@@ -28,7 +29,6 @@ import commandGenerator.arguments.objects.Enchantment;
 import commandGenerator.arguments.objects.Entity;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.objects.SavedObjects;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.DataTags;
@@ -46,7 +46,6 @@ import commandGenerator.gui.helper.argumentSelection.dataTag.TradeSelectionPanel
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
 public class SavedObjectsPanel extends JPanel
@@ -147,7 +146,7 @@ public class SavedObjectsPanel extends JPanel
 	private void create(boolean editing)
 	{
 		if (editing && listObjects.getSelectedValue() == null) return;
-		String title = Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:" + SavedObjects.typeNames[listTypes.getSelectedIndex()]));
+		String title = Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:" + SavedObjects.typeNames[listTypes.getSelectedIndex()]));
 		Object object = null;
 
 		switch (types[listTypes.getSelectedIndex()])
@@ -180,7 +179,7 @@ public class SavedObjectsPanel extends JPanel
 				break;
 
 			case ObjectBase.ITEM:
-				ItemSelectionPanel panelI = new ItemSelectionPanel("GENERAL:item", Registry.getList(CGConstants.LIST_ITEMS), true, true);
+				ItemSelectionPanel panelI = new ItemSelectionPanel("GENERAL:item", Generator.registry.getList(CGConstants.LIST_ITEMS), true, true);
 
 				if (editing) panelI.setupFrom((ItemStack) displayed.get(listObjects.getSelectedValue()));
 
@@ -189,7 +188,7 @@ public class SavedObjectsPanel extends JPanel
 				break;
 
 			case ObjectBase.BLOCK:
-				BlockSelectionPanel panelB = new BlockSelectionPanel("GENERAL:block", Registry.getList(CGConstants.LIST_BLOCKS), true);
+				BlockSelectionPanel panelB = new BlockSelectionPanel("GENERAL:block", Generator.registry.getList(CGConstants.LIST_BLOCKS), true);
 
 				if (editing) panelB.setupFrom((ItemStack) displayed.get(listObjects.getSelectedValue()));
 
@@ -207,7 +206,7 @@ public class SavedObjectsPanel extends JPanel
 				break;
 
 			case ObjectBase.ENTITY:
-				EntitySelectionPanel panelEnt = new EntitySelectionPanel("GENERAL:entity", Registry.getObjectList(ObjectBase.ENTITY));
+				EntitySelectionPanel panelEnt = new EntitySelectionPanel("GENERAL:entity", Generator.registry.getObjectList(ObjectBase.ENTITY));
 
 				if (editing)
 				{
@@ -280,7 +279,7 @@ public class SavedObjectsPanel extends JPanel
 	{
 		String[] names = new String[SavedObjects.typeNames.length];
 		for (int i = 0; i < names.length; i++)
-			names[i] = Lang.get("GENERAL:" + SavedObjects.typeNames[i]);
+			names[i] = Generator.translate("GENERAL:" + SavedObjects.typeNames[i]);
 		return names;
 	}
 

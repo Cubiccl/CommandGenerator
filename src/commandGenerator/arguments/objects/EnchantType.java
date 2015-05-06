@@ -2,7 +2,7 @@ package commandGenerator.arguments.objects;
 
 import javax.swing.ImageIcon;
 
-import commandGenerator.main.Lang;
+import commandGenerator.Generator;
 
 public class EnchantType extends ObjectBase
 {
@@ -28,7 +28,7 @@ public class EnchantType extends ObjectBase
 		this.idNum = idNum;
 		this.max = max;
 		this.name = idString;
-		Registry.registerEnchant(this);
+		Generator.registry.registerEnchant(this);
 	}
 
 	/** Returns this Enchantment's numerical ID. */
@@ -59,7 +59,7 @@ public class EnchantType extends ObjectBase
 	@Override
 	public void updateLang()
 	{
-		this.name = Lang.get("ENCHANTS:" + this.getId());
+		this.name = Generator.translate("ENCHANTS:" + this.getId());
 	}
 
 }

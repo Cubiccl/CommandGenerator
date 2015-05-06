@@ -1,12 +1,12 @@
 package commandGenerator.gui.helper.components.button;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.SavedObjects;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.listeners.ClickListener;
 import commandGenerator.gui.helper.components.listeners.IClick;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
 public class LoadButton extends CButton implements IClick
@@ -28,7 +28,7 @@ public class LoadButton extends CButton implements IClick
 	{
 		if (SavedObjects.getList(this.type).size() == 0)
 		{
-			DisplayHelper.showMessage(new CLabel("GENERAL:load_none"), Lang.get("GENERAL:load"));
+			DisplayHelper.showMessage(new CLabel("GENERAL:load_none"), Generator.translate("GENERAL:load"));
 			return;
 		}
 		Object object = SavedObjects.askObjectToLoad(this.type);

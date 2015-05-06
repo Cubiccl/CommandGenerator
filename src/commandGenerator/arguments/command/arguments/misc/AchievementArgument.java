@@ -3,10 +3,10 @@ package commandGenerator.arguments.command.arguments.misc;
 import java.awt.Component;
 import java.util.List;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.objects.Achievement;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.argumentSelection.AchievementSelectionPanel;
 
 public class AchievementArgument extends Argument
@@ -47,13 +47,13 @@ public class AchievementArgument extends Argument
 	@Override
 	public boolean matches(List<String> data)
 	{
-		return Registry.exists(data.get(0), ObjectBase.ACHIEVEMENT);
+		return Generator.registry.exists(data.get(0), ObjectBase.ACHIEVEMENT);
 	}
 
 	@Override
 	public void setupFrom(List<String> data)
 	{
-		this.panel.setSelected((Achievement) Registry.getObjectFromId(data.get(0)));
+		this.panel.setSelected((Achievement) Generator.registry.getObjectFromId(data.get(0)));
 	}
 
 	@Override

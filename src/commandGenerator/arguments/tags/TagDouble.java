@@ -4,7 +4,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import commandGenerator.main.Lang;
+import commandGenerator.Generator;
 
 public class TagDouble extends Tag
 {
@@ -79,10 +79,10 @@ public class TagDouble extends Tag
 		if (type == MAX) errorMessage = "max";
 		if (type == BOTH) errorMessage = "integer_bound";
 
-		String error = Lang.get("WARNING:" + errorMessage);
+		String error = Generator.translate("WARNING:" + errorMessage);
 		error = error.replaceAll("<min>", Double.toString(min));
 		error = error.replaceAll("<max>", Double.toString(max));
-		if (flag) JOptionPane.showMessageDialog(null, Lang.get("WARNING:tag.error") + "\n" + error, Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
+		if (flag) JOptionPane.showMessageDialog(null, Generator.translate("WARNING:tag.error") + "\n" + error, Generator.translate("WARNING:title"), JOptionPane.WARNING_MESSAGE);
 
 		return !flag;
 	}

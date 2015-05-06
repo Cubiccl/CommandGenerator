@@ -3,6 +3,7 @@ package commandGenerator.arguments.objects;
 import java.util.ArrayList;
 import java.util.List;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagInt;
@@ -19,7 +20,7 @@ public class ObjectCreator
 	{
 		if (data.contains("achievement.")) data = data.substring("achievement.".length());
 
-		Achievement achievement = (Achievement) Registry.getObjectFromId(data);
+		Achievement achievement = (Achievement) Generator.registry.getObjectFromId(data);
 		if (achievement != null) DisplayHelper.log("Created achievement : " + achievement.getId());
 		return achievement;
 	}
@@ -117,7 +118,7 @@ public class ObjectCreator
 	public static ItemStack generateBlockStack(String id, int damage, List<Tag> nbt)
 	{
 		ItemStack stack = generateItemStack(id, damage, -1, nbt, -1);
-		return new ItemStack((Item) Registry.getObjectFromId(id), stack.getDamage(), -1, stack.getTag(), -1);
+		return new ItemStack((Item) Generator.registry.getObjectFromId(id), stack.getDamage(), -1, stack.getTag(), -1);
 	}
 
 	/** Generates a new ItemStack from the following data :
@@ -134,9 +135,9 @@ public class ObjectCreator
 	 *            - <i>int</i> - The slot of this stack. */
 	public static ItemStack generateItemStack(String id, int damage, int count, List<Tag> nbt, int slot)
 	{
-		Item item = (Item) Registry.getObjectFromId(id);
-		if (item.isBlock()) item = (Item) Registry.getObjectFromId(id + "_item");
-		if (item == null) item = (Item) Registry.getObjectFromId(id);
+		Item item = (Item) Generator.registry.getObjectFromId(id);
+		if (item.isBlock()) item = (Item) Generator.registry.getObjectFromId(id + "_item");
+		if (item == null) item = (Item) Generator.registry.getObjectFromId(id);
 		TagCompound tag = new TagCompound("tag") {
 			@Override
 			public void askValue()
@@ -144,7 +145,7 @@ public class ObjectCreator
 		};
 		tag.setValue(nbt);
 
-		DisplayHelper.log("Created Item : " + count + " " + ((Item) Registry.getObjectFromId(id)).getName(damage) + " in slot " + slot);
+		DisplayHelper.log("Created Item : " + count + " " + ((Item) Generator.registry.getObjectFromId(id)).getName(damage) + " in slot " + slot);
 		return new ItemStack(item, damage, count, tag, slot);
 	}
 
@@ -154,7 +155,7 @@ public class ObjectCreator
 	 *            - <i>TagCompount</i> - The tag used to generate. */
 	public static ItemStack generateItemStack(TagCompound tag)
 	{
-		Item item = (Item) Registry.getObjectFromId("stone");
+		Item item = (Item) Generator.registry.getObjectFromId("stone");
 		int damage = 0, count = 1, slot = -1;
 		TagCompound nbt = new TagCompound() {
 			@Override
@@ -164,7 +165,7 @@ public class ObjectCreator
 		for (int i = 0; i < tag.size(); i++)
 		{
 			Tag part = tag.get(i);
-			if (part.getId().equals("id")) item = (Item) Registry.getObjectFromId(((TagString) part).getValue());
+			if (part.getId().equals("id")) item = (Item) Generator.registry.getObjectFromId(((TagString) part).getValue());
 			if (part.getId().equals("Damage")) damage = ((TagInt) part).getValue();
 			if (part.getId().equals("Count")) count = ((TagInt) part).getValue();
 			if (part.getId().equals("Slot")) slot = ((TagInt) part).getValue();

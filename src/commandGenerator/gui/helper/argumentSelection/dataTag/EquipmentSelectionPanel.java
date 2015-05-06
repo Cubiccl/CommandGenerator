@@ -11,9 +11,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectCreator;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
@@ -21,7 +21,6 @@ import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
 public class EquipmentSelectionPanel extends CPanel
@@ -54,8 +53,8 @@ public class EquipmentSelectionPanel extends CPanel
 
 	private void addItem(int slot)
 	{
-		ItemSelectionPanel panel = new ItemSelectionPanel("GENERAL:item", Registry.getList(CGConstants.LIST_ITEMS), true, false);
-		if (DisplayHelper.showQuestion(panel, Lang.get("GUI:item.add"))) return;
+		ItemSelectionPanel panel = new ItemSelectionPanel("GENERAL:item", Generator.registry.getList(CGConstants.LIST_ITEMS), true, false);
+		if (DisplayHelper.showQuestion(panel, Generator.translate("GUI:item.add"))) return;
 		equipment[slot] = new ItemStack(panel.generateItem(), panel.getDamage(), panel.getCount(), panel.getItemTag());
 		displayItems();
 	}
@@ -163,13 +162,13 @@ public class EquipmentSelectionPanel extends CPanel
 
 	private void displayItems()
 	{
-		String[] parts = { Lang.get("GUI:slot.hand"), Lang.get("GUI:slot.feet"), Lang.get("GUI:slot.legs"), Lang.get("GUI:slot.chest"),
-				Lang.get("GUI:slot.head") };
+		String[] parts = { Generator.translate("GUI:slot.hand"), Generator.translate("GUI:slot.feet"), Generator.translate("GUI:slot.legs"), Generator.translate("GUI:slot.chest"),
+				Generator.translate("GUI:slot.head") };
 		String text = "";
 		for (int i = 0; i < equipment.length; i++)
 		{
 			if (i != 0) text += "<br />";
-			if (equipment[i] == null) text += parts[i] + ": " + Lang.get("GENERAL:nothing");
+			if (equipment[i] == null) text += parts[i] + ": " + Generator.translate("GENERAL:nothing");
 			else text += parts[i] + ": " + equipment[i].display(CGConstants.DETAILS_ALL, 0);
 		}
 		editorpane.setText(text);

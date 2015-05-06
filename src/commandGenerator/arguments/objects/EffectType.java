@@ -4,8 +4,8 @@ import java.io.File;
 
 import javax.swing.ImageIcon;
 
+import commandGenerator.Generator;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
 public class EffectType extends ObjectBase
@@ -28,7 +28,7 @@ public class EffectType extends ObjectBase
 		super(idString, ObjectBase.EFFECT);
 		this.idNum = idNum;
 		this.name = idString;
-		Registry.registerEffect(this);
+		Generator.registry.registerEffect(this);
 	}
 
 	/** Returns this Effect's numerical ID. */
@@ -61,7 +61,7 @@ public class EffectType extends ObjectBase
 	@Override
 	public void updateLang()
 	{
-		this.name = Lang.get("EFFECTS:" + this.getId());
+		this.name = Generator.translate("EFFECTS:" + this.getId());
 	}
 
 }

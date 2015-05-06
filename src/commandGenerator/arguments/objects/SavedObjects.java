@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.components.panel.LoadPanel;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
 public class SavedObjects
@@ -34,7 +34,7 @@ public class SavedObjects
 	public static Object askObjectToLoad(byte type)
 	{
 		LoadPanel panel = new LoadPanel(type);
-		if (DisplayHelper.showQuestion(panel, Lang.get("GENERAL:load"))) return null;
+		if (DisplayHelper.showQuestion(panel, Generator.translate("GENERAL:load"))) return null;
 		return panel.getSelection();
 	}
 
@@ -46,16 +46,16 @@ public class SavedObjects
 			{
 				case ObjectBase.ATTRIBUTE:
 					String[] details = textData.split(" ");
-					return new Attribute((AttributeType) Registry.getObjectFromId(details[0]), Double.parseDouble(details[1]), Integer.parseInt(details[2]));
+					return new Attribute((AttributeType) Generator.registry.getObjectFromId(details[0]), Double.parseDouble(details[1]), Integer.parseInt(details[2]));
 
 				case ObjectBase.EFFECT:
 					String[] details1 = textData.split(" ");
-					return new Effect((EffectType) Registry.getObjectFromId(details1[0]), Integer.parseInt(details1[2]), Integer.parseInt(details1[1]),
+					return new Effect((EffectType) Generator.registry.getObjectFromId(details1[0]), Integer.parseInt(details1[2]), Integer.parseInt(details1[1]),
 							!Boolean.parseBoolean(details1[3]));
 
 				case ObjectBase.ENCHANTMENT:
 					String[] details2 = textData.split(" ");
-					return new Enchantment((EnchantType) Registry.getObjectFromId(details2[0]), Integer.parseInt(details2[1]));
+					return new Enchantment((EnchantType) Generator.registry.getObjectFromId(details2[0]), Integer.parseInt(details2[1]));
 
 				case ObjectBase.ENTITY:
 					return DataTags.generateListFrom(textData);

@@ -4,8 +4,8 @@ import java.io.File;
 
 import javax.swing.ImageIcon;
 
+import commandGenerator.Generator;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
 public class ItemData extends Item
@@ -101,12 +101,12 @@ public class ItemData extends Item
 		this.names = new String[this.damageList.length];
 		for (int damage = 0; damage < this.damageList.length; damage++)
 		{
-			if (this.langType.equals("normal")) this.names[damage] = Lang.get("ITEMS:" + this.getId() + "_" + this.damageList[damage]);
+			if (this.langType.equals("normal")) this.names[damage] = Generator.translate("ITEMS:" + this.getId() + "_" + this.damageList[damage]);
 			else if (this.langType.startsWith("half_"))
 			{
-				if (this.damageList[damage] < 8) this.names[damage] = Lang.get("ITEMS:" + this.getId() + "_" + damage);
-				else this.names[damage] = Lang.get("ITEMS:" + this.getId() + "_" + (this.damageList[damage] - 8)) + " " + Lang.get("ITEMS:" + this.langType);
-			} else this.names[damage] = Lang.get("ITEMS:" + this.getId()) + " " + Lang.get("ITEMS:" + this.langType + "_" + this.damageList[damage]);
+				if (this.damageList[damage] < 8) this.names[damage] = Generator.translate("ITEMS:" + this.getId() + "_" + damage);
+				else this.names[damage] = Generator.translate("ITEMS:" + this.getId() + "_" + (this.damageList[damage] - 8)) + " " + Generator.translate("ITEMS:" + this.langType);
+			} else this.names[damage] = Generator.translate("ITEMS:" + this.getId()) + " " + Generator.translate("ITEMS:" + this.langType + "_" + this.damageList[damage]);
 		}
 	}
 }

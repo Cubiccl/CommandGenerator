@@ -3,11 +3,11 @@ package commandGenerator.arguments.command.arguments.misc;
 import java.awt.Component;
 import java.util.List;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.objects.Effect;
 import commandGenerator.arguments.objects.EffectType;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.argumentSelection.EffectSelectionPanel;
 
 public class EffectArgument extends Argument
@@ -50,7 +50,7 @@ public class EffectArgument extends Argument
 	public boolean matches(List<String> data)
 	{
 		boolean ok = true;
-		if (data.size() > 0) ok = Registry.exists(data.get(0), ObjectBase.EFFECT);
+		if (data.size() > 0) ok = Generator.registry.exists(data.get(0), ObjectBase.EFFECT);
 		if (data.size() > 1)
 		{
 			try
@@ -93,7 +93,7 @@ public class EffectArgument extends Argument
 		if (data.size() > 1) duration = Integer.parseInt(data.get(1));
 		if (data.size() > 2) level = Integer.parseInt(data.get(2));
 		if (data.size() > 3) particles = Boolean.parseBoolean(data.get(3));
-		this.panel.setupFrom(new Effect((EffectType) Registry.getObjectFromId(id), level, duration, !particles));
+		this.panel.setupFrom(new Effect((EffectType) Generator.registry.getObjectFromId(id), level, duration, !particles));
 	}
 
 	@Override

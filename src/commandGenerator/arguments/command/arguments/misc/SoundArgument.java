@@ -6,14 +6,13 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.objects.Sound;
 import commandGenerator.gui.helper.components.button.HelpButton;
 import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.icomponent.IBox;
-import commandGenerator.main.Lang;
 
 public class SoundArgument extends Argument implements IBox
 {
@@ -50,9 +49,9 @@ public class SoundArgument extends Argument implements IBox
 	@Override
 	public void initGui()
 	{
-		this.box = new ObjectComboBox("GUI:" + this.getId(), Registry.getObjectList(ObjectBase.SOUND), this);
+		this.box = new ObjectComboBox("GUI:" + this.getId(), Generator.registry.getObjectList(ObjectBase.SOUND), this);
 		this.button = new HelpButton();
-		if (this.box.getValue() != null) this.button.setData(Lang.get("HELP:sound." + this.box.getValue().getId()), this.box.getValue().getId());
+		if (this.box.getValue() != null) this.button.setData(Generator.translate("HELP:sound." + this.box.getValue().getId()), this.box.getValue().getId());
 	}
 
 	@Override
@@ -64,19 +63,19 @@ public class SoundArgument extends Argument implements IBox
 	@Override
 	public boolean matches(List<String> data)
 	{
-		return Registry.exists(data.get(0), ObjectBase.SOUND);
+		return Generator.registry.exists(data.get(0), ObjectBase.SOUND);
 	}
 
 	@Override
 	public void setupFrom(List<String> data)
 	{
-		this.box.setSelected(Registry.getObjectFromId(data.get(0)));
+		this.box.setSelected(Generator.registry.getObjectFromId(data.get(0)));
 	}
 
 	@Override
 	public void updateCombobox()
 	{
-		this.button.setData(Lang.get("HELP:sound." + this.box.getValue().getId()), this.box.getValue().getId());
+		this.button.setData(Generator.translate("HELP:sound." + this.box.getValue().getId()), this.box.getValue().getId());
 	}
 
 	@Override

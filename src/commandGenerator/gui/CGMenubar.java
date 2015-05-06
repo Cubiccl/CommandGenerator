@@ -18,10 +18,9 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import commandGenerator.CommandGenerator;
+import commandGenerator.Generator;
 import commandGenerator.gui.helper.components.panel.SavedObjectsPanel;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
 @SuppressWarnings("serial")
@@ -36,15 +35,15 @@ public class CGMenubar extends JMenuBar
 	{
 
 		// Initializing
-		menu = new JMenu(Lang.get("GUI:menu"));
+		menu = new JMenu(Generator.translate("GUI:menu"));
 
-		reset = new JMenuItem(Lang.get("GUI:menu.reset"));
-		settings = new JMenuItem(Lang.get("GUI:menu.settings"));
-		objects = new JMenuItem(Lang.get("GUI:menu.objects"));
-		changelog = new JMenuItem(Lang.get("GUI:menu.changelog"));
-		link = new JMenuItem(Lang.get("GUI:menu.link"));
-		folder = new JMenuItem(Lang.get("GUI:menu.folder"));
-		exit = new JMenuItem(Lang.get("GUI:menu.exit"));
+		reset = new JMenuItem(Generator.translate("GUI:menu.reset"));
+		settings = new JMenuItem(Generator.translate("GUI:menu.settings"));
+		objects = new JMenuItem(Generator.translate("GUI:menu.objects"));
+		changelog = new JMenuItem(Generator.translate("GUI:menu.changelog"));
+		link = new JMenuItem(Generator.translate("GUI:menu.link"));
+		folder = new JMenuItem(Generator.translate("GUI:menu.folder"));
+		exit = new JMenuItem(Generator.translate("GUI:menu.exit"));
 
 		// Adding to the menu
 		menu.add(reset);
@@ -68,14 +67,14 @@ public class CGMenubar extends JMenuBar
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				CommandGenerator.opt.change();
+				Generator.opt.change();
 			}
 		});
 		objects.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				DisplayHelper.showMessage(new SavedObjectsPanel(), Lang.get("GUI:menu.objects"));
+				DisplayHelper.showMessage(new SavedObjectsPanel(), Generator.translate("GUI:menu.objects"));
 			}
 		});
 		changelog.addActionListener(new ActionListener() {
@@ -103,7 +102,7 @@ public class CGMenubar extends JMenuBar
 				panel.add(scrollpanelist);
 				panel.add(scrollpane);
 
-				DisplayHelper.showMessage(panel, Lang.get("GUI:menu.changelog"));
+				DisplayHelper.showMessage(panel, Generator.translate("GUI:menu.changelog"));
 
 			}
 		});
@@ -151,13 +150,13 @@ public class CGMenubar extends JMenuBar
 
 	public void updateLang()
 	{
-		menu.setText(Lang.get("GUI:menu"));
-		reset.setText(Lang.get("GUI:menu.reset"));
-		settings.setText(Lang.get("GUI:menu.settings"));
-		changelog.setText(Lang.get(Lang.get("GUI:menu.changelog")));
-		link.setText(Lang.get("GUI:menu.link"));
-		folder.setText(Lang.get("GUI:menu.folder"));
-		exit.setText(Lang.get("GUI:menu.exit"));
+		menu.setText(Generator.translate("GUI:menu"));
+		reset.setText(Generator.translate("GUI:menu.reset"));
+		settings.setText(Generator.translate("GUI:menu.settings"));
+		changelog.setText(Generator.translate(Generator.translate("GUI:menu.changelog")));
+		link.setText(Generator.translate("GUI:menu.link"));
+		folder.setText(Generator.translate("GUI:menu.folder"));
+		exit.setText(Generator.translate("GUI:menu.exit"));
 	}
 
 }

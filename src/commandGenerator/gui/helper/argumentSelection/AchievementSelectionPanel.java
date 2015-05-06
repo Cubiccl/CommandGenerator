@@ -2,9 +2,9 @@ package commandGenerator.gui.helper.argumentSelection;
 
 import javax.swing.JLabel;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.Achievement;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.gui.helper.components.panel.CPanel;
@@ -34,7 +34,7 @@ public class AchievementSelectionPanel extends CPanel implements IBox
 	protected void createComponents()
 	{
 		image = new JLabel();
-		achievementBox = new ObjectComboBox("GUI:achievement.select", Registry.getObjectList(ObjectBase.ACHIEVEMENT), this);
+		achievementBox = new ObjectComboBox("GUI:achievement.select", Generator.registry.getObjectList(ObjectBase.ACHIEVEMENT), this);
 		updateCombobox();
 	}
 

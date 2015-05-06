@@ -2,7 +2,7 @@ package commandGenerator.gui.helper.components;
 
 import javax.swing.JCheckBox;
 
-import commandGenerator.main.Lang;
+import commandGenerator.Generator;
 
 @SuppressWarnings("serial")
 public class CCheckBox extends JCheckBox implements CComponent
@@ -12,7 +12,7 @@ public class CCheckBox extends JCheckBox implements CComponent
 
 	public CCheckBox(String title)
 	{
-		super(Lang.get(title));
+		super(Generator.translate(title));
 		this.title = title;
 	}
 
@@ -37,7 +37,7 @@ public class CCheckBox extends JCheckBox implements CComponent
 	@Override
 	public void updateLang()
 	{
-		this.setText(Lang.get(this.title));
+		this.setText(Generator.translate(this.title));
 	}
 
 }

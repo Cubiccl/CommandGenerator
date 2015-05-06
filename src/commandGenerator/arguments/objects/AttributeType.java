@@ -2,7 +2,7 @@ package commandGenerator.arguments.objects;
 
 import javax.swing.ImageIcon;
 
-import commandGenerator.main.Lang;
+import commandGenerator.Generator;
 
 public class AttributeType extends ObjectBase
 {
@@ -34,7 +34,7 @@ public class AttributeType extends ObjectBase
 	@Override
 	public void updateLang()
 	{
-		this.name = Lang.get("ATTRIBUTES:" + this.getId());
+		this.name = Generator.translate("ATTRIBUTES:" + this.getId());
 	}
 
 }

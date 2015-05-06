@@ -3,10 +3,10 @@ package commandGenerator.arguments.command.arguments.misc;
 import java.awt.Component;
 import java.util.List;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.Particle;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.argumentSelection.ParticleSelectionPanel;
 
 public class ParticleArgument extends Argument
@@ -46,13 +46,13 @@ public class ParticleArgument extends Argument
 	@Override
 	public boolean matches(List<String> data)
 	{
-		return Registry.exists(data.get(0), ObjectBase.PARTICLE);
+		return Generator.registry.exists(data.get(0), ObjectBase.PARTICLE);
 	}
 
 	@Override
 	public void setupFrom(List<String> data)
 	{
-		this.panel.setSelected((Particle) Registry.getObjectFromId(data.get(0)));
+		this.panel.setSelected((Particle) Generator.registry.getObjectFromId(data.get(0)));
 	}
 
 	@Override

@@ -9,11 +9,11 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
@@ -78,7 +78,7 @@ public class ItemArgument extends Argument implements INBTArgument
 	@Override
 	public void initGui()
 	{
-		this.panel = new ItemSelectionPanel("GUI:" + this.getId(), Registry.getList(CGConstants.LIST_ITEMS), true, false);
+		this.panel = new ItemSelectionPanel("GUI:" + this.getId(), Generator.registry.getList(CGConstants.LIST_ITEMS), true, false);
 		if (!this.isCompulsery())
 		{
 			this.box = new CCheckBox("GUI:" + this.getId() + ".use");
@@ -107,7 +107,7 @@ public class ItemArgument extends Argument implements INBTArgument
 		int index = 0;
 		if (this.display[0] && data.size() > index)
 		{
-			ok = Registry.exists(data.get(index), ObjectBase.ITEM) || Registry.exists("item_" + data.get(index), ObjectBase.ITEM);
+			ok = Generator.registry.exists(data.get(index), ObjectBase.ITEM) || Generator.registry.exists("item_" + data.get(index), ObjectBase.ITEM);
 			index++;
 		}
 		if (this.display[1] && data.size() > index)
@@ -159,7 +159,7 @@ public class ItemArgument extends Argument implements INBTArgument
 		int index = 0;
 		if (this.display[0] && data.size() > index)
 		{
-			this.panel.setItem((Item) Registry.getObjectFromId(data.get(index)));
+			this.panel.setItem((Item) Generator.registry.getObjectFromId(data.get(index)));
 			index++;
 		}
 		if (this.display[1] && data.size() > index)

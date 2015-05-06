@@ -13,9 +13,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.gui.helper.components.panel.PanelCommandSelection;
-import commandGenerator.main.Lang;
 
 public class CommandArgument extends Argument
 {
@@ -33,7 +33,7 @@ public class CommandArgument extends Argument
 	{
 
 		final PanelCommandSelection panelCommand = new PanelCommandSelection(false);
-		panelCommand.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), Lang.get("GUI:execute.command")));
+		panelCommand.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), Generator.translate("GUI:execute.command")));
 		panelCommand.setPreferredSize(new Dimension(1100, 650));
 		panelCommand.setupFrom(this.storedCommand);
 
@@ -53,7 +53,7 @@ public class CommandArgument extends Argument
 				}
 			}
 		});
-		JOptionPane.showMessageDialog(null, panelCommand, Lang.get("GUI:execute.select"), JOptionPane.QUESTION_MESSAGE);
+		JOptionPane.showMessageDialog(null, panelCommand, Generator.translate("GUI:execute.select"), JOptionPane.QUESTION_MESSAGE);
 		return panelCommand.generate();
 	}
 

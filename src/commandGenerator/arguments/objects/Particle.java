@@ -2,7 +2,7 @@ package commandGenerator.arguments.objects;
 
 import javax.swing.ImageIcon;
 
-import commandGenerator.main.Lang;
+import commandGenerator.Generator;
 
 public class Particle extends ObjectBase
 {
@@ -59,6 +59,6 @@ public class Particle extends ObjectBase
 	@Override
 	public void updateLang()
 	{
-		this.description = Lang.get("PARTICLES:" + this.getId());
+		this.description = Generator.translate("PARTICLES:" + this.getId());
 	}
 }

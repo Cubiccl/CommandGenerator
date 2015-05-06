@@ -2,10 +2,10 @@ package commandGenerator.arguments.objects;
 
 import javax.swing.JOptionPane;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagInt;
-import commandGenerator.main.Lang;
 
 public class Enchantment
 {
@@ -46,7 +46,7 @@ public class Enchantment
 	/** Returns a String version of this Enchantment to be displayed to the user. */
 	public String display()
 	{
-		return Lang.get("GUI:enchant.display").replaceAll("<type>", Lang.get("ENCHANTS:" + this.type.getId())).replaceAll("<lvl>", Integer.toString(this.level));
+		return Generator.translate("GUI:enchant.display").replaceAll("<type>", Generator.translate("ENCHANTS:" + this.type.getId())).replaceAll("<lvl>", Integer.toString(this.level));
 	}
 
 	/** Returns this Enchantment's level. */
@@ -74,8 +74,8 @@ public class Enchantment
 		if (this.type == null) return false;
 		if (this.checkMax && (this.level > this.type.getMaxLevel() || this.level < 1))
 		{
-			JOptionPane.showMessageDialog(null, Lang.get("WARNING:enchant.wrong_level").replaceAll("<max>", Integer.toString(this.type.getMaxLevel())),
-					Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, Generator.translate("WARNING:enchant.wrong_level").replaceAll("<max>", Integer.toString(this.type.getMaxLevel())),
+					Generator.translate("WARNING:title"), JOptionPane.WARNING_MESSAGE);
 			return false;
 		} else return true;
 	}

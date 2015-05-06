@@ -4,8 +4,8 @@ import java.io.File;
 
 import javax.swing.ImageIcon;
 
+import commandGenerator.Generator;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
 public class Entity extends ObjectBase
@@ -50,6 +50,6 @@ public class Entity extends ObjectBase
 	@Override
 	public void updateLang()
 	{
-		this.name = Lang.get("ENTITIES:" + this.getId());
+		this.name = Generator.translate("ENTITIES:" + this.getId());
 	}
 }

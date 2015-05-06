@@ -2,7 +2,7 @@ package commandGenerator.arguments.objects;
 
 import javax.swing.ImageIcon;
 
-import commandGenerator.main.Lang;
+import commandGenerator.Generator;
 
 public class Achievement extends ObjectBase
 {
@@ -47,7 +47,7 @@ public class Achievement extends ObjectBase
 	@Override
 	public void updateLang()
 	{
-		this.name = Lang.get("ACHIEVEMENTS:" + this.getId());
+		this.name = Generator.translate("ACHIEVEMENTS:" + this.getId());
 	}
 
 }

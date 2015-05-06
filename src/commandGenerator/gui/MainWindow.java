@@ -8,9 +8,8 @@ import java.awt.event.WindowStateListener;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
-import commandGenerator.arguments.objects.Registry;
+import commandGenerator.Generator;
 import commandGenerator.gui.helper.components.panel.PanelCommandSelection;
-import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
 @SuppressWarnings("serial")
@@ -24,7 +23,7 @@ public class MainWindow extends JFrame
 	public MainWindow()
 	{
 
-		String title = Lang.get("GUI:main.title");
+		String title = Generator.translate("GUI:main.title");
 		title = title.replaceAll("<version>", Resources.versions[Resources.versions.length - 1]);
 		title = title.replaceAll("<minecraft>", Resources.versionMinecraft);
 
@@ -36,7 +35,7 @@ public class MainWindow extends JFrame
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		try
 		{
-			setIconImage(Registry.getObjectFromId("command_block").getTexture().getImage());
+			setIconImage(Generator.registry.getObjectFromId("command_block").getTexture().getImage());
 		} catch (Exception e)
 		{}
 
@@ -61,7 +60,7 @@ public class MainWindow extends JFrame
 	public void updateLang()
 	{
 
-		String title = Lang.get("GUI:main.title");
+		String title = Generator.translate("GUI:main.title");
 		title = title.replaceAll("<version>", Resources.versions[Resources.versions.length - 1]);
 		title = title.replaceAll("<minecraft>", Resources.versionMinecraft);
 

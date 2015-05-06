@@ -3,8 +3,8 @@ package commandGenerator.arguments.tags;
 import java.util.ArrayList;
 import java.util.List;
 
+import commandGenerator.Generator;
 import commandGenerator.main.CGConstants;
-import commandGenerator.main.Lang;
 
 public abstract class TagList extends Tag
 {
@@ -42,7 +42,7 @@ public abstract class TagList extends Tag
 
 		String text = getName();
 		if (text != "") text += " : ";
-		if (value.size() == 0) return text + Lang.get("GENERAL:empty");
+		if (value.size() == 0) return text + Generator.translate("GENERAL:empty");
 		for (int i = 0; i < value.size(); i++)
 		{
 			text += "<br />";

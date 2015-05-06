@@ -5,10 +5,10 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.Entity;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
@@ -28,12 +28,12 @@ public class TagRiding extends TagCompound
 	public void askValue()
 	{
 		panel = new JPanel();
-		EntitySelectionPanel panelE = new EntitySelectionPanel("GUI:entity.title", Registry.getListNoPlayer());
+		EntitySelectionPanel panelE = new EntitySelectionPanel("GUI:entity.title", Generator.registry.getListNoPlayer());
 
 		panel.add(panelE);
 
 		ObjectBase entity = DataTags.getObjectFromTags(getValue());
-		if (entity instanceof Item) entity = Registry.getObjectFromId("ArmorStand");
+		if (entity instanceof Item) entity = Generator.registry.getObjectFromId("ArmorStand");
 		panelE.setupFrom((Entity) entity);
 		panelE.setDataTags(this.getValue());
 

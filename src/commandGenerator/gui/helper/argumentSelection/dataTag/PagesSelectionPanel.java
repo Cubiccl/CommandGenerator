@@ -14,6 +14,7 @@ import javax.swing.JTextArea;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
@@ -22,7 +23,6 @@ import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
 public class PagesSelectionPanel extends CPanel
@@ -52,7 +52,7 @@ public class PagesSelectionPanel extends CPanel
 	private void addJson()
 	{
 		ListSelectionPanel panel = new ListSelectionPanel("GENERAL:text", ObjectBase.JSON);
-		if (DisplayHelper.showQuestion(panel, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
+		if (DisplayHelper.showQuestion(panel, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:text")))) return;
 
 		TagList tag = new TagList() {
 			@Override
@@ -69,7 +69,7 @@ public class PagesSelectionPanel extends CPanel
 		JTextArea area = new JTextArea();
 		area.setPreferredSize(new Dimension(400, 400));
 		area.setMinimumSize(new Dimension(400, 400));
-		if (DisplayHelper.showQuestion(area, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
+		if (DisplayHelper.showQuestion(area, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:text")))) return;
 		pages.add(area.getText());
 		setupList();
 	}
@@ -152,7 +152,7 @@ public class PagesSelectionPanel extends CPanel
 		{
 			JTextArea area = new JTextArea(text);
 			area.setPreferredSize(new Dimension(400, 400));
-			if (DisplayHelper.showQuestion(area, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
+			if (DisplayHelper.showQuestion(area, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:text")))) return;
 			pages.set(list.getSelectedIndex(), area.getText());
 		}
 
@@ -163,7 +163,7 @@ public class PagesSelectionPanel extends CPanel
 	{
 		ListSelectionPanel panel = new ListSelectionPanel("GENERAL:text", ObjectBase.JSON);
 		panel.setList(DataTags.generateListFrom(text));
-		if (DisplayHelper.showQuestion(panel, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
+		if (DisplayHelper.showQuestion(panel, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:text")))) return;
 
 		TagList tag = new TagList() {
 			@Override
@@ -204,7 +204,7 @@ public class PagesSelectionPanel extends CPanel
 	{
 		String[] names = new String[pages.size()];
 		for (int i = 0; i < names.length; i++)
-			names[i] = Lang.get("GENERAL:text") + " " + (i + 1);
+			names[i] = Generator.translate("GENERAL:text") + " " + (i + 1);
 		list.setListData(names);
 		display();
 	}

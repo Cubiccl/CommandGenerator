@@ -2,8 +2,8 @@ package commandGenerator.gui.helper.argumentSelection.dataTag;
 
 import javax.swing.JOptionPane;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.Entity;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagInt;
@@ -12,7 +12,6 @@ import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.button.HelpButton;
 import commandGenerator.gui.helper.components.panel.CPanel;
-import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
 public class SpawnSelectionPanel extends CPanel
@@ -40,12 +39,12 @@ public class SpawnSelectionPanel extends CPanel
 	protected void createComponents()
 	{
 		buttonHelp = new HelpButton();
-		buttonHelp.setData(Lang.get("HELP:weight"), Lang.get("TAGS:Weight"));
+		buttonHelp.setData(Generator.translate("HELP:weight"), Generator.translate("TAGS:Weight"));
 
 		entryWeight = new CEntry("GUI:spawn.weight", "1");
 		entryWeight.setTextField("1");
 
-		panelEntity = new EntitySelectionPanel("GUI:entity.select", Registry.getListNoPlayer());
+		panelEntity = new EntitySelectionPanel("GUI:entity.select", Generator.registry.getListNoPlayer());
 	}
 
 	@Override
@@ -61,12 +60,12 @@ public class SpawnSelectionPanel extends CPanel
 			int test = Integer.parseInt(weight);
 			if (test < 1)
 			{
-				JOptionPane.showMessageDialog(null, Lang.get("WARNING:min").replaceAll("<min>", "1"), Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, Generator.translate("WARNING:min").replaceAll("<min>", "1"), Generator.translate("WARNING:title"), JOptionPane.WARNING_MESSAGE);
 				return null;
 			}
 		} catch (Exception ex)
 		{
-			JOptionPane.showMessageDialog(null, Lang.get("WARNING:min").replaceAll("<min>", "1"), Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, Generator.translate("WARNING:min").replaceAll("<min>", "1"), Generator.translate("WARNING:title"), JOptionPane.WARNING_MESSAGE);
 			return null;
 		}
 
@@ -83,14 +82,14 @@ public class SpawnSelectionPanel extends CPanel
 
 	public void setup(TagCompound nbt)
 	{
-		Entity sel = (Entity) Registry.getObjectFromId("ArmorStand");
+		Entity sel = (Entity) Generator.registry.getObjectFromId("ArmorStand");
 		for (int i = 0; i < nbt.size(); i++)
 		{
 			Tag tag = nbt.get(i);
 			if (tag.getId().equals("Type"))
 			{
-				panelEntity.setSelected((Entity) Registry.getObjectFromId(((TagString) tag).getValue()));
-				sel = (Entity) Registry.getObjectFromId(((TagString) tag).getValue());
+				panelEntity.setSelected((Entity) Generator.registry.getObjectFromId(((TagString) tag).getValue()));
+				sel = (Entity) Generator.registry.getObjectFromId(((TagString) tag).getValue());
 			}
 			if (tag.getId().equals("Weight")) entryWeight.setTextField(Integer.toString(((TagInt) tag).getValue()));
 			if (tag.getId().equals("Properties"))

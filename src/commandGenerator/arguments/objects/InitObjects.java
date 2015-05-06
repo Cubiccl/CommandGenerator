@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.main.FileHelper;
 
@@ -92,7 +93,7 @@ public class InitObjects
 		initTags(convertedData.get("ENTITYTAGS"), 2);
 		initTags(convertedData.get("GENERATEDTAGS"), 3);
 
-		Registry.end();
+		Generator.registry.end();
 		SavedObjects.load();
 
 	}
@@ -102,7 +103,7 @@ public class InitObjects
 		for (String achievement : achs)
 		{
 			String[] achData = achievement.split(",");
-			new Achievement(achData[0], (Item) Registry.getObjectFromId(achData[1]));
+			new Achievement(achData[0], (Item) Generator.registry.getObjectFromId(achData[1]));
 		}
 	}
 
@@ -164,9 +165,9 @@ public class InitObjects
 		for (String list : lists)
 		{
 			String[] listData = list.split(":");
-			Registry.registerList(listData[0], listData[1].split(","));
+			Generator.registry.registerList(listData[0], listData[1].split(","));
 		}
-		Registry.registerList("durability", Registry.durabilityList.toArray(new String[0]));
+		Generator.registry.registerList("durability", Generator.registry.durabilityList.toArray(new String[0]));
 	}
 
 	private static void initParticles(String[] particles)

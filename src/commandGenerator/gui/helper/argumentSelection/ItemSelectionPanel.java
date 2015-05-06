@@ -9,10 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
@@ -128,7 +128,7 @@ public class ItemSelectionPanel extends CPanel implements IBox, ISpin, ISave
 
 	public Item generateItem()
 	{
-		return (Item) Registry.getObjectFromId((String) comboboxId.getSelectedItem());
+		return (Item) Generator.registry.getObjectFromId((String) comboboxId.getSelectedItem());
 	}
 
 	public int getCount()

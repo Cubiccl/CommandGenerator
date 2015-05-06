@@ -24,16 +24,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import commandGenerator.CommandGenerator;
+import commandGenerator.Generator;
 import commandGenerator.arguments.command.Command;
 import commandGenerator.arguments.objects.Item;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.OptionsTab;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
 public class PanelCommandSelection extends JPanel
@@ -53,7 +51,7 @@ public class PanelCommandSelection extends JPanel
 	/** The panel used to select the Command. */
 	public PanelCommandSelection(boolean main)
 	{
-		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), Lang.get("GUI:command.title")));
+		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), Generator.translate("GUI:command.title")));
 		setLayout(new GridBagLayout());
 		this.selectedCommand = Command.achievement;
 		this.main = main;
@@ -66,7 +64,7 @@ public class PanelCommandSelection extends JPanel
 		if (this.main)
 		{
 			buttonGenerate = new CButton("GUI:command.generate");
-			buttonGenerate.setIcon(((Item) Registry.getObjectFromId("command_block")).getTexture(0));
+			buttonGenerate.setIcon(((Item) Generator.registry.getObjectFromId("command_block")).getTexture(0));
 			buttonGenerate.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e)
@@ -126,7 +124,7 @@ public class PanelCommandSelection extends JPanel
 
 					if (comboboxCommand.getSelectedItem() == null) return;
 					String commandName = ((String) comboboxCommand.getSelectedItem()).toLowerCase();
-					Command[] commands = Registry.getCommands();
+					Command[] commands = Generator.registry.getCommands();
 
 					for (int i = 0; i < commands.length; i++)
 					{
@@ -148,7 +146,7 @@ public class PanelCommandSelection extends JPanel
 
 				List<String> matchingNames = new ArrayList<String>();
 				String name = textfieldSearchbar.getText().toLowerCase();
-				Command[] commands = Registry.getCommands();
+				Command[] commands = Generator.registry.getCommands();
 
 				for (int i = 0; i < commands.length; i++)
 				{
@@ -166,7 +164,7 @@ public class PanelCommandSelection extends JPanel
 		textareaStructure = new JTextArea(Command.achievement.getStructure());
 		textareaStructure.setEditable(false);
 
-		Command[] commands = Registry.getCommands();
+		Command[] commands = Generator.registry.getCommands();
 		String[] names = new String[commands.length];
 		for (int j = 0; j < commands.length; j++)
 		{
@@ -179,8 +177,8 @@ public class PanelCommandSelection extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				selectedCommand = Registry.getCommandFromId((String) comboboxCommand.getSelectedItem());
-				Command[] commands = Registry.getCommands();
+				selectedCommand = Generator.registry.getCommandFromId((String) comboboxCommand.getSelectedItem());
+				Command[] commands = Generator.registry.getCommands();
 
 				String[] names = new String[commands.length];
 				for (int j = 0; j < commands.length; j++)
@@ -282,12 +280,12 @@ public class PanelCommandSelection extends JPanel
 	private void generator()
 	{
 		JPanel panel = new JPanel(new GridLayout(2, 1));
-		JLabel label = new JLabel(Lang.get("GUI:command.import"));
+		JLabel label = new JLabel(Generator.translate("GUI:command.import"));
 		JTextField field = new JTextField(30);
 		panel.add(label);
 		panel.add(field);
 
-		if (DisplayHelper.showQuestion(panel, Lang.get("GUI:command.generator"))) return;
+		if (DisplayHelper.showQuestion(panel, Generator.translate("GUI:command.generator"))) return;
 		String command = field.getText();
 		if (command == null) return;
 		DisplayHelper.log("Generating display from command : " + command + "  -----------------------------------------------------------");
@@ -317,7 +315,7 @@ public class PanelCommandSelection extends JPanel
 		add(tabOptions, gbc);
 		gbc.gridwidth = 1;
 
-		CommandGenerator.gui.setVisible(true);
+		Generator.gui.setVisible(true);
 
 	}
 
@@ -340,7 +338,7 @@ public class PanelCommandSelection extends JPanel
 
 	public void updateLang()
 	{
-		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), Lang.get("GUI:command")));
+		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), Generator.translate("GUI:command")));
 		labelChooseCommand.updateLang();
 		labelWarning.updateLang();
 		buttonCopy.updateLang();

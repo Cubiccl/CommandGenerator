@@ -5,11 +5,11 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.Entity;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 
 public class TagSelection
 {
@@ -20,13 +20,13 @@ public class TagSelection
 		{
 			DisplayHelper.showWarning("WARNING:tag.remove.none");
 		}
-		tags.remove(JOptionPane.showInputDialog(null, Lang.get("GUI:tag.remove.desc"), Lang.get("GUI:tag.remove.title"), JOptionPane.QUESTION_MESSAGE, null,
+		tags.remove(JOptionPane.showInputDialog(null, Generator.translate("GUI:tag.remove.desc"), Generator.translate("GUI:tag.remove.title"), JOptionPane.QUESTION_MESSAGE, null,
 				tags.toArray(new Tag[0]), tags.get(0)));
 	}
 
 	public static void askRemoveText(List<String> texts)
 	{
-		texts.remove(JOptionPane.showInputDialog(null, Lang.get("GUI:text.remove.desc"), Lang.get("GUI:text.remove.title"), JOptionPane.QUESTION_MESSAGE, null,
+		texts.remove(JOptionPane.showInputDialog(null, Generator.translate("GUI:text.remove.desc"), Generator.translate("GUI:text.remove.title"), JOptionPane.QUESTION_MESSAGE, null,
 				texts.toArray(new String[0]), texts.get(0)));
 	}
 

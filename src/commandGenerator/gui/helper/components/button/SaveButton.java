@@ -2,12 +2,12 @@ package commandGenerator.gui.helper.components.button;
 
 import javax.swing.JLabel;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.SavedObjects;
 import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.listeners.ClickListener;
 import commandGenerator.gui.helper.components.listeners.IClick;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
 public class SaveButton extends CButton implements IClick
@@ -31,7 +31,7 @@ public class SaveButton extends CButton implements IClick
 		String name = DisplayHelper.askObjectName(this.type);
 		if (name == null) return;
 		SavedObjects.add(name, this.type, object);
-		DisplayHelper.showMessage(new JLabel(Lang.get("GENERAL:save_success").replaceAll("<item>", name)), Lang.get("GENERAL:save"));
+		DisplayHelper.showMessage(new JLabel(Generator.translate("GENERAL:save_success").replaceAll("<item>", name)), Generator.translate("GENERAL:save"));
 	}
 
 }

@@ -3,10 +3,10 @@ package commandGenerator.arguments.command.arguments;
 import java.awt.Component;
 import java.util.List;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.objects.Entity;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
@@ -59,7 +59,7 @@ public class EntityArgument extends Argument implements INBTArgument
 	@Override
 	public void initGui()
 	{
-		this.panel = new EntitySelectionPanel("GUI:" + this.getId(), Registry.getObjectList(ObjectBase.ENTITY));
+		this.panel = new EntitySelectionPanel("GUI:" + this.getId(), Generator.registry.getObjectList(ObjectBase.ENTITY));
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class EntityArgument extends Argument implements INBTArgument
 	public boolean matches(List<String> data)
 	{
 		boolean ok = true;
-		if (this.display[0]) ok = Registry.exists(data.get(0), ObjectBase.ENTITY);
+		if (this.display[0]) ok = Generator.registry.exists(data.get(0), ObjectBase.ENTITY);
 		return ok;
 	}
 
@@ -95,7 +95,7 @@ public class EntityArgument extends Argument implements INBTArgument
 		int index = 0;
 		if (this.display[0])
 		{
-			this.panel.setEntity((Entity) Registry.getObjectFromId(data.get(index)));
+			this.panel.setEntity((Entity) Generator.registry.getObjectFromId(data.get(index)));
 			index++;
 		}
 		if (this.display[1]) this.panel.setDataTags(DataTags.generateListFrom(data.get(index)));

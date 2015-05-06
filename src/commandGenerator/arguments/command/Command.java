@@ -1,9 +1,8 @@
 package commandGenerator.arguments.command;
 
-import commandGenerator.arguments.objects.Registry;
+import commandGenerator.Generator;
 import commandGenerator.gui.helper.components.OptionsTab;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 
 public enum Command
 {
@@ -62,7 +61,7 @@ public enum Command
 	 *            - <i>String</i> - The command to match. */
 	public static Command identify(String command)
 	{
-		for (Command c : Registry.getCommands())
+		for (Command c : Generator.registry.getCommands())
 			if (command.startsWith(c.getId())) return c;
 		DisplayHelper.showWarning("WARNING:command.wrong_id");
 		return null;
@@ -71,7 +70,7 @@ public enum Command
 	/** Initializes the GUI to be displayed. */
 	public static void initGui()
 	{
-		for (Command c : Registry.getCommands())
+		for (Command c : Generator.registry.getCommands())
 			c.tab = new OptionsTab(c.structures);
 	}
 
@@ -100,7 +99,7 @@ public enum Command
 		this.id = id;
 		this.structure = structure;
 		this.structures = structures;
-		Registry.registerCommand(this);
+		Generator.registry.registerCommand(this);
 	}
 
 	/** Returns the index of the Structure matching the given arguments. Returns -1 if no Structure was found.
@@ -140,7 +139,7 @@ public enum Command
 	/** Returns the Command's description. */
 	public String getDescription()
 	{
-		return Lang.get("HELP:command." + id);
+		return Generator.translate("HELP:command." + id);
 	}
 
 	/** Returns the Command's ID. */

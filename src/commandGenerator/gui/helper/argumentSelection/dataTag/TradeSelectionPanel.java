@@ -3,10 +3,10 @@ package commandGenerator.gui.helper.argumentSelection.dataTag;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.ObjectCreator;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagBoolean;
 import commandGenerator.arguments.tags.TagCompound;
@@ -63,10 +63,10 @@ public class TradeSelectionPanel extends CPanel implements ISave
 		checkboxRewardExp = new CCheckBox("GUI:trade.xp");
 		checkboxBuyB = new CCheckBox("GUI:trade.buyb.use");
 
-		panelBuy = new ItemSelectionPanel("GUI:trade.buy", Registry.getList(CGConstants.LIST_ITEMS), true, false);
-		panelBuyB = new ItemSelectionPanel("GUI:trade.buyb", Registry.getList(CGConstants.LIST_ITEMS), true, false);
+		panelBuy = new ItemSelectionPanel("GUI:trade.buy", Generator.registry.getList(CGConstants.LIST_ITEMS), true, false);
+		panelBuyB = new ItemSelectionPanel("GUI:trade.buyb", Generator.registry.getList(CGConstants.LIST_ITEMS), true, false);
 		panelBuyB.setEnabledContent(false);
-		panelSell = new ItemSelectionPanel("GUI:trade.sell", Registry.getList(CGConstants.LIST_ITEMS), true, false);
+		panelSell = new ItemSelectionPanel("GUI:trade.sell", Generator.registry.getList(CGConstants.LIST_ITEMS), true, false);
 	}
 
 	@Override

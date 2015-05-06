@@ -4,7 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.JLabel;
 
-import commandGenerator.main.Lang;
+import commandGenerator.Generator;
 
 @SuppressWarnings("serial")
 public class CLabel extends JLabel implements CComponent
@@ -24,8 +24,8 @@ public class CLabel extends JLabel implements CComponent
 		this.title = title;
 		this.html = html;
 
-		if (this.html) this.setText("<html>" + Lang.get(this.title).replaceAll("\n", "<br />") + "</html>");
-		else this.setText(Lang.get(this.title));
+		if (this.html) this.setText("<html>" + Generator.translate(this.title).replaceAll("\n", "<br />") + "</html>");
+		else this.setText(Generator.translate(this.title));
 
 		if (!this.html) this.setPreferredSize(new Dimension(this.getText().length() * 7, 20));
 		if (!this.html) this.setMinimumSize(new Dimension(this.getText().length() * 7, 20));
@@ -50,8 +50,8 @@ public class CLabel extends JLabel implements CComponent
 	@Override
 	public void updateLang()
 	{
-		if (this.html) this.setText("<html>" + Lang.get(this.title).replaceAll("\n", "<br />") + "</html>");
-		else this.setText(Lang.get(this.title));
+		if (this.html) this.setText("<html>" + Generator.translate(this.title).replaceAll("\n", "<br />") + "</html>");
+		else this.setText(Generator.translate(this.title));
 	}
 
 	@Override

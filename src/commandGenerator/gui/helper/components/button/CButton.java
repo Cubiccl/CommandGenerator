@@ -1,6 +1,6 @@
 package commandGenerator.gui.helper.components.button;
 
-import commandGenerator.main.Lang;
+import commandGenerator.Generator;
 
 @SuppressWarnings("serial")
 public class CButton extends BaseButton
@@ -32,7 +32,7 @@ public class CButton extends BaseButton
 	@Override
 	public void updateLang()
 	{
-		if (this.translates) this.setText(Lang.get(this.text));
+		if (this.translates) this.setText(Generator.translate(this.text));
 	}
 
 }

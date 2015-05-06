@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.Attribute;
 import commandGenerator.arguments.objects.Effect;
 import commandGenerator.arguments.objects.Enchantment;
@@ -34,7 +35,6 @@ import commandGenerator.gui.helper.argumentSelection.json.JsonSelectionPanel;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
 public class ListSelectionPanel extends CPanel
@@ -65,27 +65,27 @@ public class ListSelectionPanel extends CPanel
 		{
 			case ObjectBase.ATTRIBUTE:
 				AttributeSelectionPanel panelA = new AttributeSelectionPanel();
-				if (DisplayHelper.showQuestion(panelA, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:attribute")))) return;
+				if (DisplayHelper.showQuestion(panelA, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:attribute")))) return;
 				if (panelA.getAttribute() == null) return;
 				objects.add(panelA.getAttribute());
 				break;
 
 			case ObjectBase.EFFECT:
 				EffectSelectionPanel panelEf = new EffectSelectionPanel("GENERAL:effect");
-				if (DisplayHelper.showQuestion(panelEf, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:effect")))) return;
+				if (DisplayHelper.showQuestion(panelEf, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:effect")))) return;
 				objects.add(panelEf.generateEffect());
 				break;
 
 			case ObjectBase.ENCHANTMENT:
 				EnchantSelectionPanel panelEn = new EnchantSelectionPanel("GENERAL:enchant", false);
-				if (DisplayHelper.showQuestion(panelEn, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:enchant")))) return;
+				if (DisplayHelper.showQuestion(panelEn, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:enchant")))) return;
 				if (panelEn.generateEnchantment() == null) return;
 				objects.add(panelEn.generateEnchantment());
 				break;
 
 			case ObjectBase.ENTITY:
 				SpawnSelectionPanel panelSp = new SpawnSelectionPanel();
-				if (DisplayHelper.showQuestion(panelSp, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:entity")))) return;
+				if (DisplayHelper.showQuestion(panelSp, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:entity")))) return;
 				if (panelSp.getTag() == null) return;
 				objects.add(panelSp.getTag());
 				break;
@@ -95,7 +95,7 @@ public class ListSelectionPanel extends CPanel
 				for (int i = 0; i < items.length; i++)
 					items[i] = (Item) list[i];
 				ItemSelectionPanel panelI = new ItemSelectionPanel("GENERAL:item", items, true, true);
-				if (DisplayHelper.showQuestion(panelI, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:item")))) return;
+				if (DisplayHelper.showQuestion(panelI, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:item")))) return;
 				objects.add(panelI.getItemStack());
 				break;
 
@@ -111,7 +111,7 @@ public class ListSelectionPanel extends CPanel
 				scrollpaneT.getVerticalScrollBar().setUnitIncrement(20);
 				scrollpaneT.getHorizontalScrollBar().setUnitIncrement(20);
 				scrollpaneT.setPreferredSize(new Dimension(840, 600));
-				if (DisplayHelper.showQuestion(scrollpaneT, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:trade")))) return;
+				if (DisplayHelper.showQuestion(scrollpaneT, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:trade")))) return;
 				if (panelT.generateTrade() == null) return;
 				objects.add(panelT.generateTrade());
 				break;
@@ -122,14 +122,14 @@ public class ListSelectionPanel extends CPanel
 				scrollpaneJ.getVerticalScrollBar().setUnitIncrement(20);
 				scrollpaneJ.getHorizontalScrollBar().setUnitIncrement(20);
 				scrollpaneJ.setPreferredSize(new Dimension(840, 600));
-				if (DisplayHelper.showQuestion(scrollpaneJ, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
+				if (DisplayHelper.showQuestion(scrollpaneJ, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:text")))) return;
 				if (panelJ.getTag() == null) return;
 				objects.add(panelJ.getTag());
 				break;
 
 			case ObjectBase.TAG_PATTERN:
 				PatternSelectionPanel panelP = new PatternSelectionPanel();
-				if (DisplayHelper.showQuestion(panelP, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:pattern")))) return;
+				if (DisplayHelper.showQuestion(panelP, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:pattern")))) return;
 				if (panelP.getPattern() == null) return;
 				objects.add(panelP.getPattern());
 				break;
@@ -139,13 +139,13 @@ public class ListSelectionPanel extends CPanel
 				for (int i = 0; i < strings.length; i++)
 					strings[i] = (String) list[i];
 				JPanel panelSt = new JPanel();
-				JLabel label = new JLabel(Lang.get("GENERAL:add_only"));
+				JLabel label = new JLabel(Generator.translate("GENERAL:add_only"));
 				JComboBox<String> box = new JComboBox<String>(strings);
 
 				panelSt.add(label);
 				panelSt.add(box);
 
-				if (DisplayHelper.showQuestion(panelSt, Lang.get("GENERAL:add_only"))) return;
+				if (DisplayHelper.showQuestion(panelSt, Generator.translate("GENERAL:add_only"))) return;
 				objects.add(new TagString().setValue((String) box.getSelectedItem()));
 				break;
 
@@ -235,7 +235,7 @@ public class ListSelectionPanel extends CPanel
 				AttributeSelectionPanel panelA = new AttributeSelectionPanel();
 				panelA.setupFrom((Attribute) objects.get(nbr));
 
-				if (DisplayHelper.showQuestion(panelA, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:attribute")))) return;
+				if (DisplayHelper.showQuestion(panelA, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:attribute")))) return;
 				if (panelA.getAttribute() == null) return;
 				objects.set(nbr, panelA.getAttribute());
 				break;
@@ -244,7 +244,7 @@ public class ListSelectionPanel extends CPanel
 				EffectSelectionPanel panelEf = new EffectSelectionPanel("GENERAL:effect");
 				panelEf.setupFrom((Effect) objects.get(nbr));
 
-				if (DisplayHelper.showQuestion(panelEf, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:effect")))) return;
+				if (DisplayHelper.showQuestion(panelEf, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:effect")))) return;
 				objects.set(nbr, panelEf.generateEffect());
 				break;
 
@@ -252,7 +252,7 @@ public class ListSelectionPanel extends CPanel
 				EnchantSelectionPanel panelEn = new EnchantSelectionPanel("GENERAL:enchant", false);
 				panelEn.setupFrom((Enchantment) objects.get(nbr));
 
-				if (DisplayHelper.showQuestion(panelEn, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:enchant")))) return;
+				if (DisplayHelper.showQuestion(panelEn, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:enchant")))) return;
 				if (panelEn.generateEnchantment() == null) return;
 				objects.set(nbr, panelEn.generateEnchantment());
 				break;
@@ -261,7 +261,7 @@ public class ListSelectionPanel extends CPanel
 				SpawnSelectionPanel panelSp = new SpawnSelectionPanel();
 				panelSp.setup((TagCompound) objects.get(nbr));
 
-				if (DisplayHelper.showQuestion(panelSp, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:entity")))) return;
+				if (DisplayHelper.showQuestion(panelSp, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:entity")))) return;
 				if (panelSp.getTag() == null) return;
 				objects.set(nbr, panelSp.getTag());
 				break;
@@ -273,7 +273,7 @@ public class ListSelectionPanel extends CPanel
 				ItemSelectionPanel panelI = new ItemSelectionPanel("GENERAL:item", items, true, true);
 				panelI.setupFrom((ItemStack) objects.get(nbr));
 
-				if (DisplayHelper.showQuestion(panelI, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:item")))) return;
+				if (DisplayHelper.showQuestion(panelI, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:item")))) return;
 				objects.set(nbr, panelI.getItemStack());
 				break;
 
@@ -289,7 +289,7 @@ public class ListSelectionPanel extends CPanel
 				scrollpaneT.getVerticalScrollBar().setUnitIncrement(20);
 				scrollpaneT.getHorizontalScrollBar().setUnitIncrement(20);
 				scrollpaneT.setPreferredSize(new Dimension(840, 600));
-				if (DisplayHelper.showQuestion(scrollpaneT, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:trade")))) return;
+				if (DisplayHelper.showQuestion(scrollpaneT, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:trade")))) return;
 				if (panelT.generateTrade() == null) return;
 				objects.set(nbr, panelT.generateTrade());
 				break;
@@ -302,7 +302,7 @@ public class ListSelectionPanel extends CPanel
 				scrollpaneJ.getHorizontalScrollBar().setUnitIncrement(20);
 				scrollpaneJ.setPreferredSize(new Dimension(840, 600));
 
-				if (DisplayHelper.showQuestion(scrollpaneJ, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:text")))) return;
+				if (DisplayHelper.showQuestion(scrollpaneJ, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:text")))) return;
 				if (panelJ.getTag() == null) return;
 				objects.set(nbr, panelJ.getTag());
 				break;
@@ -310,7 +310,7 @@ public class ListSelectionPanel extends CPanel
 			case ObjectBase.TAG_PATTERN:
 				PatternSelectionPanel panelP = new PatternSelectionPanel();
 				panelP.setup((TagCompound) objects.get(nbr));
-				if (DisplayHelper.showQuestion(panelP, Lang.get("GENERAL:add_title").replaceAll("<item>", Lang.get("GENERAL:pattern")))) return;
+				if (DisplayHelper.showQuestion(panelP, Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:pattern")))) return;
 				if (panelP.getPattern() == null) return;
 				objects.set(nbr, panelP.getPattern());
 				break;
@@ -320,7 +320,7 @@ public class ListSelectionPanel extends CPanel
 				for (int i = 0; i < strings.length; i++)
 					strings[i] = (String) list[i];
 				JPanel panelS = new JPanel();
-				JLabel label = new JLabel(Lang.get("GENERAL:edit_only"));
+				JLabel label = new JLabel(Generator.translate("GENERAL:edit_only"));
 				JComboBox<String> box = new JComboBox<String>(strings);
 
 				int index = 0;
@@ -331,7 +331,7 @@ public class ListSelectionPanel extends CPanel
 				panelS.add(label);
 				panelS.add(box);
 
-				if (DisplayHelper.showQuestion(panelS, Lang.get("GENERAL:edit_only"))) return;
+				if (DisplayHelper.showQuestion(panelS, Generator.translate("GENERAL:edit_only"))) return;
 				objects.set(nbr, new TagString().setValue((String) box.getSelectedItem()));
 				break;
 
@@ -374,32 +374,32 @@ public class ListSelectionPanel extends CPanel
 		switch (type)
 		{
 			case ObjectBase.ATTRIBUTE:
-				name = Lang.get("GENERAL:attribute");
+				name = Generator.translate("GENERAL:attribute");
 				break;
 			case ObjectBase.EFFECT:
-				name = Lang.get("GENERAL:effect");
+				name = Generator.translate("GENERAL:effect");
 				break;
 			case ObjectBase.ENCHANTMENT:
-				name = Lang.get("GENERAL:enchant");
+				name = Generator.translate("GENERAL:enchant");
 				break;
 			case ObjectBase.ENTITY:
-				name = Lang.get("GENERAL:entity");
+				name = Generator.translate("GENERAL:entity");
 				break;
 			case ObjectBase.ITEM:
-				name = Lang.get("GENERAL:item");
+				name = Generator.translate("GENERAL:item");
 				break;
 			case ObjectBase.TAG_EXPLOSION:
-				name = Lang.get("TAGS:Explosion");
+				name = Generator.translate("TAGS:Explosion");
 				break;
 			case ObjectBase.TAG_TRADE:
-				name = Lang.get("GENERAL:trade");
+				name = Generator.translate("GENERAL:trade");
 				break;
 			case ObjectBase.TAG_PATTERN:
-				name = Lang.get("GENERAL:pattern");
+				name = Generator.translate("GENERAL:pattern");
 				break;
 
 			default:
-				name = Lang.get("GENERAL:text");
+				name = Generator.translate("GENERAL:text");
 				break;
 		}
 		String[] ids = new String[objects.size()];

@@ -13,6 +13,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagInt;
 import commandGenerator.arguments.tags.TagList;
@@ -22,7 +23,6 @@ import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
 import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
 public class ExplosionSelectionPanel extends CPanel
@@ -181,12 +181,12 @@ public class ExplosionSelectionPanel extends CPanel
 		for (int i = 0; i < colors.size(); i++)
 			colorArray[i] = Integer.toString(colors.get(i));
 		for (int i = 0; i < colorsFade.size(); i++)
-			colorArray[colors.size() + i] = Lang.get("GUI:color.fade") + " : " + colorsFade.get(i);
+			colorArray[colors.size() + i] = Generator.translate("GUI:color.fade") + " : " + colorsFade.get(i);
 
 		JPanel panel = new JPanel();
 		JComboBox<String> box = new JComboBox<String>(colorArray);
 		panel.add(box);
-		if (DisplayHelper.showQuestion(panel, Lang.get("GUI:color.remove"))) return;
+		if (DisplayHelper.showQuestion(panel, Generator.translate("GUI:color.remove"))) return;
 
 		int index = box.getSelectedIndex();
 		if (index < colors.size()) colors.remove(index);

@@ -19,10 +19,10 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.Entity;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.ObjectCreator;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.objects.Target;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
@@ -37,7 +37,6 @@ import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 
 @SuppressWarnings("serial")
 public class TargetSelectionPanel extends CPanel implements ISave
@@ -66,14 +65,14 @@ public class TargetSelectionPanel extends CPanel implements ISave
 		switch (mode)
 		{
 			case CGConstants.ENTITIES_PLAYERS:
-				targets = new String[] { "@a", "@p", "@r", Lang.get("GUI:selector.player") };
+				targets = new String[] { "@a", "@p", "@r", Generator.translate("GUI:selector.player") };
 				break;
 			case CGConstants.ENTITIES_NPCS:
 				targets = new String[] { "@e" };
 				break;
 
 			default:
-				targets = new String[] { "@a", "@p", "@r", "@e", Lang.get("GUI:selector.player") };
+				targets = new String[] { "@a", "@p", "@r", "@e", Generator.translate("GUI:selector.player") };
 				break;
 		}
 
@@ -95,8 +94,8 @@ public class TargetSelectionPanel extends CPanel implements ISave
 	{
 		String selector = (String) boxSelectors.getSelectedValue();
 		String value;
-		String title = Lang.get("GUI:selector.add") + " : " + boxSelectors.getSelectedValue();
-		String text = Lang.get("HELP:selector." + boxSelectors.getSelectedValue());
+		String title = Generator.translate("GUI:selector.add") + " : " + boxSelectors.getSelectedValue();
+		String text = Generator.translate("HELP:selector." + boxSelectors.getSelectedValue());
 		JPanel panel = new JPanel(new GridLayout(3, 1));
 		JLabel label = new JLabel(text);
 		CCheckBox box = new CCheckBox("GUI:selector.not");
@@ -150,7 +149,7 @@ public class TargetSelectionPanel extends CPanel implements ISave
 
 		} else if (selector.equals("type"))
 		{
-			ObjectComboBox combobox = new ObjectComboBox("GUI:selector.type", Registry.getObjectList(ObjectBase.ENTITY), null);
+			ObjectComboBox combobox = new ObjectComboBox("GUI:selector.type", Generator.registry.getObjectList(ObjectBase.ENTITY), null);
 			panel.add(combobox);
 			if (DisplayHelper.showQuestion(panel, title)) return;
 			value = combobox.getValue().getId();
@@ -159,9 +158,9 @@ public class TargetSelectionPanel extends CPanel implements ISave
 		{
 			JTextField textfieldScore = new JTextField(10), textfieldValue = new JTextField(10);
 			JPanel panelScore = new JPanel(new GridLayout(2, 2));
-			panelScore.add(new JLabel(Lang.get("GUI:objective")));
+			panelScore.add(new JLabel(Generator.translate("GUI:objective")));
 			panelScore.add(textfieldScore);
-			panelScore.add(new JLabel(Lang.get("GUI:scoreboard.score")));
+			panelScore.add(new JLabel(Generator.translate("GUI:scoreboard.score")));
 			panelScore.add(textfieldValue);
 			panel.add(panelScore);
 			if (DisplayHelper.showQuestion(panel, title)) return;
@@ -210,7 +209,7 @@ public class TargetSelectionPanel extends CPanel implements ISave
 		entryPlayer.setEnabledContent(false);
 
 		buttonHelpEntity = new HelpButton();
-		buttonHelpEntity.setData(Lang.get("HELP:selector." + this.targets[0]), this.targets[0]);
+		buttonHelpEntity.setData(Generator.translate("HELP:selector." + this.targets[0]), this.targets[0]);
 
 		buttonAdd = new CButton("GUI:selector.add");
 		buttonRemove = new CButton("GUI:selector.remove");
@@ -252,7 +251,7 @@ public class TargetSelectionPanel extends CPanel implements ISave
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				boolean player = boxEntities.getSelectedItem().equals(Lang.get("GUI:selector.player"));
+				boolean player = boxEntities.getSelectedItem().equals(Generator.translate("GUI:selector.player"));
 				entryPlayer.setEnabledContent(player);
 				buttonAdd.setEnabled(!player);
 				buttonRemove.setEnabled(!player);
@@ -264,8 +263,8 @@ public class TargetSelectionPanel extends CPanel implements ISave
 
 				String entity = (String) boxEntities.getSelectedItem();
 				if (!entity.equals("@e") && !entity.equals("@a") && !entity.equals("@p") && !entity.equals("@r")) buttonHelpEntity.setData(
-						Lang.get("HELP:selector.player"), (String) boxEntities.getSelectedItem());
-				else buttonHelpEntity.setData(Lang.get("HELP:selector." + boxEntities.getSelectedItem()), (String) boxEntities.getSelectedItem());
+						Generator.translate("HELP:selector.player"), (String) boxEntities.getSelectedItem());
+				else buttonHelpEntity.setData(Generator.translate("HELP:selector." + boxEntities.getSelectedItem()), (String) boxEntities.getSelectedItem());
 			}
 		});
 	}
@@ -286,7 +285,7 @@ public class TargetSelectionPanel extends CPanel implements ISave
 
 	public Target generateEntity()
 	{
-		if (boxEntities.getSelectedItem().equals(Lang.get("GUI:selector.player")))
+		if (boxEntities.getSelectedItem().equals(Generator.translate("GUI:selector.player")))
 		{
 			if (entryPlayer.getText().equals("") || entryPlayer.getText().contains(" "))
 			{
@@ -308,7 +307,7 @@ public class TargetSelectionPanel extends CPanel implements ISave
 		Entity entity = Entity.player;
 		for (int i = 0; i < addedSelectors.size(); i++)
 		{
-			if (addedSelectors.get(i)[0].equals("type")) entity = (Entity) Registry.getObjectFromId(addedSelectors.get(i)[1]);
+			if (addedSelectors.get(i)[0].equals("type")) entity = (Entity) Generator.registry.getObjectFromId(addedSelectors.get(i)[1]);
 		}
 		return entity;
 	}
@@ -339,7 +338,7 @@ public class TargetSelectionPanel extends CPanel implements ISave
 			options[i] = DisplayHelper.displaySelector(addedSelectors.get(i));
 		}
 
-		String selector = (String) JOptionPane.showInputDialog(null, Lang.get("GUI:remove.selector.ask"), Lang.get("GUI:remove.selector.title"),
+		String selector = (String) JOptionPane.showInputDialog(null, Generator.translate("GUI:remove.selector.ask"), Generator.translate("GUI:remove.selector.title"),
 				JOptionPane.OK_CANCEL_OPTION, null, options, options[0]);
 		if (selector == null) return;
 
@@ -365,7 +364,7 @@ public class TargetSelectionPanel extends CPanel implements ISave
 
 		if (target.getType() == Target.PLAYER)
 		{
-			boxEntities.setSelectedItem(Lang.get("GUI:selector.player"));
+			boxEntities.setSelectedItem(Generator.translate("GUI:selector.player"));
 			entryPlayer.setTextField(target.display());
 		}
 
@@ -384,14 +383,14 @@ public class TargetSelectionPanel extends CPanel implements ISave
 		switch (mode)
 		{
 			case CGConstants.ENTITIES_PLAYERS:
-				targets = new String[] { "@a", "@p", "@r", Lang.get("GUI:selector.player") };
+				targets = new String[] { "@a", "@p", "@r", Generator.translate("GUI:selector.player") };
 				break;
 			case CGConstants.ENTITIES_NPCS:
 				targets = new String[] { "@e" };
 				break;
 
 			default:
-				targets = new String[] { "@a", "@p", "@r", "@e", Lang.get("GUI:selector.player") };
+				targets = new String[] { "@a", "@p", "@r", "@e", Generator.translate("GUI:selector.player") };
 				break;
 		}
 

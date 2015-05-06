@@ -3,11 +3,11 @@ package commandGenerator.arguments.command.arguments;
 import java.awt.Component;
 import java.util.List;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.command.Argument;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
@@ -64,7 +64,7 @@ public class BlockArgument extends Argument implements INBTArgument
 	@Override
 	public void initGui()
 	{
-		this.panel = new BlockSelectionPanel("GUI:" + this.getId(), Registry.getList(this.listId), this.canHaveNBT);
+		this.panel = new BlockSelectionPanel("GUI:" + this.getId(), Generator.registry.getList(this.listId), this.canHaveNBT);
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class BlockArgument extends Argument implements INBTArgument
 		int index = 0;
 		if (this.display[0] && data.size() > index)
 		{
-			ok = Registry.exists(data.get(index), ObjectBase.ITEM);
+			ok = Generator.registry.exists(data.get(index), ObjectBase.ITEM);
 			index++;
 		}
 		if (this.display[1] && data.size() > index)
@@ -117,7 +117,7 @@ public class BlockArgument extends Argument implements INBTArgument
 		int index = 0;
 		if (this.display[0] && data.size() > index)
 		{
-			this.panel.setBlock((Item) Registry.getObjectFromId(data.get(index)));
+			this.panel.setBlock((Item) Generator.registry.getObjectFromId(data.get(index)));
 			index++;
 		}
 		if (this.display[1] && data.size() > index)

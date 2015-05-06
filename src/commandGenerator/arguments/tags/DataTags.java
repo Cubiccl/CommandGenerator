@@ -3,8 +3,8 @@ package commandGenerator.arguments.tags;
 import java.util.ArrayList;
 import java.util.List;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.specific.TagAttributes;
 import commandGenerator.arguments.tags.specific.TagBlockEntity;
 import commandGenerator.arguments.tags.specific.TagCanDestroy;
@@ -198,7 +198,7 @@ public class DataTags
 
 	public static ObjectBase getObjectFromTags(List<Tag> list)
 	{
-		if (list.size() == 0) return Registry.getObjectFromId("air");
+		if (list.size() == 0) return Generator.registry.getObjectFromId("air");
 
 		List<ObjectBase> applicable = new ArrayList<ObjectBase>();
 		for (ObjectBase obj : list.get(0).getApplicable())
@@ -351,7 +351,7 @@ public class DataTags
 		else
 		{
 			List<String> objects = new ArrayList<String>();
-			for (ObjectBase object : Registry.getList(tagData[3].substring("LIST=".length())))
+			for (ObjectBase object : Generator.registry.getList(tagData[3].substring("LIST=".length())))
 				objects.add(object.getId());
 			tag = new TagItem(tagData[0], objects.toArray(new String[0]), false, tagData[2]);
 		}

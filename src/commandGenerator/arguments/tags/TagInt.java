@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import commandGenerator.main.Lang;
+import commandGenerator.Generator;
 
 public class TagInt extends Tag
 {
@@ -59,7 +59,7 @@ public class TagInt extends Tag
 		{
 			String[] names = new String[choices.length];
 			for (int i = 0; i < names.length; i++)
-				names[i] = Lang.get("RESOURCES:" + choicesId + "." + choices[i]);
+				names[i] = Generator.translate("RESOURCES:" + choicesId + "." + choices[i]);
 
 			JComboBox<String> combobox = new JComboBox<String>(names);
 			if (value > 0 && value < combobox.getItemCount()) combobox.setSelectedIndex(value);
@@ -112,10 +112,10 @@ public class TagInt extends Tag
 		if (type == MAX) errorMessage = "max";
 		if (type == BOTH) errorMessage = "integer_bound";
 
-		String error = Lang.get("WARNING:" + errorMessage);
+		String error = Generator.translate("WARNING:" + errorMessage);
 		error = error.replaceAll("<min>", Integer.toString(min));
 		error = error.replaceAll("<max>", Integer.toString(max));
-		if (flag) JOptionPane.showMessageDialog(null, Lang.get("WARNING:tag.error") + "\n" + error, Lang.get("WARNING:title"), JOptionPane.WARNING_MESSAGE);
+		if (flag) JOptionPane.showMessageDialog(null, Generator.translate("WARNING:tag.error") + "\n" + error, Generator.translate("WARNING:title"), JOptionPane.WARNING_MESSAGE);
 
 		return !flag;
 	}

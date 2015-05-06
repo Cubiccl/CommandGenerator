@@ -3,10 +3,10 @@ package commandGenerator.arguments.tags.specific;
 import java.util.ArrayList;
 import java.util.List;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.Attribute;
 import commandGenerator.arguments.objects.AttributeType;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagDouble;
@@ -14,7 +14,6 @@ import commandGenerator.arguments.tags.TagInt;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.argumentSelection.dataTag.ListSelectionPanel;
-import commandGenerator.main.Lang;
 
 public class TagAttributes extends TagList
 {
@@ -98,7 +97,7 @@ public class TagAttributes extends TagList
 			value = ((TagList) getValue().get(0)).getValue();
 		}
 
-		if (value.size() == 0) return text + Lang.get("GENERAL:empty");
+		if (value.size() == 0) return text + Generator.translate("GENERAL:empty");
 		for (int i = 0; i < value.size(); i++)
 		{
 			text += "<br />";
@@ -116,7 +115,7 @@ public class TagAttributes extends TagList
 				if (attribute.get(j).getId().equals("Amount")) amount = ((TagDouble) attribute.get(j)).getValue();
 				if (attribute.get(j).getId().equals("Operation")) operation = ((TagInt) attribute.get(j)).getValue();
 			}
-			text += new Attribute((AttributeType) Registry.getObjectFromId(id), amount, operation).display();
+			text += new Attribute((AttributeType) Generator.registry.getObjectFromId(id), amount, operation).display();
 		}
 
 		return text;

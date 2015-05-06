@@ -1,9 +1,9 @@
 package commandGenerator.arguments.objects;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.tags.TagBoolean;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagInt;
-import commandGenerator.main.Lang;
 
 public class Effect
 {
@@ -61,12 +61,12 @@ public class Effect
 	/** Returns a String version of this Effect to be displayed to the user. */
 	public String display()
 	{
-		String display = Lang.get("GUI:effect.display");
+		String display = Generator.translate("GUI:effect.display");
 		display = display.replaceAll("<effect>", this.type.getName());
 		display = display.replaceAll("<amplifier>", Integer.toString(this.amplifier + 1));
 		display = display.replaceAll("<duration>", Integer.toString(this.duration));
 		if (this.showParticles) display = display.replaceAll("<particles>", "");
-		else display = display.replaceAll("<particles>", Lang.get("GUI:effect.particles"));
+		else display = display.replaceAll("<particles>", Generator.translate("GUI:effect.particles"));
 		return display;
 	}
 

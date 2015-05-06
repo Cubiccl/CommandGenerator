@@ -3,6 +3,7 @@ package commandGenerator.arguments.command;
 import java.util.ArrayList;
 import java.util.List;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.command.arguments.BlockArgument;
 import commandGenerator.arguments.command.arguments.BooleanArgument;
 import commandGenerator.arguments.command.arguments.ChoiceArgument;
@@ -34,7 +35,6 @@ import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.gui.helper.components.panel.StructurePanel;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
-import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 
 public enum Structure
@@ -285,7 +285,7 @@ public enum Structure
 	/** Returns this Structure's name. */
 	public String getName()
 	{
-		return Lang.get("RESOURCES:structure." + this.id);
+		return Generator.translate("RESOURCES:structure." + this.id);
 	}
 
 	/** True if this Structure matches the given Arguments.

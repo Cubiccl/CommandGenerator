@@ -3,8 +3,8 @@ package commandGenerator.gui.helper.argumentSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import commandGenerator.Generator;
 import commandGenerator.arguments.objects.ObjectBase;
-import commandGenerator.arguments.objects.Registry;
 import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
 import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.panel.CPanel;
@@ -83,7 +83,7 @@ public class ObjectiveSelectionPanel extends CPanel
 		setupChoices();
 		int index = comboboxMain.getSelectedIndex();
 
-		if (index >= 6 && index <= 12) comboboxPrecise.setSelected(Registry.getObjectFromId(criteria.substring(1)));
+		if (index >= 6 && index <= 12) comboboxPrecise.setSelected(Generator.registry.getObjectFromId(criteria.substring(1)));
 		if (index == 13)
 		{
 			for (int i = 0; i < statList.length; i++)
@@ -103,11 +103,11 @@ public class ObjectiveSelectionPanel extends CPanel
 
 		if (index < 6) comboboxPrecise.setData(new ObjectBase[0]);
 
-		else if (index == 6) comboboxPrecise.setData(Registry.getObjectList(ObjectBase.ACHIEVEMENT));
+		else if (index == 6) comboboxPrecise.setData(Generator.registry.getObjectList(ObjectBase.ACHIEVEMENT));
 
 		else if (index == 13) comboboxPrecise2.setData("stat", statList);
 
-		else if (index == 11 || index == 12) comboboxPrecise.setData(Registry.getList(CGConstants.LIST_MOBS));
+		else if (index == 11 || index == 12) comboboxPrecise.setData(Generator.registry.getList(CGConstants.LIST_MOBS));
 
 		else if (index >= 14) comboboxPrecise2.setData("color", Resources.colors);
 
@@ -115,10 +115,10 @@ public class ObjectiveSelectionPanel extends CPanel
 		{
 			comboboxPrecise.setEnabled(true);
 			ObjectBase[] itemList = new ObjectBase[0];
-			if (index == 7) itemList = Registry.getList(CGConstants.LIST_CRAFT);
-			else if (index == 8) itemList = Registry.getList(CGConstants.LIST_USE);
-			else if (index == 9) itemList = Registry.getList(CGConstants.LIST_ITEMS);
-			else itemList = Registry.getList(CGConstants.LIST_MINE);
+			if (index == 7) itemList = Generator.registry.getList(CGConstants.LIST_CRAFT);
+			else if (index == 8) itemList = Generator.registry.getList(CGConstants.LIST_USE);
+			else if (index == 9) itemList = Generator.registry.getList(CGConstants.LIST_ITEMS);
+			else itemList = Generator.registry.getList(CGConstants.LIST_MINE);
 
 			comboboxPrecise.setData(itemList);
 		}

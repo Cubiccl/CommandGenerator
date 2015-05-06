@@ -12,11 +12,11 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import commandGenerator.Generator;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.combobox.LabeledSearchBox;
 import commandGenerator.main.FileHelper;
-import commandGenerator.main.Lang;
 import commandGenerator.main.Resources;
 import commandGenerator.main.Settings;
 
@@ -43,7 +43,7 @@ public class SettingsPanel extends CPanel
 	private void askFolder()
 	{
 		JFileChooser chooser = new JFileChooser(new File(this.fieldCustom.getText()));
-		chooser.setDialogTitle(Lang.get("GUI:settings.folder.custom"));
+		chooser.setDialogTitle(Generator.translate("GUI:settings.folder.custom"));
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		if (chooser.showSaveDialog(this) != JFileChooser.APPROVE_OPTION) return;
 		this.fieldCustom.setText(chooser.getSelectedFile().getPath());
@@ -92,8 +92,8 @@ public class SettingsPanel extends CPanel
 		this.comboboxLang = new LabeledSearchBox("GUI:settings.lang", this.opt.getLangs(), null);
 		this.comboboxLang.setSelectedItem(this.opt.getLanguage());
 
-		this.buttonDefault = new JRadioButton(Lang.get("GUI:settings.folder.default"));
-		this.buttonCustom = new JRadioButton(Lang.get("GUI:settings.folder.custom"));
+		this.buttonDefault = new JRadioButton(Generator.translate("GUI:settings.folder.default"));
+		this.buttonCustom = new JRadioButton(Generator.translate("GUI:settings.folder.custom"));
 
 		this.buttonDefault.setSelected(this.fieldCustom.getText().equals(FileHelper.getDefaultFolder()));
 		this.buttonCustom.setSelected(true);
@@ -103,9 +103,9 @@ public class SettingsPanel extends CPanel
 		this.groupFolder.add(this.buttonCustom);
 		this.groupFolder.add(this.buttonDefault);
 
-		this.buttonId = new JRadioButton(Lang.get("GUI:settings.sort.id"));
+		this.buttonId = new JRadioButton(Generator.translate("GUI:settings.sort.id"));
 		this.buttonId.setSelected(this.opt.getSortType().equals(Settings.IDS));
-		this.buttonName = new JRadioButton(Lang.get("GUI:settings.sort.name"));
+		this.buttonName = new JRadioButton(Generator.translate("GUI:settings.sort.name"));
 		this.buttonName.setSelected(this.opt.getSortType().equals(Settings.NAMES));
 
 		this.groupSort = new ButtonGroup();

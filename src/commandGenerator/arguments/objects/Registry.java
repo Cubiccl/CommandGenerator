@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import commandGenerator.CommandGenerator;
+import commandGenerator.Generator;
 import commandGenerator.arguments.command.Command;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
@@ -14,30 +14,39 @@ import commandGenerator.main.Settings;
 
 public class Registry
 {
+	public Registry()
+	{
+		this.commands = new HashMap<String, Command>();
+		this.list = new HashMap<String, ObjectBase[]>();
+		this.objects = new HashMap<Byte, Map<String, ObjectBase>>();
+		this.effects = new HashMap<Integer, EffectType>();
+		this.enchants = new HashMap<Integer, EnchantType>();
+		this.durabilityList = new ArrayList<String>();
+	}
 
 	/** Map containing registered commands. */
-	private static Map<String, Command> commands = new HashMap<String, Command>();
+	private Map<String, Command> commands;
 
 	/** Map containing registered lists. */
-	private static Map<String, ObjectBase[]> list = new HashMap<String, ObjectBase[]>();
+	private Map<String, ObjectBase[]> list;
 
 	/** Map containing registered Objects. */
-	private static Map<Byte, Map<String, ObjectBase>> objects = new HashMap<Byte, Map<String, ObjectBase>>();
+	private Map<Byte, Map<String, ObjectBase>> objects;
 
 	/** Map containing registered Effect Types. */
-	private static Map<Integer, EffectType> effects = new HashMap<Integer, EffectType>();
+	private Map<Integer, EffectType> effects;
 
 	/** Map containing registered Enchantment Types. */
-	private static Map<Integer, EnchantType> enchants = new HashMap<Integer, EnchantType>();
+	private Map<Integer, EnchantType> enchants;
 
 	/** List containing all items which have durability */
-	public static List<String> durabilityList = new ArrayList<String>();
+	public List<String> durabilityList;
 
 	/** Displays the list of all registered objects of the specified type.
 	 * 
 	 * @param objectType
 	 *            - <i>byte</i> - The Objects' type. */
-	private static void displayList(byte objectType)
+	private void displayList(byte objectType)
 	{
 		String log = "Registered " + CGConstants.TYPES[objectType] + "s : ";
 		ObjectBase[] items = getObjectList(objectType);
@@ -59,7 +68,7 @@ public class Registry
 	}
 
 	/** Finalizes the registration. */
-	public static void end()
+	public void end()
 	{
 		registerNames();
 		registerTextures();
@@ -74,25 +83,35 @@ public class Registry
 		displayList(ObjectBase.PARTICLE);
 	}
 
-	public static void registerNames()
+	public void registerNames()
 	{
-		for (ObjectBase item : getObjectList(ObjectBase.ITEM)) item.registerLang();
-		for (ObjectBase item : getObjectList(ObjectBase.ENTITY)) item.registerLang();
-		for (ObjectBase item : getObjectList(ObjectBase.ENCHANTMENT)) item.registerLang();
-		for (ObjectBase item : getObjectList(ObjectBase.EFFECT)) item.registerLang();
-		for (ObjectBase item : getObjectList(ObjectBase.ACHIEVEMENT)) item.registerLang();
-		for (ObjectBase item : getObjectList(ObjectBase.ATTRIBUTE)) item.registerLang();
-		for (ObjectBase item : getObjectList(ObjectBase.PARTICLE)) item.registerLang();
+		for (ObjectBase item : getObjectList(ObjectBase.ITEM))
+			item.registerLang();
+		for (ObjectBase item : getObjectList(ObjectBase.ENTITY))
+			item.registerLang();
+		for (ObjectBase item : getObjectList(ObjectBase.ENCHANTMENT))
+			item.registerLang();
+		for (ObjectBase item : getObjectList(ObjectBase.EFFECT))
+			item.registerLang();
+		for (ObjectBase item : getObjectList(ObjectBase.ACHIEVEMENT))
+			item.registerLang();
+		for (ObjectBase item : getObjectList(ObjectBase.ATTRIBUTE))
+			item.registerLang();
+		for (ObjectBase item : getObjectList(ObjectBase.PARTICLE))
+			item.registerLang();
 	}
 
-	private static void registerTextures()
+	private void registerTextures()
 	{
-		for (ObjectBase item : getObjectList(ObjectBase.ITEM)) ((Item) item).registerTextures();
-		for (ObjectBase entity : getObjectList(ObjectBase.ENTITY)) ((Entity) entity).registerTexture();
-		for (ObjectBase effect : getObjectList(ObjectBase.EFFECT)) ((EffectType) effect).registerTexture();
+		for (ObjectBase item : getObjectList(ObjectBase.ITEM))
+			((Item) item).registerTextures();
+		for (ObjectBase entity : getObjectList(ObjectBase.ENTITY))
+			((Entity) entity).registerTexture();
+		for (ObjectBase effect : getObjectList(ObjectBase.EFFECT))
+			((EffectType) effect).registerTexture();
 	}
 
-	public static boolean exists(String id, byte objectType)
+	public boolean exists(String id, byte objectType)
 	{
 		return objects.get(objectType).containsKey(id);
 	}
@@ -101,13 +120,13 @@ public class Registry
 	 * 
 	 * @param id
 	 *            - <i>String</i> - The Command's ID. */
-	public static Command getCommandFromId(String id)
+	public Command getCommandFromId(String id)
 	{
 		return commands.get(id);
 	}
 
 	/** Returns an array containing all registered commands. */
-	public static Command[] getCommands()
+	public Command[] getCommands()
 	{
 		Command[] commandArray = commands.values().toArray(new Command[0]);
 		List<Command> commandList = new ArrayList<Command>();
@@ -132,7 +151,7 @@ public class Registry
 	 * 
 	 * @param listName
 	 *            - <i>String</i> - The List name. */
-	public static ObjectBase[] getList(String listName)
+	public ObjectBase[] getList(String listName)
 	{
 		if (list.get(listName) == null || list.get(listName).length == 0)
 		{
@@ -145,7 +164,7 @@ public class Registry
 		for (ObjectBase o : found)
 			toSort.add(o);
 
-		if (CommandGenerator.opt.getSortType().equals(Settings.IDS))
+		if (Generator.opt.getSortType().equals(Settings.IDS))
 		{
 			if (found[0].getType() == ObjectBase.ITEM || found[0].getType() == ObjectBase.ENCHANTMENT || found[0].getType() == ObjectBase.EFFECT) sortIdsNum(toSort);
 			else sortIds(toSort);
@@ -158,7 +177,7 @@ public class Registry
 	 * 
 	 * @param id
 	 *            - <i>String</i> - The Object's ID. */
-	public static ObjectBase getObjectFromId(String id)
+	public ObjectBase getObjectFromId(String id)
 	{
 		if (id.startsWith("minecraft:") || id.startsWith("minecraft.")) id = id.substring("minecraft:".length());
 
@@ -181,7 +200,7 @@ public class Registry
 	 *            - <i>byte</i> - The type of the Object
 	 * @param id
 	 *            - <i>int</i> - The Object's ID. */
-	public static ObjectBase getObjectFromIdNum(byte type, int id)
+	public ObjectBase getObjectFromIdNum(byte type, int id)
 	{
 		switch (type)
 		{
@@ -202,14 +221,14 @@ public class Registry
 	 * 
 	 * @param type
 	 *            - <i>byte</i> - The Objects' type. */
-	public static ObjectBase[] getObjectList(byte type)
+	public ObjectBase[] getObjectList(byte type)
 	{
 		ObjectBase[] objectArray = objects.get(type).values().toArray(new ObjectBase[0]);
 		List<ObjectBase> objectList = new ArrayList<ObjectBase>();
 		for (int i = 0; i < objectArray.length; i++)
 			objectList.add(objectArray[i]);
 
-		if (CommandGenerator.opt.getSortType().equals(Settings.IDS))
+		if (Generator.opt.getSortType().equals(Settings.IDS))
 		{
 			if (type == ObjectBase.ITEM || type == ObjectBase.ENCHANTMENT || type == ObjectBase.EFFECT) sortIdsNum(objectList);
 			else sortIds(objectList);
@@ -222,7 +241,7 @@ public class Registry
 	 * @param command
 	 *            - <i>Command</i> - The Command to register. */
 
-	public static void registerCommand(Command command)
+	public void registerCommand(Command command)
 	{
 		commands.put(command.getId(), command);
 	}
@@ -233,7 +252,7 @@ public class Registry
 	 *            - <i>String</i> - The list's ID.
 	 * @param listNew
 	 *            - <i>String[]</i> - The list itself. */
-	public static void registerList(String id, String[] listNew)
+	public void registerList(String id, String[] listNew)
 	{
 		ObjectBase[] objects = new ObjectBase[listNew.length];
 		for (int i = 0; i < objects.length; i++)
@@ -248,7 +267,7 @@ public class Registry
 	 *            - <i>byte</i> - The Object type.
 	 * @param object
 	 *            - <i>ObjectBase</i> - The Object to register. */
-	public static void registerObject(byte type, ObjectBase object)
+	public void registerObject(byte type, ObjectBase object)
 	{
 		if (object.getId().equals("")) return;
 		if (objects.get(type) == null) objects.put(type, new HashMap<String, ObjectBase>());
@@ -314,18 +333,18 @@ public class Registry
 		});
 	}
 
-	public static void registerEffect(EffectType effectType)
+	public void registerEffect(EffectType effectType)
 	{
 		effects.put(effectType.getIdNum(), effectType);
 	}
 
-	public static void registerEnchant(EnchantType enchantType)
+	public void registerEnchant(EnchantType enchantType)
 	{
 		enchants.put(enchantType.getIdNum(), enchantType);
 	}
 
 	/** Returns an array containing all registered Entities, except Player. */
-	public static Entity[] getListNoPlayer()
+	public Entity[] getListNoPlayer()
 	{
 		List<Entity> entityList = new ArrayList<Entity>();
 		ObjectBase[] list = getObjectList(ObjectBase.ENTITY);
@@ -335,12 +354,12 @@ public class Registry
 		return entityList.toArray(new Entity[0]);
 	}
 
-	public static void registerDurableItem(Item item)
+	public void registerDurableItem(Item item)
 	{
 		durabilityList.add(item.getId());
 	}
 
-	public static Particle getParticleFrom(String id)
+	public Particle getParticleFrom(String id)
 	{
 		Particle part = (Particle) getObjectFromId(id);
 		if (part != null) return part;
