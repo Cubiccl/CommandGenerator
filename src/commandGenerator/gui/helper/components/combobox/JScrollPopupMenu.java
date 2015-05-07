@@ -80,7 +80,7 @@ public class JScrollPopupMenu extends JPopupMenu implements ActionListener
 
 	public void add(AbstractButton menuItem)
 	{
-		if (menuItem == null) { return; }
+		if (menuItem == null) return;
 		panelMenus.add(menuItem);
 		menuItem.removeActionListener(this);
 		menuItem.addActionListener(this);

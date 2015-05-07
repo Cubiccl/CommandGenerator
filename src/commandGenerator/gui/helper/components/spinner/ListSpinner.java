@@ -6,13 +6,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerListModel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.gui.helper.components.CLabel;
@@ -25,15 +20,13 @@ public class ListSpinner extends JPanel implements CComponent
 
 	private BaseButton buttonMax, buttonMin;
 	private CLabel label;
-	private JSpinner spinner;
+	private BaseSpinner spinner;
 	private int[] values;
-	private ISpin parent;
 
 	public ListSpinner(String labelTextId, int[] values, ISpin parent)
 	{
 		super(new GridBagLayout());
 		this.values = values;
-		this.parent = parent;
 
 		this.label = new CLabel(labelTextId);
 
@@ -59,20 +52,9 @@ public class ListSpinner extends JPanel implements CComponent
 			}
 		});
 
-		ArrayList<Integer> names = new ArrayList<Integer>();
-		for (int value : this.values)
-			names.add(value);
-		if (names.size() == 0) names.add(0);
-
-		this.spinner = new JSpinner(new SpinnerListModel(names));
+		this.spinner = new BaseSpinner(this.values, parent);
 		this.spinner.setPreferredSize(new Dimension(200, 20));
 		this.spinner.setMinimumSize(new Dimension(200, 20));
-		this.spinner.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e)
-			{
-				select();
-			}
-		});
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
@@ -84,11 +66,6 @@ public class ListSpinner extends JPanel implements CComponent
 		this.add(this.buttonMin);
 		gbc.gridx++;
 		this.add(this.buttonMax);
-	}
-
-	private void select()
-	{
-		this.parent.updateSpinner();
 	}
 
 	private void setMin()
@@ -104,12 +81,7 @@ public class ListSpinner extends JPanel implements CComponent
 	@Override
 	public void reset()
 	{
-		ArrayList<Integer> values = new ArrayList<Integer>();
-		for (int value : this.values)
-			values.add(value);
-		if (values.size() == 0) values.add(0);
-
-		this.spinner.setModel(new SpinnerListModel(values));
+		this.spinner.setValues(this.values);
 	}
 
 	@Override

@@ -19,6 +19,7 @@ public enum Command
 	fill("fill", "/fill <x1> <y1> <z1> <x2> <y2> <z2> <TileName> [dataValue] [oldBlockHandling] [dataTag]\n"
 			+ "/fill <x1> <y1> <z1> <x2> <y2> <z2> <TileName> <dataValue> replace [replaceTileName] [replaceDataValue]", Structure.fillNormal,
 			Structure.fillReplace),
+	gamemode("gamemode", "gamemode <mode> <target>", Structure.gamemode),
 	gamerule("gamerule", "gamerule <rule name> <value>", Structure.gameruleNormal, Structure.gameruleTicks),
 	give("give", "/give <player> <item> [amount] [data] [dataTag]", Structure.give),
 	kill("kill", "/kill <target>", Structure.kill),
@@ -110,7 +111,7 @@ public enum Command
 	{
 		for (int i = 0; i < this.structures.length; i++)
 			if (this.structures[i].matches(arguments)) return i;
-		
+
 		DisplayHelper.showWarning("WARNING:command.structure");
 		return -1;
 	}

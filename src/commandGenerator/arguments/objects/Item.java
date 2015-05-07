@@ -192,7 +192,8 @@ public class Item extends ObjectBase
 				else if (this.langType.startsWith("half_"))
 				{
 					if (damage < 8) this.names[damage] = Generator.translate("ITEMS:" + this.getId() + "_" + damage);
-					else this.names[damage] = Generator.translate("ITEMS:" + this.getId() + "_" + (damage - 8)) + " " + Generator.translate("ITEMS:" + this.langType);
+					else this.names[damage] = Generator.translate("ITEMS:" + this.getId() + "_" + (damage - 8)) + " "
+							+ Generator.translate("ITEMS:" + this.langType);
 				} else this.names[damage] = Generator.translate("ITEMS:" + this.getId()) + " " + Generator.translate("ITEMS:" + this.langType + "_" + damage);
 			}
 		} else
@@ -212,7 +213,7 @@ public class Item extends ObjectBase
 		int maxDamage = this.getMaxDamage();
 		if (this.getDurability() > 0) maxDamage = this.getDurability();
 
-		int[] damageList = new int[maxDamage];
+		int[] damageList = new int[maxDamage + 1];
 		for (int i = 0; i < damageList.length; i++)
 			damageList[i] = i;
 

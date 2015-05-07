@@ -71,6 +71,8 @@ public enum Structure
 	fillReplace("fill.replace", new CoordinatesArgument("fill.start", true, true, false), new CoordinatesArgument("fill.end", true, true, false),
 			new BlockArgument("fill.block", true, CGConstants.LIST_BLOCKS, false).setDisplay(true, true, false), new StaticArgument("replace"),
 			new BlockArgument("fill.block.replace", false, CGConstants.LIST_BLOCKS, false).setDisplay(true, true, false)),
+	gamemode("gamemode", new ChoiceArgument("gamemode", true, "survival", "creative", "adventure", "spectator"), new TargetArgument("target", true,
+			CGConstants.ENTITIES_ALL)),
 	gameruleNormal("gamerule.normal", new ChoiceArgument("gamerule", true, Resources.gamerules).addHelpButton(), new ChoiceArgument("value", true, "true",
 			"false")),
 	gameruleTicks("gamerule.ticks", new StaticArgument("randomTickSpeed"), new IntArgument("gamerule.value", true).setBounds(0, Integer.MAX_VALUE)),
