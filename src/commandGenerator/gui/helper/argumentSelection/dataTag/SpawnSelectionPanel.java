@@ -6,7 +6,7 @@ import commandGenerator.Generator;
 import commandGenerator.arguments.objects.Entity;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
-import commandGenerator.arguments.tags.TagInt;
+import commandGenerator.arguments.tags.TagFloat;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.argumentSelection.EntitySelectionPanel;
 import commandGenerator.gui.helper.components.CEntry;
@@ -57,7 +57,7 @@ public class SpawnSelectionPanel extends CPanel
 		String weight = entryWeight.getText();
 		try
 		{
-			int test = Integer.parseInt(weight);
+			float test = Float.parseFloat(weight);
 			if (test < 1)
 			{
 				JOptionPane.showMessageDialog(null, Generator.translate("WARNING:min").replaceAll("<min>", "1"), Generator.translate("WARNING:title"), JOptionPane.WARNING_MESSAGE);
@@ -75,7 +75,7 @@ public class SpawnSelectionPanel extends CPanel
 			{}
 		};
 		tag.addTag(new TagString("Type").setValue(panelEntity.getEntity().getId()));
-		tag.addTag(new TagInt("Weight").setValue(Integer.parseInt(weight)));
+		tag.addTag(new TagFloat("Weight").setValue(Float.parseFloat(weight)));
 		tag.addTag(panelEntity.getEntityTag());
 		return tag;
 	}
@@ -91,7 +91,7 @@ public class SpawnSelectionPanel extends CPanel
 				panelEntity.setSelected((Entity) Generator.registry.getObjectFromId(((TagString) tag).getValue()));
 				sel = (Entity) Generator.registry.getObjectFromId(((TagString) tag).getValue());
 			}
-			if (tag.getId().equals("Weight")) entryWeight.setTextField(Integer.toString(((TagInt) tag).getValue()));
+			if (tag.getId().equals("Weight")) entryWeight.setTextField(Float.toString(((TagFloat) tag).getValue()));
 			if (tag.getId().equals("Properties"))
 			{
 				panelEntity.setupFrom(sel);

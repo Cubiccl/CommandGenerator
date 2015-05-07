@@ -58,12 +58,12 @@ public class JScrollPopupMenu extends JPopupMenu implements ActionListener
 		{
 			sizescroll = scroll.getVerticalScrollBar().getPreferredSize().width;
 		}
-		scroll.setPreferredSize(new Dimension(scroll.getPreferredSize().width + sizescroll + 20, scroll.getPreferredSize().height));
+		scroll.setPreferredSize(new Dimension(scroll.getPreferredSize().width + 20, scroll.getPreferredSize().height));
 		this.pack();
 		this.setInvoker(invoker);
 		if (sizescroll != 0)
 		{
-			this.setPopupSize(new Dimension(scroll.getPreferredSize().width + 20, scroll.getMaximumSize().height - 20));
+			this.setPopupSize(new Dimension(scroll.getPreferredSize().width, scroll.getMaximumSize().height));
 		}
 		Point invokerOrigin = invoker.getLocationOnScreen();
 		this.setLocation((int) invokerOrigin.getX() + x, (int) invokerOrigin.getY() + y);

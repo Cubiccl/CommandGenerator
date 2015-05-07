@@ -34,7 +34,7 @@ public class EffectSelectionPanel extends CPanel implements IBox, ISave
 	public EffectSelectionPanel(String title)
 	{
 		super(title);
-		
+
 		this.initGui();
 	}
 
@@ -52,16 +52,16 @@ public class EffectSelectionPanel extends CPanel implements IBox, ISave
 	@Override
 	protected void createComponents()
 	{
+		ObjectBase[] objects = Generator.registry.getObjectList(ObjectBase.EFFECT);
+
 		labelTicks = new CLabel("GUI:effect.ticks");
 
 		labelImage = new JLabel();
 		try
 		{
-			labelImage.setIcon(Generator.registry.getObjectFromId("speed").getTexture());
+			if (objects.length > 0) labelImage.setIcon(objects[0].getTexture());
 		} catch (Exception e)
-		{
-			DisplayHelper.missingTexture("effects/speed.png");
-		}
+		{}
 
 		buttonSave = new SaveButton(ObjectBase.EFFECT, this);
 		buttonLoad = new LoadButton(ObjectBase.EFFECT, this);
@@ -70,7 +70,7 @@ public class EffectSelectionPanel extends CPanel implements IBox, ISave
 
 		spinnerAmplifier = new NumberSpinner("GUI:effect.amplifier", 1, 256, null);
 
-		comboboxEffect = new ObjectComboBox("GUI:effect.choose", Generator.registry.getObjectList(ObjectBase.EFFECT), this);
+		comboboxEffect = new ObjectComboBox("GUI:effect.choose", objects, this);
 
 		checkboxHideParticles = new CCheckBox("GUI:effect.hide");
 	}

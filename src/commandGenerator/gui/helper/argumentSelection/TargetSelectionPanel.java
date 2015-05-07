@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -31,6 +30,7 @@ import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.button.HelpButton;
 import commandGenerator.gui.helper.components.button.LoadButton;
 import commandGenerator.gui.helper.components.button.SaveButton;
+import commandGenerator.gui.helper.components.combobox.BaseComboBox;
 import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
 import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.icomponent.ISave;
@@ -46,7 +46,7 @@ public class TargetSelectionPanel extends CPanel implements ISave
 			"type", "score", "score_min" };
 
 	private List<String[]> addedSelectors;
-	private JComboBox<String> boxEntities;
+	private BaseComboBox boxEntities;
 	private ChoiceComboBox boxSelectors;
 	private CButton buttonAdd, buttonRemove, buttonSave, buttonLoad;
 	private HelpButton buttonHelpEntity;
@@ -216,7 +216,7 @@ public class TargetSelectionPanel extends CPanel implements ISave
 		buttonSave = new SaveButton(ObjectBase.TARGET, this);
 		buttonLoad = new LoadButton(ObjectBase.TARGET, this);
 
-		boxEntities = new JComboBox<String>(this.targets);
+		boxEntities = new BaseComboBox(this.targets, null);
 		boxEntities.setPreferredSize(new Dimension(100, 20));
 		boxEntities.setMinimumSize(new Dimension(100, 20));
 		boxSelectors = new ChoiceComboBox("selector", selectors, true);
@@ -374,31 +374,31 @@ public class TargetSelectionPanel extends CPanel implements ISave
 	@Override
 	public void updateLang()
 	{
-		labelEntity.updateLang();
-		labelSelector.updateLang();
-		labelSelectors.updateLang();
-		buttonAdd.updateLang();
-		buttonRemove.updateLang();
+		this.labelEntity.updateLang();
+		this.labelSelector.updateLang();
+		this.labelSelectors.updateLang();
+		this.buttonAdd.updateLang();
+		this.buttonRemove.updateLang();
 
 		switch (mode)
 		{
 			case CGConstants.ENTITIES_PLAYERS:
-				targets = new String[] { "@a", "@p", "@r", Generator.translate("GUI:selector.player") };
+				this.targets = new String[] { "@a", "@p", "@r", Generator.translate("GUI:selector.player") };
 				break;
 			case CGConstants.ENTITIES_NPCS:
-				targets = new String[] { "@e" };
+				this.targets = new String[] { "@e" };
 				break;
 
 			default:
-				targets = new String[] { "@a", "@p", "@r", "@e", Generator.translate("GUI:selector.player") };
+				this.targets = new String[] { "@a", "@p", "@r", "@e", Generator.translate("GUI:selector.player") };
 				break;
 		}
 
-		int index = boxEntities.getSelectedIndex();
-		boxEntities.setModel(new JComboBox<String>(targets).getModel());
-		boxEntities.setSelectedIndex(index);
+		int index = this.boxEntities.getSelectedIndex();
+		this.boxEntities.setValues(this.targets);
+		this.boxEntities.setSelectedIndex(index);
 
-		displaySelectors();
+		this.displaySelectors();
 	}
 
 	@Override
@@ -408,6 +408,6 @@ public class TargetSelectionPanel extends CPanel implements ISave
 		this.addedSelectors.clear();
 		this.boxEntities.setSelectedIndex(0);
 		this.boxSelectors.setSelected(selectors[0]);
-		displaySelectors();
+		this.displaySelectors();
 	}
 }

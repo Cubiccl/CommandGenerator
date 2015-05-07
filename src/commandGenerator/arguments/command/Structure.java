@@ -56,6 +56,8 @@ public enum Structure
 			new CoordinatesArgument("clone.destination", true, true, false), new StaticArgument("filtered"), new ChoiceArgument("clone.mode.dest", false,
 					"force", "move", "normal").addHelpButton(), new BlockArgument("clone.block", true, CGConstants.LIST_BLOCKS, false).setDisplay(true, false,
 					false)),
+	defaultgamemode("defaultgamemode", new ChoiceArgument("gamemode", true, "survival", "creative", "adventure", "spectator")),
+	difficulty("difficulty", new ChoiceArgument("difficulty", true, "peaceful", "easy", "normal", "hard")),
 	effectClear("effect.clear", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new StaticArgument("clear")),
 	effectGive("effect.give", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new EffectArgument("effect", true)),
 	enchant("enchant", new TargetArgument("target", true, CGConstants.ENTITIES_PLAYERS), new EnchantmentArgument("enchant", true)),

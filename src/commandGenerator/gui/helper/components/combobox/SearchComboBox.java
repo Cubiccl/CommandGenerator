@@ -86,7 +86,7 @@ public class SearchComboBox extends JPanel implements IBox
 		return this.combobox.getSelectedIndex();
 	}
 
-	public Object getSelectedItem()
+	public String getSelectedItem()
 	{
 		return this.combobox.getSelectedItem();
 	}

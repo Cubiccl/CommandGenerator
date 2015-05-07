@@ -6,11 +6,12 @@ import commandGenerator.main.DisplayHelper;
 
 public enum Command
 {
-
 	achievement("achievement", "/achievement <give|take> <stat_name|*> <player>", Structure.achievementOne, Structure.achievementAll),
 	blockdata("blockdata", "/blockdata <x> <y> <z> <dataTag>", Structure.blockdata),
 	clear("clear", "/clear <player> [item] [data] [maxCount] [dataTag]", Structure.clear),
 	clone("clone", "/clone <x1> <y1> <z1> <x2> <y2> <z2> <x> <y> <z> [maskMode] [cloneMode] [TileName]", Structure.clone, Structure.cloneFiltered),
+	defaultgamemode("defaultgamemode", "/defaultgamemode <mode>", Structure.defaultgamemode),
+	difficulty("difficulty", "/difficulty <difficulty>", Structure.difficulty),
 	effect("effect", "/effect <target> clear\n/effect <player> <effect> [seconds] [amplifier] [hideParticles]", Structure.effectGive, Structure.effectClear),
 	enchant("enchant", "/enchant <player> <enchantment ID> [level]", Structure.enchant),
 	entitydata("entitydata", "/entitydata <target> <dataTag>", Structure.entitydata),

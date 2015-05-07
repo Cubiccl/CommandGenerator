@@ -33,7 +33,7 @@ public class LabeledSearchBox extends JPanel implements CComponent
 		this.combobox.setSelectedItem(value);
 	}
 
-	public Object getSelectedItem()
+	public String getSelectedItem()
 	{
 		return this.combobox.getSelectedItem();
 	}
