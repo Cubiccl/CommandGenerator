@@ -5,7 +5,6 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 import commandGenerator.Generator;
@@ -15,7 +14,7 @@ import commandGenerator.gui.helper.components.button.HelpButton;
 @SuppressWarnings("serial")
 public class ChoiceComboBox extends JPanel implements CComponent
 {
-	private JComboBox<String> box;
+	private BaseComboBox box;
 	private HelpButton button;
 	private String[] choices;
 	private String title;
@@ -45,7 +44,8 @@ public class ChoiceComboBox extends JPanel implements CComponent
 			this.button.setData(Generator.translate("HELP:" + title + "." + this.choices[0]), this.choices[0]);
 		}
 
-		this.box = new JComboBox<String>(choices);
+		this.box = new BaseComboBox(choices, null);
+		this.box.setSize(200, 20);
 		if (hasHelp) this.box.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
@@ -99,7 +99,7 @@ public class ChoiceComboBox extends JPanel implements CComponent
 			else names[i] = this.choices[i];
 		}
 
-		this.box.setModel(new JComboBox<String>(names).getModel());
+		this.box.setValues(names);
 		if (this.hasHelp) button.setData(Generator.translate("HELP:" + title + "." + choices[this.box.getSelectedIndex()]), (String) this.box.getSelectedItem());
 	}
 

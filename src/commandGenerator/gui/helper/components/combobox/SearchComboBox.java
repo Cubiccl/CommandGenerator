@@ -5,18 +5,15 @@ import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import commandGenerator.gui.helper.components.icomponent.IBox;
-import commandGenerator.gui.helper.components.listeners.ClickListener;
-import commandGenerator.gui.helper.components.listeners.IClick;
 
 @SuppressWarnings("serial")
-public class SearchComboBox extends JPanel implements IClick
+public class SearchComboBox extends JPanel implements IBox
 {
-	private JComboBox<String> combobox;
+	private BaseComboBox combobox;
 	private JTextField textfield;
 	private String[] values;
 	private IBox parent;
@@ -28,8 +25,7 @@ public class SearchComboBox extends JPanel implements IClick
 		this.values = values;
 		this.parent = parent;
 
-		this.combobox = new JComboBox<String>(values);
-		this.combobox.addActionListener(new ClickListener(this));
+		this.combobox = new BaseComboBox(values, this);
 
 		this.textfield = new JTextField(18);
 		this.textfield.addKeyListener(new WriteListener(this));
@@ -37,12 +33,6 @@ public class SearchComboBox extends JPanel implements IClick
 		this.add(this.textfield);
 		this.add(this.combobox);
 		this.setSize(200, 20);
-	}
-
-	@Override
-	public void click()
-	{
-		this.validateSearch();
 	}
 
 	public void write(int keyCode)
@@ -72,7 +62,7 @@ public class SearchComboBox extends JPanel implements IClick
 
 	public void reset()
 	{
-		this.combobox.setModel(new JComboBox<String>(this.values).getModel());
+		this.combobox.setValues(this.values);
 		this.textfield.setText("");
 	}
 
@@ -114,13 +104,19 @@ public class SearchComboBox extends JPanel implements IClick
 
 	private void display(String[] names)
 	{
-		this.combobox.setModel(new JComboBox<String>(names).getModel());
+		this.combobox.setValues(names);
 	}
 
 	public void setValues(String[] values)
 	{
 		this.values = values;
 		this.reset();
+	}
+
+	@Override
+	public void updateCombobox()
+	{
+		this.validateSearch();
 	}
 
 }

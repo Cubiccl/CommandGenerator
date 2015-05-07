@@ -31,7 +31,7 @@ public class CSpinner extends JSpinner implements CComponent
 
 	private void select()
 	{
-		this.parent.updateSpinner();
+		if (parent != null) this.parent.updateSpinner();
 	}
 
 	@Override

@@ -9,10 +9,12 @@ import commandGenerator.gui.helper.components.CComponent;
 @SuppressWarnings("serial")
 public class BaseButton extends JButton implements CComponent
 {
+	public static final int DEFAULT_HEIGHT = 20, DEFAULT_WIDTH = 200;
 
 	public BaseButton(String text)
 	{
 		super(text);
+		this.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	}
 
 	@Override
@@ -35,7 +37,4 @@ public class BaseButton extends JButton implements CComponent
 		this.setPreferredSize(new Dimension(width, height));
 		this.setMinimumSize(new Dimension(width, height));
 	}
-
-	public void click()
-	{}
 }
