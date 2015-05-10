@@ -1,11 +1,13 @@
 package commandGenerator.gui.helper.components.combobox;
 
+import java.awt.AWTEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import commandGenerator.Generator;
 import commandGenerator.gui.helper.components.button.BaseButton;
 import commandGenerator.gui.helper.components.icomponent.IBox;
+import commandGenerator.gui.helper.components.listeners.IEvent;
 
 @SuppressWarnings("serial")
 public class BaseComboBox extends BaseButton
@@ -40,8 +42,11 @@ public class BaseComboBox extends BaseButton
 		else this.setText(this.values[this.getSelectedIndex()]);
 	}
 
-	protected void click()
+	@Override
+	public void handleEvent(AWTEvent event, int eventID)
 	{
+		super.handleEvent(event, eventID);
+		if (eventID != IEvent.CLICK_EVENT) return;
 		JScrollPopupMenu popup = new JScrollPopupMenu(Generator.gui);
 
 		for (int i = 0; i < this.values.length; i++)
@@ -109,7 +114,7 @@ class BoxListener implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		this.box.click();
+		this.box.handleEvent(e, IEvent.CLICK_EVENT);
 	}
 
 }

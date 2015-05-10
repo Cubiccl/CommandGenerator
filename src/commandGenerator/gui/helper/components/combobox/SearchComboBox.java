@@ -1,5 +1,6 @@
 package commandGenerator.gui.helper.components.combobox;
 
+import java.awt.AWTEvent;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
@@ -9,9 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import commandGenerator.gui.helper.components.icomponent.IBox;
+import commandGenerator.gui.helper.components.listeners.CKeyListener;
+import commandGenerator.gui.helper.components.listeners.IEvent;
 
 @SuppressWarnings("serial")
-public class SearchComboBox extends JPanel implements IBox
+public class SearchComboBox extends JPanel implements IBox, IEvent
 {
 	private BaseComboBox combobox;
 	private JTextField textfield;
@@ -28,16 +31,18 @@ public class SearchComboBox extends JPanel implements IBox
 		this.combobox = new BaseComboBox(values, this);
 
 		this.textfield = new JTextField(18);
-		this.textfield.addKeyListener(new WriteListener(this));
+		this.textfield.addKeyListener(new CKeyListener(this));
 
 		this.add(this.textfield);
 		this.add(this.combobox);
 		this.setSize(200, 20);
 	}
 
-	public void write(int keyCode)
+	@Override
+	public void handleEvent(AWTEvent event, int eventID)
 	{
-		if (keyCode == KeyEvent.VK_ENTER) this.validateSearch();
+		if (eventID != IEvent.KEY_RELEASE) return;
+		if (((KeyEvent) event).getKeyCode() == KeyEvent.VK_ENTER) this.validateSearch();
 		else this.search();
 	}
 

@@ -1,15 +1,17 @@
 package commandGenerator.gui.helper.components.button;
 
+import java.awt.AWTEvent;
+
 import commandGenerator.Generator;
 import commandGenerator.arguments.objects.SavedObjects;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.listeners.ClickListener;
-import commandGenerator.gui.helper.components.listeners.IClick;
+import commandGenerator.gui.helper.components.listeners.IEvent;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
-public class LoadButton extends CButton implements IClick
+public class LoadButton extends CButton implements IEvent
 {
 
 	private ISave parent;
@@ -24,8 +26,9 @@ public class LoadButton extends CButton implements IClick
 	}
 
 	@Override
-	public void click()
+	public void handleEvent(AWTEvent e, int eventID)
 	{
+		if (eventID != IEvent.CLICK_EVENT) return;
 		if (SavedObjects.getList(this.type).size() == 0)
 		{
 			DisplayHelper.showMessage(new CLabel("GENERAL:load_none"), Generator.translate("GENERAL:load"));

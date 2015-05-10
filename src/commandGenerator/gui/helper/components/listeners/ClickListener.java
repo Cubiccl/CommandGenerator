@@ -5,17 +5,17 @@ import java.awt.event.ActionListener;
 
 public class ClickListener implements ActionListener
 {
-	private IClick component;
+	private IEvent listener;
 
-	public ClickListener(IClick component)
+	public ClickListener(IEvent listener)
 	{
-		this.component = component;
+		this.listener = listener;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		this.component.click();
+		this.listener.handleEvent(e, IEvent.CLICK_EVENT);
 	}
 
 }

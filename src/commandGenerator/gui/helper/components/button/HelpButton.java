@@ -1,13 +1,14 @@
 package commandGenerator.gui.helper.components.button;
 
+import java.awt.AWTEvent;
 import java.awt.Font;
 
 import commandGenerator.gui.helper.components.listeners.ClickListener;
-import commandGenerator.gui.helper.components.listeners.IClick;
+import commandGenerator.gui.helper.components.listeners.IEvent;
 import commandGenerator.main.DisplayHelper;
 
 @SuppressWarnings("serial")
-public class HelpButton extends BaseButton implements IClick
+public class HelpButton extends BaseButton implements IEvent
 {
 
 	private String message, title;
@@ -29,8 +30,9 @@ public class HelpButton extends BaseButton implements IClick
 	}
 
 	@Override
-	public void click()
+	public void handleEvent(AWTEvent e, int eventID)
 	{
+		if (eventID != IEvent.CLICK_EVENT) return;
 		DisplayHelper.showHelp(this.message, this.title);
 	}
 
