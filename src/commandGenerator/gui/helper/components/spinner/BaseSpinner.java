@@ -129,20 +129,17 @@ public class BaseSpinner extends JPanel
 
 	private void minus()
 	{
-		this.setValue((int) this.textfield.getValue() - 1);
+		this.setValue(this.getFieldValue() - 1);
 	}
 
 	private void plus()
 	{
-		this.setValue((int) this.textfield.getValue() + 1);
+		this.setValue(this.getFieldValue() + 1);
 	}
 
 	private void validateSearch()
 	{
-		Object object = this.textfield.getValue();
-		int value;
-		if (object instanceof Long) value = (int) ((long) object);
-		else value = (int) object;
+		int value = this.getFieldValue();
 		boolean accepted = false;
 		for (int i = 0; i < this.values.length; i++)
 		{
@@ -159,6 +156,15 @@ public class BaseSpinner extends JPanel
 			if (value > this.values[this.values.length - 1]) this.textfield.setValue(this.values[this.values.length - 1]);
 			else this.textfield.setValue(this.values[0]);
 		}
+	}
+
+	private int getFieldValue()
+	{
+		Object object = this.textfield.getValue();
+		int value = 0;
+		if (object instanceof Long) value = (int) ((long) object);
+		if (object instanceof Integer) value = (int) object;
+		return value;
 	}
 
 	public BaseSpinner(int min, int max, ISpin parent)
