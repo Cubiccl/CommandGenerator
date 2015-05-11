@@ -28,6 +28,7 @@ import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.arguments.tags.specific.TagExplosion;
+import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.argumentSelection.EffectSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.EnchantSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
@@ -168,8 +169,11 @@ public class ListSelectionPanel extends CPanel
 	protected void createComponents()
 	{
 		buttonAdd = new CButton("GENERAL:add_only");
+		buttonAdd.setDrawType(GuiHandler.RIGHT);
 		buttonEdit = new CButton("GENERAL:edit_only");
+		buttonEdit.setDrawType(GuiHandler.FULL);
 		buttonRemove = new CButton("GENERAL:remove");
+		buttonRemove.setDrawType(GuiHandler.LEFT);
 
 		jlist = new JList<String>(new String[0]);
 

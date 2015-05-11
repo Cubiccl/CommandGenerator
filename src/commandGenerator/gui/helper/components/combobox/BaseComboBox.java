@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import commandGenerator.Generator;
+import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.components.button.BaseButton;
 import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.gui.helper.components.listeners.IEvent;
@@ -46,14 +47,14 @@ public class BaseComboBox extends BaseButton
 	public void handleEvent(AWTEvent event, int eventID)
 	{
 		super.handleEvent(event, eventID);
-		if (eventID != IEvent.CLICK_EVENT) return;
+		if (eventID != IEvent.CLICK_EVENT || this.values.length == 0) return;
 		JScrollPopupMenu popup = new JScrollPopupMenu(Generator.gui);
 
 		for (int i = 0; i < this.values.length; i++)
 		{
 			final int index = i;
 			BaseButton button = new BaseButton(this.values[i]);
-			button.setSize(200, 20);
+			button.setDrawType(GuiHandler.FULL);
 			button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0)
 				{

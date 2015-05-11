@@ -23,6 +23,7 @@ import commandGenerator.arguments.objects.Entity;
 import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.objects.ObjectCreator;
 import commandGenerator.arguments.objects.Target;
+import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
@@ -212,13 +213,14 @@ public class TargetSelectionPanel extends CPanel implements ISave
 		buttonHelpEntity.setData(Generator.translate("HELP:selector." + this.targets[0]), this.targets[0]);
 
 		buttonAdd = new CButton("GUI:selector.add");
+		buttonAdd.setDrawType(GuiHandler.RIGHT);
 		buttonRemove = new CButton("GUI:selector.remove");
+		buttonRemove.setDrawType(GuiHandler.LEFT);
 		buttonSave = new SaveButton(ObjectBase.TARGET, this);
 		buttonLoad = new LoadButton(ObjectBase.TARGET, this);
 
 		boxEntities = new BaseComboBox(this.targets, null);
-		boxEntities.setPreferredSize(new Dimension(100, 20));
-		boxEntities.setMinimumSize(new Dimension(100, 20));
+		boxEntities.setDrawType(GuiHandler.RIGHT);
 		boxSelectors = new ChoiceComboBox("selector", selectors, true);
 
 		textarea = new JEditorPane("text/html", "");

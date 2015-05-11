@@ -44,7 +44,7 @@ public class CSpinner extends BaseSpinner implements CComponent
 		this.min = min;
 		this.max = max;
 		int value = (int) this.getValue();
-		this.setValues(this.min, this.max);
+		super.setValues(min, max);
 		if (value >= this.min && value <= this.max) this.setValue(value);
 	}
 

@@ -1,7 +1,5 @@
 package commandGenerator.gui.helper.argumentSelection.dataTag;
 
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -10,8 +8,10 @@ import commandGenerator.arguments.objects.ObjectBase;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
+import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.gui.helper.components.button.CButton;
+import commandGenerator.gui.helper.components.button.HelpButton;
 import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.gui.helper.components.panel.TagDisplayer;
 
@@ -19,7 +19,8 @@ import commandGenerator.gui.helper.components.panel.TagDisplayer;
 public class NBTTagPanel extends CPanel implements CComponent
 {
 
-	private CButton buttonAdd, buttonRemove, buttonHelp;
+	private CButton buttonAdd, buttonRemove;
+	private HelpButton buttonHelp;
 	private TagDisplayer displayer;
 	private Tag[] nbtTags;
 	private ObjectBase object;
@@ -46,11 +47,10 @@ public class NBTTagPanel extends CPanel implements CComponent
 	protected void createComponents()
 	{
 		buttonAdd = new CButton("GUI:tag.add");
+		buttonAdd.setDrawType(GuiHandler.RIGHT);
 		buttonRemove = new CButton("GUI:tag.remove");
-		buttonHelp = new CButton("?", false);
-		buttonHelp.setFont(new Font(getName(), Font.PLAIN, 11));
-		buttonHelp.setPreferredSize(new Dimension(20, 20));
-		buttonHelp.setMinimumSize(new Dimension(20, 20));
+		buttonRemove.setDrawType(GuiHandler.FULL);
+		buttonHelp = new HelpButton();
 
 		displayer = new TagDisplayer(nbtTags);
 	}

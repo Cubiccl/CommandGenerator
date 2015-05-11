@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
 import commandGenerator.Generator;
+import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.gui.helper.components.button.HelpButton;
 
@@ -46,13 +47,17 @@ public class ChoiceComboBox extends JPanel implements CComponent
 
 		this.box = new BaseComboBox(choices, null);
 		this.box.setSize(200, 20);
-		if (hasHelp) this.box.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				button.setData(Generator.translate("HELP:" + title + "." + choices[box.getSelectedIndex()]), (String) box.getSelectedItem());
-			}
-		});
+		if (hasHelp)
+		{
+			this.setDrawType(GuiHandler.RIGHT);
+			this.box.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0)
+				{
+					button.setData(Generator.translate("HELP:" + title + "." + choices[box.getSelectedIndex()]), (String) box.getSelectedItem());
+				}
+			});
+		}
 
 		this.updateLang();
 
@@ -100,7 +105,8 @@ public class ChoiceComboBox extends JPanel implements CComponent
 		}
 
 		this.box.setValues(names);
-		if (this.hasHelp) button.setData(Generator.translate("HELP:" + title + "." + choices[this.box.getSelectedIndex()]), (String) this.box.getSelectedItem());
+		if (this.hasHelp) button
+				.setData(Generator.translate("HELP:" + title + "." + choices[this.box.getSelectedIndex()]), (String) this.box.getSelectedItem());
 	}
 
 	public void addActionListener(ActionListener actionListener)
@@ -118,6 +124,11 @@ public class ChoiceComboBox extends JPanel implements CComponent
 	public int getSelectedIndex()
 	{
 		return this.box.getSelectedIndex();
+	}
+
+	public void setDrawType(int drawType)
+	{
+		this.box.setDrawType(drawType);
 	}
 
 }

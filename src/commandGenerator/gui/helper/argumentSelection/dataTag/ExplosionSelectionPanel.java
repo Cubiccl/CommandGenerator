@@ -17,6 +17,7 @@ import commandGenerator.Generator;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagInt;
 import commandGenerator.arguments.tags.TagList;
+import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.argumentSelection.ColorSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.button.CButton;
@@ -60,8 +61,11 @@ public class ExplosionSelectionPanel extends CPanel
 		colorsFade = new ArrayList<Integer>();
 
 		buttonColors = new CButton("GUI:color.add");
+		buttonColors.setDrawType(GuiHandler.RIGHT);
 		buttonFadeColors = new CButton("GUI:color.add_fade");
+		buttonFadeColors.setDrawType(GuiHandler.FULL);
 		buttonRemoveColor = new CButton("GUI:color.remove");
+		buttonRemoveColor.setDrawType(GuiHandler.LEFT);
 
 		checkboxFlicker = new CCheckBox("GUI:fireworks.twinkle");
 		checkboxTrail = new CCheckBox("GUI:fireworks.trail");

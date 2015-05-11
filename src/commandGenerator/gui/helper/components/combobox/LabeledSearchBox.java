@@ -62,4 +62,9 @@ public class LabeledSearchBox extends JPanel implements CComponent
 		this.combobox.setValues(names);
 	}
 
+	public void setDrawType(int drawType)
+	{
+		this.combobox.setDrawType(drawType);
+	}
+
 }

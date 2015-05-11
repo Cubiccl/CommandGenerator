@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import commandGenerator.Generator;
 import commandGenerator.arguments.objects.ObjectBase;
+import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
 import commandGenerator.gui.helper.components.combobox.ObjectComboBox;
 import commandGenerator.gui.helper.components.panel.CPanel;
@@ -45,6 +46,7 @@ public class ObjectiveSelectionPanel extends CPanel
 		comboboxPrecise = new ObjectComboBox("", new ObjectBase[0], null);
 		comboboxPrecise2 = new ChoiceComboBox("color", Resources.colors, false);
 		comboboxPrecise2.setVisible(false);
+		comboboxPrecise2.setDrawType(GuiHandler.TOP);
 	}
 
 	@Override
@@ -100,6 +102,8 @@ public class ObjectiveSelectionPanel extends CPanel
 
 		comboboxPrecise.setVisible(index < 13);
 		comboboxPrecise2.setVisible(index >= 13);
+		if (index < 13) comboboxMain.setDrawType(GuiHandler.DEFAULT);
+		else comboboxMain.setDrawType(GuiHandler.BOTTOM);
 
 		if (index < 6) comboboxPrecise.setData(new ObjectBase[0]);
 

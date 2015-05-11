@@ -16,6 +16,7 @@ import commandGenerator.arguments.objects.ItemStack;
 import commandGenerator.arguments.objects.ObjectCreator;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
+import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.panel.CPanel;
@@ -36,7 +37,7 @@ public class EquipmentSelectionPanel extends CPanel
 	{
 		super(title);
 		equipment = new ItemStack[] { null, null, null, null, null };
-		
+
 		this.initGui();
 	}
 
@@ -74,6 +75,17 @@ public class EquipmentSelectionPanel extends CPanel
 		buttonRemoveLegs = new CButton("GUI:equipment.remove.legs");
 		buttonRemoveChest = new CButton("GUI:equipment.remove.chest");
 		buttonRemoveHead = new CButton("GUI:equipment.remove.head");
+
+		buttonAddHead.setDrawType(GuiHandler.FULL - GuiHandler.TOP_LEFT);
+		buttonRemoveHead.setDrawType(GuiHandler.FULL - GuiHandler.TOP_RIGHT);
+		buttonAddChest.setDrawType(GuiHandler.FULL);
+		buttonRemoveChest.setDrawType(GuiHandler.FULL);
+		buttonAddLegs.setDrawType(GuiHandler.FULL);
+		buttonRemoveLegs.setDrawType(GuiHandler.FULL);
+		buttonAddFeet.setDrawType(GuiHandler.FULL);
+		buttonRemoveFeet.setDrawType(GuiHandler.FULL);
+		buttonAddHand.setDrawType(GuiHandler.FULL - GuiHandler.BOTTOM_LEFT);
+		buttonRemoveHand.setDrawType(GuiHandler.FULL - GuiHandler.BOTTOM_RIGHT);
 
 		editorpane = new JEditorPane("text/html", "");
 		editorpane.setEditable(false);
@@ -162,8 +174,8 @@ public class EquipmentSelectionPanel extends CPanel
 
 	private void displayItems()
 	{
-		String[] parts = { Generator.translate("GUI:slot.hand"), Generator.translate("GUI:slot.feet"), Generator.translate("GUI:slot.legs"), Generator.translate("GUI:slot.chest"),
-				Generator.translate("GUI:slot.head") };
+		String[] parts = { Generator.translate("GUI:slot.hand"), Generator.translate("GUI:slot.feet"), Generator.translate("GUI:slot.legs"),
+				Generator.translate("GUI:slot.chest"), Generator.translate("GUI:slot.head") };
 		String text = "";
 		for (int i = 0; i < equipment.length; i++)
 		{

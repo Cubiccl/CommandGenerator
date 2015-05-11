@@ -13,6 +13,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import commandGenerator.Generator;
+import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.combobox.LabeledSearchBox;
@@ -88,6 +89,7 @@ public class SettingsPanel extends CPanel
 		this.labelSort = new CLabel("GUI:settings.sort");
 
 		this.buttonFolder = new CButton("GUI:settings.folder.select");
+		this.buttonFolder.setDrawType(GuiHandler.LEFT);
 
 		this.comboboxLang = new LabeledSearchBox("GUI:settings.lang", this.opt.getLangs(), null);
 		this.comboboxLang.setSelectedItem(this.opt.getLanguage());

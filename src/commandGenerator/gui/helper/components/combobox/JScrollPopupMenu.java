@@ -19,7 +19,7 @@ import commandGenerator.gui.helper.components.button.BaseButton;
 public class JScrollPopupMenu extends JPopupMenu implements ActionListener
 {
 	private static final long serialVersionUID = 1;
-	private static final int MAX_ELEMENTS = 15;
+	private static final int MAX_ELEMENTS = 25;
 	private JPanel panelMenus;
 	private JScrollPane scroll;
 	private JFrame jframe;

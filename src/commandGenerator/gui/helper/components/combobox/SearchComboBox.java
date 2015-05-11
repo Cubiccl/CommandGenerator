@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.gui.helper.components.listeners.CKeyListener;
 import commandGenerator.gui.helper.components.listeners.IEvent;
@@ -29,6 +30,7 @@ public class SearchComboBox extends JPanel implements IBox, IEvent
 		this.parent = parent;
 
 		this.combobox = new BaseComboBox(values, this);
+		this.combobox.setDrawType(GuiHandler.TOP);
 
 		this.textfield = new JTextField(18);
 		this.textfield.addKeyListener(new CKeyListener(this));
@@ -122,6 +124,11 @@ public class SearchComboBox extends JPanel implements IBox, IEvent
 	public void updateCombobox()
 	{
 		this.validateSearch();
+	}
+
+	public void setDrawType(int drawType)
+	{
+		this.combobox.setDrawType(drawType);
 	}
 
 }

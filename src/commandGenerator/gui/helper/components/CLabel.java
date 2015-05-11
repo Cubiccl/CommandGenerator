@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 
 import commandGenerator.Generator;
+import commandGenerator.gui.helper.GuiHandler;
 
 @SuppressWarnings("serial")
 public class CLabel extends JLabel implements CComponent
@@ -29,6 +30,8 @@ public class CLabel extends JLabel implements CComponent
 
 		if (!this.html) this.setPreferredSize(new Dimension(this.getText().length() * 7, 20));
 		if (!this.html) this.setMinimumSize(new Dimension(this.getText().length() * 7, 20));
+
+		this.setFont(GuiHandler.DEFAULT_FONT);
 	}
 
 	@Override

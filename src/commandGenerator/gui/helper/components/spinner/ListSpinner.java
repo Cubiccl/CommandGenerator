@@ -1,7 +1,6 @@
 package commandGenerator.gui.helper.components.spinner;
 
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -9,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
+import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.gui.helper.components.CLabel;
 import commandGenerator.gui.helper.components.button.BaseButton;
@@ -31,8 +31,9 @@ public class ListSpinner extends JPanel implements CComponent
 		this.label = new CLabel(labelTextId);
 
 		this.buttonMax = new BaseButton("++");
-		this.buttonMax.setSize(50, 20);
-		this.buttonMax.setFont(new Font(this.buttonMax.getName(), Font.PLAIN, 8));
+		this.buttonMax.setSize(30, 20);
+		this.buttonMax.setFont(GuiHandler.SPINNER);
+		this.buttonMax.setDrawType(GuiHandler.LEFT);
 		this.buttonMax.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e)
@@ -42,8 +43,9 @@ public class ListSpinner extends JPanel implements CComponent
 		});
 
 		this.buttonMin = new BaseButton("--");
-		this.buttonMin.setSize(50, 20);
-		this.buttonMin.setFont(new Font(this.buttonMin.getName(), Font.PLAIN, 8));
+		this.buttonMin.setSize(30, 20);
+		this.buttonMin.setFont(GuiHandler.SPINNER);
+		this.buttonMin.setDrawType(GuiHandler.FULL);
 		this.buttonMin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e)

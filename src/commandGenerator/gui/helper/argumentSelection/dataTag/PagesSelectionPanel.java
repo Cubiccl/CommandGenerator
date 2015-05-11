@@ -20,6 +20,7 @@ import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.arguments.tags.TagString;
+import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.DisplayHelper;
@@ -78,9 +79,13 @@ public class PagesSelectionPanel extends CPanel
 	protected void createComponents()
 	{
 		buttonAddText = new CButton("GUI:page.add.text");
+		buttonAddText.setDrawType(GuiHandler.FULL - GuiHandler.TOP_RIGHT);
 		buttonAddJson = new CButton("GUI:page.add.json");
+		buttonAddJson.setDrawType(GuiHandler.FULL - GuiHandler.TOP_LEFT);
 		buttonEdit = new CButton("GENERAL:edit_only");
+		buttonEdit.setDrawType(GuiHandler.FULL - GuiHandler.BOTTOM_LEFT);
 		buttonRemove = new CButton("GENERAL:remove");
+		buttonRemove.setDrawType(GuiHandler.FULL - GuiHandler.BOTTOM_RIGHT);
 
 		list = new JList<String>(new String[0]);
 		scrolllist = new JScrollPane(list);

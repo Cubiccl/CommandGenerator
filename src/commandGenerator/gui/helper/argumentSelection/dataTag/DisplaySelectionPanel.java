@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagList;
 import commandGenerator.arguments.tags.TagString;
+import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.argumentSelection.ColorSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.button.CButton;
@@ -46,6 +47,7 @@ public class DisplaySelectionPanel extends JPanel
 		textfieldLore = new JTextField(20);
 
 		buttonAdd = new CButton("GUI:text.add");
+		buttonAdd.setDrawType(GuiHandler.LEFT);
 		buttonAdd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e)

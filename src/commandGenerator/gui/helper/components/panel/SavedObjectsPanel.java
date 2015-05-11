@@ -34,6 +34,7 @@ import commandGenerator.arguments.objects.Target;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
+import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.argumentSelection.BlockSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.CoordSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.EffectSelectionPanel;
@@ -61,27 +62,30 @@ public class SavedObjectsPanel extends JPanel
 	public SavedObjectsPanel()
 	{
 		super(new GridLayout(1, 3));
-		((GridLayout) getLayout()).setHgap(10);
-		displayed = SavedObjects.getList(SavedObjects.types[0]);
+		((GridLayout) this.getLayout()).setHgap(10);
+		this.displayed = SavedObjects.getList(SavedObjects.types[0]);
 
-		buttonAdd = new CButton("GENERAL:add_only");
-		buttonAdd.addActionListener(new ActionListener() {
+		this.buttonAdd = new CButton("GENERAL:add_only");
+		this.buttonAdd.setDrawType(GuiHandler.BOTTOM);
+		this.buttonAdd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				create(false);
 			}
 		});
-		buttonEdit = new CButton("GENERAL:edit_only");
-		buttonEdit.addActionListener(new ActionListener() {
+		this.buttonEdit = new CButton("GENERAL:edit_only");
+		this.buttonEdit.setDrawType(GuiHandler.FULL);
+		this.buttonEdit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				create(true);
 			}
 		});
-		buttonRemove = new CButton("GENERAL:remove");
-		buttonRemove.addActionListener(new ActionListener() {
+		this.buttonRemove = new CButton("GENERAL:remove");
+		this.buttonRemove.setDrawType(GuiHandler.TOP);
+		this.buttonRemove.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
@@ -91,10 +95,10 @@ public class SavedObjectsPanel extends JPanel
 			}
 		});
 
-		listTypes = new JList<String>(translateTypes());
-		listTypes.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-		listTypes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listTypes.addListSelectionListener(new ListSelectionListener() {
+		this.listTypes = new JList<String>(this.translateTypes());
+		this.listTypes.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+		this.listTypes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		this.listTypes.addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent arg0)
 			{
@@ -104,10 +108,10 @@ public class SavedObjectsPanel extends JPanel
 			}
 		});
 
-		listObjects = new JList<String>(getNames());
-		listObjects.setBorder(BorderFactory.createLineBorder(Color.blue));
-		listObjects.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listObjects.addListSelectionListener(new ListSelectionListener() {
+		this.listObjects = new JList<String>(this.getNames());
+		this.listObjects.setBorder(BorderFactory.createLineBorder(Color.blue));
+		this.listObjects.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		this.listObjects.addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e)
 			{
@@ -115,38 +119,39 @@ public class SavedObjectsPanel extends JPanel
 			}
 		});
 
-		pane = new JEditorPane("text/html", "");
-		pane.setEditable(false);
+		this.pane = new JEditorPane("text/html", "");
+		this.pane.setEditable(false);
 
-		scrollbarText = new JScrollPane(pane);
-		scrollbarText.getVerticalScrollBar().setUnitIncrement(20);
-		scrollbarObjects = new JScrollPane(listObjects);
-		scrollbarObjects.getVerticalScrollBar().setUnitIncrement(20);
+		this.scrollbarText = new JScrollPane(this.pane);
+		this.scrollbarText.getVerticalScrollBar().setUnitIncrement(20);
+		this.scrollbarObjects = new JScrollPane(this.listObjects);
+		this.scrollbarObjects.getVerticalScrollBar().setUnitIncrement(20);
 
-		add(listTypes);
-		add(scrollbarObjects);
-		add(scrollbarText);
+		this.add(this.listTypes);
+		this.add(this.scrollbarObjects);
+		this.add(this.scrollbarText);
 
 		JPanel subPanel = new JPanel(new GridBagLayout());
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		subPanel.add(buttonAdd, gbc);
-		gbc.gridy++;
-		subPanel.add(buttonEdit, gbc);
-		gbc.gridy++;
-		subPanel.add(buttonRemove, gbc);
-		add(subPanel);
+		this.gbc.gridx = 0;
+		this.gbc.gridy = 0;
+		subPanel.add(this.buttonAdd, this.gbc);
+		this.gbc.gridy++;
+		subPanel.add(this.buttonEdit, this.gbc);
+		this.gbc.gridy++;
+		subPanel.add(this.buttonRemove, this.gbc);
+		this.add(subPanel);
 
-		listTypes.setSelectedIndex(0);
-		if (displayed.size() > 0) listObjects.setSelectedIndex(0);
-		if (displayed.size() > 0) pane.setText(ObjectBase.display(displayed.get(listObjects.getSelectedValue())));
+		this.listTypes.setSelectedIndex(0);
+		if (this.displayed.size() > 0) this.listObjects.setSelectedIndex(0);
+		if (this.displayed.size() > 0) this.pane.setText(ObjectBase.display(this.displayed.get(this.listObjects.getSelectedValue())));
 	}
 
 	@SuppressWarnings("unchecked")
 	private void create(boolean editing)
 	{
 		if (editing && listObjects.getSelectedValue() == null) return;
-		String title = Generator.translate("GENERAL:add_title").replaceAll("<item>", Generator.translate("GENERAL:" + SavedObjects.typeNames[listTypes.getSelectedIndex()]));
+		String title = Generator.translate("GENERAL:add_title").replaceAll("<item>",
+				Generator.translate("GENERAL:" + SavedObjects.typeNames[listTypes.getSelectedIndex()]));
 		Object object = null;
 
 		switch (types[listTypes.getSelectedIndex()])

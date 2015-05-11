@@ -1,8 +1,8 @@
 package commandGenerator.gui.helper.components.button;
 
 import java.awt.AWTEvent;
-import java.awt.Font;
 
+import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.components.listeners.ClickListener;
 import commandGenerator.gui.helper.components.listeners.IEvent;
 import commandGenerator.main.DisplayHelper;
@@ -19,8 +19,8 @@ public class HelpButton extends BaseButton implements IEvent
 		this.message = "";
 		this.title = "";
 		this.addActionListener(new ClickListener(this));
-		this.setFont(new Font(this.getName(), Font.PLAIN, 11));
-		this.setSize(40, 20);
+		this.setSize(20, 20);
+		this.setDrawType(GuiHandler.LEFT);
 	}
 
 	public void setData(String newMessage, String newTitle)
@@ -32,8 +32,9 @@ public class HelpButton extends BaseButton implements IEvent
 	@Override
 	public void handleEvent(AWTEvent e, int eventID)
 	{
+		super.handleEvent(e, eventID);
 		if (eventID != IEvent.CLICK_EVENT) return;
-		DisplayHelper.showHelp(this.message, this.title);
+		if (!(this.message.equals("") && this.title.equals(""))) DisplayHelper.showHelp(this.message, this.title);
 	}
 
 }

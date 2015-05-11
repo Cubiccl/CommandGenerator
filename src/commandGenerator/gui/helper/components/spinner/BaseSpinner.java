@@ -153,8 +153,8 @@ public class BaseSpinner extends JPanel
 		if (!accepted)
 		{
 			if (this.values.length == 0) this.textfield.setValue(0);
-			if (value > this.values[this.values.length - 1]) this.textfield.setValue(this.values[this.values.length - 1]);
-			else this.textfield.setValue(this.values[0]);
+			if (value > this.values[this.values.length - 1]) this.setValue(this.values[this.values.length - 1]);
+			else this.setValue(this.values[0]);
 		}
 	}
 
@@ -208,6 +208,11 @@ public class BaseSpinner extends JPanel
 		this.values = values;
 		this.selectedIndex = 0;
 		this.updateDisplay();
+	}
+
+	public void setValues(int min, int max)
+	{
+		this.setValues(getValuesFrom(min, max));
 	}
 
 	public int getValue()

@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 
 import commandGenerator.Generator;
 import commandGenerator.arguments.objects.SavedObjects;
+import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.components.icomponent.ISave;
 import commandGenerator.gui.helper.components.listeners.ClickListener;
 import commandGenerator.gui.helper.components.listeners.IEvent;
@@ -24,15 +25,19 @@ public class SaveButton extends CButton implements IEvent
 		this.type = type;
 		this.parent = parent;
 		this.addActionListener(new ClickListener(this));
+		this.setDrawType(GuiHandler.RIGHT);
 	}
 
 	@Override
 	public void handleEvent(AWTEvent e, int eventID)
 	{
+		super.handleEvent(e, eventID);
 		if (eventID != IEvent.CLICK_EVENT) return;
+		
 		Object object = this.parent.getObjectToSave();
 		String name = DisplayHelper.askObjectName(this.type);
 		if (name == null) return;
+		
 		SavedObjects.add(name, this.type, object);
 		DisplayHelper.showMessage(new JLabel(Generator.translate("GENERAL:save_success").replaceAll("<item>", name)), Generator.translate("GENERAL:save"));
 	}

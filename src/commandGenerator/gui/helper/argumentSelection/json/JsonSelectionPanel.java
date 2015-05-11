@@ -8,6 +8,7 @@ import commandGenerator.arguments.objects.ObjectCreator;
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagString;
+import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.argumentSelection.TargetSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
@@ -68,9 +69,11 @@ public class JsonSelectionPanel extends CPanel
 		buttonHelpInsertion = new HelpButton();
 		buttonHelpInsertion.setData(Generator.translate("HELP:json.insertion"), "GUI:json.insertion");
 		buttonHelpHover = new HelpButton();
-		buttonHelpInsertion.setData(Generator.translate("HELP:json.hover"), "GUI:json.hover");
+		buttonHelpHover.setData(Generator.translate("HELP:json.hover"), "GUI:json.hover");
+		buttonHelpHover.setDrawType(GuiHandler.DEFAULT);
 		buttonHelpClick = new HelpButton();
-		buttonHelpInsertion.setData(Generator.translate("HELP:json.click"), "GUI:json.click");
+		buttonHelpClick.setData(Generator.translate("HELP:json.click"), "GUI:json.click");
+		buttonHelpClick.setDrawType(GuiHandler.DEFAULT);
 
 		entryText = new CEntry("GUI:json.text", "");
 		entryInsertion = new CEntry("GUI:json.insertion", "");
