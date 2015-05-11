@@ -13,7 +13,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 
 import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.TagList;
@@ -21,6 +20,7 @@ import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.argumentSelection.ColorSelectionPanel;
 import commandGenerator.gui.helper.components.CCheckBox;
+import commandGenerator.gui.helper.components.CTextField;
 import commandGenerator.gui.helper.components.button.CButton;
 
 @SuppressWarnings("serial")
@@ -34,7 +34,7 @@ public class DisplaySelectionPanel extends JPanel
 	private List<String> lores;
 	private ColorSelectionPanel panel;
 	private JScrollPane scrollpane;
-	private JTextField textfieldName, textfieldLore;
+	private CTextField textfieldName, textfieldLore;
 
 	public DisplaySelectionPanel()
 	{
@@ -42,9 +42,9 @@ public class DisplaySelectionPanel extends JPanel
 
 		lores = new ArrayList<String>();
 
-		textfieldName = new JTextField(20);
+		textfieldName = new CTextField(20);
 		textfieldName.setEnabled(false);
-		textfieldLore = new JTextField(20);
+		textfieldLore = new CTextField(20);
 
 		buttonAdd = new CButton("GUI:text.add");
 		buttonAdd.setDrawType(GuiHandler.LEFT);

@@ -2,7 +2,8 @@ package commandGenerator.arguments.tags;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
+
+import commandGenerator.gui.helper.components.CTextField;
 
 public class TagString extends Tag
 {
@@ -10,7 +11,7 @@ public class TagString extends Tag
 	private JComboBox<String> box;
 	private String[] choices;
 	private JLabel label;
-	private JTextField textfield;
+	private CTextField textfield;
 	private String value;
 
 	public TagString()
@@ -26,7 +27,7 @@ public class TagString extends Tag
 		value = null;
 
 		label = new JLabel();
-		textfield = new JTextField(15);
+		textfield = new CTextField(15);
 
 		panel.add(label, gbc);
 		gbc.gridy++;

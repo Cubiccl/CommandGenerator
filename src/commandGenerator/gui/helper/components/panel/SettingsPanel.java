@@ -8,13 +8,13 @@ import java.io.File;
 import javax.swing.ButtonGroup;
 import javax.swing.JFileChooser;
 import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import commandGenerator.Generator;
 import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.components.CLabel;
+import commandGenerator.gui.helper.components.CTextField;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.combobox.LabeledSearchBox;
 import commandGenerator.main.FileHelper;
@@ -29,7 +29,7 @@ public class SettingsPanel extends CPanel
 	private JRadioButton buttonId, buttonName;
 	private CButton buttonFolder;
 	private LabeledSearchBox comboboxLang;
-	private JTextField fieldCustom;
+	private CTextField fieldCustom;
 	private ButtonGroup groupFolder, groupSort;
 	private CLabel labelFolder, labelSort;
 	private Settings opt;
@@ -80,7 +80,7 @@ public class SettingsPanel extends CPanel
 	protected void createComponents()
 	{
 
-		this.fieldCustom = new JTextField(18);
+		this.fieldCustom = new CTextField(18);
 		this.fieldCustom.setEditable(false);
 		this.fieldCustom.setText(Resources.folder);
 

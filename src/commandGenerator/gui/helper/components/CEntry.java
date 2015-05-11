@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class CEntry extends JPanel implements CComponent
@@ -12,14 +11,14 @@ public class CEntry extends JPanel implements CComponent
 
 	private String defaultValue;
 	private CLabel label;
-	private JTextField text;
+	private CTextField text;
 
 	public CEntry(String title, String defaultValue)
 	{
 		super(new GridLayout(1, 2));
 		this.defaultValue = defaultValue;
 		this.label = new CLabel(title);
-		this.text = new JTextField(13);
+		this.text = new CTextField(13);
 		this.text.setText(this.defaultValue);
 
 		this.add(label);

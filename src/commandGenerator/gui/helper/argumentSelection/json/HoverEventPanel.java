@@ -3,8 +3,6 @@ package commandGenerator.gui.helper.argumentSelection.json;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JTextField;
-
 import commandGenerator.Generator;
 import commandGenerator.arguments.objects.Achievement;
 import commandGenerator.arguments.objects.ItemStack;
@@ -15,6 +13,7 @@ import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.arguments.tags.TagString;
 import commandGenerator.gui.helper.argumentSelection.AchievementSelectionPanel;
 import commandGenerator.gui.helper.argumentSelection.ItemSelectionPanel;
+import commandGenerator.gui.helper.components.CTextField;
 import commandGenerator.gui.helper.components.combobox.ChoiceComboBox;
 import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.main.CGConstants;
@@ -27,7 +26,7 @@ public class HoverEventPanel extends CPanel
 	private ItemSelectionPanel panelItem;
 	private JsonSelectionPanel panelJson;
 	private AchievementSelectionPanel panelStat;
-	private JTextField textfieldText;
+	private CTextField textfieldText;
 
 	public HoverEventPanel()
 	{
@@ -48,7 +47,7 @@ public class HoverEventPanel extends CPanel
 	{
 		comboboxAction = new ChoiceComboBox("json.hover", new String[] { "show_text", "json", "show_item", "show_achievement" }, false);
 
-		textfieldText = new JTextField(20);
+		textfieldText = new CTextField(20);
 
 		panelJson = new JsonSelectionPanel("GUI:json.text", false);
 		panelJson.setVisible(false);

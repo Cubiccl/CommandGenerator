@@ -78,7 +78,7 @@ public class BaseButton extends JButton implements CComponent, IEvent
 	{
 		int width = this.getWidth() - 1;
 		int height = this.getHeight() - 1;
-		this.setComponentColor(g);
+		this.setComponentColor();
 
 		GuiHandler.clear(g, width, height);
 
@@ -91,7 +91,7 @@ public class BaseButton extends JButton implements CComponent, IEvent
 		GuiHandler.drawString(g, this.getText(), width, height, this.getForeground(), this.getFont());
 	}
 
-	private void setComponentColor(Graphics g)
+	private void setComponentColor()
 	{
 		this.setBackground(GuiHandler.DEFAULT_COMPONENT);
 		if (this instanceof HelpButton) this.setBackground(GuiHandler.HELP);

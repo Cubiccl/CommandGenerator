@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
-import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 import commandGenerator.Generator;
@@ -27,6 +26,7 @@ import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CEntry;
 import commandGenerator.gui.helper.components.CLabel;
+import commandGenerator.gui.helper.components.CTextField;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.button.HelpButton;
 import commandGenerator.gui.helper.components.button.LoadButton;
@@ -107,7 +107,7 @@ public class TargetSelectionPanel extends CPanel implements ISave
 				|| selector.equals("r") || selector.equals("rm") || selector.equals("c") || selector.equals("l") || selector.equals("lm")
 				|| selector.equals("team") || selector.equals("name"))
 		{
-			JTextField field = new JTextField(20);
+			CTextField field = new CTextField(20);
 			panel.add(field);
 			if (DisplayHelper.showQuestion(panel, title)) return;
 			value = field.getText();
@@ -157,7 +157,7 @@ public class TargetSelectionPanel extends CPanel implements ISave
 
 		} else
 		{
-			JTextField textfieldScore = new JTextField(10), textfieldValue = new JTextField(10);
+			CTextField textfieldScore = new CTextField(10), textfieldValue = new CTextField(10);
 			JPanel panelScore = new JPanel(new GridLayout(2, 2));
 			panelScore.add(new JLabel(Generator.translate("GUI:objective")));
 			panelScore.add(textfieldScore);

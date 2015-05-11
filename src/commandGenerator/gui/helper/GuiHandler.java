@@ -14,7 +14,8 @@ public class GuiHandler
 	public static final int DEFAULT = 0, TOP_LEFT = 1, TOP_RIGHT = 2, TOP = 3, BOTTOM_LEFT = 4, LEFT = 5, BOTTOM_RIGHT = 8, RIGHT = 10, BOTTOM = 12, FULL = 15;
 
 	public static final Color DEFAULT_BACKGROUND = UIManager.getColor("Panel.background"), DEFAULT_COMPONENT = new Color(220, 220, 250), HOVERED = new Color(
-			220, 250, 220), CLICKED = new Color(250, 220, 220), BORDER = new Color(80, 80, 200), HELP = new Color(255, 255, 210);
+			220, 250, 220), CLICKED = new Color(250, 220, 220), BORDER = new Color(80, 80, 200), BORDER_DISABLED = new Color(100, 100, 100), HELP = new Color(
+			255, 255, 210), BORDER_FIELD = new Color(150, 150, 150), BORDER_FIELD_HOVER = Color.GREEN, BORDER_FIELD_FOCUS = Color.RED;
 
 	public static final Font DEFAULT_FONT = new Font("Calibri", Font.BOLD, 15), SPINNER = new Font("Dialog", Font.PLAIN, 10);
 

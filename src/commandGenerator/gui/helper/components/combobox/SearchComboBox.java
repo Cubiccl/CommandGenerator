@@ -7,9 +7,9 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import commandGenerator.gui.helper.GuiHandler;
+import commandGenerator.gui.helper.components.CTextField;
 import commandGenerator.gui.helper.components.icomponent.IBox;
 import commandGenerator.gui.helper.components.listeners.CKeyListener;
 import commandGenerator.gui.helper.components.listeners.IEvent;
@@ -18,7 +18,7 @@ import commandGenerator.gui.helper.components.listeners.IEvent;
 public class SearchComboBox extends JPanel implements IBox, IEvent
 {
 	private BaseComboBox combobox;
-	private JTextField textfield;
+	private CTextField textfield;
 	private String[] values;
 	private IBox parent;
 
@@ -32,7 +32,7 @@ public class SearchComboBox extends JPanel implements IBox, IEvent
 		this.combobox = new BaseComboBox(values, this);
 		this.combobox.setDrawType(GuiHandler.TOP);
 
-		this.textfield = new JTextField(18);
+		this.textfield = new CTextField(18);
 		this.textfield.addKeyListener(new CKeyListener(this));
 
 		this.add(this.textfield);

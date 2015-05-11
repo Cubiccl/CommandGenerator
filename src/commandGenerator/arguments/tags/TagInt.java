@@ -6,9 +6,9 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import commandGenerator.Generator;
+import commandGenerator.gui.helper.components.CTextField;
 
 public class TagInt extends Tag
 {
@@ -16,7 +16,7 @@ public class TagInt extends Tag
 	private String[] choices;
 	private String choicesId;
 	private JLabel label;
-	protected JTextField textfield;
+	protected CTextField textfield;
 	protected int value, type, min, max;
 	private int[] values;
 
@@ -48,7 +48,7 @@ public class TagInt extends Tag
 
 		if (choicesId == null)
 		{
-			textfield = new JTextField(15);
+			textfield = new CTextField(15);
 			textfield.setText(Integer.toString(value));
 			gbc.gridy++;
 			panel.add(textfield, gbc);

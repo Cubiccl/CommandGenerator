@@ -53,7 +53,7 @@ public class ArrowButton extends BasicArrowButton implements IEvent
 	}
 
 	@Override
-	public void paintComponent(Graphics g) // HERE FOR DISPLAY
+	public void paintComponent(Graphics g) // HERE FOR DISPLAY use paint()
 	{
 		int width = this.getWidth() - 1;
 		int height = this.getHeight() - 1;

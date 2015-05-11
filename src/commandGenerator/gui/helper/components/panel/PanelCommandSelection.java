@@ -17,13 +17,13 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 import commandGenerator.Generator;
 import commandGenerator.arguments.command.Command;
 import commandGenerator.arguments.objects.Item;
 import commandGenerator.gui.helper.components.CCheckBox;
 import commandGenerator.gui.helper.components.CLabel;
+import commandGenerator.gui.helper.components.CTextField;
 import commandGenerator.gui.helper.components.OptionsTab;
 import commandGenerator.gui.helper.components.button.CButton;
 import commandGenerator.gui.helper.components.combobox.LabeledSearchBox;
@@ -42,7 +42,7 @@ public class PanelCommandSelection extends JPanel implements IBox
 	private Command selectedCommand;
 	public OptionsTab tabOptions;
 	private JTextArea textareaStructure;
-	private JTextField textfieldCommand;
+	private CTextField textfieldCommand;
 
 	/** The panel used to select the Command. */
 	public PanelCommandSelection(boolean main)
@@ -90,7 +90,7 @@ public class PanelCommandSelection extends JPanel implements IBox
 				}
 			});
 
-			textfieldCommand = new JTextField();
+			textfieldCommand = new CTextField();
 			textfieldCommand.setEditable(false);
 			textfieldCommand.setPreferredSize(new Dimension(600, 20));
 			textfieldCommand.setMinimumSize(new Dimension(600, 20));
@@ -210,7 +210,7 @@ public class PanelCommandSelection extends JPanel implements IBox
 	{
 		JPanel panel = new JPanel(new GridLayout(2, 1));
 		JLabel label = new JLabel(Generator.translate("GUI:command.import"));
-		JTextField field = new JTextField(30);
+		CTextField field = new CTextField(30);
 		panel.add(label);
 		panel.add(field);
 

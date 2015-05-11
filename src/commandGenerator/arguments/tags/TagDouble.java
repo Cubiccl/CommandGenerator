@@ -2,15 +2,15 @@ package commandGenerator.arguments.tags;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 import commandGenerator.Generator;
+import commandGenerator.gui.helper.components.CTextField;
 
 public class TagDouble extends Tag
 {
 
 	private JLabel label;
-	private JTextField textfield;
+	private CTextField textfield;
 	private int type;
 	private double value, min, max;
 
@@ -25,7 +25,7 @@ public class TagDouble extends Tag
 		value = 0.0D;
 
 		label = new JLabel();
-		textfield = new JTextField(15);
+		textfield = new CTextField(15);
 		panel.add(label, gbc);
 		gbc.gridy++;
 		panel.add(textfield, gbc);
