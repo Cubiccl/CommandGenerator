@@ -9,13 +9,13 @@ import javax.swing.UIManager;
 
 public class GuiHandler
 {
-	private static final int ARC_SIZE = 10;
 	/** Drawing Types */
 	public static final int DEFAULT = 0, TOP_LEFT = 1, TOP_RIGHT = 2, TOP = 3, BOTTOM_LEFT = 4, LEFT = 5, BOTTOM_RIGHT = 8, RIGHT = 10, BOTTOM = 12, FULL = 15;
 
 	public static final Color DEFAULT_BACKGROUND = UIManager.getColor("Panel.background"), DEFAULT_COMPONENT = new Color(220, 220, 250), HOVERED = new Color(
 			220, 250, 220), CLICKED = new Color(250, 220, 220), BORDER = new Color(80, 80, 200), BORDER_DISABLED = new Color(100, 100, 100), HELP = new Color(
-			255, 255, 210), BORDER_FIELD = new Color(150, 150, 150), BORDER_FIELD_HOVER = Color.GREEN, BORDER_FIELD_FOCUS = Color.RED;
+			255, 255, 210), BORDER_FIELD = new Color(150, 150, 150), BORDER_FIELD_HOVER = Color.GREEN, BORDER_FIELD_FOCUS = Color.RED,
+			FIELD_EDITABLE = new Color(230, 230, 230);
 
 	public static final Font DEFAULT_FONT = new Font("Calibri", Font.BOLD, 15), SPINNER = new Font("Dialog", Font.PLAIN, 10);
 
@@ -25,37 +25,7 @@ public class GuiHandler
 		g.fillRect(0, 0, width + 1, height + 1);
 	}
 
-	public static void drawBorder(Graphics g, int width, int height, Color color, int drawType)
-	{
-		if (drawType == DEFAULT)
-		{
-			drawDefaultBorder(g, width, height, color);
-			return;
-		}
-
-		boolean[] corners = getCornersToDraw(drawType);
-		if (corners[0]) drawCorner(g, width, height, color, TOP_LEFT);
-		if (corners[1]) drawCorner(g, width, height, color, TOP_RIGHT);
-		if (corners[2]) drawCorner(g, width, height, color, BOTTOM_LEFT);
-		if (corners[3]) drawCorner(g, width, height, color, BOTTOM_RIGHT);
-	}
-
-	public static void drawComponent(Graphics g, int width, int height, Color color, int drawType)
-	{
-		if (drawType == DEFAULT)
-		{
-			drawDefault(g, width, height, color);
-			return;
-		}
-
-		boolean[] corners = getCornersToDraw(drawType);
-		if (corners[0]) fillCorner(g, width, height, color, TOP_LEFT);
-		if (corners[1]) fillCorner(g, width, height, color, TOP_RIGHT);
-		if (corners[2]) fillCorner(g, width, height, color, BOTTOM_LEFT);
-		if (corners[3]) fillCorner(g, width, height, color, BOTTOM_RIGHT);
-	}
-
-	private static void drawCorner(Graphics g, int width, int height, Color color, int corner)
+	private static void drawAngledCorner(Graphics g, int width, int height, Color color, int corner)
 	{
 		g.setColor(color);
 		switch (corner)
@@ -71,8 +41,8 @@ public class GuiHandler
 				break;
 
 			case BOTTOM_LEFT:
-				g.drawLine(0, height, width / 2, height);
 				g.drawLine(0, height / 2, 0, height);
+				g.drawLine(0, height, width / 2, height);
 				break;
 
 			case BOTTOM_RIGHT:
@@ -85,16 +55,61 @@ public class GuiHandler
 		}
 	}
 
-	public static void drawDefault(Graphics g, int width, int height, Color color)
+	public static void drawBorder(Graphics g, int width, int height, Color color, int drawType)
 	{
-		g.setColor(color);
-		g.fillRoundRect(0, 0, width, height, ARC_SIZE, ARC_SIZE);
+		boolean[] corners = getCornersToDraw(drawType);
+		drawCorner(g, width, height, color, TOP_LEFT, corners[0]);
+		drawCorner(g, width, height, color, TOP_RIGHT, corners[1]);
+		drawCorner(g, width, height, color, BOTTOM_LEFT, corners[2]);
+		drawCorner(g, width, height, color, BOTTOM_RIGHT, corners[3]);
 	}
 
-	public static void drawDefaultBorder(Graphics g, int width, int height, Color color)
+	public static void drawComponent(Graphics g, int width, int height, Color color, int drawType)
 	{
+		boolean[] corners = getCornersToDraw(drawType);
+		fillCorner(g, width, height, color, TOP_LEFT, corners[0]);
+		fillCorner(g, width, height, color, TOP_RIGHT, corners[1]);
+		fillCorner(g, width, height, color, BOTTOM_LEFT, corners[2]);
+		fillCorner(g, width, height, color, BOTTOM_RIGHT, corners[3]);
+	}
+
+	private static void drawCorner(Graphics g, int width, int height, Color color, int corner, boolean isAngled)
+	{
+		if (isAngled) drawAngledCorner(g, width, height, color, corner);
+		else drawRoundedCorner(g, width, height, color, corner);
+	}
+
+	private static void drawRoundedCorner(Graphics g, int width, int height, Color color, int corner)
+	{
+		int arcSize = height;
 		g.setColor(color);
-		g.drawRoundRect(0, 0, width, height, ARC_SIZE, ARC_SIZE);
+		switch (corner)
+		{
+			case TOP_LEFT:
+				g.drawArc(0, 0, arcSize, arcSize, 90, 90);
+				g.drawLine(height / 2, 0, width / 2, 0);
+				break;
+
+			case TOP_RIGHT:
+				if (height <= width) g.drawArc(width - height, 0, arcSize, arcSize, 0, 90);
+				else g.drawArc(0, 0, width, height, 0, 90);
+				g.drawLine(width / 2, 0, width - height / 2, 0);
+				break;
+
+			case BOTTOM_LEFT:
+				g.drawArc(0, 0, arcSize, arcSize, 180, 90);
+				g.drawLine(height / 2, height, width / 2, height);
+				break;
+
+			case BOTTOM_RIGHT:
+				if (height <= width) g.drawArc(width - height, 0, arcSize, arcSize, 270, 90);
+				else g.drawArc(0, 0, width, height, 270, 90);
+				g.drawLine(width / 2, height, width - height / 2, height);
+				break;
+
+			default:
+				break;
+		}
 	}
 
 	public static void drawString(Graphics g, String text, int width, int height, Color color, Font font)
@@ -111,25 +126,77 @@ public class GuiHandler
 
 	}
 
-	private static void fillCorner(Graphics g, int width, int height, Color color, int corner)
+	private static void fillAngledCorner(Graphics g, int width, int height, Color color, int corner)
 	{
 		g.setColor(color);
 		switch (corner)
 		{
 			case TOP_LEFT:
-				g.fillRect(0, 0, width / 2, height / 2);
+				g.fillRect(0, 0, width / 2, height / 2 + 1);
 				break;
 
 			case TOP_RIGHT:
-				g.fillRect(width / 2, 0, width, height / 2);
+				g.fillRect(width / 2, 0, width, height / 2 + 1);
 				break;
 
 			case BOTTOM_LEFT:
-				g.fillRect(0, height / 2, width / 2, height);
+				g.fillRect(0, height / 2 - 1, width / 2, height);
 				break;
 
 			case BOTTOM_RIGHT:
-				g.fillRect(width / 2, height / 2, width, height);
+				g.fillRect(width / 2, height / 2 - 1, width, height);
+				break;
+
+			default:
+				break;
+		}
+	}
+
+	private static void fillCorner(Graphics g, int width, int height, Color color, int corner, boolean isAngled)
+	{
+		if (isAngled) fillAngledCorner(g, width, height, color, corner);
+		else fillRoundedCorner(g, width, height, color, corner);
+	}
+
+	private static void fillRoundedCorner(Graphics g, int width, int height, Color color, int corner)
+	{
+		int arcSize = height;
+		int rectWidth = width / 2 - height / 2 + 1;
+		g.setColor(color);
+		switch (corner)
+		{
+			case TOP_LEFT:
+				g.fillArc(0, 0, arcSize, arcSize, 90, 90);
+				g.fillRect(height / 2, 0, rectWidth, height / 2);
+				break;
+
+			case TOP_RIGHT:
+				if (height <= width)
+				{
+					g.fillArc(width - height, 0, arcSize, arcSize, 0, 90);
+					g.fillRect(width / 2, 0, rectWidth, height / 2);
+				} else
+				{
+					g.fillArc(0, 0, width, height, 0, 90);
+					g.fillRect(width / 2, 0, 1, height / 2);
+				}
+				break;
+
+			case BOTTOM_LEFT:
+				g.fillArc(0, 0, arcSize, arcSize, 180, 90);
+				g.fillRect(height / 2, height / 2, rectWidth, height);
+				break;
+
+			case BOTTOM_RIGHT:
+				if (height <= width)
+				{
+					g.fillArc(width - height, 0, arcSize, arcSize, 270, 90);
+					g.fillRect(width / 2, height / 2, rectWidth, height);
+				} else
+				{
+					g.fillArc(0, 0, width, height, 270, 90);
+					g.fillRect(width / 2, height / 2, 1, height);
+				}
 				break;
 
 			default:

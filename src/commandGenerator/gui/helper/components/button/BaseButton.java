@@ -82,9 +82,6 @@ public class BaseButton extends JButton implements CComponent, IEvent
 
 		GuiHandler.clear(g, width, height);
 
-		GuiHandler.drawDefault(g, width, height, this.getBackground());
-		GuiHandler.drawDefaultBorder(g, width, height, GuiHandler.BORDER);
-
 		GuiHandler.drawComponent(g, width, height, this.getBackground(), this.drawType);
 		GuiHandler.drawBorder(g, width, height, GuiHandler.BORDER, this.drawType);
 

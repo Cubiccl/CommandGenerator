@@ -70,4 +70,9 @@ public class CEntry extends JPanel implements CComponent
 		this.text.setEditable(editable);
 	}
 
+	public void setDrawType(int drawType)
+	{
+		this.text.setDrawType(drawType);
+	}
+
 }

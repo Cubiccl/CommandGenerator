@@ -13,11 +13,11 @@ import java.awt.event.KeyListener;
 import java.text.NumberFormat;
 
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.text.NumberFormatter;
 
+import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.components.button.ArrowButton;
 import commandGenerator.gui.helper.components.icomponent.ISpin;
 
@@ -26,7 +26,7 @@ public class BaseSpinner extends JPanel
 {
 	private int[] values;
 	private int selectedIndex;
-	private JFormattedTextField textfield;
+	private CFormattedTextField textfield;
 	private JButton buttonPlus, buttonMinus;
 	private ISpin parent;
 
@@ -40,9 +40,10 @@ public class BaseSpinner extends JPanel
 		NumberFormatter formatter = new NumberFormatter(NumberFormat.getIntegerInstance());
 		formatter.setAllowsInvalid(false);
 
-		this.textfield = new JFormattedTextField(formatter);
+		this.textfield = new CFormattedTextField(formatter);
 		this.textfield.setMinimumSize(new Dimension(180, 20));
 		this.textfield.setPreferredSize(new Dimension(180, 20));
+		this.textfield.setDrawType(GuiHandler.RIGHT);
 
 		this.buttonPlus = new ArrowButton(BasicArrowButton.NORTH);
 		this.buttonPlus.addActionListener(new ActionListener() {

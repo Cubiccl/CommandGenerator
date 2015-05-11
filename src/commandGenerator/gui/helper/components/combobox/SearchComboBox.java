@@ -34,6 +34,7 @@ public class SearchComboBox extends JPanel implements IBox, IEvent
 
 		this.textfield = new CTextField(18);
 		this.textfield.addKeyListener(new CKeyListener(this));
+		this.textfield.setDrawType(GuiHandler.BOTTOM);
 
 		this.add(this.textfield);
 		this.add(this.combobox);
@@ -129,6 +130,12 @@ public class SearchComboBox extends JPanel implements IBox, IEvent
 	public void setDrawType(int drawType)
 	{
 		this.combobox.setDrawType(drawType);
+	}
+
+	public void setDrawWithHelp()
+	{
+		this.textfield.setDrawType(GuiHandler.FULL - GuiHandler.TOP_LEFT);
+		this.combobox.setDrawType(GuiHandler.FULL - GuiHandler.BOTTOM_LEFT);
 	}
 
 }

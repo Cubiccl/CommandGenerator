@@ -77,6 +77,7 @@ public class JsonSelectionPanel extends CPanel
 
 		entryText = new CEntry("GUI:json.text", "");
 		entryInsertion = new CEntry("GUI:json.insertion", "");
+		entryInsertion.setDrawType(GuiHandler.RIGHT);
 
 		checkboxBold = new CCheckBox("GUI:json.bold");
 		checkboxUnderlined = new CCheckBox("GUI:json.underlined");

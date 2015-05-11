@@ -1,4 +1,4 @@
-package commandGenerator.gui.helper.components;
+package commandGenerator.gui.helper.components.spinner;
 
 import java.awt.AWTEvent;
 import java.awt.Color;
@@ -6,27 +6,22 @@ import java.awt.Graphics;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-import javax.swing.JTextField;
+import javax.swing.JFormattedTextField;
+import javax.swing.text.NumberFormatter;
 
 import commandGenerator.gui.helper.GuiHandler;
 import commandGenerator.gui.helper.components.listeners.CMouseListener;
 import commandGenerator.gui.helper.components.listeners.IEvent;
 
 @SuppressWarnings("serial")
-public class CTextField extends JTextField implements IEvent
+public class CFormattedTextField extends JFormattedTextField implements IEvent
 {
 	private int drawType;
 	private boolean isHovered;
 
-	public CTextField()
+	public CFormattedTextField(NumberFormatter formatter)
 	{
-		super();
-		this.init();
-	}
-
-	public CTextField(int cols)
-	{
-		super(cols);
+		super(formatter);
 		this.init();
 	}
 

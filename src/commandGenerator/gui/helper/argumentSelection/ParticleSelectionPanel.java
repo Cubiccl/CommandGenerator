@@ -45,7 +45,8 @@ public class ParticleSelectionPanel extends CPanel implements IBox
 		buttonHelp.setData(((Particle) list[0]).getDescription(), list[0].getName());
 
 		comboboxParticle = new ObjectComboBox("GENERAL:particle", Generator.registry.getObjectList(ObjectBase.PARTICLE), this);
-
+		comboboxParticle.setDrawWithHelp();
+		
 		panelBlock = new BlockSelectionPanel("GUI:particle.block", Generator.registry.getList(CGConstants.LIST_BLOCKS), false);
 		panelBlock.setVisible(false);
 		panelItem = new ItemSelectionPanel("GUI:particle.item", Generator.registry.getList(CGConstants.LIST_ICONS), false, false);
