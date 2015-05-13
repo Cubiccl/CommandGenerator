@@ -14,7 +14,6 @@ import java.text.NumberFormat;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.text.NumberFormatter;
 
 import commandGenerator.gui.helper.GuiHandler;
@@ -46,14 +45,14 @@ public class BaseSpinner extends JPanel implements CComponent
 		this.textfield.setPreferredSize(new Dimension(180, 20));
 		this.textfield.setDrawType(GuiHandler.RIGHT);
 
-		this.buttonPlus = new ArrowButton(BasicArrowButton.NORTH);
+		this.buttonPlus = new ArrowButton(ArrowButton.NORTH);
 		this.buttonPlus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
 				plus();
 			}
 		});
-		this.buttonMinus = new ArrowButton(BasicArrowButton.SOUTH);
+		this.buttonMinus = new ArrowButton(ArrowButton.SOUTH);
 		this.buttonMinus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
@@ -69,8 +68,6 @@ public class BaseSpinner extends JPanel implements CComponent
 		JPanel panelButtons = new JPanel(new GridLayout(2, 1));
 		panelButtons.add(this.buttonPlus);
 		panelButtons.add(this.buttonMinus);
-		panelButtons.setMinimumSize(new Dimension(18, 18));
-		panelButtons.setPreferredSize(new Dimension(18, 18));
 		gbc.gridx++;
 		this.add(panelButtons, gbc);
 

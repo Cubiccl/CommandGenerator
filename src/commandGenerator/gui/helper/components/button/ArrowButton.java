@@ -1,25 +1,21 @@
 package commandGenerator.gui.helper.components.button;
 
-import java.awt.AWTEvent;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
-import javax.swing.plaf.basic.BasicArrowButton;
-
 import commandGenerator.gui.helper.GuiHandler;
-import commandGenerator.gui.helper.components.listeners.CMouseListener;
-import commandGenerator.gui.helper.components.listeners.IEvent;
 
 @SuppressWarnings("serial")
-public class ArrowButton extends BasicArrowButton implements IEvent
+public class ArrowButton extends BaseButton
 {
-	private boolean isHovered, isClicked;
+	private int direction;
 
 	public ArrowButton(int direction)
 	{
-		super(direction);
-		this.setSize(22, 12);
-		this.addMouseListener(new CMouseListener(this));
+		super("");
+		this.direction = direction;
+		this.setSize(20, 10);
+		this.setDrawType(GuiHandler.FULL);
 	}
 
 	@Override
@@ -30,52 +26,43 @@ public class ArrowButton extends BasicArrowButton implements IEvent
 	}
 
 	@Override
-	public void handleEvent(AWTEvent event, int eventID)
+	public void paintComponent(Graphics g)
 	{
-		switch (eventID)
+		int width = this.getWidth();
+		int height = this.getHeight();
+		super.paintComponent(g);
+		int[] x = new int[3], y = new int[3];
+
+		switch (this.direction)
 		{
-			case IEvent.MOUSE_ENTER:
-				this.isHovered = true;
+			case NORTH:
+				x[0] = width / 2;
+				y[0] = 1;
+
+				x[1] = 3;
+				y[1] = height - 2;
+
+				x[2] = width - 2;
+				y[2] = height - 2;
 				break;
-			case IEvent.MOUSE_EXIT:
-				this.isHovered = false;
-				break;
-			case IEvent.MOUSE_PRESS:
-				this.isClicked = true;
-				break;
-			case IEvent.MOUSE_RELEASE:
-				this.isClicked = false;
+
+			case SOUTH:
+				x[0] = width / 2 + 1;
+				y[0] = height - 1;
+
+				x[1] = 3;
+				y[1] = 2;
+
+				x[2] = width - 2;
+				y[2] = 2;
 				break;
 
 			default:
 				break;
 		}
+
+		g.setColor(this.getForeground());
+		g.fillPolygon(x, y, 3);
 	}
-
-	@Override
-	public void paintComponent(Graphics g) // HERE FOR DISPLAY use paint()
-	{
-		int width = this.getWidth() - 1;
-		int height = this.getHeight() - 1;
-		this.setComponentColor(g);
-
-		GuiHandler.clear(g, width, height);
-
-		GuiHandler.drawComponent(g, width, height, this.getBackground(), GuiHandler.FULL);
-		GuiHandler.drawBorder(g, width, height, GuiHandler.BORDER, GuiHandler.FULL);
-
-		GuiHandler.drawString(g, this.getText(), width, height, this.getForeground(), this.getFont());
-	}
-
-	private void setComponentColor(Graphics g)
-	{
-		this.setBackground(GuiHandler.DEFAULT_COMPONENT);
-		if (this.isHovered) this.setBackground(GuiHandler.HOVERED);
-		if (this.isClicked) this.setBackground(GuiHandler.CLICKED);
-	}
-
-	@Override
-	public void paintBorder(Graphics g)
-	{}
 
 }

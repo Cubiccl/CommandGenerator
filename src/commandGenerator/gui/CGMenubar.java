@@ -9,7 +9,6 @@ import java.io.File;
 import java.net.URL;
 
 import javax.swing.JEditorPane;
-import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -19,6 +18,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import commandGenerator.Generator;
+import commandGenerator.gui.helper.components.CList;
 import commandGenerator.gui.helper.components.panel.SavedObjectsPanel;
 import commandGenerator.main.DisplayHelper;
 import commandGenerator.main.Resources;
@@ -85,7 +85,7 @@ public class CGMenubar extends JMenuBar
 				JScrollPane scrollpane = new JScrollPane(pane);
 				scrollpane.getVerticalScrollBar().setUnitIncrement(20);
 
-				final JList<String> list = new JList<String>(Resources.versions);
+				final CList<String> list = new CList<String>(Resources.versions);
 				list.addListSelectionListener(new ListSelectionListener() {
 					@Override
 					public void valueChanged(ListSelectionEvent arg0)

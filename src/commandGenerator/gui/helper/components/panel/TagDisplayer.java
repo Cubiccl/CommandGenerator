@@ -9,7 +9,6 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JEditorPane;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -23,6 +22,7 @@ import commandGenerator.arguments.tags.Tag;
 import commandGenerator.arguments.tags.specific.TagBlockEntity;
 import commandGenerator.gui.helper.argumentSelection.dataTag.TagSelection;
 import commandGenerator.gui.helper.components.CComponent;
+import commandGenerator.gui.helper.components.CList;
 import commandGenerator.main.CGConstants;
 import commandGenerator.main.DisplayHelper;
 
@@ -32,7 +32,7 @@ public class TagDisplayer extends JPanel implements CComponent
 
 	private JEditorPane editorPane;
 	private GridBagConstraints gbc = new GridBagConstraints();
-	private JList<String> list;
+	private CList<String> list;
 	private ObjectBase object;
 	private JScrollPane scrollPane, scrollList;
 	private Tag[] tags;
@@ -44,7 +44,7 @@ public class TagDisplayer extends JPanel implements CComponent
 		this.tags = tags;
 		values = new ArrayList<Tag>();
 
-		list = new JList<String>(new String[0]);
+		list = new CList<String>(new String[0]);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.addListSelectionListener(new ListSelectionListener() {
 			@Override
