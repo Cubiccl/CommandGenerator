@@ -252,8 +252,10 @@ public class PanelCommandSelection extends JPanel implements IBox
 
 	public void setSelectedCommand(Command command)
 	{
+		this.selectedCommand = command;
 		comboboxCommand.setSelectedItem(command.getId());
-		setOptionsPanel(command.getOptionsTab());
+		this.setOptionsPanel(command.getOptionsTab());
+		this.textareaStructure.setText(command.getStructure());
 	}
 
 	public void setupFrom(String command)
@@ -262,9 +264,8 @@ public class PanelCommandSelection extends JPanel implements IBox
 		Command newCommand = Command.identify(command);
 		if (newCommand == null) return;
 
-		this.setSelectedCommand(newCommand);
 		newCommand.generateFrom(command);
-		this.setOptionsPanel(newCommand.getOptionsTab());
+		this.setSelectedCommand(newCommand);
 	}
 
 	public void updateLang()

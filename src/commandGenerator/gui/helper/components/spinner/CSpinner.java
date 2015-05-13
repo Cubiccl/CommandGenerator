@@ -1,10 +1,9 @@
 package commandGenerator.gui.helper.components.spinner;
 
-import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.gui.helper.components.icomponent.ISpin;
 
 @SuppressWarnings("serial")
-public class CSpinner extends BaseSpinner implements CComponent
+public class CSpinner extends BaseSpinner
 {
 	private int min, max;
 
@@ -12,22 +11,6 @@ public class CSpinner extends BaseSpinner implements CComponent
 	{
 		super(min, max, parent);
 	}
-
-	@Override
-	public void reset()
-	{
-		this.setValue(min);
-	}
-
-	@Override
-	public void setEnabledContent(boolean enable)
-	{
-		this.setEnabled(enable);
-	}
-
-	@Override
-	public void updateLang()
-	{}
 
 	public int getMin()
 	{

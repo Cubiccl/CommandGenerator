@@ -255,10 +255,11 @@ public class TargetSelectionPanel extends CPanel implements ISave
 			{
 				boolean player = boxEntities.getSelectedItem().equals(Generator.translate("GUI:selector.player"));
 				entryPlayer.setEnabledContent(player);
-				buttonAdd.setEnabled(!player);
-				buttonRemove.setEnabled(!player);
-				boxSelectors.setEnabled(!player);
-				labelSelectors.setEnabled(!player);
+				buttonAdd.setEnabledContent(!player);
+				buttonRemove.setEnabledContent(!player);
+				boxSelectors.setEnabledContent(!player);
+				labelSelector.setEnabledContent(!player);
+				labelSelectors.setEnabledContent(!player);
 				textarea.setEnabled(!player);
 				if (player) scrollpane.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 				else scrollpane.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));

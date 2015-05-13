@@ -30,7 +30,7 @@ public class CFormattedTextField extends JFormattedTextField implements IEvent
 		Color color = GuiHandler.BORDER_FIELD;
 		if (this.isHovered && this.isEditable() && this.isEnabled()) color = GuiHandler.BORDER_FIELD_HOVER;
 		if (this.isFocusOwner() && this.isEditable() && this.isEnabled()) color = GuiHandler.BORDER_FIELD_FOCUS;
-		if (!this.isEnabled()) color = GuiHandler.BORDER_DISABLED;
+		if (!this.isEnabled()) color = GuiHandler.DISABLED_BORDER;
 		return color;
 	}
 

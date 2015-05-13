@@ -1,6 +1,7 @@
 package commandGenerator.gui.helper.components.button;
 
 import java.awt.AWTEvent;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
@@ -17,6 +18,7 @@ public class BaseButton extends JButton implements CComponent, IEvent
 	public static final int DEFAULT_HEIGHT = 20, DEFAULT_WIDTH = 200;
 	private boolean isHovered, isClicked;
 	private int drawType;
+	private Color borderColor;
 
 	public BaseButton(String text)
 	{
@@ -83,9 +85,19 @@ public class BaseButton extends JButton implements CComponent, IEvent
 		GuiHandler.clear(g, width, height);
 
 		GuiHandler.drawComponent(g, width, height, this.getBackground(), this.drawType);
-		GuiHandler.drawBorder(g, width, height, GuiHandler.BORDER, this.drawType);
+		GuiHandler.drawBorder(g, width, height, this.getBorderColor(), this.drawType);
 
 		GuiHandler.drawString(g, this.getText(), width, height, this.getForeground(), this.getFont());
+	}
+
+	public Color getBorderColor()
+	{
+		return this.borderColor;
+	}
+
+	public void setBorderColor(Color borderColor)
+	{
+		this.borderColor = borderColor;
 	}
 
 	private void setComponentColor()
@@ -94,6 +106,16 @@ public class BaseButton extends JButton implements CComponent, IEvent
 		if (this instanceof HelpButton) this.setBackground(GuiHandler.HELP);
 		if (this.isHovered) this.setBackground(GuiHandler.HOVERED);
 		if (this.isClicked) this.setBackground(GuiHandler.CLICKED);
+		if (!this.isEnabled())
+		{
+			this.setBackground(GuiHandler.DISABLED);
+			this.setBorderColor(GuiHandler.DISABLED_BORDER);
+			this.setForeground(GuiHandler.DISABLED_BORDER);
+		} else
+		{
+			this.setBorderColor(GuiHandler.BORDER);
+			this.setForeground(GuiHandler.FONT);
+		}
 	}
 
 	@Override

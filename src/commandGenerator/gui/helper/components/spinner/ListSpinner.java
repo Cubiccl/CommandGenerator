@@ -90,7 +90,7 @@ public class ListSpinner extends JPanel implements CComponent
 	public void setEnabledContent(boolean enable)
 	{
 		this.setEnabled(enable);
-		this.spinner.setEnabled(enable);
+		this.spinner.setEnabledContent(enable);
 		this.label.setEnabledContent(enable);
 		this.buttonMax.setEnabledContent(enable);
 		this.buttonMin.setEnabledContent(enable);

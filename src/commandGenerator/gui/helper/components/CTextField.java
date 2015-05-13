@@ -17,6 +17,7 @@ public class CTextField extends JTextField implements IEvent
 {
 	private int drawType;
 	private boolean isHovered;
+	private Color borderColor;
 
 	public CTextField()
 	{
@@ -30,13 +31,14 @@ public class CTextField extends JTextField implements IEvent
 		this.init();
 	}
 
-	private Color getBorderColor()
+	public Color getBorderColor()
 	{
-		Color color = GuiHandler.BORDER_FIELD;
-		if (this.isHovered && this.isEditable() && this.isEnabled()) color = GuiHandler.BORDER_FIELD_HOVER;
-		if (this.isFocusOwner() && this.isEditable() && this.isEnabled()) color = GuiHandler.BORDER_FIELD_FOCUS;
-		if (!this.isEnabled()) color = GuiHandler.BORDER_DISABLED;
-		return color;
+		return this.borderColor;
+	}
+
+	public void setBorderColor(Color borderColor)
+	{
+		this.borderColor = borderColor;
 	}
 
 	@Override
@@ -82,11 +84,32 @@ public class CTextField extends JTextField implements IEvent
 
 	protected void paintComponent(Graphics g)
 	{
-		if (this.isEnabled() && this.isEditable()) this.setBackground(Color.WHITE);
-		else if (this.isEnabled()) this.setBackground(GuiHandler.FIELD_EDITABLE);
-		else this.setBackground(GuiHandler.DEFAULT_BACKGROUND);
+		this.setComponentColor();
 		GuiHandler.drawComponent(g, this.getWidth() - 1, this.getHeight() - 1, this.getBackground(), this.drawType);
 		super.paintComponent(g);
+	}
+
+	private void setComponentColor()
+	{
+		this.setBackground(GuiHandler.DEFAULT_BACKGROUND);
+		this.setBorderColor(GuiHandler.BORDER_FIELD);
+		if (this.isEditable())
+		{
+			this.setBackground(GuiHandler.FIELD_EDITABLE);
+			if (this.isEnabled())
+			{
+				this.setBackground(Color.WHITE);
+				this.setForeground(GuiHandler.FONT);
+			}
+			if (this.isHovered) this.setBorderColor(GuiHandler.BORDER_FIELD_HOVER);
+			if (this.isFocusOwner()) this.setBorderColor(GuiHandler.BORDER_FIELD_FOCUS);
+		}
+		if (!this.isEnabled())
+		{
+			this.setBackground(GuiHandler.DISABLED);
+			this.setBorderColor(GuiHandler.DISABLED_BORDER);
+			this.setForeground(GuiHandler.DISABLED_BORDER);
+		}
 	}
 
 	public void setDrawType(int drawType)

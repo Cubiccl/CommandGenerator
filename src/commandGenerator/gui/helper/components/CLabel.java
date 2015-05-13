@@ -42,6 +42,8 @@ public class CLabel extends JLabel implements CComponent
 	public void setEnabledContent(boolean enable)
 	{
 		this.setEnabled(enable);
+		if (enable) this.setForeground(GuiHandler.FONT);
+		else this.setForeground(GuiHandler.DISABLED_BORDER);
 	}
 
 	public void setTitle(String id)

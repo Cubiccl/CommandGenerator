@@ -18,11 +18,12 @@ import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.text.NumberFormatter;
 
 import commandGenerator.gui.helper.GuiHandler;
+import commandGenerator.gui.helper.components.CComponent;
 import commandGenerator.gui.helper.components.button.ArrowButton;
 import commandGenerator.gui.helper.components.icomponent.ISpin;
 
 @SuppressWarnings("serial")
-public class BaseSpinner extends JPanel
+public class BaseSpinner extends JPanel implements CComponent
 {
 	private int[] values;
 	private int selectedIndex;
@@ -221,5 +222,23 @@ public class BaseSpinner extends JPanel
 		if (this.values.length == 0) return 0;
 		return this.values[this.selectedIndex];
 	}
+
+	@Override
+	public void reset()
+	{
+		if (this.values.length > 0) this.setValue(this.values[0]);
+	}
+
+	@Override
+	public void setEnabledContent(boolean enable)
+	{
+		this.textfield.setEnabled(enable);
+		this.buttonMinus.setEnabled(enable);
+		this.buttonPlus.setEnabled(enable);
+	}
+
+	@Override
+	public void updateLang()
+	{}
 
 }
