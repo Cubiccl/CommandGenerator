@@ -16,6 +16,7 @@ public class EntityArgument extends Argument implements INBTArgument
 {
 
 	private boolean[] display;
+	private ObjectBase[] entities;
 	private EntitySelectionPanel panel;
 
 	public EntityArgument(String id, boolean isCompulsery)
@@ -23,6 +24,7 @@ public class EntityArgument extends Argument implements INBTArgument
 		super(id, isCompulsery);
 		this.display = new boolean[] { false, false };
 		this.setMaximumLength(2);
+		this.entities = Generator.registry.getObjectList(ObjectBase.ENTITY);
 	}
 
 	@Override
@@ -53,13 +55,14 @@ public class EntityArgument extends Argument implements INBTArgument
 	@Override
 	public TagCompound getNBT()
 	{
+		System.out.println("NBT");
 		return this.panel.getEntityTag();
 	}
 
 	@Override
 	public void initGui()
 	{
-		this.panel = new EntitySelectionPanel("GUI:" + this.getId(), Generator.registry.getObjectList(ObjectBase.ENTITY));
+		this.panel = new EntitySelectionPanel(this.getId(), this.entities);
 	}
 
 	@Override
@@ -80,11 +83,12 @@ public class EntityArgument extends Argument implements INBTArgument
 	{
 		this.display[0] = displayEntity;
 		this.display[1] = displayNBT;
-		
+
 		int max = 0;
-		for (boolean flag : this.display) if (flag) max++;
+		for (boolean flag : this.display)
+			if (flag) max++;
 		this.setMaximumLength(max);
-		
+
 		return this;
 	}
 
@@ -95,10 +99,16 @@ public class EntityArgument extends Argument implements INBTArgument
 		int index = 0;
 		if (this.display[0])
 		{
-			this.panel.setEntity((Entity) Generator.registry.getObjectFromId(data.get(index)));
+			this.panel.setSelected((Entity) Generator.registry.getObjectFromId(data.get(index)));
 			index++;
 		}
-		if (this.display[1]) this.panel.setDataTags(DataTags.generateListFrom(data.get(index)));
+		if (this.display[1])
+		{
+			List<Tag> tags = DataTags.generateListFrom(data.get(index));
+			ObjectBase entity = DataTags.getObjectFromTags(tags);
+			if (entity instanceof Entity) this.panel.setSelected((Entity) entity);
+			this.panel.setDataTags(tags);
+		}
 	}
 
 	@Override
@@ -119,6 +129,12 @@ public class EntityArgument extends Argument implements INBTArgument
 	public void reset()
 	{
 		this.panel.reset();
+	}
+
+	public EntityArgument setEntities(ObjectBase... entities)
+	{
+		this.entities = entities;
+		return this;
 	}
 
 }

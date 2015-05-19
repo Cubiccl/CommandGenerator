@@ -287,11 +287,7 @@ public class PanelCommandSelection extends JPanel implements IBox
 	public void updateCombobox()
 	{
 		Command selection = Generator.registry.getCommandFromId(this.comboboxCommand.getSelectedItem());
-		if (selection != null)
-		{
-			this.selectedCommand = selection;
-			this.setOptionsPanel(this.selectedCommand.getOptionsTab());
-		}
+		if (selection != null) this.setSelectedCommand(selection);
 	}
 
 }

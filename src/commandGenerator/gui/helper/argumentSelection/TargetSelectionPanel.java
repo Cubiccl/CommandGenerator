@@ -307,7 +307,7 @@ public class TargetSelectionPanel extends CPanel implements ISave
 
 	public Entity getEntity()
 	{
-		Entity entity = Entity.player;
+		Entity entity = Entity.PLAYER;
 		for (int i = 0; i < addedSelectors.size(); i++)
 		{
 			if (addedSelectors.get(i)[0].equals("type")) entity = (Entity) Generator.registry.getObjectFromId(addedSelectors.get(i)[1]);

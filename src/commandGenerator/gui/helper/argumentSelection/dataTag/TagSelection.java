@@ -33,7 +33,7 @@ public class TagSelection
 	public static Tag[] getAllowedTags(Tag[] tags, ObjectBase item)
 	{
 		if (item == null) return new Tag[0];
-		if (item == Entity.entity) return tags;
+		if (item == Entity.ENTITY) return tags;
 
 		List<Tag> allowed = new ArrayList<Tag>();
 		for (Tag tag : tags)

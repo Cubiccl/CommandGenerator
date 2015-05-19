@@ -29,6 +29,7 @@ import commandGenerator.gui.helper.components.icomponent.ISpin;
 import commandGenerator.gui.helper.components.panel.CPanel;
 import commandGenerator.gui.helper.components.spinner.ListSpinner;
 import commandGenerator.gui.helper.components.spinner.NumberSpinner;
+import commandGenerator.main.CGConstants;
 
 @SuppressWarnings("serial")
 public class ItemSelectionPanel extends CPanel implements IBox, ISpin, ISave
@@ -48,6 +49,7 @@ public class ItemSelectionPanel extends CPanel implements IBox, ISpin, ISave
 	public ItemSelectionPanel(String title, ObjectBase[] itemList, boolean withData, boolean slot)
 	{
 		super(title);
+		if (itemList.length == 0) itemList = Generator.registry.getList(CGConstants.LIST_ITEMS);
 		this.itemList = new Item[itemList.length];
 		this.withData = withData;
 		this.slot = slot;
@@ -118,7 +120,7 @@ public class ItemSelectionPanel extends CPanel implements IBox, ISpin, ISave
 		if (slot) spinnerSlot = new ListSpinner("GUI:item.slot", SLOTS, null);
 
 		if (withData) panelData = new NBTTagPanel("GUI:item.nbt", itemList[0], DataTags.items);
-		
+
 		this.updateCombobox();
 	}
 

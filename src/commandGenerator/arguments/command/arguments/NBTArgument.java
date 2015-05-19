@@ -18,7 +18,7 @@ public class NBTArgument extends Argument
 
 	@Override
 	/**
-	 * For a NBT Argument, it will return the ID of the Argument which the NBT Tags come from.
+	 * For an NBT Argument, it will return the ID of the Argument which the NBT Tags come from.
 	 */
 	public String generateCommand()
 	{

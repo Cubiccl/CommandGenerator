@@ -107,11 +107,6 @@ public class EntitySelectionPanel extends CPanel implements IBox, ISave
 		this.panelData.setupFrom(list);
 	}
 
-	public void setEntity(Entity entity)
-	{
-		this.combobox.setSelected(entity);
-	}
-
 	public void setSelected(Entity entity)
 	{
 		combobox.setSelected(entity);

@@ -29,6 +29,7 @@ import commandGenerator.arguments.command.arguments.misc.SlotArgument;
 import commandGenerator.arguments.command.arguments.misc.SoundArgument;
 import commandGenerator.arguments.command.arguments.misc.TeamOptionArgument;
 import commandGenerator.arguments.command.arguments.misc.XpArgument;
+import commandGenerator.arguments.objects.Entity;
 import commandGenerator.arguments.tags.DataTags;
 import commandGenerator.arguments.tags.TagCompound;
 import commandGenerator.gui.helper.components.panel.CPanel;
@@ -61,7 +62,7 @@ public enum Structure
 	effectClear("effect.clear", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new StaticArgument("clear")),
 	effectGive("effect.give", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new EffectArgument("effect", true)),
 	enchant("enchant", new TargetArgument("target", true, CGConstants.ENTITIES_PLAYERS), new EnchantmentArgument("enchant", true)),
-	entitydata("entitydata", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new EntityArgument("entity.tags", true).setDisplay(false, true)),
+	entitydata("entitydata", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new EntityArgument("GUI:entity.tags", true).setDisplay(false, true)),
 	executeDetect("execute.detect", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new CoordinatesArgument("execute.coords", true, true, false),
 			new StaticArgument("detect"), new CoordinatesArgument("execute.block_coords", true, true, false), new BlockArgument("execute.block", true,
 					CGConstants.LIST_BLOCKS, false).setDisplay(true, true, false), new CommandArgument()),
@@ -79,7 +80,7 @@ public enum Structure
 			"false")),
 	gameruleTicks("gamerule.ticks", new StaticArgument("randomTickSpeed"), new IntArgument("gamerule.value", true).setBounds(0, Integer.MAX_VALUE)),
 	give("give", new TargetArgument("target", true, CGConstants.ENTITIES_PLAYERS), new ItemArgument("give.item", true).setDisplay(true, true, true, true)),
-	kill("kill", new TargetArgument("target", true, CGConstants.ENTITIES_ALL)),
+	kill("kill", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new EntityArgument("GENERAL:target.nbt", false).setDisplay(false, true)),
 	particle("particle", new ParticleArgument(), new CoordinatesArgument("particle.start", true, true, false), new CoordinatesArgument("particle.end", true,
 			false, false), new FloatArgument("particle.speed", true).setBounds(0, Integer.MAX_VALUE), new IntArgument("particle.count", false).setBounds(0,
 			Integer.MAX_VALUE), new BooleanArgument("particle.seen", false).setValues("", "force")),
@@ -105,7 +106,7 @@ public enum Structure
 	scorePlayerReset("scoreboard.players.reset", new StaticArgument("reset"), new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new StringArgument(
 			"scoreboard.players.clear.objective", false)),
 	scorePlayerSet("scoreboard.players.set", new ChoiceArgument("mode", true, "add", "set", "remove"), new TargetArgument("target", true,
-			CGConstants.ENTITIES_ALL), new StringArgument("objective", true), new IntArgument("value", true)),
+			CGConstants.ENTITIES_ALL), new StringArgument("objective", true), new IntArgument("value", true), new EntityArgument("GENERAL:target.nbt", false).setDisplay(false, true).setEntities(Entity.PLAYER)),
 	scorePlayerTest("scoreboard.players.test", new StaticArgument("test"), new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new StringArgument(
 			"objective", true), new IntArgument("scoreboard.score.min", true), new IntArgument("scoreboard.score.max", false)),
 	scoreTeamAdd("scoreboard.teams.add", new StaticArgument("add"), new StringArgument("scoreboard.team", true),
@@ -132,10 +133,10 @@ public enum Structure
 	statsSetEntity("stats.set.entity", new StaticArgument("entity"), new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new StaticArgument("set"),
 			new ChoiceArgument("stats", true, Resources.stats).addHelpButton(), new TargetArgument("target.stats", true, CGConstants.ENTITIES_ALL),
 			new StringArgument("objective", true)),
-	summon("summon", new EntityArgument("spawn.entity", true).setDisplay(true, false), new CoordinatesArgument("spawn.coords", false, true, false),
-			new NBTArgument("nbt", false, "spawn.entity")),
+	summon("summon", new EntityArgument("GUI:spawn.entity", true).setDisplay(true, false), new CoordinatesArgument("spawn.coords", false, true, false),
+			new NBTArgument("nbt", false, "GUI:spawn.entity")),
 	tellraw("tellraw", new TargetArgument("target", true, CGConstants.ENTITIES_PLAYERS), new JsonArgument("json", true)),
-	testfor("testfor", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new EntityArgument("entity.tags", true).setDisplay(false, true)),
+	testfor("testfor", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new EntityArgument("GUI:entity.tags", true).setDisplay(false, true)),
 	testforblock("testforblock", new CoordinatesArgument("block.coords", true, true, false),
 			new BlockArgument("block.set", true, CGConstants.LIST_BLOCKS, true).setDisplay(true, true, true)),
 	testforblocks("testforblocks", new CoordinatesArgument("testforblocks.start", true, true, false), new CoordinatesArgument("testforblocks.end", true, true,

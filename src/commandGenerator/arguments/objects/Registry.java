@@ -190,7 +190,7 @@ public class Registry
 		if (object == null) object = objects.get(ObjectBase.PARTICLE).get(id);
 		if (object == null) object = objects.get(ObjectBase.SOUND).get(id);
 
-		// if (object == null) DisplayHelper.log(id + " isn't the ID of any object.");
+		 if (object == null) DisplayHelper.log(id + " isn't the ID of any object.");
 		return object;
 	}
 

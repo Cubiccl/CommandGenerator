@@ -11,7 +11,7 @@ import commandGenerator.main.Resources;
 public class Entity extends ObjectBase
 {
 
-	public static final Entity player = new Entity("Player"), entity = new Entity("");
+	public static final Entity PLAYER = new Entity("Player"), ENTITY = new Entity("");
 
 	private ImageIcon texture;
 	private String name;
