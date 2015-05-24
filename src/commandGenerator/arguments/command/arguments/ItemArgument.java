@@ -155,7 +155,7 @@ public class ItemArgument extends Argument implements INBTArgument
 	{
 		this.panel.reset();
 		this.panel.setEnabledContent(true);
-		this.box.setSelected(true);
+		if (!this.isCompulsery()) this.box.setSelected(true);
 		int index = 0;
 		if (this.display[0] && data.size() > index)
 		{

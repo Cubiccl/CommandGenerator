@@ -128,12 +128,17 @@ public class BaseSpinner extends JPanel implements CComponent
 
 	private void minus()
 	{
-		this.setValue(this.getFieldValue() - 1);
+		this.setSelectedIndex(this.getSelectedIndex() - 1);
+	}
+
+	private int getSelectedIndex()
+	{
+		return this.selectedIndex;
 	}
 
 	private void plus()
 	{
-		this.setValue(this.getFieldValue() + 1);
+		this.setSelectedIndex(this.getSelectedIndex() + 1);
 	}
 
 	private void validateSearch()
@@ -192,6 +197,7 @@ public class BaseSpinner extends JPanel implements CComponent
 
 	private void setSelectedIndex(int index)
 	{
+		if (index >= this.values.length || index < 0) return;
 		this.selectedIndex = index;
 		this.updateDisplay();
 		if (parent != null) this.parent.updateSpinner();

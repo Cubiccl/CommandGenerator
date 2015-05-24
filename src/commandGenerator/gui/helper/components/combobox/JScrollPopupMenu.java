@@ -48,6 +48,7 @@ public class JScrollPopupMenu extends JPopupMenu implements ActionListener
 	public void show(Component invoker, int x, int y)
 	{
 		init(jframe);
+		jframe.setAlwaysOnTop(true);
 		panelMenus.validate();
 		int maxsize = scroll.getMaximumSize().height;
 		int realsize = panelMenus.getPreferredSize().height;
@@ -61,10 +62,7 @@ public class JScrollPopupMenu extends JPopupMenu implements ActionListener
 		scroll.setPreferredSize(new Dimension(scroll.getPreferredSize().width + 20, scroll.getPreferredSize().height));
 		this.pack();
 		this.setInvoker(invoker);
-		if (sizescroll != 0)
-		{
-			this.setPopupSize(new Dimension(scroll.getPreferredSize().width, scroll.getMaximumSize().height));
-		}
+		if (sizescroll != 0) this.setPopupSize(new Dimension(scroll.getPreferredSize().width, scroll.getMaximumSize().height));
 		Point invokerOrigin = invoker.getLocationOnScreen();
 		this.setLocation((int) invokerOrigin.getX() + x, (int) invokerOrigin.getY() + y);
 		this.setVisible(true);
@@ -76,6 +74,12 @@ public class JScrollPopupMenu extends JPopupMenu implements ActionListener
 		{
 			this.setVisible(false);
 		}
+	}
+	
+	@Override
+	public void setVisible(boolean visible) {
+		super.setVisible(visible);
+		this.jframe.setAlwaysOnTop(visible);
 	}
 
 	public void add(AbstractButton menuItem)
