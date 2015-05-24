@@ -32,6 +32,7 @@ public class NBTTagPanel extends CPanel implements CComponent
 		this.nbtTags = new Tag[nbtTags.length];
 		for (int i = 0; i < nbtTags.length; i++)
 			this.nbtTags[i] = DataTags.init(nbtTags[i]);
+		this.nbtTags = DataTags.sortTagsByName(this.nbtTags);
 		
 		this.initGui();
 	}
@@ -116,6 +117,7 @@ public class NBTTagPanel extends CPanel implements CComponent
 	{
 		super.updateLang();
 		updateCombobox(object);
+		this.nbtTags = DataTags.sortTagsByName(this.nbtTags);
 	}
 
 }

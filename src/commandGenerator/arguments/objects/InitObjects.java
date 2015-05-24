@@ -197,6 +197,7 @@ public class InitObjects
 		{
 			data[i] = tags[i].split(",");
 		}
+
 		switch (type)
 		{
 			case 0:

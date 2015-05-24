@@ -1,6 +1,7 @@
 package commandGenerator.arguments.tags;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import commandGenerator.Generator;
@@ -380,6 +381,27 @@ public class DataTags
 			}
 		}
 		return tag;
+	}
+
+	public static Tag[] sortTagsByName(Tag[] data)
+	{
+		ArrayList<Tag> sort = new ArrayList<Tag>();
+		for (int i = 0; i < data.length; i++)
+		{
+			sort.add(data[i]);
+		}
+
+		sort.sort(new Comparator<Tag>() {
+			public int compare(Tag o1, Tag o2)
+			{
+				int comparison = o1.getName().compareTo(o2.getName());
+				if (comparison < 0) comparison = -1;
+				if (comparison > 0) comparison = 1;
+				return comparison;
+			}
+		});
+
+		return sort.toArray(new Tag[0]);
 	}
 
 }
