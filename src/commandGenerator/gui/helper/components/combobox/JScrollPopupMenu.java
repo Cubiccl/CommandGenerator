@@ -48,7 +48,7 @@ public class JScrollPopupMenu extends JPopupMenu implements ActionListener
 	public void show(Component invoker, int x, int y)
 	{
 		init(jframe);
-		jframe.setAlwaysOnTop(true);
+		//jframe.setAlwaysOnTop(true);
 		panelMenus.validate();
 		int maxsize = scroll.getMaximumSize().height;
 		int realsize = panelMenus.getPreferredSize().height;
