@@ -22,18 +22,16 @@ public class JScrollPopupMenu extends JPopupMenu implements ActionListener
 	private static final int MAX_ELEMENTS = 25;
 	private JPanel panelMenus;
 	private JScrollPane scroll;
-	private JFrame jframe;
 
 	public JScrollPopupMenu(JFrame jframe)
 	{
 		super();
-		this.jframe = jframe;
 		this.setLayout(new BorderLayout());
 		this.panelMenus = new JPanel(new GridLayout(0, 1));
-		init(jframe);
+		this.init();
 	}
 
-	private void init(JFrame jframe)
+	private void init()
 	{
 		super.removeAll();
 		scroll = new JScrollPane();
@@ -47,8 +45,7 @@ public class JScrollPopupMenu extends JPopupMenu implements ActionListener
 
 	public void show(Component invoker, int x, int y)
 	{
-		init(jframe);
-		//jframe.setAlwaysOnTop(true);
+		this.init();
 		panelMenus.validate();
 		int maxsize = scroll.getMaximumSize().height;
 		int realsize = panelMenus.getPreferredSize().height;
@@ -75,11 +72,11 @@ public class JScrollPopupMenu extends JPopupMenu implements ActionListener
 			this.setVisible(false);
 		}
 	}
-	
+
 	@Override
-	public void setVisible(boolean visible) {
+	public void setVisible(boolean visible)
+	{
 		super.setVisible(visible);
-		this.jframe.setAlwaysOnTop(visible);
 	}
 
 	public void add(AbstractButton menuItem)
