@@ -19,8 +19,9 @@ public class Resources
 	/** The URL to the Command Generator resource folder. */
 	public static String folder;
 
-	public static final String[] gamerules = { "commandBlockOutput", "doDaylightCycle", "doFireTick", "doMobLoot", "doMobSpawning", "doTileDrops",
-			"keepInventory", "mobGriefing", "naturalRegeneration", "logAdminCommands", "sendCommandFeedback", "showDeathMessages" };
+	public static final String[] gamerules = { "commandBlockOutput", "doDaylightCycle", "doEntityDrops", "doFireTick", "doMobLoot", "doMobSpawning",
+			"doTileDrops", "keepInventory", "mobGriefing", "naturalRegeneration", "randomTickSpeed", "logAdminCommands", "sendCommandFeedback",
+			"showDeathMessages", "reducedDebugInfo" };
 
 	public static final String[] operations = { "+=", "-=", "*=", "/=", "%=", "=", "<", ">", "><" };
 

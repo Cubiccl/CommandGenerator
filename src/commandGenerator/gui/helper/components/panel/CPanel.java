@@ -39,7 +39,7 @@ public abstract class CPanel extends JPanel implements CComponent
 		this.title = title;
 		if (!title.equals("GENERAL:options")) setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
 				Generator.translate(title)));
-		setPreferredSize(new Dimension(MIN, MIN));
+		this.setPreferredSize(new Dimension(MIN, MIN));
 
 		gbc = new GridBagConstraints();
 		gbc.gridx = 0;

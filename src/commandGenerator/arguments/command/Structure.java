@@ -22,6 +22,7 @@ import commandGenerator.arguments.command.arguments.misc.BlockSlotArgument;
 import commandGenerator.arguments.command.arguments.misc.CommandArgument;
 import commandGenerator.arguments.command.arguments.misc.EffectArgument;
 import commandGenerator.arguments.command.arguments.misc.EnchantmentArgument;
+import commandGenerator.arguments.command.arguments.misc.GameruleArgument;
 import commandGenerator.arguments.command.arguments.misc.JsonArgument;
 import commandGenerator.arguments.command.arguments.misc.ObjectiveArgument;
 import commandGenerator.arguments.command.arguments.misc.ParticleArgument;
@@ -76,9 +77,10 @@ public enum Structure
 			new BlockArgument("fill.block.replace", false, CGConstants.LIST_BLOCKS, false).setDisplay(true, true, false)),
 	gamemode("gamemode", new ChoiceArgument("gamemode", true, "survival", "creative", "adventure", "spectator"), new TargetArgument("target", true,
 			CGConstants.ENTITIES_ALL)),
-	gameruleNormal("gamerule.normal", new ChoiceArgument("gamerule", true, Resources.gamerules).addHelpButton(), new ChoiceArgument("value", true, "true",
-			"false")),
-	gameruleTicks("gamerule.ticks", new StaticArgument("randomTickSpeed"), new IntArgument("gamerule.value", true).setBounds(0, Integer.MAX_VALUE)),
+	gameruleNormal("gamerule.normal", new GameruleArgument()),
+	gameruleNormalCustom("gamerule.normal.custom", new ChoiceArgument("gamerule", true, Resources.gamerules).addHelpButton()),
+	gameruleQuery("gamerule.query", new StringArgument("gamerule.name", true), new ChoiceArgument("value", true, "true", "false")),
+	gameruleQueryCustom("gamerule.query.custom", new StringArgument("gamerule.name", true)),
 	give("give", new TargetArgument("target", true, CGConstants.ENTITIES_PLAYERS), new ItemArgument("give.item", true).setDisplay(true, true, true, true)),
 	kill("kill", new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new EntityArgument("GENERAL:target.nbt", false).setDisplay(false, true)),
 	particle("particle", new ParticleArgument(), new CoordinatesArgument("particle.start", true, true, false), new CoordinatesArgument("particle.end", true,
@@ -106,7 +108,8 @@ public enum Structure
 	scorePlayerReset("scoreboard.players.reset", new StaticArgument("reset"), new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new StringArgument(
 			"scoreboard.players.clear.objective", false)),
 	scorePlayerSet("scoreboard.players.set", new ChoiceArgument("mode", true, "add", "set", "remove"), new TargetArgument("target", true,
-			CGConstants.ENTITIES_ALL), new StringArgument("objective", true), new IntArgument("value", true), new EntityArgument("GENERAL:target.nbt", false).setDisplay(false, true).setEntities(Entity.PLAYER)),
+			CGConstants.ENTITIES_ALL), new StringArgument("objective", true), new IntArgument("value", true), new EntityArgument("GENERAL:target.nbt", false)
+			.setDisplay(false, true).setEntities(Entity.PLAYER)),
 	scorePlayerTest("scoreboard.players.test", new StaticArgument("test"), new TargetArgument("target", true, CGConstants.ENTITIES_ALL), new StringArgument(
 			"objective", true), new IntArgument("scoreboard.score.min", true), new IntArgument("scoreboard.score.max", false)),
 	scoreTeamAdd("scoreboard.teams.add", new StaticArgument("add"), new StringArgument("scoreboard.team", true),
