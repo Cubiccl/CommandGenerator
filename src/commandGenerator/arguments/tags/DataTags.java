@@ -16,6 +16,7 @@ import commandGenerator.arguments.tags.specific.TagDropChances;
 import commandGenerator.arguments.tags.specific.TagEffects;
 import commandGenerator.arguments.tags.specific.TagEnchants;
 import commandGenerator.arguments.tags.specific.TagEquipment;
+import commandGenerator.arguments.tags.specific.TagExitPortal;
 import commandGenerator.arguments.tags.specific.TagExplosion;
 import commandGenerator.arguments.tags.specific.TagFireworks;
 import commandGenerator.arguments.tags.specific.TagHideFlags;
@@ -253,6 +254,7 @@ public class DataTags
 		if (id.equals("SpawnPotentials")) return new TagSpawnPotentials(id, tagData[2]);
 		if (id.equals("SpawnData")) return new TagSpawnData(id, tagData[2]);
 		if (id.equals("Patterns")) return new TagPatterns();
+		if (id.equals("ExitPortal")) return new TagExitPortal(tagData[2]);
 
 		if (id.equals("display")) return new TagDisplay();
 		if (id.equals("HideFlags")) return new TagHideFlags();
@@ -272,11 +274,17 @@ public class DataTags
 		if (id.equals("Riding")) return new TagRiding();
 		if (id.equals("ActiveEffects")) return new TagEffects(id, "LIST=mob");
 		if (id.equals("Attributes")) return new TagAttributes(id, true, "LIST=mob");
-		if (id.equals("Equipment")) return new TagEquipment();
-		if (id.equals("DropChances")) return new TagDropChances();
+		if (id.equals("Equipment")) return new TagEquipment(id, "hand", "head", "chest", "legs", "feet");
+		if (id.equals("ArmorItems")) return new TagEquipment(id, "head", "chest", "legs", "feet");
+		if (id.equals("HandItems")) return new TagEquipment(id, "handLeft", "handRight");
+		if (id.equals("DropChances")) return new TagDropChances(id, "hand", "head", "chest", "legs", "feet");
+		if (id.equals("ArmorDropChances")) return new TagDropChances(id, "head", "chest", "legs", "feet");
+		if (id.equals("HandDropChances")) return new TagDropChances(id, "handLeft", "handRight");
 		if (id.equals("Offers")) return new TagOffers();
 		if (id.equals("DisabledSlots")) return new TagDisabledSlots();
 		if (id.equals("Pose")) return new TagPose();
+		
+		DisplayHelper.log("Missing tag manager for " + id);
 
 		return null;
 	}

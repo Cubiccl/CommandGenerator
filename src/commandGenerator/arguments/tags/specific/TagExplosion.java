@@ -29,7 +29,8 @@ public class TagExplosion extends TagCompound
 			@Override
 			public void askValue()
 			{}
-		}, fade = new TagList("FadeColors") {
+		};
+		TagList fade = new TagList("FadeColors") {
 			@Override
 			public void askValue()
 			{}

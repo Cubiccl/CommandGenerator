@@ -5,19 +5,21 @@ import commandGenerator.gui.helper.argumentSelection.dataTag.EquipmentSelectionP
 
 public class TagEquipment extends TagList
 {
+	private String[] slots;
 
-	public TagEquipment()
+	public TagEquipment(String id, String... slots)
 	{
-		super("entity.Equipment", "LIST=mob:ArmorStand");
+		super(id, "LIST=mob:ArmorStand");
+		this.slots = slots;
 	}
 
 	@Override
 	public void askValue()
 	{
-		panel = new EquipmentSelectionPanel("TAGS:" + getId());
-		((EquipmentSelectionPanel) panel).setup(getValue());
-		if (showPanel()) return;
-		setValue(((EquipmentSelectionPanel) panel).getSelectedEquipment());
+		this.panel = new EquipmentSelectionPanel("TAGS:" + this.getId(), slots);
+		((EquipmentSelectionPanel) this.panel).setup(this.getValue());
+		if (this.showPanel()) return;
+		this.setValue(((EquipmentSelectionPanel) panel).getSelectedEquipment());
 	}
 
 }

@@ -231,4 +231,9 @@ public class ObjectCreator
 		return Target.PLAYER;
 	}
 
+	public static Coordinates generateCoordinates(double x, double y, double z)
+	{
+		return generateCoordinates(Double.toString(x), Double.toString(y), Double.toString(z));
+	}
+
 }

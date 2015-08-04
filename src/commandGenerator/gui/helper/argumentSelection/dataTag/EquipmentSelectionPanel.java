@@ -26,17 +26,17 @@ import commandGenerator.main.DisplayHelper;
 @SuppressWarnings("serial")
 public class EquipmentSelectionPanel extends CPanel
 {
-
-	private CButton buttonAddHand, buttonAddFeet, buttonAddLegs, buttonAddChest, buttonAddHead, buttonRemoveHand, buttonRemoveFeet, buttonRemoveLegs,
-			buttonRemoveChest, buttonRemoveHead;
+	private String[] slots;
+	private CButton[] buttons;
 	private JEditorPane editorpane;
 	private ItemStack[] equipment;
 	private JScrollPane scrollpane;
 
-	public EquipmentSelectionPanel(String title)
+	public EquipmentSelectionPanel(String title, String... slots)
 	{
 		super(title);
-		equipment = new ItemStack[] { null, null, null, null, null };
+		this.equipment = new ItemStack[slots.length];
+		this.slots = slots;
 
 		this.initGui();
 	}
@@ -44,12 +44,11 @@ public class EquipmentSelectionPanel extends CPanel
 	@Override
 	protected void addComponents()
 	{
-		addLine(buttonAddHead, buttonRemoveHead);
-		addLine(buttonAddChest, buttonRemoveChest);
-		addLine(buttonAddLegs, buttonRemoveLegs);
-		addLine(buttonAddFeet, buttonRemoveFeet);
-		addLine(buttonAddHand, buttonRemoveHand);
-		add(scrollpane);
+		for (int i = 0; i < this.slots.length; i++)
+		{
+			this.addLine(this.buttons[i * 2], this.buttons[i * 2 + 1]);
+		}
+		this.add(scrollpane);
 	}
 
 	private void addItem(int slot)
@@ -63,29 +62,30 @@ public class EquipmentSelectionPanel extends CPanel
 	@Override
 	protected void createComponents()
 	{
-		equipment = new ItemStack[] { null, null, null, null, null };
+		this.equipment = new ItemStack[this.slots.length];
+		this.buttons = new CButton[this.slots.length * 2];
+		for (int i = 0; i < this.slots.length; i++)
+		{
+			CButton buttonAdd = new CButton("GUI:equipment.add." + this.slots[i]);
+			CButton buttonRemove = new CButton("GUI:equipment.remove." + this.slots[i]);
 
-		buttonAddHand = new CButton("GUI:equipment.add.hand");
-		buttonAddFeet = new CButton("GUI:equipment.add.feet");
-		buttonAddLegs = new CButton("GUI:equipment.add.legs");
-		buttonAddChest = new CButton("GUI:equipment.add.chest");
-		buttonAddHead = new CButton("GUI:equipment.add.head");
-		buttonRemoveHand = new CButton("GUI:equipment.remove.hand");
-		buttonRemoveFeet = new CButton("GUI:equipment.remove.feet");
-		buttonRemoveLegs = new CButton("GUI:equipment.remove.legs");
-		buttonRemoveChest = new CButton("GUI:equipment.remove.chest");
-		buttonRemoveHead = new CButton("GUI:equipment.remove.head");
+			if (i == 0)
+			{
+				buttonAdd.setDrawType(GuiHandler.FULL - GuiHandler.TOP_LEFT);
+				buttonRemove.setDrawType(GuiHandler.FULL - GuiHandler.TOP_RIGHT);
+			} else if (i == this.slots.length - 1)
+			{
+				buttonAdd.setDrawType(GuiHandler.FULL - GuiHandler.BOTTOM_LEFT);
+				buttonRemove.setDrawType(GuiHandler.FULL - GuiHandler.BOTTOM_RIGHT);
+			} else
+			{
+				buttonAdd.setDrawType(GuiHandler.FULL);
+				buttonRemove.setDrawType(GuiHandler.FULL);
+			}
 
-		buttonAddHead.setDrawType(GuiHandler.FULL - GuiHandler.TOP_LEFT);
-		buttonRemoveHead.setDrawType(GuiHandler.FULL - GuiHandler.TOP_RIGHT);
-		buttonAddChest.setDrawType(GuiHandler.FULL);
-		buttonRemoveChest.setDrawType(GuiHandler.FULL);
-		buttonAddLegs.setDrawType(GuiHandler.FULL);
-		buttonRemoveLegs.setDrawType(GuiHandler.FULL);
-		buttonAddFeet.setDrawType(GuiHandler.FULL);
-		buttonRemoveFeet.setDrawType(GuiHandler.FULL);
-		buttonAddHand.setDrawType(GuiHandler.FULL - GuiHandler.BOTTOM_LEFT);
-		buttonRemoveHand.setDrawType(GuiHandler.FULL - GuiHandler.BOTTOM_RIGHT);
+			this.buttons[i * 2] = buttonAdd;
+			this.buttons[i * 2 + 1] = buttonRemove;
+		}
 
 		editorpane = new JEditorPane("text/html", "");
 		editorpane.setEditable(false);
@@ -100,85 +100,33 @@ public class EquipmentSelectionPanel extends CPanel
 	@Override
 	protected void createListeners()
 	{
-		buttonAddHand.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				addItem(0);
-			}
-		});
-		buttonAddFeet.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				addItem(1);
-			}
-		});
-		buttonAddLegs.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				addItem(2);
-			}
-		});
-		buttonAddChest.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				addItem(3);
-			}
-		});
-		buttonAddHead.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				addItem(4);
-			}
-		});
-		buttonRemoveHand.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				removeItem(0);
-			}
-		});
-		buttonRemoveFeet.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				removeItem(1);
-			}
-		});
-		buttonRemoveLegs.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				removeItem(2);
-			}
-		});
-		buttonRemoveChest.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				removeItem(3);
-			}
-		});
-		buttonRemoveHead.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				removeItem(4);
-			}
-		});
+		for (int i = 0; i < this.slots.length; i++)
+		{
+			final int slot = i;
+			this.buttons[i * 2].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0)
+				{
+					addItem(slot);
+				}
+			});
+			this.buttons[i * 2 + 1].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0)
+				{
+					removeItem(slot);
+				}
+			});
+		}
 	}
 
 	private void displayItems()
 	{
-		String[] parts = { Generator.translate("GUI:slot.hand"), Generator.translate("GUI:slot.feet"), Generator.translate("GUI:slot.legs"),
-				Generator.translate("GUI:slot.chest"), Generator.translate("GUI:slot.head") };
+		String[] parts = new String[this.slots.length];
 		String text = "";
 		for (int i = 0; i < equipment.length; i++)
 		{
+			parts[i] = Generator.translate("GUI:slot." + this.slots[i]);
 			if (i != 0) text += "<br />";
 			if (equipment[i] == null) text += parts[i] + ": " + Generator.translate("GENERAL:nothing");
 			else text += parts[i] + ": " + equipment[i].display(CGConstants.DETAILS_ALL, 0);
@@ -212,11 +160,11 @@ public class EquipmentSelectionPanel extends CPanel
 
 	public void setup(List<Tag> value)
 	{
-		if (value.size() < 5) DisplayHelper.log("Error : Missing Equipment.");
+		if (value.size() < this.slots.length) DisplayHelper.log("Error : Missing Equipment.");
 
-		for (int i = 0; i < value.size() && i < 5; i++)
-			equipment[i] = ObjectCreator.generateItemStack((TagCompound) value.get(i));
-		displayItems();
+		for (int i = 0; i < value.size() && i < this.slots.length; i++)
+			this.equipment[i] = ObjectCreator.generateItemStack((TagCompound) value.get(i));
+		this.displayItems();
 	}
 
 }

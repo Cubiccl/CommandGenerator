@@ -15,49 +15,39 @@ import commandGenerator.main.DisplayHelper;
 public class DropChancesSelectionPanel extends CPanel
 {
 
-	private CEntry entryHand, entryHead, entryChest, entryLegs, entryFeet;
+	private String[] slots;
+	private CEntry[] entries;
 	private CLabel label;
 
-	public DropChancesSelectionPanel(String title)
+	public DropChancesSelectionPanel(String title, String... slots)
 	{
 		super(title);
-		
+		this.slots = slots;
+		this.entries = new CEntry[this.slots.length];
+
 		this.initGui();
 	}
 
 	@Override
 	protected void addComponents()
 	{
-		add(label);
-		add(entryHand);
-		add(entryHead);
-		add(entryChest);
-		add(entryLegs);
-		add(entryFeet);
+		this.add(this.label);
+		for (int i = 0; i < this.entries.length; i++)
+		{
+			this.add(this.entries[i]);
+		}
 	}
 
 	@Override
 	protected void createComponents()
 	{
-		label = new CLabel("GUI:desc.drop_chances");
+		this.label = new CLabel("GUI:desc.drop_chances");
 
-		entryHand = new CEntry("GUI:slot.hand", "1.0");
-		entryHead = new CEntry("GUI:slot.head", "1.0");
-		entryChest = new CEntry("GUI:slot.chest", "1.0");
-		entryLegs = new CEntry("GUI:slot.legs", "1.0");
-		entryFeet = new CEntry("GUI:slot.feet", "1.0");
-
-		entryHand.setTextField("0");
-		entryHead.setTextField("0");
-		entryChest.setTextField("0");
-		entryLegs.setTextField("0");
-		entryFeet.setTextField("0");
-
-		entryHand.setMinimumSize(new Dimension(200, 20));
-		entryHead.setMinimumSize(new Dimension(200, 20));
-		entryChest.setMinimumSize(new Dimension(200, 20));
-		entryLegs.setMinimumSize(new Dimension(200, 20));
-		entryFeet.setMinimumSize(new Dimension(200, 20));
+		for (int i = 0; i < this.slots.length; i++)
+		{
+			this.entries[i] = new CEntry("GUI:slot." + this.slots[i], "1.0");
+			this.entries[i].setMinimumSize(new Dimension(200, 20));
+		}
 	}
 
 	@Override
@@ -67,53 +57,43 @@ public class DropChancesSelectionPanel extends CPanel
 	public List<Tag> getDropChances()
 	{
 
-		String hand = entryHand.getText();
-		String head = entryHead.getText();
-		String chest = entryChest.getText();
-		String legs = entryLegs.getText();
-		String feet = entryFeet.getText();
+		List<Tag> tag = new ArrayList<Tag>();
 
-		try
+		for (int i = 0; i < this.entries.length; i++)
 		{
-			float testHa = Float.parseFloat(hand);
-			float testHe = Float.parseFloat(head);
-			float testC = Float.parseFloat(chest);
-			float testL = Float.parseFloat(legs);
-			float testF = Float.parseFloat(feet);
-			if (testHa < 0.0f || testHe < 0.0f || testC < 0.0f || testL < 0.0f || testF < 0.0f || testHa > 1.0f || testHe > 1.0f || testC > 1.0f
-					|| testL > 1.0f || testF > 1.0f)
+			String text = this.entries[i].getText();
+
+			try
+			{
+				float test = Float.parseFloat(text);
+				if (test < 0.0f || test > 1.0f)
+				{
+					DisplayHelper.warningBounds(0, 1);
+					return null;
+				}
+			} catch (Exception ex)
 			{
 				DisplayHelper.warningBounds(0, 1);
 				return null;
 			}
-		} catch (Exception ex)
-		{
-			DisplayHelper.warningBounds(0, 1);
-			return null;
+			tag.add(new TagFloat().setValue(Float.parseFloat(text)));
 		}
-
-		List<Tag> tag = new ArrayList<Tag>();
-		tag.add(new TagFloat().setValue(Float.parseFloat(hand)));
-		tag.add(new TagFloat().setValue(Float.parseFloat(feet)));
-		tag.add(new TagFloat().setValue(Float.parseFloat(legs)));
-		tag.add(new TagFloat().setValue(Float.parseFloat(chest)));
-		tag.add(new TagFloat().setValue(Float.parseFloat(head)));
 		return tag;
 	}
 
 	public void setup(List<Tag> data)
 	{
-		if (data.size() < 5) DisplayHelper.log("Error : missing drop chances");
+		if (data.size() < this.slots.length) DisplayHelper.log("Error : missing drop chances");
 
-		float[] chances = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-		for (int i = 0; i < data.size() && i < 5; i++)
+		float[] chances = new float[this.slots.length];
+		for (int i = 0; i < chances.length; i++)
+			chances[i] = 0.0f;
+
+		for (int i = 0; i < data.size() && i < this.slots.length; i++)
+		{
 			chances[i] = ((TagFloat) data.get(i)).getValue();
-
-		entryHand.setTextField(Float.toString(chances[0]));
-		entryFeet.setTextField(Float.toString(chances[1]));
-		entryLegs.setTextField(Float.toString(chances[2]));
-		entryChest.setTextField(Float.toString(chances[3]));
-		entryHead.setTextField(Float.toString(chances[4]));
+			this.entries[i].setTextField(Float.toString(chances[i]));
+		}
 	}
 
 }

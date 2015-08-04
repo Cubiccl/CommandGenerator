@@ -5,19 +5,21 @@ import commandGenerator.gui.helper.argumentSelection.dataTag.DropChancesSelectio
 
 public class TagDropChances extends TagList
 {
+	private String[] slots;
 
-	public TagDropChances()
+	public TagDropChances(String id, String... slots)
 	{
-		super("entity.DropChances", "LIST=mob");
+		super(id, "LIST=mob");
+		this.slots = slots;
 	}
 
 	@Override
 	public void askValue()
 	{
-		panel = new DropChancesSelectionPanel("TAGS:" + getId());
-		((DropChancesSelectionPanel) panel).setup(getValue());
-		if (showPanel()) return;
-		setValue(((DropChancesSelectionPanel) panel).getDropChances());
+		this.panel = new DropChancesSelectionPanel("TAGS:" + this.getId(), this.slots);
+		((DropChancesSelectionPanel) this.panel).setup(this.getValue());
+		if (this.showPanel()) return;
+		this.setValue(((DropChancesSelectionPanel) this.panel).getDropChances());
 	}
 
 }
