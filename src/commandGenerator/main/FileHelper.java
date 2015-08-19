@@ -19,6 +19,38 @@ public class FileHelper
 	/** Writer used to edit files. */
 	private static PrintWriter writer;
 
+	private static void addOption(String id)
+	{
+		try
+		{
+			scanner = new Scanner(new File(folder + "options.txt"));
+		} catch (Exception e)
+		{
+			DisplayHelper.log("Couldn't open the Options file.");
+			return;
+		}
+		List<String> options = new ArrayList<String>();
+		while (scanner.hasNextLine())
+		{
+			options.add(scanner.nextLine());
+		}
+		scanner.close();
+
+		try
+		{
+			writer = new PrintWriter(folder + "options.txt", "UTF-8");
+			for (int i = 0; i < options.size(); i++)
+			{
+				writer.println(options.get(i));
+			}
+			writer.write(id + " = " + Settings.getDefaultOption(id));
+			writer.close();
+		} catch (Exception e)
+		{
+
+		}
+	}
+
 	public static void changePath(String folder)
 	{
 		String folderPath = getDefaultFolder();
@@ -60,7 +92,7 @@ public class FileHelper
 		else
 		{
 			directory = System.getProperty("user.home");// Mac or Linux
-			directory += "/Library/Application Support";// Mac
+			directory += "/Library/Application Support";
 		}
 		return directory + "/commandGenerator/";
 	}
@@ -92,38 +124,6 @@ public class FileHelper
 
 		scanner.close();
 		return option;
-	}
-
-	private static void addOption(String id)
-	{
-		try
-		{
-			scanner = new Scanner(new File(folder + "options.txt"));
-		} catch (Exception e)
-		{
-			DisplayHelper.log("Couldn't open the Options file.");
-			return;
-		}
-		List<String> options = new ArrayList<String>();
-		while (scanner.hasNextLine())
-		{
-			options.add(scanner.nextLine());
-		}
-		scanner.close();
-
-		try
-		{
-			writer = new PrintWriter(folder + "options.txt", "UTF-8");
-			for (int i = 0; i < options.size(); i++)
-			{
-				writer.println(options.get(i));
-			}
-			writer.write(id + " = " + Settings.getDefaultOption(id));
-			writer.close();
-		} catch (Exception e)
-		{
-
-		}
 	}
 
 	/** Opens a file. Returns true if it couldn't.

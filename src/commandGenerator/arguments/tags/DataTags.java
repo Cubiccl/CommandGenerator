@@ -253,7 +253,7 @@ public class DataTags
 		if (id.equals("Text1") || id.equals("Text2") || id.equals("Text3") || id.equals("Text4")) return new TagSignText(id, tagData[2]);
 		if (id.equals("SpawnPotentials")) return new TagSpawnPotentials(id, tagData[2]);
 		if (id.equals("SpawnData")) return new TagSpawnData(id, tagData[2]);
-		if (id.equals("Patterns")) return new TagPatterns();
+		if (id.equals("Patterns")) return new TagPatterns(tagData[2]);
 		if (id.equals("ExitPortal")) return new TagExitPortal(tagData[2]);
 
 		if (id.equals("display")) return new TagDisplay();
@@ -269,7 +269,7 @@ public class DataTags
 		if (id.equals("Fireworks")) return new TagFireworks();
 		if (id.equals("BlockEntityTag")) return new TagBlockEntity("BlockEntityTag", "LIST=tileentity");
 
-		if (id.equals("Pos") || id.equals("Motion")) return new TagPos(id, "LIST=allEntities");
+		if (id.equals("Pos") || id.equals("Motion")) return new TagPos(id, false, "LIST=allEntities");
 		if (id.equals("Rotation")) return new TagRotation();
 		if (id.equals("Riding")) return new TagRiding();
 		if (id.equals("ActiveEffects")) return new TagEffects(id, "LIST=mob");
@@ -283,6 +283,7 @@ public class DataTags
 		if (id.equals("Offers")) return new TagOffers();
 		if (id.equals("DisabledSlots")) return new TagDisabledSlots();
 		if (id.equals("Pose")) return new TagPose();
+		if (id.equals("BeamTarget")) return new TagPos(id, true, "EnderCrystal");
 		
 		DisplayHelper.log("Missing tag manager for " + id);
 

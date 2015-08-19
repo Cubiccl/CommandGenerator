@@ -44,21 +44,6 @@ public class Settings
 		createLangs();
 	}
 
-	/** Returns true if the version has already been updated.
-	 * 
-	 * @param version
-	 *            - <i>String</i> - The version to test for. */
-	public boolean alreadyUpdated(String version)
-	{
-		int indexPrev = 0, indexVersion = 0;
-		for (int i = 0; i < Resources.versions.length; i++)
-		{
-			if (Resources.versions[i].equals(version)) indexVersion = i;
-			if (Resources.versions[i].equals(previousVersion)) indexPrev = i;
-		}
-		return indexPrev >= indexVersion;
-	}
-
 	public void change()
 	{
 		SettingsPanel panel = new SettingsPanel(this);

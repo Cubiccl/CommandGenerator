@@ -7,9 +7,9 @@ import commandGenerator.gui.helper.argumentSelection.dataTag.ListSelectionPanel;
 public class TagPatterns extends TagList
 {
 
-	public TagPatterns()
+	public TagPatterns(String... applicable)
 	{
-		super("block.Patterns", "standing_banner:wall_banner:banner");
+		super("block.Patterns", applicable);
 	}
 
 	@Override
