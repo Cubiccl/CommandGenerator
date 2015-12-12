@@ -3,6 +3,8 @@ package generator;
 import generator.gui.MainWindow;
 import generator.gui.panel.CPanel;
 import generator.gui.panel.LoadingPanel;
+import generator.gui.panel.PanelConfirm;
+import generator.interfaces.IConfirmState;
 import generator.main.FileManager;
 import generator.main.Settings;
 import generator.main.State;
@@ -21,6 +23,17 @@ public class CommandGenerator
 	public static void addState(String textID, CPanel component)
 	{
 		instance.stateManager.addState(textID, component);
+	}
+
+	public static void addStateWithConfirm(String textID, CPanel component, IConfirmState listener)
+	{
+		PanelConfirm confirm = new PanelConfirm(component, listener);
+		addState(textID, confirm);
+	}
+
+	public static void clearActiveState()
+	{
+		instance.stateManager.clearActiveState();
 	}
 
 	/** Closes the Command Generator. */
@@ -88,12 +101,12 @@ public class CommandGenerator
 		instance.stateManager.updateLang();
 		getWindow().updateLang();
 	}
-
 	/** Contains all data. */
 	private Registry registry;
 	private Settings settings;
 	/** Manages what state the Generator is at. */
 	private StateManager stateManager;
+
 	private Translator translator;
 
 	private MainWindow window;

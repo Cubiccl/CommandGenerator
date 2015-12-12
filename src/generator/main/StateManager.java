@@ -25,6 +25,12 @@ public class StateManager implements ITranslate
 		this.onStateChanged();
 	}
 
+	public void clearActiveState()
+	{
+		this.states.remove(this.states.size() - 1);
+		this.onStateChanged();
+	}
+
 	public State getActiveState()
 	{
 		if (this.states.size() == 0) return null;
