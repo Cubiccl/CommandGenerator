@@ -109,7 +109,7 @@ public class FileManager
 	 * @return The path to this folder. */
 	public static String setupFolder()
 	{
-		// TODO adapt to launcher
+		// TODO adapt to launcher 
 		String directory;
 		String os = (System.getProperty("os.name")).toUpperCase();
 
@@ -119,7 +119,7 @@ public class FileManager
 			directory = System.getProperty("user.home");// Mac or Linux
 			directory += "/Library/Application Support";
 		}
-		return directory + "/commandGenerator/";
+		return directory + "/CommandGeneratorResources/";
 	}
 
 }
