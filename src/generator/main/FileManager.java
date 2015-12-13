@@ -32,6 +32,7 @@ public class FileManager
 			return texture;
 		} catch (Exception e)
 		{
+			CommandGenerator.log("Missing texture : " + path);
 			CommandGenerator.log(e);
 		}
 		return null;
@@ -41,7 +42,7 @@ public class FileManager
 	{
 		File file = new File(folder() + "log.txt");
 		ArrayList<String> toPrint = new ArrayList<String>();
-		if (file.exists()) toPrint.addAll(readFileAsList(".log.txt"));
+		if (file.exists()) toPrint.addAll(readFileAsList("log.txt"));
 		else try
 		{
 			file.createNewFile();
@@ -120,6 +121,19 @@ public class FileManager
 			directory += "/Library/Application Support";
 		}
 		return directory + "/CommandGeneratorResources/";
+	}
+
+	public static void clearLog()
+	{
+		File logFile = new File(folder() + "log.txt");
+		if (logFile.exists()) logFile.delete();
+		try
+		{
+			logFile.createNewFile();
+		} catch (Exception e)
+		{
+			System.out.println(e);
+		}
 	}
 
 }

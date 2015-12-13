@@ -39,6 +39,19 @@ public class Registry implements ITranslate
 		if (!this.lists.get(listId).contains(object)) this.lists.get(listId).add(object);
 	}
 
+	public void complete()
+	{
+		this.achievements.complete();
+		this.attributes.complete();
+		this.blocks.complete();
+		this.effects.complete();
+		this.enchantments.complete();
+		this.entities.complete();
+		this.items.complete();
+		this.particles.complete();
+		this.sounds.complete();
+	}
+
 	public Achievement getAchievementFromId(String id)
 	{
 		return this.achievements.getObjectFromId(id);

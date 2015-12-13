@@ -8,11 +8,12 @@ import java.awt.image.BufferedImage;
 public class ItemBlock extends ObjectWithNumId
 {
 	/** Default texture type = same texture for all damage values. */
-	private static final int DEFAULT = 100000;
+	private static final int DEFAULT = 0;
 
 	/** True if this is a block or a block represented as an item. */
 	private boolean block;
 	private int[] damage;
+	private boolean hasDurability;
 	private String langType;
 	private String[] names;
 	private BufferedImage[] textures;
@@ -30,6 +31,7 @@ public class ItemBlock extends ObjectWithNumId
 		this.langType = "null";
 		this.textureType = DEFAULT;
 		this.block = block;
+		this.hasDurability = false;
 	}
 
 	@Override
@@ -38,9 +40,10 @@ public class ItemBlock extends ObjectWithNumId
 		String path = "textures/";
 		if (this.isBlock()) path += "blocks/";
 		else path += "items/";
-		this.textures = new BufferedImage[this.getDamage().length];
+		if (this.hasDurability()) this.textures = new BufferedImage[1];
+		else this.textures = new BufferedImage[this.getDamage().length];
 
-		if (textureType == DEFAULT) for (int i = 0; i < this.textures.length; i++)
+		if (textureType == DEFAULT || this.hasDurability()) for (int i = 0; i < this.textures.length; i++)
 			this.textures[i] = FileManager.loadTexture(path + "other/" + this.getId());
 
 		else for (int i = 0; i < this.textures.length; i++)
@@ -83,6 +86,11 @@ public class ItemBlock extends ObjectWithNumId
 		return this.getName();
 	}
 
+	public boolean hasDurability()
+	{
+		return this.hasDurability;
+	}
+
 	/** @return True if this is a block or a block represented as an item. */
 	public boolean isBlock()
 	{
@@ -103,6 +111,12 @@ public class ItemBlock extends ObjectWithNumId
 		this.damage = damage;
 	}
 
+	public void setDurability(int durability)
+	{
+		this.hasDurability = true;
+		this.setDamage(durability);
+	}
+
 	public void setLangType(String langType)
 	{
 		this.langType = langType;
@@ -118,7 +132,13 @@ public class ItemBlock extends ObjectWithNumId
 	{
 		String category = "ITEM";
 		if (this.isBlock()) category = "BLOCK";
+		if (this.hasDurability())
+		{
+			this.names = new String[] { CommandGenerator.translate(category + ":" + this.getId()) };
+			return;
+		}
 		this.names = new String[this.getDamage().length];
+
 		switch (this.langType)
 		{
 

@@ -10,6 +10,7 @@ import generator.main.Settings;
 import generator.main.State;
 import generator.main.StateManager;
 import generator.main.Translator;
+import generator.registry.ObjectCreator;
 import generator.registry.Registry;
 
 import java.lang.reflect.InvocationTargetException;
@@ -118,13 +119,24 @@ public class CommandGenerator
 	{
 		this.settings = new Settings(FileManager.setupFolder());
 		this.settings.init();
+		FileManager.clearLog();
+		
 		log("Command generator loading...");
 		this.createFrame();
 		this.stateManager = new StateManager(getWindow().getTextAreaStates());
 		this.translator = new Translator();
 		getWindow().updateLang();
-		addState("GUI:loading.loading", new LoadingPanel());
+		
+		LoadingPanel panel = new LoadingPanel();
+		addState("GUI:loading.loading", panel);
+		
 		this.registry = new Registry();
+		ObjectCreator.createObjects();
+
+		panel.setDetail("GUI:loading.objects_end");
+		this.registry.complete();
+		
+		panel.setDetail("GUI:loading.gui");
 	}
 
 	private void createFrame()

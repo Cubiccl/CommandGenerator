@@ -14,6 +14,14 @@ public class Register<T extends ObjectBase> implements ITranslate
 		this.register = new HashMap<String, T>();
 	}
 
+	public void complete()
+	{
+		for (String key : this.register.keySet())
+		{
+			this.register.get(key).complete();
+		}
+	}
+
 	public T getObjectFromId(String id)
 	{
 		if (!this.register.containsKey(id))

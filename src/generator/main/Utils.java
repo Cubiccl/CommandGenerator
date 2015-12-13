@@ -9,7 +9,7 @@ public class Utils
 		for (int i = 0; i < array.length; i++)
 		{
 			if (i != 0) string += separator;
-			string += array;
+			string += array[i];
 		}
 		return string;
 	}

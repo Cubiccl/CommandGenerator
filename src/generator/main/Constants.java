@@ -14,7 +14,7 @@ public final class Constants
 	public static final Font font = new Font("Dialog", Font.BOLD, 13);
 	public static final int ITEM = 0, BLOCK = 1, ENTITY = 2, EFFECT = 3, ENCHANTMENT = 4, ACHIEVEMENT = 5, ATTRIBUTE = 6, PARTICLE = 7, SOUND = 8,
 			COMMAND = 100;
-	public static final String[] OBJECT_NAMES = { "item", "sound", "particle", "achievement", "entity", "attribute", "effect", "enchantment", };
+	public static final String[] OBJECT_NAMES = { "item", "block", "entity", "effect", "enchantment", "achievement", "attribute", "particle", "sound" };
 
 	public static String getObjectName(int type)
 	{
