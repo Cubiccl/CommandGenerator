@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import generator.CommandGenerator;
 import generator.interfaces.ITranslate;
-import generator.main.Constants;
+import generator.main.Utils;
 
 public class Registry implements ITranslate
 {
@@ -42,15 +42,15 @@ public class Registry implements ITranslate
 
 	public void complete()
 	{
-		this.achievements.complete(Constants.getObjectName(Constants.ACHIEVEMENT));
-		this.attributes.complete(Constants.getObjectName(Constants.ATTRIBUTE));
-		this.blocks.complete(Constants.getObjectName(Constants.BLOCK));
-		this.effects.complete(Constants.getObjectName(Constants.EFFECT));
-		this.enchantments.complete(Constants.getObjectName(Constants.ENCHANTMENT));
-		this.entities.complete(Constants.getObjectName(Constants.ENTITY));
-		this.items.complete(Constants.getObjectName(Constants.ITEM));
-		this.particles.complete(Constants.getObjectName(Constants.PARTICLE));
-		this.sounds.complete(Constants.getObjectName(Constants.SOUND));
+		this.achievements.complete(Utils.getObjectTypeName(Utils.ACHIEVEMENT));
+		this.attributes.complete(Utils.getObjectTypeName(Utils.ATTRIBUTE));
+		this.blocks.complete(Utils.getObjectTypeName(Utils.BLOCK));
+		this.effects.complete(Utils.getObjectTypeName(Utils.EFFECT));
+		this.enchantments.complete(Utils.getObjectTypeName(Utils.ENCHANTMENT));
+		this.entities.complete(Utils.getObjectTypeName(Utils.ENTITY));
+		this.items.complete(Utils.getObjectTypeName(Utils.ITEM));
+		this.particles.complete(Utils.getObjectTypeName(Utils.PARTICLE));
+		this.sounds.complete(Utils.getObjectTypeName(Utils.SOUND));
 	}
 
 	public Achievement getAchievementFromId(String id)

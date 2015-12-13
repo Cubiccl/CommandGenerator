@@ -1,13 +1,13 @@
 package generator.registry;
 
-import generator.main.Constants;
+import generator.main.Utils;
 
 public class Particle extends Sound
 {
 
 	public Particle(String id)
 	{
-		super(Constants.PARTICLE, id);
+		super(Utils.PARTICLE, id);
 	}
 
 }

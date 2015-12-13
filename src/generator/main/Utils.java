@@ -1,8 +1,55 @@
 package generator.main;
 
-public class Utils
-{
+import generator.CommandGenerator;
 
+import java.awt.Color;
+import java.awt.Font;
+
+/** Contains various constants and and methods. */
+public final class Utils
+{
+	/** Background Color of a Component being clicked. */
+	public static final Color BACKGROUND_CLICKED = new Color(250, 220, 220);
+	/** Background Color of a Component being hovered. */
+	public static final Color BACKGROUND_HOVERED = new Color(220, 250, 220);
+	/** Background Color of a regular Component. */
+	public static final Color BACKGROUND_NORMAL = new Color(220, 220, 250);
+	/** Border Color of a Component. */
+	public static final Color BORDER_COLOR = Color.GRAY;
+	/** Font to be used by most Components. */
+	public static final Font font = new Font("Dialog", Font.BOLD, 13);
+
+	/** Object types :
+	 * <ul>
+	 * <li>ITEM = 0;</li>
+	 * <li>BLOCK = 1;</li>
+	 * <li>ENTITY = 2;</li>
+	 * <li>EFFECT = 3;</li>
+	 * <li>ENCHANTMENT = 4;</li>
+	 * <li>ACHIEVEMENT = 5;</li>
+	 * <li>ATTRIBUTE = 6;</li>
+	 * <li>PARTICLE = 7;</li>
+	 * <li>SOUND = 8;</li>
+	 * <li>COMMAND = 100;</li>
+	 * </ul> */
+	public static final int ITEM = 0, BLOCK = 1, ENTITY = 2, EFFECT = 3, ENCHANTMENT = 4, ACHIEVEMENT = 5, ATTRIBUTE = 6, PARTICLE = 7, SOUND = 8,
+			COMMAND = 100;
+	/** Names for Objects types. */
+	public static final String[] OBJECT_TYPES_NAMES = { "item", "block", "entity", "effect", "enchantment", "achievement", "attribute", "particle", "sound" };
+
+	/** @param type - The type of the object.
+	 * @return - Its name.
+	 * @see Utils#ITEM */
+	public static String getObjectTypeName(int type)
+	{
+		if (type == 100) return CommandGenerator.translate("GUI:command.command");
+		if (type < 0 || type >= OBJECT_TYPES_NAMES.length) return "object";
+		return CommandGenerator.translate("GUI:object." + OBJECT_TYPES_NAMES[type]);
+	}
+
+	/** @param array - The array.
+	 * @param separator - A String to put between each component of the array.
+	 * @return A String representation of the array. */
 	public static String toString(String[] array, String separator)
 	{
 		String string = "";

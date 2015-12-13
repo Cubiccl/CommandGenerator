@@ -1,6 +1,6 @@
 package generator.gui;
 
-import generator.main.Constants;
+import generator.main.Utils;
 
 import javax.swing.JEditorPane;
 import javax.swing.text.html.HTMLDocument;
@@ -16,7 +16,7 @@ public class CTextArea extends JEditorPane
 		this.setBackground(null);
 		this.setEditable(false);
 		this.setHighlighter(null);
-		String bodyRule = "body { font-family: " + Constants.font.getFamily() + "; " + "font-size: " + Constants.font.getSize() + "pt; }";
+		String bodyRule = "body { font-family: " + Utils.font.getFamily() + "; " + "font-size: " + Utils.font.getSize() + "pt; }";
 		((HTMLDocument) this.getDocument()).getStyleSheet().addRule(bodyRule);
 	}
 

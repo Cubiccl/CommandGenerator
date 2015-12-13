@@ -2,7 +2,7 @@ package generator.registry;
 
 import java.awt.image.BufferedImage;
 
-import generator.main.Constants;
+import generator.main.Utils;
 import generator.main.FileManager;
 
 public class Effect extends ObjectWithNumId
@@ -12,7 +12,7 @@ public class Effect extends ObjectWithNumId
 
 	public Effect(int idNum, String idString)
 	{
-		super(Constants.EFFECT, idNum, idString);
+		super(Utils.EFFECT, idNum, idString);
 	}
 
 	@Override

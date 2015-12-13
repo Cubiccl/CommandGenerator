@@ -1,6 +1,6 @@
 package generator.gui.button;
 
-import generator.main.Constants;
+import generator.main.Utils;
 
 import java.awt.Graphics;
 
@@ -14,9 +14,9 @@ public class CButtonUI extends BasicButtonUI
 	@Override
 	public void paint(Graphics g, JComponent c)
 	{
-		if (((AbstractButton) c).getModel().isPressed()) c.setBackground(Constants.BACKGROUND_CLICKED);
-		else if (((AbstractButton) c).getModel().isRollover()) c.setBackground(Constants.BACKGROUND_HOVERED);
-		else c.setBackground(Constants.BACKGROUND_NORMAL);
+		if (((AbstractButton) c).getModel().isPressed()) c.setBackground(Utils.BACKGROUND_CLICKED);
+		else if (((AbstractButton) c).getModel().isRollover()) c.setBackground(Utils.BACKGROUND_HOVERED);
+		else c.setBackground(Utils.BACKGROUND_NORMAL);
 		super.paint(g, c);
 	}
 

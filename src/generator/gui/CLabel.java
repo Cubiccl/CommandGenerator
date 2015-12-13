@@ -2,7 +2,7 @@ package generator.gui;
 
 import generator.CommandGenerator;
 import generator.interfaces.ITranslate;
-import generator.main.Constants;
+import generator.main.Utils;
 
 import javax.swing.JLabel;
 
@@ -15,7 +15,7 @@ public class CLabel extends JLabel implements ITranslate
 	{
 		super("");
 		this.textID = textID;
-		this.setFont(Constants.font);
+		this.setFont(Utils.font);
 		this.updateLang();
 	}
 

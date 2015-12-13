@@ -1,13 +1,13 @@
 package generator.registry;
 
-import generator.main.Constants;
+import generator.main.Utils;
 
 public class Block extends ItemBlock
 {
 
 	public Block(int idNum, String idString)
 	{
-		super(Constants.BLOCK, idNum, idString, true);
+		super(Utils.BLOCK, idNum, idString, true);
 	}
 
 }

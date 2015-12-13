@@ -2,7 +2,7 @@ package generator.registry;
 
 import java.awt.image.BufferedImage;
 
-import generator.main.Constants;
+import generator.main.Utils;
 
 public class Achievement extends ObjectBase
 {
@@ -10,7 +10,7 @@ public class Achievement extends ObjectBase
 
 	public Achievement(String id, Item itemIcon)
 	{
-		super(Constants.ACHIEVEMENT, id);
+		super(Utils.ACHIEVEMENT, id);
 		this.itemIcon = itemIcon;
 	}
 	

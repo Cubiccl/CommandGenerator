@@ -2,7 +2,7 @@ package generator.registry;
 
 import java.awt.image.BufferedImage;
 
-import generator.main.Constants;
+import generator.main.Utils;
 import generator.main.FileManager;
 
 public class Entity extends ObjectBase
@@ -12,7 +12,7 @@ public class Entity extends ObjectBase
 
 	public Entity(String id)
 	{
-		super(Constants.ENTITY, id);
+		super(Utils.ENTITY, id);
 	}
 
 	@Override

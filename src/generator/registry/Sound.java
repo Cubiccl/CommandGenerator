@@ -1,13 +1,13 @@
 package generator.registry;
 
-import generator.main.Constants;
+import generator.main.Utils;
 
 public class Sound extends ObjectBase
 {
 
 	public Sound(String id)
 	{
-		this(Constants.SOUND, id);
+		this(Utils.SOUND, id);
 	}
 	
 	protected Sound(int type, String id)

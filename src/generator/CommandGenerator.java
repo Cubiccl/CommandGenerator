@@ -19,19 +19,30 @@ import javax.swing.SwingUtilities;
 
 public class CommandGenerator
 {
+	/** The instance of the generator. */
 	private static CommandGenerator instance;
 
+	/** Adds a new state.
+	 * 
+	 * @param textID - The ID of the state's name.
+	 * @param component - The component to display. */
 	public static void addState(String textID, CPanel component)
 	{
 		instance.stateManager.addState(textID, component);
 	}
 
+	/** Adds a new state. Will have OK and Cancel buttons.
+	 * 
+	 * @param textID - The ID of the state's name.
+	 * @param component - The component to display.
+	 * @param listener - Called when the user clicks on OK or Cancel. */
 	public static void addStateWithConfirm(String textID, CPanel component, IConfirmState listener)
 	{
 		PanelConfirm confirm = new PanelConfirm(component, listener);
 		addState(textID, confirm);
 	}
 
+	/** Deletes the current state. */
 	public static void clearActiveState()
 	{
 		instance.stateManager.clearActiveState();
@@ -43,21 +54,25 @@ public class CommandGenerator
 		getWindow().dispose();
 	}
 
+	/** @return The current State. */
 	public static State getActiveState()
 	{
 		return instance.stateManager.getActiveState();
 	}
 
+	/** @return The Registry, containing all Objects. */
 	public static Registry getRegistry()
 	{
 		return instance.registry;
 	}
 
+	/** @return The Settings. */
 	public static Settings getSettings()
 	{
 		return instance.settings;
 	}
 
+	/** @return The Main Window. */
 	public static MainWindow getWindow()
 	{
 		return instance.window;
@@ -95,6 +110,7 @@ public class CommandGenerator
 		return instance.translator.translate(textId);
 	}
 
+	/** Updates all translations of the Generator. Called when the user changes language. */
 	public static void updateLang()
 	{
 		instance.translator.updateLang();
@@ -102,43 +118,46 @@ public class CommandGenerator
 		instance.stateManager.updateLang();
 		getWindow().updateLang();
 	}
+
 	/** Contains all data. */
 	private Registry registry;
 	private Settings settings;
 	/** Manages what state the Generator is at. */
 	private StateManager stateManager;
-
+	/** Contains all translations. */
 	private Translator translator;
-
 	private MainWindow window;
 
+	/** Constructor. */
 	private CommandGenerator()
 	{}
 
+	/** Initializes all the program. */
 	private void create()
 	{
 		this.settings = new Settings(FileManager.setupFolder());
 		this.settings.init();
 		FileManager.clearLog();
-		
+
 		log("Command generator loading...");
 		this.createFrame();
 		this.stateManager = new StateManager(getWindow().getTextAreaStates());
 		this.translator = new Translator();
 		getWindow().updateLang();
-		
+
 		LoadingPanel panel = new LoadingPanel();
 		addState("GUI:loading.loading", panel);
-		
+
 		this.registry = new Registry();
 		ObjectCreator.createObjects();
 
 		panel.setDetail("GUI:loading.objects_end");
 		this.registry.complete();
-		
+
 		panel.setDetail("GUI:loading.gui");
 	}
 
+	/** Creates the main window. */
 	private void createFrame()
 	{
 		try

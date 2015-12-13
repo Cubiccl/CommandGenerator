@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import generator.CommandGenerator;
 import generator.interfaces.ITranslate;
-import generator.main.Constants;
+import generator.main.Utils;
 
 public abstract class ObjectBase implements ITranslate
 {
@@ -55,6 +55,6 @@ public abstract class ObjectBase implements ITranslate
 	@Override
 	public void updateLang()
 	{
-		this.name = CommandGenerator.translate(Constants.OBJECT_NAMES[this.getType()].toUpperCase() + ":" + this.getId());
+		this.name = CommandGenerator.translate(Utils.OBJECT_TYPES_NAMES[this.getType()].toUpperCase() + ":" + this.getId());
 	}
 }

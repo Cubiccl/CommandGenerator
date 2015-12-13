@@ -3,7 +3,7 @@ package generator.gui.button;
 import generator.CommandGenerator;
 import generator.gui.RoundedCornerBorder;
 import generator.interfaces.ITranslate;
-import generator.main.Constants;
+import generator.main.Utils;
 
 import javax.swing.JButton;
 
@@ -16,7 +16,7 @@ public class CButton extends JButton implements ITranslate
 	{
 		super("");
 		this.textID = textID;
-		this.setFont(Constants.font);
+		this.setFont(Utils.font);
 		this.setBorder(new RoundedCornerBorder());
 		this.setUI(new CButtonUI());
 		this.updateLang();

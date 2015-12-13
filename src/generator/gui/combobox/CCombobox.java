@@ -1,7 +1,7 @@
 package generator.gui.combobox;
 
 import generator.gui.RoundedCornerBorder;
-import generator.main.Constants;
+import generator.main.Utils;
 
 import javax.swing.JComboBox;
 import javax.swing.plaf.basic.BasicComboBoxUI;
@@ -16,7 +16,7 @@ public class CCombobox extends JComboBox<String>
 		this.setBorder(new RoundedCornerBorder());
 		this.setRenderer(new CListCellRenderer());
 		this.setUI(new BasicComboBoxUI());
-		this.setBackground(Constants.BACKGROUND_NORMAL);
+		this.setBackground(Utils.BACKGROUND_NORMAL);
 	}
 
 	public void setValues(String[] values)

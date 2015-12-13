@@ -1,7 +1,6 @@
 package generator.registry;
 
 import generator.CommandGenerator;
-import generator.main.Constants;
 import generator.main.FileManager;
 import generator.main.Utils;
 
@@ -178,39 +177,39 @@ public final class ObjectCreator
 	{
 		switch (type)
 		{
-			case Constants.ITEM:
+			case Utils.ITEM:
 				createItem(data);
 				break;
 
-			case Constants.BLOCK:
+			case Utils.BLOCK:
 				createBlock(data);
 				break;
 
-			case Constants.ENTITY:
+			case Utils.ENTITY:
 				createEntity(data);
 				break;
 
-			case Constants.EFFECT:
+			case Utils.EFFECT:
 				createEffect(data);
 				break;
 
-			case Constants.ENCHANTMENT:
+			case Utils.ENCHANTMENT:
 				createEnchantment(data);
 				break;
 
-			case Constants.ACHIEVEMENT:
+			case Utils.ACHIEVEMENT:
 				createAchievement(data);
 				break;
 
-			case Constants.ATTRIBUTE:
+			case Utils.ATTRIBUTE:
 				createAttribute(data);
 				break;
 
-			case Constants.PARTICLE:
+			case Utils.PARTICLE:
 				createParticle(data);
 				break;
 
-			case Constants.SOUND:
+			case Utils.SOUND:
 				createSounds(data);
 				break;
 

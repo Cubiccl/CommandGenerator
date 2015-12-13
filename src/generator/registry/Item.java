@@ -1,6 +1,6 @@
 package generator.registry;
 
-import generator.main.Constants;
+import generator.main.Utils;
 
 public class Item extends ItemBlock
 {
@@ -11,7 +11,7 @@ public class Item extends ItemBlock
 
 	public Item(int idNum, String idString, boolean block)
 	{
-		super(Constants.ITEM, idNum, idString, block);
+		super(Utils.ITEM, idNum, idString, block);
 	}
 
 }

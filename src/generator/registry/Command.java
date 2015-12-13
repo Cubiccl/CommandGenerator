@@ -1,13 +1,13 @@
 package generator.registry;
 
-import generator.main.Constants;
+import generator.main.Utils;
 
 public class Command extends ObjectDescribed
 {
 
 	public Command(String id)
 	{
-		super(Constants.COMMAND, id);
+		super(Utils.COMMAND, id);
 	}
 
 }

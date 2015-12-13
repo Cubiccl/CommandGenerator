@@ -1,13 +1,13 @@
 package generator.registry;
 
-import generator.main.Constants;
+import generator.main.Utils;
 
 public class Attribute extends ObjectBase
 {
 
 	public Attribute(String id)
 	{
-		super(Constants.ATTRIBUTE, id);
+		super(Utils.ATTRIBUTE, id);
 	}
 
 }

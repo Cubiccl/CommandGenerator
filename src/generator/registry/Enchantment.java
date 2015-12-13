@@ -1,9 +1,8 @@
 package generator.registry;
 
-import java.awt.image.BufferedImage;
+import generator.main.Utils;
 
-import generator.main.Constants;
-import generator.main.FileManager;
+import java.awt.image.BufferedImage;
 
 public class Enchantment extends ObjectWithNumId
 {
@@ -12,7 +11,7 @@ public class Enchantment extends ObjectWithNumId
 
 	public Enchantment(int idNum, String idString, int maxLevel)
 	{
-		super(Constants.ENCHANTMENT, idNum, idString);
+		super(Utils.ENCHANTMENT, idNum, idString);
 		this.maxLevel = maxLevel;
 	}
 

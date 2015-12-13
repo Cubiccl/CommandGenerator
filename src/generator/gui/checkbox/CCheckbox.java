@@ -3,7 +3,7 @@ package generator.gui.checkbox;
 import generator.CommandGenerator;
 import generator.gui.RoundedCornerBorder;
 import generator.interfaces.ITranslate;
-import generator.main.Constants;
+import generator.main.Utils;
 
 import javax.swing.JCheckBox;
 
@@ -16,7 +16,7 @@ public class CCheckbox extends JCheckBox implements ITranslate
 	{
 		super("");
 		this.textID = textID;
-		this.setFont(Constants.font);
+		this.setFont(Utils.font);
 		this.setBorder(new RoundedCornerBorder());
 		this.setBorderPainted(true);
 		this.setUI(new CCheckboxUI());
