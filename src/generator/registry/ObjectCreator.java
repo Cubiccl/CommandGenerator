@@ -3,6 +3,8 @@ package generator.registry;
 import generator.CommandGenerator;
 import generator.main.FileManager;
 import generator.main.Utils;
+import generator.registry.command.Command;
+import generator.registry.command.Structure;
 
 /** Contains methods to create Objects from the data files. */
 public final class ObjectCreator
@@ -264,15 +266,21 @@ public final class ObjectCreator
 	{
 		String[] data = FileManager.readFileAsArray("data-1.8.txt");
 		int category = 0;
+		Command currentCommand = null;
 		for (String line : data)
 		{
 			if (line.startsWith("//") || line.startsWith("/**")) continue;
 			if (line.startsWith("CATEGORY=")) category = Integer.parseInt(line.substring("CATEGORY=".length()));
-			else createObject(category, line.split(","));
+			else if (category == Utils.COMMAND)
+			{
+				if (line.startsWith("COMMAND=")) currentCommand = new Command(line.substring("COMMAND=".length()));
+				else currentCommand.addStructure(createStructure(line.split(";")));
+				continue;
+			} else createObject(category, line.split(","));
 		}
 	}
 
-	/** Creates a new Block.
+	/** Creates a new Particle.
 	 * 
 	 * @param data - The input data.<br/>
 	 *            <strong>ID</strong> */
@@ -289,7 +297,7 @@ public final class ObjectCreator
 		}
 	}
 
-	/** Creates a new Block.
+	/** Creates new Sounds.
 	 * 
 	 * @param data - The input data. Can contain several IDs on the same row.<br/>
 	 *            <strong>ID</strong> */
@@ -307,5 +315,15 @@ public final class ObjectCreator
 				CommandGenerator.log(e);
 			}
 		}
+	}
+
+	/** Creates a new Structure.
+	 * 
+	 * @param data - The input data.<br/>
+	 *            <strong>ID;Argument[details...];Argument;...</strong> */
+	private static Structure createStructure(String[] data)
+	{
+		// TODO Create Structure
+		return new Structure(data[0]);
 	}
 }

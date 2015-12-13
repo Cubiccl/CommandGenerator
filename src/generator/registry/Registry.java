@@ -1,11 +1,12 @@
 package generator.registry;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import generator.CommandGenerator;
 import generator.interfaces.ITranslate;
 import generator.main.Utils;
+import generator.registry.command.Command;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /** Contains all game Objects. */
 public class Registry implements ITranslate
@@ -13,6 +14,7 @@ public class Registry implements ITranslate
 	private Register<Achievement> achievements;
 	private Register<Attribute> attributes;
 	private Register<Block> blocks;
+	private Register<Command> commands;
 	private Register<Effect> effects;
 	private Register<Enchantment> enchantments;
 	private Register<Entity> entities;
@@ -26,6 +28,7 @@ public class Registry implements ITranslate
 		this.achievements = new Register<Achievement>();
 		this.attributes = new Register<Attribute>();
 		this.blocks = new Register<Block>();
+		this.commands = new Register<Command>();
 		this.effects = new Register<Effect>();
 		this.enchantments = new Register<Enchantment>();
 		this.entities = new Register<Entity>();
@@ -51,6 +54,7 @@ public class Registry implements ITranslate
 		this.achievements.complete(Utils.getObjectTypeName(Utils.ACHIEVEMENT));
 		this.attributes.complete(Utils.getObjectTypeName(Utils.ATTRIBUTE));
 		this.blocks.complete(Utils.getObjectTypeName(Utils.BLOCK));
+		this.commands.complete(Utils.getObjectTypeName(Utils.COMMAND));
 		this.effects.complete(Utils.getObjectTypeName(Utils.EFFECT));
 		this.enchantments.complete(Utils.getObjectTypeName(Utils.ENCHANTMENT));
 		this.entities.complete(Utils.getObjectTypeName(Utils.ENTITY));
@@ -78,6 +82,13 @@ public class Registry implements ITranslate
 	public Block getBlockFromId(String id)
 	{
 		return this.blocks.getObjectFromId(id);
+	}
+
+	/** @param id - The ID of the target Command.
+	 * @return The Command with the given ID. */
+	public Command getCommandFromId(String id)
+	{
+		return this.commands.getObjectFromId(id);
 	}
 
 	/** @param id - The ID of the target Effect.
@@ -156,6 +167,14 @@ public class Registry implements ITranslate
 	public void registerBlock(Block block)
 	{
 		this.blocks.register(block);
+	}
+
+	/** Registers a new Command.
+	 * 
+	 * @param command - The input Command. */
+	public void registerBlock(Command command)
+	{
+		this.commands.register(command);
 	}
 
 	/** Registers a new Effect.
