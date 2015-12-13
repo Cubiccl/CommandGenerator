@@ -5,6 +5,7 @@ import generator.main.FileManager;
 
 import java.awt.image.BufferedImage;
 
+/** Represents an Item or a Block. */
 public class ItemBlock extends ObjectWithNumId
 {
 	/** Default texture type = same texture for all damage values. */
@@ -12,13 +13,25 @@ public class ItemBlock extends ObjectWithNumId
 
 	/** True if this is a block or a block represented as an item. */
 	private boolean block;
+	/** The damage values this Item/Block can get. */
 	private int[] damage;
+	/** True if this Item has durability, thus should always have the same texture and name. */
 	private boolean hasDurability;
+	/** Allows easier name handling. */
 	private String langType;
+	/** This Item/Block's names. */
 	private String[] names;
+	/** This Item/Block's textures. */
 	private BufferedImage[] textures;
+	/** Allows easier texture handling. */
 	private int textureType;
 
+	/** Creates a new Item/Block
+	 * 
+	 * @param type - Constans.ITEM or Constans.BLOCK
+	 * @param idNum - Its numerical ID.
+	 * @param idString - Its String ID.
+	 * @param block - True if it is a Block, false if Item. */
 	public ItemBlock(int type, int idNum, String idString, boolean block)
 	{
 		super(type, idNum, idString);
@@ -47,6 +60,10 @@ public class ItemBlock extends ObjectWithNumId
 
 	}
 
+	/** Called by {@link ItemBlock#updateLang()}
+	 * 
+	 * @param damage - The input damage.
+	 * @return The name of this Object for the given damage. */
 	private String generateName(int damage)
 	{
 		if (this.getLangType().equals("null")) return CommandGenerator.translate("ITEM:" + this.getId() + "_" + damage);
@@ -62,6 +79,7 @@ public class ItemBlock extends ObjectWithNumId
 
 	}
 
+	/** @return The damage values this Item/Block can get. */
 	public int[] getDamage()
 	{
 		return this.damage;
@@ -73,6 +91,8 @@ public class ItemBlock extends ObjectWithNumId
 		return this.getIcon(this.getDamage()[0]);
 	}
 
+	/** @param damage - The input damage
+	 * @return The Icon for the given damage. */
 	public BufferedImage getIcon(int damage)
 	{
 		for (int i = 0; i < this.damage.length; i++)
@@ -82,17 +102,22 @@ public class ItemBlock extends ObjectWithNumId
 		return this.getIcon();
 	}
 
-	private String getLangType()
+	/** @return The language type of this Item/Block. */
+	public String getLangType()
 	{
 		return this.langType;
 	}
 
+	/** @see ItemBlock#getName(int) */
+	@Deprecated
 	@Override
 	public String getName()
 	{
 		return this.getName(this.getDamage()[0]);
 	}
 
+	/** @param damage - The input damage
+	 * @return The name for the given damage. */
 	public String getName(int damage)
 	{
 		for (int i = 0; i < this.damage.length; i++)
@@ -102,6 +127,7 @@ public class ItemBlock extends ObjectWithNumId
 		return this.getName();
 	}
 
+	/** @return True if this Item has durability. */
 	public boolean hasDurability()
 	{
 		return this.hasDurability;
@@ -113,6 +139,9 @@ public class ItemBlock extends ObjectWithNumId
 		return this.block;
 	}
 
+	/** Sets the damage values to (0 to maxDamage)
+	 * 
+	 * @param maximumDamage - The maximum damage. */
 	public void setDamage(int maximumDamage)
 	{
 		this.damage = new int[maximumDamage + 1];
@@ -122,22 +151,26 @@ public class ItemBlock extends ObjectWithNumId
 		}
 	}
 
+	/** @param damage - The new damage values. */
 	public void setDamage(int[] damage)
 	{
 		this.damage = damage;
 	}
 
+	/** @param durability - The new durability. */
 	public void setDurability(int durability)
 	{
 		this.hasDurability = true;
 		this.setDamage(durability);
 	}
 
+	/** @param langType - The new langType. */
 	public void setLangType(String langType)
 	{
 		this.langType = langType;
 	}
 
+	/** @param textureType - The new textureType. */
 	public void setTextureType(int textureType)
 	{
 		this.textureType = textureType;

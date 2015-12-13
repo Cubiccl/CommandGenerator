@@ -4,9 +4,14 @@ import generator.CommandGenerator;
 import generator.main.FileManager;
 import generator.main.Utils;
 
+/** Contains methods to create Objects from the data files. */
 public final class ObjectCreator
 {
 
+	/** Creates a new Achievement.
+	 * 
+	 * @param data - The input data.<br/>
+	 *            <strong>ID, ItemTexture ID</strong> */
 	private static void createAchievement(String[] data)
 	{
 		try
@@ -20,6 +25,10 @@ public final class ObjectCreator
 		}
 	}
 
+	/** Creates a new Attribute.
+	 * 
+	 * @param data - The input data.<br/>
+	 *            <strong>ID</strong> */
 	private static void createAttribute(String[] data)
 	{
 		try
@@ -33,6 +42,10 @@ public final class ObjectCreator
 		}
 	}
 
+	/** Creates a new Block.
+	 * 
+	 * @param data - The input data.<br/>
+	 *            <strong>numerical ID, String ID, details...</strong> */
 	private static void createBlock(String[] data)
 	{
 		try
@@ -60,6 +73,10 @@ public final class ObjectCreator
 		}
 	}
 
+	/** Creates custom damage from String data.
+	 * 
+	 * @param data - The input data.
+	 * @return The int array containing the custom damage. */
 	private static int[] createCustomDamage(String data)
 	{
 		String[] values = data.split(":");
@@ -71,6 +88,10 @@ public final class ObjectCreator
 		return damage;
 	}
 
+	/** Creates a new Effect.
+	 * 
+	 * @param data - The input data.<br/>
+	 *            <strong>numerical ID, String ID</strong> */
 	private static void createEffect(String[] data)
 	{
 		try
@@ -84,6 +105,10 @@ public final class ObjectCreator
 		}
 	}
 
+	/** Creates a new Enchantment.
+	 * 
+	 * @param data - The input data.<br/>
+	 *            <strong>numerical ID, String ID, maximum level</strong> */
 	private static void createEnchantment(String[] data)
 	{
 		try
@@ -97,6 +122,10 @@ public final class ObjectCreator
 		}
 	}
 
+	/** Creates a new Entity.
+	 * 
+	 * @param data - The input data.<br/>
+	 *            <strong>ID, details...</strong> */
 	private static void createEntity(String[] data)
 	{
 		try
@@ -114,6 +143,10 @@ public final class ObjectCreator
 		}
 	}
 
+	/** Creates a new Item.
+	 * 
+	 * @param data - The input data.<br/>
+	 *            <strong>numerical ID, String ID, details...</strong> */
 	private static void createItem(String[] data)
 	{
 		try
@@ -138,6 +171,10 @@ public final class ObjectCreator
 		}
 	}
 
+	/** Creates a new Item representation of a Block.
+	 * 
+	 * @param data - The input data.<br/>
+	 *            <strong>numerical ID, String ID, details...</strong> */
 	private static void createItemFromBlock(String[] data)
 	{
 		try
@@ -173,6 +210,10 @@ public final class ObjectCreator
 		}
 	}
 
+	/** Creates a new Object.
+	 * 
+	 * @param type - Its type.
+	 * @param data - The input data. */
 	public static void createObject(int type, String[] data)
 	{
 		switch (type)
@@ -218,6 +259,7 @@ public final class ObjectCreator
 		}
 	}
 
+	/** Creates all objects from the input file. */
 	public static void createObjects()
 	{
 		String[] data = FileManager.readFileAsArray("data-1.8.txt");
@@ -230,6 +272,10 @@ public final class ObjectCreator
 		}
 	}
 
+	/** Creates a new Block.
+	 * 
+	 * @param data - The input data.<br/>
+	 *            <strong>ID</strong> */
 	private static void createParticle(String[] data)
 	{
 		try
@@ -243,6 +289,10 @@ public final class ObjectCreator
 		}
 	}
 
+	/** Creates a new Block.
+	 * 
+	 * @param data - The input data. Can contain several IDs on the same row.<br/>
+	 *            <strong>ID</strong> */
 	private static void createSounds(String[] data)
 	{
 		for (String id : data)

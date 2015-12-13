@@ -7,6 +7,7 @@ import generator.CommandGenerator;
 import generator.interfaces.ITranslate;
 import generator.main.Utils;
 
+/** Contains all game Objects. */
 public class Registry implements ITranslate
 {
 	private Register<Achievement> achievements;
@@ -34,12 +35,17 @@ public class Registry implements ITranslate
 		this.lists = new HashMap<String, ArrayList<ObjectBase>>();
 	}
 
+	/** Adds an object to a list.
+	 * 
+	 * @param listId - The ID of the list.
+	 * @param object - The input Object. */
 	public void addObjectToList(String listId, ObjectBase object)
 	{
 		if (!this.lists.containsKey(listId)) this.lists.put(listId, new ArrayList<ObjectBase>());
 		if (!this.lists.get(listId).contains(object)) this.lists.get(listId).add(object);
 	}
 
+	/** Finalizes the registry. Creates language & textures. */
 	public void complete()
 	{
 		this.achievements.complete(Utils.getObjectTypeName(Utils.ACHIEVEMENT));
@@ -53,41 +59,57 @@ public class Registry implements ITranslate
 		this.sounds.complete(Utils.getObjectTypeName(Utils.SOUND));
 	}
 
+	/** @param id - The ID of the target Achievement.
+	 * @return The Achievement with the given ID. */
 	public Achievement getAchievementFromId(String id)
 	{
 		return this.achievements.getObjectFromId(id);
 	}
 
+	/** @param id - The ID of the target Attribute.
+	 * @return The Attribute with the given ID. */
 	public Attribute getAttributeFromId(String id)
 	{
 		return this.attributes.getObjectFromId(id);
 	}
 
+	/** @param id - The ID of the target Block.
+	 * @return The Block with the given ID. */
 	public Block getBlockFromId(String id)
 	{
 		return this.blocks.getObjectFromId(id);
 	}
 
+	/** @param id - The ID of the target Effect.
+	 * @return The Effect with the given ID. */
 	public Effect getEffectFromId(String id)
 	{
 		return this.effects.getObjectFromId(id);
 	}
 
+	/** @param id - The ID of the target Enchantment.
+	 * @return The Enchantment with the given ID. */
 	public Enchantment getEnchantmentFromId(String id)
 	{
 		return this.enchantments.getObjectFromId(id);
 	}
 
+	/** @param id - The ID of the target Entity.
+	 * @return The Entity with the given ID. */
 	public Entity getEntityFromId(String id)
 	{
 		return this.entities.getObjectFromId(id);
 	}
 
+	/** @param id - The ID of the target Item.
+	 * @return The Item with the given ID. */
 	public Item getItemFromId(String id)
 	{
 		return this.items.getObjectFromId(id);
 	}
 
+	/** @param listId - The ID of the list.
+	 * @return A list containing a certain type of Objects. */
 	public ArrayList<ObjectBase> getList(String listId)
 	{
 		if (!this.lists.containsKey(listId))
@@ -98,56 +120,87 @@ public class Registry implements ITranslate
 		return this.lists.get(listId);
 	}
 
+	/** @param id - The ID of the target Particle.
+	 * @return The Particle with the given ID. */
 	public Particle getParticleFromId(String id)
 	{
 		return this.particles.getObjectFromId(id);
 	}
 
+	/** @param id - The ID of the target Sound.
+	 * @return The Sound with the given ID. */
 	public Sound getSoundFromId(String id)
 	{
 		return this.sounds.getObjectFromId(id);
 	}
 
+	/** Registers a new Achievement.
+	 * 
+	 * @param achievement - The input Achievement. */
 	public void registerAchievement(Achievement achievement)
 	{
 		this.achievements.register(achievement);
 	}
 
-	public void registerAttribute(Attribute achievement)
+	/** Registers a new Attribute.
+	 * 
+	 * @param attribute - The input Attribute. */
+	public void registerAttribute(Attribute attribute)
 	{
-		this.attributes.register(achievement);
+		this.attributes.register(attribute);
 	}
 
+	/** Registers a new Block.
+	 * 
+	 * @param achievement - The input Block. */
 	public void registerBlock(Block block)
 	{
 		this.blocks.register(block);
 	}
 
-	public void registerEffect(Effect achievement)
+	/** Registers a new Effect.
+	 * 
+	 * @param effect - The input Effect. */
+	public void registerEffect(Effect effect)
 	{
-		this.effects.register(achievement);
+		this.effects.register(effect);
 	}
 
-	public void registerEnchantment(Enchantment achievement)
+	/** Registers a new Enchantment.
+	 * 
+	 * @param enchantment - The input Enchantment. */
+	public void registerEnchantment(Enchantment enchantment)
 	{
-		this.enchantments.register(achievement);
+		this.enchantments.register(enchantment);
 	}
 
+	/** Registers a new Entity.
+	 * 
+	 * @param achievement - The input Entity. */
 	public void registerEntity(Entity entity)
 	{
 		this.entities.register(entity);
 	}
 
+	/** Registers a new Item.
+	 * 
+	 * @param achievement - The input Item. */
 	public void registerItem(Item item)
 	{
 		this.items.register(item);
 	}
 
+	/** Registers a new Particle.
+	 * 
+	 * @param achievement - The input Particle. */
 	public void registerParticle(Particle particle)
 	{
 		this.particles.register(particle);
 	}
 
+	/** Registers a new Sound.
+	 * 
+	 * @param achievement - The input Sound. */
 	public void registerSound(Sound sound)
 	{
 		this.sounds.register(sound);

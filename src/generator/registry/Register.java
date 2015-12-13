@@ -5,8 +5,12 @@ import java.util.HashMap;
 import generator.CommandGenerator;
 import generator.interfaces.ITranslate;
 
+/** Contains all Objects of the same type.
+ * 
+ * @param <T> - The type of the Objects. */
 public class Register<T extends ObjectBase> implements ITranslate
 {
+	/** All objects, sorted by ID. */
 	private HashMap<String, T> register;
 
 	public Register()
@@ -14,6 +18,9 @@ public class Register<T extends ObjectBase> implements ITranslate
 		this.register = new HashMap<String, T>();
 	}
 
+	/** Finalizes the Register. Creates language & textures.
+	 * 
+	 * @param name - The name of the Objects. (used for listing the register.) */
 	public void complete(String name)
 	{
 		String display = "";
@@ -33,6 +40,8 @@ public class Register<T extends ObjectBase> implements ITranslate
 		CommandGenerator.log(display);
 	}
 
+	/** @param id - The ID of the target Object.
+	 * @return The Object with the given ID. */
 	public T getObjectFromId(String id)
 	{
 		if (!this.register.containsKey(id))
@@ -43,6 +52,9 @@ public class Register<T extends ObjectBase> implements ITranslate
 		return this.register.get(id);
 	}
 
+	/** Adds a new Object.
+	 * 
+	 * @param object - The input Object. */
 	public void register(T object)
 	{
 		this.register.put(object.getId(), object);
