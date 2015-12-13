@@ -51,6 +51,20 @@ public class ItemBlock extends ObjectWithNumId
 
 	}
 
+	private String generateName(int damage)
+	{
+		if (this.getLangType().equals("null")) return CommandGenerator.translate("ITEM:" + this.getId() + "_" + damage);
+		if (this.getLangType().equals("item")) return CommandGenerator.translate("ITEM:" + this.getId() + "_item_" + damage);
+		if (this.getLangType().equals("half_slab"))
+		{
+			if (damage < 8) return CommandGenerator.translate("ITEM:" + this.getId() + "_" + damage % 8);
+			else return CommandGenerator.translate("ITEM:" + this.getId() + "_" + damage % 8) + " " + CommandGenerator.translate("ITEM:half_slab");
+		}
+		if (this.getLangType().equals("color")) return CommandGenerator.translate("ITEM:color" + "_" + damage) + " " + CommandGenerator.translate("ITEM:" + this.getId());
+		return CommandGenerator.translate("ITEM:" + this.getId()) + " " + CommandGenerator.translate("ITEM:" + this.getLangType() + "_" + damage);
+
+	}
+
 	public int[] getDamage()
 	{
 		return this.damage;
@@ -69,6 +83,11 @@ public class ItemBlock extends ObjectWithNumId
 			if (this.damage[i] == damage) return this.textures[i];
 		}
 		return this.getIcon();
+	}
+
+	private String getLangType()
+	{
+		return this.langType;
 	}
 
 	@Override
@@ -149,7 +168,7 @@ public class ItemBlock extends ObjectWithNumId
 
 				// several damage values : BLOCK:stone_0, BLOCK:stone_1...
 				else for (int i = 0; i < this.names.length; i++)
-					this.names[i] = CommandGenerator.translate(category + ":" + this.getId() + "_" + this.getDamage()[i]);
+					this.names[i] = this.generateName(this.getDamage()[i]);
 				break;
 		}
 	}

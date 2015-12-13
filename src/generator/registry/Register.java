@@ -14,12 +14,23 @@ public class Register<T extends ObjectBase> implements ITranslate
 		this.register = new HashMap<String, T>();
 	}
 
-	public void complete()
+	public void complete(String name)
 	{
+		String display = "Registered " + name + "s : ";
+		String current = display;
+
 		for (String key : this.register.keySet())
 		{
+			current += this.register.get(key).getId() + ", ";
+			if (current.length() >= 100)
+			{
+				display += current + "\n";
+				current = "";
+			}
 			this.register.get(key).complete();
 		}
+		display += current;
+		CommandGenerator.log(display);
 	}
 
 	public T getObjectFromId(String id)

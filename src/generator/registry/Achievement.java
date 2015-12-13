@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import generator.main.Constants;
 
-public class Achievement extends ObjectDescribed
+public class Achievement extends ObjectBase
 {
 	private Item itemIcon;
 

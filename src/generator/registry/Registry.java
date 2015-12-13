@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import generator.CommandGenerator;
 import generator.interfaces.ITranslate;
+import generator.main.Constants;
 
 public class Registry implements ITranslate
 {
@@ -41,15 +42,15 @@ public class Registry implements ITranslate
 
 	public void complete()
 	{
-		this.achievements.complete();
-		this.attributes.complete();
-		this.blocks.complete();
-		this.effects.complete();
-		this.enchantments.complete();
-		this.entities.complete();
-		this.items.complete();
-		this.particles.complete();
-		this.sounds.complete();
+		this.achievements.complete(Constants.getObjectName(Constants.ACHIEVEMENT));
+		this.attributes.complete(Constants.getObjectName(Constants.ATTRIBUTE));
+		this.blocks.complete(Constants.getObjectName(Constants.BLOCK));
+		this.effects.complete(Constants.getObjectName(Constants.EFFECT));
+		this.enchantments.complete(Constants.getObjectName(Constants.ENCHANTMENT));
+		this.entities.complete(Constants.getObjectName(Constants.ENTITY));
+		this.items.complete(Constants.getObjectName(Constants.ITEM));
+		this.particles.complete(Constants.getObjectName(Constants.PARTICLE));
+		this.sounds.complete(Constants.getObjectName(Constants.SOUND));
 	}
 
 	public Achievement getAchievementFromId(String id)
