@@ -53,7 +53,7 @@ public final class ObjectCreator
 
 			CommandGenerator.getRegistry().registerBlock(block);
 
-			if (item) createItem(data);
+			if (item) createItemFromBlock(data);
 		} catch (Exception e)
 		{
 			CommandGenerator.log("Malformed Block : " + Utils.toString(data, ","));
@@ -115,19 +115,35 @@ public final class ObjectCreator
 		}
 	}
 
-	/*private static void createItem(String[] data) { try { Item item = new Item(Integer.parseInt(data[0]), data[1]);
-	 * 
-	 * for (int i = 2; i < data.length; i++) { String property = data[i]; if (property.startsWith("damage=")) item.setDamage(Integer.parseInt(property.substring("damage=".length()))); if (property.startsWith("damage_custom="))
-	 * item.setDamage(createCustomDamage(property.substring("damage_custom=".length()))); if (property.startsWith("durability=")) item.setDurability(Integer.parseInt(property.substring("durability=".length()))); if (property.startsWith("texture="))
-	 * item.setTextureType(Integer.parseInt(property.substring("texture=".length()))); if (property.startsWith("lang=")) item.setLangType(property.substring("lang=".length())); }
-	 * 
-	 * CommandGenerator.getRegistry().registerItem(item); } catch (Exception e) { CommandGenerator.log("Malformed Item : " + Utils.toString(data, ",")); CommandGenerator.log(e); } } */
-
 	private static void createItem(String[] data)
 	{
 		try
 		{
 			Item item = new Item(Integer.parseInt(data[0]), data[1]);
+
+			for (int i = 2; i < data.length; i++)
+			{
+				String property = data[i];
+				if (property.startsWith("damage=")) item.setDamage(Integer.parseInt(property.substring("damage=".length())));
+				if (property.startsWith("damage_custom=")) item.setDamage(createCustomDamage(property.substring("damage_custom=".length())));
+				if (property.startsWith("durability=")) item.setDurability(Integer.parseInt(property.substring("durability=".length())));
+				if (property.startsWith("texture=")) item.setTextureType(Integer.parseInt(property.substring("texture=".length())));
+				if (property.startsWith("lang=")) item.setLangType(property.substring("lang=".length()));
+			}
+
+			CommandGenerator.getRegistry().registerItem(item);
+		} catch (Exception e)
+		{
+			CommandGenerator.log("Malformed Item : " + Utils.toString(data, ","));
+			CommandGenerator.log(e);
+		}
+	}
+
+	private static void createItemFromBlock(String[] data)
+	{
+		try
+		{
+			Item item = new Item(Integer.parseInt(data[0]), data[1], true);
 			boolean customDamage = false, customTexture = false, customLang = false;
 
 			for (String element : data)

@@ -16,8 +16,8 @@ public class Register<T extends ObjectBase> implements ITranslate
 
 	public void complete(String name)
 	{
-		String display = "Registered " + name + "s : ";
-		String current = display;
+		String display = "";
+		String current = "Registered " + name + "s : ";
 
 		for (String key : this.register.keySet())
 		{
@@ -29,7 +29,7 @@ public class Register<T extends ObjectBase> implements ITranslate
 			}
 			this.register.get(key).complete();
 		}
-		display += current;
+		display += current + "\n ";
 		CommandGenerator.log(display);
 	}
 

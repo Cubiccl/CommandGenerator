@@ -22,12 +22,6 @@ public class Enchantment extends ObjectWithNumId
 	}
 
 	@Override
-	protected void createIcon()
-	{
-		this.icon = FileManager.loadTexture("enchantments/" + this.getId());
-	}
-
-	@Override
 	public BufferedImage getIcon()
 	{
 		return this.icon;
