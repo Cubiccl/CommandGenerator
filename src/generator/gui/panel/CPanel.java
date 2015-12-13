@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public abstract class CPanel extends JPanel implements ITranslate
 {
+	/** Used to place components. */
 	protected GridBagConstraints gbc;
 
 	public CPanel()

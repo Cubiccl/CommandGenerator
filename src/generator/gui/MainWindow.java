@@ -51,6 +51,7 @@ public class MainWindow extends JFrame implements ITranslate
 		panel2.add(this.scrollpane, BorderLayout.CENTER);
 	}
 
+	/** @return The currently displayed panel. */
 	public CPanel getPanelCurrent()
 	{
 		return this.panelCurrent;
@@ -62,6 +63,9 @@ public class MainWindow extends JFrame implements ITranslate
 		return this.textAreaStates;
 	}
 
+	/** Changes the panel to display.
+	 * 
+	 * @param panelCurrent - The new panel. */
 	public void setPanelCurrent(CPanel panelCurrent)
 	{
 		this.panelCurrent = panelCurrent;

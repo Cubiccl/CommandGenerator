@@ -2,6 +2,7 @@ package generator.gui.panel;
 
 import java.awt.Component;
 
+/** Horizontal panel : components are placed from left to right. */
 @SuppressWarnings("serial")
 public class CPanelHorizontal extends CPanel
 {

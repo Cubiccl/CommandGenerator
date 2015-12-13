@@ -13,6 +13,7 @@ import java.awt.datatransfer.StringSelection;
 import javax.swing.BorderFactory;
 import javax.swing.border.BevelBorder;
 
+/** Displays the command and several useful buttons such as copy, edit... */
 @SuppressWarnings("serial")
 public class PanelCommand extends CPanelHorizontal implements IClickEvent
 {

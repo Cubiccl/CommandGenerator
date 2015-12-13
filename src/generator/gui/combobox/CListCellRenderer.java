@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
+/** Custom renderer for elements of a list/combobox. */
 public class CListCellRenderer implements ListCellRenderer<String>
 {
 

@@ -13,7 +13,8 @@ import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.border.AbstractBorder;
 
-/** @author aterai */
+/** @author aterai <br/>
+ *         A Border with rounded corners. */
 public class RoundedCornerBorder extends AbstractBorder
 {
 	private static final long serialVersionUID = 1L;

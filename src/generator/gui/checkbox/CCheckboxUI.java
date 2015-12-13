@@ -35,6 +35,7 @@ public class CCheckboxUI extends BasicCheckBoxUI
 
 }
 
+/** Custom Icon to display */
 class CheckboxIcon implements Icon
 {
 	private static final Color COLOR = new Color(50, 50, 50);

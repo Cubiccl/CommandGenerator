@@ -6,6 +6,7 @@ import generator.interfaces.ClickEvent;
 import generator.interfaces.IClickEvent;
 import generator.interfaces.IConfirmState;
 
+/** Contains a component and an OK and Cancel buttons. */
 @SuppressWarnings("serial")
 public class PanelConfirm extends CPanel implements IClickEvent
 {
@@ -15,6 +16,8 @@ public class PanelConfirm extends CPanel implements IClickEvent
 	private CPanel component;
 	private IConfirmState listener;
 
+	/** @param component - The main component.
+	 * @param listener - A listener to call when the user clicks on OK or Cancel. */
 	public PanelConfirm(CPanel component, IConfirmState listener)
 	{
 		this.component = component;

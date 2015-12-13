@@ -20,7 +20,6 @@ public class PanelSettings extends CPanel implements IConfirmState
 	}
 
 	private CCombobox comboboxLanguage;
-
 	private CLabel labelLanguage;
 
 	public PanelSettings()

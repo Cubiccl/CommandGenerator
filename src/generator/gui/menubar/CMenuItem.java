@@ -11,7 +11,9 @@ import javax.swing.JMenuItem;
 public class CMenuItem extends JMenuItem implements ITranslate
 {
 	private String textId;
-	
+
+	/** @param textId - The ID of the text for this Menu.
+	 * @param listener - A listener to call when this Menu is clicked. */
 	public CMenuItem(String textId, ActionListener listener)
 	{
 		this.textId = "GUI:" + textId;

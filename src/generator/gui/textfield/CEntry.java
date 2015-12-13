@@ -4,6 +4,7 @@ import generator.gui.CLabel;
 import generator.gui.CTextfield;
 import generator.gui.panel.CPanelHorizontal;
 
+/** Represents a labled textfield. */
 @SuppressWarnings("serial")
 public class CEntry extends CPanelHorizontal
 {
@@ -24,6 +25,7 @@ public class CEntry extends CPanelHorizontal
 		return this.label;
 	}
 
+	/** @return The text input by the user. */
 	public String getText()
 	{
 		return this.textfield.getText();
@@ -34,6 +36,9 @@ public class CEntry extends CPanelHorizontal
 		return this.textfield;
 	}
 
+	/** Changes the text in the textfield.
+	 * 
+	 * @param text - The text to set. */
 	public void setText(String text)
 	{
 		this.textfield.setText(text);

@@ -19,6 +19,9 @@ public class CCombobox extends JComboBox<String>
 		this.setBackground(Utils.BACKGROUND_NORMAL);
 	}
 
+	/** Changes the values of this box.
+	 * 
+	 * @param values - The new values. */
 	public void setValues(String[] values)
 	{
 		this.setModel(new JComboBox<String>(values).getModel());
