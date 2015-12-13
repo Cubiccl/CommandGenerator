@@ -7,11 +7,17 @@ import generator.interfaces.ITranslate;
 
 import java.util.ArrayList;
 
+/** Manages states. Determines what should be displayed. */
 public class StateManager implements ITranslate
 {
+	/** List of all states. */
 	private ArrayList<State> states;
+	/** The TextArea displaying the states. */
 	private CTextArea textAreaStates;
 
+	/** Constructor.
+	 * 
+	 * @param textAreaStates - The TextArea to display the States. */
 	public StateManager(CTextArea textAreaStates)
 	{
 		this.states = new ArrayList<State>();
@@ -19,18 +25,24 @@ public class StateManager implements ITranslate
 		this.onStateChanged();
 	}
 
+	/** Adds a new state.
+	 * 
+	 * @param textID - The ID of the state's name.
+	 * @param component - The component to display. */
 	public void addState(String textID, CPanel component)
 	{
 		this.states.add(new State(textID, component));
 		this.onStateChanged();
 	}
 
+	/** Deletes the current state. */
 	public void clearActiveState()
 	{
 		this.states.remove(this.states.size() - 1);
 		this.onStateChanged();
 	}
 
+	/** @return The current State. */
 	public State getActiveState()
 	{
 		if (this.states.size() == 0) return null;

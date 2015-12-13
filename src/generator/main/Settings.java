@@ -2,34 +2,48 @@ package generator.main;
 
 import generator.CommandGenerator;
 
+/** Contains settings customizable by the user. */
 public class Settings
 {
+	/** Settings IDs.
+	 * <ul>
+	 * <li>LANGUAGE = "language";</li>
+	 * </ul> */
 	public static final String LANGUAGE = "language";
-	private String[][] availableLanguages;
 
+	/** Contains all available languages. <br/>
+	 * [[id, name], [id, name], ...] */
+	private String[][] availableLanguages;
+	/** The path to the resources folder. */
 	private String folder;
+	/** The current selected language. */
 	private int language;
 
+	/** @param folder - The path to the resources folder. */
 	public Settings(String folder)
 	{
 		this.folder = folder;
 	}
 
+	/** @return The available languages. */
 	public String[][] getAvailableLanguages()
 	{
 		return this.availableLanguages;
 	}
 
+	/** @return The path to the resources folder. */
 	public String getFolder()
 	{
 		return this.folder;
 	}
 
+	/** @return The current selected language. */
 	public int getLanguage()
 	{
 		return this.language;
 	}
 
+	/** @return The ID of the current selected language. */
 	public String getLanguageId()
 	{
 		return this.getAvailableLanguages()[this.getLanguage()][0];
@@ -56,12 +70,15 @@ public class Settings
 
 	/** Resets all settings to default. */
 	private void setDefaultSettings()
-	{}
+	{
+		this.language = 0;
+	}
 
 	/** Changes the given setting.
 	 * 
 	 * @param id - The ID of the setting to change.
-	 * @param value - The new value for the setting. */
+	 * @param value - The new value for the setting.
+	 * @see Settings#LANGUAGE */
 	public void setSetting(String id, String value)
 	{
 		switch (id)

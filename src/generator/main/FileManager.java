@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
+/** Contains various utility methods for managing files. */
 public class FileManager
 {
 
@@ -23,6 +24,8 @@ public class FileManager
 		return CommandGenerator.getSettings().getFolder();
 	}
 
+	/** @param path - The path to the Image.
+	 * @return A BufferedImage containing the texture. */
 	public static BufferedImage loadTexture(String path)
 	{
 		try
@@ -38,6 +41,9 @@ public class FileManager
 		return null;
 	}
 
+	/** Prints a message into the log file.
+	 * 
+	 * @param message - The input message. */
 	public static void log(String message)
 	{
 		File file = new File(folder() + "log.txt");
@@ -110,7 +116,7 @@ public class FileManager
 	 * @return The path to this folder. */
 	public static String setupFolder()
 	{
-		// TODO adapt to launcher 
+		// TODO adapt to launcher
 		String directory;
 		String os = (System.getProperty("os.name")).toUpperCase();
 
@@ -123,6 +129,7 @@ public class FileManager
 		return directory + "/CommandGeneratorResources/";
 	}
 
+	/** Clears the log File. */
 	public static void clearLog()
 	{
 		File logFile = new File(folder() + "log.txt");

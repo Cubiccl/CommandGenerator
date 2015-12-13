@@ -5,6 +5,7 @@ import generator.interfaces.ITranslate;
 
 import java.util.HashMap;
 
+/** Contains translations and methods to translate. */
 public class Translator implements ITranslate
 {
 	/** Contains translations, sorted by categories. */
@@ -13,9 +14,12 @@ public class Translator implements ITranslate
 	public Translator()
 	{
 		this.dictionnary = new HashMap<String, HashMap<String, String>>();
-		this.updateDictionnary();
+		this.updateLang();
 	}
 
+	/** @param textId - The ID for the text to translate.<br>
+	 *            <strong>CATEGORY:id.of.the.text</strong>
+	 * @return The translation. */
 	public String translate(String textId)
 	{
 		String[] values = textId.split(":");
@@ -27,6 +31,9 @@ public class Translator implements ITranslate
 		return translate(values[0], values[1]);
 	}
 
+	/** @param category - The category of the ID.
+	 * @param key - The key of the ID.
+	 * @return The translation. */
 	public String translate(String category, String key)
 	{
 		if (!dictionnary.containsKey(category))
@@ -44,7 +51,9 @@ public class Translator implements ITranslate
 		return dictionnary.get(category).get(key);
 	}
 
-	private void updateDictionnary()
+	/** Upates translations. */
+	@Override
+	public void updateLang()
 	{
 		this.dictionnary.clear();
 		String currentCategory = "";
@@ -72,12 +81,6 @@ public class Translator implements ITranslate
 			}
 			this.dictionnary.get(currentCategory).put(line.substring(0, index - 1), line.substring(index + 1));
 		}
-	}
-
-	@Override
-	public void updateLang()
-	{
-		this.updateDictionnary();
 	}
 
 }
