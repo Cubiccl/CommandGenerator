@@ -273,8 +273,11 @@ public final class ObjectCreator
 			if (line.startsWith("CATEGORY=")) category = Integer.parseInt(line.substring("CATEGORY=".length()));
 			else if (category == Utils.COMMAND)
 			{
-				if (line.startsWith("COMMAND=")) currentCommand = new Command(line.substring("COMMAND=".length()));
-				else currentCommand.addStructure(createStructure(line.split(";")));
+				if (line.startsWith("COMMAND="))
+				{
+					currentCommand = new Command(line.substring("COMMAND=".length()));
+					CommandGenerator.getRegistry().registerCommand(currentCommand);
+				} else currentCommand.addStructure(createStructure(line.split(";")));
 				continue;
 			} else createObject(category, line.split(","));
 		}

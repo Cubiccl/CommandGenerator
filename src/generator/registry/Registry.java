@@ -172,7 +172,7 @@ public class Registry implements ITranslate
 	/** Registers a new Command.
 	 * 
 	 * @param command - The input Command. */
-	public void registerBlock(Command command)
+	public void registerCommand(Command command)
 	{
 		this.commands.register(command);
 	}
