@@ -43,9 +43,18 @@ public final class Utils
 	 * @see Utils#ITEM */
 	public static String getObjectTypeName(int type)
 	{
-		if (type == 100) return CommandGenerator.translate("GUI:command.command");
+		return CommandGenerator.translate("GUI:object." + getObjectTypeNameId(type));
+	}
+
+	/** @param type - The type of the object.
+	 * @return - Its name ID.
+	 * @see Utils#ITEM */
+	public static String getObjectTypeNameId(int type)
+	{
+		if (type == COMMAND) return "command";
+		if (type == STRUCTURE) return "structure";
 		if (type < 0 || type >= OBJECT_TYPES_NAMES.length) return "object";
-		return CommandGenerator.translate("GUI:object." + OBJECT_TYPES_NAMES[type]);
+		return OBJECT_TYPES_NAMES[type];
 	}
 
 	/** @param array - The array.

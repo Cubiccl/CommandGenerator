@@ -25,7 +25,7 @@ public class PanelCommand extends CPanelHorizontal implements IClickEvent
 	public PanelCommand()
 	{
 		super();
-		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED), CommandGenerator.translate("GUI:command.command")));
+		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED), CommandGenerator.translate("GUI:object.command")));
 
 		this.entryCommand = new CEntry("GUI:command.command_entry");
 		this.entryCommand.getTextfield().setEditable(false);
@@ -61,7 +61,7 @@ public class PanelCommand extends CPanelHorizontal implements IClickEvent
 	@Override
 	public void updateLang()
 	{
-		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED), CommandGenerator.translate("GUI:command.command")));
+		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED), CommandGenerator.translate("GUI:object.command")));
 		super.updateLang();
 	}
 

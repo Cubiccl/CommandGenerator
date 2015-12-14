@@ -27,7 +27,7 @@ public class ObjectDescribed extends ObjectBase
 	@Override
 	public void updateLang()
 	{
-		this.description = CommandGenerator.translate(Utils.OBJECT_TYPES_NAMES[this.getType()].toUpperCase() + ":" + this.getId() + ".description");
+		this.description = CommandGenerator.translate(Utils.getObjectTypeNameId(this.getType()).toUpperCase() + ":" + this.getId() + ".description");
 		super.updateLang();
 	}
 

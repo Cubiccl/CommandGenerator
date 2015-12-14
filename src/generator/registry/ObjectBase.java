@@ -70,6 +70,6 @@ public abstract class ObjectBase implements ITranslate
 	@Override
 	public void updateLang()
 	{
-		this.name = CommandGenerator.translate(Utils.OBJECT_TYPES_NAMES[this.getType()].toUpperCase() + ":" + this.getId());
+		this.name = CommandGenerator.translate(Utils.getObjectTypeNameId(this.getType()).toUpperCase() + ":" + this.getId());
 	}
 }

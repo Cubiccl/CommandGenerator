@@ -1,12 +1,12 @@
 package generator.registry.command;
 
+import generator.main.Utils;
+import generator.registry.ObjectBase;
+
 import java.util.ArrayList;
 
-import generator.main.Utils;
-import generator.registry.ObjectDescribed;
-
 /** A Command. */
-public class Command extends ObjectDescribed
+public class Command extends ObjectBase
 {
 	/** Contains all Structures that belong to this Command. */
 	private ArrayList<Structure> structures;
