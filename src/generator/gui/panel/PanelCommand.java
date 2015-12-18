@@ -27,7 +27,7 @@ public class PanelCommand extends CPanelHorizontal implements IClickEvent
 		super();
 		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED), CommandGenerator.translate("GUI:object.command")));
 
-		this.entryCommand = new CEntry("GUI:command.command_entry");
+		this.entryCommand = new CEntry("GUI:command.command");
 		this.entryCommand.getTextfield().setEditable(false);
 		this.entryCommand.getTextfield().setColumns(20);
 		this.checkboxEditable = new CCheckbox("GUI:command.editable");

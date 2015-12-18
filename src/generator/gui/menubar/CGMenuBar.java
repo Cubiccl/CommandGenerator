@@ -30,9 +30,9 @@ public class CGMenuBar extends JMenuBar implements ITranslate, IClickEvent
 		switch (componentID)
 		{
 			case SETTINGS:
-				PanelSettings.create();
+				if (CommandGenerator.isInitialized()) PanelSettings.create();
 				break;
-			
+
 			case EXIT:
 				CommandGenerator.exit();
 				break;

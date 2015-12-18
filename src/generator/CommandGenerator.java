@@ -3,6 +3,7 @@ package generator;
 import generator.gui.MainWindow;
 import generator.gui.panel.CPanel;
 import generator.gui.panel.LoadingPanel;
+import generator.gui.panel.PanelCommandSetup;
 import generator.gui.panel.PanelConfirm;
 import generator.interfaces.IConfirmState;
 import generator.main.FileManager;
@@ -78,6 +79,12 @@ public class CommandGenerator
 		return instance.window;
 	}
 
+	/** @return True if it has finished initializing, thus the user can interact. */
+	public static boolean isInitialized()
+	{
+		return instance.initialized;
+	}
+
 	/** Prints a message into the console and the log file.
 	 * 
 	 * @param exception - The exception to log. */
@@ -119,6 +126,8 @@ public class CommandGenerator
 		getWindow().updateLang();
 	}
 
+	/** True if it has finished initializing, thus the user can interact. */
+	private boolean initialized;
 	/** Contains all data. */
 	private Registry registry;
 	private Settings settings;
@@ -130,7 +139,9 @@ public class CommandGenerator
 
 	/** Constructor. */
 	private CommandGenerator()
-	{}
+	{
+		this.initialized = false;
+	}
 
 	/** Initializes all the program. */
 	private void create()
@@ -155,6 +166,11 @@ public class CommandGenerator
 		this.registry.complete();
 
 		panel.setDetail("GUI:loading.gui");
+		PanelCommandSetup panelCommand = new PanelCommandSetup();
+
+		clearActiveState();
+		addState("GUI:object.command", panelCommand);
+		this.initialized = true;
 	}
 
 	/** Creates the main window. */
