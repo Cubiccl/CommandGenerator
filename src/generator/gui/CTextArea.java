@@ -11,6 +11,11 @@ public class CTextArea extends JEditorPane
 {
 	public CTextArea()
 	{
+		this("");
+	}
+
+	public CTextArea(String text)
+	{
 		super();
 		this.setContentType("text/html");
 		this.setBackground(null);
@@ -18,6 +23,8 @@ public class CTextArea extends JEditorPane
 		this.setHighlighter(null);
 		String bodyRule = "body { font-family: " + Utils.font.getFamily() + "; " + "font-size: " + Utils.font.getSize() + "pt; }";
 		((HTMLDocument) this.getDocument()).getStyleSheet().addRule(bodyRule);
+		
+		this.setText(text);
 	}
 
 }

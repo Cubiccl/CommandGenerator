@@ -16,8 +16,8 @@ public class PanelCommandSetup extends CPanel
 	{
 		this.setLayout(new BorderLayout());
 
-		this.panelSelection = new PanelCommandSelection();
 		this.tabbedPaneStructure = new CTabbedPane();
+		this.panelSelection = new PanelCommandSelection(this.tabbedPaneStructure);
 
 		this.add(this.panelSelection, BorderLayout.NORTH);
 		this.add(this.tabbedPaneStructure, BorderLayout.CENTER);

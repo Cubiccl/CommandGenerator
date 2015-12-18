@@ -91,6 +91,12 @@ public class Registry implements ITranslate
 		return this.commands.getObjectFromId(id);
 	}
 
+	/** @return The list of all Commands. */
+	public Command[] getCommands()
+	{
+		return this.commands.getList().toArray(new Command[0]);
+	}
+
 	/** @param id - The ID of the target Effect.
 	 * @return The Effect with the given ID. */
 	public Effect getEffectFromId(String id)
@@ -228,7 +234,16 @@ public class Registry implements ITranslate
 	@Override
 	public void updateLang()
 	{
+		this.achievements.updateLang();
+		this.attributes.updateLang();
+		this.blocks.updateLang();
+		this.commands.updateLang();
+		this.effects.updateLang();
+		this.enchantments.updateLang();
+		this.entities.updateLang();
 		this.items.updateLang();
+		this.particles.updateLang();
+		this.sounds.updateLang();
 	}
 
 }

@@ -42,5 +42,15 @@ public class Command extends ObjectBase
 	{
 		return this.structures.toArray(new Structure[0]);
 	}
+	
+	@Override
+	public void updateLang()
+	{
+		super.updateLang();
+		for (Structure structure : this.structures)
+		{
+			structure.updateLang();
+		}
+	}
 
 }

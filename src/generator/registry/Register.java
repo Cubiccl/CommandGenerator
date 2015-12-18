@@ -1,5 +1,6 @@
 package generator.registry;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 import generator.CommandGenerator;
@@ -38,6 +39,12 @@ public class Register<T extends ObjectBase> implements ITranslate
 		}
 		display += current + "\n ";
 		CommandGenerator.log(display);
+	}
+
+	/** @return The lsit of all Objects. */
+	public Collection<T> getList()
+	{
+		return this.register.values();
 	}
 
 	/** @param id - The ID of the target Object.
