@@ -12,9 +12,13 @@ import javax.swing.ListCellRenderer;
 public class CListCellRenderer implements ListCellRenderer<String>
 {
 
+	public CListCellRenderer()
+	{}
+
 	@Override
 	public Component getListCellRendererComponent(JList<? extends String> list, String value, int index, boolean isSelected, boolean cellHasFocus)
 	{
+		list.setSelectionBackground(null);
 		JLabel label = new JLabel(value);
 		label.setOpaque(true);
 		label.setBackground(Utils.BACKGROUND_NORMAL);
