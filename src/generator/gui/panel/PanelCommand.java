@@ -58,6 +58,11 @@ public class PanelCommand extends CPanelHorizontal implements IClickEvent
 		}
 	}
 
+	public void setCommand(String command)
+	{
+		this.entryCommand.setText(command);
+	}
+
 	@Override
 	public void updateLang()
 	{

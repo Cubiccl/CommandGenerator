@@ -3,6 +3,7 @@ package generator.gui.panel;
 import generator.CommandGenerator;
 import generator.gui.CLabel;
 import generator.gui.CTabbedPane;
+import generator.gui.button.CButton;
 import generator.gui.combobox.CCombobox;
 import generator.interfaces.ClickEvent;
 import generator.interfaces.IClickEvent;
@@ -14,10 +15,11 @@ import javax.swing.border.BevelBorder;
 
 /** Used to select a Command and a Structure. */
 @SuppressWarnings("serial")
-public class PanelCommandSelection extends CPanel implements IClickEvent
+public class PanelCommandSelection extends CPanelHorizontal implements IClickEvent
 {
-	private static final int COMMAND = 0;
+	private static final int COMMAND_SELECTION = 0, GENERATE = 1;
 
+	private CButton buttonGenerate;
 	private CCombobox comboboxCommand;
 	private Command[] commands;
 	private CLabel labelCommand;
@@ -28,15 +30,17 @@ public class PanelCommandSelection extends CPanel implements IClickEvent
 		this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		this.tabbedPaneStructure = tabbedPaneStructure;
 
+		this.buttonGenerate = new CButton("GUI:command.generate");
+
 		this.labelCommand = new CLabel("GUI:command.command");
 		this.comboboxCommand = new CCombobox(new String[] { "give", "tp" });
 
-		this.comboboxCommand.addActionListener(new ClickEvent(this, COMMAND));
+		this.comboboxCommand.addActionListener(new ClickEvent(this, COMMAND_SELECTION));
+		this.buttonGenerate.addActionListener(new ClickEvent(this, GENERATE));
 
-		this.add(this.labelCommand, this.gbc);
-
-		this.gbc.gridx++;
-		this.add(this.comboboxCommand, this.gbc);
+		this.add(this.buttonGenerate);
+		this.add(this.labelCommand);
+		this.add(this.comboboxCommand);
 
 		this.commands = CommandGenerator.getRegistry().getCommands();
 		this.updateLang();
@@ -48,13 +52,22 @@ public class PanelCommandSelection extends CPanel implements IClickEvent
 		return this.commands[this.comboboxCommand.getSelectedIndex()];
 	}
 
+	public Structure getSelectedStructure()
+	{
+		return this.getSelectedCommand().getStructures()[this.tabbedPaneStructure.getSelectedIndex()];
+	}
+
 	@Override
 	public void onClick(int componentID)
 	{
 		switch (componentID)
 		{
-			case COMMAND:
+			case COMMAND_SELECTION:
 				this.onCommandChange();
+				break;
+
+			case GENERATE:
+				CommandGenerator.generate();
 				break;
 
 			default:

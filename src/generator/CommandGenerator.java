@@ -7,12 +7,14 @@ import generator.gui.panel.PanelCommandSetup;
 import generator.gui.panel.PanelConfirm;
 import generator.interfaces.IConfirmState;
 import generator.main.FileManager;
+import generator.main.GenerationException;
 import generator.main.Settings;
 import generator.main.State;
 import generator.main.StateManager;
 import generator.main.Translator;
 import generator.registry.ObjectCreator;
 import generator.registry.Registry;
+import generator.registry.command.Structure;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -53,6 +55,19 @@ public class CommandGenerator
 	public static void exit()
 	{
 		getWindow().dispose();
+	}
+
+	/** Generates the command and displays it. */
+	public static void generate()
+	{
+		Structure structure = ((PanelCommandSetup) getActiveState().getComponent()).getSelectedStructure();
+		try
+		{
+			getWindow().setCommand(structure.generate());
+		} catch (GenerationException e)
+		{
+			e.showMessage();
+		}
 	}
 
 	/** @return The current State. */
@@ -135,6 +150,7 @@ public class CommandGenerator
 	private StateManager stateManager;
 	/** Contains all translations. */
 	private Translator translator;
+
 	private MainWindow window;
 
 	/** Constructor. */

@@ -1,9 +1,20 @@
 package generator.main;
 
 import generator.CommandGenerator;
+import generator.gui.CTextArea;
+import generator.gui.button.CButton;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Box;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
 
 /** Contains various constants and and methods. */
 public final class Utils
@@ -55,6 +66,40 @@ public final class Utils
 		if (type == STRUCTURE) return "structure";
 		if (type < 0 || type >= OBJECT_TYPES_NAMES.length) return "object";
 		return OBJECT_TYPES_NAMES[type];
+	}
+
+	/** Shows a popup window, with an "OK" button to close it..
+	 * 
+	 * @param title - Its title.
+	 * @param message - Its message. */
+	public static void showMessage(String title, String message)
+	{
+		JDialog dialog = new JDialog(CommandGenerator.getWindow(), title, true);
+		int width = CommandGenerator.getWindow().getWidth() / 3, height = CommandGenerator.getWindow().getHeight() / 3;
+
+		JPanel panel = new JPanel(new GridBagLayout());
+		CTextArea textArea = new CTextArea(message);
+		CButton button = new CButton("GUI:state.ok");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				dialog.dispose();
+			}
+		});
+
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		panel.add(textArea, gbc);
+		gbc.gridy++;
+		panel.add(Box.createRigidArea(new Dimension(100, 20)), gbc);
+		gbc.gridy++;
+		panel.add(button, gbc);
+
+		dialog.getContentPane().add(panel);
+		dialog.setSize(width, height);
+		dialog.setLocationRelativeTo(CommandGenerator.getWindow());
+		dialog.setVisible(true);
 	}
 
 	/** @param array - The array.

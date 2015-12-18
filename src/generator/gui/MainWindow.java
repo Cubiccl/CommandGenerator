@@ -80,4 +80,12 @@ public class MainWindow extends JFrame implements ITranslate
 		this.panelCommand.updateLang();
 	}
 
+	/** Changes the displayed generated command.
+	 * 
+	 * @param command - The input command. */
+	public void setCommand(String command)
+	{
+		this.panelCommand.setCommand(command);
+	}
+
 }

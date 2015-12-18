@@ -1,6 +1,7 @@
 package generator.gui.panel;
 
 import generator.gui.CTabbedPane;
+import generator.registry.command.Structure;
 
 import java.awt.BorderLayout;
 
@@ -21,6 +22,11 @@ public class PanelCommandSetup extends CPanel
 
 		this.add(this.panelSelection, BorderLayout.NORTH);
 		this.add(this.tabbedPaneStructure, BorderLayout.CENTER);
+	}
+
+	public Structure getSelectedStructure()
+	{
+		return this.panelSelection.getSelectedStructure();
 	}
 
 }

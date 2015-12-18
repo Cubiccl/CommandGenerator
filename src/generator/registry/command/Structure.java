@@ -5,6 +5,7 @@ import javax.swing.border.BevelBorder;
 
 import generator.gui.CTextArea;
 import generator.gui.panel.CPanelVertical;
+import generator.main.GenerationException;
 import generator.main.Utils;
 import generator.registry.ObjectDescribed;
 
@@ -34,6 +35,13 @@ public class Structure extends ObjectDescribed
 	{
 		super.updateLang();
 		this.textAreaDescription.setText(this.getDescription());
+	}
+
+	/** @return The generated command. */
+	public String generate() throws GenerationException
+	{
+		// TODO Generate
+		return "/command arg1 arg2 arg3";
 	}
 
 }
