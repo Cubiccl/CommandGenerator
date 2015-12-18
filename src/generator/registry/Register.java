@@ -1,22 +1,44 @@
 package generator.registry;
 
-import java.util.Collection;
-import java.util.HashMap;
-
 import generator.CommandGenerator;
 import generator.interfaces.ITranslate;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 
 /** Contains all Objects of the same type.
  * 
  * @param <T> - The type of the Objects. */
 public class Register<T extends ObjectBase> implements ITranslate
 {
-	/** All objects, sorted by ID. */
+	class ObjectSorter implements Comparator<String>
+	{
+		private Register<T> register;
+
+		public ObjectSorter(Register<T> register)
+		{
+			this.register = register;
+		}
+
+		@Override
+		public int compare(String o1, String o2)
+		{
+			return this.register.getObjectFromId(o1).getId().compareTo(this.register.getObjectFromId(o2).getId());
+		}
+
+	}
+
+	/** IDs, sorted. */
+	private ArrayList<String> ids;
+
+	/** All objects */
 	private HashMap<String, T> register;
 
 	public Register()
 	{
 		this.register = new HashMap<String, T>();
+		this.ids = new ArrayList<String>();
 	}
 
 	/** Finalizes the Register. Creates language & textures.
@@ -24,6 +46,8 @@ public class Register<T extends ObjectBase> implements ITranslate
 	 * @param name - The name of the Objects. (used for listing the register.) */
 	public void complete(String name)
 	{
+		this.sort();
+
 		String display = "";
 		String current = "Registered " + name + "s : ";
 
@@ -41,10 +65,15 @@ public class Register<T extends ObjectBase> implements ITranslate
 		CommandGenerator.log(display);
 	}
 
-	/** @return The lsit of all Objects. */
-	public Collection<T> getList()
+	/** @return The list of all Objects. */
+	public ArrayList<T> getList()
 	{
-		return this.register.values();
+		ArrayList<T> list = new ArrayList<T>();
+		for (String id : this.ids)
+		{
+			list.add(this.getObjectFromId(id));
+		}
+		return list;
 	}
 
 	/** @param id - The ID of the target Object.
@@ -65,6 +94,13 @@ public class Register<T extends ObjectBase> implements ITranslate
 	public void register(T object)
 	{
 		this.register.put(object.getId(), object);
+		this.ids.add(object.getId());
+	}
+
+	/** Sorts all Objects in this Register. */
+	public void sort()
+	{
+		this.ids.sort(new ObjectSorter(this));
 	}
 
 	@Override

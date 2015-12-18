@@ -231,6 +231,21 @@ public class Registry implements ITranslate
 		this.sounds.register(sound);
 	}
 
+	/** Sorts all Objects. */
+	public void sort()
+	{
+		this.achievements.sort();
+		this.attributes.sort();
+		this.blocks.sort();
+		this.commands.sort();
+		this.effects.sort();
+		this.enchantments.sort();
+		this.entities.sort();
+		this.items.sort();
+		this.particles.sort();
+		this.sounds.sort();
+	}
+
 	@Override
 	public void updateLang()
 	{
