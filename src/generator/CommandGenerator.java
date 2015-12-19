@@ -14,6 +14,7 @@ import generator.main.StateManager;
 import generator.main.Translator;
 import generator.registry.ObjectCreator;
 import generator.registry.Registry;
+import generator.registry.command.Command;
 import generator.registry.command.Structure;
 
 import java.lang.reflect.InvocationTargetException;
@@ -182,6 +183,10 @@ public class CommandGenerator
 		this.registry.complete();
 
 		panel.setDetail("GUI:loading.gui");
+		for (Command command : getRegistry().getCommands())
+		{
+			command.createGui();
+		}
 		PanelCommandSetup panelCommand = new PanelCommandSetup();
 
 		clearActiveState();

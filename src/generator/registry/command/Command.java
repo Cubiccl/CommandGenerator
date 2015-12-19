@@ -23,6 +23,16 @@ public class Command extends ObjectBase
 	public void addStructure(Structure structure)
 	{
 		this.structures.add(structure);
+		structure.setCommand(this);
+	}
+
+	/** Creates each Structure's GUI. */
+	public void createGui()
+	{
+		for (Structure structure : this.structures)
+		{
+			structure.createGui();
+		}
 	}
 
 	@Override
@@ -42,7 +52,7 @@ public class Command extends ObjectBase
 	{
 		return this.structures.toArray(new Structure[0]);
 	}
-	
+
 	@Override
 	public void updateLang()
 	{

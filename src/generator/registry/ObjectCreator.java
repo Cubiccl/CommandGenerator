@@ -4,7 +4,7 @@ import generator.CommandGenerator;
 import generator.main.FileManager;
 import generator.main.Utils;
 import generator.registry.command.Command;
-import generator.registry.command.Structure;
+import generator.registry.command.StructureCreator;
 
 /** Contains methods to create Objects from the data files. */
 public final class ObjectCreator
@@ -277,7 +277,7 @@ public final class ObjectCreator
 				{
 					currentCommand = new Command(line.substring("COMMAND=".length()));
 					CommandGenerator.getRegistry().registerCommand(currentCommand);
-				} else currentCommand.addStructure(createStructure(line.split(";")));
+				} else currentCommand.addStructure(StructureCreator.createStructure(line.split(";")));
 				continue;
 			} else createObject(category, line.split(","));
 		}
@@ -318,15 +318,5 @@ public final class ObjectCreator
 				CommandGenerator.log(e);
 			}
 		}
-	}
-
-	/** Creates a new Structure.
-	 * 
-	 * @param data - The input data.<br/>
-	 *            <strong>ID;Argument[details...];Argument;...</strong> */
-	private static Structure createStructure(String[] data)
-	{
-		// TODO Create Structure
-		return new Structure(data[0]);
 	}
 }
