@@ -49,6 +49,20 @@ public final class Utils
 	/** Names for Objects types. */
 	public static final String[] OBJECT_TYPES_NAMES = { "item", "block", "entity", "effect", "enchantment", "achievement", "attribute", "particle", "sound" };
 
+	/** @param text - The input text.
+	 * @param substring - The occurrences to look for.
+	 * @return The number of times the substring appears in the text. */
+	public static int countOccurrences(String text, String substring)
+	{
+		int count = 0;
+		while (text.length() > 0)
+		{
+			if (text.startsWith(substring)) count++;
+			text = text.substring(1);
+		}
+		return count;
+	}
+
 	/** @param type - The type of the object.
 	 * @return - Its name.
 	 * @see Utils#ITEM */

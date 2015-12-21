@@ -26,6 +26,8 @@ public final class StructureCreator
 
 		switch (type)
 		{
+			case "Static":
+				return new StaticArgument(details[0]);
 
 			default:
 				String typeFinal = type;
