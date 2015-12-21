@@ -29,7 +29,7 @@ public final class StructureCreator
 
 			default:
 				String typeFinal = type;
-				return new Argument(Argument.COMPOUND, true, 1) {
+				return new Argument(true, 1) {
 
 					private JLabel label;
 
