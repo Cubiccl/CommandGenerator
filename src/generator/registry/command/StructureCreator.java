@@ -1,5 +1,6 @@
 package generator.registry.command;
 
+import generator.CommandGenerator;
 import generator.main.GenerationException;
 
 import java.awt.Component;
@@ -16,18 +17,31 @@ public final class StructureCreator
 	 * @return The created Argument. */
 	private static Argument createArgument(String element)
 	{
-		String type = element;
-		String[] details = new String[0];
+		String type = element; // The type of the Argument.
+		String[] details = new String[0]; // The details.
 		if (element.contains("["))
 		{
 			type = element.substring(0, element.indexOf('['));
 			details = element.substring(element.indexOf('[') + 1, element.indexOf(']')).split(",");
 		}
+		boolean compulsory = Character.isUpperCase(type.charAt(0)); // True if compulsory
+		type = type.toLowerCase();
 
 		switch (type)
 		{
-			case "Static":
+			case "static":
 				return new StaticArgument(details[0]);
+
+			case "boolean":
+				BooleanArgument argument = new BooleanArgument(compulsory, details[0]);
+				for (int i = 1; i < details.length; i++)
+				{
+					String detail = details[i];
+					if (detail.startsWith("true=")) argument.setTrueValue(detail.substring("true=".length()));
+					else if (detail.startsWith("false=")) argument.setFalseValue(detail.substring("false=".length()));
+					else CommandGenerator.log("Unknown detail : " + detail);
+				}
+				return argument;
 
 			default:
 				String typeFinal = type;
