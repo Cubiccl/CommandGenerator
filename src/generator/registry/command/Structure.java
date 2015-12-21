@@ -43,7 +43,8 @@ public class Structure extends ObjectDescribed
 		this.component.add(this.textAreaDescription);
 		for (Argument argument : this.arguments)
 		{
-			this.component.add(argument.getComponent());
+			argument.createGui();
+			if (argument.getComponent() != null) this.component.add(argument.getComponent());
 		}
 	}
 
@@ -53,7 +54,7 @@ public class Structure extends ObjectDescribed
 		String command = "/" + this.command.getId();
 		for (Argument argument : this.arguments)
 		{
-			if (argument.isUsed()) command += " " + argument.generate();
+			if (argument.isUsed() && argument.generate() != null) command += " " + argument.generate();
 		}
 		return command;
 	}

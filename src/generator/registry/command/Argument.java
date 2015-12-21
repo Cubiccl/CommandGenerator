@@ -58,7 +58,7 @@ public abstract class Argument implements ITranslate
 	}
 
 	/** Initializes the Component of this Argument. */
-	public abstract void initGui();
+	public abstract void createGui();
 
 	/** @return True if this Argument is currently being used for the Command generation. Equals {@link Argument#isCompulsory} by default, Override for more. */
 	public boolean isUsed()
