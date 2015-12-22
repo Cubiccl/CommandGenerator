@@ -33,15 +33,18 @@ public final class StructureCreator
 				return new StaticArgument(details[0]);
 
 			case "boolean":
-				BooleanArgument argument = new BooleanArgument(compulsory, details[0]);
+				BooleanArgument argumentBoolean = new BooleanArgument(compulsory, details[0]);
 				for (int i = 1; i < details.length; i++)
 				{
 					String detail = details[i];
-					if (detail.startsWith("true=")) argument.setTrueValue(detail.substring("true=".length()));
-					else if (detail.startsWith("false=")) argument.setFalseValue(detail.substring("false=".length()));
+					if (detail.startsWith("true=")) argumentBoolean.setTrueValue(detail.substring("true=".length()));
+					else if (detail.startsWith("false=")) argumentBoolean.setFalseValue(detail.substring("false=".length()));
 					else CommandGenerator.log("Unknown detail : " + detail);
 				}
-				return argument;
+				return argumentBoolean;
+				
+			case "label":
+				return new LabelArgument(details[0]);
 
 			default:
 				String typeFinal = type;
