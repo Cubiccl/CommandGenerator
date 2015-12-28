@@ -10,7 +10,7 @@ public abstract class Argument implements ITranslate
 {
 	/** True if this Argument should always be used when generating the Command. */
 	private boolean isCompulsory;
-	/** This Argument's length. Determines how many elements of the Command it generates. */
+	/** This Argument's length. Determines how many elements of the Command it generates. -1 for any (potentially infinite) length. */
 	private int length;
 
 	/** Creates a new Argument.
@@ -40,10 +40,24 @@ public abstract class Argument implements ITranslate
 		return this.length;
 	}
 
+	/** @return True if this Argument is compulsory ; thus should always be used when generating the Command. */
+	public boolean isCompulsory()
+	{
+		return this.isCompulsory;
+	}
+
 	/** @return True if this Argument is currently being used for the Command generation. Equals {@link Argument#isCompulsory} by default, Override for more. */
 	public boolean isUsed()
 	{
 		return this.isCompulsory;
+	}
+
+	/** Changes the length of this Argument.
+	 * 
+	 * @param length - The new length. */
+	protected void setLength(int length)
+	{
+		this.length = length;
 	}
 
 }

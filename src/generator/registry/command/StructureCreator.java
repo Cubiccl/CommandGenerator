@@ -29,6 +29,9 @@ public final class StructureCreator
 
 		switch (type)
 		{
+			case "label":
+				return new LabelArgument(details[0]);
+
 			case "static":
 				return new StaticArgument(details[0]);
 
@@ -42,9 +45,16 @@ public final class StructureCreator
 					else CommandGenerator.log("Unknown detail : " + detail);
 				}
 				return argumentBoolean;
-				
-			case "label":
-				return new LabelArgument(details[0]);
+
+			case "string":
+				StringArgument argumentString = new StringArgument(compulsory, details[0]);
+				for (int i = 1; i < details.length; i++)
+				{
+					String detail = details[i];
+					if (detail.equals("space")) argumentString.setHasSpaces();
+					else CommandGenerator.log("Unknown detail : " + detail);
+				}
+				return argumentString;
 
 			default:
 				String typeFinal = type;

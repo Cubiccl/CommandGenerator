@@ -9,11 +9,17 @@ import java.awt.Component;
 import javax.swing.BorderFactory;
 import javax.swing.border.BevelBorder;
 
+/** This is not an actual Argument ; it will only display some text. */
 public class LabelArgument extends Argument
 {
+	/** Text Area to display the text. */
 	private CTextArea textArea;
+	/** ID of the text to display. */
 	private String textID;
 
+	/** Creates a new Label Argument.
+	 * 
+	 * @param textID - The ID of the text to display. */
 	public LabelArgument(String textID)
 	{
 		super(false, 0);
