@@ -1,5 +1,6 @@
 package generator.registry.command;
 
+import generator.CommandGenerator;
 import generator.gui.panel.CPanelHorizontal;
 import generator.gui.textfield.CCheckEntry;
 import generator.gui.textfield.CEntry;
@@ -30,6 +31,12 @@ public class StringArgument extends Argument
 		super(isCompulsory, 1);
 		this.textID = textID;
 		this.hasSpaces = false;
+	}
+
+	/** Adds a help button, displaying information about the value to input. */
+	public void addInfo()
+	{
+		// TODO addInfo()
 	}
 
 	@Override
@@ -93,6 +100,7 @@ public class StringArgument extends Argument
 	 * @throws GenerationException if the value cannot be accepted. */
 	protected void verifyValue() throws GenerationException
 	{
-		if (!this.hasSpaces && this.getValue().contains(" ")) throw new GenerationException("GUI:error.space");
+		if (!this.hasSpaces && this.getValue().contains(" ")) throw new GenerationException(CommandGenerator.translate("GUI:error.space").replaceAll("<value>",
+				this.getValue()));
 	}
 }

@@ -64,9 +64,22 @@ public final class StructureCreator
 				{
 					String detail = details[i];
 					if (detail.equals("space")) argumentString.setHasSpaces();
+					else if (detail.equals("info")) argumentString.addInfo();
 					else CommandGenerator.log("Unknown detail : " + detail);
 				}
 				return argumentString;
+
+			case "float":
+				FloatArgument argumentFloat = new FloatArgument(compulsory, details[0]);
+				for (int i = 1; i < details.length; i++)
+				{
+					String detail = details[i];
+					if (detail.startsWith("min=")) argumentFloat.setMin(Float.parseFloat(detail.substring("min=".length())));
+					else if (detail.startsWith("max=")) argumentFloat.setMax(Float.parseFloat(detail.substring("max=".length())));
+					else if (detail.equals("info")) argumentFloat.addInfo();
+					else CommandGenerator.log("Unknown detail : " + detail);
+				}
+				return argumentFloat;
 
 			default:
 				String typeFinal = type;
