@@ -89,10 +89,9 @@ public final class Utils
 	public static void showMessage(String title, String message)
 	{
 		JDialog dialog = new JDialog(CommandGenerator.getWindow(), title, true);
-		int width = CommandGenerator.getWindow().getWidth() / 3, height = CommandGenerator.getWindow().getHeight() / 3;
-
 		JPanel panel = new JPanel(new GridBagLayout());
 		CTextArea textArea = new CTextArea(message);
+		textArea.setPreferredSize(new Dimension(400, 200));
 		CButton button = new CButton("GUI:state.ok");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
@@ -111,7 +110,7 @@ public final class Utils
 		panel.add(button, gbc);
 
 		dialog.getContentPane().add(panel);
-		dialog.setSize(width, height);
+		dialog.setSize(440, 300);
 		dialog.setLocationRelativeTo(CommandGenerator.getWindow());
 		dialog.setVisible(true);
 	}

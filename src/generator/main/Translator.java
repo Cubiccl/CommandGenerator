@@ -73,13 +73,13 @@ public class Translator implements ITranslate
 				continue;
 			}
 
-			int index = line.indexOf('=');
+			int index = line.indexOf(" = ");
 			if (currentCategory.equals(""))
 			{
 				CommandGenerator.log(new Exception("Declare category!"));
 				continue;
 			}
-			this.dictionnary.get(currentCategory).put(line.substring(0, index - 1), line.substring(index + 1));
+			this.dictionnary.get(currentCategory).put(line.substring(0, index), line.substring(index + 2));
 		}
 	}
 

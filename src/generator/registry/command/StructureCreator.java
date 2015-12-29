@@ -56,6 +56,18 @@ public final class StructureCreator
 				}
 				return argumentString;
 
+			case "choice":
+				boolean hasHelp = details.length > 1 && details[1].equals("help");
+				String[] values;
+				if (hasHelp) values = new String[details.length - 2];
+				else values = new String[details.length - 1];
+				for (int i = 0; i < values.length; i++)
+				{
+					if (hasHelp) values[i] = details[i + 2];
+					else values[i] = details[i + 1];
+				}
+				return new ChoiceArgument(compulsory, hasHelp, details[0], values);
+
 			default:
 				String typeFinal = type;
 				return new Argument(true, 1) {
