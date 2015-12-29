@@ -1,6 +1,7 @@
 package generator.registry.command;
 
 import generator.CommandGenerator;
+import generator.gui.button.CMessageButton;
 import generator.gui.panel.CPanelHorizontal;
 import generator.gui.textfield.CCheckEntry;
 import generator.gui.textfield.CEntry;
@@ -11,10 +12,14 @@ import java.awt.Component;
 /** A text Argument. */
 public class StringArgument extends Argument
 {
+	/** The Help button if this has info. */
+	private CMessageButton buttonHelp;
 	/** The Entry if not compulsory. */
 	private CCheckEntry checkEntry;
 	/** The Entry for user input. */
 	private CEntry entry;
+	/** True if a button displaying additional information should be added. */
+	private boolean hasInfo;
 	/** True if the input String can contain spaces. */
 	private boolean hasSpaces;
 	/** The Panel containing all the GUI. */
@@ -31,12 +36,13 @@ public class StringArgument extends Argument
 		super(isCompulsory, 1);
 		this.textID = textID;
 		this.hasSpaces = false;
+		this.hasInfo = false;
 	}
 
 	/** Adds a help button, displaying information about the value to input. */
 	public void addInfo()
 	{
-		// TODO addInfo()
+		this.hasInfo = true;
 	}
 
 	@Override
@@ -52,6 +58,13 @@ public class StringArgument extends Argument
 		{
 			this.checkEntry = new CCheckEntry("GUI:" + this.textID);
 			this.panel.add(this.checkEntry);
+		}
+
+		if (this.hasInfo)
+		{
+			this.buttonHelp = new CMessageButton();
+			this.updateLang();
+			this.panel.add(this.buttonHelp);
 		}
 	}
 
@@ -93,6 +106,11 @@ public class StringArgument extends Argument
 	{
 		if (this.entry != null) this.entry.updateLang();
 		if (this.checkEntry != null) this.checkEntry.updateLang();
+		if (this.buttonHelp != null)
+		{
+			this.buttonHelp.setTitle(CommandGenerator.translate("HELP:main").replaceAll("<object>", CommandGenerator.translate("GUI:" + this.textID)));
+			this.buttonHelp.setMessage(CommandGenerator.translate("HELP:" + this.textID));
+		}
 	}
 
 	/** Verifies the value input by the user. Called when generating.
