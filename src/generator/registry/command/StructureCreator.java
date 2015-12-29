@@ -46,16 +46,6 @@ public final class StructureCreator
 				}
 				return argumentBoolean;
 
-			case "string":
-				StringArgument argumentString = new StringArgument(compulsory, details[0]);
-				for (int i = 1; i < details.length; i++)
-				{
-					String detail = details[i];
-					if (detail.equals("space")) argumentString.setHasSpaces();
-					else CommandGenerator.log("Unknown detail : " + detail);
-				}
-				return argumentString;
-
 			case "choice":
 				boolean hasHelp = details.length > 1 && details[1].equals("help");
 				String[] values;
@@ -67,6 +57,16 @@ public final class StructureCreator
 					else values[i] = details[i + 1];
 				}
 				return new ChoiceArgument(compulsory, hasHelp, details[0], values);
+
+			case "string":
+				StringArgument argumentString = new StringArgument(compulsory, details[0]);
+				for (int i = 1; i < details.length; i++)
+				{
+					String detail = details[i];
+					if (detail.equals("space")) argumentString.setHasSpaces();
+					else CommandGenerator.log("Unknown detail : " + detail);
+				}
+				return argumentString;
 
 			default:
 				String typeFinal = type;

@@ -1,6 +1,5 @@
 package generator.registry.command;
 
-import generator.CommandGenerator;
 import generator.gui.panel.CPanelHorizontal;
 import generator.gui.textfield.CCheckEntry;
 import generator.gui.textfield.CEntry;
@@ -52,21 +51,21 @@ public class StringArgument extends Argument
 	@Override
 	public String generate() throws GenerationException
 	{
-		// If compulsory use the entry, else use the check entry.
-
-		if (!this.hasSpaces)
-		{
-			if (this.isCompulsory() && this.entry.getText().contains(" ")) throw new GenerationException(CommandGenerator.translate("GUI:error.space"));
-			else if (!this.isCompulsory() && this.checkEntry.getText().contains(" ")) throw new GenerationException(
-					CommandGenerator.translate("GUI:error.space"));
-		}
-		return this.isCompulsory() ? this.entry.getText() : this.checkEntry.getText();
+		this.verifyValue();
+		return this.getValue();
 	}
 
 	@Override
 	public Component getComponent()
 	{
 		return this.panel;
+	}
+
+	/** @return The value input by the user. */
+	protected String getValue()
+	{
+		// If compulsory use the entry, else use the check entry.
+		return this.isCompulsory() ? this.entry.getText() : this.checkEntry.getText();
 	}
 
 	@Override
@@ -89,4 +88,11 @@ public class StringArgument extends Argument
 		if (this.checkEntry != null) this.checkEntry.updateLang();
 	}
 
+	/** Verifies the value input by the user. Called when generating.
+	 * 
+	 * @throws GenerationException if the value cannot be accepted. */
+	protected void verifyValue() throws GenerationException
+	{
+		if (!this.hasSpaces && this.getValue().contains(" ")) throw new GenerationException("GUI:error.space");
+	}
 }
