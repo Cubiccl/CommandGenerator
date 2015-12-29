@@ -36,49 +36,20 @@ public final class StructureCreator
 				return new StaticArgument(details[0]);
 
 			case "boolean":
-				BooleanArgument argumentBoolean = new BooleanArgument(compulsory, details[0]);
-				for (int i = 1; i < details.length; i++)
-				{
-					String detail = details[i];
-					if (detail.startsWith("true=")) argumentBoolean.setTrueValue(detail.substring("true=".length()));
-					else if (detail.startsWith("false=")) argumentBoolean.setFalseValue(detail.substring("false=".length()));
-					else CommandGenerator.log("Unknown detail : " + detail);
-				}
-				return argumentBoolean;
+				return createBoolean(compulsory, details);
 
 			case "choice":
-				boolean hasHelp = details.length > 1 && details[1].equals("help");
-				String[] values;
-				if (hasHelp) values = new String[details.length - 2];
-				else values = new String[details.length - 1];
-				for (int i = 0; i < values.length; i++)
-				{
-					if (hasHelp) values[i] = details[i + 2];
-					else values[i] = details[i + 1];
-				}
-				return new ChoiceArgument(compulsory, hasHelp, details[0], values);
+				return createChoice(compulsory, details);
 
 			case "string":
-				StringArgument argumentString = new StringArgument(compulsory, details[0]);
-				for (int i = 1; i < details.length; i++)
-				{
-					String detail = details[i];
-					if (detail.equals("space")) argumentString.setHasSpaces();
-					else if (detail.equals("info")) argumentString.addInfo();
-					else CommandGenerator.log("Unknown detail : " + detail);
-				}
-				return argumentString;
+				return createString(compulsory, details);
 
 			case "float":
-				FloatArgument argumentFloat = new FloatArgument(compulsory, details[0]);
-				for (int i = 1; i < details.length; i++)
-				{
-					String detail = details[i];
-					if (detail.startsWith("min=")) argumentFloat.setMin(Float.parseFloat(detail.substring("min=".length())));
-					else if (detail.startsWith("max=")) argumentFloat.setMax(Float.parseFloat(detail.substring("max=".length())));
-					else if (detail.equals("info")) argumentFloat.addInfo();
-					else CommandGenerator.log("Unknown detail : " + detail);
-				}
+				return createFloat(compulsory, details);
+
+			case "integer":
+				NumberArgument argumentFloat = createFloat(compulsory, details);
+				argumentFloat.setInteger();
 				return argumentFloat;
 
 			default:
@@ -110,6 +81,60 @@ public final class StructureCreator
 					{}
 				};
 		}
+	}
+
+	private static BooleanArgument createBoolean(boolean compulsory, String[] details)
+	{
+		BooleanArgument argument = new BooleanArgument(compulsory, details[0]);
+		for (int i = 1; i < details.length; i++)
+		{
+			String detail = details[i];
+			if (detail.startsWith("true=")) argument.setTrueValue(detail.substring("true=".length()));
+			else if (detail.startsWith("false=")) argument.setFalseValue(detail.substring("false=".length()));
+			else CommandGenerator.log("Unknown detail : " + detail);
+		}
+		return argument;
+	}
+
+	private static ChoiceArgument createChoice(boolean compulsory, String[] details)
+	{
+		boolean hasHelp = details.length > 1 && details[1].equals("help");
+		String[] values;
+		if (hasHelp) values = new String[details.length - 2];
+		else values = new String[details.length - 1];
+		for (int i = 0; i < values.length; i++)
+		{
+			if (hasHelp) values[i] = details[i + 2];
+			else values[i] = details[i + 1];
+		}
+		return new ChoiceArgument(compulsory, hasHelp, details[0], values);
+	}
+
+	private static NumberArgument createFloat(boolean compulsory, String[] details)
+	{
+		NumberArgument argument = new NumberArgument(compulsory, details[0]);
+		for (int i = 1; i < details.length; i++)
+		{
+			String detail = details[i];
+			if (detail.startsWith("min=")) argument.setMin(Float.parseFloat(detail.substring("min=".length())));
+			else if (detail.startsWith("max=")) argument.setMax(Float.parseFloat(detail.substring("max=".length())));
+			else if (detail.equals("info")) argument.addInfo();
+			else CommandGenerator.log("Unknown detail : " + detail);
+		}
+		return argument;
+	}
+
+	private static StringArgument createString(boolean compulsory, String[] details)
+	{
+		StringArgument argument = new StringArgument(compulsory, details[0]);
+		for (int i = 1; i < details.length; i++)
+		{
+			String detail = details[i];
+			if (detail.equals("space")) argument.setHasSpaces();
+			else if (detail.equals("info")) argument.addInfo();
+			else CommandGenerator.log("Unknown detail : " + detail);
+		}
+		return argument;
 	}
 
 	/** Creates a new Structure.
