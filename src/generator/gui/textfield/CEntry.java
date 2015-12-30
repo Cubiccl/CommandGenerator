@@ -1,7 +1,6 @@
 package generator.gui.textfield;
 
 import generator.gui.CLabel;
-import generator.gui.CTextfield;
 import generator.gui.panel.CPanelHorizontal;
 
 /** Represents a labeled textfield. */

@@ -28,7 +28,7 @@ public class ItemBlock extends ObjectWithNumId
 
 	/** Creates a new Item/Block
 	 * 
-	 * @param type - Constans.ITEM or Constans.BLOCK
+	 * @param type - Utils.ITEM or Utils.BLOCK
 	 * @param idNum - Its numerical ID.
 	 * @param idString - Its String ID.
 	 * @param block - True if it is a Block, false if Item. */

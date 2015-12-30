@@ -1,6 +1,5 @@
 package generator.gui.textfield;
 
-import generator.gui.CTextfield;
 import generator.gui.checkbox.CCheckbox;
 import generator.gui.panel.CPanelHorizontal;
 import generator.interfaces.ClickEvent;

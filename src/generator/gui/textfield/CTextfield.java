@@ -1,4 +1,6 @@
-package generator.gui;
+package generator.gui.textfield;
+
+import generator.gui.RoundedCornerBorder;
 
 import java.awt.Color;
 
