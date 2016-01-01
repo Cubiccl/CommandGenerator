@@ -70,6 +70,12 @@ public class Registry implements ITranslate
 		return this.achievements.getObjectFromId(id);
 	}
 
+	/** @return The list of all Achievements. */
+	public Achievement[] getAchievements()
+	{
+		return this.achievements.getList().toArray(new Achievement[0]);
+	}
+
 	/** @param id - The ID of the target Attribute.
 	 * @return The Attribute with the given ID. */
 	public Attribute getAttributeFromId(String id)
@@ -77,11 +83,23 @@ public class Registry implements ITranslate
 		return this.attributes.getObjectFromId(id);
 	}
 
+	/** @return The list of all Attributes. */
+	public Attribute[] getAttributes()
+	{
+		return this.attributes.getList().toArray(new Attribute[0]);
+	}
+
 	/** @param id - The ID of the target Block.
 	 * @return The Block with the given ID. */
 	public Block getBlockFromId(String id)
 	{
 		return this.blocks.getObjectFromId(id);
+	}
+
+	/** @return The list of all Blocks. */
+	public Block[] getBlocks()
+	{
+		return this.blocks.getList().toArray(new Block[0]);
 	}
 
 	/** @param id - The ID of the target Command.
@@ -104,11 +122,29 @@ public class Registry implements ITranslate
 		return this.effects.getObjectFromId(id);
 	}
 
+	/** @return The list of all Effects. */
+	public Effect[] getEffects()
+	{
+		return this.effects.getList().toArray(new Effect[0]);
+	}
+
 	/** @param id - The ID of the target Enchantment.
 	 * @return The Enchantment with the given ID. */
 	public Enchantment getEnchantmentFromId(String id)
 	{
 		return this.enchantments.getObjectFromId(id);
+	}
+
+	/** @return The list of all Enchantments. */
+	public Enchantment[] getEnchantments()
+	{
+		return this.enchantments.getList().toArray(new Enchantment[0]);
+	}
+
+	/** @return The list of all Entities. */
+	public Entity[] getEntities()
+	{
+		return this.entities.getList().toArray(new Entity[0]);
 	}
 
 	/** @param id - The ID of the target Entity.
@@ -123,6 +159,12 @@ public class Registry implements ITranslate
 	public Item getItemFromId(String id)
 	{
 		return this.items.getObjectFromId(id);
+	}
+
+	/** @return The list of all Items. */
+	public Item[] getItems()
+	{
+		return this.items.getList().toArray(new Item[0]);
 	}
 
 	/** @param listId - The ID of the list.
@@ -144,11 +186,23 @@ public class Registry implements ITranslate
 		return this.particles.getObjectFromId(id);
 	}
 
+	/** @return The list of all Particles. */
+	public Particle[] getParticles()
+	{
+		return this.particles.getList().toArray(new Particle[0]);
+	}
+
 	/** @param id - The ID of the target Sound.
 	 * @return The Sound with the given ID. */
 	public Sound getSoundFromId(String id)
 	{
 		return this.sounds.getObjectFromId(id);
+	}
+
+	/** @return The list of all Sounds. */
+	public Sound[] getSounds()
+	{
+		return this.sounds.getList().toArray(new Sound[0]);
 	}
 
 	/** Registers a new Achievement.
