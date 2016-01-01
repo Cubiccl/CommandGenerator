@@ -28,6 +28,16 @@ public abstract class CPanel extends JPanel implements ITranslate
 	}
 
 	@Override
+	public void setEnabled(boolean enabled)
+	{
+		super.setEnabled(enabled);
+		for (Component component : this.getComponents())
+		{
+			component.setEnabled(this.isEnabled());
+		}
+	}
+
+	@Override
 	public void updateLang()
 	{
 		for (Component component : this.getComponents())

@@ -41,15 +41,16 @@ public class CoordinatesArgument extends Argument implements IClickEvent
 	public void createGui()
 	{
 		this.panelMain = new CPanelVertical();
+		this.panelCoordinates = new PanelCoordinates(this.titleID, this.relative);
 
 		if (!this.isCompulsory())
 		{
 			this.checkbox = new CCheckbox("GUI:coordinates.use");
 			this.checkbox.addActionListener(new ClickEvent(this, ENABLE));
+			this.panelCoordinates.setEnabled(false);
 			this.panelMain.add(this.checkbox);
 		}
 
-		this.panelCoordinates = new PanelCoordinates(this.titleID, this.relative);
 		this.panelMain.add(this.panelCoordinates);
 	}
 

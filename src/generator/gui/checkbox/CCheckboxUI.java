@@ -55,7 +55,8 @@ class CheckboxIcon implements Icon
 	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y)
 	{
-		g.setColor(COLOR);
+		if (!c.isEnabled()) g.setColor(Utils.BORDER_COLOR);
+		else g.setColor(COLOR);
 		int margin = c.getHeight() / 4;
 		int size = c.getHeight() / 2;
 		g.drawRect(x + margin, margin, size, size);
