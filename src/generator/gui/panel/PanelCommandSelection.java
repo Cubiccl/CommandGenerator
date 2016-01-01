@@ -1,5 +1,7 @@
 package generator.gui.panel;
 
+import java.awt.AWTEvent;
+
 import generator.CommandGenerator;
 import generator.gui.CLabel;
 import generator.gui.CTabbedPane;
@@ -58,7 +60,7 @@ public class PanelCommandSelection extends CPanelHorizontal implements IClickEve
 	}
 
 	@Override
-	public void onClick(int componentID)
+	public void onEvent(int componentID, AWTEvent event)
 	{
 		switch (componentID)
 		{

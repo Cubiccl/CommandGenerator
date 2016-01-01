@@ -1,5 +1,7 @@
 package generator.gui.menubar;
 
+import java.awt.AWTEvent;
+
 import generator.CommandGenerator;
 import generator.gui.panel.PanelSettings;
 import generator.interfaces.ClickEvent;
@@ -25,7 +27,7 @@ public class CGMenuBar extends JMenuBar implements ITranslate, IClickEvent
 	}
 
 	@Override
-	public void onClick(int componentID)
+	public void onEvent(int componentID, AWTEvent event)
 	{
 		switch (componentID)
 		{

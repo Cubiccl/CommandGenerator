@@ -1,5 +1,7 @@
 package generator.gui.button;
 
+import java.awt.AWTEvent;
+
 import generator.interfaces.ClickEvent;
 import generator.interfaces.IClickEvent;
 import generator.main.Utils;
@@ -33,7 +35,7 @@ public class CMessageButton extends CButton implements IClickEvent
 	}
 
 	@Override
-	public void onClick(int componentID)
+	public void onEvent(int componentID, AWTEvent event)
 	{
 		switch (componentID)
 		{

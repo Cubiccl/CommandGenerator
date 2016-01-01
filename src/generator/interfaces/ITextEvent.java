@@ -2,7 +2,7 @@ package generator.interfaces;
 
 import java.awt.AWTEvent;
 
-public interface IClickEvent
+public interface ITextEvent
 {
 
 	/** Called when a sub-component is being written in.

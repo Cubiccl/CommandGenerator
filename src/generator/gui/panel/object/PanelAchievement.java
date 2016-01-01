@@ -1,8 +1,10 @@
 package generator.gui.panel.object;
 
+import java.awt.AWTEvent;
+
 import generator.CommandGenerator;
 import generator.gui.CImage;
-import generator.gui.combobox.CCombobox;
+import generator.gui.combobox.CSearchBox;
 import generator.gui.panel.CPanelHorizontal;
 import generator.interfaces.ClickEvent;
 import generator.interfaces.IClickEvent;
@@ -17,7 +19,7 @@ public class PanelAchievement extends CPanelHorizontal implements IClickEvent
 	private static final int SELECT = 0;
 
 	private Achievement[] achievements;
-	private CCombobox combobox;
+	private CSearchBox combobox;
 	private CImage labelTexture;
 
 	public PanelAchievement()
@@ -25,7 +27,7 @@ public class PanelAchievement extends CPanelHorizontal implements IClickEvent
 		super();
 		this.achievements = CommandGenerator.getRegistry().getAchievements();
 
-		this.combobox = new CCombobox();
+		this.combobox = new CSearchBox();
 		this.combobox.addActionListener(new ClickEvent(this, SELECT));
 		this.labelTexture = new CImage();
 
@@ -41,7 +43,7 @@ public class PanelAchievement extends CPanelHorizontal implements IClickEvent
 	}
 
 	@Override
-	public void onClick(int componentID)
+	public void onEvent(int componentID, AWTEvent event)
 	{
 		switch (componentID)
 		{

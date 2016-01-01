@@ -7,6 +7,7 @@ import generator.gui.textfield.CEntry;
 import generator.interfaces.ClickEvent;
 import generator.interfaces.IClickEvent;
 
+import java.awt.AWTEvent;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 
@@ -41,7 +42,7 @@ public class PanelCommand extends CPanelHorizontal implements IClickEvent
 	}
 
 	@Override
-	public void onClick(int componentID)
+	public void onEvent(int componentID, AWTEvent event)
 	{
 		switch (componentID)
 		{

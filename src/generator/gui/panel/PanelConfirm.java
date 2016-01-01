@@ -1,5 +1,7 @@
 package generator.gui.panel;
 
+import java.awt.AWTEvent;
+
 import generator.CommandGenerator;
 import generator.gui.button.CButton;
 import generator.interfaces.ClickEvent;
@@ -41,7 +43,7 @@ public class PanelConfirm extends CPanel implements IClickEvent
 	}
 
 	@Override
-	public void onClick(int componentID)
+	public void onEvent(int componentID, AWTEvent event)
 	{
 		if (this.listener.confirm(componentID == CANCEL, this.component)) CommandGenerator.clearActiveState();
 	}

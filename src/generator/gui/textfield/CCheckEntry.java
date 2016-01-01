@@ -1,5 +1,7 @@
 package generator.gui.textfield;
 
+import java.awt.AWTEvent;
+
 import generator.gui.checkbox.CCheckbox;
 import generator.gui.panel.CPanelHorizontal;
 import generator.interfaces.ClickEvent;
@@ -41,7 +43,7 @@ public class CCheckEntry extends CPanelHorizontal implements IClickEvent
 	}
 
 	@Override
-	public void onClick(int componentID)
+	public void onEvent(int componentID, AWTEvent event)
 	{
 		switch (componentID)
 		{

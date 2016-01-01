@@ -79,7 +79,7 @@ public class Translator implements ITranslate
 				CommandGenerator.log(new Exception("Declare category!"));
 				continue;
 			}
-			this.dictionnary.get(currentCategory).put(line.substring(0, index), line.substring(index + 2));
+			this.dictionnary.get(currentCategory).put(line.substring(0, index), line.substring(index + 3));
 		}
 	}
 

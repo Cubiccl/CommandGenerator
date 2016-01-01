@@ -14,7 +14,7 @@ public class CCombobox extends JComboBox<String> implements IMouseManager
 
 	public CCombobox()
 	{
-		this(new String[0]);
+		this(new String[] { "" });
 	}
 
 	public CCombobox(String[] values)

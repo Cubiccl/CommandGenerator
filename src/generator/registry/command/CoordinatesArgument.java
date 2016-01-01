@@ -7,6 +7,7 @@ import generator.interfaces.ClickEvent;
 import generator.interfaces.IClickEvent;
 import generator.main.GenerationException;
 
+import java.awt.AWTEvent;
 import java.awt.Component;
 
 /** An Argument to precise Coordinates in the world. */
@@ -67,7 +68,7 @@ public class CoordinatesArgument extends Argument implements IClickEvent
 	}
 
 	@Override
-	public void onClick(int componentID)
+	public void onEvent(int componentID, AWTEvent event)
 	{
 		switch (componentID)
 		{
