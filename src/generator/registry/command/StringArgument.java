@@ -23,7 +23,7 @@ public class StringArgument extends Argument
 	/** True if the input String can contain spaces. */
 	private boolean hasSpaces;
 	/** The Panel containing all the GUI. */
-	private CPanelHorizontal panel;
+	protected CPanelHorizontal panel;
 	/** The ID of the Label. */
 	private String textID;
 

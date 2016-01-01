@@ -52,6 +52,9 @@ public final class StructureCreator
 				argumentFloat.setInteger();
 				return argumentFloat;
 
+			case "coord":
+				return createSingleCoordinate(compulsory, details);
+
 			case "coordinates":
 				return createCoordinates(compulsory, details);
 
@@ -137,6 +140,11 @@ public final class StructureCreator
 			else CommandGenerator.log("Unknown detail : " + detail);
 		}
 		return argument;
+	}
+
+	private static Argument createSingleCoordinate(boolean compulsory, String[] details)
+	{
+		return new SingleCoordinateArgument(compulsory, details[0]);
 	}
 
 	private static StringArgument createString(boolean compulsory, String[] details)
