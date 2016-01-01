@@ -17,16 +17,16 @@ public class Translator implements ITranslate
 		this.updateLang();
 	}
 
-	/** @param textId - The ID for the text to translate.<br>
+	/** @param textID - The ID for the text to translate.<br>
 	 *            <strong>CATEGORY:id.of.the.text</strong>
 	 * @return The translation. */
-	public String translate(String textId)
+	public String translate(String textID)
 	{
-		String[] values = textId.split(":");
+		String[] values = textID.split(":");
 		if (values.length < 2)
 		{
-			CommandGenerator.log(new Exception(textId + " does not contain a category."));
-			return textId;
+			CommandGenerator.log(new Exception(textID + " does not contain a category."));
+			return textID;
 		}
 		return translate(values[0], values[1]);
 	}

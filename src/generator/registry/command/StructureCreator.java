@@ -52,6 +52,9 @@ public final class StructureCreator
 				argumentFloat.setInteger();
 				return argumentFloat;
 
+			case "coordinates":
+				return createCoordinates(compulsory, details);
+
 			default:
 				String typeFinal = type;
 				return new Argument(true, 1) {
@@ -108,6 +111,18 @@ public final class StructureCreator
 			else values[i] = details[i + 1];
 		}
 		return new ChoiceArgument(compulsory, hasHelp, details[0], values);
+	}
+
+	private static Argument createCoordinates(boolean compulsory, String[] details)
+	{
+		boolean relative = false;
+		for (int i = 1; i < details.length; i++)
+		{
+			String detail = details[i];
+			if (detail.equals("relative")) relative = true;
+			else CommandGenerator.log("Unknown detail : " + detail);
+		}
+		return new CoordinatesArgument(compulsory, details[0], relative);
 	}
 
 	private static NumberArgument createFloat(boolean compulsory, String[] details)

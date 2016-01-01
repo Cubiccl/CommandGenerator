@@ -125,12 +125,12 @@ public class CommandGenerator
 		instance.create();
 	}
 
-	/** @param textId - The ID of the text to translate.
+	/** @param textID - The ID of the text to translate.
 	 * @return A translation of the given text ID. */
-	public static String translate(String textId)
+	public static String translate(String textID)
 	{
-		if (instance.translator == null) return textId;
-		return instance.translator.translate(textId);
+		if (instance.translator == null || textID == null) return textID;
+		return instance.translator.translate(textID);
 	}
 
 	/** Updates all translations of the Generator. Called when the user changes language. */
