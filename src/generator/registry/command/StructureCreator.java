@@ -51,6 +51,9 @@ public final class StructureCreator
 				NumberArgument argumentFloat = createFloat(compulsory, details);
 				argumentFloat.setInteger();
 				return argumentFloat;
+				
+			case "xp":
+				return new XPArgument();
 
 			case "coord":
 				return new SingleCoordinateArgument(compulsory, details[0]);
