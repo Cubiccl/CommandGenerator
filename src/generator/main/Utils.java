@@ -42,14 +42,15 @@ public final class Utils
 	 * <li>PARTICLE = 7;</li>
 	 * <li>SOUND = 8;</li>
 	 * <li>COORDINATES = 9;</li>
+	 * <li>TARGET = 10;</li>
 	 * <li>COMMAND = 100;</li>
 	 * <li>STRUCTURE = 101;</li>
 	 * </ul> */
 	public static final int ITEM = 0, BLOCK = 1, ENTITY = 2, EFFECT = 3, ENCHANTMENT = 4, ACHIEVEMENT = 5, ATTRIBUTE = 6, PARTICLE = 7, SOUND = 8,
-			COORDINATES = 9, COMMAND = 100, STRUCTURE = 101;
+			COORDINATES = 9, TARGET = 10, COMMAND = 100, STRUCTURE = 101;
 	/** Names for Objects types. */
 	public static final String[] OBJECT_TYPES_NAMES = { "item", "block", "entity", "effect", "enchantment", "achievement", "attribute", "particle", "sound",
-			"coordinates" };
+			"coordinates", "target" };
 
 	/** @param text - The input text.
 	 * @param substring - The occurrences to look for.
