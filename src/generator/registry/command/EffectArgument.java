@@ -13,7 +13,7 @@ public class EffectArgument extends Argument
 	/** Creates a new Effect Argument. */
 	public EffectArgument()
 	{
-		super(true, 4);
+		super(true, 1, 4);
 	}
 
 	@Override

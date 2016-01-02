@@ -11,17 +11,27 @@ public abstract class Argument implements ITranslate
 	/** True if this Argument should always be used when generating the Command. */
 	private boolean isCompulsory;
 	/** This Argument's length. Determines how many elements of the Command it generates. -1 for any (potentially infinite) length. */
-	private int length;
+	private int minLength, maxLength;
 
 	/** Creates a new Argument.
 	 * 
 	 * @param isCompulsory - True if compulsory.
-	 * @param length - Its length.
-	 * @see Argument#COMPOUND */
+	 * @param length - Its length. */
 	public Argument(boolean isCompulsory, int length)
 	{
+		this(isCompulsory, length, length);
+	}
+
+	/** Creates a new Argument.
+	 * 
+	 * @param isCompulsory - True if compulsory.
+	 * @param minLength - Its minimum length.
+	 * @param maxLength - Its maximum length. */
+	public Argument(boolean isCompulsory, int minLength, int maxLength)
+	{
 		this.isCompulsory = isCompulsory;
-		this.length = length;
+		this.minLength = minLength;
+		this.maxLength = maxLength;
 	}
 
 	/** Initializes the Component of this Argument. */
@@ -34,10 +44,16 @@ public abstract class Argument implements ITranslate
 	/** @return The Component used to let the user determine how this Argument is used. */
 	public abstract Component getComponent();
 
-	/** @return This Argument's length. Determines how many elements of the Command it generates. */
-	public int getLength()
+	/** @return This Argument's maximum length. Determines how many elements of the Command it generates. */
+	public int getMaxLength()
 	{
-		return this.length;
+		return this.maxLength;
+	}
+
+	/** @return This Argument's minimum length. Determines how many elements of the Command it generates. */
+	public int getMinLength()
+	{
+		return this.minLength;
 	}
 
 	/** @return True if this Argument is compulsory ; thus should always be used when generating the Command. */
@@ -50,14 +66,6 @@ public abstract class Argument implements ITranslate
 	public boolean isUsed()
 	{
 		return this.isCompulsory;
-	}
-
-	/** Changes the length of this Argument.
-	 * 
-	 * @param length - The new length. */
-	protected void setLength(int length)
-	{
-		this.length = length;
 	}
 
 }
