@@ -60,8 +60,12 @@ public final class StructureCreator
 
 			case "achievement":
 				return new AchievementArgument();
+				
+			case "enchantment":
+				return new EnchantmentArgument();
 
 			default:
+				CommandGenerator.log("Unknown Argument type : " + type);
 				String typeFinal = type;
 				return new Argument(true, 1) {
 

@@ -1,6 +1,8 @@
 package generator.registry.instance;
 
-public class Coordinates
+import generator.main.Utils;
+
+public class Coordinates extends ObjectInstance
 {
 	/** Indexes for positions and relative arrays. */
 	public static final int X = 0, Y = 1, Z = 2;
@@ -30,6 +32,7 @@ public class Coordinates
 	 * @param zRelative - True if the z position is relative. */
 	public Coordinates(float x, float y, float z, boolean xRelative, boolean yRelative, boolean zRelative)
 	{
+		super(Utils.COORDINATES);
 		this.positions = new float[] { x, y, z };
 		this.relative = new boolean[] { xRelative, yRelative, zRelative };
 	}
@@ -82,7 +85,7 @@ public class Coordinates
 		return this.getRelative()[Z];
 	}
 
-	/** @return The String representation of these Coordinates to use in a Command. */
+	@Override
 	public String toCommand()
 	{
 		String command = "";
