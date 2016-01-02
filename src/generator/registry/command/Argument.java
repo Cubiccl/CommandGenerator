@@ -68,4 +68,12 @@ public abstract class Argument implements ITranslate
 		return this.isCompulsory;
 	}
 
+	/** Changes this Argument's length.
+	 * 
+	 * @param length - The new length. */
+	protected void setLength(int length)
+	{
+		this.minLength = length;
+	}
+
 }
