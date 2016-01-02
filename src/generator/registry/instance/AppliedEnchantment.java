@@ -22,6 +22,18 @@ public class AppliedEnchantment extends ObjectInstance
 		this.level = level;
 	}
 
+	/** @return The Enchantment type. */
+	public Enchantment getEnchantment()
+	{
+		return this.enchantment;
+	}
+
+	/** @return The level of this Enchantment. */
+	public int getLevel()
+	{
+		return this.level;
+	}
+
 	@Override
 	public String toCommand()
 	{

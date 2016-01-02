@@ -63,7 +63,8 @@ public class PanelEnchantment extends CPanel implements IClickEvent
 		this.updateLang();
 	}
 
-	/** @return The Enchantment inpu by the user. */
+	/** @return The generated Applied Enchantment.
+	 * @throws GenerationException If an input value is incorrect. */
 	public AppliedEnchantment generateEnchantment() throws GenerationException
 	{
 		if (this.isRestricted) { return new AppliedEnchantment(this.getSelectedEnchantment(), (int) this.spinnerLevel.getValue()); }

@@ -63,6 +63,9 @@ public final class StructureCreator
 				
 			case "enchantment":
 				return new EnchantmentArgument();
+				
+			case "effect":
+				return new EffectArgument();
 
 			default:
 				CommandGenerator.log("Unknown Argument type : " + type);
