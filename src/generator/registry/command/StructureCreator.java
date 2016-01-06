@@ -51,7 +51,7 @@ public final class StructureCreator
 				NumberArgument argumentFloat = createFloat(compulsory, details);
 				argumentFloat.setInteger();
 				return argumentFloat;
-				
+
 			case "xp":
 				return new XPArgument();
 
@@ -63,12 +63,15 @@ public final class StructureCreator
 
 			case "achievement":
 				return new AchievementArgument();
-				
+
 			case "enchantment":
 				return new EnchantmentArgument();
-				
+
 			case "effect":
 				return new EffectArgument();
+
+			case "target":
+				return createTarget(compulsory, details);
 
 			default:
 				CommandGenerator.log("Unknown Argument type : " + type);
@@ -181,6 +184,16 @@ public final class StructureCreator
 			structure.addArgument(createArgument(data[i]));
 		}
 		return structure;
+	}
+
+	private static ArgumentTarget createTarget(boolean compulsory, String[] details)
+	{
+		int type = ArgumentTarget.ALL;
+		if (details[1].equals("all")) type = ArgumentTarget.ALL;
+		else if (details[1].equals("players")) type = ArgumentTarget.PLAYERS;
+		else if (details[1].equals("entity")) type = ArgumentTarget.ENTITIES;
+
+		return new ArgumentTarget(compulsory, "GUI:" + details[0], type);
 	}
 
 }
