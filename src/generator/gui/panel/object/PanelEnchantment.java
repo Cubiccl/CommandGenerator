@@ -1,7 +1,5 @@
 package generator.gui.panel.object;
 
-import java.awt.AWTEvent;
-
 import generator.CommandGenerator;
 import generator.gui.CLabel;
 import generator.gui.combobox.CSearchBox;
@@ -11,8 +9,11 @@ import generator.gui.textfield.CTextfield;
 import generator.interfaces.ClickEvent;
 import generator.interfaces.IClickEvent;
 import generator.main.GenerationException;
+import generator.main.Text;
 import generator.registry.Enchantment;
 import generator.registry.instance.AppliedEnchantment;
+
+import java.awt.AWTEvent;
 
 /** Used to input an Enchantment. */
 @SuppressWarnings("serial")
@@ -42,8 +43,8 @@ public class PanelEnchantment extends CPanel implements IClickEvent
 		this.isRestricted = isRestricted;
 		this.enchantments = CommandGenerator.getRegistry().getEnchantments();
 
-		this.labelEnchantment = new CLabel("GUI:enchantment.enchant");
-		this.labelLevel = new CLabel("GUI:enchantment.level");
+		this.labelEnchantment = new CLabel(new Text("GUI", "enchantment.enchant"));
+		this.labelLevel = new CLabel(new Text("GUI", "enchantment.level"));
 
 		this.comboboxEnchantment = new CSearchBox();
 		this.comboboxEnchantment.addActionListener(new ClickEvent(this, SELECT));
@@ -75,7 +76,7 @@ public class PanelEnchantment extends CPanel implements IClickEvent
 			level = Integer.parseInt(this.textfieldLevel.getText());
 		} catch (NumberFormatException e)
 		{
-			throw new GenerationException(CommandGenerator.translate("GUI:error.integer").replaceAll("<value>", this.textfieldLevel.getText()));
+			throw new GenerationException(new Text("GUI", "error.integer", false).addReplacement("<value>", this.textfieldLevel.getText()));
 		}
 
 		return new AppliedEnchantment(this.getSelectedEnchantment(), level);

@@ -8,6 +8,7 @@ import generator.gui.combobox.CSearchBox;
 import generator.gui.panel.CPanelHorizontal;
 import generator.interfaces.ClickEvent;
 import generator.interfaces.IClickEvent;
+import generator.main.Text;
 import generator.registry.Achievement;
 
 import javax.swing.BorderFactory;
@@ -21,10 +22,12 @@ public class PanelAchievement extends CPanelHorizontal implements IClickEvent
 	private Achievement[] achievements;
 	private CSearchBox combobox;
 	private CImage labelTexture;
+	private Text title;
 
 	public PanelAchievement()
 	{
 		super();
+		this.title = new Text("GUI", "object.achievement");
 		this.achievements = CommandGenerator.getRegistry().getAchievements();
 
 		this.combobox = new CSearchBox();
@@ -60,7 +63,7 @@ public class PanelAchievement extends CPanelHorizontal implements IClickEvent
 	public void updateLang()
 	{
 		super.updateLang();
-		this.setBorder(BorderFactory.createTitledBorder(CommandGenerator.translate("GUI:object.achievement")));
+		this.setBorder(BorderFactory.createTitledBorder(this.title.getValue()));
 
 		String[] names = new String[this.achievements.length];
 		for (int i = 0; i < names.length; i++)

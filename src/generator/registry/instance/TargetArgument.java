@@ -6,12 +6,15 @@ import generator.gui.panel.CPanel;
 import generator.gui.panel.CPanelHorizontal;
 import generator.interfaces.IConfirmState;
 import generator.main.GenerationException;
+import generator.main.Text;
 
 public class TargetArgument implements IConfirmState
 {
 	/** The IDs of the Arguments. */
 	public static final String[] ARGUMENT_IDS = { "x", "y", "z", "dx", "dy", "dz", "r", "rm", "rx", "rxm", "ry", "rym", "m", "c", "l", "lm", "name", "type",
 			"score", "score_min", "team" };
+	/** The names of the Arguments. */
+	public static Text[] NAMES = new Text[ARGUMENT_IDS.length];
 	/** The different Target Argument types.
 	 * <ul>
 	 * <li>X = 0;</li>
@@ -41,9 +44,13 @@ public class TargetArgument implements IConfirmState
 
 	/** @param type - The type of the Argument.
 	 * @return The name of this Argument */
-	public static String getName(int type)
+	public static Text getName(int type)
 	{
-		return CommandGenerator.translate("CHOICE:target." + ARGUMENT_IDS[type]);
+		if (NAMES == null) for (int i = 0; i < ARGUMENT_IDS.length; i++)
+		{
+			NAMES[i] = new Text("CHOICE", "target." + ARGUMENT_IDS[type]);
+		}
+		return NAMES[type];
 	}
 
 	/** The type of the Selector. */
@@ -64,7 +71,7 @@ public class TargetArgument implements IConfirmState
 	/** Asks the user the value of this Argument. */
 	public void askValue()
 	{
-		CommandGenerator.addStateWithConfirm("GUI:state.target_argument", this.createGui(), this);
+		CommandGenerator.addStateWithConfirm(new Text("GUI", "state.target_argument"), this.createGui(), this);
 	}
 
 	@Override
@@ -90,7 +97,7 @@ public class TargetArgument implements IConfirmState
 	{
 		// TODO Auto-generated method stub
 		CPanel panel = new CPanelHorizontal();
-		panel.add(new CLabel("CHOICE:target." + ARGUMENT_IDS[this.type]));
+		panel.add(new CLabel(new Text("CHOICE", "target." + ARGUMENT_IDS[this.type])));
 		return panel;
 	}
 

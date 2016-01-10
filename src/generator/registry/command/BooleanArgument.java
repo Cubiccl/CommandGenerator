@@ -2,6 +2,7 @@ package generator.registry.command;
 
 import generator.gui.checkbox.CCheckbox;
 import generator.main.GenerationException;
+import generator.main.Text;
 
 import java.awt.Component;
 
@@ -10,18 +11,18 @@ public class BooleanArgument extends Argument
 {
 	private CCheckbox checkbox;
 	/** The text ID to use for the Checkbox. */
-	private String textID;
+	private Text text;
 	/** The values to use to generate. "true" and "false" by default. */
 	private String trueValue, falseValue;
 
 	/** Creates a new Boolean Argument.
 	 * 
 	 * @param isCompulsory - True if compulsory.
-	 * @param textID - The text ID for the Checkbox. */
-	public BooleanArgument(boolean isCompulsory, String textID)
+	 * @param text - The text ID for the Checkbox. */
+	public BooleanArgument(boolean isCompulsory, Text text)
 	{
 		super(isCompulsory, 1);
-		this.textID = "GUI:" + textID;
+		this.text = text;
 		this.trueValue = "true";
 		this.falseValue = "false";
 	}
@@ -29,7 +30,7 @@ public class BooleanArgument extends Argument
 	@Override
 	public void createGui()
 	{
-		this.checkbox = new CCheckbox(this.textID);
+		this.checkbox = new CCheckbox(this.text);
 	}
 
 	@Override

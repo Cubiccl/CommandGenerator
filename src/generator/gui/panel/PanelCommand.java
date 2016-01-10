@@ -1,11 +1,11 @@
 package generator.gui.panel;
 
-import generator.CommandGenerator;
 import generator.gui.button.CButton;
 import generator.gui.checkbox.CCheckbox;
 import generator.gui.textfield.CEntry;
 import generator.interfaces.ClickEvent;
 import generator.interfaces.IClickEvent;
+import generator.main.Text;
 
 import java.awt.AWTEvent;
 import java.awt.Toolkit;
@@ -22,18 +22,20 @@ public class PanelCommand extends CPanelHorizontal implements IClickEvent
 	private CButton buttonCopy;
 	private CCheckbox checkboxEditable;
 	private CEntry entryCommand;
+	private Text title;
 
 	public PanelCommand()
 	{
 		super();
-		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED), CommandGenerator.translate("GUI:object.command")));
+		this.title = new Text("GUI", "object.command");
+		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED), this.title.getValue()));
 
-		this.entryCommand = new CEntry("GUI:command.command");
+		this.entryCommand = new CEntry(new Text("GUI", "command.command"));
 		this.entryCommand.getTextfield().setEditable(false);
 		this.entryCommand.getTextfield().setColumns(20);
-		this.checkboxEditable = new CCheckbox("GUI:command.editable");
+		this.checkboxEditable = new CCheckbox(new Text("GUI", "command.editable"));
 		this.checkboxEditable.addActionListener(new ClickEvent(this, EDITABLE));
-		this.buttonCopy = new CButton("GUI:command.copy");
+		this.buttonCopy = new CButton(new Text("GUI", "command.copy"));
 		this.buttonCopy.addActionListener(new ClickEvent(this, COPY));
 
 		this.add(this.entryCommand);
@@ -67,8 +69,7 @@ public class PanelCommand extends CPanelHorizontal implements IClickEvent
 	@Override
 	public void updateLang()
 	{
-		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED), CommandGenerator.translate("GUI:object.command")));
+		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED), this.title.getValue()));
 		super.updateLang();
 	}
-
 }

@@ -2,6 +2,7 @@ package generator.registry.command;
 
 import generator.CommandGenerator;
 import generator.main.GenerationException;
+import generator.main.Text;
 
 import java.awt.Component;
 
@@ -30,7 +31,7 @@ public final class StructureCreator
 		switch (type)
 		{
 			case "label":
-				return new LabelArgument(details[0]);
+				return new LabelArgument(new Text("GUI", details[0]));
 
 			case "static":
 				return new StaticArgument(details[0]);
@@ -56,7 +57,7 @@ public final class StructureCreator
 				return new XPArgument();
 
 			case "coord":
-				return new SingleCoordinateArgument(compulsory, details[0]);
+				return new SingleCoordinateArgument(compulsory, new Text("GUI", details[0]));
 
 			case "coordinates":
 				return createCoordinates(compulsory, details);
@@ -107,7 +108,7 @@ public final class StructureCreator
 
 	private static BooleanArgument createBoolean(boolean compulsory, String[] details)
 	{
-		BooleanArgument argument = new BooleanArgument(compulsory, details[0]);
+		BooleanArgument argument = new BooleanArgument(compulsory, new Text("GUI", details[0]));
 		for (int i = 1; i < details.length; i++)
 		{
 			String detail = details[i];
@@ -141,12 +142,12 @@ public final class StructureCreator
 			if (detail.equals("relative")) relative = true;
 			else CommandGenerator.log("Unknown detail : " + detail);
 		}
-		return new CoordinatesArgument(compulsory, details[0], relative);
+		return new CoordinatesArgument(compulsory, new Text("GUI", details[0]), relative);
 	}
 
 	private static NumberArgument createFloat(boolean compulsory, String[] details)
 	{
-		NumberArgument argument = new NumberArgument(compulsory, details[0]);
+		NumberArgument argument = new NumberArgument(compulsory, new Text("GUI", details[0]));
 		for (int i = 1; i < details.length; i++)
 		{
 			String detail = details[i];
@@ -160,7 +161,7 @@ public final class StructureCreator
 
 	private static StringArgument createString(boolean compulsory, String[] details)
 	{
-		StringArgument argument = new StringArgument(compulsory, details[0]);
+		StringArgument argument = new StringArgument(compulsory, new Text("GUI", details[0]));
 		for (int i = 1; i < details.length; i++)
 		{
 			String detail = details[i];
@@ -193,7 +194,7 @@ public final class StructureCreator
 		else if (details[1].equals("players")) type = ArgumentTarget.PLAYERS;
 		else if (details[1].equals("entity")) type = ArgumentTarget.ENTITIES;
 
-		return new ArgumentTarget(compulsory, "GUI:" + details[0], type);
+		return new ArgumentTarget(compulsory, new Text("GUI", details[0]), type);
 	}
 
 }

@@ -2,6 +2,7 @@ package generator.registry.command;
 
 import generator.gui.checkbox.CCheckbox;
 import generator.main.GenerationException;
+import generator.main.Text;
 
 /** A single coordinate (x, y or z) */
 public class SingleCoordinateArgument extends NumberArgument
@@ -13,7 +14,7 @@ public class SingleCoordinateArgument extends NumberArgument
 	 * 
 	 * @param isCompulsory - True if it is compulsory.
 	 * @param textID - The ID of the text. */
-	public SingleCoordinateArgument(boolean isCompulsory, String textID)
+	public SingleCoordinateArgument(boolean isCompulsory, Text textID)
 	{
 		super(isCompulsory, textID);
 	}
@@ -22,7 +23,7 @@ public class SingleCoordinateArgument extends NumberArgument
 	public void createGui()
 	{
 		super.createGui();
-		this.checkboxRelative = new CCheckbox("GUI:coordinates.relative");
+		this.checkboxRelative = new CCheckbox(new Text("GUI", "coordinates.relative"));
 		this.panel.add(this.checkboxRelative);
 	}
 

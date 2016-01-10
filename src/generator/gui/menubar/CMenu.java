@@ -1,7 +1,7 @@
 package generator.gui.menubar;
 
-import generator.CommandGenerator;
 import generator.interfaces.ITranslate;
+import generator.main.Text;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -9,18 +9,18 @@ import javax.swing.JMenuItem;
 @SuppressWarnings("serial")
 public class CMenu extends JMenu implements ITranslate
 {
-	private String textId;
+	private Text text;
 
-	public CMenu(String textId)
+	public CMenu(Text text)
 	{
-		this.textId = "GUI:" + textId;
+		this.text = text;
 		this.updateLang();
 	}
 
 	@Override
 	public void updateLang()
 	{
-		this.setText(CommandGenerator.translate(textId));
+		this.setText(this.text.getValue());
 		for (int index = 0; index < this.getItemCount(); index++)
 		{
 			JMenuItem item = this.getItem(index);

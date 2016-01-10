@@ -1,7 +1,5 @@
 package generator.gui.panel;
 
-import java.awt.AWTEvent;
-
 import generator.CommandGenerator;
 import generator.gui.CLabel;
 import generator.gui.CTabbedPane;
@@ -9,8 +7,11 @@ import generator.gui.button.CButton;
 import generator.gui.combobox.CCombobox;
 import generator.interfaces.ClickEvent;
 import generator.interfaces.IClickEvent;
+import generator.main.Text;
 import generator.registry.command.Command;
 import generator.registry.command.Structure;
+
+import java.awt.AWTEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.border.BevelBorder;
@@ -32,9 +33,9 @@ public class PanelCommandSelection extends CPanelHorizontal implements IClickEve
 		this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		this.tabbedPaneStructure = tabbedPaneStructure;
 
-		this.buttonGenerate = new CButton("GUI:command.generate");
+		this.buttonGenerate = new CButton(new Text("GUI", "command.generate"));
 
-		this.labelCommand = new CLabel("GUI:command.command");
+		this.labelCommand = new CLabel(new Text("GUI", "command.command"));
 		this.comboboxCommand = new CCombobox(new String[] { "give", "tp" });
 
 		this.comboboxCommand.addActionListener(new ClickEvent(this, COMMAND_SELECTION));
@@ -59,6 +60,21 @@ public class PanelCommandSelection extends CPanelHorizontal implements IClickEve
 		return this.getSelectedCommand().getStructures()[this.tabbedPaneStructure.getSelectedIndex()];
 	}
 
+	/** Called when the user changes the command. */
+	private void onCommandChange()
+	{
+		Structure[] structures = this.getSelectedCommand().getStructures();
+		String[] structureNames = new String[structures.length];
+		this.tabbedPaneStructure.removeAll();
+
+		for (int i = 0; i < structureNames.length; i++)
+		{
+			structureNames[i] = structures[i].getName();
+			this.tabbedPaneStructure.add(structures[i].getName(), structures[i].getComponent());
+		}
+
+	}
+
 	@Override
 	public void onEvent(int componentID, AWTEvent event)
 	{
@@ -75,21 +91,6 @@ public class PanelCommandSelection extends CPanelHorizontal implements IClickEve
 			default:
 				break;
 		}
-	}
-
-	/** Called when the user changes the command. */
-	private void onCommandChange()
-	{
-		Structure[] structures = this.getSelectedCommand().getStructures();
-		String[] structureNames = new String[structures.length];
-		this.tabbedPaneStructure.removeAll();
-
-		for (int i = 0; i < structureNames.length; i++)
-		{
-			structureNames[i] = structures[i].getName();
-			this.tabbedPaneStructure.add(structures[i].getName(), structures[i].getComponent());
-		}
-
 	}
 
 	@Override

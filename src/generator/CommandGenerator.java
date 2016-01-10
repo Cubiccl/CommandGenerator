@@ -11,6 +11,7 @@ import generator.main.GenerationException;
 import generator.main.Settings;
 import generator.main.State;
 import generator.main.StateManager;
+import generator.main.Text;
 import generator.main.Translator;
 import generator.registry.ObjectCreator;
 import generator.registry.Registry;
@@ -28,22 +29,22 @@ public class CommandGenerator
 
 	/** Adds a new state.
 	 * 
-	 * @param textID - The ID of the state's name.
+	 * @param text - The state's name.
 	 * @param component - The component to display. */
-	public static void addState(String textID, CPanel component)
+	public static void addState(Text text, CPanel component)
 	{
-		instance.stateManager.addState(textID, component);
+		instance.stateManager.addState(text, component);
 	}
 
 	/** Adds a new state. Will have OK and Cancel buttons.
 	 * 
-	 * @param textID - The ID of the state's name.
+	 * @param text - The state's name.
 	 * @param component - The component to display.
 	 * @param listener - Called when the user clicks on OK or Cancel. */
-	public static void addStateWithConfirm(String textID, CPanel component, IConfirmState listener)
+	public static void addStateWithConfirm(Text text, CPanel component, IConfirmState listener)
 	{
 		PanelConfirm confirm = new PanelConfirm(component, listener);
-		addState(textID, confirm);
+		addState(text, confirm);
 	}
 
 	/** Deletes the current state. */
@@ -125,12 +126,18 @@ public class CommandGenerator
 		instance.create();
 	}
 
-	/** @param textID - The ID of the text to translate.
-	 * @return A translation of the given text ID. */
-	public static String translate(String textID)
+	public static void registerText(Text text)
 	{
-		if (instance.translator == null || textID == null) return textID;
-		return instance.translator.translate(textID);
+		instance.translator.registerText(text);
+	}
+
+	/** @param text - The Text to translate.
+	 * @return A translation of the given text ID. */
+	public static String translate(Text text)
+	{
+		if (text == null) return null;
+		if (instance.translator == null) return text.toString();
+		return instance.translator.translate(text);
 	}
 
 	/** Updates all translations of the Generator. Called when the user changes language. */
@@ -141,7 +148,6 @@ public class CommandGenerator
 		instance.stateManager.updateLang();
 		getWindow().updateLang();
 	}
-
 	/** True if it has finished initializing, thus the user can interact. */
 	private boolean initialized;
 	/** Contains all data. */
@@ -149,6 +155,7 @@ public class CommandGenerator
 	private Settings settings;
 	/** Manages what state the Generator is at. */
 	private StateManager stateManager;
+
 	/** Contains all translations. */
 	private Translator translator;
 
@@ -163,6 +170,7 @@ public class CommandGenerator
 	/** Initializes all the program. */
 	private void create()
 	{
+		this.translator = new Translator();
 		this.settings = new Settings(FileManager.setupFolder());
 		this.settings.init();
 		FileManager.clearLog();
@@ -170,19 +178,19 @@ public class CommandGenerator
 		log("Command generator loading...");
 		this.createFrame();
 		this.stateManager = new StateManager(getWindow().getTextAreaStates());
-		this.translator = new Translator();
+		this.translator.updateLang();
 		getWindow().updateLang();
 
 		LoadingPanel panel = new LoadingPanel();
-		addState("GUI:loading.loading", panel);
+		addState(new Text("GUI", "loading.loading"), panel);
 
 		this.registry = new Registry();
 		ObjectCreator.createObjects();
 
-		panel.setDetail("GUI:loading.objects_end");
+		panel.setDetail(new Text("GUI", "loading.objects_end"));
 		this.registry.complete();
 
-		panel.setDetail("GUI:loading.gui");
+		panel.setDetail(new Text("GUI", "loading.gui"));
 		for (Command command : getRegistry().getCommands())
 		{
 			command.createGui();
@@ -190,7 +198,7 @@ public class CommandGenerator
 		PanelCommandSetup panelCommand = new PanelCommandSetup();
 
 		clearActiveState();
-		addState("GUI:object.command", panelCommand);
+		addState(new Text("GUI", "object.command"), panelCommand);
 		this.initialized = true;
 	}
 

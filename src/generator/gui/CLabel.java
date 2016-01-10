@@ -2,6 +2,7 @@ package generator.gui;
 
 import generator.CommandGenerator;
 import generator.interfaces.ITranslate;
+import generator.main.Text;
 import generator.main.Utils;
 
 import javax.swing.JLabel;
@@ -9,27 +10,32 @@ import javax.swing.JLabel;
 @SuppressWarnings("serial")
 public class CLabel extends JLabel implements ITranslate
 {
-	private String textID;
+	private Text text;
 
-	public CLabel(String textID)
+	public CLabel(Text text)
 	{
 		super("");
-		this.textID = textID;
+		this.text = text;
 		this.setFont(Utils.font);
 		this.updateLang();
 	}
 
+	/** @see CLabel#setText(Text) */
 	@Override
-	public void setText(String textID)
+	@Deprecated
+	public void setText(String text)
+	{}
+
+	public void setText(Text text)
 	{
-		this.textID = textID;
+		this.text = text;
 		this.updateLang();
 	}
 
 	@Override
 	public void updateLang()
 	{
-		if (textID != null && !textID.equals("")) super.setText(CommandGenerator.translate(this.textID));
+		if (text != null && !text.equals("")) super.setText(CommandGenerator.translate(this.text));
 	}
 
 }

@@ -1,8 +1,8 @@
 package generator.registry.command;
 
-import generator.CommandGenerator;
 import generator.gui.CTextArea;
 import generator.main.GenerationException;
+import generator.main.Text;
 
 import java.awt.Component;
 
@@ -12,24 +12,24 @@ import javax.swing.border.BevelBorder;
 /** This is not an actual Argument ; it will only display some text. */
 public class LabelArgument extends Argument
 {
+	/** ID of the text to display. */
+	private Text text;
 	/** Text Area to display the text. */
 	private CTextArea textArea;
-	/** ID of the text to display. */
-	private String textID;
 
 	/** Creates a new Label Argument.
 	 * 
-	 * @param textID - The ID of the text to display. */
-	public LabelArgument(String textID)
+	 * @param text - The ID of the text to display. */
+	public LabelArgument(Text text)
 	{
 		super(false, 0);
-		this.textID = textID;
+		this.text = text;
 	}
 
 	@Override
 	public void createGui()
 	{
-		this.textArea = new CTextArea(CommandGenerator.translate("GUI:" + this.textID));
+		this.textArea = new CTextArea(this.text.getValue());
 		this.textArea.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 	}
 
@@ -48,7 +48,7 @@ public class LabelArgument extends Argument
 	@Override
 	public void updateLang()
 	{
-		if (this.textArea != null) this.textArea.setText(CommandGenerator.translate("GUI:" + this.textID));
+		if (this.textArea != null) this.textArea.setText(this.text.getValue());
 	}
 
 }

@@ -2,6 +2,7 @@ package generator.registry.command;
 
 import generator.gui.checkbox.CCheckbox;
 import generator.main.GenerationException;
+import generator.main.Text;
 
 /** Used to give experience. */
 public class XPArgument extends NumberArgument
@@ -11,7 +12,7 @@ public class XPArgument extends NumberArgument
 
 	public XPArgument()
 	{
-		super(true, "xp.amount");
+		super(true, new Text("GUI", "xp.amount"));
 		this.setInteger();
 	}
 
@@ -20,7 +21,7 @@ public class XPArgument extends NumberArgument
 	{
 		super.createGui();
 
-		this.checkboxLevel = new CCheckbox("GUI:xp.level");
+		this.checkboxLevel = new CCheckbox(new Text("GUI", "xp.level"));
 		this.panel.add(this.checkboxLevel);
 	}
 

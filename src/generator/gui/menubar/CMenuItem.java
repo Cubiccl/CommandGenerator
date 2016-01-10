@@ -1,22 +1,22 @@
 package generator.gui.menubar;
 
-import java.awt.event.ActionListener;
-
-import generator.CommandGenerator;
 import generator.interfaces.ITranslate;
+import generator.main.Text;
+
+import java.awt.event.ActionListener;
 
 import javax.swing.JMenuItem;
 
 @SuppressWarnings("serial")
 public class CMenuItem extends JMenuItem implements ITranslate
 {
-	private String textId;
+	private Text text;
 
-	/** @param textId - The ID of the text for this Menu.
+	/** @param text - The text for this Menu.
 	 * @param listener - A listener to call when this Menu is clicked. */
-	public CMenuItem(String textId, ActionListener listener)
+	public CMenuItem(Text text, ActionListener listener)
 	{
-		this.textId = "GUI:" + textId;
+		this.text = text;
 		this.addActionListener(listener);
 		this.updateLang();
 	}
@@ -24,7 +24,7 @@ public class CMenuItem extends JMenuItem implements ITranslate
 	@Override
 	public void updateLang()
 	{
-		this.setText(CommandGenerator.translate(textId));
+		this.setText(this.text.getValue());
 	}
 
 }

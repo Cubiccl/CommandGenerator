@@ -1,7 +1,5 @@
 package generator.gui.panel.object;
 
-import java.awt.AWTEvent;
-
 import generator.CommandGenerator;
 import generator.gui.CImage;
 import generator.gui.CLabel;
@@ -12,8 +10,11 @@ import generator.gui.textfield.CEntry;
 import generator.interfaces.ClickEvent;
 import generator.interfaces.IClickEvent;
 import generator.main.GenerationException;
+import generator.main.Text;
 import generator.registry.Effect;
 import generator.registry.instance.ActiveEffect;
+
+import java.awt.AWTEvent;
 
 /** Used to input an Effect. */
 @SuppressWarnings("serial")
@@ -41,13 +42,13 @@ public class PanelEffect extends CPanel implements IClickEvent
 		super();
 		this.effects = CommandGenerator.getRegistry().getEffects();
 
-		this.labelEffect = new CLabel("GUI:effect.effect");
+		this.labelEffect = new CLabel(new Text("GUI", "effect.effect"));
 		this.texture = new CImage();
 
-		this.checkboxHideParticles = new CCheckbox("GUI:effect.particles");
+		this.checkboxHideParticles = new CCheckbox(new Text("GUI", "effect.particles"));
 
-		this.entryAmplifier = new CEntry("GUI:effect.amplifier");
-		this.entryDuration = new CEntry("GUI:effect.duration");
+		this.entryAmplifier = new CEntry(new Text("GUI", "effect.amplifier"));
+		this.entryDuration = new CEntry(new Text("GUI", "effect.duration"));
 
 		this.comboboxEffect = new CSearchBox();
 		this.comboboxEffect.addActionListener(new ClickEvent(this, SELECT));
@@ -84,7 +85,7 @@ public class PanelEffect extends CPanel implements IClickEvent
 			duration = Integer.parseInt(this.entryDuration.getText());
 		} catch (NumberFormatException e)
 		{
-			throw new GenerationException(CommandGenerator.translate("GUI:error.integer").replaceAll("<value>", this.entryDuration.getText()));
+			throw new GenerationException(new Text("GUI", "error.integer", false).addReplacement("<value>", this.entryDuration.getText()));
 		}
 
 		try
@@ -92,11 +93,11 @@ public class PanelEffect extends CPanel implements IClickEvent
 			amplifier = Integer.parseInt(this.entryAmplifier.getText());
 		} catch (NumberFormatException e)
 		{
-			throw new GenerationException(CommandGenerator.translate("GUI:error.integer").replaceAll("<value>", this.entryAmplifier.getText()));
+			throw new GenerationException(new Text("GUI", "error.integer", false).addReplacement("<value>", this.entryAmplifier.getText()));
 		}
 
-		if (duration < 0) throw new GenerationException(CommandGenerator.translate("GUI:error.number.min").replaceAll("<value>", this.entryDuration.getText())
-				.replaceAll("<min>", "0"));
+		if (duration < 0) throw new GenerationException(new Text("GUI", "error.number.min", false).addReplacement("<value>", this.entryDuration.getText())
+				.addReplacement("<min>", "0"));
 
 		return new ActiveEffect(this.getSelectedEffect(), duration, amplifier, this.checkboxHideParticles.isSelected());
 	}

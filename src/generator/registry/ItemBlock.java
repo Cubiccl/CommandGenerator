@@ -1,7 +1,7 @@
 package generator.registry;
 
-import generator.CommandGenerator;
 import generator.main.FileManager;
+import generator.main.Text;
 
 import java.awt.image.BufferedImage;
 
@@ -20,7 +20,7 @@ public class ItemBlock extends ObjectWithNumId
 	/** Allows easier name handling. */
 	private String langType;
 	/** This Item/Block's names. */
-	private String[] names;
+	private Text[] names;
 	/** This Item/Block's textures. */
 	private BufferedImage[] textures;
 	/** Allows easier texture handling. */
@@ -40,6 +40,32 @@ public class ItemBlock extends ObjectWithNumId
 		this.textureType = DEFAULT;
 		this.block = block;
 		this.hasDurability = false;
+	}
+
+	@Override
+	public void complete()
+	{
+		if (this.hasDurability())
+		{
+			this.names = new Text[] { new Text("ITEM", this.getId()) };
+			return;
+		}
+		this.names = new Text[this.getDamage().length];
+
+		switch (this.langType)
+		{
+
+			default:
+				// 0 damage value : BLOCK:bedrock
+				if (this.getDamage().length == 1) for (int i = 0; i < this.names.length; i++)
+					this.names[i] = new Text("ITEM", this.getId());
+
+				// several damage values : BLOCK:stone_0, BLOCK:stone_1...
+				else for (int i = 0; i < this.names.length; i++)
+					this.names[i] = this.generateName(this.getDamage()[i]);
+				break;
+		}
+		this.createIcon();
 	}
 
 	@Override
@@ -64,18 +90,17 @@ public class ItemBlock extends ObjectWithNumId
 	 * 
 	 * @param damage - The input damage.
 	 * @return The name of this Object for the given damage. */
-	private String generateName(int damage)
+	private Text generateName(int damage)
 	{
-		if (this.getLangType().equals("null")) return CommandGenerator.translate("ITEM:" + this.getId() + "_" + damage);
-		if (this.getLangType().equals("item")) return CommandGenerator.translate("ITEM:" + this.getId() + "_item_" + damage);
+		if (this.getLangType().equals("null")) return new Text("ITEM", this.getId() + "_" + damage);
+		if (this.getLangType().equals("item")) return new Text("ITEM", this.getId() + "_item_" + damage);
 		if (this.getLangType().equals("half_slab"))
 		{
-			if (damage < 8) return CommandGenerator.translate("ITEM:" + this.getId() + "_" + damage % 8);
-			else return CommandGenerator.translate("ITEM:" + this.getId() + "_" + damage % 8) + " " + CommandGenerator.translate("ITEM:half_slab");
+			if (damage < 8) return new Text("ITEM", this.getId() + "_" + damage % 8);
+			else return new Text("ITEM", this.getId() + "_" + damage % 8).addSuffix(new Text("ITEM", "half_slab"));
 		}
-		if (this.getLangType().equals("color")) return CommandGenerator.translate("ITEM:color" + "_" + damage) + " "
-				+ CommandGenerator.translate("ITEM:" + this.getId());
-		return CommandGenerator.translate("ITEM:" + this.getId()) + " " + CommandGenerator.translate("ITEM:" + this.getLangType() + "_" + damage);
+		if (this.getLangType().equals("color")) return new Text("ITEM", "color" + "_" + damage).addSuffix(new Text("ITEM", this.getId()));
+		return new Text("ITEM", this.getId()).addSuffix(new Text("ITEM", this.getLangType() + "_" + damage));
 
 	}
 
@@ -122,7 +147,7 @@ public class ItemBlock extends ObjectWithNumId
 	{
 		for (int i = 0; i < this.damage.length; i++)
 		{
-			if (this.damage[i] == damage) return this.names[i];
+			if (this.damage[i] == damage) return this.names[i].getValue();
 		}
 		return this.getName();
 	}
@@ -174,30 +199,5 @@ public class ItemBlock extends ObjectWithNumId
 	public void setTextureType(int textureType)
 	{
 		this.textureType = textureType;
-	}
-
-	@Override
-	public void updateLang()
-	{
-		if (this.hasDurability())
-		{
-			this.names = new String[] { CommandGenerator.translate("ITEM:" + this.getId()) };
-			return;
-		}
-		this.names = new String[this.getDamage().length];
-
-		switch (this.langType)
-		{
-
-			default:
-				// 0 damage value : BLOCK:bedrock
-				if (this.getDamage().length == 1) for (int i = 0; i < this.names.length; i++)
-					this.names[i] = CommandGenerator.translate("ITEM:" + this.getId());
-
-				// several damage values : BLOCK:stone_0, BLOCK:stone_1...
-				else for (int i = 0; i < this.names.length; i++)
-					this.names[i] = this.generateName(this.getDamage()[i]);
-				break;
-		}
 	}
 }

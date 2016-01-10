@@ -1,18 +1,17 @@
 package generator.registry;
 
-import java.awt.image.BufferedImage;
-
-import generator.CommandGenerator;
-import generator.interfaces.ITranslate;
+import generator.main.Text;
 import generator.main.Utils;
 
+import java.awt.image.BufferedImage;
+
 /** A basic game Object. */
-public abstract class ObjectBase implements ITranslate
+public abstract class ObjectBase
 {
 	/** Its ID. */
 	private final String id;
 	/** Its name. */
-	protected String name;
+	protected Text name;
 	/** Its type. */
 	private final int type;
 
@@ -29,7 +28,7 @@ public abstract class ObjectBase implements ITranslate
 	/** Finalizes this Object. Creates language & textures. */
 	public void complete()
 	{
-		this.updateLang();
+		this.name = new Text(Utils.getObjectTypeNameId(this.getType()).toUpperCase(), this.getId());
 		this.createIcon();
 	}
 
@@ -58,18 +57,12 @@ public abstract class ObjectBase implements ITranslate
 	/** @return This Object's name. */
 	public String getName()
 	{
-		return this.name;
+		return this.name.getValue();
 	}
 
 	/** @return This Object's type. */
 	public int getType()
 	{
 		return this.type;
-	}
-
-	@Override
-	public void updateLang()
-	{
-		this.name = CommandGenerator.translate(Utils.getObjectTypeNameId(this.getType()).toUpperCase() + ":" + this.getId());
 	}
 }

@@ -7,12 +7,13 @@ import javax.swing.border.BevelBorder;
 
 import generator.gui.CTextArea;
 import generator.gui.panel.CPanelVertical;
+import generator.interfaces.ITranslate;
 import generator.main.GenerationException;
 import generator.main.Utils;
 import generator.registry.ObjectDescribed;
 
 /** A single way to use a Command. */
-public class Structure extends ObjectDescribed
+public class Structure extends ObjectDescribed implements ITranslate
 {
 	private ArrayList<Argument> arguments;
 	private Command command;
@@ -76,7 +77,6 @@ public class Structure extends ObjectDescribed
 	@Override
 	public void updateLang()
 	{
-		super.updateLang();
 		if (this.component != null) this.component.updateLang();
 		if (this.textAreaDescription != null) this.textAreaDescription.setText(this.getDescription());
 		for (Argument argument : this.arguments)

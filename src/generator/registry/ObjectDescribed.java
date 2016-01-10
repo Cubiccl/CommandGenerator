@@ -1,13 +1,13 @@
 package generator.registry;
 
-import generator.CommandGenerator;
+import generator.main.Text;
 import generator.main.Utils;
 
 /** An Object with a description. */
 public class ObjectDescribed extends ObjectBase
 {
 	/** Its description. */
-	private String description;
+	private Text description;
 
 	/** Creates a new Object.
 	 * 
@@ -19,16 +19,16 @@ public class ObjectDescribed extends ObjectBase
 	}
 
 	@Override
-	public String getDescription()
+	public void complete()
 	{
-		return this.description;
+		this.description = new Text(Utils.getObjectTypeNameId(this.getType()).toUpperCase(), this.getId() + ".description");
+		super.complete();
 	}
 
 	@Override
-	public void updateLang()
+	public String getDescription()
 	{
-		this.description = CommandGenerator.translate(Utils.getObjectTypeNameId(this.getType()).toUpperCase() + ":" + this.getId() + ".description");
-		super.updateLang();
+		return this.description.getValue();
 	}
 
 }

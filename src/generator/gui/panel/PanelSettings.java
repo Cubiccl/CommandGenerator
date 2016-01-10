@@ -5,6 +5,7 @@ import generator.gui.CLabel;
 import generator.gui.combobox.CCombobox;
 import generator.interfaces.IConfirmState;
 import generator.main.Settings;
+import generator.main.Text;
 
 @SuppressWarnings("serial")
 public class PanelSettings extends CPanel implements IConfirmState
@@ -12,10 +13,10 @@ public class PanelSettings extends CPanel implements IConfirmState
 	/** Creates a new PanelSettings and displays it. */
 	public static void create()
 	{
-		if (!CommandGenerator.getActiveState().getName().equals(CommandGenerator.translate("GUI:menu.settings")))
+		if (!(CommandGenerator.getActiveState().getComponent() instanceof LoadingPanel))
 		{
 			PanelSettings panel = new PanelSettings();
-			CommandGenerator.addStateWithConfirm("GUI:menu.settings", panel, panel);
+			CommandGenerator.addStateWithConfirm(new Text("GUI", "menu.settings"), panel, panel);
 		}
 	}
 
@@ -26,7 +27,7 @@ public class PanelSettings extends CPanel implements IConfirmState
 	{
 		super();
 
-		this.labelLanguage = new CLabel("GUI:settings.language");
+		this.labelLanguage = new CLabel(new Text("GUI", "settings.language"));
 		this.comboboxLanguage = new CCombobox(new String[0]);
 
 		this.add(this.labelLanguage, this.gbc);

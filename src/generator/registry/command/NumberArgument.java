@@ -1,7 +1,7 @@
 package generator.registry.command;
 
-import generator.CommandGenerator;
 import generator.main.GenerationException;
+import generator.main.Text;
 
 /** A number argument. Can have bounds and be an integer or a float. */
 public class NumberArgument extends StringArgument
@@ -11,7 +11,7 @@ public class NumberArgument extends StringArgument
 	/** Bounds for the value. */
 	private float min, max;
 
-	public NumberArgument(boolean isCompulsory, String textID)
+	public NumberArgument(boolean isCompulsory, Text textID)
 	{
 		super(isCompulsory, textID);
 		this.min = Float.NEGATIVE_INFINITY;
@@ -45,7 +45,7 @@ public class NumberArgument extends StringArgument
 			Integer.parseInt(this.getValue());
 		} catch (NumberFormatException e)
 		{
-			throw new GenerationException(CommandGenerator.translate("GUI:error.integer").replaceAll("<value>", this.getValue()));
+			throw new GenerationException(new Text("GUI", "error.integer").addReplacement("<value>", this.getValue()));
 		}
 
 		try
@@ -53,17 +53,17 @@ public class NumberArgument extends StringArgument
 			float value = Float.parseFloat(this.getValue());
 			if (value < this.min || value > this.max)
 			{
-				if (this.min != Float.NEGATIVE_INFINITY && this.max != Float.POSITIVE_INFINITY) throw new GenerationException(CommandGenerator
-						.translate("GUI:error.number.bounds").replaceAll("<value>", this.getValue()).replaceAll("<min>", Float.toString(this.min))
-						.replaceAll("<max>", Float.toString(this.max)));
-				else if (this.min != Float.NEGATIVE_INFINITY) throw new GenerationException(CommandGenerator.translate("GUI:error.number.min")
-						.replaceAll("<value>", this.getValue()).replaceAll("<min>", Float.toString(this.min)));
-				else if (this.max != Float.POSITIVE_INFINITY) throw new GenerationException(CommandGenerator.translate("GUI:error.number.max")
-						.replaceAll("<value>", this.getValue()).replaceAll("<max>", Float.toString(this.max)));
+				if (this.min != Float.NEGATIVE_INFINITY && this.max != Float.POSITIVE_INFINITY) throw new GenerationException(new Text("GUI",
+						"error.number.bounds", false).addReplacement("<value>", this.getValue()).addReplacement("<min>", Float.toString(this.min))
+						.addReplacement("<max>", Float.toString(this.max)));
+				else if (this.min != Float.NEGATIVE_INFINITY) throw new GenerationException(new Text("GUI", "error.number.min", false).addReplacement(
+						"<value>", this.getValue()).addReplacement("<min>", Float.toString(this.min)));
+				else if (this.max != Float.POSITIVE_INFINITY) throw new GenerationException(new Text("GUI", "error.number.max", false).addReplacement(
+						"<value>", this.getValue()).addReplacement("<max>", Float.toString(this.max)));
 			}
 		} catch (NumberFormatException e)
 		{
-			throw new GenerationException(CommandGenerator.translate("GUI:error.number").replaceAll("<value>", this.getValue()));
+			throw new GenerationException(new Text("GUI", "error.number", false).addReplacement("<value>", this.getValue()));
 		}
 	}
 }

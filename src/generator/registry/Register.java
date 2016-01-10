@@ -1,7 +1,6 @@
 package generator.registry;
 
 import generator.CommandGenerator;
-import generator.interfaces.ITranslate;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -10,7 +9,7 @@ import java.util.HashMap;
 /** Contains all Objects of the same type.
  * 
  * @param <T> - The type of the Objects. */
-public class Register<T extends ObjectBase> implements ITranslate
+public class Register<T extends ObjectBase>
 {
 	class ObjectSorter implements Comparator<String>
 	{
@@ -46,6 +45,8 @@ public class Register<T extends ObjectBase> implements ITranslate
 	 * @param name - The name of the Objects. (used for listing the register.) */
 	public void complete(String name)
 	{
+		for (T object : this.getList())
+			object.complete();
 		this.sort();
 
 		String display = "";
@@ -101,15 +102,6 @@ public class Register<T extends ObjectBase> implements ITranslate
 	public void sort()
 	{
 		this.ids.sort(new ObjectSorter(this));
-	}
-
-	@Override
-	public void updateLang()
-	{
-		for (T object : this.register.values())
-		{
-			object.updateLang();
-		}
 	}
 
 }

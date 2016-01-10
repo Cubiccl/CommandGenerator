@@ -1,12 +1,13 @@
 package generator.registry.command;
 
+import generator.interfaces.ITranslate;
 import generator.main.Utils;
 import generator.registry.ObjectBase;
 
 import java.util.ArrayList;
 
 /** A Command. */
-public class Command extends ObjectBase
+public class Command extends ObjectBase implements ITranslate
 {
 	/** Contains all Structures that belong to this Command. */
 	private ArrayList<Structure> structures;
@@ -24,6 +25,16 @@ public class Command extends ObjectBase
 	{
 		this.structures.add(structure);
 		structure.setCommand(this);
+	}
+
+	@Override
+	public void complete()
+	{
+		super.complete();
+		for (Structure structure : structures)
+		{
+			structure.complete();
+		}
 	}
 
 	/** Creates each Structure's GUI. */
@@ -56,7 +67,6 @@ public class Command extends ObjectBase
 	@Override
 	public void updateLang()
 	{
-		super.updateLang();
 		for (Structure structure : this.structures)
 		{
 			structure.updateLang();

@@ -2,6 +2,7 @@ package generator.registry.command;
 
 import generator.gui.panel.object.PanelTarget;
 import generator.main.GenerationException;
+import generator.main.Text;
 
 import java.awt.Component;
 
@@ -23,25 +24,25 @@ public class ArgumentTarget extends Argument
 	 * @see ArgumentTarget#ALL */
 	private int targetType;
 	/** The ID of the text for the title of the GUI */
-	private String titleId;
+	private Text title;
 
 	/** Creates a new ArgumentTarget.
 	 * 
 	 * @param isCompulsory - True if it is compulsory.
-	 * @param titleId - The ID of the text for the title of the GUI.
+	 * @param title - The ID of the text for the title of the GUI.
 	 * @param targetType - The type of the target.
 	 * @see ArgumentTarget#ALL */
-	public ArgumentTarget(boolean isCompulsory, String titleId, int targetType)
+	public ArgumentTarget(boolean isCompulsory, Text title, int targetType)
 	{
 		super(isCompulsory, 1);
-		this.titleId = titleId;
+		this.title = title;
 		this.targetType = targetType;
 	}
 
 	@Override
 	public void createGui()
 	{
-		this.panel = new PanelTarget(this.titleId, this.targetType);
+		this.panel = new PanelTarget(this.title, this.targetType);
 	}
 
 	@Override

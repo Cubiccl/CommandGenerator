@@ -1,13 +1,15 @@
 package generator.gui.combobox;
 
-import generator.CommandGenerator;
 import generator.interfaces.ITranslate;
+import generator.main.Text;
 
 /** A Combobox that translates is values. */
 @SuppressWarnings("serial")
 public class CChoiceCombobox extends CCombobox implements ITranslate
 {
 
+	/** The values to display */
+	private Text[] choices;
 	/** The ID for translations */
 	private String id;
 	/** The values */
@@ -22,6 +24,11 @@ public class CChoiceCombobox extends CCombobox implements ITranslate
 		super(values);
 		this.id = id;
 		this.values = values;
+		this.choices = new Text[this.values.length];
+		for (int i = 0; i < this.values.length; i++)
+		{
+			this.choices[i] = new Text("CHOICE", this.id + "." + this.values[i]);
+		}
 		this.updateLang();
 	}
 
@@ -43,9 +50,7 @@ public class CChoiceCombobox extends CCombobox implements ITranslate
 	{
 		String[] translations = new String[this.values.length];
 		for (int i = 0; i < translations.length; i++)
-		{
-			translations[i] = CommandGenerator.translate("CHOICE:" + this.id + "." + this.values[i]);
-		}
+			translations[i] = this.choices[i].getValue();
 		super.setValues(translations);
 	}
 

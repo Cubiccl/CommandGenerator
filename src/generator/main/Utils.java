@@ -71,7 +71,7 @@ public final class Utils
 	 * @see Utils#ITEM */
 	public static String getObjectTypeName(int type)
 	{
-		return CommandGenerator.translate("GUI:object." + getObjectTypeNameId(type));
+		return CommandGenerator.translate(new Text("GUI", "object." + getObjectTypeNameId(type)));
 	}
 
 	/** @param type - The type of the object.
@@ -89,13 +89,13 @@ public final class Utils
 	 * 
 	 * @param title - Its title.
 	 * @param message - Its message. */
-	public static void showMessage(String title, String message)
+	public static void showMessage(Text title, Text message)
 	{
-		JDialog dialog = new JDialog(CommandGenerator.getWindow(), title, true);
+		JDialog dialog = new JDialog(CommandGenerator.getWindow(), title.getValue(), true);
 		JPanel panel = new JPanel(new GridBagLayout());
-		CTextArea textArea = new CTextArea(message);
+		CTextArea textArea = new CTextArea(message.getValue());
 		textArea.setPreferredSize(new Dimension(400, 200));
-		CButton button = new CButton("GUI:state.ok");
+		CButton button = new CButton(new Text("GUI", "state.ok"));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{

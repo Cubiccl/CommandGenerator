@@ -286,6 +286,9 @@ public class Registry implements ITranslate
 	}
 
 	/** Sorts all Objects. */
+	/**
+	 * 
+	 */
 	public void sort()
 	{
 		this.achievements.sort();
@@ -303,16 +306,10 @@ public class Registry implements ITranslate
 	@Override
 	public void updateLang()
 	{
-		this.achievements.updateLang();
-		this.attributes.updateLang();
-		this.blocks.updateLang();
-		this.commands.updateLang();
-		this.effects.updateLang();
-		this.enchantments.updateLang();
-		this.entities.updateLang();
-		this.items.updateLang();
-		this.particles.updateLang();
-		this.sounds.updateLang();
+		for (Command command : this.getCommands())
+		{
+			command.updateLang();
+		}
 	}
 
 }

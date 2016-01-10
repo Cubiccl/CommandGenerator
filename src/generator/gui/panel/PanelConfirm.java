@@ -1,12 +1,13 @@
 package generator.gui.panel;
 
-import java.awt.AWTEvent;
-
 import generator.CommandGenerator;
 import generator.gui.button.CButton;
 import generator.interfaces.ClickEvent;
 import generator.interfaces.IClickEvent;
 import generator.interfaces.IConfirmState;
+import generator.main.Text;
+
+import java.awt.AWTEvent;
 
 /** Contains a component and an OK and Cancel buttons. */
 @SuppressWarnings("serial")
@@ -24,8 +25,8 @@ public class PanelConfirm extends CPanel implements IClickEvent
 	{
 		this.component = component;
 		this.listener = listener;
-		this.buttonCancel = new CButton("GUI:state.cancel");
-		this.buttonOk = new CButton("GUI:state.ok");
+		this.buttonCancel = new CButton(new Text("GUI", "state.cancel"));
+		this.buttonOk = new CButton(new Text("GUI", "state.ok"));
 
 		this.buttonCancel.addActionListener(new ClickEvent(this, CANCEL));
 		this.buttonOk.addActionListener(new ClickEvent(this, OK));

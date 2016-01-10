@@ -1,8 +1,9 @@
 package generator.gui.checkbox;
 
-import generator.CommandGenerator;
 import generator.gui.RoundedCornerBorder;
+import generator.gui.button.CButton;
 import generator.interfaces.ITranslate;
+import generator.main.Text;
 import generator.main.Utils;
 
 import javax.swing.JCheckBox;
@@ -10,12 +11,12 @@ import javax.swing.JCheckBox;
 @SuppressWarnings("serial")
 public class CCheckbox extends JCheckBox implements ITranslate
 {
-	private String textID;
+	private Text text;
 
-	public CCheckbox(String textID)
+	public CCheckbox(Text text)
 	{
 		super("");
-		this.textID = textID;
+		this.text = text;
 		this.setFont(Utils.font);
 		this.setBorder(new RoundedCornerBorder());
 		this.setBorderPainted(true);
@@ -23,17 +24,22 @@ public class CCheckbox extends JCheckBox implements ITranslate
 		this.updateLang();
 	}
 
+	/** @see CButton#setText(Text) */
 	@Override
-	public void setText(String textID)
+	@Deprecated
+	public void setText(String text)
+	{}
+
+	public void setText(Text text)
 	{
-		this.textID = textID;
+		this.text = text;
 		this.updateLang();
 	}
 
 	@Override
 	public void updateLang()
 	{
-		if (textID != null && !textID.equals("")) super.setText(CommandGenerator.translate(this.textID));
+		if (!this.text.getValue().equals("")) super.setText(this.text.getValue());
 	}
 
 }

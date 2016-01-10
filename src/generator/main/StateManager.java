@@ -27,11 +27,11 @@ public class StateManager implements ITranslate
 
 	/** Adds a new state.
 	 * 
-	 * @param textID - The ID of the state's name.
+	 * @param text - The state's name.
 	 * @param component - The component to display. */
-	public void addState(String textID, CPanel component)
+	public void addState(Text text, CPanel component)
 	{
-		this.states.add(new State(textID, component));
+		this.states.add(new State(text, component));
 		this.onStateChanged();
 	}
 

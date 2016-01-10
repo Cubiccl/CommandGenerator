@@ -1,28 +1,28 @@
 package generator.main;
 
-import generator.CommandGenerator;
-
 /** An error occurring when the user would input wrong data in the structure arguments. */
 @SuppressWarnings("serial")
 public class GenerationException extends Exception
 {
-	private String message;
+	public static Text general = new Text("GUI", "error.generation");
 
-	public GenerationException(String message)
+	private Text message;
+
+	public GenerationException(Text text)
 	{
-		this.message = message;
+		this.message = text;
 	}
 
 	@Override
 	public String getMessage()
 	{
-		return this.message;
+		return this.message.getValue();
 	}
 
 	/** Displays the error message to the user. */
 	public void showMessage()
 	{
-		Utils.showMessage(CommandGenerator.translate("GUI:error.generation"), this.getMessage());
+		Utils.showMessage(general, this.message);
 	}
 
 }

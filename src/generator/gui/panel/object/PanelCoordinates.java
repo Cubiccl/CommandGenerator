@@ -1,13 +1,13 @@
 package generator.gui.panel.object;
 
-import javax.swing.BorderFactory;
-
-import generator.CommandGenerator;
 import generator.gui.checkbox.CCheckbox;
 import generator.gui.panel.CPanel;
 import generator.gui.textfield.CEntry;
 import generator.main.GenerationException;
+import generator.main.Text;
 import generator.registry.instance.Coordinates;
+
+import javax.swing.BorderFactory;
 
 @SuppressWarnings("serial")
 public class PanelCoordinates extends CPanel
@@ -19,24 +19,24 @@ public class PanelCoordinates extends CPanel
 	/** True if the Coordinates can be relative. */
 	private boolean relative;
 	/** The ID of the text for this panel's title. */
-	private String titleID;
+	private Text title;
 
-	public PanelCoordinates(String titleID, boolean relative)
+	public PanelCoordinates(Text title, boolean relative)
 	{
 		super();
-		this.titleID = titleID;
+		this.title = title;
 		this.relative = relative;
 
 		// Creating components
-		this.entryX = new CEntry("GUI:coordinates.x");
-		this.entryY = new CEntry("GUI:coordinates.y");
-		this.entryZ = new CEntry("GUI:coordinates.z");
+		this.entryX = new CEntry(new Text("GUI", "coordinates.x"));
+		this.entryY = new CEntry(new Text("GUI", "coordinates.y"));
+		this.entryZ = new CEntry(new Text("GUI", "coordinates.z"));
 
 		if (this.relative)
 		{
-			this.checkboxXRel = new CCheckbox("GUI:coordinates.relative");
-			this.checkboxYRel = new CCheckbox("GUI:coordinates.relative");
-			this.checkboxZRel = new CCheckbox("GUI:coordinates.relative");
+			this.checkboxXRel = new CCheckbox(new Text("GUI", "coordinates.relative"));
+			this.checkboxYRel = new CCheckbox(new Text("GUI", "coordinates.relative"));
+			this.checkboxZRel = new CCheckbox(new Text("GUI", "coordinates.relative"));
 		}
 
 		// Adding components
@@ -69,7 +69,7 @@ public class PanelCoordinates extends CPanel
 			x = Float.parseFloat(this.entryX.getText());
 		} catch (Exception e)
 		{
-			throw new GenerationException(CommandGenerator.translate("GUI:error.number").replaceAll("<value>", this.entryX.getText()));
+			throw new GenerationException(new Text("GUI", "GUI:error.number", false).addReplacement("<value>", this.entryX.getText()));
 		}
 
 		try
@@ -77,7 +77,7 @@ public class PanelCoordinates extends CPanel
 			y = Float.parseFloat(this.entryY.getText());
 		} catch (Exception e)
 		{
-			throw new GenerationException(CommandGenerator.translate("GUI:error.number").replaceAll("<value>", this.entryY.getText()));
+			throw new GenerationException(new Text("GUI", "GUI:error.number", false).addReplacement("<value>", this.entryY.getText()));
 		}
 
 		try
@@ -85,7 +85,7 @@ public class PanelCoordinates extends CPanel
 			z = Float.parseFloat(this.entryZ.getText());
 		} catch (Exception e)
 		{
-			throw new GenerationException(CommandGenerator.translate("GUI:error.number").replaceAll("<value>", this.entryZ.getText()));
+			throw new GenerationException(new Text("GUI", "GUI:error.number", false).addReplacement("<value>", this.entryZ.getText()));
 		}
 
 		if (this.relative) return new Coordinates(x, y, z, this.checkboxXRel.isSelected(), this.checkboxYRel.isSelected(), this.checkboxZRel.isSelected());
@@ -96,7 +96,7 @@ public class PanelCoordinates extends CPanel
 	public void updateLang()
 	{
 		super.updateLang();
-		this.setBorder(BorderFactory.createTitledBorder(CommandGenerator.translate(this.titleID)));
+		this.setBorder(BorderFactory.createTitledBorder(this.title.getValue()));
 	}
 
 }

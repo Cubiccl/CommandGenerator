@@ -1,12 +1,13 @@
 package generator.gui.menubar;
 
-import java.awt.AWTEvent;
-
 import generator.CommandGenerator;
 import generator.gui.panel.PanelSettings;
 import generator.interfaces.ClickEvent;
 import generator.interfaces.IClickEvent;
 import generator.interfaces.ITranslate;
+import generator.main.Text;
+
+import java.awt.AWTEvent;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -20,9 +21,9 @@ public class CGMenuBar extends JMenuBar implements ITranslate, IClickEvent
 	{
 		super();
 
-		CMenu menu = new CMenu("menu.menu");
-		menu.add(new CMenuItem("menu.settings", new ClickEvent(this, SETTINGS)));
-		menu.add(new CMenuItem("menu.exit", new ClickEvent(this, EXIT)));
+		CMenu menu = new CMenu(new Text("GUI", "menu.menu"));
+		menu.add(new CMenuItem(new Text("GUI", "menu.settings"), new ClickEvent(this, SETTINGS)));
+		menu.add(new CMenuItem(new Text("GUI", "menu.exit"), new ClickEvent(this, EXIT)));
 		this.add(menu);
 	}
 

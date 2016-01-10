@@ -1,10 +1,11 @@
 package generator.gui.button;
 
-import java.awt.AWTEvent;
-
 import generator.interfaces.ClickEvent;
 import generator.interfaces.IClickEvent;
+import generator.main.Text;
 import generator.main.Utils;
+
+import java.awt.AWTEvent;
 
 /** A button that will display a message when clicked. */
 @SuppressWarnings("serial")
@@ -13,22 +14,22 @@ public class CMessageButton extends CButton implements IClickEvent
 	private static final int CLICK = 0;
 
 	/** The message to display. */
-	private String message;
+	private Text message;
 	/** The title of the popup window. */
-	private String title;
+	private Text title;
 
 	public CMessageButton()
 	{
-		this("", "");
+		this(new Text(""), new Text(""));
 	}
 
 	/** Creates a new Message Button.
 	 * 
 	 * @param title - The title of the popup window.
 	 * @param message - The message to display. */
-	public CMessageButton(String title, String message)
+	public CMessageButton(Text title, Text message)
 	{
-		super("?", false);
+		super(new Text("?"));
 		this.title = title;
 		this.message = message;
 		this.addActionListener(new ClickEvent(this, CLICK));
@@ -51,7 +52,7 @@ public class CMessageButton extends CButton implements IClickEvent
 	/** Changes the message to display.
 	 * 
 	 * @param message - The new message. */
-	public void setMessage(String message)
+	public void setMessage(Text message)
 	{
 		this.message = message;
 	}
@@ -59,7 +60,7 @@ public class CMessageButton extends CButton implements IClickEvent
 	/** Changes the title of the popup window.
 	 * 
 	 * @param title - The new title. */
-	public void setTitle(String title)
+	public void setTitle(Text title)
 	{
 		this.title = title;
 	}

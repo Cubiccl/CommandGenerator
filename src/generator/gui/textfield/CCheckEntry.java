@@ -1,11 +1,12 @@
 package generator.gui.textfield;
 
-import java.awt.AWTEvent;
-
 import generator.gui.checkbox.CCheckbox;
 import generator.gui.panel.CPanelHorizontal;
 import generator.interfaces.ClickEvent;
 import generator.interfaces.IClickEvent;
+import generator.main.Text;
+
+import java.awt.AWTEvent;
 
 @SuppressWarnings("serial")
 public class CCheckEntry extends CPanelHorizontal implements IClickEvent
@@ -15,9 +16,9 @@ public class CCheckEntry extends CPanelHorizontal implements IClickEvent
 	private CCheckbox checkbox;
 	private CTextfield textfield;
 
-	public CCheckEntry(String textID)
+	public CCheckEntry(Text text)
 	{
-		this.checkbox = new CCheckbox(textID);
+		this.checkbox = new CCheckbox(text);
 		this.checkbox.addActionListener(new ClickEvent(this, ENABLE));
 		this.textfield = new CTextfield();
 		this.textfield.setEnabled(false);

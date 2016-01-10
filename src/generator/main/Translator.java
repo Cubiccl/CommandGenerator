@@ -3,6 +3,7 @@ package generator.main;
 import generator.CommandGenerator;
 import generator.interfaces.ITranslate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /** Contains translations and methods to translate. */
@@ -10,48 +11,54 @@ public class Translator implements ITranslate
 {
 	/** Contains translations, sorted by categories. */
 	private HashMap<String, HashMap<String, String>> dictionnary;
+	/** List of the Texts the Translator is tracking. */
+	private ArrayList<Text> tracking;
 
 	public Translator()
 	{
 		this.dictionnary = new HashMap<String, HashMap<String, String>>();
-		this.updateLang();
+		this.tracking = new ArrayList<Text>();
 	}
 
-	/** @param textID - The ID for the text to translate.<br>
-	 *            <strong>CATEGORY:id.of.the.text</strong>
-	 * @return The translation. */
-	public String translate(String textID)
+	/** Adds a new Text to track.
+	 * 
+	 * @param text - The input text. */
+	public void registerText(Text text)
 	{
-		String[] values = textID.split(":");
-		if (values.length < 2)
-		{
-			CommandGenerator.log(new Exception(textID + " does not contain a category."));
-			return textID;
-		}
-		return translate(values[0], values[1]);
+		this.tracking.add(text);
 	}
 
-	/** @param category - The category of the ID.
-	 * @param key - The key of the ID.
-	 * @return The translation. */
-	public String translate(String category, String key)
+	/** Updates all texts the Translator is tracking. */
+	public void reloadTexts()
 	{
-		if (!dictionnary.containsKey(category))
+		for (Text text : this.tracking)
 		{
-			CommandGenerator.log(category + " is not a valid category.");
-			return category + ":" + key;
+			text.updateLang();
 		}
-
-		if (!dictionnary.get(category).containsKey(key))
-		{
-			CommandGenerator.log("Missing translation : " + category + ":" + key);
-			return category + ":" + key;
-		}
-
-		return dictionnary.get(category).get(key);
 	}
 
-	/** Upates translations. */
+	/** Translates a Text.
+	 * 
+	 * @param text - The input Text.
+	 * @return The translation. */
+	public String translate(Text text)
+	{
+		if (!dictionnary.containsKey(text.getCategory()))
+		{
+			CommandGenerator.log(text.getCategory() + " is not a valid category.");
+			return text.getCategory() + ":" + text.getId();
+		}
+
+		if (!dictionnary.get(text.getCategory()).containsKey(text.getId()))
+		{
+			CommandGenerator.log("Missing translation : " + text.getCategory() + ":" + text.getId());
+			return text.getCategory() + ":" + text.getId();
+		}
+
+		return dictionnary.get(text.getCategory()).get(text.getId());
+	}
+
+	/** Updates translations. */
 	@Override
 	public void updateLang()
 	{
@@ -81,6 +88,7 @@ public class Translator implements ITranslate
 			}
 			this.dictionnary.get(currentCategory).put(line.substring(0, index), line.substring(index + 3));
 		}
+		this.reloadTexts();
 	}
 
 }

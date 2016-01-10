@@ -1,12 +1,12 @@
 package generator.registry.command;
 
-import generator.CommandGenerator;
 import generator.gui.button.CMessageButton;
 import generator.gui.combobox.CChoiceCombobox;
 import generator.gui.panel.CPanelHorizontal;
 import generator.interfaces.ClickEvent;
 import generator.interfaces.IClickEvent;
 import generator.main.GenerationException;
+import generator.main.Text;
 
 import java.awt.AWTEvent;
 import java.awt.Component;
@@ -92,9 +92,8 @@ public class ChoiceArgument extends Argument implements IClickEvent
 	{
 		if (this.buttonHelp != null)
 		{
-			this.buttonHelp.setTitle(CommandGenerator.translate("HELP:main").replaceAll("<object>",
-					CommandGenerator.translate("CHOICE:" + this.id + "." + this.combobox.getSelectedValue())));
-			this.buttonHelp.setMessage(CommandGenerator.translate("HELP:" + this.id + "." + this.combobox.getSelectedValue()));
+			this.buttonHelp.setTitle(new Text("HELP", "main").addReplacement("<object>", new Text("CHOICE", this.id + "." + this.combobox.getSelectedValue())));
+			this.buttonHelp.setMessage(new Text("HELP", this.id + "." + this.combobox.getSelectedValue()));
 		}
 	}
 

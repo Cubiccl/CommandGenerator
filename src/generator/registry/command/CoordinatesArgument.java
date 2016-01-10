@@ -6,6 +6,7 @@ import generator.gui.panel.object.PanelCoordinates;
 import generator.interfaces.ClickEvent;
 import generator.interfaces.IClickEvent;
 import generator.main.GenerationException;
+import generator.main.Text;
 
 import java.awt.AWTEvent;
 import java.awt.Component;
@@ -24,17 +25,17 @@ public class CoordinatesArgument extends Argument implements IClickEvent
 	/** True if the Coordinates can be relative. */
 	private boolean relative;
 	/** The text ID of the Coordinates panel's title. */
-	private String titleID;
+	private Text title;
 
 	/** Creates a new Coordinates Argument.
 	 * 
 	 * @param isCompulsory - True if it is compulsory.
-	 * @param titleID - The text ID of the Coordinates panel's title.
+	 * @param title - The Coordinates panel's title.
 	 * @param relative - True if the Coordinates can be relative. */
-	public CoordinatesArgument(boolean isCompulsory, String titleID, boolean relative)
+	public CoordinatesArgument(boolean isCompulsory, Text title, boolean relative)
 	{
 		super(isCompulsory, 3);
-		this.titleID = "GUI:" + titleID;
+		this.title = title;
 		this.relative = relative;
 	}
 
@@ -42,11 +43,11 @@ public class CoordinatesArgument extends Argument implements IClickEvent
 	public void createGui()
 	{
 		this.panelMain = new CPanelVertical();
-		this.panelCoordinates = new PanelCoordinates(this.titleID, this.relative);
+		this.panelCoordinates = new PanelCoordinates(this.title, this.relative);
 
 		if (!this.isCompulsory())
 		{
-			this.checkbox = new CCheckbox("GUI:coordinates.use");
+			this.checkbox = new CCheckbox(new Text("GUI", "coordinates.use"));
 			this.checkbox.addActionListener(new ClickEvent(this, ENABLE));
 			this.panelCoordinates.setEnabled(false);
 			this.panelMain.add(this.checkbox);

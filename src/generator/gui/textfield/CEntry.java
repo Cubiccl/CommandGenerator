@@ -2,6 +2,7 @@ package generator.gui.textfield;
 
 import generator.gui.CLabel;
 import generator.gui.panel.CPanelHorizontal;
+import generator.main.Text;
 
 /** Represents a labeled textfield. */
 @SuppressWarnings("serial")
@@ -10,9 +11,9 @@ public class CEntry extends CPanelHorizontal
 	private CLabel label;
 	private CTextfield textfield;
 
-	public CEntry(String textID)
+	public CEntry(Text text)
 	{
-		this.label = new CLabel(textID);
+		this.label = new CLabel(text);
 		this.textfield = new CTextfield();
 
 		this.add(this.label);
@@ -34,7 +35,7 @@ public class CEntry extends CPanelHorizontal
 	{
 		return this.textfield;
 	}
-	
+
 	@Override
 	public void setEnabled(boolean enabled)
 	{

@@ -7,6 +7,7 @@ import generator.gui.textfield.CEntry;
 import generator.interfaces.ClickEvent;
 import generator.interfaces.IClickEvent;
 import generator.main.GenerationException;
+import generator.main.Text;
 import generator.registry.instance.Target;
 import generator.registry.instance.TargetArgument;
 
@@ -27,18 +28,18 @@ public class PanelTarget extends CPanelVertical implements IClickEvent
 	/** Entry to type in a Player's name. */
 	private CEntry entryName;
 	/** The ID of the title. */
-	private String titleId;
+	private Text title;
 
-	public PanelTarget(String titleId, int targetType)
+	public PanelTarget(Text title, int targetType)
 	{
 		super();
-		this.titleId = titleId;
+		this.title = title;
 
 		this.comboboxArgument = new CChoiceCombobox("argument", TargetArgument.ARGUMENT_IDS);
 		this.comboboxSelector = new CChoiceCombobox("target", Target.SELECTORS);
 		this.comboboxSelector.addActionListener(new ClickEvent(this, SELECTOR));
 
-		this.entryName = new CEntry("GUI:target.name");
+		this.entryName = new CEntry(new Text("GUI", "target.name"));
 		this.entryName.setVisible(false);
 
 		this.add(this.comboboxSelector);
@@ -54,8 +55,8 @@ public class PanelTarget extends CPanelVertical implements IClickEvent
 	{
 		if (this.comboboxSelector.getSelectedValue().equals(Target.PLAYER_NAME))
 		{
-			if (this.entryName.getText().equals("")) throw new GenerationException(CommandGenerator.translate("GUI:error.missing"));
-			if (this.entryName.getText().contains(" ")) throw new GenerationException(CommandGenerator.translate("GUI:error.space"));
+			if (this.entryName.getText().equals("")) throw new GenerationException(new Text("GUI", "error.missing", false));
+			if (this.entryName.getText().contains(" ")) throw new GenerationException(new Text("GUI", "error.space", false));
 			return new Target(this.entryName.getText());
 		}
 		return new Target(this.comboboxSelector.getSelectedIndex());
@@ -80,6 +81,6 @@ public class PanelTarget extends CPanelVertical implements IClickEvent
 	@Override
 	public void updateLang()
 	{
-		this.setBorder(BorderFactory.createTitledBorder(CommandGenerator.translate(this.titleId)));
+		this.setBorder(BorderFactory.createTitledBorder(CommandGenerator.translate(this.title)));
 	}
 }

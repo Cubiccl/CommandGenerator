@@ -1,8 +1,8 @@
 package generator.gui.button;
 
-import generator.CommandGenerator;
 import generator.gui.RoundedCornerBorder;
 import generator.interfaces.ITranslate;
+import generator.main.Text;
 import generator.main.Utils;
 
 import javax.swing.JButton;
@@ -12,38 +12,34 @@ import javax.swing.JButton;
 public class CButton extends JButton implements ITranslate
 {
 	/** The ID of the text to translate, or the text to display itself. */
-	private String textID;
-	/** True if the text should be translated. */
-	private boolean translated;
+	private Text text;
 
-	public CButton(String textID)
-	{
-		this(textID, true);
-	}
-
-	public CButton(String textID, boolean translated)
+	public CButton(Text text)
 	{
 		super("");
-		this.textID = textID;
-		this.translated = translated;
+		this.text = text;
 		this.setFont(Utils.font);
 		this.setBorder(new RoundedCornerBorder());
 		this.setUI(new CButtonUI());
 		this.updateLang();
 	}
 
+	/** @see CButton#setText(Text) */
 	@Override
-	public void setText(String textID)
+	@Deprecated
+	public void setText(String text)
+	{}
+
+	public void setText(Text text)
 	{
-		this.textID = textID;
+		this.text = text;
 		this.updateLang();
 	}
 
 	@Override
 	public void updateLang()
 	{
-		if (!this.translated) super.setText(this.textID);
-		else if (textID != null && !textID.equals("")) super.setText(CommandGenerator.translate(this.textID));
+		if (!text.getValue().equals("")) super.setText(this.text.getValue());
 	}
 
 }

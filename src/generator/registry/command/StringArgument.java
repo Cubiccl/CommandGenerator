@@ -1,11 +1,11 @@
 package generator.registry.command;
 
-import generator.CommandGenerator;
 import generator.gui.button.CMessageButton;
 import generator.gui.panel.CPanelHorizontal;
 import generator.gui.textfield.CCheckEntry;
 import generator.gui.textfield.CEntry;
 import generator.main.GenerationException;
+import generator.main.Text;
 
 import java.awt.Component;
 
@@ -25,16 +25,16 @@ public class StringArgument extends Argument
 	/** The Panel containing all the GUI. */
 	protected CPanelHorizontal panel;
 	/** The ID of the Label. */
-	private String textID;
+	private Text text;
 
 	/** Creates a new String Argument.
 	 * 
 	 * @param isCompulsory - True if compulsory.
-	 * @param textID - The ID of the Label. */
-	public StringArgument(boolean isCompulsory, String textID)
+	 * @param text - The ID of the Label. */
+	public StringArgument(boolean isCompulsory, Text text)
 	{
 		super(isCompulsory, 1);
-		this.textID = textID;
+		this.text = text;
 		this.hasSpaces = false;
 		this.hasInfo = false;
 	}
@@ -52,11 +52,11 @@ public class StringArgument extends Argument
 
 		if (this.isCompulsory())
 		{
-			this.entry = new CEntry("GUI:" + this.textID);
+			this.entry = new CEntry(this.text);
 			this.panel.add(this.entry);
 		} else
 		{
-			this.checkEntry = new CCheckEntry("GUI:" + this.textID);
+			this.checkEntry = new CCheckEntry(this.text);
 			this.panel.add(this.checkEntry);
 		}
 
@@ -108,8 +108,8 @@ public class StringArgument extends Argument
 		if (this.checkEntry != null) this.checkEntry.updateLang();
 		if (this.buttonHelp != null)
 		{
-			this.buttonHelp.setTitle(CommandGenerator.translate("HELP:main").replaceAll("<object>", CommandGenerator.translate("GUI:" + this.textID)));
-			this.buttonHelp.setMessage(CommandGenerator.translate("HELP:" + this.textID));
+			this.buttonHelp.setTitle(new Text("HELP", "main").addReplacement("<object>", this.text));
+			this.buttonHelp.setMessage(new Text("HELP", this.text.getId()));
 		}
 	}
 
@@ -118,7 +118,7 @@ public class StringArgument extends Argument
 	 * @throws GenerationException if the value cannot be accepted. */
 	protected void verifyValue() throws GenerationException
 	{
-		if (!this.hasSpaces && this.getValue().contains(" ")) throw new GenerationException(CommandGenerator.translate("GUI:error.space").replaceAll("<value>",
+		if (!this.hasSpaces && this.getValue().contains(" ")) throw new GenerationException(new Text("GUI", "error.space", false).addReplacement("<value>",
 				this.getValue()));
 	}
 }
