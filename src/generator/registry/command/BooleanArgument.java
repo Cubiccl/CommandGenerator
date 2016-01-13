@@ -34,7 +34,7 @@ public class BooleanArgument extends Argument
 	}
 
 	@Override
-	public String generate() throws GenerationException
+	protected String generateValue() throws GenerationException
 	{
 		return this.checkbox.isSelected() ? this.trueValue : this.falseValue;
 	}
@@ -72,6 +72,13 @@ public class BooleanArgument extends Argument
 	public void updateLang()
 	{
 		if (this.checkbox != null) this.checkbox.updateLang();
+	}
+
+	@Override
+	protected void verifyValue(String value) throws GenerationException
+	{
+		if (!value.equals(this.trueValue) && !value.equals(this.falseValue)) throw new GenerationException(new Text("GUI", "error.boolean", false)
+				.addReplacement("<true>", this.trueValue).addReplacement("<false>", this.falseValue).addReplacement("<value>", value));
 	}
 
 }

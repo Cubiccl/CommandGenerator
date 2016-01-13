@@ -62,7 +62,7 @@ public class ChoiceArgument extends Argument implements IClickEvent
 	}
 
 	@Override
-	public String generate() throws GenerationException
+	protected String generateValue() throws GenerationException
 	{
 		return this.combobox.getSelectedValue();
 	}
@@ -102,5 +102,16 @@ public class ChoiceArgument extends Argument implements IClickEvent
 	{
 		if (this.combobox != null) this.combobox.updateLang();
 		if (this.buttonHelp != null) this.updateButtonLang();
+	}
+
+	@Override
+	protected void verifyValue(String value) throws GenerationException
+	{
+		for (String test : this.values)
+		{
+			if (value.equals(test)) return;
+		}
+		throw new GenerationException(new Text("GUI", "error.id", false).addReplacement("<value>", value).addReplacement("<object>",
+				new Text("GUI", "scoreboard.value", false)));
 	}
 }

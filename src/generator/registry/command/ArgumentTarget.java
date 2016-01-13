@@ -46,12 +46,6 @@ public class ArgumentTarget extends Argument
 	}
 
 	@Override
-	public String generate() throws GenerationException
-	{
-		return this.panel.generateTarget().toCommand();
-	}
-
-	@Override
 	public Component getComponent()
 	{
 		return this.panel;
@@ -61,6 +55,18 @@ public class ArgumentTarget extends Argument
 	public void updateLang()
 	{
 		if (this.panel != null) this.panel.updateLang();
+	}
+
+	@Override
+	protected String generateValue() throws GenerationException
+	{
+		return this.panel.generateTarget().toCommand();
+	}
+
+	@Override
+	protected void verifyValue(String value) throws GenerationException
+	{
+		// TODO ArgumentTarget.verifyValue(value)
 	}
 
 }

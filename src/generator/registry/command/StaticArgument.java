@@ -1,6 +1,7 @@
 package generator.registry.command;
 
 import generator.main.GenerationException;
+import generator.main.Text;
 import generator.main.Utils;
 
 import java.awt.Component;
@@ -24,7 +25,7 @@ public class StaticArgument extends Argument
 	{}
 
 	@Override
-	public String generate() throws GenerationException
+	protected String generateValue() throws GenerationException
 	{
 		return this.value;
 	}
@@ -38,5 +39,12 @@ public class StaticArgument extends Argument
 	@Override
 	public void updateLang()
 	{}
+
+	@Override
+	protected void verifyValue(String value) throws GenerationException
+	{
+		if (!value.equals(this.value)) throw new GenerationException(new Text("GUI", "error.value", false).addReplacement("<value>", value).addReplacement(
+				"<correct>", this.value));
+	}
 
 }

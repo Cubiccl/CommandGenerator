@@ -148,6 +148,7 @@ public class CommandGenerator
 		instance.stateManager.updateLang();
 		getWindow().updateLang();
 	}
+
 	/** True if it has finished initializing, thus the user can interact. */
 	private boolean initialized;
 	/** Contains all data. */

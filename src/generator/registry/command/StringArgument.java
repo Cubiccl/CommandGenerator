@@ -69,23 +69,16 @@ public class StringArgument extends Argument
 	}
 
 	@Override
-	public String generate() throws GenerationException
+	protected String generateValue() throws GenerationException
 	{
-		this.verifyValue();
-		return this.getValue();
+		// If compulsory use the entry, else use the check entry.
+		return this.isCompulsory() ? this.entry.getText() : this.checkEntry.getText();
 	}
 
 	@Override
 	public Component getComponent()
 	{
 		return this.panel;
-	}
-
-	/** @return The value input by the user. */
-	protected String getValue()
-	{
-		// If compulsory use the entry, else use the check entry.
-		return this.isCompulsory() ? this.entry.getText() : this.checkEntry.getText();
 	}
 
 	@Override
@@ -113,12 +106,9 @@ public class StringArgument extends Argument
 		}
 	}
 
-	/** Verifies the value input by the user. Called when generating.
-	 * 
-	 * @throws GenerationException if the value cannot be accepted. */
-	protected void verifyValue() throws GenerationException
+	@Override
+	protected void verifyValue(String value) throws GenerationException
 	{
-		if (!this.hasSpaces && this.getValue().contains(" ")) throw new GenerationException(new Text("GUI", "error.space", false).addReplacement("<value>",
-				this.getValue()));
+		if (!this.hasSpaces && value.contains(" ")) throw new GenerationException(new Text("GUI", "error.space", false).addReplacement("<value>", value));
 	}
 }

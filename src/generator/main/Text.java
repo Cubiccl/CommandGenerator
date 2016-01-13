@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /** Represents a translatable String text. */
 public class Text implements ITranslate
 {
-	class Replacement
+	public class Replacement
 	{
 		private String id;
 		private Text value;
@@ -19,9 +19,10 @@ public class Text implements ITranslate
 			this.value = value;
 		}
 
-		public void applyTo(String translation)
+		public String replace(String translation)
 		{
-			translation.replaceAll(this.id, this.value.getValue());
+			System.out.println(translation.replaceAll(this.id, this.value.getValue()));
+			return translation.replaceAll(this.id, this.value.getValue());
 		}
 	}
 
@@ -29,7 +30,6 @@ public class Text implements ITranslate
 	private ArrayList<Replacement> replacements;
 	private Text suffix;
 	private boolean translated;
-
 	private String translation;
 
 	/** Creates a non-translated text.
@@ -87,6 +87,7 @@ public class Text implements ITranslate
 	public Text addReplacement(String id, Text text)
 	{
 		this.replacements.add(new Replacement(id, text));
+		this.updateLang();
 		return this;
 	}
 
@@ -130,7 +131,9 @@ public class Text implements ITranslate
 		{
 			this.translation = CommandGenerator.translate(this);
 			for (Replacement replacement : replacements)
-				replacement.applyTo(this.translation);
+			{
+				this.translation = replacement.replace(this.translation);
+			}
 			if (this.suffix != null) this.translation += " " + this.suffix.getValue();
 		} else this.translation = this.id;
 	}

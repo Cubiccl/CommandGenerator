@@ -57,7 +57,7 @@ public class CoordinatesArgument extends Argument implements IClickEvent
 	}
 
 	@Override
-	public String generate() throws GenerationException
+	protected String generateValue() throws GenerationException
 	{
 		return this.panelCoordinates.generateCoordinates().toCommand();
 	}
@@ -87,6 +87,26 @@ public class CoordinatesArgument extends Argument implements IClickEvent
 	{
 		if (this.checkbox != null) this.checkbox.updateLang();
 		if (this.panelCoordinates != null) this.panelCoordinates.updateLang();
+	}
+
+	@Override
+	protected void verifyValue(String value) throws GenerationException
+	{
+		String[] elements = value.split(" ");
+		if (elements.length < 3) throw new GenerationException(new Text("GUI", "error.coordinates.missing", false));
+
+		for (String coord : elements)
+		{
+			if (!this.relative && coord.startsWith("~")) throw new GenerationException(new Text("GUI", "error.coordinates.relative", false));
+			if (coord.startsWith("~")) coord = coord.substring(1);
+			try
+			{
+				Float.parseFloat(coord);
+			} catch (Exception e)
+			{
+				throw new GenerationException(new Text("GUI", "error.number", false).addReplacement("<value>", coord));
+			}
+		}
 	}
 
 }

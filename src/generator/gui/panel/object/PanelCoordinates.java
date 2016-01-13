@@ -69,7 +69,7 @@ public class PanelCoordinates extends CPanel
 			x = Float.parseFloat(this.entryX.getText());
 		} catch (Exception e)
 		{
-			throw new GenerationException(new Text("GUI", "GUI:error.number", false).addReplacement("<value>", this.entryX.getText()));
+			throw new GenerationException(new Text("GUI", "error.number", false).addReplacement("<value>", this.entryX.getText()));
 		}
 
 		try
@@ -77,7 +77,7 @@ public class PanelCoordinates extends CPanel
 			y = Float.parseFloat(this.entryY.getText());
 		} catch (Exception e)
 		{
-			throw new GenerationException(new Text("GUI", "GUI:error.number", false).addReplacement("<value>", this.entryY.getText()));
+			throw new GenerationException(new Text("GUI", "error.number", false).addReplacement("<value>", this.entryY.getText()));
 		}
 
 		try
@@ -85,7 +85,7 @@ public class PanelCoordinates extends CPanel
 			z = Float.parseFloat(this.entryZ.getText());
 		} catch (Exception e)
 		{
-			throw new GenerationException(new Text("GUI", "GUI:error.number", false).addReplacement("<value>", this.entryZ.getText()));
+			throw new GenerationException(new Text("GUI", "error.number", false).addReplacement("<value>", this.entryZ.getText()));
 		}
 
 		if (this.relative) return new Coordinates(x, y, z, this.checkboxXRel.isSelected(), this.checkboxYRel.isSelected(), this.checkboxZRel.isSelected());

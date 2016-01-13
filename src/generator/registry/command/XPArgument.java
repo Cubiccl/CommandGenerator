@@ -26,9 +26,9 @@ public class XPArgument extends NumberArgument
 	}
 
 	@Override
-	public String generate() throws GenerationException
+	public String generateValue() throws GenerationException
 	{
-		return this.checkboxLevel.isSelected() ? super.generate() + "L" : super.generate();
+		return this.checkboxLevel.isSelected() ? super.generateValue() + "L" : super.generateValue();
 	}
 
 	@Override
@@ -36,6 +36,13 @@ public class XPArgument extends NumberArgument
 	{
 		super.updateLang();
 		if (this.checkboxLevel != null) this.checkboxLevel.updateLang();
+	}
+
+	@Override
+	protected void verifyValue(String value) throws GenerationException
+	{
+		if (value.endsWith("L")) value = value.substring(0, value.length() - 1);
+		super.verifyValue(value);
 	}
 
 }

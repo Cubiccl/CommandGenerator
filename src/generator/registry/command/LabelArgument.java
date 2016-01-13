@@ -34,7 +34,7 @@ public class LabelArgument extends Argument
 	}
 
 	@Override
-	public String generate() throws GenerationException
+	protected String generateValue() throws GenerationException
 	{
 		return null;
 	}
@@ -50,5 +50,9 @@ public class LabelArgument extends Argument
 	{
 		if (this.textArea != null) this.textArea.setText(this.text.getValue());
 	}
+
+	@Override
+	protected void verifyValue(String value) throws GenerationException
+	{}
 
 }

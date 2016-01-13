@@ -36,34 +36,34 @@ public class NumberArgument extends StringArgument
 	}
 
 	@Override
-	protected void verifyValue() throws GenerationException
+	protected void verifyValue(String value) throws GenerationException
 	{
-		super.verifyValue();
+		super.verifyValue(value);
 
 		if (this.isInteger) try
 		{
-			Integer.parseInt(this.getValue());
+			Integer.parseInt(value);
 		} catch (NumberFormatException e)
 		{
-			throw new GenerationException(new Text("GUI", "error.integer").addReplacement("<value>", this.getValue()));
+			throw new GenerationException(new Text("GUI", "error.integer").addReplacement("<value>", value));
 		}
 
 		try
 		{
-			float value = Float.parseFloat(this.getValue());
-			if (value < this.min || value > this.max)
+			float valueF = Float.parseFloat(value);
+			if (valueF < this.min || valueF > this.max)
 			{
 				if (this.min != Float.NEGATIVE_INFINITY && this.max != Float.POSITIVE_INFINITY) throw new GenerationException(new Text("GUI",
-						"error.number.bounds", false).addReplacement("<value>", this.getValue()).addReplacement("<min>", Float.toString(this.min))
+						"error.number.bounds", false).addReplacement("<value>", value).addReplacement("<min>", Float.toString(this.min))
 						.addReplacement("<max>", Float.toString(this.max)));
 				else if (this.min != Float.NEGATIVE_INFINITY) throw new GenerationException(new Text("GUI", "error.number.min", false).addReplacement(
-						"<value>", this.getValue()).addReplacement("<min>", Float.toString(this.min)));
+						"<value>", value).addReplacement("<min>", Float.toString(this.min)));
 				else if (this.max != Float.POSITIVE_INFINITY) throw new GenerationException(new Text("GUI", "error.number.max", false).addReplacement(
-						"<value>", this.getValue()).addReplacement("<max>", Float.toString(this.max)));
+						"<value>", value).addReplacement("<max>", Float.toString(this.max)));
 			}
 		} catch (NumberFormatException e)
 		{
-			throw new GenerationException(new Text("GUI", "error.number", false).addReplacement("<value>", this.getValue()));
+			throw new GenerationException(new Text("GUI", "error.number", false).addReplacement("<value>", value));
 		}
 	}
 }

@@ -94,6 +94,12 @@ public final class StructureCreator
 					}
 
 					@Override
+					protected String generateValue() throws GenerationException
+					{
+						return null;
+					}
+
+					@Override
 					public Component getComponent()
 					{
 						return this.label;
@@ -101,6 +107,10 @@ public final class StructureCreator
 
 					@Override
 					public void updateLang()
+					{}
+
+					@Override
+					protected void verifyValue(String value) throws GenerationException
 					{}
 				};
 		}
