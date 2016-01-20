@@ -21,7 +21,6 @@ public class Text implements ITranslate
 
 		public String replace(String translation)
 		{
-			System.out.println(translation.replaceAll(this.id, this.value.getValue()));
 			return translation.replaceAll(this.id, this.value.getValue());
 		}
 	}
