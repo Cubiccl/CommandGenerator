@@ -70,6 +70,9 @@ public final class StructureCreator
 
 			case "effect":
 				return new EffectArgument();
+				
+			case "sound":
+				return new SoundArgument();
 
 			case "target":
 				return createTarget(compulsory, details);
