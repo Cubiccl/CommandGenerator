@@ -58,6 +58,11 @@ public class Translator implements ITranslate
 		return dictionnary.get(text.getCategory()).get(text.getId());
 	}
 
+	public void unregisterText(Text text)
+	{
+		this.tracking.remove(text);
+	}
+
 	/** Updates translations. */
 	@Override
 	public void updateLang()

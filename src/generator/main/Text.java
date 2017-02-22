@@ -123,6 +123,12 @@ public class Text implements ITranslate
 		else return this.id;
 	}
 
+	/** Deletes this Text from the Text tracker. Call when finished using. */
+	public void unregister()
+	{
+		CommandGenerator.unregisterText(this);
+	}
+
 	@Override
 	public void updateLang()
 	{

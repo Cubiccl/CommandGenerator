@@ -140,6 +140,11 @@ public class CommandGenerator
 		return instance.translator.translate(text);
 	}
 
+	public static void unregisterText(Text text)
+	{
+		instance.translator.unregisterText(text);
+	}
+
 	/** Updates all translations of the Generator. Called when the user changes language. */
 	public static void updateLang()
 	{
@@ -148,12 +153,12 @@ public class CommandGenerator
 		instance.stateManager.updateLang();
 		getWindow().updateLang();
 	}
-
 	/** True if it has finished initializing, thus the user can interact. */
 	private boolean initialized;
 	/** Contains all data. */
 	private Registry registry;
 	private Settings settings;
+
 	/** Manages what state the Generator is at. */
 	private StateManager stateManager;
 
